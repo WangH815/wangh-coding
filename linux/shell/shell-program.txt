@@ -1,0 +1,374 @@
+Shell编程
+
+Shell是C语言编写，既是命令语言又是程序设计语言;通过Shell提供的界面访问操作系统内核
+
+常见Shell
+Bourne Shell（/usr/bin/sh或/bin/sh）
+Bourne Again Shell（/bin/bash） //适用范围最广
+C Shell（/usr/bin/csh）
+K Shell（/usr/bin/ksh）
+Shell for Root（/sbin/sh）
+
+cat /etc/shells   //查看系统可使用的Shell
+echo $SHELL       //查看当前使用的shell
+chsh -s /bin/zsh  //设置用户默认Shell或者修改 /etc/passwd 文件中对应Shell
+
+
+Shell脚本
+#!/bin/bash       //脚本第一行，指明运行脚本的Shell
+
+脚本运行方式
+1 . xx.sh        //一般用于生效用户配置而不需要重新登录shell，xx.sh有读权限即可
+2 source xx.sh   //同上。常见用于执行 profile 配置，脚本本身在当前进程中执行
+3 sh xx.sh       //读权限即可，脚本本身会在子进程中执行
+4 xx.sh          //需要执行权限，脚本本身会在子进程中执行
+
+注释
+#                   //单行注释，例外：#!
+:<<EOF
+注释内容
+注释内容
+注释内容
+EOF                 //多行注释，EOF可由单引号或感叹号等替代
+
+变量
+1.字母、数字和下划线构成
+2.不以数字开头
+3.系统关键字不能作为变量名
+4.字母大小写敏感
+5.变量类型默认是字符型
+
+变量类型
+1) 局部变量
+   在脚本或命令中定义，仅在当前shell中有效，其他shell启动的程序不能访问局部变量。
+   一般是在函数中定义，如：local var
+2) 环境变量
+所有的程序都能访问环境变量，有些程序需要环境变量来保证其正常运行。
+必要的时候shell脚本也可以定义环境变量。
+3) shell变量
+由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，
+这些变量保证了shell的正常运行
+
+环境变量的设置
+1)设置永久环境变量:修改 /etc/profile /etc/bashrc
+2)设置用户环境变量:修改 ~/.bash_profile ~/.bash_bashrc
+3)临时环境变量: export var="value"
+4)显示环境变量: env/set
+5)临时取消环境变量: unset var
+
+
+变量声明赋值
+1.一般连续字符、数字、路径等可以不加任何引号，但建议使用双引号
+2.其他情况建议使用双引号或单引号
+3.反引号一般配合命令使用。如 AAA=`ls` 等价于 AAA=$(ls)
+
+var=""                //变量置空
+unset var             //同上
+var=123               //等号两边不能有空格，默认var[0]=123 (数组)
+var="ad"              //字符串赋值，也可用单引号(更严格),它可以防止任何变量扩展。
+                      // 双引号可防止通配符扩展但允许变量扩展
+var1=1;var2=2;var3=3  //同时赋值，分号隔开就可以
+
+
+
+变量使用
+env                          //查看所有环境变量
+set                          //查看所有变量
+echo $var                    //打印输出变量值
+echo ${var}                  //同上，另一种方式。能识别变量边界，例如$a/$ab/${a}b
+readonly var                 //设置变量只读
+echo ${#var}                 //输出字符串字符数
+echo `expr index "$var" io`  //查找i或o第一次出现的位置(非数组下标)
+echo ${var-default}          //var未声明时输出default(可为其他字符串)，否则输出var的值。
+echo ${var=default}          //同上并赋值
+echo ${var:-default}         //var为空或未声明时输出default，否则输出var的值。
+echo ${var:=default}         //同上并赋值
+echo ${var+default}          //var没有声明则为空，否则为default
+echo ${var:+default}         //var的值为非空则为default，否则为空
+echo ${var?default}          //var已声明则输出var的值，否则输出default
+echo ${var:?default}         //var的值为非空则输出var的值，否则输出default
+
+变量截取替换(位置从1开始)
+var=abcdef
+${var:pos}                   //截取从数组下标为pos(不含pos，下同)之后的子串
+${var:pos:len}               //截取pos之后长度为len的子串
+${var/Pattern/Replacement}   //使用Replacement来替换var中第一次匹配Pattern的字符串
+${var//Pattern/Replacement}  //全部替换
+${var/#Pattern/Replacement}  //从var开头匹配，匹配到则替换
+${var/%Pattern/Replacement}  //从var结尾匹配，匹配到则替换
+
+${!varpre*}                  //匹配所有已声明变量名以varpre开头的所有变量名，以空格隔开
+${!varpre@}                  //同上
+
+
+
+变量拼接
+${a}${b}
+${a}"str"${b}
+${a}'str'${b}
+
+
+数组
+仅支持一维数组，不限定长度
+array_name=(arr1 arr2 arr3 ...)  //赋值
+array_name=(
+arr1
+arr2
+...
+)  //同上
+array_name[0]=value0   //单独定义
+array_name[1]=value1   //单独定义
+...                    //单独定义
+array_name[n]=valuen   //单独定义，数组下标可以不连续
+echo ${array_name[n]}  //打印输出某个数组元素
+echo ${#array_name[@]} //打印输出数组元素长度，未定义的不统计
+echo ${#array_name[*]} //同上
+echo ${array_name[@]}  //打印输出数组所有元素(未定义的不打印)，以多个字符串的形式，元素之间空格分隔
+echo ${array_name[*]}  //以一个字符串的形式，其余同上
+
+参数传递
+xx.sh arg1 arg2 arg3 ...  //脚本有执行权限，arg开头的为参数
+$0  //执行脚本名称，可在脚本中调用
+$1/$2/$3  //参数，可在脚本中调用,当n>=10时，需要使用${n}来调用
+$#  //传递到脚本的参数个数
+$*  //以一个单字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。
+$$  //脚本运行的当前进程ID号
+$!  //后台运行的最后一个进程的ID号
+$@  //与$*相同，但是使用时加引号，并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
+$-  //显示Shell使用的当前选项，与set命令功能相同。
+$?  //显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。
+
+基本运算符
+主要包括以下这些：
+1)算数运算符
+2)关系运算符
+3)布尔运算符
+4)字符串运算符
+5)文件测试运算符
+注：原生bash不支持简单数学运算，主要通过awk和expr实现，expr最常用(也可用于字符串处理)
+
+算数运算
+a=10,b=20
+加法	`expr $a + $b`  //+左右无空格的会解析为"10+20"，其余同理
+减法	`expr $a - $b`
+乘法	`expr $a \* $b` //*需要转义
+除法	`expr $b / $a`
+取余	`expr $b % $a`
+赋值	a=$b
+相等    [ $a == $b ] //注意空格，无空格会解析成字符串拼接
+不相等  [ $a != $b ]
+
+关系运算
+相等     [ $a -eq $b ]
+不相等	 [ $a -ne $b ]
+大于     [ $a -gt $b ]
+小于	 [ $a -lt $b ]
+大于等于 [ $a -ge $b ]
+小于等于 [ $a -le $b ]
+
+布尔运算
+非  [ ! 布尔表达式 ] 
+或	[ 布尔表达式1 -o 布尔表达式2 ]
+与	[ 布尔表达式1 -a 布尔表达式2 ]
+
+逻辑运算
+[[ 布尔表达式1 && 布尔表达式2 ]]  //and
+[[ 布尔表达式1 || 布尔表达式2 ]]  //or
+
+字符串运算
+相等       [ $a = $b ]
+不相等     [ $a != $b ]
+长度为0    [ -z $a ]
+长度不为0  [ -n "$a" ]
+不为空     [ $a ]
+
+文件测试运算
+设备文件                  [ -b $filename ]
+字符设备文件              [ -c $filename ]
+目录                      [ -d $filename ]
+普通文件                  [ -f $filename ]
+设置了 SGID 位            [ -g $filename ]
+设置了粘着位(Sticky Bit)  [ -k $filename ]
+管道文件                  [ -p $filename ]
+设置了 SUID 位            [ -u $filename ]
+可读                      [ -r $filename ]
+可写                      [ -w $filename ]
+可执行                    [ -x $filename ]
+不为空（文件大小大于0）   [ -s $filename ]
+存在 	                  [ -e $filename ]
+
+标准输入输出
+read var               //输入        
+echo $var/${var}  //输出，输出后自动换行
+echo -e                     //开启转义
+echo `commands`             //输出命令结果
+printf  format-string  [arguments...]  //格式化输出，不自动换行
+例如：
+printf "%-10s %-8s\n" 姓名 性别  //格式化字符串与C语言相同，移植性比echo好
+
+printf转义序列
+\a	   //警告字符，通常为ASCII的BEL字符
+\b	   //后退
+\c	   //抑制（不显示）输出结果中任何结尾的换行字符
+       //（只在%b格式指示符控制下的参数字符串中有效），
+	   //而且，任何留在参数里的字符、任何接下来的参数
+	   //以及任何留在格式字符串中的字符，都被忽略
+\f	   //换页（formfeed）
+\n	   //换行
+\r	   //回车（Carriage return）
+\t	   //水平制表符
+\v	   //垂直制表符
+\\	   //一个字面上的反斜杠字符
+\ddd   //表示1到3位数八进制值的字符。仅在格式字符串中有效
+\0ddd  //表示1到3位的八进制值字符
+
+test命令
+用于检查某个条件是否成立，它可以进行数值、字符串和文件三个方面的测试。
+1)数值测试
+-eq	等于则为真
+-ne	不等于则为真
+-gt	大于则为真
+-ge	大于等于则为真
+-lt	小于则为真
+-le	小于等于则为真
+格式：test $[算术表达式1] -eq $[算术表达式2]  //返回布尔值
+2)字符串测试
+=	等于则为真
+!=	不相等则为真
+-z  长度为零
+-n  长度不为零
+格式：同1),[]中为字符串或字符串表达式
+3)文件测试
+-e 文件名	文件存在
+-r 文件名	存在且可读
+-w 文件名	存在且可写
+-x 文件名	存在且可执行
+-s 文件名	存在且至少有一个字符
+-d 文件名	存在且为目录
+-f 文件名	存在且为普通文件
+-c 文件名	存在且为字符型特殊文件
+-b 文件名	存在且为块特殊文件
+格式：if test -e ./bash  //判断./bash文件是否存在
+
+流程控制
+if else
+1)格式1/if/脚本格式
+if condition
+then
+    command1 
+    command2
+    ...
+    commandN 
+fi
+2)格式2/if/命令行格
+if condition;then command1;command2;...;commandN;fi 
+3)格式3/if else
+if condition
+then
+    command1 
+    command2
+    ...
+    commandN
+else
+    command
+fi
+4)格式4/if else-if else
+if condition1
+then
+    command1
+elif condition2 
+then 
+    command2
+else
+    commandN
+fi
+
+for循环
+for var in item1 item2 ... itemN  //for (( ; ; ))可实现无限循环
+do
+    command1
+    command2
+    ...
+    commandN
+done
+
+while循环  //先判断后执行循环体
+while condition   //while true或while :可实现无限循环
+do
+    command
+done
+
+util循环  //先执行循环体再判断
+until condition
+do
+    command
+done
+
+case   //类似于C的switch case
+case $var in
+模式1)
+    command1
+    command2
+    ...
+    commandN  //break和continue作为循环控制
+    ;;
+模式2）
+    command1
+    command2
+    ...
+    commandN
+    ;;
+esac  //casec反序
+如：
+echo -n "输入 1 到 5 之间的数字: "
+read aNum
+case $aNum in
+    1|2|3|4|5) echo "你输入的数字为 $aNum!"  //模式之间可用 | 分割
+    ;;
+    *) echo "你输入的数字不是 1 到 5 之间的!"  // * 类似于deflaut
+        continue
+        echo "游戏结束"
+    ;;
+esac
+
+函数
+格式：
+[ function ] funname [()]
+{
+    action;
+    [return int;]
+}
+说明：
+1、可以带function fun() 定义，也可以直接fun() 定义,不带任何参数。
+2、参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n(0-255)
+
+输入输出重定向
+command > file	//将输出重定向到 file。
+command < file	//将输入重定向到 file。
+command >> file	//将输出以追加的方式重定向到 file。
+n > file	    //将文件描述符为 n 的文件重定向到 file。
+n >> file	    //将文件描述符为 n 的文件以追加的方式重定向到 file。
+n >& m	        //将输出文件 m 和 n 合并。
+n <& m	        //将输入文件 m 和 n 合并。
+<< tag	        //将开始标记 tag 和结束标记 tag 之间的内容作为输入。
+注：需要注意的是文件描述符 
+    0 通常是标准输入（STDIN），
+	1 是标准输出（STDOUT），
+	2 是标准错误输出（STDERR）。
+
+command < infile > outfile  //infile作为命令参数输入，结果输出到outfile
+command 2 > file  //标准错误输出
+command 2 >> file  //标准错误追加输出
+command > file 2>&1  //标准输出(包括错误)
+command > /dev/null  //屏蔽标准输出
+command > /dev/null 2>&1  //屏蔽命令输出
+
+Here Document  //特殊重定向方式
+格式：
+command << delimiter  //分隔符可以使EOF等任意合法字符
+    document
+delimiter  //结束分隔符顶格写，后面不能有任何字符
+
+Shell引用其他文件
+sourse filename  //可引用其他文件中变量
+. /path/filename

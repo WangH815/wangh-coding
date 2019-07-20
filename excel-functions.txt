@@ -1,0 +1,63 @@
+Excel函数
+
+B列元素是否在A列元素中
+=IF(COUNTIF(A:A,B1)>0,"Y","N")
+=IF(IFERROR(MATCH(B1,A:A,0),0)>0,"Y","N")
+=IF(IFERROR(INDEX(A:A,MATCH(B1,A:A,0)),0)<>0,"Y","N")
+
+年份+天数转换成具体日期
+=CONCATENATE(MID(A1,1,4)&"-01-01")+MID(A1,5,3)-1
+例如：2018234 转为 2018-08-22
+
+日期格式转换
+日期转日期：
+text(value,format)  
+text(B1,"e-mm-dd")
+text(B1,"e年m月d日")
+text(D3,"e年m月d日 aaaa") //aaaa表示"星期X";英文日期用dddd
+text(D3,"e年m月d日 aaa")  //aaa表示"X",不带"星期";英文日期用ddd
+字符转日期：
+text(value,"00-00-00")    //"20180101"转为2018-01-01
+
+参数引用
+A1  相对位置
+A$1 绝对位置
+
+Ctrl + 上/下/左/右  //调到有数据的或边界
+Alt + Enter //行内换行
+
+字符串截取
+MID(text,start_num,num_chars)
+
+字符串拼接
+CONCATENATE(Text1，Text……) 
+
+统计某个单元格区域中符合指定条件的单元格数目
+COUNTIF(Range,Criteria) //例如：COUNTIF(A1:B13,">=60")
+
+VLOOKUP函数　　
+函数名称：VLOOKUP　　
+主要功能：在数据表的首列查找指定的数值，并由此返回数据表当前行中指定列处的数值。　　
+使用格式：VLOOKUP(lookup_value,table_array,col_index_num,range_lookup)　　
+参数说明：Lookup_value代表需要查找的数值；
+          Table_array代表需要在其中查找数据的单元格区域；
+          Col_index_num为在table_array区域中待返回的匹配值的列序号（当Col_index_num为2时,
+          返回table_array第2列中的数值，为3时，返回第3列的值……）；Range_lookup为一逻辑值，
+          如果为TRUE或省略，则返回近似匹配值，也就是说，如果找不到精确匹配值，则返回小于
+          lookup_value的最大数值；如果为FALSE，则返回精确匹配值，如果找不到，则返回错误值#N/A。　　
+应用举例：表格中，A列，B列分别是学生姓名，手机号码；F列，G列分别是学生姓名，高考总分，
+          现需要给高考成绩最好的几位同学电话沟通；那我们可以在C1单元格中输入公式：
+          =VLOOKUP(A1,F:G,2,FALSE)，回车确认后，向下拖动公式进行填充，就可以在C列看到每位同学的
+          高考成绩了，选出需要沟通的同学即可电话联系。　　特别提醒：Lookup_value参见必须在Table_array区域的首列中；
+          如果忽略Range_lookup参数，则Table_array的首列必须进行排序；
+          另外，还有HLOOKUP，请自行学习，这样，按列按行查找匹配都OK了。
+
+
+
+
+
+
+
+
+
+

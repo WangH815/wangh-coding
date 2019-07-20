@@ -1,0 +1,386 @@
+Ubuntu 18.04
+
+shell脚本的运行方式
+1 . xx.sh        //一般用于生效用户配置而不需要重新登录shell，xx.sh有读权限即可
+2 source xx.sh   //同上。常见用于执行 profile 配置，脚本本身在当前进程中执行
+3 sh xx.sh       //读权限即可，脚本本身会在子进程中执行
+4 xx.sh          //需要执行权限，脚本本身会在子进程中执行
+
+shell命令类型
+1.内置命令
+shell解释器包含的命令，只有内置命令能改变shell命令行环境变量。
+在当前进程(一般是bash，跟随shell版本)中执行
+2.shell函数
+shell编写的函数，可引用
+3.外部命令
+独立的shell可执行命令，在子进程中执行(Linux内核调用fork实现)，不会改变父进程的环境变量
+
+
+#常用命令
+sudo passwd root                  //启用root用户
+passwd -u 用户名                  //修改指定用户密码
+man command                       //命令详细说明
+command -h/--help                 //命令简要帮助
+service systemd-networkd restart  //重启网络服务
+tzselect                          //修改时区
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  //创建时区软连接(root操作)
+su username        //切换用户，不加载用户环境变量，只切换用户权限;username缺省默认为root，下同
+su - username      //切换用户，加载用户环境变量，等同于用户登录
+sudo command       //以root用户执行某命令
+apt-get autoremove //清理未使用的软件包
+apt-get clean      //清理软件包
+netplan apply      //生效netplan修改
+cat                //逐行显示文件内容
+tac                //逐行反向显示文件内容
+nl                 //带行号的 cat
+more               //分页查看文件，一次性加载，空格/b 翻页
+less               //分页查看文件，逐步加载，空格/b PgUp/PgDn 翻页
+head/tail -n       //显示文件头尾n行内容
+tail -f filname    //循环读取某文件
+ps/watch/top       //查看程序运行命令
+free/vmstat/iostat/netstat  //内存/虚拟内存/系统IO/网络 监控
+lsof               //查看文件(普通文件/目录/网络文件等)打开情况
+at/crontab         //设置计划任务
+tar/gzip           //打包压缩解压命令
+chmod/chgrp/chown  //设置文件权限
+df/du              //磁盘文件空间大小
+which              //查看可执行文件的位置
+whereis            //查看文件的位置 
+locate             //配合数据库查看文件位置
+find               //实际搜寻硬盘查询文件名称
+ifconfig           //网络配置信息
+ping               //测试主机连通性
+traceroute         //到达指定主机网络路径
+ss                 //socket统计信息
+ln                 //创建软(-s)/硬链接
+cut -b/c/d filename  //按字节/字符/自定义分隔符切割文本
+sort               //文本排序
+sed -a/d/c/i       //文本增删改查
+split              //按照指定行数或字节数切割大文件
+wc -c/m/l          //按照字节/字符/行数统计文本
+write user [ttyname]  //向其他用户发送给信息(message)，ttyname可以使用who查询，Ctrl + c结束
+file                                 //辨识文件类型
+time [options] COMMAND [arguments]   //测量命令运行时间
+xargs [options] [command [options]]  //捕获命令输出作为其他命令标准输入
+command [options] | xargs [options]  //主要适用于不支持管道(|)的命令
+bc                                   //计算器模式，quit退出
+lscpu                                //显示cpu相关信息
+
+
+
+#批量增加用户
+http://www.runoob.com/linux/linux-user-manage.html
+
+
+#允许root远程登录
+1.确定是否安装了openssh-server，如没有可使用 apt install openssh-server
+2.修改文件/etc/ssh/sshd_config 配置项 PermitRootLogin yes
+
+
+修改静态IP
+修改文件/etc/netplan/50-cloud-init.yaml
+netplan apply  //生效netplan修改
+
+
+包管理/软件安装
+apt和apt-get的区别
+https://www.sysgeek.cn/apt-vs-apt-get/
+apt命令在Ubuntu 16.04发布时引入，the Advanced Packaging Tool/高级打包工具
+简单来说就是：apt = apt-get、apt-cache 和 apt-config 中最常用命令选项的集合
+Most used commands:
+  list		   - list packages based on package names
+  search 	   - search in package descriptions
+  show 		   - show package details
+  install      - install packages
+  remove       - remove packages
+  autoremove   - Remove automatically all unused packages
+  update       - update list of available packages
+  upgrade      - upgrade the system by installing/upgrading packages
+  full-upgrade - upgrade the system by removing/installing/upgrading packages
+  edit-sources - edit the source information file
+  
+apt list --installed  //列出已安装软件包
+
+
+zsh安装
+
+方式一：
+apt install zsh         //安装
+zsh --version           //查看版本
+chsh -s $(which zsh)    //设置默认shell，重新登录后生效
+echo $SHELL             //输出默认shell
+
+方式二：
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+  
+#mysql安装
+以下步骤以5.7.24版本为标准
+0.安装
+  apt install mysql-server  //apt安装软件mysql
+1.取消只能本机访问的限制
+  a.修改/etc/mysql/mysql.conf.d/mysqld.cnf 中 bind-address为0.0.0.0或注销
+  b.执行update mysql.user set host='%' where user='root';  //mysql -uroot登录数据库
+  c.执行grant all PRIVILEGES on *.* to root@'%' identified by 'root'; //授权并设置密码
+2.刷新
+  flush privileges;  //mysql命令行中执行
+3.重启Mysql服务
+ service mysql restart
+注：如还不能正常访问可以考虑防火墙或者其他网络问题
+
+mysql软件源配置文件/etc/mysql/mysql.conf.d/mysqld.cnf
+deb http://archive.ubuntu.com/ubuntu bionic main
+deb http://archive.ubuntu.com/ubuntu bionic-security main
+##deb http://archive.ubuntu.com/ubuntu bionic-updates main  //##为注释
+ 
+#mysql常见操作
+mysql -uroot -p                      //root用户登录mysql数据库
+mysql -u root -p                     //同上
+mysql -u root -p -h ip               //连接远程数据库
+show databases/tables;               //显示能查看的数据库或者表
+desc table                           //显示表字段信息
+show columns from tablename;         //同上
+show index from tablename;           //显示表索引
+show table status from databasename；//显示数据库所有信息
+use database_name;                   //切换数据库
+select * from table_name \G;         //逐条显示数据
+exit                                 //退出命令行
+\q                                   //同上
+
+
+安装指定版本Python
+Step 1 – Prerequsiteis
+apt-get install build-essential checkinstall
+apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
+libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev
+	
+Step 2 – Download Python 3.7
+cd /usr/src
+wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz
+tar xzf Python-3.7.3.tgz
+
+Step 3 – Compile Python Source
+cd Python-3.7.3
+./configure --enable-optimizations
+make altinstall
+
+Step 4 – Check Python Version
+python3.7 -V
+
+
+#更改镜像源
+修改Ubuntu的/etc/apt/sources.list文件
+https://blog.csdn.net/u012843189/article/details/80964287  
+
+source.list文件条目格式
+[档案类型]     [仓库地址]       [发行版]       [软件包分类]
+[Archive type] [Repository URL] [Distribution] [Component]
+deb/deb-src    http://xxx       bionic/...      main/...
+
+deb/deb-src      //deb二进制包和deb源码包,Debian系统或以此为母版的系统软件包
+
+bionic           //Ubuntu 18.04系统版本代号
+bionic-security  //Important Security Updates/重要的安全更新
+bionic-updates   //Recommended Updates/推荐更新
+bionic-proposed  //Pre-released Updates/预览版更新
+bionic-backports //Unsupported Updates/不受支持更新
+
+main         //完全的自由软件
+restricted   //不完全的自由软件
+universe     //Ubuntu官方不提供支持与补丁，全靠社区支持
+multiverse   //非自由软件，完全不提供支持和补丁
+
+#阿里源
+#18.04
+deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+#16.04
+deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
+#14.04
+deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multivers
+
+#中科大源
+https://mirrors.ustc.edu.cn/ubuntu/  //IP部分修改为中科大的即可，其他源同理
+
+#163/网易源
+http://mirrors.163.com/ubuntu/
+
+#清华源
+https://mirrors.tuna.tsinghua.edu.cn/ubuntu/
+
+注：更改源之后需要执行apt-get update/apt update命令更新软件列表(索引)
+
+
+jdk环境安装  //root用户操作
+1.apt remove openjdk*  //卸载openjdk
+2.下载oracle jdk并解压文件
+3.编辑 /etc/profile 文件，追加以下内容
+# Java Path
+export JAVA_HOME=/jdkpath  //如: JAVA_HOME=/etc/java8/jdk1.8.0_191 
+export JRE_HOME=/jrepath   //如: JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${PATH}:${JAVA_HOME}/bin:${JRE_HOME}/bin
+4.source /etc/profile  //生效配置，其他用户重启生效(推荐)或者配置 ~/.profile文件生效
+
+
+docker  //表意为码头工人。现指一种轻量级容器技术
+简介
+Docker是一个轻量级容器技术，类似于虚拟机。一般运行在Linux系统中，实现了虚拟机技术的资源隔离，性能远远高于虚拟机技术。    
+Docker支持将软件编译成一个镜像（image），在这个镜像里做好对软件的各种配置，然后发布这个镜像，使用者可以运行这个镜像，
+运行中的镜像称为容器（container），容器的启动是非常快的。Linux系统也可被编译成一个镜像。
+目前各大主流计算平台都支持Docker容器技术。
+
+环境：
+Ubuntu 18.04
+
+1.安装和卸载docker      //可暂时将阿里镜像源改为官方源
+apt install docker.ce   //社区版，docker.ee为企业版(主要加强安全)。docker.io等其他的为之前的老版本
+apt remove docker.ce    //卸载
+docker -v/--version     //查看docker版本
+
+2.启动和关闭docker服务
+service docker start     //启动
+service docker stop      //停止
+service docker restart   //重启
+docker info              //查看docker概要信息
+
+3.docker使用权限
+groupadd docker  //可使用 cat /etc/group | grep docker 查看是否有docker用户组，如已存在可不执行
+usermod -aG docker wangh  //将用户wangh添加到docker用户组中
+
+4.镜像源
+vi /etc/docker/daemon.json  //没有则创建此文件，重启docker后生效
+#设置为网易镜像源
+{
+
+"registry-mirrors": ["http://hub-mirror.c.163.com"]  
+
+}
+其他常用镜像源
+https://registry.docker-cn.com      //Docker官方中国区镜像源
+https://docker.mirrors.ustc.edu.cn  //中科大镜像源
+
+
+常用命令
+
+docker --help   //docker命令帮助
+
+镜像操作
+#列出本地镜像，默认位于 /var/lib/docker 目录下
+docker images 
+REPOSITORY   TAG   IMAGE ID   CREATED   SIZE  
+REPOSITORY: 镜像所在的仓库名称
+TAG：       镜像标签
+IMAGE ID：  镜像ID
+CREATED：   镜像的创建日期（不是获取该镜像的日期）
+SIZE：      镜像大小
+
+docker search ${CONTAINER NAME}         //搜索镜像源可用镜像
+docker pull ${CONTAINER NAME}           //从镜像源下载指定镜像，下同
+docker pull ${CONTAINER NAME:VERSION}
+docker rmi ${IMAGE NAME/ID}             //删除本地指定镜像
+docker rmi $(docker images -q)          //删除本地所有镜像
+
+容器操作  //可认为是镜像的实例
+docker ps                       //查看正在运行的容器       
+docker ps -a                    //查看所用容器，包括启动过的历史容器
+docker ps -a -q                 //显示所有容器ID
+docker ps -|                    //查看最后一次运行的容器
+docker ps -f status=exited      //查看停止的容器
+docker rm ${CONTAINER NAME/ID}  //删除已停止容器
+docker rm $(docker ps -a -q)    //删除所有容器,前提是所有容器都是停止的
+docker rm $(docker ps -f "status=exited" -q)   //删除所有退出的容器
+docker rm $(docker stop $(docker ps -a -q))     //停止并删除所有容器
+docker stats -a --no-stream             //显示所有容器的统计信息(包括没有运行的) ，只显示一次
+docker stats --no-stream | sort -k8 -h  //统计容器信息并以使用流量作为倒序
+docker system df      //显示硬盘占用
+docker system events  //显示容器的实时事件
+docker system info    //显示系统信息
+docker system prune   //清理文件
+docker top ${CONTAINER NAME/ID}  //显示容器本身的top信息，类似于Linux top，更简洁
+docker logs ${CONTAINER NAME/ID} //显示运行容器的日志
+
+创建启动容器
+docker run
+#参数
+--name ${container name}                          //设置容器名称
+-p ${host port}:${container port}                 //映射主机和容器内的端口
+-e ${env name}=${env value}                       //添加环境变量
+-v ${host folder path}:${container folder path}   //将主机目录挂在到容器内
+-d    //后台运行，守护式容器方式
+-i    //表示运行容器
+-t    //表示容器启动后会进入其命令行，加入 -it，创建并登录进去。即分配一个伪终端。
+
+交互式容器
+docker run -it --name=mycentos7 centos:7 /bin/bash  
+exit 命令可退出当前容器，退出后容器停止
+
+守护式容器
+docker run -di --name=mycentos7 centos:7  //创建容器
+docker exec -it ${CONTAINER NAME/ID} /bin/bash                   //进入/登录容器
+docker exec -it ${CONTAINER NAME/ID} ping ${CONTAINER NAME/ID}   //一个容器ping另外一个容器
+exit 退出容器后容器仍然在运行
+
+启停容器
+docker stop ${CONTAINER NAME/ID}
+docker stop $(docker ps -a -q)     //停止所有容器
+docker start ${CONTAINER NAME/ID}
+docker restart ${CONTAINER NAME/ID}
+docker restart $(docker ps -q)     //重启所有正在运行的容器
+
+文件拷贝
+docker cp 需要拷贝的文件或目录 容器名称:容器目录  //拷贝到容器
+docker cp 容器名称:容器目录 需要拷贝的文件或目录  //反向
+docker save ${IMAGE NAME} > ${FILE NAME}.tar      //将镜像保存成文件
+docker load < ${FILE NAME}.tar                    //从文件加载镜像
+
+目录挂载
+在创建容器的时候，将宿主机的目录和容器内的目录进行映射，这样我们就可以通过修改宿主机某个目录的文件从而影响容器。格式为：
+docker run -di -v 宿主机目录:容器目录
+
+获取容器或镜像元数据(详细信息)
+docker inspect 容器名称/镜像名称
+
+
+Mysql部署
+1.下载镜像
+docker pull mysql:5.7
+2.创建守护容器
+docker run -di --name docker_mysql -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root mysql:5.7
+-p 代表端口映射，格式为 宿主机映射端口:容器运行端口
+-e 代表添加环境变量， MYSQL_ROOT_PASSWORD是root用户的登录密码
+3.登录容器
+docker exec -it docker_mysql /bin/bash   //登录容器
+mysql -uroot -p                          //登录mysql
+echo 'port=3307' >>/etc/mysql/my.cnf
+
+
+
+
+

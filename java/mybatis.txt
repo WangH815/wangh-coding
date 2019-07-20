@@ -1,0 +1,519 @@
+MyBatis 学习
+
+ibatis   //老版本，后改名为MyBatis
+
+https://www.yiibai.com/ibatis
+
+MyBatis 是支持普通 SQL 查询,存储过程和高级映射的优秀持久层框架。
+MyBatis 消除 了几乎所有的 JDBC 代码和参数的手工设置以及结果集的检索。
+
+主要特点：
+支持存储过程
+支持内嵌SQL
+支持动态SQL
+
+
+步骤如下
+
+1.数据库连接配置文件SqlMapConfig.xml
+以连接Mysql为例
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig
+PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+     <settings useStatementNamespaces="true"/>
+     <transactionManager type="JDBC">
+        <dataSource type="SIMPLE">
+          <property name="JDBC.Driver" 
+               value="com.mysql.jdbc.Driver"/>
+          <property name="JDBC.ConnectionURL"
+               value="jdbc:mysql://localhost:3306/testdb"/>
+          <property name="JDBC.Username" value="root"/>
+          <property name="JDBC.Password" value="root"/>
+        </dataSource>
+      </transactionManager>
+     <sqlMap resource="Employee.xml"/> 
+</sqlMapConfig>
+
+还可配置以下参数
+<property name="JDBC.AutoCommit" value="true"/>
+<property name="Pool.MaximumActiveConnections" value="10"/>
+<property name="Pool.MaximumIdleConnections" value="5"/>
+<property name="Pool.MaximumCheckoutTime" value="150000"/> 
+<property name="Pool.MaximumTimeToWait" value="500"/> 
+<property name="Pool.PingQuery" value="select 1 from Employee"/> 
+<property name="Pool.PingEnabled" value="false"/>
+
+2.在数据库中创建表Employee表和存储过程
+CREATE TABLE EMPLOYEE (
+    id INT NOT NULL auto_increment,
+    first_name VARCHAR(20) default NULL,
+    last_name  VARCHAR(20) default NULL,
+    salary     INT  default NULL,
+    PRIMARY KEY (id)
+);
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `testdb`.`getEmp` $$
+CREATE PROCEDURE `testdb`.`getEmp` 
+   (IN empid INT)
+BEGIN
+   SELECT * FROM EMPLOYEE
+   WHERE ID = empid;
+END $$
+
+DELIMITER;
+
+3.编写Java类，映射数据库表
+public class Employee {   //普通Java类，也称POJO类
+    private int id;
+    private String first_name; 
+    private String last_name;   
+    private int salary;  
+    
+    public Employee() {}
+    
+    public Employee(String fname, String lname, int salary) {
+        this.first_name = fname;
+        this.last_name = lname;
+        this.salary = salary;
+    }
+	
+	public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getFirstName() {
+        return first_name;
+    }
+    public void setFirstName(String fname) {
+        this.first_name = fname;
+    }
+    public String getLastName() {
+        return last_name;
+    }
+    public void setlastName(String lname) {
+        this.last_name = lname;
+    }
+    public int getSalary() {
+        return salary;
+    }
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+	
+}
+
+4.POJO映射文件配置
+Employee.xml
+insert标签用于在 IbatisInsert.java 文件的数据库执行SQL INSERT查询“id”
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap 
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Employee"> 
+
+<!--插入节点-->
+<insert id="insert" parameterClass="Employee">          
+   insert into EMPLOYEE(first_name, last_name, salary)
+   values (#first_name#, #last_name#, #salary#)
+
+   <selectKey resultClass="int" keyProperty="id">
+      select last_insert_id() as id
+   </selectKey>
+</insert> 
+
+<!--插入节点-->
+<select id="getAll" resultClass="Employee">
+   SELECT * FROM EMPLOYEE
+</select>
+
+<!--更新节点-->
+<update id="update" parameterClass="Employee">
+   UPDATE EMPLOYEE
+   SET first_name = #first_name#
+   WHERE id = #id#
+</update>
+
+<!--删除节点-->
+<delete id="delete" parameterClass="int">
+   DELETE FROM EMPLOYEE
+   WHERE id = #id#
+</delete>
+
+<!--结果映射，包含resultMap和下面的select节点-->
+<resultMap id="result" class="Employee">
+    <result property="id" column="id"/>
+    <result property="first_name" column="first_name"/>
+    <result property="last_name" column="last_name"/>
+    <result property="salary" column="salary"/>
+</resultMap> 
+<select id="useResultMap" resultMap="result">
+    SELECT * FROM EMPLOYEE
+    WHERE id=#id#
+</select>
+
+<!--储存过程-->
+<procedure id="getEmpInfo" resultClass="Employee" parameterMap="getEmpInfoCall">
+    { call getEmp( #acctID# ) } 
+</procedure>
+<parameterMap id="getEmpInfoCall" class="map">
+    <parameter property="acctID" jdbcType="INT" javaType="java.lang.Integer" mode="IN"/>
+</parameterMap>
+
+<!--动态SQL，传入ID则返回该记录，否则返回全部记录-->
+<select id="findByID" resultClass="Employee">
+   SELECT * FROM EMPLOYEE
+   <dynamic prepend="WHERE ">
+      <isNotNull property="id">
+         id = #id#
+      </isNotNull>
+   </dynamic>
+</select>
+
+</sqlMap>
+
+4.逻辑处理类，这里已插入为例
+IbatisInsert.java
+import com.ibatis.common.resources.Resources;
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.ibatis.sqlmap.client.SqlMapClientBuilder;
+import java.io.*;
+import java.sql.SQLException;
+import java.util.*;
+
+public class IbatisInsert{
+    public static void main(String[] args) throws IOException,SQLException{
+        Reader rd = Resources.getResourceAsReader("SqlMapConfig.xml");
+        SqlMapClient smc = SqlMapClientBuilder.buildSqlMapClient(rd);
+        
+		//插入
+        Employee em = new Employee("Zara", "Ali", 5000);        
+        smc.insert("Employee.insert", em);
+		
+        /*查询		
+        List <Employee> ems = (List<Employee>)smc.queryForList("Employee.getAll", null);
+        Employee em = null;
+        for (Employee e : ems) {
+             System.out.print("  " + e.getId());
+             System.out.print("  " + e.getFirstName());
+             System.out.print("  " + e.getLastName());
+             System.out.print("  " + e.getSalary());
+             em = e; 
+             System.out.println("");
+		}
+	    */
+		
+		/*更新	
+		System.out.println("Going to update record.....");
+        Employee rec = new Employee();
+        rec.setId(1);
+        rec.setFirstName( "Roma");
+        smc.update("Employee.update", rec );
+        */	
+
+		/*删除
+        int id = 1;       
+        smc.delete("Employee.delete", id );
+		*/
+		
+		/*结果映射查询
+		int id = 1;
+        Employee e = (Employee)smc.queryForObject("Employee.useResultMap", id);       
+        System.out.println("ID:  " + e.getId());
+        System.out.println("First Name:  " + e.getFirstName());
+        System.out.println("Last Name:  " + e.getLastName());
+        System.out.println("Salary:  " + e.getSalary());
+        */
+		
+		/*调用存储过程
+		int id = 1;
+        Employee e = (Employee)smc.queryForObject("Employee.getEmpInfo", id);        
+        System.out.println("First Name:  " + e.getFirstName());
+		*/
+		
+		/*动态SQL
+		Employee rec = new Employee();
+        rec.setId(1);        
+        List <Employee> ems = (List<Employee>)smc.queryForList("Employee.findByID", rec);
+        Employee em = null;
+        for (Employee e : ems) {
+           System.out.print("  " + e.getId());
+           System.out.print("  " + e.getFirstName());
+           System.out.print("  " + e.getLastName());
+           System.out.print("  " + e.getSalary());
+           em = e; 
+           System.out.println("");
+        }
+		*/
+    }
+}
+
+
+iBATIS OGNL 表达式
+
+iBATIS的提供了强大的基于OGNL的表达式来消除其他元素。实现SQL的动态拼接。
+
+主要涉及以下语句：
+1.if
+2.choose/when/otherwise 
+3.where
+4.foreach
+
+if语句：
+有条件的where语句。例如：
+<select id="findActiveBlogWithTitleLike" parameterType="Blog" resultType="Blog">
+   SELECT * FROM BLOG
+   WHERE state = 'ACTIVE.
+   <if test="title != null">
+      AND title like #{title}
+   </if>
+   <if test="author != null">
+      AND author like #{author}
+   </if>
+</select>
+
+choose, when, otherwise 语句:
+类似于Java的switch语句
+下面的例子将只搜索标题上如果提供，那么只有由作者如果已提供。如果没有提供，让我们只返回精选的博客：
+<select id="findActiveBlogWithTitleLike" parameterType="Blog" resultType="Blog">
+   SELECT * FROM BLOG
+   WHERE state = 'ACTIVE.
+   <choose>
+      <when test="title != null">
+         AND title like #{title}
+      </when>
+      <when test="author != null and author.name != null">
+         AND author like #{author}
+      </when>
+      <otherwise>
+         AND featured = 1
+      </otherwise>
+   </choose>
+</select>
+
+where 语句:
+如果我们看一下前面的例子中，如果没有一个条件满足会发生什么事？最终SQL看起来像这样：
+SELECT * FROM BLOG
+WHERE
+这会失败，但iBATIS有一个简单的改变一个简单的解决方案，让一切工作正常：
+<select id="findActiveBlogLike"
+           parameterType="Blog" resultType="Blog">
+   SELECT * FROM BLOG
+   <where>
+      <if test="state != null">
+         state = #{state}
+      </if>
+      <if test="title != null">
+         AND title like #{title}
+      </if>
+      <if test="author != null>
+         AND author like #{author}
+      </if>
+   </where>
+</select>
+where元素知道只有插入WHERE ，如果有一个由含标签返回的任何内容。此外，如果该内容开头AND或OR，它知道剥离其关闭。
+
+foreach语句：
+foreach元素是非常强大的，并允许你指定一个集合，声明可以在元素的体内可用于项目和索引变量。
+它也允许你指定打开和关闭的字符串，并添加一个分隔符放置在迭代之间。可以建立一个IN条件如下：
+<select id="selectPostIn" resultType="domain.blog.Post">
+   SELECT * FROM POST P
+   WHERE ID in
+   <foreach item="item" index="index" collection="list"
+      open="(" separator="," close=")">
+         #{item}
+   </foreach>
+</select>
+
+
+调试
+可使用Log4J处理
+
+
+MyBatis
+
+https://www.yiibai.com/mybatis
+
+MyBatis应用程序主要使用SqlSessionFactory实例，
+SqlSessionFactory实例可以通过SqlSessionFactoryBuilder获得。
+SqlSessionFactoryBuilder可以从一个xml配置文件或者一个预定义的配置类的实例获得。
+
+使用步骤
+1.配置并创建工程
+MyBatis的jar包和JDBC驱动jar包，建议使用Maven管理
+
+2.创建数据库和 User 表
+CREATE TABLE `user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL DEFAULT '',
+  `dept` varchar(254) NOT NULL DEFAULT '',
+  `website` varchar(254) DEFAULT '',
+  `phone` varchar(16) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('1', 'yiibai', 'Tech', 'http://www.yiibai.com', '13800009988');
+
+3.创建MyBatis配置文件
+src/config/Configure.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="User" type="com.yiibai.mybatis.models.User" />
+	</typeAliases>
+	
+	<environments default="development">
+	    <environment id="development">
+		<transactionManager type="JDBC" />
+			<dataSource type="POOLED">  
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+			    <property name="url" value="jdbc:mysql://127.0.0.1:3306/yiibai" />
+			    <property name="username" value="root" />
+			    <property name="password" value="" />
+            </dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+	     <mapper resource="com/yiibai/mybatis/models/User.xml" />
+	</mappers>
+</configuration>
+
+4.创建实体类和映射文件
+实体类
+com.yiibai.mybatis.models. User.java
+
+package com.yiibai.mybatis.models;
+
+public class User {
+	private int id;
+	private String name;
+	private String dept;
+	private String phone;
+	private String website;
+	
+	public String getWebsite() {
+		return website;
+	}
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+}
+
+映射文件
+com/yiibai/mybatis/models/User.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiibai.mybatis.models.UserMapper">
+	<select id="GetUserByID" parameterType="int" resultType="User">
+		select * from `user` where id = #{id}
+    </select>
+</mapper>
+
+配置文件说明：
+1)配置文件 Configure.xml 是 mybatis 用来建立 sessionFactory，里面主要包含了数据库连接相关内容，
+  还有 java 类所对应的别名，比如：<typeAlias alias="User" type="com.yiibai.mybatis.models.User"/> 
+  这个别名非常重要，在具体的类的映射中，比如：User.xml 中 resultType 就是对应这个。要保持一致，
+  这里的 resultType 还有另外单独的定义方式。
+2)Configure.xml 里面 的<mapper resource="com/yiibai/mybatis/models/User.xml"/>是包含要映射的类的 xml 配置文件。
+3)在User.xml 文件里面主要是定义各种 SQL 语句，以及这些语句的参数，以及要返回的类型等等。
+
+5.查询测试
+import java.io.Reader;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import com.yiibai.mybatis.models.*;
+
+/**
+ * @author yiibai
+ * @copyright http://www.yiibai.com
+ * @date 2015/09/22
+ */
+public class HelloWord {
+	private static SqlSessionFactory sqlSessionFactory;
+	private static Reader reader;
+
+	static {
+		try {
+			//加载数据库配置信息，创建会话工厂对象
+			reader = Resources.getResourceAsReader("config/Configure.xml");
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static SqlSessionFactory getSession() {
+		return sqlSessionFactory;
+	}
+
+	public static void main(String[] args) {
+		//创建会话
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			//通过映射执行SQL，并返回实体类对象
+			User user = (User) session.selectOne("com.yiibai.mybatis.models.UserMapper.GetUserByID", 1);
+			if(user!=null){
+				String userInfo = "名字："+user.getName()+", 所属部门："+user.getDept()+", 主页："+user.getWebsite();
+				System.out.println(userInfo);
+			}
+		} finally {
+			session.close();  //关闭会话
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+

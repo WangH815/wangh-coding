@@ -1,0 +1,249 @@
+Java 集合框架
+
+数据来源
+https://blog.csdn.net/sdgihshdv/article/details/72566485
+https://blog.csdn.net/qq_37025445/article/details/76563133
+https://blog.csdn.net/HHcoco/article/details/53117525
+
+简介
+
+存储对象的容器
+所有接口和实现类均在java.util包中
+
+集合框架设计目标/特性
+1.该框架必须是高性能的。基本集合（动态数组，链表，树，哈希表）的实现也必须是高效的。
+2.该框架允许不同类型的集合，以类似的方式工作，具有高度的互操作性。
+3.对一个集合的扩展和适应必须是简单的。
+
+
+分类
+
+顶级接口 Collection(单元素集合) 和 Map(键值对集合)
+
+Collection  //该接口存储不唯一、无序的对象，无法直接继承此接口，只能继承或实现其子接口
+1.List   //有序、不唯一。常用实现类有 ArrayList 和 LinkedList，分别为数组和链表实现
+2.Set    //无序、唯一。常用实现类有 HashSet 和 TreeSet
+3.Queue  //不常用
+
+List 和 Set 区别
+List和数组类似，可动态增长，查找效率高，插入和删除效率低(会引起其他数据位置变化)
+Set检索效率低，插入和删除效率高(不会引起其他数据位置变化)
+
+主要方法
+size()                                     //集合内的对象数量
+add(E)/addAll(Collection)                  //向集合内添加单个/批量对象
+remove(Object)/removeAll(Collection)       //从集合内删除单个/批量对象
+contains(Object)/containsAll(Collection)   //判断集合中是否存在某个/某些对象
+toArray()                                  //返回包含集合内所有对象的数组
+
+List主要新增方法
+get(int)                                   //返回指定index位置上的对象
+add(E)/add(int, E)                         //在List末尾/指定index位置上插入一个对象
+set(int, E)                                //替换置于List指定index位置上的对象
+indexOf(Object)                            //返回指定对象在List中的index位置
+subList(int,int)                           //返回指定起始index到终止index的子List对象
+
+ArrayList vs LinkedList
+ArrayList的随机访问更高，基于数组实现的ArrayList可直接定位到目标对象，
+而LinkedList需要从头Node或尾Node开始向后/向前遍历若干次才能定位到目标对象
+LinkedList在头/尾节点执行插入/删除操作的效率比ArrayList要高
+由于ArrayList每次扩容的容量是当前的1.5倍，所以LinkedList所占的内存空间要更小一些
+二者的遍历效率接近，但需要注意，遍历LinkedList时应用iterator方式，不要用get(int)方式，否则效率会很低
+
+Vector vs ArrayList
+Vector和ArrayList很像，都是基于数组实现的集合，它和ArrayList的主要区别在于
+Vector是线程安全的，而ArrayList不是
+由于Vector中的方法基本都是synchronized的，其性能低于ArrayList
+Vector可以定义数组长度扩容的因子，ArrayList不能
+
+CopyOnWriteArrayList
+与 Vector一样，CopyOnWriteArrayList也可以认为是ArrayList的线程安全版，不同之处在于 CopyOnWriteArrayList
+在写操作时会先复制出一个副本，在新副本上执行写操作，然后再修改引用。这种机制让 CopyOnWriteArrayList可以
+对读操作不加锁，这就使CopyOnWriteArrayList的读效率远高于Vector。 CopyOnWriteArrayList的理念比较类似读写
+分离，适合读多写少的多线程场景。但要注意，CopyOnWriteArrayList只能保证数据的最终一致性，并不能保证数据
+的实时一致性，如果一个写操作正在进行中且并未完成，此时的读操作无法保证能读到这个写操作的结果。
+二者均是线程安全的、基于数组实现的List
+Vector是"绝对"线程安全的，CopyOnWriteArrayList只能保证读线程会读到"已完成"的写结果，但无法像Vector一样
+实现读操作的"等待写操作完成后再读最新值"的能力
+CopyOnWriteArrayList读性能远高于Vector，并发线程越多优势越明显，但占用更多的内存空间
+
+
+Map  //该接口存储键值对的集合。常用实现类 HashMap
+
+主要方法
+size()                            //集合内的对象数量
+put(K,V)/putAll(Map)              //向Map内添加单个/批量对象
+get(K)                            //返回Key对应的对象
+remove(K)                         //删除Key对应的对象
+keySet()                          //返回包含Map中所有key的Set
+values()                          //返回包含Map中所有value的Collection
+entrySet()                        //返回包含Map中所有key-value对的EntrySet
+containsKey(K)/containsValue(V)   //判断Map中是否存在指定key/value
+
+Map将key和value封装至一个叫做Entry的对象中，Map中存储的元素实际是Entry。
+只有在keySet()和values()方法被调用时，Map才会将keySet和values对象实例化。
+每一个Map根据其自身特点，都有不同的Entry实现，以对应Map的内部类形式出现。
+前文已经对Map接口的基本特点进行过描述，我们直接来看一下Map接口的常用实现
+
+HashMap
+HashMap的Entry类：
+static class Entry<K,V> implements Map.Entry<K,V> {
+    final K key;
+    V value;
+    Entry<K,V> next;
+    int hash;
+}
+HashMap将Entry对象存储在一个数组中，并通过哈希表来实现对Entry的快速访问，由每个Entry中的key的哈希值决定
+该Entry在数组中的位置。以这种特性能够实现。通过key快速查找到Entry，从而获得该key对应的value。在不发生
+哈希冲突的前提下，查找的时间复杂度是O(1)。如果两个不同的key计算出的index是一样的，就会发生两个不同的key
+都对应到数组中同一个位置的情况，也就是所谓的哈希冲突。HashMap处理哈 希冲突的方法是拉链法，也就是说数组中
+每个位置保存的实际是一个Entry链表，链表中每个Entry都拥有指向链表中后一个Entry的引用。在发生哈希冲突时，
+将冲突的Entry追加至链表的头部。当HashMap在寻址时发现某个key对应的数组index上有多个Entry，便会遍历该位置上
+的 Entry链表，直到找到目标的Entry。
+
+Hashtable
+Hashtable 可以说是HashMap的前身（Hashtable自JDK1.0就存在，而HashMap乃至整个Map接口都是JDK1.2引入的新特性），
+其实现思 路与HashMap几乎完全一样，都是通过数组存储Entry，以key的哈希值计算Entry在数组中的index，用拉链法解决
+哈希冲突。二者最大的不同在于，Hashtable是线程安全的，其提供的方法几乎都是同步的。
+
+ConcurrentHashMap
+ConcurrentHashMap的HashEntry类：
+static final class HashEntry<K,V> {
+    final int hash;
+    final K key;
+    volatile V value;
+    volatile HashEntry<K,V> next;
+}
+ConcurrentHashMap是HashMap的线程安全版（自JDK1.5引入），提供比Hashtable更高效的并发性能。
+Hashtable 在进行读写操作时会锁住整个Entry数组，这就导致数据越多性能越差。而ConcurrentHashMap使用分离锁的思路
+解决并发性能，其将 Entry数组拆分至16个Segment中，以哈希算法决定Entry应该存储在哪个Segment。这样就可以实现在
+写操作时只对一个Segment 加锁，大幅提升了并发写的性能。
+在进行读操作时，ConcurrentHashMap在绝大部分情况下都不需要加锁，其Entry中的value是volatile的，这保证了value
+被修改时的线程可见性，无需加锁便能实现线程安全的读操作。
+
+但是鱼与熊掌不可兼得，ConcurrentHashMap的高性能是有代价的（否则Hashtable就没有存在价值了），那就是它不能保证
+读操作的绝对 一致性。ConcurrentHashMap保证读操作能获取到已存在Entry的value的最新值，同时也能保证读操作可获取到
+已完成的写操作的内容，但如果写操作是在创建一个新的Entry，那么在写操作没有完成时，读操作是有可能获取不到这个Entry的。
+
+HashMap vs Hashtable vs ConcurrentHashMap
+三者在数据存储层面的机制原理基本一致
+HashMap不是线程安全的，多线程环境下除了不能保证数据一致性之外，还有可能在rehash阶段引发Entry链表成环，导致死循环
+Hashtable是线程安全的，能保证绝对的数据一致性，但性能是问题，并发线程越多，性能越差
+ConcurrentHashMap 也是线程安全的，使用分离锁和volatile等方法极大地提升了读写性能，同时也能保证在绝大部分情况下的数据一致性。
+但其不能保证绝对的数据一致性， 在一个线程向Map中加入Entry的操作没有完全完成之前，其他线程有可能读不到新加入的Entry
+
+LinkedHashMap
+LinkedHashMap与HashMap非常类似，唯一的不同在于前者的Entry在HashMap.Entry的基础上增加了到前一个插入和后一个插入
+的Entry的引用，以实现能够按Entry的插入顺序进行遍历。
+
+TreeMap
+TreeMap是基于红黑树实现的Map结构，其Entry类拥有到左/右叶子节点和父节点的引用，同时还记录了自己的颜色：
+红黑树及TreeMap实现原理:  https://blog.csdn.net/chenssy/article/details/26668941
+static final class Entry<K,V> implements Map.Entry<K,V> {
+    K key;
+    V value;
+    Entry<K,V> left = null;
+    Entry<K,V> right = null;
+    Entry<K,V> parent;
+    boolean color = BLACK; 
+}
+红黑树实际是一种算法复杂但高效的平衡二叉树，具备二叉树的基本性质，即任何节点的值大于其左叶子节点，小于其右叶子节点，
+利用这种特性，TreeMap能够实现Entry的排序和快速查找。
+TreeMap的Entry是有序的，所以提供了一系列方便的功能，比如获取以升序或降序排列的KeySet(EntrySet)、获取在指定key(Entry)
+之前/之后的key(Entry)等等。适合需要对key进行有序操作的场景。
+
+ConcurrentSkipListMap
+static class Index<K,V> {
+        final Node<K,V> node;
+        final Index<K,V> down;    //下引用
+        volatile Index<K,V> right;//右引用
+}
+ConcurrentSkipListMap同样能够提供有序的Entry排列，但其实现原理与TreeMap不同，是基于跳表(SkipList)的：
+ConcurrentSkipListMap由一个多级链表实现，底层链上拥有所有元素，逐级上升的过程中每个链的元素数递减。
+在查找时从顶层链出发，按先右后下的优先级进行查找，从而实现快速寻址。
+与TreeMap不同，ConcurrentSkipListMap在进行插入、删除等操作时，只需要修改影响到的节点的右引用，而右引用又是volatile的，
+所以ConcurrentSkipListMap是线程安全的。但ConcurrentSkipListMap与ConcurrentHashMap一样，不能保证数据的绝对一致性，在某些
+情况下有可能无法读到正在被插入的数据。
+
+TreeMap vs ConcurrentSkipListMap
+二者都能够提供有序的Entry集合
+二者的性能相近，查找时间复杂度都是O(logN)
+ConcurrentSkipListMap会占用更多的内存空间
+ConcurrentSkipListMap是线程安全的，TreeMap不是
+
+
+集合算法
+一般由 Collections 类、 Arrays 类和 Map 类等的静态方法提供，例如搜素和排序等
+
+
+迭代器(Iterator)
+迭代集合内元素
+
+
+实例
+
+1.ArrayList遍历
+import java.util.*;
+ 
+public class Test{
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<String>();
+        list.add("Hello");  //添加元素
+        list.add("World");
+        
+        //foreach遍历        
+        for (String str : list) { 
+           System.out.println(str);
+        }
+        
+        //转化为数组进行遍历
+        String[] strArray = new String[list.size()];
+        list.toArray(strArray);
+        for(int i=0;i<strArray.length;i++) { //或foreach形式        
+           System.out.println(strArray[i]);
+        }
+        
+        //迭代器遍历        
+        Iterator<String> ite = list.iterator();
+        while(ite.hasNext()) {       
+            System.out.println(ite.next());
+        }
+    }
+}
+
+2.HashMap遍历
+import java.util.*;
+ 
+public class Test{
+    public static void main(String[] args) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("1", "value1");  //添加元素
+        map.put("2", "value2");
+        
+        //按key取value，常用
+        for (String key : map.keySet()) {
+            System.out.println("key= "+ key + " and value= " + map.get(key));
+        }
+        
+        //迭代器遍历
+        Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();  //获取迭代器
+        while (it.hasNext()) {
+            Map.Entry<String, String> entry = it.next();
+            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+        }
+        
+        //同上，简化版。大容量适用
+        System.out.println("通过Map.entrySet遍历key和value");
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+        }
+        
+        //遍历值
+        for (String v : map.values()) {
+         System.out.println("value= " + v);
+        }
+    }
+}
+
+
+

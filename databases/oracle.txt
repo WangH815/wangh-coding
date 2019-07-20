@@ -1,0 +1,316 @@
+用户名、库名不区分大小写
+
+四个基本用户
+sys,system 系统管理用户，sys权限高于system
+
+sysman     用于操作企业管理器的用户
+前三个密码是安装时数据库自行设置的
+
+scott      其中一个创始人名字，该用户为普通用户
+默认密码 tiger
+该用户默认是锁定的，可使用系统管理员登录sqlplus解锁
+解锁命令
+alter user scott account unlock;
+
+
+sqlplus
+使用系统命令不需要使用分号结尾，sql语句必须以分号结尾
+登录
+命令格式
+[username/password] [@sever] [as sysdba|sysoper]
+
+登陆后切换到其他用户可使用
+
+connect username/password as sysdba|sysoper
+
+show user         查看登录用户
+desc dba_users;   查询用户表字段，语句结尾分号可不加
+select username from dba_users;  查询用户
+
+
+表空间：用于存放数据库文件的逻辑空间
+分类
+永久表空间：存放需要永久保存的数据
+临时表空间：数据库运行期间需要临时使用的空间，使用完会释放
+undo表空间：用于执行事务前存放修改前数据的表空间，方便回滚
+
+dba_tablespaces  系统管理员查看的表空间数据字典的表
+
+user_tablespaces 普通用户查看的表空间数据字典的表
+
+dba_users、user_users 数据字典，与上类似
+
+修改或设置用户默认或临时表空间
+ALTER USER username
+DEFRAULT|TEMPORARY
+TABLESPACE tablespace_name;
+
+创建表空间
+CREATE [TEMPORARY] TABLESPACE
+tablespace_name
+TEMPFILE|DETAFILE '/path/xx.dbf' SIZE xx;
+
+dba_data_files 存放数据库永久表空间相关数据，存放路径（file_name）
+dba_temp_files 存放数据库临时表空间相关数据，存放路径（file_name）
+
+修改表永久空间联机脱机状态，新建的表空间默认是联机状态
+alter tablespace tablespace_name online|offline;
+
+查看数据库表空间状态
+select status from dba_tablespaces where tablespace_name = '表空间名';
+
+修改表永久空间读写状态
+alter tablespace tablespace_name read only|read write;
+
+修改表空间数据文件
+增加数据文件
+alter tablespace tablespace_name add datafile 'xx.dbf' size xx;
+删除数据文件,不能删除第一个数据库表空间的数据文件，可通过删除整个数据库表空间删除
+alter tablespace tablespace_name drop datafile `xx.dbf`;
+
+删除表空间,不加including contents默认删除表空间不删除文件
+drop tablespace tablespace_name [including contents]
+
+
+管理表
+
+数据类型
+字符型：char(n)， max(n) = 2000
+       nchar(n)，max(n) = 1000；数据以unicode存储
+       varchar2(n)， max(n) = 4000
+       nvarchar2(n)，max(n) = 2000；数据以unicode存储
+数值型：number(p,s)，p为有效位；s为小数点后位数
+       float(n)
+日期型：date，-4712.01.01到9999.12.31，可精确到秒
+       timestamp，可精确到小数秒
+其他类型：blob，最大4G，二进制方式存放
+        clob，最大4G，字符串方式存放
+
+创建表
+同一用户下表名唯一
+create table table_name
+(
+  cloumn_name_1 datatype,
+  ...
+  cloumn_name_n datatype
+);
+
+修改表
+添加字段
+alter table table_name
+add cloumn_name datatype;
+更改数据类型或者长度
+alter table table_name
+modify cloumn_name datatype;
+删除字段
+alter table table_name
+drop cloumn_name;
+修改字段名
+alter table table_name
+rename cloumn_name to new_cloumn_name;
+修改表名
+rename table_name to new_table_name;
+删除表数据,表结构还在
+truncate table table_name;
+删除表，包括数据
+drop table table_name;
+
+插入数据
+部分字段
+insert into table_name
+(cloumn_1,...,cloumn_n)
+values
+(values_1,...,values_n);
+全部字段
+insert into table_name
+values
+(values_1,...,values_n);
+创建表并插入数据
+create table new_table_name
+as
+select column_1,...,clumn_n from another_table_name;
+子查询方式插入数据
+insert into table_name
+(cloumn_1,...,cloumn_n)
+values
+select cloumn_1,...,cloumn_n from another_table_name;
+
+修改数据
+修改多个字段值
+update table_name
+set clumn_1 = values_1,...,clumn_n = values_n
+[where conditions];
+
+删除数据
+delete table_name
+[where conditions];
+
+
+约束
+除了非空约束，约束都有名称
+非空约束 not null
+create table table_name
+(
+  cloumn_name_1 datatype NOT NULL,
+  ...
+  cloumn_name_n datatype
+);
+设置表字段空值约束
+alter table table_name
+modify cloumn_name datatype NOT NULL|NULL;
+
+主键约束
+创建表时
+create table table_name  //单一主键
+(
+  cloumn_name_1 datatype PRIMARY KEY,
+  ...
+  cloumn_name_n datatype
+);
+create table table_name  //联合主键或复合主键
+(
+  cloumn_name_1 datatype,
+  ...
+  cloumn_name_n datatype,
+  CONSTRAINT constraint_name PRIMARY KEY (cloumn_name_1,...)
+);
+
+修改表时添加主键
+alter table_name
+add contraint constraints_name
+PRIMARY KEY (cloumn_name_1,...);
+
+查询主键相关信息
+select * from user_constraints [where conditions];
+select constraints_name
+from user_constraints
+where table_name = 'table_name'
+
+修改约束名
+alter table_name
+rename contraint constraints_name to new_constraints_name;
+
+禁用启用约束
+alter table_name
+disable|enable constraint constraints_name；
+
+删除约束
+alter table_name
+drop constraint constraints_name；
+
+删除主键约束（一个表只有一个主键）
+alter table_name
+drop constraint primary key [cascade];  //cascade 用于级联删除，涉及到外键
+
+外键约束
+创建表时
+create table table_name
+//table_name为从表，new_table_name为主表，
+//约束的字段为同一数据类型且主表字段为主键
+//从表中约束的字段的值必须来源于主表约束字段中的值或者NULL
+(
+  cloumn_name_1 datatype references new_table_name(column_name),
+  ...
+  cloumn_name_n datatype
+);
+
+create table table_name
+(
+  cloumn_name_1 datatype,
+  ...
+  cloumn_name_n datatype,
+  CONSTRAINT constraint_name
+  FOREIGN KEY (cloumn_name) 
+  references new_table_name(new_column_name)
+  [ON DELETE CASCADE] 
+  //[]中表示级联删除，当主表中主键字段记录删除时，
+  //同时删除从表中使用到字段数值的记录,保证主从表数据一致性
+);
+修改表时
+alter table_name
+add contraint constraints_name
+FOREIGN KEY (cloumn_name) 
+references new_table_name(new_column_name)
+[ON DELETE CASCADE];
+ 
+唯一约束
+关键字unique，相关使用类似单一主键约束（primary key），删除只能通过约束名称
+
+检查约束
+创建表时
+create table table_name
+(
+  cloumn_name_1 datatype CHECK(expressions),
+  ...
+  cloumn_name_n datatype
+);
+
+
+查询
+sqlplus显示格式设置
+更改显示的字段名
+column/col column_name heading new_name;
+
+设置显示格式
+column/col column_name format dataformat;
+例如：
+col column_name format a10;     //字符格式，a表示字符，10表示位数
+col column_name format 999.99;  //数字格式，9表示一位数字；此句表示3位整数位两位小数位,右对齐显示。
+col column_name format $999.99; //在数字显示结果前面加上$
+
+清除显示格式
+col column_name clear;
+
+基本格式
+单表查询
+select [distinct] column_name_1,...|* //distinct用于去重
+from table_name
+[where conditions]
+
+查询一张表所有字段
+select * from table_name;
+
+查询自定字段
+select column_name_1,... from table_name; //字段显示顺序与语句中保持一致
+
+设置字段显示别名  //不限于sqlplus中
+select column_name_1 [as] new_col,... from table_name;
+
+where字句中条件由and,or,between ... and ...
+
+where字句中
+not(column_name = *)  <=>  column_name <> *
+
+模糊查询
+column_name like '_a%' //表示匹配第二个字符是a的字段值,_表示一个字符,%表示是零个或多个字符
+
+范围查询
+column_name between 800 and 2000 //匹配800到2000之前的数，闭合区间[800,2000]
+column_name [not] in ('a','b','c')     //匹配字段[不]为a,b,或者c的记录
+
+查询结果排序
+select column_name_1,...
+from table_name
+order by column_name_1 desc/asc,column_name_2 desc/asc,...  //asc为默认排序，desc为降序
+
+case ... when语句，放在select语句中作为一个字段
+形式1  //column_name字段值为values，显示result1；else语句存在时不在条件里显示result，不存在else语句且不在条件里的字段显示为空
+case column_name
+when value1 then result1,
+when value2 then result2,
+...
+[else result] end
+
+形式2 //conditions1为某字段满足的条件
+case
+when conditions1 then result1,
+when conditions2 then result2,
+...
+[else result] end
+
+decode函数跟case ... when语句形式1类似
+decode(column_name,value1,result1,
+                   value2,result2,
+				   ...,...,
+				   result)  //类似于case ... when语句形式1中的else
+

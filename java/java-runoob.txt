@@ -1,0 +1,888 @@
+java教程
+
+简介
+Java是由Sun Microsystems公司(简称Sun)在1995.05推出的面向对象的高级程序设计语言和Java平台的总称，
+主要由James Gosling开发。
+
+Java三个体系
+1)JavaSE(J2SE) (Java2 Platform Standard Edition, java平台标准版)
+2)JavaEE(J2EE) (Java2 Platform Enterprise Edition, java平台企业版)
+3)JavaME(J2ME) (Java2 Platform Micro Edition, java平台微型版)
+2005.06，JavaOne大会上Sun发布Java SE 6，各个版本取消数字2，更名为SE，EE以及ME
+
+主要特性
+ 1)简单：语法与C和C++类似
+ 2)面向对象
+ 3)分布式：支持Internet应用开发
+ 4)健壮的：Java提供的强类型机制、异常处理、垃圾自动回收和安全检查机制等保证了语言的健壮性
+ 5)安全：安全机制、安全防范机制以及安全管理机制
+ 6)体系结构中立：.java由编译器编译为.class(字节码)文件，可在任意系统的JVM中解释执行
+ 7)可移植：编译器由Java实现，运行环境由ANSI C实现。来源于上一条。
+ 8)解释型
+ 9)高性能
+10)多线程
+11)动态
+
+
+基础语法
+
+一个Java程序可认为是一系列对象的集合，调用彼此的方法来协同工作。
+对象：类的实例，有状态(属性)和行为(方法)
+类：对象模板
+方法：实现特定功能
+
+注意事项
+大小写敏感
+类名首字母大写，后续采用驼峰写法
+方法名首字母小写，后续驼峰写法
+源文件与类名相同
+所有Java程序有main()方法开始执行
+
+标识符
+Java组成部分名字。如类名、变量名及方法名。
+以字母，美元符或下划线开始
+首字符之后可以字母，美元符、下划线或数字
+关键字不能作为标识符
+大小写敏感
+
+修饰符
+修饰类中的方法和属性
+访问修饰符：default,public,protected,private
+非访问控制修饰符：final,abstract,strictfp
+
+变量
+局部变量：一般是在方法或语句块中，无访问修饰词，只在该方法和语句块中可见，存储在栈上
+类变量：静态变量，必须声明为static，大多数情况声明为常量，存储在静态存储区
+成员变量：类变量，无static修饰
+
+数组
+存储在堆上
+
+枚举
+限制变量只能是设定好的值
+class FreshJuice{
+	enum FreshJuiceSize{
+		SMALL, MEDIUM, LARGE
+	}
+	FreshJuiceSize size;
+}
+
+注释
+/*多行注释
+ *
+ */
+//单行注释
+/*单行注释*/
+
+
+对象和类
+
+主要概念：多态、继承、封装、抽象、类、对象、实例、方法、重载
+
+构造方法
+方法名与类名一致，用于初始化实例对象，没有显式编译器默认提供一个隐式构造方法。
+
+源文件声明规则
+一个源文件只能有一个public类，可以有多个非public类
+package语句有的话必须位于首行，import有的话必须位于package和类定义之间
+
+包
+主要用于对类或接口进行分类
+
+
+基本数据类型
+
+两大数据类型
+1)内置数据类型
+2)引用数据类型
+
+内置数据类型
+1)byte/Byte      8bit
+2)short/Short   16bit
+3)int/Integer   32bit
+4)long/Long     64bit
+5)float/Float   32bit
+6)double/Double 64bit
+7)boolean/Boolean true/false  默认 false
+8)char/Char     16bit \u0000 - \uffff <==>[0, 65535]
+9)void/Void 无法直接操作
+
+引用数据类型
+对象、数组都是引用类型
+
+常量
+程序运行时不能被修改
+使用final修饰，变量名一般大写
+byte/int/long/short 表示常量时，0开头表示8进制，0x开头表示16进制
+char/String 表示Unicode字符，char使用单引号，String使用双引号，\u开头
+
+自动类型转换
+低----->高
+byte,short,char-->int-->long-->float-->double
+boolean 类型不能转换
+
+自动类型装换/强制类型转换
+
+
+修饰符
+
+访问控制修饰符
+实现对类、变量、方法和构造方法的访问控制
+default ：缺省，适用于类、接口、变量和方法
+private ：同一类中可见，适用于变量和方法
+public ：对所有类可见，适用于类、接口、变量和方法
+protected ：对同一包内的类可所有子类可见，适用于变量和方法 
+
+访问控制和继承
+父类private方法不能被继承
+父类中非private方法在子类中必须使用相同访问控制符或更宽松的访问控制符
+
+非访问控制修饰符
+static 用于修饰类方法和类变量
+final 用于修饰类、方法和变量，分别为不可继承，不能重新定义和常量，表示不可修改
+abstract 用于修饰抽象类和抽象方法
+synchronized,volatile 主要用于线程编程
+
+
+运算符
+1)算术运算符
+2)关系运算符
+3)位运算符
+4)逻辑运算符
+5)赋值运算符
+6)其他运算符
+
+其他运算符
+条件运算符，也叫三元运算符  ? :
+
+instanceof 运算符
+用于检查对象是否为一个特定类型（类类型或接口类型）
+
+循环结构
+while
+do...while
+for
+
+分支结构
+if...else
+switch(expression){
+	case value: //value支持byte、short、int或char，Java7开始支持String
+	    //语句
+		break; //可选
+	case value:
+	    //语句
+		break; //可选
+	//case语句可以有任意个
+	default: //可选
+	    //语句
+}
+
+
+Numver和Math类
+Byte、Integer、Double、Float、Short和Long包装类都是抽象类Number的子类
+
+自动拆箱装箱
+包装类和内置数据类型的相互转换，由编译器完成
+
+Math类
+包含所有用于执行基本数学运算的属性和方法，所有方法均为static形式
+
+
+Charater类
+char的包装类
+
+
+String类
+有约11中构造方法，初始化方式较多
+
+格式化输出字符串
+System.out.printf(); //格式化输出，返回PrintStream对象
+String.format();     //格式化输出，返回String类型
+
+
+StringBuffer和StringBuilder
+主要用于需要修改的字符串
+StringBuffer线程安全，速度慢;StringBuilder相反
+
+
+数组
+
+声明数组
+dataType[] array = new dataType[arraySize];
+
+
+日期时间
+
+java.util.Date类封装当前日期与时间
+Data()和Date(long millisec)两个构造方法初始化Date对象
+SimpleDateFormat类用于格式化日期
+
+休眠
+Thread.sleep(1000); //阻塞当前线程，单位ms
+
+测量时间
+long t = System.currentTimeMills(); //获取当前时间与1970.1.1 00:00:00差值，单位ms
+
+Calendar抽象类
+比Date功能强大得多，实现方式也更复杂
+Calendar c = Calendar.getInstance(); //初始化，获取当前日期
+
+GregorianCalendar类
+Calendar的一个实现类，实现了公立日历
+
+
+正则表达式
+定义了字符串的模式
+适用于搜索、编辑或处理文本
+几乎所有语言都有正则，但有细微差别
+
+正则处理类
+java.util.regex包主要包括Pattern、Matcher和PatternSyntaxException这三个类
+
+Pattern类
+其对象为正则表达式的编译表示。该类没有公共构造方法。
+通过调用其公共静态方法compile()创建实例化对象，返回Pattern对象。
+
+Matcher类
+其对象是解析及操作字符串的引擎。
+需通过调用其公共静态方法matcher()创建实例化对象，返回Matcher对象。
+
+PatternSyntaxException
+此类是一个非强制异常类，表示正则表达式模式中的语法错误。
+
+
+方法
+System.out.println();
+System为系统类
+out为标准输出对象
+println()为一个方法
+
+命名
+一般采用驼峰命名，首字母小写，见名知意。
+下划线一般出现在Junit中测试方法用于分割名称的逻辑组件，下划线前后采用驼峰命名。
+
+可变参数的方法
+typeName... parameterName
+
+main()的两种形式
+main(String[] args) <==> main(String... args)
+
+finalize()方法
+一般用于主动清除回收对象，作用于系统垃圾回收之前。
+声明格式
+protected void finalize(){
+	//终结代码
+}
+
+
+Stream、File和IO
+java.io包几乎包含了 所有操作输入、输出需要的类。
+java.io包中的流支持多种格式，比如：基本类型、对象以及本地化字符集等。
+一个流表示一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据。
+广泛应用于文件传输和网络编程。
+
+控制台输入
+import java.io.*
+public class BRRead{
+	public static void main(String[] args){
+		char c; //如需要的读取的是字符串，此句改为 String str;
+		//使用System.in创建BufferedReader
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		Systen.out.println("输入字符，按'q'退出。");
+		do{
+			//不断从控制台读取字符，直到用户输入'q'
+			c = (char) br.read();  //如需读取的是字符串，此句改为 str = br.readLine();
+			System.out.println(c);
+		}while(c != 'q');  //如判断某字符串结束，条件改为 !str.equals("end")
+	}
+}
+
+控制台输出
+绝大部分情况由print()和println()方法完成，在PrintStream类中定义，System.out是该类对象的一个引用。
+PrintStream继承了OutputStream类，实现了write()，最简单的格式如下：
+void write(int byteval); //将byteval的第八位字节写到流中
+
+write()实例
+int b = 'A';
+System.out.write(b);
+System.out.write('\n');
+
+读写文件
+IO流包括字符流和字节流
+字符流包括Reader和Writer
+字节流包括InputStream和OutputStream
+
+读写文件最重要的两个流是FileInputStream和FileOutputStream
+
+FileInputStream //用于从文件中读取数据
+//实例化1
+InputStream f1 = new FileInputStream("C:/hello.java");
+//实例化2
+File f = new File("C:/hello.java");
+InputStream f2 = new FileInputStream(f);
+
+FileOutputStream //用于向文件中写入数据
+//实例化1
+OutputStream f1 = new FileOutputStream("C:/hello.java");
+//实例化2
+File f = new File("C:/hello.java");
+OutputStream f2 = new FileOutputStream(f);
+
+//二进制写入文件并输出到控制台
+import java.io.*
+
+public class fileStreamTest{
+	public static void main(String[] args){
+		try{
+			byte[] bWrite = {11,45,77,876,786,3,8,9};
+			OutputStream os = new FileOutputStream("test.txt"); //创建字节输出流对象
+			for(int i = 0; i < bWrite.length; i++)
+				os.write(bWrite[i]); //按二进制字节流写入到文件中
+		    os.close(); //关闭输出流
+		    InputStream is = new FileInputStream("test.txt"); //创建输入流
+		    for(int i = 0; i < is.available(); i++)
+			    System.out.print((char)is.read() + " "); //调用输入流的read()方法读取 
+		    is.close();
+		}catch(IOException e){
+			System.out.print("Exception");
+		}
+	}
+}
+
+//指定编码格式写入文件
+public class fileStreamTest2{
+	public static void main(String[] args){
+		File f = new File("test.txt");
+		FileOutputStream fos = new FileOutputStream(f); //创建字节输出(写入)流对象，文件不存在会自动创建
+		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); //创建字符输出流，指定编码格式
+		osw.append("中文输入"); //调用append()方法，写入缓冲区
+		osw.append("\r\n"); //换行
+		osw.append("English");
+		osw.close(); //关闭写入流并把缓冲区内容写入到文件中;也可以主动调用flush方法刷新缓冲区，写入文件
+		fos.close(); //关闭输出流，释放系统资源
+		FileInputStream fis = new FileInputStream(f); //创建字节输出流对象
+		InputStreamReader isr = new InputStreamReader(fis, "UTF-8"); //创建字符输入(读取)流对象，指定编码格式
+		StringBuffer sb = new StringBuffer();
+		while(isr.ready())
+			sb.append((char) isr.read()); //将字符输出流中字符追加到StringBuffer对象中
+		System.out.println(sb.toString());
+		isr.close(); //关闭读取流
+		fis.close(); //关闭输入流，释放系统资源
+	}
+}
+
+文件和I/O
+主要需要知道三个类，分别是File、FileReader和FileWriter
+
+File类
+File f = new File("/tmp/user/java/bin"); //创建文件对象
+f.mkdir(); //创建bin文件夹，若/tmp/user/java文件夹不存在时，不会创建bin并返回false
+f.mkdirs(); //创建文件夹，包含所有父文件夹，类似于Linux里的 mkdir -p
+f.isDirectory(); //判断f是否为目录
+String[] str = f.list(); //返回文件夹中所有的子文件和子目录
+delete(f); //删除文件或空文件夹
+
+删除指定目录中所有的子文件和子目录
+import java.io.File;
+
+public class DeleteFileDemo{
+	public static void main(String[] args){
+		File f = new File("/tmp/java"); //创建文件对象
+		deleteFolder(f); //递归删除java目录下所有的文件和文件夹
+	}
+	public static void deleteFolder(File f){
+		File[] fs = f.listFiles(); //创建文件数组，获取指定目录下的文件和文件夹对象
+		if(fs != null){
+			for(File f : fs){ //foreach循环
+				if(f.isDirectory) //判断是否为文件夹
+					deleteFolder(f); //递归删除
+				else
+					f.delete(); //删除文件或空文件夹
+			}
+		}
+		f.delete(); //删除指定目录或文件
+	}
+}
+
+
+Scanner类
+用于获取用户输入
+Scanner s = new Scanner(Sysytem.in); //获取键盘输入
+next()和nextLine()方法获取输入字符串
+hasNext()和hasNextLine()判断是否还有输入数据
+hasNextInt(); //判断输入是否为Int类型数据；其他基本类型类似
+
+next()和nextLine()的区别
+next()
+必须读取到有效输入才可以结束输入
+字符串前空格会忽略，后面的空格作为结束符
+nextLine()
+Enter作为结束符,能获取带有空格的字符串
+
+
+异常处理
+主要为以下三类
+1.检查型异常：用户错误或问题引起的，程序员无法预见，编译时不能简单被忽略
+2.运行时异常：程序员可能避免的异常，编译时可被忽略
+3.错误：错误不是异常，一般指程序脱离控制。在代码通常被忽略，编译时无法被检查到。
+
+Exception类的层次
+所有异常类都是java.lang.Exception类的子类
+Throwable类包括Error类和Exception类
+Exception包括IOException、RuntimeException等子类
+Error一般指运行时环境发生的错误，例如：JVM内存溢出、通信时网络中断等
+
+
+继承
+目的
+1.代码复用
+2.便于创建等级层次的类
+
+class A extends B{   //A继承B
+    //code	
+}
+
+class C implements A,B{  //C实现借口A和B
+	//code
+}
+
+继承的特性
+子类拥有父类非 private 的属性及方法
+子类可以拥有自己的属性及方法，用于对父类的扩展
+可以对父类的非 final 方法重新实现
+java为单继承，但可以实现多个接口来体现多继承的形式
+提高了类之间的耦合性
+final 类不能被继承
+
+super 和 this 关键词分别实现对父类和子类成员的访问
+
+构造器
+用于初始化实例
+子类不能继承父类的构造方法
+父类构造器带有参数，子类构造器中必须通过 super 关键词显式调用父类构造器
+父类构造器无参数时，子类构造器无需显式调用，系统会自动调用父类的无参构造器
+
+
+重写(Override)
+子类对父类的允许访问的方法的实现过程重新编写
+
+重写规则
+返回值类型需相同或者其兼容类型(子类型)
+形参类型数量顺序都不能变
+成员方法只能被它的子类重写
+private 和 final 方法不能被重写
+static 方法不能被重写，可以再次声明
+子类和父类不在同一包内，只能重写申明为 public 和 protected 的非final方法
+重写的方法可以任何非强制异常，但不能抛出新的检查异常以及更宽泛的异常
+构造方法不能被重写
+
+重载(Overload)
+重载是在同一个类中，方法名相同，参数列表不同。返回值类型可以不同。
+
+重载规则
+重载方法必须改变参数列表，即参数数量、顺序或参数类型一项或多项不一致
+返回值类型可以不同
+访问修饰符可以不同
+可以申明新的或者更广的检查异常
+
+总结
+重写和重载是Java多态的不同表现
+重写体现同一方法在父子类中不同的实现形式
+重载体现的是同一个类中方法功能的扩展，例如：原方法只能实现两个整数的和，通过重载可以实现两个浮点数或一个整数和一个浮点数的和或多个整数的和
+
+
+多态
+
+优点或作用
+1.消除类型直接的耦合性
+2.可替代性
+3.可扩充性
+4.接口性
+5.灵活性
+6.简化性
+
+实现方式
+1.Override和Overload
+2.接口
+3.抽象类和抽象方法
+
+多态存在的三个必要条件
+继承;重写;父类引用指向子类对象
+
+//例子如下
+Parent p = new Child();
+当通过对象p调用某方法时，先检查父类中是否有此方法，
+如没有编译报错，有的话调用子类同名方法。
+这种调用方式也叫做虚拟方法调用
+
+
+抽象类
+通过 abstract class 来描述一个类
+不能实例化，只能通过其非抽象子类实现
+有抽象方法的类必须声明为抽象类
+其子类必须重写父类所有抽象方法，除非子类也是抽象类
+抽象类不一定包括抽象方法
+构造方法、类方法（ static 修饰）不能声明为抽象方法
+
+抽象方法
+用 abstract 修饰的方法
+只有方法名，没有方法体，由子类实现
+
+
+封装
+隐藏实现细节
+防止该类的代码和数据被外部定义的代码随机访问
+减少耦合
+内部实现细节可自由修改
+
+实现封装步骤
+1.private 修饰成员变量
+2.通过get和set方法获取和设置成员变量的值
+
+
+接口/Interface
+一个抽象类型，是抽象方法的集合
+非抽象类必须实现所继承接口的所有方法
+接口无法实例化
+
+接口与一般类的区别
+与类很相似
+不能实例化对象
+没有构造方法
+所有方法都是抽象方法
+没有成员变量，可以有final和static变量
+支持多继承
+
+接口特性
+接口声明前不加 abstract 关键词
+其每方法都是是隐式抽象的,并被隐式的指定为 public abstract,声明时一般不加 abstract
+其变量会被隐式的指定为 public static final,
+其方法是不能在接口中实现的，只能由实现接口的类来实现接口中的方法
+使用 implements 关键词在class声明后面实现该接口，若实现多个接口，需逗号隔开
+
+
+接口的声明
+[可见度修饰词] interface 接口名称 [extends 接口A,接口B,...]{
+	//声明变量
+	//抽象方法
+}
+
+标记接口
+没有任何方法和属性的接口，仅仅表明实现它的类属于特定类型，供其他代码来测试允许做的一些事情
+其作用是给某个对象打个标(盖个戳)，使对象拥有某个或某些特权
+主要目的：
+1.建立一个公共父接口，用于建立一组接口的父接口
+2.向一个类添加数据类型，其实现类通过多态性变成一个接口类型
+
+
+包/package
+
+包的作用
+1.为了更好地组织类、接口等，把功能相似或相关的放在同一个包中，方便查询和使用
+2.同文件夹一样，包采取树形目录的存储方式
+3.包机制主要解决命名冲突，访问控制，提供搜索和定位类、接口、枚举和注释等
+
+package/import 分别用于创建和导入包
+包名一般互联网域名的倒序方式，一般为小写，例如：com.baidu.test
+
+
+数据结构
+Java工具包提供了强大的数据结构，主要包括以下几种接口和类:
+枚举/Enumeration //此接口本身不属于数据结构，定义了一种从数据结构中取回连续元素的方式
+位集合/BitSet    //实现了一组可以单独设置和清除的位或标志，处理一组布尔值比较方便
+向量/Vector      //类似于传统数组，但长度可以动态变化
+栈/Stack         //对象垂直分布的栈，先进后出，后进先出
+字典/Dictionary  //定义了键映射到值得数据结构的抽象类，通过键访问值
+哈希表/Hashtable //此类提供了一种在用户定义键结构的基础上组织数据的手段
+属性/Properties  //继承于Hashtable.Properties
+以上的类或接口是传统遗留的，之后版本主要为集合框架(Collection)
+
+
+集合框架
+
+特性
+1.高性能。基本集合(动态数组，链表，树，哈希表)的实现也必须是高效的
+2.允许不同类型的集合，以类似的方式工作，具有高度的互操作性
+3.对一个集合的扩展和适应是简单的
+
+集合框架主要包括两种类型的容器接口：Collection和Map
+
+框架内容
+1.接口：代表集合的抽象数据类型。如：Collection/List/Set/Map等，用于操作不同的集合对象
+2.实现类：接口的具体实现。如：ArrayList/LinkList/HashSet/HashMap
+3.算法/方法：对集合元素的常见操作。如：搜索和排序
+
+集合接口
+
+Collection接口
+最基本的接口，Java不直接提供继承于该类的实现类，
+而是提供了子接口(List和Set)。存储一组不唯一，无序的对象
+
+List接口
+不唯一、有序，和数组类似，可根据实际存储数据的长度自动增长，
+检索效率高，插入删除效率低，主要实现类有ArrayList、LinkedList、Vector
+
+Set接口
+唯一、无序，检索效率低，删除插入效率高且不会改变元素位置，
+主要实现类为HashSet和TreeSet
+
+SortedSet接口
+继承于Set，但有序
+
+Map接口
+存储一组键值对对象，并提供key到value的映射
+
+集合实现类/抽象类
+1.AbstractCollection 
+实现了大部分的集合接口。
+2.AbstractList 
+继承于AbstractCollection 并且实现了大部分List接口。
+3.AbstractSequentialList 
+继承于 AbstractList ，提供了对数据元素的链式访问而不是随机访问。
+4.LinkedList
+该类实现了List接口，允许有null（空）元素。主要用于创建链表数据结构，
+该类没有同步方法，如果多个线程同时访问一个List，则必须自己实现访问同步，
+解决方法就是在创建List时候构造一个同步的List。例如：
+Listlist ll = Collections.synchronizedList(new LinkedList(...));
+LinkedList 查找效率低。
+5.ArrayList
+该类也是实现了List的接口，实现了可变大小的数组，随机访问和遍历元素时，
+提供更好的性能。该类也是非同步的,在多线程的情况下不要使用。
+ArrayList 增长当前长度的50%，插入删除效率低。
+6.AbstractSet 
+继承于AbstractCollection 并且实现了大部分Set接口。
+7.HashSet
+该类实现了Set接口，不允许出现重复元素，不保证集合中元素的顺序，可含null的元素。
+8.LinkedHashSet
+具有可预知迭代顺序的 Set 接口的哈希表和链接列表实现。
+9.TreeSet
+该类实现了Set接口，可以实现排序等功能。
+10.AbstractMap 
+实现了大部分的Map接口。
+11.HashMap 
+HashMap 是一个散列表，它存储的内容是键值对(key-value)映射。
+该类实现了Map接口，根据键的HashCode值存储数据，具有很快的访问速度，
+最多允许一条记录的键为null，不支持线程同步。
+12.TreeMap 
+继承了AbstractMap，并且使用一颗树。
+13.WeakHashMap 
+继承AbstractMap类，使用弱密钥的哈希表。
+14.LinkedHashMap 
+继承于HashMap，使用元素的自然顺序对元素进行排序.
+15.IdentityHashMap 
+继承AbstractMap类，比较文档时使用引用相等。
+
+java.util中定义的类
+1.Vector 
+该类和ArrayList非常相似，但是该类是同步的，可以用在多线程的情况，
+该类允许设置默认的增长长度，默认扩容方式为原来的2倍。
+2.Stack 
+栈是Vector的一个子类，它实现了一个标准的后进先出的栈。
+3.Dictionary 
+Dictionary 类是一个抽象类，用来存储键/值对，作用和Map类相似。
+4.Hashtable 
+Hashtable 是 Dictionary(字典) 类的子类。
+5.Properties 
+Properties 继承于 Hashtable，表示一个持久的属性集，
+属性列表中每个键及其对应值都是一个字符串。
+6.BitSet
+一个Bitset类创建一种特殊类型的数组来保存位值。BitSet中数组大小会随需要增加。
+
+集合算法
+集合框架定义了几种算法，可用于Collection和Map。这些算法被定义为集合类的静态方法。
+还有三个静态变量：EMPTY_SET、EMPTY_LIST、EMPTY_MAP
+
+迭代器/Iterator
+一般数组遍历使用for或增强for，也可以用于集合框架
+也可以使用Iterator或ListIterator接口的实现类遍历集合框架的元素或删除其中的元素
+ListIterator继承了Iterator，允许双向遍历List和修改元素
+
+集合框架总结
+集合框架为程序员提供了预先包装的数据结构和算法来操纵它们
+集合是一个类，用于容纳其他对象的引用
+集合框架的类和接口均在java.util
+任何对象加入某个集合后自动转为Object类型，取出时需要做强制类型转换
+
+
+泛型/generics
+jdk 5 中引入的的一个新特性，提供编译时类型安全监测机制，但是可利用反射绕过这种机制
+本质是参数化类型，即所操作的数据类型被指定一个参数
+
+泛型方法
+泛型方法在调用时可以接受不同类型的参数
+定义规则如下：
+1.声明在返回类型之前。 //如：public static < E > void printArray( E[] inputArray ){}
+2.泛型参数只能是引用类型
+
+有界参数类型的泛型方法 //用于限定参数类型的范围
+如下比较三个可比较的对象的最大值
+public static < T extends Comparable<T> > T maximum(T x, T y, T z){
+	T max = x;
+	if(y.compareTo(max) > 0)
+		max = y;
+	if(z.compareTo(max) > 0)
+		max = z;
+	return max;
+}
+
+泛型类
+类名后添加泛型参数声明部分
+public class Box< T >{
+	private T t;
+	public void add(T t){
+		this.t = t;
+	}
+	public T get(){
+		return t;
+	}
+	
+	public static void main(String[] args){
+		Box<integer> iBox = new Box<Integer>(); 
+		Box<String> sBox = new Box<String>();
+		iBox.add(new Integer(10));
+		sBox.add(new String("runoob"));
+	}
+}
+
+类型通配符
+例如：List<?>
+//main()方法中实例化三个对象
+List<String> s = new ArrayList<String>();
+List<Integer> i = new ArrayList<Integer>();
+List<Number> n = new ArrayList<Number>();
+//类方法统配调用
+//方法1
+public static void getData(List<?> data){
+	//直接获取三个对象的值，无需调用三次
+	System.out.println(data.get(0));
+}
+//方法2，设定通配上限。非Number类及其子类的对象参数会被过滤掉
+public static void getUperNumber(List<? extends Number> data){
+	//直接获取三个对象的值，无需调用三次，实际不会获取对象 s 的值
+	System.out.println(data.get(0));
+}
+通配符上限形如 List<? extends T> //匹配T类型及其子类
+通配符下限形如 List<? super T> //匹配T类型及其父类
+
+
+序列化
+对象序列化机制中，一个对象可以被表示为一个字节序列，将序列化对象写到文件之后，
+可以从文件中读取出来，并对其反序列化，就可以在内存新建其对象
+
+对象序列化条件
+1.此类必须实现java.io.Serizable接口
+2.该类所有的属性必须是可序列化的。如果某个属性不是可序列化的，则该属性必须注明是短暂的
+
+
+网络编程
+
+java.net包提供了两种常见的网络协议的支持
+TCP：传输控制协议，解决了两个应用程序之间的可靠通信。常用的通信互联网协议，被称为TCP/IP
+UDP：用户数据报协议，无连接式广播协议，用于两个应用程序之间，但不是可靠的
+
+Socket编程/套接字编程
+套接字使用TCP提供了两台计算机之间的通信机制。
+java.net.Socket类和ServerSocket类表示客户端和服务端之间的套接字
+以下是连接步骤：
+1.服务端实例化一个ServerSocket对象
+2.服务端的对象调用accept()方法等待客户端连接
+3.客户端实例化一个Socket对象，向客户端发出连接请求
+4.通过三次握手建立通信连接，然后发送或接受数据
+
+
+多线程编程
+一个线程指的是某个进程中一个单一顺序的控制流，不能独立存在
+一个进程可以有多个线程，每个线程执行不同的任务
+
+线程的生命周期
+新建状态   //使用new关键词和Thread或其子类建立一个线程对象，知道执行start()方法之前
+就绪状态   //执行start()方法，线程处于就绪队列中，并等待JVM线程调度器调用
+运行状态   //获取系统资源，执行run()方法
+阻塞状态   //一个线程执行了sleep()、suspend(挂起)等方法，失去所占用的资源
+  等待阻塞 //执行了wait()方法
+  同步阻塞 //获取synchronized同步锁失败(同步锁被其他线程占用)
+  其他阻塞 //执行sleep()或join()后
+死亡状态   //线程完成任务或其他终止条件发生时
+
+线程优先级
+方便操作系统调用，确定执行顺序
+优先级为整数[1,10]/[Thread.MIN_PRIORITY,Thread.MAX_PRIORITY]
+默认优先级为5
+线程优先级不能保证线程的执行顺序，而且非常依赖与平台
+
+创建一个线程
+以下三种方法都可用于创建一个线程
+1.实现Runnable接口
+2.继承Thread类，重写run()方法
+3.通过Callable和Future创建
+
+
+文档注释
+Java支持三种文档注释方式
+1.//       单行注释
+2./* */    多行注释
+3./**      文档注释
+     */
+
+javadoc标签
+
+
+Java 8
+Oracle公司于2014.03.18发布，支持函数式编程，
+新的JavaScript引擎，新的日期API，新的Stream API等
+
+新特性
+1.Lambda表达式。允许函数作为方法的参数
+2.方法引用。可以直接引用已有Java类或者对象的方法或者构造器
+3.默认方法。在接口里有了一个实现的方法
+4.新的工具。新的编译工具，如：Nashorm引擎jjs、类依赖分析器jdeps
+5.Stream API。引入函数式编程
+6.Date Time API。加强对时间与日期的处理
+7.Optional类。java类库的一部分，用于解决空指针异常
+8.Nashorm JavaScript引擎。允许在JVM运行特定的js程序
+
+
+Java 9
+java9于2017.09.22发布，最主要的新特性是已经实现的模块化系统
+
+新特性
+ 1.模块系统。模块是一个包的容器，引入了模块系统(Jigsaw)
+ 2.REPL(JShell)。交互式编程环境
+ 3.HTTP/2客户端。HTTP/2标准是HTTP协议的最新版本，新的HTTPClientAPI支持WebSocket和HTTP2流以及服务器推送特性。
+ 4.改进的Javadoc。Javadoc支持在API文档中的进行搜索，Javadoc的输出符合兼容HTML5标准。
+ 5.多版本兼容JAR包。能让你创建仅在特定版本的Java环境中运行库程序时选择使用的class版本。
+ 6.集合工厂方法。List，Set和Map接口中，新的静态工厂方法可以创建这些集合的不可变实例。
+ 7.私有接口方法。在接口中使用private私有方法。我们可以使用private访问修饰符在接口中编写私有方法。
+ 8.进程API。用于控制和管理操作系统进程。
+ 9.改进的Stream API。添加了一些便利的方法，使流处理更容易，并使用收集器编写复杂的查询。
+10.改进try-with-resources。该语句中使用final变量，而无需在语句中声明一个新变量。
+11.改进的弃用注解@Deprecated。用于标记 Java API 状态，被标记的 API 将会被移除或已经破坏。
+12.改进钻石操作符(Diamond Operator)。匿名类可以使用钻石操作符(Diamond Operator)。
+13.改进Optional类。java.util.Optional 添加了很多新的有用方法，Optional 可以直接转为 stream。
+14.多分辨率图像API。定义多分辨率图像API，开发者可以很容易的操作和展示不同分辨率的图像了。
+15.改进的CompletableFuture API。次类的异步机制可以在 ProcessHandle.onExit 方法退出时执行操作。
+16.轻量级的JSON API。内置了一个轻量级的JSON API
+17.响应式流（Reactive Streams) API。引入了新的响应式流 API 来支持 Java 9 中的响应式编程。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+lintcode刷题
+
+37. 反转一个3位整数
+反转一个只有3位数的整数。
+
+样例
+123 反转之后是 321。
+900 反转之后是 9。
+
+注意事项
+你可以假设输入一定是一个只有三位数的整数，这个整数大于等于100，小于1000。
+
+public class Solution {
+    /**
+     * @param number: A 3-digit number.
+     * @return: Reversed number.
+     */
+    public int reverseInteger(int number) {
+        int i1 = number/100;
+		int i3 = number%10;
+		int i2 = number - i1*100 - i3;
+		return i3*100 + i2 +i1;
+    }
+}
+
+
+
+145. 大小写转换
+将一个字符由小写字母转换为大写字母
+
+样例
+a -> A
+
+b -> B
+
+public class Solution {
+    /**
+     * @param character: a character
+     * @return: a character
+     */
+    public char lowercaseToUppercase(char character) {
+        return (char) (character - 32);
+    }
+}
+
+

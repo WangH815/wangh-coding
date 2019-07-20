@@ -1,0 +1,52 @@
+Java 注解
+
+注解概述
+
+常见注解
+
+注解分类
+
+自定义注解
+
+
+
+
+
+Java提供了一种原程序中的元素关联任何信息和任何元数据的途径和方法
+
+JDK注解
+@Override 重写方法
+@Deprecated 标注方法过时
+@Suppvisewarnings 忽略警告
+
+第三方注解
+Spring：@Autowired
+		@Service
+		@Repository
+		
+Mybatis：@InsertProvider
+		 @UpdateProvider
+		 @Options
+
+注解分类:
+按运行机制分类
+源码注解，只在源码中出现，不在.class中
+编译时注解，出现在.class中
+运行时注解，运行阶段还会起作用
+
+按来源分类
+JDK注解，JDK中自带的注解
+第三方注解，大部分是框架里的
+自定义注解
+		
+自定义注解
+语法要求，@interface关键词
+元注解(注解的注解)		
+使用自定义注解
+解析注解		
+		
+总结
+@Target
+注解范围：作用在类上的为类注解，同理还有方法注解，包注解等等。
+@Retention
+表示生命周期，见运行机制注解分类

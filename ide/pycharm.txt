@@ -1,0 +1,12 @@
+# 快捷键
+Shift + F6           //重构重命名
+Ctrl + Shift + F10   //运行程序
+Ctrl + Alt + L       //格式化代码
+
+
+
+# pycharm 常见问题
+
+1.打开.md文件卡死
+原因：Markdown插件造成
+方案：禁用此插件

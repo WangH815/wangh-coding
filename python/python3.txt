@@ -1,0 +1,367 @@
+Python3 
+
+
+标识符
+1.由字母数字下划线构成，第一个字符不能是数字
+2.区分大小写
+3.Python3支持非ASCII字符
+4.不能使用保留字，可通过标准库的keyword模块获取保留字
+>>>import keyword
+>>>keyword.kwlist
+
+
+注释
+#                    单行注释
+#!/usr/bin/python3   声明使用的Python版本
+'''
+多行注释
+'''
+
+"""
+多行注释
+"""
+
+
+行与缩进
+缩进表示代码块，而不使用{}，多条语句写在同一行可使用分号隔开
+
+
+多行语句
+sum = a + \        
+      b + \
+	  c         #等价于 sum = a + b + c ,在[],{},()中无需使用 \
+
+
+输入输出
+input("\n\n 按下enter退出")
+print(var_name)          #换行输出
+print(var_name,end="")   #不换行输出
+
+
+模块导入
+import somemodule                            #导入模块(somemodule) 
+from somemodule import somefunction          #从某个模块中导入某个函数
+from somemodule import firstfunc, secondfunc #从某个模块中导入多个函数 
+from somemodule import *                     #将某个模块中的全部函数导入 
+
+
+多变量赋值
+a = b = c = 1
+a, b, c = 1, 2, "runoob"
+del var_name,var_name2   #删除变量
+
+
+判断数据类型
+type()       #打印详细数据类型，例如 type(1) ,输出<class 'int'>
+isinstance() #判断类型之间的关系，isinstance(1, int) ,输出 True
+
+
+数据类型：(标准类型)
+
+Python3 中有六个标准的数据类型：
+Number      #数字
+String      #字符串
+List        #列表
+Tuple       #元组
+Set         #集合
+Dictionary  #字典
+
+Number/String/Tuple  #不可变数据
+List/Dictionary/Set  #可变数据
+
+1)Number（数字）  #不可变
+0x开头为十六进制
+0o开头为八进制
+int     var_name = 1       #无long
+bool    var_name = True    #还有False，Python2中没有布尔型
+float   var_name = 1.0
+complex var_name = 1 + 2j
+
+2)String（字符串）  #不可变
+var_name = 'sdas'   #双引号也可以，使用完全相同；多行字符串可使用三引号指定
+var_name = r'sd \n' #\为转义符，字符串前加r可使转义失效
+
+3)Tuple（元组）     #不可变
+赋值可以不用括号
+var_name = ('asda','asda',12)
+一个值tuple
+var_name = (20,)
+空元组
+var_name = ()
+
+4)Sets（集合）        不可变
+集合元素是无序不重复
+var_name = {'asda','asda'}
+var_name = set() 空集
+
+5)List（列表）        可变
+有序
+var_name = ['asda','asda',12]
+
+6)Dictionary（字典）  可变
+key-value形式，无序key不重复
+var_name = {}  空字典
+###
+dict = {}
+dict['one'] = "1 - 菜鸟教程"
+dict[2]     = "2 - 菜鸟工具"
+
+tinydict = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
+
+print (dict['one'])       # 输出键为 'one' 的值
+print (dict[2])           # 输出键为 2 的值
+print (tinydict)          # 输出完整的字典
+print (tinydict.keys())   # 输出所有键
+print (tinydict.values()) # 输出所有值
+
+1 - 菜鸟教程
+2 - 菜鸟工具
+{'name': 'runoob', 'site': 'www.runoob.com', 'code': 1}
+dict_keys(['name', 'site', 'code'])
+dict_values(['runoob', 'www.runoob.com', 1])
+###
+
+
+运算符
+算术
+a%b   取模（支持浮点），值为余数部分
+a//b  取商的整数部分
+a**b  a的b次幂
+
+比较
+
+赋值
+a = b
+a [算术运算符]= b  <=> a = a [算术运算符] b
+
+位运算
+&，|，^，~，<<，>> 分别为按位与，或，异或，取反，左移和右移
+
+逻辑
+x and y  x,y为非零整数，返回大的数
+x or y   x,y为非零整数，返回小的数
+not x    x为非零整数，返回false
+
+成员
+in，not in
+
+身份
+判断两个标识符是否引用同一对象
+is，not is
+
+
+转义字符
+\           续行符，用于行尾，一般要求一行不超过59个字符
+\[特殊字符] 特殊字符正常输出
+
+
+字符串运算
++   连接
+*   重复输出
+[]  通过索引获取字符
+[:] 截取
+r/R 输出原始字符串，如print(r'\n') 输出\n
+
+格式化输出
+%
+
+三引号
+'''/"""
+允许一个字符串跨多行，所见即所得。典型场景为HTML、SQL、XML
+
+
+列表 list
+可修改
+访问方式
+list_name[i]   第i+1个元素      0<=i<len(list_name)
+list_name[-j]  倒数第j个元素    0<j<=len(list_name)
+list_name[x:y] x+1倒y之间的元素 0<=x<y<len(list_name)
+list_name[k:]  k+1开始之后的元素
+list_name[:t]  t之前的元素
+del list_name[访问方式] 删除元素
+list可以嵌套，访问方式同C语言中多维数组
+
+元组 tuple
+不可修改
+tuple_name = ('sdfsd','s',1231)/'sdfsd','s',1231
+访问方式类似于list
+删除只能删除全部元素，不能删除特定元素。删除元组会出现异常
+
+字典 dictionary
+key不能为列表，可以为数字，字符串，元组；value无限制
+dic_name = {key1 : value1, key2 : value2 }
+访问方式
+dic_name[key]
+
+
+迭代器 iterator
+迭代是Python最强大的功能之一，是访问集合元素的一种方式。
+迭代器是一个可以记住遍历的位置的对象。
+迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。
+迭代器有两个基本的方法：iter() 和 next()。
+字符串，列表或元组对象都可用于创建迭代器
+
+#!/usr/bin/python3
+ 
+list=[1,2,3,4]
+it = iter(list)    # 创建迭代器对象
+for x in it:
+    print (x, end=" ")
+
+输出：
+1 2 3 4
+ 
+#!/usr/bin/python3
+ 
+import sys         # 引入 sys 模块
+ 
+list=[1,2,3,4]
+it = iter(list)    # 创建迭代器对象
+ 
+while True:
+    try:
+        print (next(it))
+    except StopIteration:
+        sys.exit()
+
+输出:
+1
+2
+3
+4
+
+
+生成器  generator
+使用了 yield 的函数被称为生成器
+
+#!/usr/bin/python3
+
+import sys
+
+def fibonacci(n): # 生成器函数 - 斐波那契
+    a, b, counter = 0,1,0
+	while True
+	    if (counter > n):
+		    return
+	    yield a
+		a, b = b, a + b
+        counter += 1
+f = fibonacci(10) # f 是一个迭代器，由生成器返回生成
+
+while True:
+    try:
+	    print (next(f), end = " ")
+	except StopIteration:
+	    sys.exit()
+ 
+输出:
+0 1 1 2 3 5 8 13 21 34 55
+
+
+函数
+
+def 函数名（参数列表）:
+    函数体
+
+匿名函数
+python 使用 lambda 来创建匿名函数
+lambda [arg1 [,arg2,.....argn]]:expression
+
+
+变量作用域
+
+L （Local）     局部作用域
+E （Enclosing） 闭包函数外的函数中
+G （Global）    全局作用域
+B （Built-in）  内建作用域
+
+以 L –> E –> G –>B 的规则查找 
+
+例如：
+x = int(2.9)         # 内建作用域
+ 
+g_count = 0          # 全局作用域
+def outer():
+    o_count = 1      # 闭包函数外的函数中
+    def inner():
+        i_count = 2  # 局部作用域
+
+Python 中只有模块（module），类（class）以及函数（def、lambda）才会引入新的作用域，
+其它的代码块（如 if/elif/else/、try/except、for/while等）是不会引入新的作用域的，
+也就是说这些语句内定义的变量，外部也可以访问
+
+
+模块 module
+import语句
+多次执行import，模块只会导入一次
+import module1[, module2[,... moduleN] 导入模块
+
+例如导入 support.py
+import support
+support.函数名（参数列表） 使用module中定义的函数
+
+from ... import 语句
+从模块中导入一个指定的部分到当前命名空间中
+from modname import name1[, name2[, ... nameN]] 部分内容
+from modname import *                           全部
+
+内置函数 dir()
+可以找到模块内定义的所有名称。以一个字符串列表的形式返回
+
+
+>>> 主提示符由标准module sys.ps1定义，可修改
+... 副提示符由标准module sys.ps2定义，亦可修改
+
+
+包
+模块的名称是 A.B， 那么他表示一个包 A中的子模块 B 
+
+
+输出
+Python两种输出值的方式: 
+表达式语句和 print() 函数。
+
+第三种方式是使用文件对象的 write() 方法，
+标准输出文件可以用 sys.stdout 引用。
+
+如果你希望输出的形式更加多样，
+可以使用 str.format() 函数来格式化输出值。
+
+如果你希望将输出的值转成字符串，
+可以使用 repr() 或 str() 函数来实现。
+
+str()： 函数返回一个用户易读的表达形式，可以转义字符串中的特殊字符
+repr()： 产生一个解释器易读的表达形式，其的参数可以是 Python 的任何对象
+
+
+输入  
+input()函数，读取键盘内容
+
+
+文件的读写
+open()返回一个file的文件对象
+基本格式 open(filename,mode)
+
+f = open("path/filename", "w")
+
+文件对象的读写方法用于操作文件
+
+
+基本数据的序列化合反序列化
+pickle模块
+
+
+os模块提供非常丰富的方法来处理文件和目录
+
+
+异常处理
+
+20
+
+
+
+
+
+
+
+

@@ -1,0 +1,2112 @@
+地址
+
+http://www.runoob.com/servlet/servlet-tutorial.html
+http://www.runoob.com/jsp/jsp-tutorial.html
+
+
+Servlet网络资源
+Sun's Site on Servlets         //Sun 的官方网站上关于 Servlet 的相关资料。
+JSP Engine - Tomcat            //Apache Tomcat 是一个开源软件，实现了对 Java Servlet 和 JSP（JavaServer Pages）技术的支持。
+MySQL Connector/J              //MySQL Connector/J 是 MySQL 官方 JDBC 驱动程序。
+The JavaTM Tutorials           //该 Java 教程是为那些想用 Java 编程语言创建应用程序的编程人员提供的实用指南。
+JavaTM 2 SDK, Standard Edition //JavaTM 2 SDK, Standard Edition 的官网。
+Free Java Download             //为您的桌面计算机下载 Java！
+Sun Developer Network          //Sun Microsystem 的官方网站，上面列出了所有的 API 文档，最新的 Java 技术、书籍和其他资源。
+
+
+==================================================================================================================
+==================================================================================================================
+
+Servlet
+
+简介
+Java Servlet 是运行在 Web 服务器或应用服务器上的程序，作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。
+使用 Servlet，可以收集来自网页表单的用户输入，呈现来自数据库或者其他源的记录，还可以动态创建网页。
+Java Servlet 通常情况下与使用 CGI（Common Gateway Interface，公共网关接口）实现的程序可以达到异曲同工的效果。
+但是相比于 CGI，Servlet 有以下几点优势：
+1.性能明显更好
+2.Servlet 在 Web 服务器的地址空间内执行。这样它就没有必要再创建一个单独的进程来处理每个客户端请求。
+3.Servlet 是独立于平台的，因为它们是用 Java 编写的。
+4.服务器上的 Java 安全管理器执行了一系列限制，以保护服务器计算机上的资源。因此，Servlet 是可信的。
+5.Java 类库的全部功能对 Servlet 来说都是可用的。它可以通过 sockets 和 RMI 机制与 applets、数据库或其他软件进行交互。
+
+
+作用
+1.读取客户端（浏览器）发送的显式的数据。这包括网页上的 HTML 表单，或者也可以是来自 applet 或自定义的 HTTP 客户端程序的表单。
+2.读取客户端（浏览器）发送的隐式的 HTTP 请求数据。这包括 cookies、媒体类型和浏览器能理解的压缩格式等等。
+3.处理数据并生成结果。这个过程可能需要访问数据库，执行 RMI 或 CORBA 调用，调用 Web 服务，或者直接计算得出对应的响应。
+4.发送显式的数据（即文档）到客户端（浏览器）。该文档的格式可以是多种多样的，包括文本文件（HTML 或 XML）、二进制文件（GIF 图像）、Excel 等。
+5.发送隐式的 HTTP 响应到客户端（浏览器）。这包括告诉浏览器或其他客户端被返回的文档类型（例如 HTML），设置 cookies 和缓存参数，以及其他类似的任务。
+
+
+Servlet 包
+Java Servlet 是运行在带有支持 Java Servlet 规范的解释器的 web 服务器上的 Java 类。
+Servlet 可以使用 javax.servlet 和 javax.servlet.http 包创建，它是 Java 企业版的标准组成部分
+
+
+环境设置
+1.安装JDK或者公共JRE
+2.部署Web服务器Tomcat或者Nginx等
+3.编写程序并发布到Web服务器中
+
+
+Servlet 生命周期
+其定义为从创建直到毁灭的整个过程。以下是 Servlet 遵循的过程：
+1.Servlet 通过调用 init () 方法进行初始化
+2.Servlet 调用 service() 方法来处理客户端的请求
+3.Servlet 通过调用 destroy() 方法终止（结束）
+4.Servlet 是由 JVM 的垃圾回收器进行垃圾回收的
+
+init()方法
+init()方法被设计成只调用一次。第一次创建 Servlet 时被调用，后续每次用户请求时不再调用。类似于 Applet 的 init 方法一样。
+Servlet 创建于用户第一次调用对应于该 Servlet 的 URL 时，但也可指定 Servlet 在服务器第一次启动时被加载。
+当用户调用一个 Servlet 时，就会创建一个 Servlet 实例，每一个用户请求都会产生一个新的线程，适当的时候移交给 doGet 或 doPost 方法。
+init() 方法简单地创建或加载一些数据，这些数据将被用于 Servlet 的整个生命周期。
+init 方法的定义如下：
+public void init() throws ServletException {
+  // 初始化代码...
+}
+
+service() 方法
+执行实际任务的主要方法。通过Servlet 容器（即 Web 服务器）的service() 方法来处理来自客户端的请求。
+检查 HTTP 请求类型（GET、POST、PUT、DELETE 等），并在适当的时候调用 doGet、doPost、doPut，doDelete 等方法。
+下面是该方法的特征：
+public void service(ServletRequest request, ServletResponse response) 
+      throws ServletException, IOException{
+}
+
+service() 方法由容器调用，service 方法在适当的时候调用特定的 doGet、doPost、doPut、doDelete 等方法。
+doGet() 和 doPost() 方法是每次服务请求中最常用的方法。下面是这两种方法的特征。
+doGet() 方法
+GET 请求来自于一个 URL 的正常请求，或者来自于一个未指定 METHOD 的 HTML 表单，它由 doGet() 方法处理。
+public void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+    // Servlet 代码
+}
+
+doPost() 方法
+POST 请求来自于一个特别指定了 METHOD 为 POST 的 HTML 表单，它由 doPost() 方法处理。
+public void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+    // Servlet 代码
+}
+
+destroy() 方法
+destroy() 方法只会被调用一次，在 Servlet 生命周期结束时被调用。主要用于关闭数据库连接、停止后台线程、把 Cookie 列表或点击计数器写入到磁盘，并执行其他类似的清理活动。
+在调用 destroy() 方法之后，servlet 对象被标记为垃圾回收。destroy 方法定义如下所示：
+public void destroy() {
+    // 终止化代码...
+}
+
+
+典型的 Servlet 生命周期方案。
+
+1.第一个到达服务器的 HTTP 请求被委派到 Servlet 容器。
+2.Servlet 容器在调用 service() 方法之前加载 Servlet。
+3.然后 Servlet 容器处理由多个线程产生的多个请求，每个线程执行一个单一的 Servlet 实例的 service() 方法。
+
+
+Servlet 实例
+Hello World 示例代码:
+
+// 导入必需的 java 库
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class HelloWorld extends HttpServlet {  //继承 HttpServlet 类 
+    private String message;    
+
+    public void init() throws ServletException{
+        message = "Hello World";  // 执行必需的初始化
+    }
+    
+    //重写doGet()方法
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{       
+        response.setContentType("text/html");  // 设置响应内容类型    
+        // 实际的逻辑是在这里
+        PrintWriter out = response.getWriter();
+        out.println("<h1>" + message + "</h1>");
+    }
+    
+    public void destroy(){
+        // 什么也不做
+    }
+}
+
+
+Servlet 部署
+1.Servlet编译后 .class 部署到<Tomcat-installation-directory>/webapps/ROOT/WEB-INF/classes
+2.修改配置文件 <Tomcat-installation-directory>/webapps/ROOT/WEB-INF/web.xml
+  <web-app>      
+    <servlet>
+        <servlet-name>HelloWorld</servlet-name>
+        <servlet-class>HelloWorld</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloWorld</servlet-name>
+        <url-pattern>/HelloWorld</url-pattern>
+    </servlet-mapping>
+  </web-app>  
+3.启动服务器
+4.访问 http://localhost:8080/HelloWorld  //以本地部署为例
+
+
+Servlet 表单
+一般情况，客户端(浏览器)通过 GET 或 POST 方法向服务端传递表单信息
+
+GET 方法
+一般格式如下:
+http://www.test.com/hello?key1=value1&key2=value2  // ? 后面的内容。特点是明文，且请求字符串最多1024字节
+对应的服务端 Servlet 通过doGet() 方法处理该类型的请求
+
+POST 方法
+与GET不同，POST方法不通过明文发送，而作为单独的消息加密发送，无大小限制
+对应的服务端 Servlet 通过doPost() 方法处理该类型的请求
+
+Servlet 读取表单数据
+Servlet 处理表单数据，这些数据会根据不同的情况使用不同的方法自动解析：
+1.getParameter()：您可以调用 request.getParameter() 方法来获取表单参数的值。
+2.getParameterValues()：如果参数出现一次以上，则调用该方法，并返回多个值，例如复选框。
+3.getParameterNames()：如果您想要得到当前请求中的所有参数的完整列表，则调用该方法。
+
+URL 的 GET 方法实例
+下面是一个简单的 URL，将使用 GET 方法向 HelloForm 程序传递两个值
+http://localhost:8080/TomcatTest/HelloForm?name=菜鸟教程&url=www.runoob.com   //这里是手工拼接，一般是通过客户端来发送get请求
+下面是处理 Web 浏览器输入的 HelloForm.java Servlet 程序。我们将使用 getParameter() 方法，可以很容易地访问传递的信息：
+
+package com.runoob.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class HelloForm
+ */
+@WebServlet("/HelloForm")
+public class HelloForm extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public HelloForm() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 设置响应内容类型
+        response.setContentType("text/html;charset=UTF-8");
+
+        PrintWriter out = response.getWriter();
+        String title = "使用 GET 方法读取表单数据";
+        // 处理中文
+        String name =new String(request.getParameter("name").getBytes("ISO8859-1"),"UTF-8");
+        String docType = "<!DOCTYPE html> \n";
+        out.println(docType +
+            "<html>\n" +
+            "<head><title>" + title + "</title></head>\n" +
+            "<body bgcolor=\"#f0f0f0\">\n" +
+            "<h1 align=\"center\">" + title + "</h1>\n" +
+            "<ul>\n" +
+            "  <li><b>站点名</b>："
+            + name + "\n" +
+            "  <li><b>网址</b>："
+            + request.getParameter("url") + "\n" +
+            "</ul>\n" +
+            "</body></html>");
+    }
+    
+    // 处理 POST 方法请求的方法
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+}
+
+在 web.xml 文件中创建以下条目：
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <servlet>
+    <servlet-name>HelloForm</servlet-name>
+    <servlet-class>com.runoob.test.HelloForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloForm</servlet-name>
+    <url-pattern>/TomcatTest/HelloForm</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+在浏览器的地址栏中输入 http://localhost:8080/TomcatTest/HelloForm?name=菜鸟教程&url=www.runoob.com 可得到结果
+
+可通过客户端提交请求得到相同结果:
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+
+<form action="HelloForm" method="GET">  //指定GET方式
+网址名：<input type="text" name="name">
+<br />
+网址：<input type="text" name="url" />
+<input type="submit" value="提交" />
+</form>     
+
+</body>
+</html>
+
+
+过滤器
+Servlet 过滤器可以动态地拦截请求和响应，以变换或使用包含在请求或响应中的信息。
+Servlet 过滤器是可用于 Servlet 编程的 Java 类，可以实现以下目的：
+1.在客户端的请求访问后端资源之前，拦截这些请求。
+2.在服务器的响应发送回客户端之前，处理这些响应。
+根据规范建议的各种类型的过滤器：
+1)身份验证过滤器（Authentication Filters）。
+2)数据压缩过滤器（Data compression Filters）。
+3)加密过滤器（Encryption Filters）。
+4)触发资源访问事件过滤器。
+5)图像转换过滤器（Image Conversion Filters）。
+6)日志记录和审核过滤器（Logging and Auditing Filters）。
+7)MIME-TYPE 链过滤器（MIME-TYPE Chain Filters）。
+8)标记化过滤器（Tokenizing Filters）。
+9)XSL/T 过滤器（XSL/T Filters），转换 XML 内容。
+
+Filter的执行顺序与在web.xml配置文件中的配置顺序一致，一般把Filter配置在所有的Servlet之前。
+
+过滤器方法
+过滤器是一个实现了 javax.servlet.Filter 接口的 Java 类。主要定义了三个方法：
+1.public void doFilter (ServletRequest, ServletResponse, FilterChain)  //完成实际的过滤操作
+2.public void init(FilterConfig filterConfig)  //根据web.xml配置，完成过滤器的初始化
+3.public void destroy()  //Servlet容器在销毁过滤器实例前调用该方法，释放过滤器占用的资源。
+
+FilterConfig 使用
+Filter 的 init 方法中提供了一个 FilterConfig 对象。
+1.web.xml配置如下：
+<filter>
+    <filter-name>LogFilter</filter-name>
+    <filter-class>com.runoob.test.LogFilter</filter-class>
+    <init-param>
+        <param-name>Site</param-name>
+        <param-value>菜鸟教程</param-value>
+    </init-param>
+</filter>
+
+2.在init方法使用FilterConfig对象获取参数：
+public void  init(FilterConfig config) throws ServletException {
+    // 获取初始化参数
+    String site = config.getInitParameter("Site"); 
+    // 输出初始化参数
+    System.out.println("网站名称: " + site); 
+}
+
+3.Servlet过滤器实例
+以下是 Servlet 过滤器的实例，将输出网站名称和地址
+package com.runoob.test;
+
+//导入必需的 java 库
+import javax.servlet.*;
+import java.util.*;
+
+public class LogFilter implements Filter {  //实现 Filter 类
+    public void  init(FilterConfig config) throws ServletException {       
+        String site = config.getInitParameter("Site");  // 获取初始化参数      
+        System.out.println("网站名称: " + site);  // 输出初始化参数
+    }
+	
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
+		throws java.io.IOException, ServletException {       
+        System.out.println("站点网址：http://www.runoob.com");  // 输出站点名称        
+        chain.doFilter(request,response);  // 把请求传回过滤链
+    }
+	
+    public void destroy( ){
+        /* 在 Filter 实例被 Web 容器从服务移除之前调用 */
+    }
+}
+
+4.使用前文提到的 DisplayHeader.java 为例子：
+//导入必需的 java 库
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/DisplayHeader")
+public class DisplayHeader extends HttpServlet {  //扩展 HttpServlet 类
+   
+    public void doGet(HttpServletRequest request, HttpServletResponse response) // 处理 GET 方法请求的方法
+		throws ServletException, IOException {
+        
+        response.setContentType("text/html;charset=UTF-8");  // 设置响应内容类型
+
+        PrintWriter out = response.getWriter();
+        String title = "HTTP Header 请求实例 - 菜鸟教程实例";
+        String docType =
+            "<!DOCTYPE html> \n";
+            out.println(docType +
+            "<html>\n" +
+            "<head><meta charset=\"utf-8\"><title>" + title + "</title></head>\n"+
+            "<body bgcolor=\"#f0f0f0\">\n" +
+            "<h1 align=\"center\">" + title + "</h1>\n" +
+            "<table width=\"100%\" border=\"1\" align=\"center\">\n" +
+            "<tr bgcolor=\"#949494\">\n" +
+            "<th>Header 名称</th><th>Header 值</th>\n"+
+            "</tr>\n");
+
+        Enumeration headerNames = request.getHeaderNames();
+
+        while(headerNames.hasMoreElements()) {
+            String paramName = (String)headerNames.nextElement();
+            out.print("<tr><td>" + paramName + "</td>\n");
+            String paramValue = request.getHeader(paramName);
+            out.println("<td> " + paramValue + "</td></tr>\n");
+        }
+        out.println("</table>\n</body></html>");
+    }
+    
+    public void doPost(HttpServletRequest request, HttpServletResponse response)  // 处理 POST 方法请求的方法
+		throws ServletException, IOException {
+        doGet(request, response);
+    }
+}
+
+6.Web.xml中的Servlet过滤器映射（Servlet Filter Mapping）
+定义过滤器，然后映射到一个 URL 或 Servlet
+<?xml version="1.0" encoding="UTF-8"?>  
+<web-app>  
+<filter>
+  <filter-name>LogFilter</filter-name>
+  <filter-class>com.runoob.test.LogFilter</filter-class>
+  <init-param>
+    <param-name>Site</param-name>
+    <param-value>菜鸟教程</param-value>
+  </init-param>
+</filter>
+<filter-mapping>
+  <filter-name>LogFilter</filter-name>
+  <url-pattern>/\*</url-pattern>   //此处为/*,过滤所有Servlet
+</filter-mapping>
+<servlet>  
+  <!-- 类名 -->  
+  <servlet-name>DisplayHeader</servlet-name>  
+  <!-- 所在的包 -->  
+  <servlet-class>com.runoob.test.DisplayHeader</servlet-class>  
+</servlet>  
+<servlet-mapping>  
+  <servlet-name>DisplayHeader</servlet-name>  
+  <!-- 访问的网址 -->  
+  <url-pattern>/TomcatTest/DisplayHeader</url-pattern>  
+</servlet-mapping>  
+</web-app>  
+
+
+使用多个过滤器
+Web 应用程序可以根据特定的目的定义若干个不同的过滤器。
+假设定义了两个过滤器 AuthenFilter 和 LogFilter。需要创建一个如下所述的不同的映射：
+<filter>
+   <filter-name>LogFilter</filter-name>
+   <filter-class>com.runoob.test.LogFilter</filter-class>
+   <init-param>
+      <param-name>test-param</param-name>
+      <param-value>Initialization Paramter</param-value>
+   </init-param>
+</filter>
+
+<filter>
+   <filter-name>AuthenFilter</filter-name>
+   <filter-class>com.runoob.test.AuthenFilter</filter-class>
+   <init-param>
+      <param-name>test-param</param-name>
+      <param-value>Initialization Paramter</param-value>
+   </init-param>
+</filter>
+
+<filter-mapping>
+   <filter-name>LogFilter</filter-name>
+   <url-pattern>/\*</url-pattern>   //此处为/*,过滤所有Servlet
+</filter-mapping>
+
+<filter-mapping>
+   <filter-name>AuthenFilter</filter-name>
+   <url-pattern>/\*</url-pattern>   //此处为/*,过滤所有Servlet
+</filter-mapping>
+
+过滤器的应用顺序
+由web.xml 中的 filter-mapping 元素的顺序决定。调整先后顺序即可改变过滤顺序。
+
+web.xml配置各节点说明
+<filter>          //指定一个过滤器。
+<filter-name>     //用于为过滤器指定一个名字，该元素的内容不能为空。
+<filter-class>    //元素用于指定过滤器的完整的限定类名。
+<init-param>      //元素用于为过滤器指定初始化参数，它的子元素<param-name>指定参数的名字，<param-value>指定参数的值。
+                  //在过滤器中，可以使用FilterConfig接口对象来访问初始化参数。
+<filter-mapping>  //元素用于设置一个 Filter 所负责拦截的资源。一个Filter拦截的资源可通过两种方式来指定：Servlet 名称和资源访问的请求路径
+<filter-name>     //子元素用于设置filter的注册名称。该值必须是在<filter>元素中声明过的过滤器的名字
+<url-pattern>     //设置 filter 所拦截的请求路径(过滤器关联的URL样式)
+<servlet-name>    //指定过滤器所拦截的Servlet名称。
+<dispatcher>      //指定过滤器所拦截的资源被 Servlet 容器调用的方式，可以是REQUEST,INCLUDE,FORWARD和ERROR之一，默认REQUEST。用户可以设置多个<dispatcher>子元素用来指定 Filter 对资源的多种调用方式进行拦截。
+<dispatcher>      //子元素可以设置的值及其意义
+                  //REQUEST：当用户直接访问页面时，Web容器将会调用过滤器。如果目标资源是通过RequestDispatcher的include()或forward()方法访问时，那么该过滤器就不会被调用。
+                  //INCLUDE：如果目标资源是通过RequestDispatcher的include()方法访问时，那么该过滤器将被调用。除此之外，该过滤器不会被调用。
+                  //FORWARD：如果目标资源是通过RequestDispatcher的forward()方法访问时，那么该过滤器将被调用，除此之外，该过滤器不会被调用。
+                  //ERROR：如果目标资源是通过声明式异常处理机制调用时，那么该过滤器将被调用。除此之外，过滤器不会被调用。
+
+
+异常处理
+Servlet 抛出异常时，Web 容器在使用了 exception-type 元素的 web.xml 中搜索与抛出异常类型相匹配的配置。
+
+您必须在 web.xml 中使用 error-page 元素来指定对特定异常 或 HTTP 状态码 作出相应的 Servlet 调用。
+
+web.xml 配置
+假设，有一个 ErrorHandler 的 Servlet 在任何已定义的异常或错误出现时被调用。以下将是在 web.xml 中创建的项。
+
+<!-- servlet 定义 -->
+<servlet>
+        <servlet-name>ErrorHandler</servlet-name>
+        <servlet-class>ErrorHandler</servlet-class>
+</servlet>
+<!-- servlet 映射 -->
+<servlet-mapping>
+    <servlet-name>ErrorHandler</servlet-name>
+    <url-pattern>/ErrorHandler</url-pattern>
+</servlet-mapping>
+
+<!-- error-code 相关的错误页面 -->
+<error-page>
+    <error-code>404</error-code>
+    <location>/ErrorHandler</location>
+</error-page>
+<error-page>
+    <error-code>403</error-code>
+    <location>/ErrorHandler</location>
+</error-page>
+
+<!-- exception-type 相关的错误页面 -->
+<error-page>
+    <exception-type>
+          javax.servlet.ServletException
+    </exception-type >
+    <location>/ErrorHandler</location>
+</error-page>
+
+<error-page>
+    <exception-type>java.io.IOException</exception-type >
+    <location>/ErrorHandler</location>
+</error-page>
+
+通用异常处理，匹配所有异常
+<error-page>
+    <exception-type>java.lang.Throwable</exception-type >
+    <location>/ErrorHandler</location>
+</error-page>
+
+
+Servlet 错误处理程序实例
+异常处理的过滤器：
+
+//导入必需的 java 库
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.*;
+
+public class ErrorHandler extends HttpServlet {  //扩展 HttpServlet 类
+
+    // 处理 GET 方法请求的方法
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
+        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+        
+		String servletName = (String) request.getAttribute("javax.servlet.error.servlet_name");
+        if (servletName == null){
+            servletName = "Unknown";
+        }
+		
+        String requestUri = (String) request.getAttribute("javax.servlet.error.request_uri");
+        if (requestUri == null){
+            requestUri = "Unknown";
+        }
+        
+        response.setContentType("text/html;charset=UTF-8");  // 设置响应内容类型
+        PrintWriter out = response.getWriter();
+        String title = "菜鸟教程 Error/Exception 信息";
+       
+        String docType = "<!DOCTYPE html>\n";
+        out.println(docType +
+            "<html>\n" +
+             "<head><title>" + title + "</title></head>\n" +
+             "<body bgcolor=\"#f0f0f0\">\n");
+           out.println("<h1>菜鸟教程异常信息实例演示</h1>");
+           if (throwable == null && statusCode == null){
+                out.println("<h2>错误信息丢失</h2>");
+                out.println("请返回 <a href=\"" + response.encodeURL("http://localhost:8080/") + "\">主页</a>。");
+           }else if (statusCode != null) {
+                out.println("错误代码 : " + statusCode);
+           }else{
+                out.println("<h2>错误信息</h2>");
+                out.println("Servlet Name : " + servletName + "</br></br>");
+                out.println("异常类型 : " + throwable.getClass( ).getName( ) + "</br></br>");
+                out.println("请求 URI: " + requestUri + "<br><br>");
+                out.println("异常信息: " + throwable.getMessage( ));
+           }
+           out.println("</body>");
+           out.println("</html>");
+    }
+    // 处理 POST 方法请求的方法
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+}
+
+编译后把其class文件放入<Tomcat-installation-directory>/webapps/ROOT/WEB-INF/classes 中。
+
+让我们在 web.xml 文件中添加如下配置来处理异常：
+
+<?xml version="1.0" encoding="UTF-8"?>  
+<web-app>  
+<servlet>
+        <servlet-name>ErrorHandler</servlet-name>
+        <servlet-class>com.runoob.test.ErrorHandler</servlet-class>
+</servlet>
+<!-- servlet mappings -->
+<servlet-mapping>
+        <servlet-name>ErrorHandler</servlet-name>
+        <url-pattern>/TomcatTest/ErrorHandler</url-pattern>
+</servlet-mapping>
+
+<error-page>
+    <error-code>404</error-code>
+    <location>/TomcatTest/ErrorHandler</location>
+</error-page>
+<error-page>
+    <exception-type>java.lang.Throwable</exception-type >
+    <location>/ErrorHandler</location>
+</error-page>
+</web-app>  
+
+
+Servlet Cookie 处理
+Cookie 是存储在客户端计算机上的文本文件，并保留了各种跟踪信息。Servlet 显然支持 HTTP Cookie。
+
+识别返回用户包括三个步骤：
+1.服务器脚本向浏览器发送一组 Cookie。例如：姓名、年龄或识别号码等。
+2.浏览器将这些信息存储在本地计算机上，以备将来使用。
+3.当下一次浏览器向 Web 服务器发送任何请求时，浏览器会把这些 Cookie 信息发送到服务器，服务器将使用这些信息来识别用户。
+
+Servlet Cookie 处理需要对中文进行编码与解码，方法如下：
+String str = java.net.URLEncoder.encode("中文"，"UTF-8");            //编码
+String str = java.net.URLDecoder.decode("编码后的字符串","UTF-8");   // 解码
+
+
+通过 Servlet 设置 Cookie
+步骤如下：
+(1) Cookie cookie = new Cookie("key","value");  //创建Cookie对象，键和值为String且不含空格或[ ] ( ) = , " / ? @ : ;
+(2) cookie.setMaxAge(60*60*24);  //设置最大生命周期，秒为单位
+(3) response.addCookie(cookie);  //发送 Cookie 到 HTTP 响应头
+
+为名字和姓氏设置 Cookie的实例：
+package com.runoob.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class HelloServlet
+ */
+@WebServlet("/HelloForm")
+public class HelloForm extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public HelloForm() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        // 为名字和姓氏创建 Cookie      
+        Cookie name = new Cookie("name", URLEncoder.encode(request.getParameter("name"), "UTF-8")); // 中文转码
+        Cookie url = new Cookie("url", request.getParameter("url"));
+        
+        // 为两个 Cookie 设置过期日期为 24 小时后
+        name.setMaxAge(60*60*24); 
+        url.setMaxAge(60*60*24); 
+        
+        // 在响应头中添加两个 Cookie
+        response.addCookie( name );
+        response.addCookie( url );
+        
+        // 设置响应内容类型
+        response.setContentType("text/html;charset=UTF-8");
+        
+        PrintWriter out = response.getWriter();
+        String title = "设置 Cookie 实例";
+        String docType = "<!DOCTYPE html>\n";
+        out.println(docType +
+                "<html>\n" +
+                "<head><title>" + title + "</title></head>\n" +
+                "<body bgcolor=\"#f0f0f0\">\n" +
+                "<h1 align=\"center\">" + title + "</h1>\n" +
+                "<ul>\n" +
+                "  <li><b>站点名：</b>："
+                + request.getParameter("name") + "\n</li>" +
+                "  <li><b>站点 URL：</b>："
+                + request.getParameter("url") + "\n</li>" +
+                "</ul>\n" +
+                "</body></html>");
+        }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
+
+}
+
+编译上面的 Servlet HelloForm，并在 web.xml 文件中创建适当的条目:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <servlet> 
+    <!-- 类名 -->  
+    <servlet-name>HelloForm</servlet-name>
+    <!-- 所在的包 -->
+    <servlet-class>com.runoob.test.HelloForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloForm</servlet-name>
+    <!-- 访问的网址 -->
+    <url-pattern>/TomcatTest/HelloForm</url-pattern>
+  </servlet-mapping>
+</web-app> 
+
+最后尝试下面的 HTML 页面来调用 Servlet。
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+
+<form action="/TomcatTest/HelloForm" method="GET">
+站点名 ：<input type="text" name="name">
+<br />
+站点 URL：<input type="text" name="url" /><br>
+<input type="submit" value="提交" />
+</form>
+
+</body>
+</html>
+
+
+通过 Servlet 读取 Cookie
+1.调用 HttpServletRequest 的 getCookies( ) 方法创建一个 javax.servlet.http.Cookie 对象的数组。
+2.遍历数组，使用 getName() 和 getValue() 方法来访问每个 cookie 和关联的值。
+
+实例：
+package com.runoob.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLDecoder;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class ReadCookies
+ */
+@WebServlet("/ReadCookies")
+public class ReadCookies extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ReadCookies() {
+        super();
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        Cookie cookie = null;
+        Cookie[] cookies = null;       
+        cookies = request.getCookies();  // 获取与该域相关的 Cookie 的数组
+         
+         
+        response.setContentType("text/html;charset=UTF-8");  // 设置响应内容类型
+    
+        PrintWriter out = response.getWriter();
+        String title = "Delete Cookie Example";
+        String docType = "<!DOCTYPE html>\n";
+        out.println(docType +
+                   "<html>\n" +
+                   "<head><title>" + title + "</title></head>\n" +
+                   "<body bgcolor=\"#f0f0f0\">\n" );
+        if( cookies != null ){
+            out.println("<h2>Cookie 名称和值</h2>");
+            for (int i = 0; i < cookies.length; i++){
+               cookie = cookies[i];
+               if((cookie.getName( )).compareTo("name") == 0 ){
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                    out.print("已删除的 cookie：" + cookie.getName( ) + "<br/>");
+               }
+               out.print("名称：" + cookie.getName( ) + "，");
+               out.print("值：" +  URLDecoder.decode(cookie.getValue(), "utf-8") +" <br/>");
+            }
+         }else{
+             out.println("<h2 class=\"tutheader\">No Cookie founds</h2>");
+         }
+         out.println("</body>");
+         out.println("</html>");
+        }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+}
+
+
+通过 Servlet 删除 Cookie
+步骤如下：
+1.读取一个现有的 cookie，并把它存储在 Cookie 对象中。
+2.使用 setMaxAge() 方法设置 cookie 的年龄为零，来删除现有的 cookie。
+3.把这个 cookie 添加到响应头。
+
+实例
+下面的例子将删除现有的名为 "url" 的 cookie，当您下次运行 ReadCookies 的 Servlet 时，它会返回 url 为 null。
+
+package com.runoob.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class DeleteCookies
+ */
+@WebServlet("/DeleteCookies")
+public class DeleteCookies extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DeleteCookies() {
+        super();
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        Cookie cookie = null;
+        Cookie[] cookies = null;
+        cookies = request.getCookies();  // 获取与该域相关的 Cookie 的数组   
+        response.setContentType("text/html;charset=UTF-8");  // 设置响应内容类型
+   
+        PrintWriter out = response.getWriter();
+        String title = "删除 Cookie 实例";
+        String docType = "<!DOCTYPE html>\n";
+        out.println(docType +
+                  "<html>\n" +
+                  "<head><title>" + title + "</title></head>\n" +
+                  "<body bgcolor=\"#f0f0f0\">\n" );
+        if( cookies != null ){
+           out.println("<h2>Cookie 名称和值</h2>");
+           for (int i = 0; i < cookies.length; i++){
+              cookie = cookies[i];
+              if((cookie.getName( )).compareTo("url") == 0 ){
+                   cookie.setMaxAge(0);
+                   response.addCookie(cookie);
+                   out.print("已删除的 cookie：" + cookie.getName( ) + "<br/>");
+              }
+              out.print("名称：" + cookie.getName( ) + "，");
+              out.print("值：" + cookie.getValue( )+" <br/>");
+           }
+        }else{
+            out.println("<h2 class=\"tutheader\">No Cookie founds</h2>");
+        }
+        out.println("</body>");
+        out.println("</html>");
+        }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+}
+
+
+Servlet Session 跟踪
+HTTP 是一种"无状态"协议
+以下三种方式来维持 Web 客户端和 Web 服务器之间的 session 会话：
+1.Cookies  //部分浏览器不支持或Cookie禁用时无法使用，不推荐是用这种方式
+2.隐藏的表单字段 
+  例如：<input type="hidden" name="sessionid" value="12345">  //部分情况不可用
+3.URL 重写
+  例如：http://w3cschool.cc/file.htm;sessionid=12345，session 会话标识符被附加为 sessionid=12345
+URL 重写是一种更好的维持 session 会话的方式，它在浏览器不支持 cookie 时能够很好地工作。
+
+HttpSession 对象
+除了上述的三种方式，Servlet 还提供了 HttpSession 接口
+Servlet 容器使用这个接口来创建一个 HTTP 客户端和 HTTP 服务器之间的 session 会话。会话持续一个指定的时间段，跨多个连接或页面请求。
+通过调用 HttpServletRequest 的公共方法 getSession() 来获取 HttpSession 对象，如下所示：
+HttpSession session = request.getSession();
+
+
+Session 跟踪实例
+使用 HttpSession 对象获取 session 会话创建时间和最后访问时间。如果不存在 session 会话，我们将通过请求创建一个新的 session 会话。
+
+package com.runoob.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class SessionTrack
+ */
+@WebServlet("/SessionTrack")
+public class SessionTrack extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {       
+        HttpSession session = request.getSession(true);  // 如果不存在 session 会话，则创建一个 session 对象        
+        Date createTime = new Date(session.getCreationTime());  // 获取 session 创建时间       
+        Date lastAccessTime = new Date(session.getLastAccessedTime());  // 获取该网页的最后一次访问时间        
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  //设置日期输出的格式  
+    
+        String title = "Servlet Session 实例 - 菜鸟教程";
+        Integer visitCount = new Integer(0);
+        String visitCountKey = new String("visitCount");
+        String userIDKey = new String("userID");
+        String userID = new String("Runoob");
+        if(session.getAttribute(visitCountKey) == null) {
+            session.setAttribute(visitCountKey, new Integer(0));
+        }
+		
+        // 检查网页上是否有新的访问者
+        if (session.isNew()){
+            title = "Servlet Session 实例 - 菜鸟教程";
+             session.setAttribute(userIDKey, userID);
+        } else {
+             visitCount = (Integer)session.getAttribute(visitCountKey);
+             visitCount = visitCount + 1;
+             userID = (String)session.getAttribute(userIDKey);
+        }
+        session.setAttribute(visitCountKey, visitCount);
+            
+        response.setContentType("text/html;charset=UTF-8");  // 设置响应内容类型
+        PrintWriter out = response.getWriter();
+    
+        String docType = "<!DOCTYPE html>\n";
+        out.println(docType +
+                "<html>\n" +
+                "<head><title>" + title + "</title></head>\n" +
+                "<body bgcolor=\"#f0f0f0\">\n" +
+                "<h1 align=\"center\">" + title + "</h1>\n" +
+                 "<h2 align=\"center\">Session 信息</h2>\n" +
+                "<table border=\"1\" align=\"center\">\n" +
+                "<tr bgcolor=\"#949494\">\n" +
+                "  <th>Session 信息</th><th>值</th></tr>\n" +
+                "<tr>\n" +
+                "  <td>id</td>\n" +
+                "  <td>" + session.getId() + "</td></tr>\n" +
+                "<tr>\n" +
+                "  <td>创建时间</td>\n" +
+                "  <td>" +  df.format(createTime) + 
+                "  </td></tr>\n" +
+                "<tr>\n" +
+                "  <td>最后访问时间</td>\n" +
+                "  <td>" + df.format(lastAccessTime) + 
+                "  </td></tr>\n" +
+                "<tr>\n" +
+                "  <td>用户 ID</td>\n" +
+                "  <td>" + userID + 
+                "  </td></tr>\n" +
+                "<tr>\n" +
+                "  <td>访问统计：</td>\n" +
+                "  <td>" + visitCount + "</td></tr>\n" +
+                "</table>\n" +
+                "</body></html>"); 
+    }
+}
+
+编译上面的 Servlet SessionTrack，并在 web.xml 文件中创建适当的条目。
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <servlet> 
+    <!-- 类名 -->  
+    <servlet-name>SessionTrack</servlet-name>
+    <!-- 所在的包 -->
+    <servlet-class>com.runoob.test.SessionTrack</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SessionTrack</servlet-name>
+    <!-- 访问的网址 -->
+    <url-pattern>/TomcatTest/SessionTrack</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+
+删除 Session 会话数据
+当您完成了一个用户的 session 会话数据，您有以下几种选择：
+1.移除一个特定的属性：您可以调用 public void removeAttribute(String name) 方法来删除与特定的键相关联的值。
+2.删除整个 session 会话：您可以调用 public void invalidate() 方法来丢弃整个 session 会话。
+3.设置 session 会话过期时间：您可以调用 public void setMaxInactiveInterval(int interval) 方法来单独设置 session 会话超时。
+  getMaxInactiveInterval() 方法会返回 session 会话的超时时间，以秒为单位。
+4.注销用户：如果使用的是支持 servlet 2.4 的服务器，您可以调用 logout 来注销 Web 服务器的客户端，并把属于所有用户的所有 session 会话设置为无效。
+5.web.xml 配置：如果您使用的是 Tomcat，除了上述方法，您还可以在 web.xml 文件中配置 session 会话超时，如下所示：
+  <session-config>
+    <session-timeout>15</session-timeout>
+  </session-config>
+注:超时时间是以分钟为单位，将覆盖 Tomcat 中默认的 30 分钟超时时间。
+
+
+Servlet 数据库访问
+JDBC方式访问数据库
+下面的实例演示了如何使用 Servlet 访问 RUNOOB 数据库
+package com.runoob.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.*;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class DatabaseAccess
+ */
+@WebServlet("/DatabaseAccess")
+public class DatabaseAccess extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  // JDBC 驱动名
+    static final String DB_URL = "jdbc:mysql://localhost:3306/RUNOOB";  // 数据库 URL
+    // 数据库的用户名与密码
+    static final String USER = "root";
+    static final String PASS = "123456"; 
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DatabaseAccess() {
+        super();
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Connection conn = null;
+        Statement stmt = null;      
+        response.setContentType("text/html;charset=UTF-8"); // 设置响应内容类型
+        PrintWriter out = response.getWriter();
+        String title = "Servlet Mysql 测试 - 菜鸟教程";
+        String docType = "<!DOCTYPE html>\n";
+        out.println(docType +
+        "<html>\n" +
+        "<head><title>" + title + "</title></head>\n" +
+        "<body bgcolor=\"#f0f0f0\">\n" +
+        "<h1 align=\"center\">" + title + "</h1>\n");
+        
+		try{
+                        Class.forName("com.mysql.jdbc.Driver"); // 注册 JDBC 驱动器           
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);  // 打开一个连接
+            stmt = conn.createStatement(); // 执行 SQL 查询
+            String sql = "SELECT id, name, url FROM websites";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // 展开结果集数据库
+            while(rs.next()){
+                // 通过字段检索
+                int id  = rs.getInt("id");
+                String name = rs.getString("name");
+                String url = rs.getString("url");
+    
+                // 输出数据
+                out.println("ID: " + id);
+                out.println(", 站点名称: " + name);
+                out.println(", 站点 URL: " + url);
+                out.println("<br />");
+            }
+            out.println("</body></html>");
+
+            // 完成后关闭
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch(SQLException se) {            
+            se.printStackTrace(); // 处理 JDBC 错误
+        } catch(Exception e) {            
+            e.printStackTrace(); // 处理 Class.forName 错误
+        }finally{
+            // 最后是用于关闭资源的块
+            try{
+                if(stmt!=null)
+                stmt.close();
+            }catch(SQLException se2){
+            }
+            try{
+                if(conn!=null)
+                conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
+       
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+}
+
+现在让我们来编译上面的 Servlet，并在 web.xml 文件中创建以下条目：
+....
+    <servlet>
+        <servlet-name>DatabaseAccess</servlet-name>
+        <servlet-class>com.runoob.test.DatabaseAccess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DatabaseAccess</servlet-name>
+        <url-pattern>/TomcatTest/DatabaseAccess</url-pattern>
+    </servlet-mapping>
+....
+
+
+Servlet 文件上传
+Servlet 与 HTML form 标签可实现用户上传文件到服务器。
+本文使用到的文件有：
+1.upload.jsp              //文件上传表单。
+2.message.jsp             //上传成功后跳转页面。
+3.UploadServlet.java      //上传处理 Servlet。
+Lib: commons-fileupload-1.3.2、commons-io-2.5.jar
+注:Servlet3.0 已经内置了文件上传特性，无需 Commons FileUpload 组件
+
+upload.jsp 文件代码如下：
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>文件上传实例 - 菜鸟教程</title>
+</head>
+<body>
+<h1>文件上传实例 - 菜鸟教程</h1>
+<form method="post" action="/TomcatTest/UploadServlet" enctype="multipart/form-data">
+    选择一个文件:
+    <input type="file" name="uploadFile" />
+    <br/><br/>
+    <input type="submit" value="上传" />
+</form>
+</body>
+</html>
+
+UploadServlet.java 的源代码 如下所示：
+package com.runoob.test;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+ 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+ 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+ 
+
+/**
+ * Servlet implementation class UploadServlet
+ */
+@WebServlet("/UploadServlet")
+public class UploadServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;    
+    private static final String UPLOAD_DIRECTORY = "upload"; // 上传文件存储目录
+ 
+    // 上传配置
+    private static final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB
+    private static final int MAX_FILE_SIZE      = 1024 * 1024 * 40; // 40MB
+    private static final int MAX_REQUEST_SIZE   = 1024 * 1024 * 50; // 50MB
+ 
+    /**
+     * 上传数据及保存文件
+     */
+    protected void doPost(HttpServletRequest request,
+        HttpServletResponse response) throws ServletException, IOException {
+        // 检测是否为多媒体上传
+        if (!ServletFileUpload.isMultipartContent(request)) {
+            // 如果不是则停止
+            PrintWriter writer = response.getWriter();
+            writer.println("Error: 表单必须包含 enctype=multipart/form-data");
+            writer.flush();
+            return;
+        }
+        
+        DiskFileItemFactory factory = new DiskFileItemFactory();  // 配置上传参数        
+        factory.setSizeThreshold(MEMORY_THRESHOLD); // 设置内存临界值 - 超过后将产生临时文件并存储于临时目录中      
+        factory.setRepository(new File(System.getProperty("java.io.tmpdir")));  // 设置临时存储目录 
+        ServletFileUpload upload = new ServletFileUpload(factory);      
+        upload.setFileSizeMax(MAX_FILE_SIZE);  // 设置最大文件上传值         
+        upload.setSizeMax(MAX_REQUEST_SIZE);  // 设置最大请求值 (包含文件和表单数据)      
+        upload.setHeaderEncoding("UTF-8");  // 中文处理
+
+        // 构造临时路径来存储上传的文件
+        // 这个路径相对当前应用的目录
+        String uploadPath = request.getServletContext().getRealPath("./") + File.separator + UPLOAD_DIRECTORY;
+                
+        // 如果目录不存在则创建
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+ 
+        try {
+            // 解析请求的内容提取文件数据
+            @SuppressWarnings("unchecked")
+            List<FileItem> formItems = upload.parseRequest(request);
+ 
+            if (formItems != null && formItems.size() > 0) {
+                // 迭代表单数据
+                for (FileItem item : formItems) {
+                    // 处理不在表单中的字段
+                    if (!item.isFormField()) {
+                        String fileName = new File(item.getName()).getName();
+                        String filePath = uploadPath + File.separator + fileName;
+                        File storeFile = new File(filePath);                        
+                        System.out.println(filePath);  // 在控制台输出文件的上传路径                     
+                        item.write(storeFile);  // 保存文件到硬盘
+                        request.setAttribute("message", "文件上传成功!");
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            request.setAttribute("message", "错误信息: " + ex.getMessage());
+        }
+        // 跳转到 message.jsp
+        request.getServletContext().getRequestDispatcher("/message.jsp").forward(request, response);
+    }
+}
+
+message.jsp 文件代码如下：
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>文件上传结果</title>
+</head>
+<body>
+    <center>
+        <h2>${message}</h2>
+    </center>
+</body>
+</html>
+
+
+编译上面的 UploadServlet.java，并在 web.xml 文件中创建所需的条目，如下所示：
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+        http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    id="WebApp_ID" version="2.5">
+  <servlet>
+    <display-name>UploadServlet</display-name>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>com.runoob.test.UploadServlet</servlet-class>
+  </servlet>
+   
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/TomcatTest/UploadServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+
+Servlet 网页重定向  //客户端两次请求，而请求转发为服务端内部跳转
+当页面或者资源发生改变时，需要用到网页重定向。或是为了负载均衡、简单的随机等都有可能用到网页重定向。
+重定向请求到另一个网页的可使用 response 对象的 sendRedirect() 方法：
+public void HttpServletResponse.sendRedirect(String location) throws IOException 
+
+该方法把响应连同状态码和新的网页位置发送回浏览器。
+您也可以通过把 setStatus() 和 setHeader() 方法一起使用来达到同样的效果：
+
+....
+String site = "http://www.runoob.com" ;
+response.setStatus(response.SC_MOVED_TEMPORARILY);
+response.setHeader("Location", site); 
+....
+
+实例
+package com.runoob.test;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class PageRedirect
+ */
+@WebServlet("/PageRedirect")
+public class PageRedirect extends HttpServlet{
+    
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{   
+      response.setContentType("text/html;charset=UTF-8");  // 设置响应内容类型    
+      String site = new String("http://www.runoob.com");  // 要重定向的新位置
+      response.setStatus(response.SC_MOVED_TEMPORARILY);  //设置状态吗
+      response.setHeader("Location", site);    
+    }
+} 
+
+编译上面的 Servlet，并在 web.xml 文件中创建以下条目：
+....
+ <servlet>
+     <servlet-name>PageRedirect</servlet-name>
+     <servlet-class>PageRedirect</servlet-class>
+ </servlet>
+
+ <servlet-mapping>
+     <servlet-name>PageRedirect</servlet-name>
+     <url-pattern>/TomcatTest/PageRedirect</url-pattern>
+ </servlet-mapping>
+....
+
+
+Servlet 点击计数器
+
+用于网站的某个特定页面上的总点击量。
+步骤：
+1.在init()方法中初始化一个全局变量。
+2.每次调用doGet()或 doPost() 方法时，都增加全局变量。
+3.如果需要，您可以使用一个数据库表来存储全局变量的值在 destroy() 中。
+  在下次初始化 Servlet 时，该值可在 init() 方法内被读取。可选的。
+4.如果您只想对一个 session 会话计数一次页面点击，那么请使用 isNew() 方法来检查该 session 会话是否已点击过相同页面。可选。
+5.您可以通过显示全局计数器的值，来在网站上展示页面的总点击量。可选的。
+6.Web容器重新启动或Servlet被销毁，计数器将被重置。
+
+实例
+package com.runoob.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class PageHitCounter
+ */
+@WebServlet("/PageHitCounter")
+public class PageHitCounter extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private int hitCount; 
+    
+    public void init() {       
+        hitCount = 0;  // 重置点击计数器
+    } 
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        response.setContentType("text/html;charset=UTF-8");       
+        hitCount++;   // 增加 hitCount
+        PrintWriter out = response.getWriter();
+        String title = "总点击量";
+        String docType = "<!DOCTYPE html> \n";
+        out.println(docType +
+            "<html>\n" +
+            "<head><title>" + title + "</title></head>\n" +
+            "<body bgcolor=\"#f0f0f0\">\n" +
+            "<h1 align=\"center\">" + title + "</h1>\n" +
+            "<h2 align=\"center\">" + hitCount + "</h2>\n" +
+            "</body></html>");
+    }
+    
+    public void destroy() { 
+        // 这一步是可选的，但是如果需要，您可以把 hitCount 的值写入到数据库
+    } 
+
+}
+
+编译上面的 Servlet，并在 web.xml 文件中创建以下条目：
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <servlet>
+    <servlet-name>PageHitCounter</servlet-name>
+    <servlet-class>com.runoob.test.PageHitCounter</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PageHitCounter</servlet-name>
+    <url-pattern>/TomcatTest/PageHitCounter</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+可访问 http://localhost:8080/TomcatTest/PageHitCounter 查看结果
+
+
+网站点击计数器
+使用过滤器可统计整个网站的总点击量
+步骤如下：
+1.在过滤器的 init() 方法中初始化一个全局变量。
+2.每次调用 doFilter() 方法时，都增加全局变量。
+3.也可过滤器的 destroy() 中使用一个数据库表来存储全局变量的值。
+  下次初始化过滤器时，该值可在 init() 方法内被读取, 这一步是可选的。
+4.Web容器重新启动或Servlet被销毁，计数器将被重置。
+
+实例
+本实例演示了如何实现一个简单的网站点击计数器：
+// 导入必需的 java 库
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.*;
+
+public class SiteHitCounter implements Filter{
+    
+  private int hitCount; 
+               
+  public void  init(FilterConfig config) throws ServletException{    
+     hitCount = 0; // 重置点击计数器
+  }
+
+  public void  doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
+              throws java.io.IOException, ServletException {
+      
+      hitCount++;  // 把计数器的值增加 1      
+      System.out.println("网站访问统计："+ hitCount ); // 输出计数器     
+      chain.doFilter(request,response);  // 把请求传回到过滤器链
+  }
+  
+  public void destroy() { 
+      // 这一步是可选的，但是如果需要，您可以把 hitCount 的值写入到数据库
+  } 
+} 
+
+编译上面的 Servlet，并在 web.xml 文件中创建以下条目：
+....
+<filter>
+   <filter-name>SiteHitCounter</filter-name>
+   <filter-class>SiteHitCounter</filter-class>
+</filter>
+
+<filter-mapping>
+   <filter-name>SiteHitCounter</filter-name>
+   <url-pattern>/\*</url-pattern>  //这里是/*，匹配所有请求
+</filter-mapping>
+....
+
+现在访问网站的任意页面，每次被点击时，计数器的值都会增加 1，并在日志中显示
+
+
+Servlet 自动刷新页面
+需要定期刷新应用场景，如显示现场比赛成绩或股票市场状况或货币兑换率。
+可使用下列方法实现：
+1.刷新网页的最简单的方式是使用响应对象的方法 setIntHeader()。
+  public void setIntHeader(String header, int headerValue)
+  此方法把头信息 "Refresh" 连同一个表示时间间隔的整数值（以秒为单位）发送回浏览器。
+
+实例
+package com.runoob.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
+
+import java.util.GregorianCalendar;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Refresh
+ */
+@WebServlet("/Refresh")
+public class Refresh extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+   
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
+        response.setIntHeader("Refresh", 5); // 设置刷新自动加载的事件间隔为 5 秒     
+        response.setContentType("text/html;charset=UTF-8"); // 设置响应内容类型
+     
+        // 获取当前的时间
+        Calendar calendar = new GregorianCalendar();
+        String am_pm;
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+        int second = calendar.get(Calendar.SECOND);
+        if(calendar.get(Calendar.AM_PM) == 0)
+            am_pm = "AM";
+        else
+            am_pm = "PM";
+     
+        String CT = hour+":"+ minute +":"+ second +" "+ am_pm;
+        
+        PrintWriter out = response.getWriter();
+        String title = "使用 Servlet 自动刷新页面";
+        String docType = "<!DOCTYPE html> \n";
+        out.println(docType +
+            "<html>\n" +
+            "<head><title>" + title + "</title></head>\n"+
+            "<body bgcolor=\"#f0f0f0\">\n" +
+            "<h1 align=\"center\">" + title + "</h1>\n" +
+            "<p>当前时间是：" + CT + "</p>\n");
+    }
+
+}
+
+编译上面的 Servlet，并在 web.xml 文件中创建以下条目：
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <servlet>
+    <servlet-name>Refresh</servlet-name>
+    <servlet-class>com.runoob.test.Refresh</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Refresh</servlet-name>
+    <url-pattern>/TomcatTest/Refresh</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+访问 http://localhost:8080/TomcatTest/Refresh 来调用这个 Servlet。可实现5秒刷新一次
+
+
+Servlet 发送电子邮件
+需要mail.jar 和 activation.jar
+
+实例
+// 文件名 SendEmail.java
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+ 
+public class SendEmail extends HttpServlet{
+    
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
+        String to = "abcd@gmail.com";  // 收件人的电子邮件 ID      
+        String from = "web@gmail.com";  // 发件人的电子邮件 ID     
+        String host = "localhost";  // 假设您是从本地主机发送电子邮件
+        Properties properties = System.getProperties();  // 获取系统的属性      
+        properties.setProperty("mail.smtp.host", host);  // 设置邮件服务器      
+        Session session = Session.getDefaultInstance(properties);  // 获取默认的 Session 对象              
+        response.setContentType("text/html;charset=UTF-8");  // 设置响应内容类型
+        PrintWriter out = response.getWriter();
+    
+        try{          
+            MimeMessage message = new MimeMessage(session);  // 创建一个默认的 MimeMessage 对象          
+            message.setFrom(new InternetAddress(from));  // 设置 From: header field of the header. 
+			// 设置 To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));          
+            message.setSubject("This is the Subject Line!");  // 设置 Subject: header field         
+            message.setText("This is actual message");  // 现在设置实际消息         
+            Transport.send(message);  // 发送消息
+            String title = "发送电子邮件";
+            String res = "成功发送消息...";
+            String docType = "<!DOCTYPE html> \n";
+            out.println(docType +
+            "<html>\n" +
+            "<head><title>" + title + "</title></head>\n" +
+            "<body bgcolor=\"#f0f0f0\">\n" +
+            "<h1 align=\"center\">" + title + "</h1>\n" +
+            "<p align=\"center\">" + res + "</p>\n" +
+            "</body></html>");
+        }catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+     }
+} 
+
+编译上面的 Servlet，并在 web.xml 文件中创建以下条目：
+....
+ <servlet>
+     <servlet-name>SendEmail</servlet-name>
+     <servlet-class>SendEmail</servlet-class>
+ </servlet>
+ 
+ <servlet-mapping>
+     <servlet-name>SendEmail</servlet-name>
+     <url-pattern>/SendEmail</url-pattern>
+ </servlet-mapping>
+....
+
+现在通过访问 URL http://localhost:8080/SendEmail 来调用发送电子邮件到给定的电子邮件 ID abcd@gmail.com
+
+发送给多个收件人，可使用：
+void addRecipients(Message.RecipientType type, Address[] addresses) throws MessagingException {...}
+1.type：这将被设置为 TO、CC 或 BCC。在这里，CC 代表抄送，BCC 代表密件抄送。
+2.addresses：这是电子邮件 ID 的数组。当指定电子邮件 ID 时，您需要使用 InternetAddress() 方法。
+
+发送内容大小不限的 HTML 内容
+实例
+// 文件名 SendEmail.java
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+ 
+public class SendEmail extends HttpServlet{
+    
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+      
+        String to = "abcd@gmail.com";  // 收件人的电子邮件 ID          
+        String from = "web@gmail.com";  // 发件人的电子邮件 ID          
+        String host = "localhost";  // 假设您是从本地主机发送电子邮件          
+        Properties properties = System.getProperties();  // 获取系统的属性          
+        properties.setProperty("mail.smtp.host", host);  // 设置邮件服务器          
+        Session session = Session.getDefaultInstance(properties);  // 获取默认的 Session 对象              
+        response.setContentType("text/html;charset=UTF-8");  // 设置响应内容类型
+        PrintWriter out = response.getWriter();
+    
+        try{          
+            MimeMessage message = new MimeMessage(session);  // 创建一个默认的 MimeMessage 对象          
+            message.setFrom(new InternetAddress(from));  // 设置 From: header field of the header.
+            // 设置 To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));          
+            message.setSubject("This is the Subject Line!");  // 设置 Subject: header field                      
+            message.setContent("<h1>This is actual message</h1>","text/html" );  // 设置实际的 HTML 消息，内容大小不限
+            // 发送消息
+            Transport.send(message);
+            String title = "发送电子邮件";
+            String res = "成功发送消息...";
+            String docType = "<!DOCTYPE html> \n";
+            out.println(docType +
+            "<html>\n" +
+            "<head><title>" + title + "</title></head>\n" +
+            "<body bgcolor=\"#f0f0f0\">\n" +
+            "<h1 align=\"center\">" + title + "</h1>\n" +
+            "<p align=\"center\">" + res + "</p>\n" +
+            "</body></html>");
+        }catch (MessagingException mex) {
+           mex.printStackTrace();
+        }
+    }
+} 
+
+编译并运行上面的 Servlet ，在给定的电子邮件 ID 上发送 HTML 消息。
+
+发送带附件的电子邮件
+实例
+// 文件名 SendEmail.java
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+ 
+public class SendEmail extends HttpServlet{
+    
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
+        String to = "abcd@gmail.com";  // 收件人的电子邮件 ID          
+        String from = "web@gmail.com";  // 发件人的电子邮件 ID          
+        String host = "localhost";  // 假设您是从本地主机发送电子邮件          
+        Properties properties = System.getProperties();  // 获取系统的属性          
+        properties.setProperty("mail.smtp.host", host);  // 设置邮件服务器         
+        Session session = Session.getDefaultInstance(properties);  // 获取默认的 Session 对象              
+        response.setContentType("text/html;charset=UTF-8");  // 设置响应内容类型
+        PrintWriter out = response.getWriter();
+    
+        try{          
+            MimeMessage message = new MimeMessage(session); // 创建一个默认的 MimeMessage 对象                      
+            message.setFrom(new InternetAddress(from));  // 设置 From: header field of the header.            
+            // 设置 To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));                      
+            message.setSubject("This is the Subject Line!");  // 设置 Subject: header field                       
+            BodyPart messageBodyPart = new MimeBodyPart();  // 创建消息部分                      
+            messageBodyPart.setText("This is message body");  // 填写消息                      
+            Multipart multipart = new MimeMultipart();  // 创建一个多部分消息                     
+            multipart.addBodyPart(messageBodyPart);  // 设置文本消息部分                      
+            messageBodyPart = new MimeBodyPart();  // 第二部分是附件
+            String filename = "file.txt";
+            DataSource source = new FileDataSource(filename);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(filename);
+            multipart.addBodyPart(messageBodyPart);                      
+            message.setContent(multipart );  // 发送完整的消息部分            
+            // 发送消息
+            Transport.send(message);
+            String title = "发送电子邮件";
+            String res = "成功发送电子邮件...";
+            String docType = "<!DOCTYPE html> \n";
+            out.println(docType +
+            "<html>\n" +
+            "<head><title>" + title + "</title></head>\n" +
+            "<body bgcolor=\"#f0f0f0\">\n" +
+            "<h1 align=\"center\">" + title + "</h1>\n" +
+            "<p align=\"center\">" + res + "</p>\n" +
+            "</body></html>");
+        }catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+    }
+}
+ 
+编译并运行上面的 Servlet ，在给定的电子邮件 ID 上发送带有文件附件的消息。
+
+用户身份认证部分
+如果需要向电子邮件服务器提供用户 ID 和密码进行身份认证，那么您可以设置如下属性：
+ props.setProperty("mail.user", "myuser");
+ props.setProperty("mail.password", "mypwd");
+电子邮件发送机制的其余部分与上面讲解的保持一致。
+
+
+Servlet项目创建步骤
+1.Servlet 包
+涉及到 WEB-INF 子目录的 Web 应用程序结构是所有的 Java web 应用程序的标准，并由 Servlet API 规范指定。
+给定一个顶级目录名 myapp，目录结构如下所示：
+/myapp
+    /images
+    /WEB-INF
+        /classes
+        /lib
+WEB-INF 子目录中包含应用程序的部署描述符，名为 web.xml。
+所有的 HTML 文件都位于顶级目录 myapp 下。对于 admin 用户，您会发现 ROOT 目录是 myApp 的父目录。
+
+2.创建包中的 Servlet
+WEB-INF/classes 目录包含了所有的 Servlet 类和其他类文件，类文件所在的目录结构与他们的包名称匹配。
+例如，如果您有一个完全合格的类名称 com.myorg.MyServlet，那么这个 Servlet 类必须位于以下目录中：
+
+/myapp/WEB-INF/classes/com/myorg/MyServlet.class
+下面的例子创建包名为 com.myorg 的 MyServlet 类。
+
+package com.myorg;  
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+@WebServlet("/MyServlet")
+public class MyServlet extends HttpServlet {
+ 
+    private String message;
+    
+    public void init() throws ServletException{        
+        message = "Hello World";  // 执行必需的的初始化
+    }
+    
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException{      
+        response.setContentType("text/html;charset=UTF-8");  // 设置响应内容类型         
+        PrintWriter out = response.getWriter();  // 实际的逻辑是在这里
+        out.println("<h1>" + message + "</h1>");
+    }
+    
+    public void destroy(){
+        // 什么也不做
+    }
+}
+
+3.编译包中的 Servlet
+进入<Tomcat-installation-directory>/webapps/ROOT/WEB-INF/classes 目录，并编译 MyServlet.java，如下所示：
+$ javac MyServlet.java
+如果 Servlet 依赖于其他库，那么您必须在 CLASSPATH 中也要引用那些 JAR 文件。
+
+4.Servlet 打包部署
+默认情况下，Servlet 应用程序位于路径 <Tomcat-installation-directory>/webapps/ROOT 下，
+且类文件放在 <Tomcat-installation-directory>/webapps/ROOT/WEB-INF/classes 中。
+
+如果您有一个完全合格的类名称 com.myorg.MyServlet，
+那么这个 Servlet 类必须位于 WEB-INF/classes/com/myorg/MyServlet.class 中，
+您需要在位于 <Tomcat-installation-directory>/webapps/ROOT/WEB-INF/ 的 web.xml 文件中创建以下条目：
+
+<servlet>
+    <servlet-name>MyServlet</servlet-name>
+    <servlet-class>com.myorg.MyServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>MyServlet</servlet-name>
+    <url-pattern>/MyServlet</url-pattern>
+</servlet-mapping>
+
+上面的条目要被创建在 web.xml 文件中的 <web-app>...</web-app> 标签内。
+
+使用 <Tomcat-installation-directory>\bin\startup.bat（在 Windows 上）
+或 <Tomcat-installation-directory>/bin/startup.sh（在 Linux/Solaris 等上）启动 tomcat 服务器，
+最后在浏览器的地址栏中输入 http://localhost:8080/MyServlet。
+
+
+Servlet 调试
+多使用System.out.println()打印出变量的值。输出的所有消息将被记录在 Web 服务器日志文件中。
+
+消息日志
+推荐使用 log4J 来记录所有的消息。
+Servlet API 还提供了一个简单的输出信息的方式，使用 log() 方法，如下所示：
+
+// 导入必需的 java 库
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class ContextLog extends HttpServlet {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) 
+	                              throws ServletException, java.io.IOException {    
+        String par = request.getParameter("par1");      
+        ServletContext context = getServletContext( );  // 调用两个 ServletContext.log 方法
+    
+        if (par == null || par.equals(""))
+            // 通过 Throwable 参数记录版本
+            context.log("No message received:", new IllegalStateException("Missing parameter"));
+        else
+            context.log("Here is the visitor's message: " + par);
+        
+        response.setContentType("text/html;charset=UTF-8");
+        java.io.PrintWriter out = response.getWriter( );
+        String title = "Context Log";
+        String docType = "<!DOCTYPE html> \n";
+        out.println(docType +
+          "<html>\n" +
+          "<head><title>" + title + "</title></head>\n" +
+          "<body bgcolor=\"#f0f0f0\">\n" +
+          "<h1 align=\"center\">" + title + "</h1>\n" +
+          "<h2 align=\"center\">Messages sent</h2>\n" +
+          "</body></html>");
+    } //doGet
+}
+
+ServletContext 把它的文本消息记录到 Servlet 容器的日志文件中。对于 Tomcat，这些日志可以在 <Tomcat-installation-directory>/logs 目录中找到。
+这些日志文件确实对新出现的错误或问题的频率给出指示。正因为如此，建议在通常不会发生的异常的 catch 子句中使用 log() 函数。
+
+使用 JDB 调试器
+可以使用调试 applet 或应用程序的 jdb 命令来调试 Servlet。
+可以调试 sun.servlet.http.HttpServer，然后把它看成是 HttpServer 执行 Servlet 来响应浏览器端的 HTTP 请求。
+这与调试 applet 小程序非常相似。与调试 applet 不同的是，实际被调试的程序是 sun.applet.AppletViewer。
+
+大多数调试器会自动隐藏如何调试 applet 的细节。同样的，对于 servlet，您必须帮调试器执行以下操作：
+
+设置您的调试器的类路径 classpath，以便它可以找到 sun.servlet.http.Http-Server 和相关的类。
+设置您的调试器的类路径 classpath，以便它可以找到您的 servlet 和支持的类，通常是在 server_root/servlets 和 server_root/classes 中。
+您通常不会希望 server_root/servlets 在您的 classpath 中，因为它会禁用 servlet 的重新加载。
+但是这种包含规则对于调试是非常有用的。它允许您的调试器在 HttpServer 中的自定义 Servlet 加载器加载 Servlet 之前在 Servlet 中设置断点。
+
+如果您已经设置了正确的类路径 classpath，就可以开始调试 sun.servlet.http.HttpServer。可以在您想要调试的 Servlet 代码中设置断点，然后通过 Web 浏览器使用给定的 Servlet（http://localhost:8080/servlet/ServletToDebug）向 HttpServer 发出请求。您会看到程序执行到断点处会停止。
+
+使用注释
+代码中的注释有助于以各种方式进行调试。注释可用于调试过程的很多其他方式中。
+
+客户端和服务器端头信息
+有时，当一个 Servlet 并没有像预期那样时，查看原始的 HTTP 请求和响应是非常有用的。
+如果您熟悉 HTTP 结构，您可以阅读请求和响应，看看这些头信息究竟是什么。
+
+重要的调试技巧
+下面列出了一些 Servlet 调试的技巧：
+
+请注意，server_root/classes 不会重载，而 server_root/servlets 可能会。
+要求浏览器显示它所显示的页面的原始内容。这有助于识别格式的问题。它通常是"视图"菜单下的一个选项。
+通过强制执行完全重新加载页面来确保浏览器还没有缓存前一个请求的输出。在 Netscape Navigator 中，请使用 Shift-Reload，在 Internet Explorer 中，请使用 Shift-Refresh。
+请确认 servlet 的 init() 方法接受一个 ServletConfig 参数，并调用 super.init(config)。
+
+
+Servlet 国际化
+
+开始之前，先来看看三个重要术语：
+国际化（i18n）：这意味着一个网站提供了不同版本的翻译成访问者的语言或国籍的内容。
+本地化（l10n）：这意味着向网站添加资源，以使其适应特定的地理或文化区域，例如网站翻译成印地文（Hindi）。
+区域设置（locale）：这是一个特殊的文化或地理区域。它通常指语言符号后跟一个下划线和一个国家符号。例如 "en_US" 表示针对 US 的英语区域设置。
+
+Servlet 可以根据请求者的区域设置拾取相应版本的网站，并根据当地的语言、文化和需求提供相应的网站版本。
+
+实例
+本实例演示了如何显示某个请求的语言和相关的国家：
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Locale;
+
+public class GetLocale extends HttpServlet{
+    
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        // 获取客户端的区域设置
+        Locale locale = request.getLocale();
+        String language = locale.getLanguage();
+        String country = locale.getCountry();
+    
+        // 设置响应内容类型
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+    
+        String title = "检测区域设置";
+        String docType = "<!DOCTYPE html> \n";
+        out.println(docType +
+          "<html>\n" +
+          "<head><title>" + title + "</title></head>\n" +
+          "<body bgcolor=\"#f0f0f0\">\n" +
+          "<h1 align=\"center\">" + language + "</h1>\n" +
+          "<h2 align=\"center\">" + country + "</h2>\n" +
+          "</body></html>");
+    }
+}
+
+语言设置
+Servlet 可以输出以西欧语言（如英语、西班牙语、德语、法语、意大利语、荷兰语等）编写的页面。
+在这里，为了能正确显示所有的字符，设置 Content-Language 头是非常重要的。
+第二点是使用 HTML 实体显示所有的特殊字符，例如，"&#241;" 表示 "ñ"，"&#161;" 表示 "¡"，如下所示：
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Locale;
+
+public class DisplaySpanish extends HttpServlet{
+    
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        // 设置响应内容类型
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        // 设置西班牙语言代码
+        response.setHeader("Content-Language", "es");
+        
+        String title = "En Espa&ntilde;ol";
+        String docType = "<!DOCTYPE html> \n";
+          out.println(docType +
+          "<html>\n" +
+          "<head><title>" + title + "</title></head>\n" +
+          "<body bgcolor=\"#f0f0f0\">\n" +
+          "<h1>" + "En Espa&ntilde;ol:" + "</h1>\n" +
+          "<h1>" + "&iexcl;Hola Mundo!" + "</h1>\n" +
+          "</body></html>");
+    }
+} 
+
+特定于区域设置的日期
+可以使用 java.text.DateFormat 类及其静态方法 getDateTimeInstance() 来格式化特定于区域设置的日期和时间。
+下面的实例演示了如何格式化特定于某个给定的区域设置的日期：
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Locale;
+import java.text.DateFormat;
+import java.util.Date;
+
+public class DateLocale extends HttpServlet{
+    
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        // 设置响应内容类型
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        // 获取客户端的区域设置
+        Locale locale = request.getLocale( );
+        String date = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, locale).format(new Date( ));
+        
+        String title = "特定于区域设置的日期";
+        String docType = "<!DOCTYPE html> \n";
+          out.println(docType +
+          "<html>\n" +
+          "<head><title>" + title + "</title></head>\n" +
+          "<body bgcolor=\"#f0f0f0\">\n" +
+          "<h1 align=\"center\">" + date + "</h1>\n" +
+          "</body></html>");
+    }
+} 
+
+特定于区域设置的货币
+可以使用 java.text.NumberFormat 类及其静态方法 getCurrencyInstance() 来格式化数字（比如 long 类型或 double 类型）为特定于区域设置的货币。
+下面的实例演示了如何格式化特定于某个给定的区域设置的货币：
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Locale;
+import java.text.NumberFormat;
+import java.util.Date;
+
+public class CurrencyLocale extends HttpServlet{
+    
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        // 设置响应内容类型
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        // 获取客户端的区域设置
+        Locale locale = request.getLocale( );
+        NumberFormat nft = NumberFormat.getCurrencyInstance(locale);
+        String formattedCurr = nft.format(1000000);
+        
+        String title = "特定于区域设置的货币";
+        String docType = "<!DOCTYPE html> \n";
+          out.println(docType +
+          "<html>\n" +
+          "<head><title>" + title + "</title></head>\n" +
+          "<body bgcolor=\"#f0f0f0\">\n" +
+          "<h1 align=\"center\">" + formattedCurr + "</h1>\n" +
+          "</body></html>");
+    }
+} 
+
+特定于区域设置的百分比
+您可以使用 java.text.NumberFormat 类及其静态方法 getPercentInstance() 来格式化特定于区域设置的百分比。
+下面的实例演示了如何格式化特定于某个给定的区域设置的百分比：
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Locale;
+import java.text.NumberFormat;
+import java.util.Date;
+
+public class PercentageLocale extends HttpServlet{
+    
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        // 设置响应内容类型
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        // 获取客户端的区域设置
+        Locale locale = request.getLocale( );
+        NumberFormat nft = NumberFormat.getPercentInstance(locale);
+        String formattedPerc = nft.format(0.51);
+        
+        String title = "特定于区域设置的百分比";
+        String docType = "<!DOCTYPE html> \n";
+          out.println(docType +
+          "<html>\n" +
+          "<head><title>" + title + "</title></head>\n" +
+          "<body bgcolor=\"#f0f0f0\">\n" +
+          "<h1 align=\"center\">" + formattedPerc + "</h1>\n" +
+          "</body></html>");
+    }
+} 
+
+
+==================================================================================================================
+==================================================================================================================
+
+Jsp简介
+
+JSP全称Java Server Pages，动态网页开发技术，使用JSP标签在HTML中插入Java代码。标签通常以<%开头以%>结束。
+JSP是一种Java servlet，主要用于实现Java web应用程序的用户界面部分。通过结合HTML、XHTML、XML以及嵌入JSP操作和命令来编写JSP。
+JSP通过表单获取用户输入数据、访问数据库及其他数据源，然后动态地创建网页。
+JSP标签有多种功能，比如访问数据库、记录用户选择信息、访问JavaBeans组件等，还可以在不同的网页中传递控制信息和共享信息。 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

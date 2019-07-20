@@ -1,0 +1,173 @@
+Java 反射
+
+
+反射机制提供的功能
+1.在运行时判定任意一个对象所属的类
+2.在运行时构造任意一个类的对象；
+3.在运行时判定任意一个类所具有的成员变量和方法；
+4.在运行时调用任意一个对象的方法；
+5.生成动态代理；
+
+
+Java反射机制类：
+java.lang.Class;                 //类               
+java.lang.reflect.Constructor;   //构造方法 
+java.lang.reflect.Field;         //类的成员变量       
+java.lang.reflect.Method;        //类的方法
+java.lang.reflect.Modifier;      //访问权限
+
+
+反射机制的应用场景：
+1.逆向代码 ，例如反编译
+2.与注解相结合的框架 例如Retrofit
+3.单纯的反射机制应用框架 例如EventBus 2.x
+4.动态生成类框架 例如Gson
+
+
+反射机制的优缺点：
+优点：运行期类型的判断，动态类加载，动态代理使用反射。
+缺点：性能是一个问题，反射相当于一系列解释操作，通知jvm要做的事情，性能比直接的java代码要慢很多。
+
+Java的反射机制在平时的业务开发过程中很少使用到，但是在一些基础框架的搭建上应用非常广泛。
+
+
+类加载器/ClassLoader
+https://www.cnblogs.com/doit8791/p/5820037.html
+
+
+Java反射机制实现：
+
+1)Class对象的获取
+class Foo{...}
+Foo f = new Foo(); //常规实例化对象
+/**
+*c1、c2和c3表示Foo类的类类型(class type)，c1=c2=c3 
+*/
+//第一种，通过类的隐含静态成员变量获取类类型
+Class c1 = Foo.Class;
+//第二种，通过实例化对象的getClass()方法
+Class c2 = f.getClass();
+//第三种，通过Class类的forName()的参数最好是带完整的包名，动态加载类。需要try catch获取异常
+Class c3 = Class.forName("Foo");
+
+Foo foo = c1.newInstance();   //通过Class类的newInstance()方法创建实例对象
+
+2)获取class对象的摘要信息
+boolean isPrimitive         = c1.isPrimitive();      //判断是否是基础类型
+boolean isArray             = c1.isArray();          //判断是否是集合类
+boolean isAnnotation        = c1.isAnnotation();     //判断是否是注解类
+boolean isInterface         = c1.isInterface();      //判断是否是接口类
+boolean isEnum              = c1.isEnum();           //判断是否是枚举类
+boolean isAnonymousClass    = c1.isAnonymousClass(); //判断是否是匿名内部类
+boolean isAnnotationPresent = c1.isAnnotationPresent(Deprecated.class); //判断是否被某个注解类修饰
+
+String className  = c1.getName();        //获取class名字 包含包名路径
+Package aPackage  = c1.getPackage();     //获取class的包信息
+String simpleName = c1.getSimpleName();  //获取class类名
+int modifiers     = c1.getModifiers();   //获取class访问权限
+
+Class<?>[] declaredClasses = c1.getDeclaredClasses(); //内部类
+Class<?> declaringClass    = c1.getDeclaringClass();  //外部类
+
+3)获取class对象的属性、方法、构造函数等
+Field[] allFields    = c1.getDeclaredFields();     //获取class对象的所有属性
+Field[] publicFields = c1.getFields();             //获取class对象的public属性
+Field ageField       = c1.getDeclaredField("age"); //获取class指定属性
+Field desField       = c1.getField("des");         //获取class指定的public属性
+Method[] methods     = c1.getDeclaredMethods();    //获取class对象的所有声明方法
+Method[] allMethods  = c1.getMethods();            //获取class对象的所有方法 包括父类的方法
+Class parentClass    = c1.getSuperclass();         //获取class对象的父类
+Class<?>[] interfaceClasses = c1.getInterfaces();  //获取class对象的所有接口
+Constructor<?>[] allConstructors    = c1.getDeclaredConstructors();  //获取class对象的所有声明构造函数
+Constructor<?>[] publicConstructors = c1.getConstructors();          //获取class对象public构造函数
+Constructor<?> constructor          = c1.getDeclaredConstructor(new Class[]{String.class});//获取指定声明构造函数
+Constructor publicConstructor       = c1.getConstructor(new Class[]{});   //获取指定声明的public构造函数
+Annotation[] annotations            = c1.getAnnotations();                //获取class对象的所有注解
+Annotation annotation               = c1.getAnnotation(Deprecated.class); //获取class对象指定注解
+Type genericSuperclass              = c1.getGenericSuperclass();          //获取class对象的直接超类的 Type
+Type[] interfaceTypes               = c1.getGenericInterfaces();          //获取class对象的所有接口的type集合
+
+4)class对象动态生成
+//第一种方式 Class对象调用newInstance()方法生成
+Object obj = c1.newInstance();
+//第二种方式 对象获得对应的Constructor对象，再通过该Constructor对象的newInstance()方法生成
+Constructor<?> constructor = c1.getDeclaredConstructor(new Class[]{String.class});//获取指定声明构造函数
+obj = constructor.newInstance(new Object[]{"lcj"});
+
+5)动态调用函数
+try {    
+    Object obj = c1.newInstance();                // 生成新的对象：用newInstance()方法    
+    boolean isInstanceOf = obj instanceof Person; //判断该对象是否是Person的子类  
+    Method method = c1.getDeclaredMethod("setAge", new Class[]{int.class}); //首先需要获得与该方法对应的Method对象    
+    method.invoke(obj, 28);                       //调用指定的函数并传递参数
+    method = c1.getDeclaredMethod("getAge");
+    Object result = method.invoke(obj, new Class[]{});
+} catch (InstantiationException e) {
+    e.printStackTrace();
+} catch (IllegalAccessException e) {
+    e.printStackTrace();
+} catch (NoSuchMethodException e) {
+    e.printStackTrace();
+} catch (InvocationTargetException e) {
+    e.printStackTrace();
+}
+
+6.)通过反射机制获取泛型类型
+public class People<T> {}               //People类
+public class Person<T> extends People<String> implements PersonInterface<Integer> {}  //Person类继承People类
+public interface PersonInterface<T> {}  //PersonInterface接口
+Person<String> person = new Person<>();
+//第一种方式 通过对象getClass方法
+Class<?> c1 = person.getClass();
+Type genericSuperclass = c1.getGenericSuperclass(); //获取class对象的直接超类的 Type
+Type[] interfaceTypes  = c1.getGenericInterfaces(); //获取class对象的所有接口的Type集合
+
+getComponentType(genericSuperclass);
+getComponentType(interfaceTypes[0]);
+
+getComponentType具体实现
+private Class<?> getComponentType(Type type) {
+    Class<?> componentType = null;
+    if (type instanceof ParameterizedType) {
+        //getActualTypeArguments()返回表示此类型实际类型参数的 Type 对象的数组。
+        Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
+        if (actualTypeArguments != null && actualTypeArguments.length > 0) {
+            componentType = (Class<?>) actualTypeArguments[0];
+        }
+    } else if (type instanceof GenericArrayType) {
+        // 表示一种元素类型是参数化类型或者类型变量的数组类型
+        componentType = (Class<?>) ((GenericArrayType) type).getGenericComponentType();
+    } else {
+        componentType = (Class<?>) type;
+    }
+    return componentType;
+}
+
+6.)通过反射机制获取注解信息
+以获取Method的注解信息为例
+try {
+    //首先需要获得与该方法对应的Method对象
+    Method method = c1.getDeclaredMethod("jumpToGoodsDetail", new Class[]{String.class, String.class});
+    Annotation[] annotations1 = method.getAnnotations();//获取所有的方法注解信息
+    Annotation annotation1 = method.getAnnotation(RouterUri.class);//获取指定的注解信息
+    TypeVariable[] typeVariables1 = method.getTypeParameters();
+    Annotation[][] parameterAnnotationsArray = method.getParameterAnnotations();//拿到所有参数注解信息
+    Class<?>[] parameterTypes = method.getParameterTypes();//获取所有参数class类型
+    Type[] genericParameterTypes = method.getGenericParameterTypes();//获取所有参数的type类型
+    Class<?> returnType = method.getReturnType();//获取方法的返回类型
+    int modifiers = method.getModifiers();//获取方法的访问权限
+} catch (NoSuchMethodException e) {
+    e.printStackTrace();
+}
+
+
+c1.getName();                                       //返回类名，包含包名
+Method[] ms1        = c1.getMethids();              //返回类中所有public方法
+Method[] ms2        = c1.getDeclaredMethids();      //返回类中自己申明的方法
+ms1[i].getName();                                   //返回方法名
+Class[] paramTypes  = ms1[i].getParameterType();    //返回参数列表类类型
+Class[] returnTypes = ms1[i].getReturnType();       //返回返回值类类型
+Field[] fs          = c1.getFields();               //获取public成员变量的类类型，自定义变量同上
+Constructor[] cs    = c1.getDeclaredConstructors(); //获取自定义构造器类类型
+c1.get...();                                        //可以还得到类的访问权限，接口，包名，父类等等
+

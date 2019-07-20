@@ -1,0 +1,289 @@
+Linux 文本处理
+
+
+主要用到的命令：
+find/grep/xargs/sort/uniq/tr/cut/paste/wc/sed/awk
+
+1.find 文件(夹)查找
+
+命令格式
+find [path1 path2 ...] [option1 value1] [option2 value2] ... [operation]
+[path]         #与Linux对路径的定义一致。.表示当前路径(path省略默认为当前路径)，~表示用户根目录，/表示系统根目录
+[option value] #匹配选项及值，绝大部分成对出现，取结果交集。
+               #如：-type d 表示查找所有文件夹，选项前加上 ！ 表示不匹配
+               #选择性强的放前面可提高查询效率，例如 -depth/mindepth/maxdepth			   
+[operation]    #对于查找结果的操作，常用操作如下：
+               #-print： 将匹配结果输出到标准输出，一般可不加。标shell脚本建议加上。
+			   #-print0：同上，但不换行。
+               #-exec：  用于下一步的命令执行。形式为 "command {} \;" 
+               #         如：find . -type f -exec rm -rf {} \; 表示删除所有文件。{}表示每条查找结果
+               #-ok：    同上，不同在于会让用户确认是否执行每个命令
+               #         find . -type f|xargs rm -rf  可实现同-exec功能
+			   #-delete: 删除文件或文件夹
+			   #         如：find . -type f -delete 删除所有文件
+
+常用option(选项)
+-name filename           #名称
+-iname filename          #忽略大小写
+-perm 755                #权限
+-user username           #所属者
+-group groupname         #按组来查找
+-empty                   #空文件或文件夹
+-mtime -n                #n天内(包含n)修改的。-n表n天内，+n表n天前
+-atime -n                #访问时间
+-ctime -n                #创建时间
+-amin -n                 #n分钟
+-nogroup                 #即文件的属组在/etc/groups中不存在
+-nouser                  #查无有效属主的文件，即文件的属主在/etc/passwd中不存 
+-nogroup                 #查无有效属组的文件，即文件的属组在/etc/groups中不存在
+-nouser                  #查无有效属主的文件，即文件的属主在/etc/passwd中不存
+-newer f1 !f2            #查更改时间比f1新但比f2旧的文件
+-type b/d/c/p/l/f        #文件类型。块设备、目录、字符设备、管道、符号链接、普通文件
+-size n[cwbkMG]          #大小为n字节/字/块(一般为512bit)///////的文件
+-depth/mindepth/maxdepth #使查找在进入子目录前先行查找完本目录
+-fstype                  #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
+-mount                   #查文件时不跨越文件系统mount点
+-follow                  #如果遇到符号链接文件，就跟踪链接所指的文件
+-cpio                    #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
+-prune                   #忽略某个目录
+
+实例 
+find . -name   "*.txt" -print                       #.txt结尾的文件，双引号可不加
+find . ! -name "*.txt" -print                       #查找所有非 .txt 结尾文件
+find . -name   "[A-Z]*" -print                      #查以大写字母开头的文件
+find . -name   "host*" -print                       #查以host开头的文件
+find . -name "[a-z][a-z][0–9][0–9].txt" -print      #查以两个小写字母和两个数字开头的txt文件     
+find . -name "*.txt" -o -name "*.pdf"  -print       #查找txt或pdf文件，-o表示或
+find . -regex  ".*\(\.txt|\.pdf\)$" -print          #同上。-iregex:忽略大小写
+find . -name 'xa*'|grep -v xaa|xargs rm -rf         #删除当前目录下所有除了xaa的xa*文件
+find . -perm 755 exec ls -ltr {} \;                 #显示所有
+find . -size +512k                                  #大于512k的文件 
+
+2、grep 文本搜索
+
+命令格式
+grep [option] [match_patten] [文件]       #匹配文本所在行
+
+option
+-E     #开启扩展的正则
+-o     #只输出匹配的文本行
+-v     #只输出没有匹配的文本行
+-c     #统计出现次数
+-n     #打印匹配的行号
+-i     #搜索时忽略大小写
+-l     #只打印文件名
+-R     #递归查找
+-w     #只匹配单词
+-A  n  #显示匹配到的字符串所在的行及其后n行
+-B  n  #显示匹配到的字符串所在的行及其前n行
+-C  n  #显示匹配到的字符串所在的行及其前后各n行
+
+基本正则表达式
+
+匹配字符：
+.                    #任意一个字符。
+[abc]                #表示匹配一个字符，这个字符必须是abc中的一个。
+[a-zA-Z]             #表示匹配一个字符，这个字符必须是a-z或A-Z这52个字母中的一个。
+[^123]               #匹配一个字符，这个字符是除了1、2、3以外的所有字符。
+[A-Za-z]             #等价于 [[:alpha:]]
+[0-9]                #等价于 [[:digit:]]
+[A-Za-z0-9]          #等价于 [[:alnum:]]
+tab,space 等空白字符 #等价于 [[:space:]]
+[A-Z]                #等价于 [[:upper:]]
+[a-z]                #等价于 [[:lower:]]
+标点符号             #等价于 [[:punct:]]
+
+匹配次数：
+\{m,n\} #匹配其前面出现的字符至少m次，至多n次。
+\?      #匹配其前面出现的内容0次或1次，等价于\{0,1\}。
+*       #匹配其前面出现的内容任意次，等价于\{0,\}，所以 ".*" 表述任意字符任意次，即无论什么内容全部匹配。
+
+位置锚定：
+^       #锚定行首
+$       #锚定行尾。技巧："^$"用于匹配空白行。
+\b或\<  #锚定单词的词首。如"\blike"不会匹配alike，但是会匹配liker
+\b或\>  #锚定单词的词尾。如"\blike\b"不会匹配alike和liker，只会匹配like
+\B      #与\b作用相反。
+
+grep match_patten path -R -n   #在多级目录中对文本递归搜索
+
+3、xargs 命令行参数转换
+xargs 能够将输入数据转化为特定命令的命令行参数；这样，可以配合很多命令来组合使用。比如grep，比如find；
+
+cat file.txt| xargs         #将多行输出转化为单行输出
+cat single.txt | xargs -n 3 #原文件每三行作为一行显示
+
+xargs参数
+-d 定义定界符 （默认为空格 多行的定界符为 \n）
+-n 指定输出为多行
+
+4、sort 排序
+字段说明：
+-n    #按数字进行排序
+-d    #按字典序进行排序
+-r    #逆序排序
+-k N  #指定按第N列排序
+-b    #忽略像空格之类的前导空白字符
+
+sort -nrk 1 data.txt
+sort -bd data
+
+5、uniq 消除相邻重复行，不改变原文件
+sort unsort.txt | uniq     #排序并去除重复行
+sort unsort.txt | uniq -c  #统计各行在文件中出现的次数
+sort unsort.txt | uniq -d  #找出重复行
+
+6、用tr进行转换，不改变原文件
+echo 12345 | tr '0-9' '9876543210'  #按规则替换字符。结果为87654
+cat text | tr '\t' ' '              #制表符替换为空格
+cat file | tr -d '0-9'              #删除所有数字
+cat file | tr -d -c '0-9\n'         #删除非数字数据，默认不换行，加上 \n
+cat file | tr -s ' '                #去除重复空格
+
+字符类
+tr中可用各种字符类(class)：
+alnum：字母和数字
+alpha：字母
+digit：数字
+space：空白字符
+lower：小写
+upper：大写
+cntrl：控制（非可打印）字符
+print：可打印字符
+使用方法：tr [:class:] [:class:]
+
+eg: tr '[:lower:]' '[:upper:]'
+
+7、cut 按列切分文本
+cut -f2,4 filename             # 截取文件的第2列和第4列,
+cut -f3 --complement filename  #去文件除第3列的所有列
+cut -f2 -d";" filename         
+cut 取的范围
+N   #第N个
+N-  #第N个字段到结尾 
+-M  #第1个字段为M，等价于 1-M
+N-M #N到M个字段,[N,M]
+
+cut 取的单位
+-b 以字节为单位
+-c 以字符为单位
+-f 以字段为单位（使用定界符）
+
+eg:
+cut -c1-5 file //打印第一到5个字符
+cut -c-2 file  //打印前2个字符
+   
+8、paste 按列拼接文本
+paste file1 file2         #列模式拼接
+paste file1 file2 -d ","  #默认的定界符是制表符，可以用-d指明分隔符
+
+9、wc 统计行和字符的工具
+wc -l/w/c file #统计行数/单词数/字符数
+
+10、sed 文本替换利器
+sed 's/text/replace_text/' file      #替换每一行的第一处匹配的text，''可换为""，区别在于""会对表达式求值
+sed 's/text/replace_text/g' file     #全局替换
+sed -i 's/text/repalce_text/g' file  #全局替换并替换原文件
+sed '/^$/d' file                     #替换空行，会修改原文件
+sed 's/ //g' file                    #替换所有空格
+
+11、awk 数据流处理工具，逐行处理
+awk脚本结构
+awk ' BEGIN{ statements } statements2 END{ statements } '
+
+工作方式
+1.执行begin中语句块；
+2.从文件或stdin中读入一行，然后执行statements2，重复这个过程，直到文件全部被读取完毕；
+3.执行end语句块；
+
+print 打印当前行
+echo -e "line1\nline2" | awk 'BEGIN{print "start"} {print } END{ print "End" }' 
+
+特殊变量： NR NF $0 $1 $2
+NR  #数据流行号
+NF  #数据流字段数
+$0  #数据流本身
+$n  #处理后第n个字段，n > 0
+
+
+awk -F: '{print $NF}' /etc/passwd                                         #使用-F来设置定界符（默认为空格）
+echo -e "line1 f2 f3\n line2 \n line 3" | awk '{print NR":"$0"-"$1"-"$2}' #打印每一行的第二和第三个字段
+awk ' END {print NR}' file #统计文件的行数
+#累加每一行的第一个字段：
+echo -e "1\n 2\n 3\n 4\n" | awk 'BEGIN{num = 0 ;print "begin";} {sum += $1;} END {print "=="; print sum }'
+#传递外部变量
+var=1000
+echo | awk '{print vara}' vara=$var #  输入来自stdinawk '{print vara}' vara=$var file # 输入来自文件
+用样式对awk处理的行进行过滤
+awk 'NR < 5'                   #行号小于5
+awk 'NR==1,NR==4 {print}' file #行号等于1和4的打印出来
+awk '/linux/'                  #包含linux文本的行（可以用正则表达式来指定，超级强大）
+awk '!/linux/'                 #不包含linux文本的行
+
+读取命令输出
+使用getline，将外部shell命令的输出读入到变量cmdout中；
+
+echo | awk '{"grep root /etc/passwd" | getline cmdout; print cmdout }' 
+在awk中使用循环
+for(i=0;i<10;i++){print $i;}
+for(i in array){print array[i];}
+
+eg:
+以逆序的形式打印行：(tac命令的实现）
+
+seq 9| \
+awk '{lifo[NR] = $0; lno=NR} \
+END{ for(;lno>-1;lno--){print lifo[lno];}
+} '
+awk实现head、tail命令
+head:
+
+awk 'NR<=10{print}' filename
+tail:
+
+awk '{buffer[NR%10] = $0;} END{for(i=0;i<11;i++){ \
+  print buffer[i %10]} } ' filename
+打印指定列
+awk方式实现：
+
+ls -lrt | awk '{print $6}'
+cut方式实现
+
+ls -lrt | cut -f6
+打印指定文本区域
+确定行号
+
+seq 100| awk 'NR==4,NR==6{print}'
+确定文本
+打印处于start_pattern 和end_pattern之间的文本；
+
+awk '/start_pattern/, /end_pattern/' filename
+eg:
+
+seq 100 | awk '/13/,/15/'cat /etc/passwd| awk '/mai.*mail/,/news.*news/'
+awk常用内建函数
+index(string,search_string):返回search_string在string中出现的位置
+sub(regex,replacement_str,string):将正则匹配到的第一处内容替换为replacement_str;
+match(regex,string):检查正则表达式是否能够匹配字符串；
+length(string)：返回字符串长度
+
+echo | awk '{"grep root /etc/passwd" | getline cmdout; print length(cmdout) }' 
+printf 类似c语言中的printf，对输出进行格式化
+eg：
+
+seq 10 | awk '{printf "->%4s\n", $1}'
+12、迭代文件中的行、单词和字符
+1. 迭代文件中的每一行
+while 循环法
+
+while read line;doecho $line;done < file.txt改成子shell:cat file.txt | (while read line;do echo $line;done)
+awk法：
+cat file.txt| awk '{print}'
+
+2.迭代一行中的每一个单词
+for word in $line;do echo $word;done
+3. 迭代每一个字符
+${string:start_pos:num_of_chars}：从字符串中提取一个字符；(bash文本切片）
+${#word}:返回变量word的长度
+
+for((i=0;i<${#word};i++))doecho ${word:i:1);done

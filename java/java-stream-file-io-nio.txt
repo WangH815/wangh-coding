@@ -1,0 +1,678 @@
+Java Stream && File && IO && NIO
+
+
+Stream/File/IO
+
+核心包
+java.io.*
+1.几乎包含了所有操作输入、输出需要的类。所有这些流类代表了输入源和输出目标。
+2.流支持很多种格式，比如：基本类型、对象、本地化字符集等等。
+3.一个流可以理解为一个数据的序列。输入流(读取流)表示从一个源读取数据，输出流(写入流)表示向一个目标写数据。
+4.主要用于文件传输和网络编程中。
+
+
+控制台读取
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));  //输入缓冲
+char ch = (char) br.read();   //读取控制台字符
+String str = br.readLine();   //读取控制台字符串
+System.out.write(ch);         //输出流，常用println()
+
+
+IO流
+分类
+1.字节流           //不带编码
+  输入流(读取流)   //名称以 InputStream 结尾
+  输出流(写入流)   //名称以 OutStream 结尾; PrintStream除外,System.out就是打印流的引用，最常用的方法为print()和println()
+2.字符流           //带编码
+  输入流(读取流)   //名称以 Reader 结尾
+  输出流(写入流)   //名称以 Writer 结尾
+
+  
+基础类
+输入流
+InputStream  
+
+主要方法
+方法	                                	  方法描述
+read()								 	  读取一个字节并将读取的字节作为int返回。当到达输入流的结尾时，它返回-1。
+read(byte[] buffer)						  读取最大值直到指定缓冲区的长度。它返回在缓冲区中读取的字节数。如果到达输入流的结尾，则返回-1。
+read(byte[] buffer,int offset, int length)  读取最大值到指定长度字节。数据从偏移索引开始写入缓冲区。它返回读取的字节数，如果到达输入流的结束它返回-1。
+close()									  关闭输入流
+available()	  							  返回可以从此输入流读取但不阻塞的估计字节数。
+
+
+管道(pipe)
+作用
+连接输入流和输出流。用于将数据从一个线程传输到另一个线程。两个线程之间的同步由阻塞读和写来处理。
+
+管道I/O基于生产者连接输入流和输出流。
+管道I/O基于生产者 - 消费者模式，其中生产者产生数据，而消费者消费数据。
+在管道I/O中，创建两个流代表管道的两端。 PipedOutputStream对象表示流的一端，PipedInputStream对象则表示流的另一端。
+使用两个对象的connect()方法连接两端
+
+创建方法
+方案一
+PipedInputStream pis  = new PipedInputStream(); 
+PipedOutputStream pos  = new PipedOutputStream(); 
+pis.connect(pos);                                         //通过输入流 connect() 方法连接
+pis.read();                                               //读取数据
+pos.write();                                              //写入数据
+方案二                                                    
+PipedInputStream pis  = new PipedInputStream();           
+PipedOutputStream pos  = new PipedOutputStream(pis);      //输出流通过输入流初始化而达到管道连接目的
+
+PipedInputStream pis  = new PipedInputStream(pos, 2048);  //设置2048字节缓冲区。待修正
+
+ 
+常用流
+
+FileInputStream   //文件字节输入流(读取流)
+
+InputStream f = new FileInputStream(String filePath);              //初始化1
+InputStream out = new FileInputStream(new File(String filePath));  //初始化2
+
+FileInputStream常用方法
+1.public void close()        //关闭此文件输入流并释放与此流有关的所有系统资源
+2.protected void finalize()  //这个方法清除与该文件的连接。确保在不再引用文件输入流时调用其 close 方法
+3.public int read(int r)     //这个方法从 InputStream 对象读取指定字节的数据。返回为整数值。返回下一字节数据，如果已经到结尾则返回-1。
+4.public int read(byte[] r)  //这个方法从输入流读取r.length长度的字节。返回读取的字节数。如果是文件结尾则返回-1。
+5.public int available()     //返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取的字节数。返回一个整数值。
+
+
+FileOutputStream  //文件字节输出流(写入流)
+
+OutputStream f = new FileOutputStream(String filePath);            //初始化1
+OutputStream f = new FileOutputStream(new File(String filePath));  //初始化2
+
+FileOutputStream常用方法
+1.public void close()          //关闭此文件输入流并释放与此流有关的所有系统资源。
+2.protected void finalize()    //这个方法清除与该文件的连接。确保在不再引用文件输入流时调用其 close 方法。
+3.public void write(int w)     //这个方法把指定的字节写到输出流中。
+4.public void write(byte[] w)  //把指定数组中w.length长度的字节写到OutputStream中。
+
+字节流中文乱码问题
+写入
+FileOutputStream fop = new FileOutputStream(new File(String filePath));  //创建字节写入流
+OutputStreamWriter osw = new OutputStreamWriter(fop, "UTF-8");  //创建字符写入流，并指定字符编码。默认为操作系统字符编码
+osw.append("中文输入");                                         //向缓冲追加数据
+osw.close();                                                    //关闭流，并将缓冲内容写入文件
+读取
+FileInputStream fip = new FileInputStream(new File(String filePath));  //创建字节读取流  
+InputStreamReader isr = new InputStreamReader(fip, "UTF-8");           //创建字符读取流，并指定编码
+StringBuffer sb = new StringBuffer();                                  //创建字符串缓冲
+while (isr.ready()) {                                                  //判断流是否准备好被读取
+    sb.append((char) isr.read());                                      //转成char追加到StringBuffer对象中
+}
+System.out.println(sb.toString());
+isr.close();
+
+
+对象序列化和反序列化
+  序列化：将对象写入到文件系统
+反序列化：从文件系统中读取对象
+
+对象必须实现序列化接口(Serializable,该接口为标记接口)或其子接口(如Externalizable,此接口方便控制从流中读取对象和向对象写入对象)
+
+序列化实例
+import java.io.Serializable;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+class Person implements Serializable {  //序列化类
+    private String name = "Unknown";
+    private String gender = "Unknown";
+    private double height = Double.NaN;
+    
+    public Person(String name, String gender, double height) {
+        this.name = name;
+        this.gender = gender;
+        this.height = height;
+    }
+    
+    @Override
+    public String toString() {
+        return "Name: " + this.name + ", Gender:   " + this.gender + ",  Height: " + this.height;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person p1 = new Person("John", "Male", 1.7);
+        Person p2 = new Person("Wally", "Male", 1.7);
+        Person p3 = new Person("Katrina", "Female", 1.4);
+        
+        File fileObject = new File("person.ser");  //指定序列化对象保存文件名
+        
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileObject))) {  //构造序列化对象            
+            oos.writeObject(p1);  //执行序列化，将对象写入文件系统
+            oos.writeObject(p2);
+            oos.writeObject(p3);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+反序列化实例
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
+public class Main {
+    public static void main(String[] args) {
+        File fileObject = new File("person.ser");  //反序列化文件
+        
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileObject))) {   //构造反序列化对象
+            Person p1 = (Person) ois.readObject();  //执行反序列化，读取文件中的对象
+            Person p2 = (Person) ois.readObject();
+            Person p3 = (Person) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+外部化对象序列化
+要序列化和反序列化可外部化对象，请实现Externalizable接口。
+实例
+import java.io.Externalizable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+
+class PersonExt implements Externalizable {  //外部化对象序列化
+    private String name = "Unknown";
+    private String gender = "Unknown";
+    private double height = Double.NaN;
+
+    public PersonExt() {
+    }
+
+    public PersonExt(String name, String gender, double height) {
+        this.name = name;
+        this.gender = gender;
+        this.height = height;
+    }
+
+    public String toString() {
+        return "Name: " + this.name + ", Gender:   " + this.gender + ",  Height: " + this.height;
+    }
+
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        this.name = in.readUTF();
+        this.gender = in.readUTF();
+    }
+
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeUTF(this.name);
+        out.writeUTF(this.gender);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        PersonExt p1 = new PersonExt("John", "Male", 6.7);
+        PersonExt p2 = new PersonExt("Wally", "Male", 5.7);
+        PersonExt p3 = new PersonExt("Katrina", "Female", 5.4);
+
+        File fileObject = new File("personext.ser");
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileObject))) {
+            oos.writeObject(p1);
+            oos.writeObject(p2);
+            oos.writeObject(p3);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+        fileObject = new File("personext.ser");
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileObject))) {
+
+            p1 = (PersonExt) ois.readObject();
+            p2 = (PersonExt) ois.readObject();
+            p3 = (PersonExt) ois.readObject();
+            System.out.println("Objects were  read   from  " + fileObject.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+文件和IO  //文件包括文件和文件夹
+
+涉及类
+File         //文件操作
+FileReader   //读
+FileWriter   //写
+
+File类
+构造器
+File(String pathName)              //绝对路径或相对路径
+File(File parent, String child)    //上级文件和文件名
+File(String parent, String child)  //上级路径和文件名
+File(URI uri)                      //统一资源标识符，一般指网络地址
+
+常见语句
+String dir = "C:\\dir1\\dir12\\dir13"; //设置目录(或文件),windows环境写法，其他环境参考官方API
+String dir = "C:/dir1/dir12/dir13";    //设置目录(或文件)的另一种方式
+File f = new File(dir);                //创建文件(或目录)对象
+boolean res = f.createNewFile();       //创建文件，非目录
+boolean res = f.createTempFile();      //创建临时文件，非目录
+boolean res = f.mkdir();               //创建目录，上级目录不存在不会创建
+boolean res = f.mkdirs();              //递归创建目录，类似于linux的mkdir -p
+boolean res = f.renameTo(newFileName); //文件名修改
+boolean res = f.exists();              //判断是文件或目录是否存在
+boolean res = f.isFile();              //判断是否为文件
+boolean res = f.isDirectory();         //判断是否为目录
+boolean res = f.delete();              //删除文件或者空文件夹，无法删除非空文件夹
+boolean res = f.isHidden();            //判断文件是否隐藏
+boolean res = f.setReadOnly();         //设置文件只读
+boolean res = f.setReadable();         //设置文件可读
+boolean res = f.setWritable();         //设置文件可写
+boolean res = f.setExecutable();       //设置文件可执行
+String str = f.getName();              //获取文件名或文件夹名
+String str = f.getPath();              //获取文件或者文件夹的路径
+String str = f.getAbsolutePath();      //获取文件或者文件夹的绝对路径
+String str = f.getParent();            //获取上级目录
+long lm = f.lastModified();            //获取文件最后修改时间
+Date d = new Date(lm);                 //格式化最后修改时间
+String workingDir = System.getProperty("user.dir");  //获取JVM工作路径，由属性 user.dir 确定 
+System.setProperty("user.dir", "C:\\myDir");         //设置JVM工作路径，等同于windows系统执行 java -Duser.dir=C:\test your-java-class
+
+long size = f.length();                    //返回文件(非目录)大小，以bytes(字节)计，文件不存在返回0
+long size = FileUtils.sizeOfDirectory(f);  //需要导入commons.io包，返回非空文件夹大小，以bytes(字节)计
+
+String[] dirLists = f.list();    //f是目录时，获取目录下所有文件(包括目录)字符串数组，不是递归
+File[] fs = f.listFiles();       //返回文件对象数组
+File[] roots = File.listRoots(); //返回可访问文件系统根目录文件对象数组
+
+//递归删除目录下所有文件及文件夹
+public static boolean deleteDir(File dir) {
+    if (dir.isDirectory()) {
+        String[] children = dir.list();
+        for (int i = 0; i < children.length; i++) {
+			//dir为相对路径或者绝对路径，children[i]为dir目录下的子目录或者文件
+            boolean success = deleteDir(new File(dir, children[i]));
+            if (!success) {
+                return false;
+            }
+        }
+    }
+    System.out.println("The directory is deleted.");
+    return dir.delete();
+}
+
+//获取指定目录下所有的子目录对象
+File dir = new File(String fileAbsolutePath); 
+FileFilter ff = new FileFilter() {  //文件过滤器对象
+    public boolean accept(File file) {
+        return file.isDirectory();
+    }
+};
+File[] fs = dir.listFiles(ff);
+
+
+============================================================================================================================
+
+NIO(Non-Blocking I/O)  //非阻塞I/O
+
+https://www.yiibai.com/java_nio
+
+NIO读写是I/O的基本过程。 
+通道读取：创建一个缓冲区，然后请求通道读取数据。
+通道写入：创建一个缓冲区，填充数据，并要求通道写入数据。
+读写操作中使用的核心部件有：Channels Buffers Selectors 
+
+常用通道(Channel)     //一般来说，一个通道对应一个实体(如文件等)
+DatagramChannel       //UDP
+SocketChannel         //TCP
+FileChannel           //File
+ServerSocketChannel   //Server
+
+常用缓冲(Buffer)
+CharBuffer
+DoubleBuffer
+IntBuffer
+LongBuffer
+ByteBuffer  //多数情况下的适用类型
+ShortBuffer
+FloatBuffer
+
+选择器(Selector)
+一般用于监视多个通道的对象，如数据到达，连接打开等
+如下可实现单线程通过选择器控制多个通道进行数据处理，提高IO效率
+				   --Channel 1
+Thread--Selector-----Channel 2
+				   --Channel 3
+
+
+NIO包
+
+包名称					使用/目的
+java.nio				它是NIO系统的顶级包，NIO系统封装了各种类型的缓冲区。
+java.nio.charset		它封装了字符集，并且还支持分别将字符转换为字节和字节到编码器和解码器的操作。
+java.nio.charset.spi	它支持字符集服务提供者
+java.nio.channels		它支持通道，这些通道本质上是打开I/O连接。
+java.nio.channels.spi	它支持频道的服务提供者
+java.nio.file			它提供对文件的支持
+java.nio.file.spi		它支持文件系统的服务提供者
+java.nio.file.attribute	它提供对文件属性的支持
+
+
+IO和NIO之间的主要区别
+IO					NIO
+基于阻塞I/O操作		基于非阻塞I/O操作
+面向流的			面向缓存的                  //流是单向的，只能读或者写;缓冲可以是双向的
+通道不可用			通道可用于非阻塞I/O操作
+选择器不可用		选择器可用于非阻塞I/O操作
+
+阻塞与非阻塞I/O
+1.阻塞IO等待数据写入或返回前的读取。Java IO的各种流是阻塞的。
+这意味着当线程调用write()或read()时，线程会被阻塞，直到有一些数据可用于读取或数据被完全写入。
+
+2.非阻塞I/O非阻塞IO不等待返回前读取或写入数据。 Java NIO非阻塞模式允许线程请求向通道写入数据，
+但不等待它被完全写入。允许线程继续进行，并做其他事情。
+
+
+常用通道的实现
+1.FileChannel：用于从文件读取数据。
+FileInputStream fis = new FileInputStream("D:\\file-read.txt"); 
+ReadableByteChannel rbc = fis.getChannel();  //文件读取通道
+
+2.DatagramChannel：通过UDP(用户数据报协议)通过网络读取和写入数据。它使用工厂方法来创建新对象。
+DatagramChannel ch = DatagramChannel.open();
+DatagramChannel ch = DatagramChannel.close();
+
+3.SocketChannel：通过TCP读取和写入数据。使用工厂方法来创建新对象。
+SocketChannel ch = SocketChannel.open();  
+ch.connect(new InetSocketAddress("somehost", someport));
+SocketChannel ch = SocketChannel.close();  
+
+4.ServerSocketChannel：允许用户监听传入的TCP连接，与Web服务器相同。
+  对于每个传入连接，都会为连接创建一个SocketChannel。
+ServerSocketChannel ch = ServerSocketChannel.open();  
+ch.socket().bind (new InetSocketAddress (somelocalport));  //绑定主机端口
+ServerSocketChannel ch = ServerSocketChannel.close();  
+
+
+缓冲常用方法
+ByteBuffer buf = ByteBuffer.allocate(28);  //创建字节缓冲，并指定缓冲区大小为28字节
+byte aByte = buf.get();                    //获取缓冲区内容，注意缓冲区大小与数据类型对应的关系
+int bytesWritten = inChannel.write(buf);   //将缓冲区内容写入通道
+
+buf.asIntBuffer().put(420);                  //int型数据写入到缓冲
+buf.asCharBuffer().put(data);                //Char型数据写入到缓冲
+int bInt = buf.asIntBuffer().get();          //从缓冲中获取int数据
+String str = buf.asCharBuffer().toString();  //从缓冲中获取Char数据并转为String
+
+buf.clear()   //清空缓冲
+buf.rewind()  //读写模式下都可用，简单的将指针置0
+buf.flip()    //写模式转换为读模式
+
+NIO之Buffer的clear()、rewind()、flip()方法的区别
+
+Java的NIO中有关Buffer的几种常用方法比如clear,rewind和flip到底有哪些区别。
+下面给大家这三种方法的源码，方便大家记忆。
+1.clear()方法
+用于写模式，其作用为情况Buffer中的内容，所谓清空是指写上限与Buffer的真实容量相同，即limit==capacity,
+同时将当前写位置置为最前端下标为0处。代码如下：
+
+public final Buffer clear() { 
+         position = 0; //设置当前下标为0
+         limit = capacity; //设置写越界位置与和Buffer容量相同
+         mark = -1; //取消标记
+         return this; 
+} 
+
+2.rewind()
+在读写模式下都可用，它单纯的将当前位置置0，同时取消mark标记，仅此而已；也就是说写模式下limit仍保持与
+Buffer容量相同，只是重头写而已；读模式下limit仍然与rewind()调用之前相同，也就是为flip()调用之前写模式
+下的position的最后位置，flip()调用后此位置变为了读模式的limit位置，即越界位置，代码如下：
+
+public final Buffer rewind() { 
+        position = 0; 
+        mark = -1; 
+        return this; 
+} 
+
+3.flip()函数的作用是将写模式转变为读模式，即将写模式下的Buffer中内容的最后位置变为读模式下的limit位置，
+作为读越界位置，同时将当前读位置置为0，表示转换后重头开始读，同时再消除写模式下的mark标记，代码如下
+public final Buffer flip() { 
+        limit = position; 
+        position = 0; 
+        mark = -1; 
+        return this; 
+ }  
+这三种模式下Buffer的capacity不变，其值一直为常量。
+
+
+Java NIO 学习(四)--ServerSocketChannel与SocketChannel
+https://blog.csdn.net/wenhuayuzhihui/article/details/51900204
+
+
+NIO分散/聚集或向量I/O
+基本原理：
+多个Buffer可读取单个Channel的数据  //分散读取
+单个Channel可读取多个Buffer的数据  //聚集写入
+
+分散读取
+public interface ScatteringByteChannel extends ReadableByteChannel {  
+    public long read (ByteBuffer [] argv) throws IOException;  
+    public long read (ByteBuffer [] argv, int length, int offset) throws IOException;  
+}
+ScatteringByteChannel sbc = new FileInputStream(String fileName).getChannel();  //分散通道
+
+
+聚集写入
+public interface GatheringByteChannel extends WritableByteChannel { 
+    public long write(ByteBuffer[] argv) throws IOException;  
+    public long write(ByteBuffer[] argv, int length, int offset) throws IOException;  
+}
+GatheringByteChannel sbc = new FileOutputStream(String fileName).getChannel();  //聚集通道
+
+
+通道间数据传输   //常用于文件的批量传输
+常用方法：
+FileChannel.transferTo()  //从FileChannel到其他通道的数据传输
+public abstract class Channel extends AbstractChannel  {    
+   public abstract long transferTo (long position, long count, WritableByteChannel target);  
+}
+
+JavaFileChannel.transferFrom()  //从源通道到FileChannel的数据传输
+public abstract class Channel extends AbstractChannel  {    
+    public abstract long transferFrom (ReadableByteChannel src, long position, long count);  
+}
+
+
+选择器(Selector)
+用于使用单个线程处理多个通道，提高IO效率。线程之间的切换对于操作系统来说是昂贵的。
+
+Selector selector = Selector.open();
+
+打开服务器套接字通道
+ServerSocketChannel serverSocket = ServerSocketChannel.open();  
+InetSocketAddress hostAddress = new InetSocketAddress("localhost", 8099);  
+serverSocket.bind(hostAddress);  //绑定主机端口
+
+使用选择器选择通道在使用选择器注册一个或多个通道时，可以调用select()方法之一。 
+该方法返回一个准备好进行要执行事件的通道，即：连接，读取，写入或接受。
+可用于选择通道的各种select()方法有：
+int select()          //返回的整数值通知有多少个通道准备好进行通信。
+int select(long TS)   //同上，参数为阻塞最大TS(毫秒)时间的输出。
+int selectNow()       //不阻止输出并立即返回任何准备好的通道。
+selectedKeys()  调用了任何一个select()方法后，它将返回一个值，表示一个或多个通道准备就绪，
+那么我们可以通过使用选择的键集合来访问就绪通道，通过调用选择器selectedkeys()方法如下：
+Set<SelectionKey> selectedKeys = selector.selectedKeys();
+Java可以迭代所选的键集合来访问准备好的信道，如下所示：
+Set<SelectionKey> selectedKeys = selector.selectedKeys();  
+Iterator<SelectionKey> keyIterator = selectedKeys.iterator();  
+while(keyIterator.hasNext()) {    
+    SelectionKey key = keyIterator.next();  
+    if(key.isConnectable()) {  
+        // The connection was established with a remote server.  
+    } else if (key.isAcceptable()) {  
+        // The connection was accepted by a ServerSocketChannel.  
+    } else if (key.isWritable()) {  
+        //  The channel is ready for writing  
+    } else if (key.isReadable()) {  
+        // The channel is ready for reading  
+    }  
+    keyIterator.remove();  
+}
+
+
+套接字通道(SocketChannel)
+用于将通道与TCP(传输控制协议)网络套接字连接
+
+创建SocketChannel的场景
+1.当传入连接到达ServerSocketChannel时，可以创建它。
+2.打开一个SocketChannel，并在网络上与服务器连接。
+
+常用语法
+SocketChannel sc = SocketChannel.open();               //打开套接字通道
+sc.connect(new InetSocketAddress("localhost", 9099));  //连接
+sc.close();                                            //关闭通道
+ByteBuffer bb = ByteBuffer.allocate(84);               //设置缓冲
+int bytesRead = sc.read(bb);                           //读取通道数据写入缓冲区
+
+写入通道
+String newData = "The new String is writing in a file ..." + System.currentTimeMillis();  //设置传输数据
+ByteBuffer bb= ByteBuffer.allocate(48);                                                   //设置缓冲
+bb.clear();                                                                               //清空缓冲
+bb.put(newData.getBytes());                                                               //将数据写入缓冲
+bb.flip();                                                                                //将缓冲由写模式转为读模式
+while(bb.hasRemaining()) {                                                                //判断缓冲中是否还有可读数据
+    SocketChannel.write(bb);                                                              //将缓冲中数据写入到通道
+}
+
+
+服务套接字通道(ServerSocketChannel)
+连接SocketChannel
+
+常用语法
+ServerSocketChannel ssc = ServerSocketChannel.open();    //打开服务套接字通道
+ssc.socket().bind(new InetSocketAddress(8085));          //绑定端口
+ssc.connect(new InetSocketAddress("localhost", 9099));   //同上
+while(true){                                             
+    SocketChannel sc = ssc.accept();                     //监听连接
+}                                                        
+ssc.close();                                             //关闭通道
+
+读写数据参照SocketChannel
+
+
+管道(pipe)
+用于在两个线程之间建立单向数据连接。它有一个槽通道和源通道。数据正在写入槽通道，然后可以从源通道读取该数据。
+
+工作原理
+Thread A --> Sink Channel --> Source Channel --> Thread B
+管道包含中间两个通道，管道用于确保数据必须以写入管道的相同顺序读取
+
+常用语法
+Pipe pp = Pipe.open();                    //创建或打开管道
+Pipe.SourceChannel sc= pipe.source();     //访问源通道
+ByteBuffer bb= ByteBuffer.allocate(512);  //设置缓冲
+int bytesRead = sc.read(bb);              //读取源通道数据写入缓冲区
+
+Sink通道写入
+String newData = "The new String is writing in a Pipe..." + System.currentTimeMillis();  
+Pipe.SinkChannel sc= pipe.sink();         //访问Sink通道
+ByteBuffer bb= ByteBuffer.allocate(512);
+bb.clear();  
+bb.put(newData.getBytes());  
+bb.flip();  
+while(bb.hasRemaining()) {  
+    sc.write(bb);   //写入Sink通道
+}
+
+
+NIO字符集
+
+常见Java字符集
+UTF-8       //8位UCS转换格式。
+US-ASCII    //7位ASCII字符。
+UTF-16LE    //16位UCS转换，小字节顺序。
+ISO-8859-1  //ISO拉丁字母UTF-16：16位UCS转换格式。
+UTF-16BE    //大字节顺序的16位UCS变换格式
+
+NIO常见方法
+Charset.displayName()  //返回规范名称的字符集。
+Charset.encode()       //用于将UNICODE字符集的charbuffer编码为给定字符集的CharBuffer。
+Charset.decode()       //中用于将给定字符集的字符串解码为Unicode字符集的CharBuffer。
+
+常用语法
+Charset cs = Charset.forName("UTF-8");
+System.out.println(cs.displayName());
+System.out.println(cs.canEncode());
+String st = "Welcome to yiibai.com, it is Charset test Example.";
+ByteBuffer bb = ByteBuffer.wrap(st.getBytes());
+CharBuffer cb = cs.decode(bb);             //解码 
+ByteBuffer newbytebuffer = cs.encode(cb);  //编码
+while (newbytebuffer.hasRemaining()) {
+    char ca = (char) newbytebuffer.get();
+    System.out.print(ca);
+}
+newbytebuffer.clear();
+
+
+NIO编码和解码
+CharsetEncoder和CharsetDecoder在ByteBuffer和CharBuffer之间的编码和解码中起着重要的作用
+
+Charset cs = Charset.forName("UTF-8");
+CharsetDecoder csdecoder = cs.newDecoder();
+CharsetEncoder csencoder = cs.newEncoder();
+String st = "Example of Encode and Decode in Java NIO.";
+ByteBuffer bb = ByteBuffer.wrap(st.getBytes());
+CharBuffer cb = csdecoder.decode(bb);
+ByteBuffer newbb = csencoder.encode(cb);
+while (newbb.hasRemaining()) {
+    char ca = (char) newbb.get();
+    System.out.print(ca);
+}
+newbb.clear();
+
+
+通道文件锁(Channel FileLock)
+FileLock锁定或尝试锁定文件的给定部分。它属于java.nio.channels包。FileLock用于在共享模式或非共享模式下锁定文件。
+它有两个重要的方法如下：
+FileLock.lock(long position, long size, boolean shared)
+FileLock.tryLock(long position, long size, boolean shared)
+
+实例
+String input = "end of the file.";                    //输入内容                 
+ByteBuffer buf = ByteBuffer.wrap(input.getBytes());   //将内容写入缓冲
+String fp = "testout-file.txt";                       //输出文件
+Path pt = Paths.get(fp);                              //输出文件路径
+//以追加写模式打开文件通道
+FileChannel fc = FileChannel.open(pt, StandardOpenOption.WRITE, StandardOpenOption.APPEND);  
+fc.position(fc.size() - 1);      //将通道指针指向文件结尾
+FileLock lock = fc.lock();       //锁定通道
+System.out.println("The Lock is shared: " + lock.isShared());  //判断文件是否是共享状态
+fc.write(buf);                   //将缓冲写入通道
+fc.close(); 
+PrintFile.print(fp);			 //打印文件
+
+public class PrintFile {
+    public static void print(String path) throws IOException {
+        FileReader filereader = new FileReader(path);                     //文件字符读取流
+        BufferedReader bufferedreader = new BufferedReader(filereader);   //读取缓冲
+        String tr = bufferedreader.readLine();                            //逐行读取
+        while (tr != null) {                                              //判断读取的行是否为空
+            System.out.println(tr);                                       //输出内容
+            tr = bufferedreader.readLine();                               //读取下一行
+        }
+        filereader.close();
+        bufferedreader.close();
+    }
+}
+
+============================================================================================================================
