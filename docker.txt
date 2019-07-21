@@ -78,14 +78,14 @@ docker run
 -v ${host folder path}:${container folder path}   //将主机目录挂在到容器内
 -d    //后台运行，守护式容器方式
 -i    //表示运行容器
--t    //表示容器启动后会进入其命令行，加入 -it，创建并登录进去。即分配一个伪终端。
+-t    // ，加入 -it，创建并登录进去。即分配一个伪终端。
 
 交互式容器
 docker run -it --name=mycentos7 centos:7 /bin/bash  
 exit 命令可退出当前容器，退出后容器停止
 
 守护式容器
-docker run -di --name=mycentos7 centos:7                         //创建容器
+docker run -di --name mycentos7 centos:7                         //创建容器
 docker exec -it ${CONTAINER NAME/ID} /bin/bash                   //进入/登录容器
 docker exec -it ${CONTAINER NAME/ID} ping ${CONTAINER NAME/ID}   //一个容器ping另外一个容器
 exit 退出容器后容器仍然在运行
