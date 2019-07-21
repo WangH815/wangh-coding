@@ -1,7 +1,7 @@
 Python3 
 
 
-标识符
+标识符规范
 1.由字母数字下划线构成，第一个字符不能是数字
 2.区分大小写
 3.Python3支持非ASCII字符
@@ -27,6 +27,7 @@ Python3
 
 
 多行语句
+单行字符建议不超过79
 sum = a + \        
       b + \
 	  c         #等价于 sum = a + b + c ,在[],{},()中无需使用 \
@@ -39,10 +40,10 @@ print(var_name,end="")   #不换行输出
 
 
 模块导入
-import somemodule                            #导入模块(somemodule) 
+import somemodule                            #导入模块(somemodule)
+from somemodule import *                     #同上
 from somemodule import somefunction          #从某个模块中导入某个函数
 from somemodule import firstfunc, secondfunc #从某个模块中导入多个函数 
-from somemodule import *                     #将某个模块中的全部函数导入 
 
 
 多变量赋值
@@ -357,11 +358,4 @@ os模块提供非常丰富的方法来处理文件和目录
 异常处理
 
 20
-
-
-
-
-
-
-
 
