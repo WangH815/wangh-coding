@@ -2,12 +2,16 @@ Python3
 
 
 标识符规范
-1.由字母数字下划线构成，第一个字符不能是数字
+1.由字母数字下划线构成，第一个字符不能是数字；长度不限制
 2.区分大小写
-3.Python3支持非ASCII字符
+3.Python3支持非ASCII字符，具体见unicodedata模块中的Unicode 字符数据库版本
 4.不能使用保留字，可通过标准库的keyword模块获取保留字
 >>>import keyword
 >>>keyword.kwlist
+
+
+字面量
+用于表示一些内置类型的常量
 
 
 注释
