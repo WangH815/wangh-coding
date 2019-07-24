@@ -79,7 +79,7 @@ http://www.runoob.com/linux/linux-user-manage.html
 
 #静态IP设置
 ##14.04     //默认网卡名称为eth0
-1.备份并修改 /etc/network/interfaces 文件，具体设置依据VMWare中虚拟网络设置
+1.备份并修改 /etc/network/interfaces 网卡配置文件，具体设置依据VMWare中虚拟网络设置
 auto eth0
 iface eth0 inet static
 address 192.168.88.120
@@ -88,9 +88,16 @@ netmask 255.255.255.0
 network 192.168.88.0
 broadcast 192.168.88.255
 
-2.重启网卡
-ifdown eth0 && ifup eht0
+2.设置DNS(域名服务器IP)
+nameserver 202.96.128.86  #国内
+nameserver 8.8.8.8        #谷歌
+
+3.重启网卡
+ifdown eth0 && ifup eht0  # 重启机器生效
 ifconfig eth0 down && ifconfig eth0 up
+
+##16.04
+
 
 ##18.04
 修改文件/etc/netplan/50-cloud-init.yaml
