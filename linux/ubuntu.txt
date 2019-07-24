@@ -77,7 +77,22 @@ http://www.runoob.com/linux/linux-user-manage.html
 2.修改文件/etc/ssh/sshd_config 配置项 PermitRootLogin yes
 
 
-修改静态IP
+#静态IP设置
+##14.04     //默认网卡名称为eth0
+1.备份并修改 /etc/network/interfaces 文件，具体设置依据VMWare中虚拟网络设置
+auto eth0
+iface eth0 inet static
+address 192.168.88.120
+gateway 192.168.88.2
+netmask 255.255.255.0
+network 192.168.88.0
+broadcast 192.168.88.255
+
+2.重启网卡
+ifdown eth0 && ifup eht0
+ifconfig eth0 down && ifconfig eth0 up
+
+##18.04
 修改文件/etc/netplan/50-cloud-init.yaml
 netplan apply  //生效netplan修改
 
