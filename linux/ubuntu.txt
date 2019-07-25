@@ -1,73 +1,5 @@
 Ubuntu 18.04
 
-shell脚本的运行方式
-1 . xx.sh        //一般用于生效用户配置而不需要重新登录shell，xx.sh有读权限即可
-2 source xx.sh   //同上。常见用于执行 profile 配置，脚本本身在当前进程中执行
-3 sh xx.sh       //读权限即可，脚本本身会在子进程中执行
-4 xx.sh          //需要执行权限，脚本本身会在子进程中执行
-
-shell命令类型
-1.内置命令
-shell解释器包含的命令，只有内置命令能改变shell命令行环境变量。
-在当前进程(一般是bash，跟随shell版本)中执行
-2.shell函数
-shell编写的函数，可引用
-3.外部命令
-独立的shell可执行命令，在子进程中执行(Linux内核调用fork实现)，不会改变父进程的环境变量
-
-
-#常用命令
-sudo passwd root                  //启用root用户
-passwd -u 用户名                  //修改指定用户密码
-man command                       //命令详细说明
-command -h/--help                 //命令简要帮助
-service systemd-networkd restart  //重启网络服务
-tzselect                          //修改时区
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  //创建时区软连接(root操作)
-su username        //切换用户，不加载用户环境变量，只切换用户权限;username缺省默认为root，下同
-su - username      //切换用户，加载用户环境变量，等同于用户登录
-sudo command       //以root用户执行某命令
-apt-get autoremove //清理未使用的软件包
-apt-get clean      //清理软件包
-netplan apply      //生效netplan修改
-cat                //逐行显示文件内容
-tac                //逐行反向显示文件内容
-nl                 //带行号的 cat
-more               //分页查看文件，一次性加载，空格/b 翻页
-less               //分页查看文件，逐步加载，空格/b PgUp/PgDn 翻页
-head/tail -n       //显示文件头尾n行内容
-tail -f filname    //循环读取某文件
-ps/watch/top       //查看程序运行命令
-free/vmstat/iostat/netstat  //内存/虚拟内存/系统IO/网络 监控
-lsof               //查看文件(普通文件/目录/网络文件等)打开情况
-at/crontab         //设置计划任务
-tar/gzip           //打包压缩解压命令
-chmod/chgrp/chown  //设置文件权限
-df/du              //磁盘文件空间大小
-which              //查看可执行文件的位置
-whereis            //查看文件的位置 
-locate             //配合数据库查看文件位置
-find               //实际搜寻硬盘查询文件名称
-ifconfig           //网络配置信息
-ping               //测试主机连通性
-traceroute         //到达指定主机网络路径
-ss                 //socket统计信息
-ln                 //创建软(-s)/硬链接
-cut -b/c/d filename  //按字节/字符/自定义分隔符切割文本
-sort               //文本排序
-sed -a/d/c/i       //文本增删改查
-split              //按照指定行数或字节数切割大文件
-wc -c/m/l          //按照字节/字符/行数统计文本
-write user [ttyname]  //向其他用户发送给信息(message)，ttyname可以使用who查询，Ctrl + c结束
-file                                 //辨识文件类型
-time [options] COMMAND [arguments]   //测量命令运行时间
-xargs [options] [command [options]]  //捕获命令输出作为其他命令标准输入
-command [options] | xargs [options]  //主要适用于不支持管道(|)的命令
-bc                                   //计算器模式，quit退出
-lscpu                                //显示cpu相关信息
-
-
-
 #批量增加用户
 http://www.runoob.com/linux/linux-user-manage.html
 
@@ -77,31 +9,50 @@ http://www.runoob.com/linux/linux-user-manage.html
 2.修改文件/etc/ssh/sshd_config 配置项 PermitRootLogin yes
 
 
-#静态IP设置     //VMWare Workstation 15 安装，网络使用net
-##14.04         //默认网卡名称为eth0
-1.备份并修改 /etc/network/interfaces 网卡配置文件，具体设置依据VMWare中虚拟网络设置
+#静态IP设置   //VMWare Workstation 15 安装，网络使用net
+##14.04       //默认网卡名称为eth0
+1.备份并修改网卡配置文件，具体设置依据VMWare中虚拟网络设置
+/etc/network/interfaces
 auto eth0
-iface eth0 inet static    #设置IP获取方式为静态
-address 192.168.88.120    #IP，可设置范围可在vmware虚拟网络编辑器中DHCP设置中查看
-gateway 192.168.88.2      #网关，可在vmware虚拟网络编辑器中NAT设置中查看
-netmask 255.255.255.0     #子网掩码，同上
-network 192.168.88.0      #子网，同上
-broadcast 192.168.88.255  #广播地址，子网的最后一位换成255
-
-2.设置DNS(域名服务器IP)
-nameserver 202.96.128.86  #国内
-nameserver 8.8.8.8        #谷歌
-
-3.重启网卡
-ifdown eth0 && ifup eht0  # 重启机器生效
-ifconfig eth0 down && ifconfig eth0 up
+iface eth0 inet static       #设置IP获取方式为静态
+address 192.168.88.120       #IP，可设置范围可在vmware虚拟网络编辑器中DHCP设置中查看
+gateway 192.168.88.2         #网关，可在vmware虚拟网络编辑器中NAT设置中查看
+netmask 255.255.255.0        #子网掩码，同上
+network 192.168.88.0         #子网，同上
+broadcast 192.168.88.255     #广播地址，子网的最后一位换成255
+dns-nameservers 192.168.88.2 #这里设置与网关一致
+2.重启网卡
+ifdown eth0 && ifup eth0
 
 ##16.04
-
+1.修改配置
+/etc/network/interfaces
+auto ens33
+iface ens33 inet static  
+address 192.168.99.150  
+gateway 192.168.99.2    
+netmask 255.255.255.0   
+network 192.168.99.0    
+broadcast 192.168.99.255
+dns-nameservers 192.168.99.2
+2.刷新网卡配置并重启网络
+ip addr flush ens33 && systemctl restart networking
 
 ##18.04
-修改文件/etc/netplan/50-cloud-init.yaml
-netplan apply  //生效netplan修改
+1.修改配置
+/etc/netplan/50-cloud-init.yaml
+network:
+version: 2
+renderer: networkd
+ethernets:
+ens33:     #配置的网卡名称  可以使用ip a查看本机的网卡
+dhcp4: no  #dhcp4 no关闭，yes 打开
+addresses: [192.168.1.142/24]  #设置本机IP及掩码
+gateway4: 192.168.1.1  #设置网关
+nameservers:
+addresses: [114.114.114.114, 8.8.8.8]  #设置DNS
+2.生效配置
+netplan apply
 
 
 包管理/软件安装

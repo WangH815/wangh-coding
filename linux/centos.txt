@@ -1,10 +1,5 @@
 CentOS 7
 
-#常用命令
-#打包解包压缩解压
-tar -zxvf xxx.tar.gz   //解包
-tar -jxvf xxx.tar.bz2  //同上
-
 #软件安装
 https://www.cnblogs.com/gmlkl/p/9354254.html
 yum [options] [command] [package ...]  //yum命令形式
@@ -95,11 +90,31 @@ vi /etc/sysconfig/network-scripts/ifcfg-eth0
 rm -f /etc/udev/rules.d/70-persistent-net.rules
 
 
-#静态IP设置
+#静态IP设置   //root用户操作
 
+##6.9  
+1.修改网卡配置文件 /etc/sysconfig/network-scripts/ifcfg-eth0
+  增加或修改以下内容，具体配置参考vmware虚拟网络配置
+  设置多个IP参见 https://blog.csdn.net/javastart/article/details/79868187
+BOOTPROTO=static         #静态IP，可以选择dhcp
+BROADCAST=192.168.99.255 #广播地址
+NETWORY=192.168.99.0     #网段
+IPADDR=192.168.99.110    #IP地址
+NETMASK=255.255.255.0    #子网掩码
+GATEWAY=192.168.99.2     #网关
+DNS=192.168.99.2         #DNS，这里设置与网关一致
+2.重启网络服务
+service network restart
 
-
-
-
-
-
+##7.6(1810)
+网络配置文件 /etc/sysconfig/network-scripts/ifcfg-eno1 
+DEVICE=物理设备名
+IPADDR=IP地址
+NETMASK=掩码值
+NETWORK=网络地址
+BROADCAST=广播地址
+GATEWAY=网关地址
+ONBOOT=[yes|no]（引导时是否激活设备）
+USERCTL=[yes|no]（非root用户是否可以控制该设备）
+BOOTPROTO=[none|static|bootp|dhcp]（引导时不使用协议|静态分配|BOOTP协议|DHCP协议）
+HWADDR = MAC地址
