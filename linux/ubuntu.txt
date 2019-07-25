@@ -45,12 +45,11 @@ network:
 version: 2
 renderer: networkd
 ethernets:
-ens33:     #配置的网卡名称  可以使用ip a查看本机的网卡
-dhcp4: no  #dhcp4 no关闭，yes 打开
-addresses: [192.168.1.142/24]  #设置本机IP及掩码
-gateway4: 192.168.1.1  #设置网关
+ens33:                             #配置的网卡名称  可以使用ip a查看本机的网卡
+addresses: [192.168.99.190/24]     #设置本机IP及掩码
+gateway4: 192.168.99.2             #设置网关
 nameservers:
-addresses: [114.114.114.114, 8.8.8.8]  #设置DNS
+addresses: [192.168.99.2]          #设置DNS
 2.生效配置
 netplan apply
 
