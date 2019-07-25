@@ -80,10 +80,7 @@ hostnamectl set-hostname "" --transient
 hostnamectl set-hostname "" --pretty    
 
 
-
-CentOS 6.9
-
-#vm复制无法获取ip处理
+#CentOS 6.9 vmware虚拟机复制无法获取ip处理
     原因：复制之后mac和uuid与原系统一致导致
 解决方案：删除 HWADDR 和 UUID 配置以及网卡相关信息文件后重启系统
 vi /etc/sysconfig/network-scripts/ifcfg-eth0
