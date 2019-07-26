@@ -94,24 +94,19 @@ rm -f /etc/udev/rules.d/70-persistent-net.rules
   增加或修改以下内容，具体配置参考vmware虚拟网络配置
   设置多个IP参见 https://blog.csdn.net/javastart/article/details/79868187
 BOOTPROTO=static         #静态IP，可以选择dhcp
-BROADCAST=192.168.99.255 #广播地址
-NETWORY=192.168.99.0     #网段
+BROADCAST=192.168.99.255 #广播地址，非必需项
+NETWORK=192.168.99.0     #网段，非必需项
 IPADDR=192.168.99.110    #IP地址
 NETMASK=255.255.255.0    #子网掩码
 GATEWAY=192.168.99.2     #网关
-DNS=192.168.99.2         #DNS，这里设置与网关一致
+DNS1=192.168.99.2         #DNS，这里设置与网关一致；多个可设置DNS1/DNS2等
 2.重启网络服务
 service network restart
 
 ##7.6(1810)
-网络配置文件 /etc/sysconfig/network-scripts/ifcfg-eno1 
-DEVICE=物理设备名
-IPADDR=IP地址
-NETMASK=掩码值
-NETWORK=网络地址
-BROADCAST=广播地址
-GATEWAY=网关地址
-ONBOOT=[yes|no]（引导时是否激活设备）
-USERCTL=[yes|no]（非root用户是否可以控制该设备）
-BOOTPROTO=[none|static|bootp|dhcp]（引导时不使用协议|静态分配|BOOTP协议|DHCP协议）
-HWADDR = MAC地址
+网络配置文件 /etc/sysconfig/network-scripts/ifcfg-ens33 
+配置值用双引号，如：IPADDR="192.168.99.110"
+重启网络推荐使用 systemctl restart network
+
+
+
