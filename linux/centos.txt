@@ -42,18 +42,14 @@ rpm -qi              //查看已安装软件包信息
 rpm:Redhat Package Manager
 yum:Yellow dog Updater, Modified。基于rpm的RHEL(含衍生版)的Shell前端软件包管理器。由RedHat官方提供。
 epel:Extra Packages for Enterprise Linux 。由 Fedora 社区打造，相当于第三方rpm库，软件版本较新。
-mkdir /etc/yum.repos.d.yyyymmdd                   //创建备份目录
-mv /etc/yum.repos.d/* /etc/yum.repos.d.yyyymmdd   //备份
-//下载阿里Base.repo
+1.备份
+mkdir /etc/yum.repos.d.yyyymmdd
+mv /etc/yum.repos.d/* /etc/yum.repos.d.yyyymmdd
+2.下载阿里Base.repo和epel，wget无法使用可用 curl -o
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-或
-curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-yum clean      //清空yum cache
-yum makecache  //生成cache
-//下载阿里epel
 wget -O /etc/yum.repos.d/epel-7.repo https://mirrors.aliyun.com/repo/epel-7.repo
-yum clean      //清空yum cache
-yum makecache  //生成cache
+3.生成cache
+yum makecache
 
 
 #主机名相关
@@ -99,7 +95,7 @@ NETWORK=192.168.99.0     #网段，非必需项
 IPADDR=192.168.99.110    #IP地址
 NETMASK=255.255.255.0    #子网掩码
 GATEWAY=192.168.99.2     #网关
-DNS1=192.168.99.2         #DNS，这里设置与网关一致；多个可设置DNS1/DNS2等
+DNS1=192.168.99.2        #DNS，这里设置与网关一致；多个可设置DNS1/DNS2等
 2.重启网络服务
 service network restart
 

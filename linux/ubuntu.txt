@@ -112,7 +112,7 @@ deb http://archive.ubuntu.com/ubuntu bionic-security main
 mysql -uroot -p                      //root用户登录mysql数据库
 mysql -u root -p                     //同上
 mysql -u root -p -h ip               //连接远程数据库
-show databases/tables;               //显示能查看的数据库或者表
+show databases/tables;               //显示能查看的数据库/表
 desc table                           //显示表字段信息
 show columns from tablename;         //同上
 show index from tablename;           //显示表索引
@@ -198,7 +198,7 @@ deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiv
 deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multivers
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
 
 #中科大源
 https://mirrors.ustc.edu.cn/ubuntu/  //IP部分修改为中科大的即可，其他源同理
@@ -224,7 +224,7 @@ export PATH=${PATH}:${JAVA_HOME}/bin:${JRE_HOME}/bin
 4.source /etc/profile  //生效配置，其他用户重启生效(推荐)或者配置 ~/.profile文件生效
 
 
-docker  //表意为码头工人。现指一种轻量级容器技术
+#docker  //表意为码头工人。现指一种轻量级容器技术
 简介
 Docker是一个轻量级容器技术，类似于虚拟机。一般运行在Linux系统中，实现了虚拟机技术的资源隔离，性能远远高于虚拟机技术。    
 Docker支持将软件编译成一个镜像（image），在这个镜像里做好对软件的各种配置，然后发布这个镜像，使用者可以运行这个镜像，
@@ -235,8 +235,8 @@ Docker支持将软件编译成一个镜像（image），在这个镜像里做好
 Ubuntu 18.04
 
 1.安装和卸载docker      //可暂时将阿里镜像源改为官方源
-apt install docker.ce   //社区版，docker.ee为企业版(主要加强安全)。docker.io等其他的为之前的老版本
-apt remove docker.ce    //卸载
+apt install docker.io   //社区版，docker.ee为企业版(主要加强安全)。docker.io等其他的为之前的老版本
+apt remove docker.io    //卸载
 docker -v/--version     //查看docker版本
 
 2.启动和关闭docker服务
@@ -251,6 +251,7 @@ usermod -aG docker wangh  //将用户wangh添加到docker用户组中
 
 4.镜像源
 vi /etc/docker/daemon.json  //没有则创建此文件，重启docker后生效
+service docker restart
 #设置为网易镜像源
 {
 
@@ -261,9 +262,7 @@ vi /etc/docker/daemon.json  //没有则创建此文件，重启docker后生效
 https://registry.docker-cn.com      //Docker官方中国区镜像源
 https://docker.mirrors.ustc.edu.cn  //中科大镜像源
 
-
 常用命令
-
 docker --help   //docker命令帮助
 
 镜像操作
@@ -342,8 +341,7 @@ docker run -di -v 宿主机目录:容器目录
 获取容器或镜像元数据(详细信息)
 docker inspect 容器名称/镜像名称
 
-
-Mysql部署
+Mysql5.7部署
 1.下载镜像
 docker pull mysql:5.7
 2.创建守护容器
@@ -354,8 +352,5 @@ docker run -di --name docker_mysql -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root mysq
 docker exec -it docker_mysql /bin/bash   //登录容器
 mysql -uroot -p                          //登录mysql
 echo 'port=3307' >>/etc/mysql/my.cnf
-
-
-
 
 
