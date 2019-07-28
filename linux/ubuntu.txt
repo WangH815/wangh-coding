@@ -351,6 +351,6 @@ docker run -di --name docker_mysql -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root mysq
 3.登录容器
 docker exec -it docker_mysql /bin/bash   //登录容器
 mysql -uroot -p                          //登录mysql
-echo 'port=3307' >>/etc/mysql/my.cnf
+
 
 
