@@ -82,7 +82,7 @@ drop tablespace tablespace_name [including contents]
 数值型：number(p,s)，p为有效位；s为小数点后位数
        float(n)
 日期型：date，-4712.01.01到9999.12.31，可精确到秒
-       timestamp，可精确到小数秒
+        timestamp，可精确到小数秒
 其他类型：blob，最大4G，二进制方式存放
         clob，最大4G，字符串方式存放
 
