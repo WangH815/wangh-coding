@@ -20,7 +20,7 @@
 
 
 #常用命令
-sudo passwd root                  //启用root用户
+sudo passwd root                  //ubuntu启用root用户
 passwd -u 用户名                  //修改指定用户密码
 man command                       //命令详细说明
 command -h/--help                 //命令简要帮助
