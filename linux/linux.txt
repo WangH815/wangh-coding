@@ -7,12 +7,16 @@
 
 #shell命令类型
 1.内置命令
-shell解释器包含的命令，只有内置命令能改变shell命令行环境变量。
-在当前进程(一般是bash，跟随shell版本)中执行
+  shell解释器包含的命令，只有内置命令能改变shell命令行环境变量。
+  在当前进程(一般是bash，跟随shell版本)中执行
+  内置命令可使用 compgen -b | column 显示     //column格式化显示
+  man command 会显示无相关使用手册，一般可通过 help command 或 command --help 获取帮助
+  which command  无法显示命令位置
+  常见内置命令 cd/help/pwd/export/set/alias/umask/kill/source/test等
 2.shell函数
-shell编写的函数，可引用
+  shell编写的函数，可引用
 3.外部命令
-独立的shell可执行命令，在子进程中执行(Linux内核调用fork实现)，不会改变父进程的环境变量
+  独立的shell可执行命令，在子进程中执行(Linux内核调用fork()函数实现)，不会改变父进程的环境变量
 
 
 #常用命令
