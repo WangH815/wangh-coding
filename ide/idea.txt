@@ -1,0 +1,9 @@
+Idea的常用操作
+
+# 快捷键
+Ctrl + Shift + F10      //执行代码
+Ctrl + Alt + L          //代码格式化
+
+
+sout       //快捷输出print()
+main       //快捷输出main()
