@@ -3,6 +3,8 @@ Idea的常用操作
 # 快捷键
 Ctrl + Shift + F10      //执行代码
 Ctrl + Alt + L          //代码格式化
+Ctrl + d                //复制光标所在行到下一行
+Alt + Insert            //新建文件
 
 
 sout       //快捷输出print()
