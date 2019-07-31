@@ -7,5 +7,5 @@ Ctrl + d                //复制光标所在行到下一行
 Alt + Insert            //新建文件
 
 
-sout       //快捷输出print()
-main       //快捷输出main()
+sout       //快捷输出print()，一般输入so就有提示
+main       //快捷输出main()，一般输入m就有提示
