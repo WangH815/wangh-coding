@@ -1,0 +1,76 @@
+hadoop
+
+#链接地址
+https://www.yiibai.com/hadoop    //易百教程
+
+
+#简介
+Hadoop是使用Java编写，允许分布在集群，使用简单的编程模型的计算机大型数据集处理的Apache的开源框架。 
+Hadoop框架应用工程提供跨计算机集群的分布式存储和计算的环境。 Hadoop是专为从单一服务器到上千台机器扩展，
+每个机器都可以提供本地计算和存储。
+Hadoop的架构主要有以下两个层次：
+1.HDFS(Hadoop分布式文件系统)，存储层
+2.MapReduce，加工/计算层
+
+
+#基础环境搭建
+使用Ubuntu Server 18.04
+1.创建hadoop用户
+adduser hadoop     //使用root用户操作，下同
+passwd hadoop      //设置用户密码
+
+2.安装jre1.8
+#开发机可安装jdk，生产机只需安装jre。这里安装Oracle jre1.8
+#这里安装版本为 jre-8u191-linux-x64.tar.gz 
+cd /usr/local
+mkdir java
+cd java
+tar xzf jre-8u191-linux-x64.tar.gz
+cp /etc/profile /etc/profile.yyyyMMdd
+vi /etc/profile  //修改配置文件，追加以下内容
+#java
+export JRE_HOME=/usr/local/java/jre1.8.0_191
+export PATH=${PATH}:${JRE_HOME}/bin
+
+source /etc/profile  //生效配置
+
+3.安装hadoop
+#使用hadoop用户在默认目录下操作
+wget http://apache.claz.org/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz   //这里选择3.2.0版本     
+tar xzf hadoop-3.2.0.tar.gz
+cp /etc/profile /etc/profile.yyyyMMdd
+vi /etc/profile   //修改配置文件，追加以下内容
+#hadoop
+export HADOOP_HOME=/home/hadoop/hadoop-3.2.0
+export PATH=${PATH}:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin
+export HADOOP_COMMON_HOME=${HADOOP_HOME} 
+export HADOOP_HDFS_HOME=${HADOOP_HOME} 
+export HADOOP_MAPRED_HOME=${HADOOP_HOME}
+export HADOOP_YARN_HOME=${HADOOP_HOME} 
+export HADOOP_INSTALL=${HADOOP_HOME} 
+export HADOOP_COMMON_LIB_NATIVE_DIR=${HADOOP_HOME}/lib/native 
+export HADOOP_CONF_DIR=${HADOOP_HOME} 
+export HADOOP_LIBEXEC_DIR=${HADOOP_HOME}/libexec 
+export JAVA_LIBRARY_PATH=${HADOOP_HOME}/lib/native:${JAVA_LIBRARY_PATH}
+export HADOOP_CONF_DIR=${HADOOP_PREFIX}/etc/hadoop
+export HDFS_DATANODE_USER=hadoop
+export HDFS_DATANODE_SECURE_USER=hadoop
+export HDFS_SECONDARYNAMENODE_USER=hadoop
+export HDFS_NAMENODE_USER=hadoop
+export YARN_RESOURCEMANAGER_USER=hadoop
+export YARN_NODEMANAGER_USER=hadoop
+
+source /etc/profile  //生效配置
+
+cd /usr/local/hadoop/hadoop-3.2.0/etc/hadoop
+cp hadoop-env.sh hadoop-env.sh.20190801
+vi hadoop-env.sh    //
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export HDFS_NAMENODE_USER=hadoop
+export HDFS_DATANODE_USER=hadoop
+export HDFS_SECONDARYNAMENODE_USER=hadoop
+export YARN_RESOURCEMANAGER_USER=hadoop
+export YARN_NODEMANAGER_USER=hadoop
+
+
+
