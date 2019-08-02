@@ -26,9 +26,10 @@ passwd hadoop      //设置用户密码
 cd /usr/local
 mkdir java
 cd java
-tar xzf jre-8u191-linux-x64.tar.gz
-cp /etc/profile /etc/profile.20190801
-vi /etc/profile  //修改配置文件，追加以下内容
+tar xzf jdk-8u191-linux-x64.tar.gz      //解压，版本可在Oracle官网下载
+chown -R root:root jdk1.8.0_191         //更改属组。更改前可使用ll命令查看
+cp /etc/profile /etc/profile.$(date '+%Y%m%d%H%M%S')   //备份配置文件
+vi /etc/profile                         //修改配置文件，追加以下内容
 #java
 export JAVA_HOME=/usr/local/java/jdk1.8.0_191
 export JRE_HOME=${JAVA_HOME}/jre    
@@ -39,10 +40,10 @@ source /etc/profile  //生效配置
 
 3.安装hadoop
 #使用hadoop用户在默认目录下操作
-wget http://apache.claz.org/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz   //这里选择3.2.0版本     
-tar xzf hadoop-3.2.0.tar.gz
-cp /etc/profile /etc/profile.yyyyMMdd
-vi /etc/profile   //修改配置文件，追加以下内容
+wget http://apache.claz.org/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz   //下载hadoop，这里选择3.2.0版本     
+tar xzf hadoop-3.2.0.tar.gz                            //解压
+cp /etc/profile /etc/profile.$(date '+%Y%m%d%H%M%S')   //备份备份配置文件
+vi /etc/profile                                        //修改配置文件，追加以下内容
 #hadoop
 export HADOOP_HOME=/home/hadoop/hadoop-3.2.0
 export PATH=${PATH}:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin
@@ -55,7 +56,7 @@ export HADOOP_COMMON_LIB_NATIVE_DIR=${HADOOP_HOME}/lib/native
 export HADOOP_CONF_DIR=${HADOOP_HOME} 
 export HADOOP_LIBEXEC_DIR=${HADOOP_HOME}/libexec 
 export JAVA_LIBRARY_PATH=${HADOOP_HOME}/lib/native:${JAVA_LIBRARY_PATH}
-export HADOOP_CONF_DIR=${HADOOP_PREFIX}/etc/hadoop
+export HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
 export HDFS_DATANODE_USER=hadoop
 export HDFS_DATANODE_SECURE_USER=hadoop
 export HDFS_SECONDARYNAMENODE_USER=hadoop
@@ -66,7 +67,7 @@ export YARN_NODEMANAGER_USER=hadoop
 source /etc/profile  //生效配置
 
 cd /home/hadoop/hadoop-3.2.0/etc/hadoop
-cp hadoop-env.sh hadoop-env.sh.20190801
+cp hadoop-env.sh hadoop-env.sh.$(date '+%Y%m%d%H%M%S')
 vi hadoop-env.sh    //修改hadoop环境变量，追加以下内容
 export JDK_HOME=/usr/local/java/jDK1.8.0_191
 export HDFS_NAMENODE_USER=hadoop
@@ -76,16 +77,32 @@ export YARN_RESOURCEMANAGER_USER=hadoop
 export YARN_NODEMANAGER_USER=hadoop
 
 cd /home/hadoop/hadoop-3.2.0/etc/hadoop
-cp core-site.xml core-site.xml.20190802
+cp core-site.xml core-site.xml.$(date '+%Y%m%d%H%M%S')
+vi core-site.xml  //修改以下配置
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+</configuration>
 
-cd /home/hadoop/hadoop-3.2.0/etc/hadoop
-cp hdfs-site.xml hdfs-site.xml.20190802
+cp hdfs-site.xml hdfs-site.xml.$(date '+%Y%m%d%H%M%S')
+vi hdfs-site.xml
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+</configuration>
 
-cd /home/hadoop/hadoop-3.2.0/etc/hadoop
-cp mapred-site.xml mapred-site.xml.20190802
+#设置免密登陆
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 0600 ~/.ssh/authorized_keys
 
-cd /home/hadoop/hadoop-3.2.0/etc/hadoop
-cp yarn-site.xml yarn-site.xml.20190802
+cp mapred-site.xml mapred-site.xml.$(date '+%Y%m%d%H%M%S')
+
+cp yarn-site.xml yarn-site.xml.$(date '+%Y%m%d%H%M%S')
 
 
 

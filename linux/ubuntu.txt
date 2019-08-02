@@ -212,7 +212,7 @@ https://mirrors.tuna.tsinghua.edu.cn/ubuntu/
 注：更改源之后需要执行apt-get update/apt update命令更新软件列表(索引)
 
 
-jdk环境安装  //root用户操作
+#jdk环境安装  //root用户操作
 1.apt remove openjdk*  //卸载openjdk
 2.下载oracle jdk并解压文件
 3.编辑 /etc/profile 文件，追加以下内容
@@ -221,7 +221,10 @@ export JAVA_HOME=/jdkpath  //如: JAVA_HOME=/etc/java8/jdk1.8.0_191
 export JRE_HOME=/jrepath   //如: JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export PATH=${PATH}:${JAVA_HOME}/bin:${JRE_HOME}/bin
-4.source /etc/profile  //生效配置，其他用户重启生效(推荐)或者配置 ~/.profile文件生效
+4.source /etc/profile      //生效配置
 
 
+#修改时区
+tzselect                                                 //选择北京时间
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  //设置软连接，非root用户命令前加sudo
 
