@@ -1,0 +1,25 @@
+https://www.cnblogs.com/huacw/p/3888807.html
+
+windows oracle 11g备份方案
+备注：//表示备注
+
+1.打开cmd命令窗口
+win + r 输入 cmd 回车
+
+2.sqlplus登录数据库，使用管理员
+sqlplus system/123456@orcl   //sysytem为用户，123456为密码，orcl为实例名
+
+3.在创建oracle的备份目录：
+//windows我的电脑里操作
+新建备份目录 D:\temp\dmp
+//sqlplus中操作,databak为备份目录别称，单引号里为实际备份目录
+//可使用select * from dba_directories; 查看是否有重名的目录                                  
+create directory databak as 'D:\temp\dmp';
+
+4.给待备份用户设置备份目录的读写权限
+//sqlplus中使用管理员用户操作，这里scott是待备份用户
+grant read,write on directory databak to scott;
+
+5.备份实例数据
+//在cmd命令窗口中操作，需要备份日志使用logfile
+expdp scott/123456@orcl dumpfile=expdp.dmp directory=databak schemas=scott;

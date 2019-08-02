@@ -1,7 +1,8 @@
 hadoop
 
 #链接地址
-https://www.yiibai.com/hadoop    //易百教程
+https://www.yiibai.com/hadoop                      //易百教程
+https://hadoop.apache.org/docs/r3.2.0/index.html   //官方
 
 
 #简介
@@ -19,18 +20,20 @@ Hadoop的架构主要有以下两个层次：
 adduser hadoop     //使用root用户操作，下同
 passwd hadoop      //设置用户密码
 
-2.安装jre1.8
-#开发机可安装jdk，生产机只需安装jre。这里安装Oracle jre1.8
+2.安装jre
+#这里使用root用户安装Oracle jre1.8.0_191
 #这里安装版本为 jre-8u191-linux-x64.tar.gz 
 cd /usr/local
 mkdir java
 cd java
 tar xzf jre-8u191-linux-x64.tar.gz
-cp /etc/profile /etc/profile.yyyyMMdd
+cp /etc/profile /etc/profile.20190801
 vi /etc/profile  //修改配置文件，追加以下内容
 #java
-export JRE_HOME=/usr/local/java/jre1.8.0_191
-export PATH=${PATH}:${JRE_HOME}/bin
+export JAVA_HOME=/usr/local/java/jdk1.8.0_191
+export JRE_HOME=${JAVA_HOME}/jre    
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib    
+export PATH=${JAVA_HOME}/bin:${PATH}
 
 source /etc/profile  //生效配置
 
@@ -62,15 +65,27 @@ export YARN_NODEMANAGER_USER=hadoop
 
 source /etc/profile  //生效配置
 
-cd /usr/local/hadoop/hadoop-3.2.0/etc/hadoop
+cd /home/hadoop/hadoop-3.2.0/etc/hadoop
 cp hadoop-env.sh hadoop-env.sh.20190801
-vi hadoop-env.sh    //
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+vi hadoop-env.sh    //修改hadoop环境变量，追加以下内容
+export JDK_HOME=/usr/local/java/jDK1.8.0_191
 export HDFS_NAMENODE_USER=hadoop
 export HDFS_DATANODE_USER=hadoop
 export HDFS_SECONDARYNAMENODE_USER=hadoop
 export YARN_RESOURCEMANAGER_USER=hadoop
 export YARN_NODEMANAGER_USER=hadoop
+
+cd /home/hadoop/hadoop-3.2.0/etc/hadoop
+cp core-site.xml core-site.xml.20190802
+
+cd /home/hadoop/hadoop-3.2.0/etc/hadoop
+cp hdfs-site.xml hdfs-site.xml.20190802
+
+cd /home/hadoop/hadoop-3.2.0/etc/hadoop
+cp mapred-site.xml mapred-site.xml.20190802
+
+cd /home/hadoop/hadoop-3.2.0/etc/hadoop
+cp yarn-site.xml yarn-site.xml.20190802
 
 
 
