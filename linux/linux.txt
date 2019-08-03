@@ -11,7 +11,7 @@
   在当前进程(一般是bash，跟随shell版本)中执行
   内置命令可使用 compgen -b | column 显示     //column格式化显示
   man command 会显示无相关使用手册，一般可通过 help command 或 command --help 获取帮助
-  which command  无法显示命令位置
+  which command  无法显示命令绝对路径
   常见内置命令 cd/help/pwd/export/set/alias/umask/kill/source/test等
 2.shell函数
   shell编写的函数，可引用
@@ -20,26 +20,82 @@
 
 
 #常用命令
-sudo passwd root                  //ubuntu启用root用户
-passwd -u 用户名                  //修改指定用户密码
-man command                       //命令详细说明
-command -h/--help                 //命令简要帮助
-service systemd-networkd restart  //重启网络服务
-tzselect                          //修改时区
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  //创建时区软连接(root操作)
-su username        //切换用户，不加载用户环境变量，只切换用户权限;username缺省默认为root，下同
-su - username      //切换用户，加载用户环境变量，等同于用户登录
-sudo command       //以root用户执行某命令
-apt-get autoremove //清理未使用的软件包
-apt-get clean      //清理软件包
-netplan apply      //生效netplan修改
-cat                //逐行显示文件内容
-tac                //逐行反向显示文件内容
-nl                 //带行号的 cat
-more               //分页查看文件，一次性加载，空格/b 翻页
-less               //分页查看文件，逐步加载，空格/b PgUp/PgDn 翻页
-head/tail -n       //显示文件头尾n行内容
-tail -f filname    //循环读取某文件
+#命令注释会给出相对完整的名称(非官方);见名知意的命令不说明
+
+##命令帮助
+man command       //manual(手册)。命令详细说明
+command -h/--help //命令简要帮助
+which command     //显示命令绝对路径
+
+##快速输入帮助    //以下使用ubuntu，其他发行版大同小异
+1.命令开头 + Tab    //会提示用户 PATH 下所有可匹配命令
+2.命令 + 空格 + Tab //提示命令选项;
+
+##用户及权限
+adduser username                //增加用户，默认添加 /home/username 目录
+useradd username                //增加用户，不添加用户家目录
+groupadd groupname              //增加用户组
+usermod -aG groupname username  //user modify;将用户增加到用户组(多个用户组可用逗号隔开)
+su [username]                   //switch user;简单切换用户，不加载环境变量;不跟用户名默认切换到root
+su - [username]                 //切换登录用户，加载环境变量;不跟用户名默认切换到root
+sudo passwd root                //switch user do(execute);ubuntu启用root用户
+passwd [-u] [username]          //root用户修改指定用户密码，-u可不加;不跟用户名默认修改当前用户密码
+id [username]                   //显示指定用户uid、gid和groups等信息，不跟用户名显示当前用户相关信息
+
+##文件目录操作
+ls -ltr [dirname] //list;按时间倒序排列指定文件夹下列表;默认显示当前文件夹列表
+ls -a             //显示所有文件列表，包含隐藏文件
+ll                //ubunt系统中由 alias 指定，实际执行ls -alF
+cd                //change directory;切换到用户家目录，由当前用户$HOME指定
+cd ~              //同上
+cd -              //切换到切换前目录
+cd path           //切换到指定路径目录;路径分为相对路径(相对于当前目录)和绝对路径(/开头)
+cd ..             //切换到上层目录
+cd ../..          //切换到上上层目录
+pwd               //print working directory;打印当前工作目录绝对路径
+mkdir [path/]dirname    //make directory;创建文件夹，多文件夹可空格隔开;要求上层目录必须存在
+mkdir -p dir1/dir2      //同上，不要求上层目录存在;不存在会创建多级目录
+mkdir -p a/{b,c/{d,e}}  //创建复杂目录
+mkdir -m 777 dirname    //创建指定权限目录
+rmdir dirname     //删除空文件夹;多文件空格隔开
+rm filename       //删除文件;多文件空格隔开
+rm -rf dirname    //递归删除文件或文件夹(不要求非空);f表示强制删除不做提示;可跟多文件(夹)
+mv 
+
+touch filename    //摸一下文件;文件不存在则创建文件;文件存在时更新文件访问和修改时间;多文件空格隔开
+vi filename       //文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
+cat filname       //concatenate;逐行显示文件内容
+view filname      //只读模式查看文件;其他操作见vi
+head filname      //显示文件开始10行
+head -n filname   //显示文件开始n行
+tail filname      //显示文件最后10行
+tail -n           //显示文件最后n行
+tail -f filname   //循环读取某文件最后10行，一般用于文件实时查看
+tail -nf filname  //循环读取某文件最后n行
+more filname      //分页查看文件，一次性加载，空格/b 翻页;大文件不建议使用
+less filname      //分页查看文件，逐步加载，空格/b PgUp/PgDn 翻页
+file filename     //显示文件或文件夹类型
+
+##系统资源
+ps -ef | grep java   //snaps of prosess;搜索含java的进程，其他类似;标准语法
+ps [-]aux |grep java //同上一条类似;BSD发行版语法
+free [-h/k/m]        //以易读/KB/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
+
+top                  //实时查看系统资源使用情况
+
+##打包压缩
+tar cvf FileName.tar dirname     //打包，dirname为文件或文件夹列表(空格隔开)
+tar xvf FileName.tar             //解包
+tar zcvf FileName.tar.gz dirname //打包并压缩，压缩包结尾可能是.tgz，dirname为文件或文件夹列表(空格隔开)
+tar zxvf FileName.tar.gz         //解压并解包，压缩包结尾可能是.tgz
+gzip FileName                    //压缩，压缩完成会删除原文件;压缩后文件名为FileName.gz
+gzip -d FileName.gz              //解压，解压完成会删除.gz文件
+gunzip FileName.gz               //解压，同上
+uncompress FileName.Z            //解压
+compress FileName                //压缩
+
+
+
 ps/watch/top       //查看程序运行命令
 free/vmstat/iostat/netstat  //内存/虚拟内存/系统IO/网络 监控
 lsof               //查看文件(普通文件/目录/网络文件等)打开情况
@@ -47,7 +103,6 @@ at/crontab         //设置计划任务
 tar/gzip           //打包压缩解压命令
 chmod/chgrp/chown  //设置文件权限
 df/du              //磁盘文件空间大小
-which              //查看可执行文件的位置
 whereis            //查看文件的位置 
 locate             //配合数据库查看文件位置
 find               //实际搜寻硬盘查询文件名称
