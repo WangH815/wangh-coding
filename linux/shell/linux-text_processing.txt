@@ -9,55 +9,54 @@ find/grep/xargs/sort/uniq/tr/cut/paste/wc/sed/awk
 命令格式
 find [path1 path2 ...] [option1 value1] [option2 value2] ... [operation]
 [path]         #与Linux对路径的定义一致。.表示当前路径(path省略默认为当前路径)，~表示用户根目录，/表示系统根目录
-[option value] #匹配选项及值，绝大部分成对出现，取结果交集。
-               #如：-type d 表示查找所有文件夹，选项前加上 ！ 表示不匹配
-               #选择性强的放前面可提高查询效率，例如 -depth/mindepth/maxdepth			   
+[option value] #匹配选项及值，部分选项不需要value，绝大部分成对出现，取结果交集。
+               #如：-type d 表示查找所有文件夹，选项前加上!表示不匹配
+               #选择性强的放前面可提高查询效率，例如 -depth/mindepth/maxdepth               
 [operation]    #对于查找结果的操作，常用操作如下：
-               #-print： 将匹配结果输出到标准输出，一般可不加。标shell脚本建议加上。
-			   #-print0：同上，但不换行。
+               #-print： 将匹配结果输出到标准输出，一般可不加。shell脚本中建议加上。
+               #-print0：同上，但不换行。
                #-exec：  用于下一步的命令执行。形式为 "command {} \;" 
                #         如：find . -type f -exec rm -rf {} \; 表示删除所有文件。{}表示每条查找结果
                #-ok：    同上，不同在于会让用户确认是否执行每个命令
                #         find . -type f|xargs rm -rf  可实现同-exec功能
-			   #-delete: 删除文件或文件夹
-			   #         如：find . -type f -delete 删除所有文件
+               #-delete: 删除文件或文件夹
+               #         如：find . -type f -delete 删除所有文件
+#常用option(选项)
+-name file           #名称;最常用的选项
+-iname file          #忽略大小写
+-perm 755            #权限
+-user username       #所属者
+-group groupname     #按组来查找
+-empty               #空文件或文件夹
+-mtime [-/+]n        #n天[内(包含n)/外]修改的;无-/+时表示第n天(当天为0);下同
+-atime [-/+]n        #访问时间
+-ctime [-/+]n        #创建时间
+-amin [-/+]n         #n分钟
+-nogroup             #即文件的属组在/etc/groups中不存在
+-nouser              #查无有效属主的文件，即文件的属主在/etc/passwd中不存 
+-nogroup             #查无有效属组的文件，即文件的属组在/etc/groups中不存在
+-nouser              #查无有效属主的文件，即文件的属主在/etc/passwd中不存
+-newer f1 !f2        #查更改时间比f1新但比f2旧的文件
+-type b/d/c/p/l/f    #文件类型。块设备、目录、字符设备、管道、符号链接、普通文件
+-size [-/+]n[cwbkMG] #大小为[小于/大于]n字节/字/块(一般为512bit)/KB/MB/GB的文件
+-depth               #使查找在进入子目录前先行查找完本目录
+-mindepth n          #指定目录的第n级目录开始查找
+-maxdepth n          #最多查询到指定目录的第n级目录
+-fstype              #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
+-mount               #查文件时不跨越文件系统mount点
+-follow              #如果遇到符号链接文件，就跟踪链接所指的文件
+-cpio                #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
+-prune               #忽略某个目录
 
-常用option(选项)
--name filename           #名称
--iname filename          #忽略大小写
--perm 755                #权限
--user username           #所属者
--group groupname         #按组来查找
--empty                   #空文件或文件夹
--mtime -n                #n天内(包含n)修改的。-n表n天内，+n表n天前
--atime -n                #访问时间
--ctime -n                #创建时间
--amin -n                 #n分钟
--nogroup                 #即文件的属组在/etc/groups中不存在
--nouser                  #查无有效属主的文件，即文件的属主在/etc/passwd中不存 
--nogroup                 #查无有效属组的文件，即文件的属组在/etc/groups中不存在
--nouser                  #查无有效属主的文件，即文件的属主在/etc/passwd中不存
--newer f1 !f2            #查更改时间比f1新但比f2旧的文件
--type b/d/c/p/l/f        #文件类型。块设备、目录、字符设备、管道、符号链接、普通文件
--size n[cwbkMG]          #大小为n字节/字/块(一般为512bit)///////的文件
--depth/mindepth/maxdepth #使查找在进入子目录前先行查找完本目录
--fstype                  #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
--mount                   #查文件时不跨越文件系统mount点
--follow                  #如果遇到符号链接文件，就跟踪链接所指的文件
--cpio                    #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
--prune                   #忽略某个目录
-
-实例 
-find . -name   "*.txt" -print                       #.txt结尾的文件，双引号可不加
-find . ! -name "*.txt" -print                       #查找所有非 .txt 结尾文件
-find . -name   "[A-Z]*" -print                      #查以大写字母开头的文件
-find . -name   "host*" -print                       #查以host开头的文件
-find . -name "[a-z][a-z][0–9][0–9].txt" -print      #查以两个小写字母和两个数字开头的txt文件     
-find . -name "*.txt" -o -name "*.pdf"  -print       #查找txt或pdf文件，-o表示或
-find . -regex  ".*\(\.txt|\.pdf\)$" -print          #同上。-iregex:忽略大小写
-find . -name 'xa*'|grep -v xaa|xargs rm -rf         #删除当前目录下所有除了xaa的xa*文件
-find . -perm 755 exec ls -ltr {} \;                 #显示所有
-find . -size +512k                                  #大于512k的文件 
+#实例
+find . -name   "*.txt" -print                      #.txt结尾的文件，双引号可不加
+find . ! -name "*.txt" -print                      #查找所有非 .txt 结尾文件
+find . -name "[a-z][a-z][0–9][0–9].txt" -print     #查以两个小写字母和两个数字开头的txt文件     
+find . -name "*.txt" -o -name "*.pdf"  -print      #查找txt或pdf文件，-o表示或
+find . -regex  ".*\(\.txt|\.pdf\)$" -print         #同上。-iregex:忽略大小写
+find . -name 'xa*'|grep -v xaa|xargs rm -rf {} \;  #删除当前目录下所有除了xaa的xa*文件
+find . -perm 755 -exec ls -ltr {} \;               #显示所有权限是755的文件(夹)
+find . -size +512k                                 #大于512k的文件
 
 2、grep 文本搜索
 

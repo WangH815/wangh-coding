@@ -57,7 +57,7 @@ network:
 netplan apply
 
 
-包管理/软件安装
+#包管理/软件安装
 apt和apt-get的区别
 https://www.sysgeek.cn/apt-vs-apt-get/
 apt命令在Ubuntu 16.04发布时引入，the Advanced Packaging Tool/高级打包工具
@@ -77,7 +77,7 @@ Most used commands:
 apt list --installed  //列出已安装软件包
 
 
-zsh安装
+#zsh
 
 方式一：
 apt install zsh         //安装
@@ -108,7 +108,7 @@ deb http://archive.ubuntu.com/ubuntu bionic main
 deb http://archive.ubuntu.com/ubuntu bionic-security main
 ##deb http://archive.ubuntu.com/ubuntu bionic-updates main  //##为注释
  
-#mysql常见操作
+##mysql常见操作
 mysql -uroot -p                      //root用户登录mysql数据库
 mysql -u root -p                     //同上
 mysql -u root -p -h ip               //连接远程数据库
@@ -123,7 +123,7 @@ exit                                 //退出命令行
 \q                                   //同上
 
 
-安装指定版本Python
+#安装指定版本Python
 Step 1 – Prerequsiteis
 apt-get install build-essential checkinstall
 apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \

@@ -1,17 +1,21 @@
 
+Linux使用
+
+
 #shell脚本的运行方式
-1 . xx.sh      //一般用于生效用户配置而不需要重新登录shell，xx.sh有读权限即可
-2 source xx.sh //同上。常见用于执行 profile 配置，脚本本身在当前进程中执行
-3 sh xx.sh     //读权限即可，脚本本身会在子进程中执行
-4 ./xx.sh      //需执行权限，脚本本身会在子进程中执行;如不指定当前路径，会优先根据PATH查找相应命令
+1 . xx.sh      #一般用于生效用户配置而不需要重新登录shell，xx.sh有读权限即可
+2 source xx.sh #同上。常见用于执行 profile 配置，脚本本身在当前进程中执行
+3 sh xx.sh     #读权限即可，脚本本身会在子进程中执行
+4 ./xx.sh      #需执行权限，脚本本身会在子进程中执行;如不指定当前路径，会优先根据PATH查找相应命令
+
 
 #shell命令类型
 1.内置命令
   shell解释器包含的命令，只有内置命令能改变shell命令行环境变量。
   在当前进程(一般是bash，跟随shell版本)中执行
-  内置命令可使用 compgen -b | column 显示     //column格式化显示
+  内置命令可使用 compgen -b | column 显示     #column格式化显示
   man command 会显示无相关使用手册，一般可通过 help command 或 command --help 获取帮助
-  which command  无法显示命令绝对路径
+  内置命令可使用 type command 判断，内置命令会提示 command is a shell builtin
   常见内置命令 cd/help/pwd/export/set/alias/umask/kill/source/test等
 2.shell函数
   shell编写的函数，可引用
@@ -19,183 +23,266 @@
   独立的shell可执行命令，在子进程中执行(Linux内核调用fork()函数实现)，不会改变父进程的环境变量
 
 
-#常用命令
-#命令注释会给出相对完整的名称(非官方);见名知意的命令不说明
+#常用基础命令
+1.主要来源 https:#www.yiibai.com/linux  #易百教程Linux部分
+2.在上一条的基础上精简，只保留常用部分;还有部分是平时工作中能用的命令及技巧
+3.命令注释会给出相对完整的名称(非官方);见名知意的命令不说明
+4.file表示文件名，dir表示文件夹名称
+5.[]中内容表示可选项
 
 ##命令帮助
-man command       //manual(手册)。命令详细说明
-command -h/--help //命令简要帮助
-which command     //显示命令绝对路径
+man command       #manual(手册);命令详细说明
+help command      #使用help命令获取简要帮助
+command --help    #同上;部分命令也可使用command -h
+which command     #显示命令绝对路径
 
-##快速输入帮助    //以下使用ubuntu，其他发行版大同小异
-1.命令开头 + Tab    //会提示用户 PATH 下所有可匹配命令
-2.命令 + 空格 + Tab //提示命令选项;
+##快速输入帮助      #以下使用ubuntu，其他发行版大同小异
+##快速输入帮助      #以下使用ubuntu，其他发行版大同小异
+1.命令开头 + Tab    #会提示用户 PATH 下所有可匹配命令
+2.命令 + 空格 + Tab #提示命令选项或参数(文件或文件夹)
 
 ##用户及权限
-adduser username                //增加用户，默认添加 /home/username 目录
-useradd username                //增加用户，不添加用户家目录
-groupadd groupname              //增加用户组
-usermod -aG groupname username  //user modify;将用户增加到用户组(多个用户组可用逗号隔开)
-su [username]                   //switch user;简单切换用户，不加载环境变量;不跟用户名默认切换到root
-su - [username]                 //切换登录用户，加载环境变量;不跟用户名默认切换到root
-sudo passwd root                //switch user do(execute);ubuntu启用root用户
-passwd [-u] [username]          //root用户修改指定用户密码，-u可不加;不跟用户名默认修改当前用户密码
-id [username]                   //显示指定用户uid、gid和groups等信息，不跟用户名显示当前用户相关信息
+adduser username                #增加用户，默认添加 /home/username 目录等
+useradd username                #增加用户，不添加用户家目录
+groupadd groupname              #增加用户组
+usermod -aG groupname username  #user modify;将用户增加到用户组(多个用户组可用逗号隔开)
+su [username]                   #switch user;简单切换用户，不加载环境变量;不跟用户名默认切换到root
+su - [username]                 #切换登录用户，加载环境变量;不跟用户名默认切换到root
+sudo passwd root                #switch user do(execute);ubuntu启用root用户
+passwd [-u] [username]          #root用户修改指定用户密码，-u可不加;不跟用户名默认修改当前用户密码
+id [username]                   #显示指定用户uid、gid和groups等信息，不跟用户名显示当前用户相关信息
 
 ##文件目录操作
-ls -ltr [dirname] //list;按时间倒序排列指定文件夹下列表;默认显示当前文件夹列表
-ls -a             //显示所有文件列表，包含隐藏文件
-ll                //ubunt系统中由 alias 指定，实际执行ls -alF
-cd                //change directory;切换到用户家目录，由当前用户$HOME指定
-cd ~              //同上
-cd -              //切换到切换前目录
-cd path           //切换到指定路径目录;路径分为相对路径(相对于当前目录)和绝对路径(/开头)
-cd ..             //切换到上层目录
-cd ../..          //切换到上上层目录
-pwd               //print working directory;打印当前工作目录绝对路径
-mkdir [path/]dirname    //make directory;创建文件夹，多文件夹可空格隔开;要求上层目录必须存在
-mkdir -p dir1/dir2      //同上，不要求上层目录存在;不存在会创建多级目录
-mkdir -p a/{b,c/{d,e}}  //创建复杂目录
-mkdir -m 777 dirname    //创建指定权限目录
-rmdir dirname     //删除空文件夹;多文件空格隔开
-rm filename       //删除文件;多文件空格隔开
-rm -rf dirname    //递归删除文件或文件夹(不要求非空);f表示强制删除不做提示;可跟多文件(夹)
-mv 
+ls -ltr [dir]  #list;按时间倒序排列指定文件夹下列表;默认显示当前文件夹列表非隐藏文件
+ls -a          #显示所有文件列表，包含隐藏文件
+ll             #ubunt系统中由 alias 指定，实际执行ls -alF
+stat file/dir  #显示文件详细信息(大小、属组、访问/修改时间等);stat还可显示文件系统状态
+cd             #change directory;切换到用户家目录，由当前用户$HOME指定
+cd ~           #同上
+cd -           #切换到切换前目录
+cd path        #切换到指定路径目录;路径分为相对路径(相对于当前目录)和绝对路径(/开头)
+cd ..          #切换到上层目录
+cd ../..       #切换到上上层目录
+pwd            #print working directory;打印当前工作目录绝对路径
+mkdir [path/]dir        #make directory;创建文件夹，多文件夹可空格隔开;要求上层目录必须存在
+mkdir -p dir1/dir2      #同上，不要st求上层目录存在;不存在会创建多级目录
+mkdir -p a/{b,c/{d,e}}  #创建复杂目录
+mkdir -m 777 dir        #创建指定权限目录
+rmdir dir               #remove empty directory;删除空文件夹;多文件空格隔开
+rm file             #remove;删除文件;多文件空格隔开
+rm -rf dir          #递归删除文件或文件夹(不要求非空);f表示强制删除不做提示;可跟多文件(夹)
+mv file1 file2      #move;file1重命名为file2，要求file1必须存在，file2已存在则覆盖
+mv file1 path/file2 #移动并重命名，其余同上
+mv file dir         #移动file到dir，要求file和dir必须存在;file存在而dir不存在时表示重命名
+mv file1 file2 dir  #移动多个文件到指定文件夹(dir);要求dir必须存在
+mv file dir1 dir2   #移动文件或文件夹到指定目录(dir2);要求dir2必须存在
+mv dir1 dir2        #移动或重命名，要求dir1必须存在;dir2存在表示移动否则表示重命名
+cp file1 file2      #copy;复制file1为file2;要求file1必须存在，file存在时会提示覆盖
+cp file dir         #复制并移动file到dir;要求file和dir存在;dir不存在时同上
+touch file      #摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
+touch -t        #设定文件时间戳，如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
+vi file         #文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
+cat file        #concatenate;显示文件内容
+cat -n file     #带行号输出
+view file       #只读模式查看文件;其他操作见vi
+head file       #显示文件开始10行
+head -n file    #显示文件开始n行
+tail file       #显示文件最后10行
+tail -n file    #显示文件最后n行
+tail -f file    #循环读取某文件最后10行，一般用于文件实时查看
+tail -nf file   #循环读取某文件最后n行
+more file       #分页查看文件，一次性加载，空格/b 翻页;大文件不建议使用
+less file       #分页查看文件，逐步加载，空格/b PgUp/PgDn 翻页
+file file       #显示文件或文件夹类型
 
-touch filename    //摸一下文件;文件不存在则创建文件;文件存在时更新文件访问和修改时间;多文件空格隔开
-vi filename       //文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
-cat filname       //concatenate;逐行显示文件内容
-view filname      //只读模式查看文件;其他操作见vi
-head filname      //显示文件开始10行
-head -n filname   //显示文件开始n行
-tail filname      //显示文件最后10行
-tail -n           //显示文件最后n行
-tail -f filname   //循环读取某文件最后10行，一般用于文件实时查看
-tail -nf filname  //循环读取某文件最后n行
-more filname      //分页查看文件，一次性加载，空格/b 翻页;大文件不建议使用
-less filname      //分页查看文件，逐步加载，空格/b PgUp/PgDn 翻页
-file filename     //显示文件或文件夹类型
+#文件查找
+which command           #查找命令位置;返回用户PATH变量中第一个匹配位置
+whereis command         #查找命令(程序)的二进制、man说明和源码文件的绝对路径
+whereis -b/m/s command  #查找命令(程序)的二进制/man说明/源码文件的绝对路径
+locate command          #查找command相关文件
+locate /etc/sh          #查找/etc目录下sh开头的文件
+find [path] [option value] [option2 value2] ... [operation]
+#参数说明
+[path]         #默认为当前路径
+[option value] #匹配选项及值，部分选项不需要value，绝大部分成对出现，取结果交集。
+               #如：-type d 表示查找所有文件夹，选项前加上!表示不匹配
+               #选择性强的放前面可提高查询效率，例如 -depth/mindepth/maxdepth               
+[operation]    #对于查找结果的操作，常用操作如下：
+               #-print： 将匹配结果输出到标准输出，一般可不加。shell脚本中建议加上。
+               #-print0：同上，但不换行。
+               #-exec：  用于下一步的命令执行。形式为 "command {} \;" 
+               #         如：find . -type f -exec rm -rf {} \; 表示删除所有文件。{}表示每条查找结果
+               #         find . -type f|xargs rm -rf 可实现同-exec功能
+               #-ok：    同上，不同在于会让用户确认是否执行每个命令
+               #-delete: 删除文件或文件夹
+               #         如：find . -type f -delete 删除所有文件
+#常用option(选项)
+-name file            #名称;最常用的选项
+-iname file           #忽略大小写
+-perm 755             #权限
+-user username        #所属者
+-group groupname      #按组来查找
+-empty                #空文件或文件夹
+-mtime [-/+]n         #n天[内(包含n)/外]修改的;无-/+时表示第n天(当天为0);下同
+-atime [-/+]n         #访问时间
+-ctime [-/+]n         #创建时间
+-amin [-/+]n          #n分钟
+-nogroup              #即文件的属组在/etc/groups中不存在
+-nouser               #查无有效属主的文件，即文件的属主在/etc/passwd中不存 
+-nogroup              #查无有效属组的文件，即文件的属组在/etc/groups中不存在
+-nouser               #查无有效属主的文件，即文件的属主在/etc/passwd中不存
+-newer f1 !f2         #查更改时间比f1新但比f2旧的文件
+-type b/d/c/p/l/f     #文件类型。块设备、目录、字符设备、管道、符号链接、普通文件
+-size [-/+]n[cwbkMG]  #大小为[小于/大于]n字节/字/块(一般为512bit)/KB/MB/GB的文件
+-depth                #使查找在进入子目录前先行查找完本目录
+-mindepth n           #指定目录的第n级目录开始查找
+-maxdepth n           #最多查询到指定目录的第n级目录
+-fstype               #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
+-mount                #查文件时不跨越文件系统mount点
+-follow               #如果遇到符号链接文件，就跟踪链接所指的文件
+-cpio                 #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
+-prune                #忽略某个目录
+find . -name   "*.txt" -print                  #.txt结尾的文件，双引号可不加
+find . ! -name "*.txt" -print                  #查找所有非 .txt 结尾文件
+find . -name "[a-z][0–9].txt" -print           #查以小写字母和数字开头的txt文件     
+find . -name "*.txt" -o -name "*.pdf"  -print  #查找txt或pdf文件，-o表示或
+find . -regex  ".*\(\.txt|\.pdf\)$" -print     #同上。-iregex:忽略大小写
+find . -name 'xa*'|grep -v xaa|xargs rm -rf    #删除当前目录下所有除了xaa的xa*文件
+find . -perm 755 -exec ls -ltr {} \;           #显示所有权限是755的文件(夹)
+find . -size +512k                             #大于512k的文件
+find . -type f -print | xargs rm -f            #逐条所有文件，不存在rm参数过长问题
+
+##文件权限
+chmod [-R] [who] [+/-/=][mode] file/dir
+#参数说明
+-R     #作用于文件夹及子文件(夹)
+who    #可选a/u/g/o，表示所有用户/所属者/所属组/其他用户;ugo可同时使用，如：chmod ug+x file
++/-/=  #分别表示增加/去除/设定
+mode   #可选r/w/x/s，表示读/写/执行/特殊权限
+chmod a+x file      #所有用户增加执行权限;
+chmod a+x,go-wx file #多种模式逗号隔开，逐条执行;等价于chmod u+x,go-wx file
+chmod a=r file      #设定所有用户对file只有读权限;等价于chmod 444 file
+chmod 755 file      #数字分别表示u/g/o的权限;r/w/x分别表示4/2/1，各自权限加起来
 
 ##系统资源
-ps -ef | grep java   //snaps of prosess;搜索含java的进程，其他类似;标准语法
-ps [-]aux |grep java //同上一条类似;BSD发行版语法
-free [-h/k/m]        //以易读/KB/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
-
-top                  //实时查看系统资源使用情况
+ps -ef | grep java   #snaps of prosess;搜索含java的进程，其他类似;标准语法
+ps [-]aux |grep java #同上一条类似;BSD发行版语法
+free [-h/k/m]        #以易读/KB/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
+top                  #实时查看系统资源使用情况
 
 ##打包压缩
-tar cvf FileName.tar dirname     //打包，dirname为文件或文件夹列表(空格隔开)
-tar xvf FileName.tar             //解包
-tar zcvf FileName.tar.gz dirname //打包并压缩，压缩包结尾可能是.tgz，dirname为文件或文件夹列表(空格隔开)
-tar zxvf FileName.tar.gz         //解压并解包，压缩包结尾可能是.tgz
-gzip FileName                    //压缩，压缩完成会删除原文件;压缩后文件名为FileName.gz
-gzip -d FileName.gz              //解压，解压完成会删除.gz文件
-gunzip FileName.gz               //解压，同上
-uncompress FileName.Z            //解压
-compress FileName                //压缩
+tar [-]cvf file.tar dir  #打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程，可不加
+tar xvf file.tar         #解包;x表示extract(提取)，f表示指定文件;打包中c表示create
+tar -tf file.tar         #查看包中文件
+tar zcvf file.tar.gz dir #打包并压缩，压缩包结尾可能是.tgz，dir为文件或文件夹列表(空格隔开)
+tar zxvf file.tar.gz     #解压并解包，压缩包结尾可能是.tgz
+gzip file1 file2         #压缩，压缩完成会删除每个原文件;压缩后文件名为file.gz
+gzip -rv dir             #递归压缩dir下所有文件及子文件夹的文件
+gzip -d file.gz          #解压，解压完成会删除.gz文件
+gzip -rd dir             #递归解压dir下所有压缩文件
+gzip -l file.gz          #查看每个压缩文件信息(文件名/压缩前后大小/压缩率);不解压
+gunzip file.gz           #解压，同上
+compress file            #压缩,比较古老的unix/linux命令;不常用，现在gzip应用更广泛
+compress -d file.Z       #解压
+uncompress file.Z        #同上
 
 
-
-ps/watch/top       //查看程序运行命令
-free/vmstat/iostat/netstat  //内存/虚拟内存/系统IO/网络 监控
-lsof               //查看文件(普通文件/目录/网络文件等)打开情况
-at/crontab         //设置计划任务
-tar/gzip           //打包压缩解压命令
-chmod/chgrp/chown  //设置文件权限
-df/du              //磁盘文件空间大小
-whereis            //查看文件的位置 
-locate             //配合数据库查看文件位置
-find               //实际搜寻硬盘查询文件名称
-ifconfig           //网络配置信息
-ping               //测试主机连通性
-traceroute         //到达指定主机网络路径
-ss                 //socket统计信息
-ln                 //创建软(-s)/硬链接
-cut -b/c/d filename  //按字节/字符/自定义分隔符切割文本
-sort               //文本排序
-sed -a/d/c/i       //文本增删改查
-split              //按照指定行数或字节数切割大文件
-wc -c/m/l          //按照字节/字符/行数统计文本
-write user [ttyname]  //向其他用户发送给信息(message)，ttyname可以使用who查询，Ctrl + c结束
-file                                 //辨识文件类型
-time [options] COMMAND [arguments]   //测量命令运行时间
-xargs [options] [command [options]]  //捕获命令输出作为其他命令标准输入
-command [options] | xargs [options]  //主要适用于不支持管道(|)的命令
-bc                                   //计算器模式，quit退出
-lscpu                                //显示cpu相关信息
-tar -zxvf xxx.tar.gz   //解包
-tar -jxvf xxx.tar.bz2  //同上
+ps/watch/top       #查看程序运行命令
+free/vmstat/iostat/netstat  #内存/虚拟内存/系统IO/网络 监控
+lsof               #查看文件(普通文件/目录/网络文件等)打开情况
+at/crontab         #设置计划任务
+chmod/chgrp/chown  #设置文件权限
+df/du              #磁盘文件空间大小
+whereis            #查看文件的位置 
+locate             #配合数据库查看文件位置
+find               #实际搜寻硬盘查询文件名称
+ifconfig           #网络配置信息
+ping               #测试主机连通性
+traceroute         #到达指定主机网络路径
+ss                 #socket统计信息
+ln                 #创建软(-s)/硬链接
+cut -b/c/d file    #按字节/字符/自定义分隔符切割文本
+sort               #文本排序
+sed -a/d/c/i       #文本增删改查
+split              #按照指定行数或字节数切割大文件
+wc -c/m/l          #按照字节/字符/行数统计文本
+write user [ttyname]                 #向其他用户发送给信息(message)，ttyname可以使用who查询，Ctrl + c结束
+time [options] COMMAND [arguments]   #测量命令运行时间
+xargs [options] [command [options]]  #捕获命令输出作为其他命令标准输入
+command [options] | xargs [options]  #主要适用于不支持管道(|)的命令
+bc                                   #计算器模式，quit退出
+lscpu                                #显示cpu相关信息
 
 
 #vi/vim 常见操作
 #三种模式
-1.命令模式（Command mode）       //用于光标移动、复制粘贴、搜索替换等
-2.输入模式（Insert mode）        //用于基本输入
-3.底线模式（Last line mode）     //用于搜索替换
+1.命令模式（Command mode）   #用于光标移动、复制粘贴、搜索替换等
+2.输入模式（Insert mode）    #用于基本输入
+3.底线模式（Last line mode） #用于搜索替换
 
 #其他命令
-u           //撤销上一个命令  
-<Ctrl> + r  //重复上一个命令
-.           //小数点，功能同上
+u           #撤销上一个命令  
+<Ctrl> + r  #重复上一个命令
+.           #小数点，功能同上
 
 ##命令模式
-vi/vim [filename] 进入命令模式
+vi/vim [file] 进入命令模式
 光标指定单个字符
 
 ###光标移动和翻页
-←/h 、↓/j 、↑/k 、→/l  //上下左右移动光标。n→表示光标向右移动n个字符，不跨行；其余同理
-PgUp/PgDn              //上下翻页
-n<space>  //<space>表示空格。向后移动n个字符，可能会跨行
-0/Home    //移动光标到行首。Home为键盘功能键Home
-$/End     //移动光标到行尾。End为键盘功能键
-G         //移动光标到最后一行行首
-nG        //移动光标到第n行行首
-n<Enter>  //光标向下移动n行
-gg        //移动光标到第一行行首，等价于1G
+←/h 、↓/j 、↑/k 、→/l  #上下左右移动光标。n→表示光标向右移动n个字符，不跨行；其余同理
+PgUp/PgDn              #上下翻页
+n<space>  #<space>表示空格。向后移动n个字符，可能会跨行
+0/Home    #移动光标到行首。Home为键盘功能键Home
+$/End     #移动光标到行尾。End为键盘功能键
+G         #移动光标到最后一行行首
+nG        #移动光标到第n行行首
+n<Enter>  #光标向下移动n行
+gg        #移动光标到第一行行首，等价于1G
 
 ###删除
-x/X       //向后删除单个字符/向前删除单个字符
-nx/nX     //向后删除n个字符/向前删除n个字符
-dd        //删除光标所在行
-ndd       //删除光标开始行(包含)以下n行
-D         //删除光标所在行内容，保留空行
-d0        //删除光标位置到行首数据
-d$        //删除光标位置到行尾数据
-d1G       //删除当前行到第一行
-dnG       //删除当前行(包含)到第n行
-dG        //删除光标行到最后一行
+x/X    #向后删除单个字符/向前删除单个字符
+nx/nX  #向后删除n个字符/向前删除n个字符
+dd     #删除光标所在行
+ndd    #删除光标开始行(包含)以下n行
+D      #删除光标所在行内容，保留空行
+d0     #删除光标位置到行首数据
+d$     #删除光标位置到行尾数据
+d1G    #删除当前行到第一行
+dnG    #删除当前行(包含)到第n行
+dG     #删除光标行到最后一行
 
 ###复制和粘贴
-yy        //复制光标所在行
-nyy       //复制光标行(包含)以下n行
-y1G       //复制第一行到光标行
-yG        //复制光标行到最后一行
-y0        //复制行首到光标所在位置数据
-y$        //复制光标位置到行尾数据
-p/P       //粘贴到光标所在行下一行/上一行
-J         //合并光标行与下一行，空格隔开    
+yy   #复制光标所在行
+nyy  #复制光标行(包含)以下n行
+y1G  #复制第一行到光标行
+yG   #复制光标行到最后一行
+y0   #复制行首到光标所在位置数据
+y$   #复制光标位置到行尾数据
+p/P  #粘贴到光标所在行下一行/上一行
+J    #合并光标行与下一行，空格隔开    
 
 ##输入模式
 以下为命令模式切换到输入模式
-i/I      //光标处输入/光标所在行第一个非空格(一般就是行首)处输入
-a/A      //光标处下一个字符处输入/光标所在行行尾处输入
-o/O      //光标下一行/
-r/R      //替换光标处字符一次/一直替换光标处字符，直到按下Esc
+i/I     #光标处输入/光标所在行第一个非空格(一般就是行首)处输入
+a/A     #光标处下一个字符处输入/光标所在行行尾处输入
+o/O     #光标下一行/
+r/R     #替换光标处字符一次/一直替换光标处字符，直到按下Esc
 
-Insert   //功能键Insert用于输入模式中切换追加还是替换模式
-ESC      //功能键ESC用于退出输入模式到命令模式
+Insert  #功能键Insert用于输入模式中切换追加还是替换模式
+ESC     #功能键ESC用于退出输入模式到命令模式
 
 ##底线模式
-/str       //向下搜索字符str，?str表示向上搜索(不常用)
-n/N        //执行上一个搜索命令/执行上一个方向相反的搜索命令
-:set nu    //设置行号
-:set nonu  //取消行号
-:wq        //保存并退出。w,q可单独使用，!表示强制
-:x         //同上
-ZZ         //同上
-:w filename      //另存为filename
-:r filename      //将filename内容追加到光标所在行下一行
-:n,m w filename  //将第n，m行之间的内容另存为到filename中
-:!command        //暂时离开vi执行command
+/str         #向下搜索字符str，?str表示向上搜索(不常用)
+n/N          #执行上一个搜索命令/执行上一个方向相反的搜索命令
+:set nu      #设置行号
+:set nonu    #取消行号
+:wq          #保存并退出。w,q可单独使用，!表示强制
+:x           #同上
+ZZ           #同上
+:w file      #另存为file
+:r file      #将file内容追加到光标所在行下一行
+:n,m w file  #将第n，m行之间的内容另存为到file中
+:!command    #暂时离开vi执行command
 
 
