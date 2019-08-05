@@ -15,14 +15,17 @@ Hadoop的架构主要有以下两个层次：
 
 
 #基础环境搭建
-使用Ubuntu Server 18.04
+##版本
+Ubuntu Server 18.04
+JAVA: oracle jdk1.8.0_191
+
+##步骤
 1.创建hadoop用户
 adduser hadoop     //使用root用户操作，下同
 passwd hadoop      //设置用户密码
 
 2.安装jre
-#这里使用root用户安装Oracle jre1.8.0_191
-#这里安装版本为 jre-8u191-linux-x64.tar.gz 
+#使用root用户安装
 cd /usr/local
 mkdir java
 cd java

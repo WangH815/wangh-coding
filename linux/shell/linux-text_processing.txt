@@ -32,7 +32,6 @@ find [path1 path2 ...] [option1 value1] [option2 value2] ... [operation]
 -atime [-/+]n        #访问时间
 -ctime [-/+]n        #创建时间
 -amin [-/+]n         #n分钟
--nogroup             #即文件的属组在/etc/groups中不存在
 -nouser              #查无有效属主的文件，即文件的属主在/etc/passwd中不存 
 -nogroup             #查无有效属组的文件，即文件的属组在/etc/groups中不存在
 -nouser              #查无有效属主的文件，即文件的属主在/etc/passwd中不存
@@ -46,7 +45,7 @@ find [path1 path2 ...] [option1 value1] [option2 value2] ... [operation]
 -mount               #查文件时不跨越文件系统mount点
 -follow              #如果遇到符号链接文件，就跟踪链接所指的文件
 -cpio                #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
--prune               #忽略某个目录
+
 
 #实例
 find . -name   "*.txt" -print                      #.txt结尾的文件，双引号可不加

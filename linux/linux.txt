@@ -35,6 +35,7 @@ man command       #manual(手册);命令详细说明
 help command      #使用help命令获取简要帮助
 command --help    #同上;部分命令也可使用command -h
 which command     #显示命令绝对路径
+type command      #判断命令类型;内置命令会提示 command is a shell builtin
 
 ##快速输入帮助      #以下使用ubuntu，其他发行版大同小异
 ##快速输入帮助      #以下使用ubuntu，其他发行版大同小异
@@ -48,6 +49,7 @@ groupadd groupname              #增加用户组
 usermod -aG groupname username  #user modify;将用户增加到用户组(多个用户组可用逗号隔开)
 su [username]                   #switch user;简单切换用户，不加载环境变量;不跟用户名默认切换到root
 su - [username]                 #切换登录用户，加载环境变量;不跟用户名默认切换到root
+su -l/--logon username          #同上
 sudo passwd root                #switch user do(execute);ubuntu启用root用户
 passwd [-u] [username]          #root用户修改指定用户密码，-u可不加;不跟用户名默认修改当前用户密码
 id [username]                   #显示指定用户uid、gid和groups等信息，不跟用户名显示当前用户相关信息
@@ -79,21 +81,21 @@ mv file dir1 dir2   #移动文件或文件夹到指定目录(dir2);要求dir2必
 mv dir1 dir2        #移动或重命名，要求dir1必须存在;dir2存在表示移动否则表示重命名
 cp file1 file2      #copy;复制file1为file2;要求file1必须存在，file存在时会提示覆盖
 cp file dir         #复制并移动file到dir;要求file和dir存在;dir不存在时同上
-touch file      #摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
-touch -t        #设定文件时间戳，如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
-vi file         #文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
-cat file        #concatenate;显示文件内容
-cat -n file     #带行号输出
-view file       #只读模式查看文件;其他操作见vi
-head file       #显示文件开始10行
-head -n file    #显示文件开始n行
-tail file       #显示文件最后10行
-tail -n file    #显示文件最后n行
-tail -f file    #循环读取某文件最后10行，一般用于文件实时查看
-tail -nf file   #循环读取某文件最后n行
-more file       #分页查看文件，一次性加载，空格/b 翻页;大文件不建议使用
-less file       #分页查看文件，逐步加载，空格/b PgUp/PgDn 翻页
-file file       #显示文件或文件夹类型
+touch file     #摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
+touch -t       #设定文件时间戳，如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
+vi file        #文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
+cat file       #concatenate;显示文件内容
+cat -n file    #带行号输出
+view file      #只读模式查看文件;其他操作见vi
+head file      #显示文件开始10行
+head -n file   #显示文件开始n行
+tail file      #显示文件最后10行
+tail -n file   #显示文件最后n行
+tail -f file   #循环读取某文件最后10行，一般用于文件实时查看
+tail -nf file  #循环读取某文件最后n行
+more file      #分页查看文件，一次性加载，空格/b 翻页;大文件不建议使用
+less file      #分页查看文件，逐步加载，空格/b PgUp/PgDn 翻页
+file file      #显示文件或文件夹类型
 
 #文件查找
 which command           #查找命令位置;返回用户PATH变量中第一个匹配位置
@@ -102,46 +104,46 @@ whereis -b/m/s command  #查找命令(程序)的二进制/man说明/源码文件
 locate command          #查找command相关文件
 locate /etc/sh          #查找/etc目录下sh开头的文件
 find [path] [option value] [option2 value2] ... [operation]
-#参数说明
-[path]         #默认为当前路径
-[option value] #匹配选项及值，部分选项不需要value，绝大部分成对出现，取结果交集。
-               #如：-type d 表示查找所有文件夹，选项前加上!表示不匹配
-               #选择性强的放前面可提高查询效率，例如 -depth/mindepth/maxdepth               
-[operation]    #对于查找结果的操作，常用操作如下：
-               #-print： 将匹配结果输出到标准输出，一般可不加。shell脚本中建议加上。
-               #-print0：同上，但不换行。
-               #-exec：  用于下一步的命令执行。形式为 "command {} \;" 
-               #         如：find . -type f -exec rm -rf {} \; 表示删除所有文件。{}表示每条查找结果
-               #         find . -type f|xargs rm -rf 可实现同-exec功能
-               #-ok：    同上，不同在于会让用户确认是否执行每个命令
-               #-delete: 删除文件或文件夹
-               #         如：find . -type f -delete 删除所有文件
-#常用option(选项)
--name file            #名称;最常用的选项
--iname file           #忽略大小写
--perm 755             #权限
--user username        #所属者
--group groupname      #按组来查找
--empty                #空文件或文件夹
--mtime [-/+]n         #n天[内(包含n)/外]修改的;无-/+时表示第n天(当天为0);下同
--atime [-/+]n         #访问时间
--ctime [-/+]n         #创建时间
--amin [-/+]n          #n分钟
--nogroup              #即文件的属组在/etc/groups中不存在
--nouser               #查无有效属主的文件，即文件的属主在/etc/passwd中不存 
--nogroup              #查无有效属组的文件，即文件的属组在/etc/groups中不存在
--nouser               #查无有效属主的文件，即文件的属主在/etc/passwd中不存
--newer f1 !f2         #查更改时间比f1新但比f2旧的文件
--type b/d/c/p/l/f     #文件类型。块设备、目录、字符设备、管道、符号链接、普通文件
--size [-/+]n[cwbkMG]  #大小为[小于/大于]n字节/字/块(一般为512bit)/KB/MB/GB的文件
--depth                #使查找在进入子目录前先行查找完本目录
--mindepth n           #指定目录的第n级目录开始查找
--maxdepth n           #最多查询到指定目录的第n级目录
--fstype               #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
--mount                #查文件时不跨越文件系统mount点
--follow               #如果遇到符号链接文件，就跟踪链接所指的文件
--cpio                 #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
--prune                #忽略某个目录
+    #参数说明
+    [path]         #默认为当前路径
+    [option value] #匹配选项及值，部分选项不需要value，绝大部分成对出现，取结果交集。
+                   #如：-type d 表示查找所有文件夹，选项前加上!表示不匹配
+                   #选择性强的放前面可提高查询效率，例如 -depth/mindepth/maxdepth               
+    [operation]    #对于查找结果的操作，常用操作如下：
+                   #-print： 将匹配结果输出到标准输出，一般可不加。shell脚本中建议加上。
+                   #-print0：同上，但不换行。
+                   #-exec：  用于下一步的命令执行。形式为 "command {} \;" 
+                   #         如：find . -type f -exec rm -rf {} \; 表示删除所有文件。{}表示每条查找结果
+                   #         find . -type f|xargs rm -rf 可实现同-exec功能
+                   #-ok：    同上，不同在于会让用户确认是否执行每个命令
+                   #-delete: 删除文件或文件夹
+                   #         如：find . -type f -delete 删除所有文件
+    #常用option(选项)
+    -name file            #名称;最常用的选项
+    -iname file           #忽略大小写
+    -type b/d/c/p/l/f     #文件类型。块设备、目录、字符设备、管道、符号链接、普通文件
+    -size [-/+]n[cwbkMG]  #大小为[小于/大于]n字节/字/块(一般为512bit)/KB/MB/GB的文件
+    -depth                #使查找在进入子目录前先行查找完本目录
+    -mindepth n           #指定目录的第n级目录开始查找
+    -maxdepth n           #最多查询到指定目录的第n级目录
+    -perm 755             #权限
+    -empty                #空文件或文件夹
+    -mtime [-/+]n         #n天[内(包含n)/外]修改的;无-/+时表示第n天(当天为0);下同
+    -atime [-/+]n         #访问时间
+    -ctime [-/+]n         #创建时间
+    -amin [-/+]n          #n分钟
+    -user username        #所属者
+    -group groupname      #按组来查找
+    -nogroup              #即文件的属组在/etc/groups中不存在
+    -nouser               #查无有效属主的文件，即文件的属主在/etc/passwd中不存 
+    -nogroup              #查无有效属组的文件，即文件的属组在/etc/groups中不存在
+    -nouser               #查无有效属主的文件，即文件的属主在/etc/passwd中不存
+    -newer f1 !f2         #查更改时间比f1新但比f2旧的文件
+    -fstype               #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
+    -mount                #查文件时不跨越文件系统mount点
+    -follow               #如果遇到符号链接文件，就跟踪链接所指的文件
+    -cpio                 #查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到
+    -prune path           #忽略某个目录
 find . -name   "*.txt" -print                  #.txt结尾的文件，双引号可不加
 find . ! -name "*.txt" -print                  #查找所有非 .txt 结尾文件
 find . -name "[a-z][0–9].txt" -print           #查以小写字母和数字开头的txt文件     
@@ -153,22 +155,45 @@ find . -size +512k                             #大于512k的文�
 find . -type f -print | xargs rm -f            #逐条所有文件，不存在rm参数过长问题
 
 ##文件权限
-chmod [-R] [who] [+/-/=][mode] file/dir
-#参数说明
--R     #作用于文件夹及子文件(夹)
-who    #可选a/u/g/o，表示所有用户/所属者/所属组/其他用户;ugo可同时使用，如：chmod ug+x file
-+/-/=  #分别表示增加/去除/设定
-mode   #可选r/w/x/s，表示读/写/执行/特殊权限
-chmod a+x file      #所有用户增加执行权限;
-chmod a+x,go-wx file #多种模式逗号隔开，逐条执行;等价于chmod u+x,go-wx file
-chmod a=r file      #设定所有用户对file只有读权限;等价于chmod 444 file
-chmod 755 file      #数字分别表示u/g/o的权限;r/w/x分别表示4/2/1，各自权限加起来
+chmod [-R] [who] [+/-/=][mode] file/dir  #change file mode bits;文件(夹)属主和root可使用
+    #参数说明
+    -R     #作用于文件夹及子文件(夹)
+    who    #可选a/u/g/o，表示所有用户/所属者/所属组/其他用户;ugo可同时使用，如：chmod ug+x file
+    +/-/=  #分别表示增加/去除/设定
+    mode   #可选r/w/x/s，表示读/写/执行/特殊权限
+chmod a+x file          #所有用户增加执行权限;
+chmod a+x,go-wx file    #多种模式逗号隔开，逐条执行;等价于chmod u+x,go-wx file
+chmod a=r file          #设定所有用户对file只有读权限;等价于chmod 444 file
+chmod 755 file          #数字分别表示u/g/o的权限;r/w/x分别表示4/2/1，各自权限加起来
+chgrp group file        #change group ownership;设定文件(夹)所属组;组名需在/etc/group;文件(夹)所属者和root可使用
+chgrp gid file          #同上，gid表示group的组ID
+chgrp -R group dir      #设定文件夹及其子文件(夹)所属组;-R选项不加只作用于此文件夹
+chown user:group file   #change group ownership;设定文件(夹)的属组;文件(夹)属主和root可使用
+chown -R user:group dir #递归设置属主和属组
+chown user: file        #适用于属主和属组名称一致的;等价于chown user:user file
+chown user file         #设定文件属主
+chown :group file       #设定文件属组
 
 ##系统资源
-ps -ef | grep java   #snaps of prosess;搜索含java的进程，其他类似;标准语法
+df         #disk file system;查看文件系统使用情况
+df -i      #以inode(文件索引节点)显示
+df -h/k/m  #以易读/KB(默认)/MB显示
+df -l      #只显示本地文件系统
+df -T      #显示文件系统类型
+du                   #文件(夹)空间占用;默认递归显示当前文件夹下文件(夹)占用空间
+du -h/b/k/m          #以易读/Byte/KB(默认)/MB递归显示当前文件夹下文件(夹)占用空间
+du -h/b/k/m file/dir #指定显示特定文件或文件夹，其余同上;文件或文件夹可跟多个   
+du -sh               #以易读方式显示当前文件夹占用总空间
+du -sh *             #以易读方式显示当前文件夹每个文件或文件夹(汇总)占用空间
+ps -ef | grep java   #snaps of prosess;搜索含java的进程快照，其他类似;标准语法
 ps [-]aux |grep java #同上一条类似;BSD发行版语法
-free [-h/k/m]        #以易读/KB/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
+free [-h/k/m]        #以易读/KB(默认)/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
 top                  #实时查看系统资源使用情况
+watch 'command'            #每2秒执行一次command;可用于监控网络，文件，用户登录情况等等
+watch -n m 'command'       #每m秒执行一次command
+watch -n m -d 'command'    #每m秒执行一次command，变化部分会高亮显示
+watch -n 1 -d netstat -ant #每1秒显示网络连接数情况
+vmstat                     #虚拟内存统计;可对操作系统的虚拟内存、进程、CPU活动进行监控
 
 ##打包压缩
 tar [-]cvf file.tar dir  #打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程，可不加
