@@ -194,6 +194,15 @@ watch -n m 'command'       #每m秒执行一次command
 watch -n m -d 'command'    #每m秒执行一次command，变化部分会高亮显示
 watch -n 1 -d netstat -ant #每1秒显示网络连接数情况
 vmstat                     #虚拟内存统计;可对操作系统的虚拟内存、进程、CPU活动进行监控
+lsof                       #查看当前系统打开文件(linux一切皆文件)的情况
+lsof /bin/bash             #查看正在使用/bin/bash的进程情况
+lsof /home                 #查看正在使用/home的情况
+lsof -u [^]username        #查看[除了]某个用户打开文件状况
+lsof -c bash               #查看命令bash开头的文件打开情况
+lsof -c a -c b             #查看命令a或b开头的文件打开情况
+lsof -p 1[,2,3]            #按照一个或多个进程号查看文件打开情况
+lsof -i [tcp/udp]          #查看所有网络[tcp/udp]连接情况
+lsof -i [tcp]:8080         #查看指定[TCP]端口使用情况
 
 ##打包压缩
 tar [-]cvf file.tar dir  #打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程，可不加
@@ -201,30 +210,34 @@ tar xvf file.tar         #解包;x表示extract(提取)，f表示指定文件;�
 tar -tf file.tar         #查看包中文件
 tar zcvf file.tar.gz dir #打包并压缩，压缩包结尾可能是.tgz，dir为文件或文件夹列表(空格隔开)
 tar zxvf file.tar.gz     #解压并解包，压缩包结尾可能是.tgz
-gzip file1 file2         #压缩，压缩完成会删除每个原文件;压缩后文件名为file.gz
-gzip -rv dir             #递归压缩dir下所有文件及子文件夹的文件
-gzip -d file.gz          #解压，解压完成会删除.gz文件
-gzip -rd dir             #递归解压dir下所有压缩文件
-gzip -l file.gz          #查看每个压缩文件信息(文件名/压缩前后大小/压缩率);不解压
-gunzip file.gz           #解压，同上
-compress file            #压缩,比较古老的unix/linux命令;不常用，现在gzip应用更广泛
-compress -d file.Z       #解压
-uncompress file.Z        #同上
+gzip file1 file2    #压缩，压缩完成会删除每个原文件;压缩后文件名为file.gz
+gzip -rv dir        #递归压缩dir下所有文件及子文件夹的文件
+gzip -d file.gz     #解压，解压完成会删除.gz文件
+gzip -rd dir        #递归解压dir下所有压缩文件
+gzip -l file.gz     #查看每个压缩文件信息(文件名/压缩前后大小/压缩率);不解压
+gunzip file.gz      #解压，同上
+compress file       #压缩,比较古老的unix/linux命令;不常用，现在gzip应用更广泛
+compress -d file.Z  #解压
+uncompress file.Z   #同上
 
+##网络相关
+ifconfig               #查看网络设备(已激活)信息;部分发行版(CentOS7等)无此命令
+ifconfig ens33 up/down #启动或关闭ens33(网络设备，一般是网卡)
+ifconfig eth0 add/del 33ffe:3240:800:1005::2/64 #为eth0(网卡)配置或删除IPv6地址
+ifconfig eth0 hw ether 00:AA:BB:CC:DD:EE        #设置(修改)eth0的Mac地址
+####临时设置IPv4地址;建议通过修改配置文件实现，通过ifconfig修改的配置重启就不存在
+ifconfig eth0 192.168.1.56 [netmask 255.255.255.0] [broadcast 192.168.1.255]
+ifconfig eth0 arp/-arp  #开启和关闭eth0的arp协议
+ifconfig eth0 mtu 1500  #设置最大传输单元
 
-ps/watch/top       #查看程序运行命令
-free/vmstat/iostat/netstat  #内存/虚拟内存/系统IO/网络 监控
-lsof               #查看文件(普通文件/目录/网络文件等)打开情况
+##计划任务后台
+at
+crontab   
+&
+
 at/crontab         #设置计划任务
-chmod/chgrp/chown  #设置文件权限
-df/du              #磁盘文件空间大小
-whereis            #查看文件的位置 
 locate             #配合数据库查看文件位置
-find               #实际搜寻硬盘查询文件名称
-ifconfig           #网络配置信息
-ping               #测试主机连通性
-traceroute         #到达指定主机网络路径
-ss                 #socket统计信息
+
 ln                 #创建软(-s)/硬链接
 cut -b/c/d file    #按字节/字符/自定义分隔符切割文本
 sort               #文本排序
