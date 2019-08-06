@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f7c7686-463c-4dc8-aa02-56996be22f31" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../linux/linux.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../linux/linux.txt" afterDir="false" />
-    </list>
+    <list default="true" id="8f7c7686-463c-4dc8-aa02-56996be22f31" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -119,8 +116,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0040_CombinationSumII.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="86" column="5" lean-forward="true" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
+            <state relative-caret-position="301">
+              <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
               <folding>
                 <element signature="e#1857#1872#0" expanded="true" />
                 <element signature="e#1975#1984#0" expanded="true" />
@@ -395,12 +392,12 @@
       <workItem from="1564620578614" duration="10133000" />
       <workItem from="1564969396998" duration="3547000" />
       <workItem from="1565008417860" duration="615000" />
-      <workItem from="1565057501003" duration="9720000" />
+      <workItem from="1565057501003" duration="10027000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33399000" />
+    <option name="totallyTimeSpent" value="33706000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="449" y="0" width="1355" height="744" extended-state="0" />
@@ -828,8 +825,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0040_CombinationSumII.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="86" column="5" lean-forward="true" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
+        <state relative-caret-position="301">
+          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
           <folding>
             <element signature="e#1857#1872#0" expanded="true" />
             <element signature="e#1975#1984#0" expanded="true" />
