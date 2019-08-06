@@ -79,7 +79,7 @@ docker stats --no-stream | sort -k8 -h  //统计容器信息并以使用流量�
 docker system df      //显示硬盘占用
 docker system events  //显示容器的实时事件
 docker system info    //显示系统信息
-docker system prune   //清理文件
+docker system prune   //清理文件  
 docker top ${CONTAINER NAME/ID}  //显示容器本身的top信息，类似于Linux top，更简洁
 docker logs ${CONTAINER NAME/ID} //显示运行容器的日志
 

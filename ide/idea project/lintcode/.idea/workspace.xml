@@ -116,7 +116,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0040_CombinationSumII.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
+            <state relative-caret-position="446">
               <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
               <folding>
                 <element signature="e#1857#1872#0" expanded="true" />
@@ -207,7 +207,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="449" />
+    <option name="x" value="-96" />
     <option name="width" value="1355" />
     <option name="height" value="744" />
   </component>
@@ -392,16 +392,15 @@
       <workItem from="1564620578614" duration="10133000" />
       <workItem from="1564969396998" duration="3547000" />
       <workItem from="1565008417860" duration="615000" />
-      <workItem from="1565057501003" duration="10027000" />
+      <workItem from="1565057501003" duration="10367000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33706000" />
+    <option name="totallyTimeSpent" value="34046000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="449" y="0" width="1355" height="744" extended-state="0" />
-    <editor active="true" />
+    <frame x="-96" y="0" width="1355" height="744" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13976835" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -413,7 +412,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977307" visible="true" weight="0.3622951" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977307" weight="0.3622951" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -825,7 +824,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0040_CombinationSumII.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
+        <state relative-caret-position="446">
           <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
           <folding>
             <element signature="e#1857#1872#0" expanded="true" />
