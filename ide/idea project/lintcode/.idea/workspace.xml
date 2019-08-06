@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8f7c7686-463c-4dc8-aa02-56996be22f31" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../idea.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../idea.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../linux/shell/shell-program.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../linux/shell/shell-program.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../linux/linux.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../linux/linux.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -20,19 +19,58 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0031_NextPermutation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+            <state relative-caret-position="323">
+              <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0022_GenerateParenthesis.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0032_LongestValidParentheses.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1206">
-              <caret line="68" column="5" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+            <state relative-caret-position="171">
+              <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+              <folding>
+                <element signature="e#227#238#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0033_SearchRotatedSortedArray.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="370">
+              <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0034_FindFirstandLastPositionofElementinSortedArray.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="35">
+              <caret line="97" column="30" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0035_SearchInsertPosition.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1083">
+              <caret line="57" column="9" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0036_ValidSudoku.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1976">
+              <caret line="104" column="61" selection-start-line="104" selection-start-column="61" selection-end-line="104" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,75 +79,51 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0023_MergeKLists.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0037_SolveSudoku.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2430">
-              <caret line="135" column="22" selection-start-line="135" selection-start-column="19" selection-end-line="135" selection-end-column="22" />
+            <state relative-caret-position="380">
+              <caret line="38" column="37" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0024_SwapPairs.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0038_CountAndSay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+            <state relative-caret-position="285">
+              <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0025_ReverseKGroup.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0039_CombinationSum.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0026_RemoveDuplicates.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0027_RemoveElement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0028_IndexOfString.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="774">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0029_Divide.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1368">
-              <caret line="78" column="41" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
+            <state relative-caret-position="187">
+              <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+              <folding>
+                <element signature="e#1260#1275#0" expanded="true" />
+                <element signature="e#1433#1442#0" expanded="true" />
+                <element signature="e#1799#1808#0" expanded="true" />
+                <element signature="e#2268#2284#0" expanded="true" />
+                <element signature="e#2718#2733#0" expanded="true" />
+                <element signature="e#2862#2871#0" expanded="true" />
+                <element signature="e#3505#3520#0" expanded="true" />
+                <element signature="e#3951#3960#0" expanded="true" />
+                <element signature="e#4338#4347#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0030_LengthOfLongestSubstring.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0040_CombinationSumII.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="28" column="39" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
+            <state relative-caret-position="244">
+              <caret line="86" column="5" lean-forward="true" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1857#1872#0" expanded="true" />
+                <element signature="e#1975#1984#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -121,6 +135,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="package.json" />
+        <option value="JavaFXApplication" />
+        <option value="Gradle Kotlin DSL Build Script" />
         <option value="Class" />
       </list>
     </option>
@@ -164,6 +181,18 @@
         <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0029_Divide.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0029_Divide.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0030_LengthOfLongestSubstring.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0031_NextPermutation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/package.json" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0032_LongestValidParentheses.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0033_SearchRotatedSortedArray.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0034_Find_First_and_Last_Position_of_Element_in_Sorted_Array.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0034_FindFirstandLastPositionofElementinSortedArray.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0035_SearchInsertPosition.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0036_ValidSudoku.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0037_SolveSudoku.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0038_CountAndSay.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0039_CombinationSum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0040_CombinationSumII.java" />
       </list>
     </option>
   </component>
@@ -181,8 +210,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="485" />
-    <option name="y" value="76" />
+    <option name="x" value="449" />
     <option name="width" value="1355" />
     <option name="height" value="744" />
   </component>
@@ -194,8 +222,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -240,6 +266,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -272,33 +300,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.L_0030_LengthOfLongestSubstring">
-    <configuration name="L_0023_MergeKLists" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.lintcode.L_0023_MergeKLists" />
-      <module name="lintcode" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.wangh.lintcode.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="L_0026_RemoveDuplicates" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.lintcode.L_0026_RemoveDuplicates" />
-      <module name="lintcode" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.wangh.lintcode.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.L_0040_CombinationSumII">
     <configuration name="L_0028_IndexOfString" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.wangh.lintcode.p0001_0100.L_0028_IndexOfString" />
       <module name="lintcode" />
@@ -338,13 +340,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="L_0038_CountAndSay" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangh.lintcode.p0001_0100.L_0038_CountAndSay" />
+      <module name="lintcode" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wangh.lintcode.p0001_0100.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="L_0040_CombinationSumII" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangh.lintcode.p0001_0100.L_0040_CombinationSumII" />
+      <module name="lintcode" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wangh.lintcode.p0001_0100.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.L_0040_CombinationSumII" />
+        <item itemvalue="Application.L_0038_CountAndSay" />
         <item itemvalue="Application.L_0030_LengthOfLongestSubstring" />
         <item itemvalue="Application.L_0029_Divide" />
         <item itemvalue="Application.L_0028_IndexOfString" />
-        <item itemvalue="Application.L_0026_RemoveDuplicates" />
-        <item itemvalue="Application.L_0023_MergeKLists" />
       </list>
     </recent_temporary>
   </component>
@@ -367,16 +395,18 @@
       <workItem from="1564620578614" duration="10133000" />
       <workItem from="1564969396998" duration="3547000" />
       <workItem from="1565008417860" duration="615000" />
+      <workItem from="1565057501003" duration="9720000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23679000" />
+    <option name="totallyTimeSpent" value="33399000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="485" y="76" width="1355" height="744" extended-state="0" />
+    <frame x="449" y="0" width="1355" height="744" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13745174" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13976835" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -386,7 +416,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977307" weight="0.3622951" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977307" visible="true" weight="0.3622951" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -446,19 +476,9 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/target/classes/com/wangh/lintcode/ListNode.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/classes/com/wangh/lintcode/L_0002_AddTwoNumbers.class">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/classes/com/wangh/lintcode/L_0001_TwoSum.class">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/target/classes/com/wangh/lintcode/ListNode.class" />
+    <entry file="file://$PROJECT_DIR$/target/classes/com/wangh/lintcode/L_0002_AddTwoNumbers.class" />
+    <entry file="file://$PROJECT_DIR$/target/classes/com/wangh/lintcode/L_0001_TwoSum.class" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0001_TwoSum.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="882">
@@ -649,14 +669,14 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0029_Divide.fxml" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
+        <state relative-caret-position="399">
           <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0022_GenerateParenthesis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1206">
+        <state relative-caret-position="1273">
           <caret line="68" column="5" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -666,59 +686,153 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0023_MergeKLists.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2430">
+        <state relative-caret-position="2565">
           <caret line="135" column="22" selection-start-line="135" selection-start-column="19" selection-end-line="135" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0024_SwapPairs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
+        <state relative-caret-position="456">
           <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0025_ReverseKGroup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
+        <state relative-caret-position="684">
           <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0026_RemoveDuplicates.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
+        <state relative-caret-position="247">
           <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0027_RemoveElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
+        <state relative-caret-position="589">
           <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0028_IndexOfString.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
+        <state relative-caret-position="817">
           <caret line="43" selection-start-line="43" selection-end-line="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0029_Divide.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1368">
+        <state relative-caret-position="1444">
           <caret line="78" column="41" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0030_LengthOfLongestSubstring.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="28" column="39" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
+        <state relative-caret-position="408">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0031_NextPermutation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0033_SearchRotatedSortedArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0032_LongestValidParentheses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+          <folding>
+            <element signature="e#227#238#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0036_ValidSudoku.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1976">
+          <caret line="104" column="61" selection-start-line="104" selection-start-column="61" selection-end-line="104" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0034_FindFirstandLastPositionofElementinSortedArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="97" column="30" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0035_SearchInsertPosition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1083">
+          <caret line="57" column="9" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0037_SolveSudoku.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="38" column="37" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0038_CountAndSay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0039_CombinationSum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+          <folding>
+            <element signature="e#1260#1275#0" expanded="true" />
+            <element signature="e#1433#1442#0" expanded="true" />
+            <element signature="e#1799#1808#0" expanded="true" />
+            <element signature="e#2268#2284#0" expanded="true" />
+            <element signature="e#2718#2733#0" expanded="true" />
+            <element signature="e#2862#2871#0" expanded="true" />
+            <element signature="e#3505#3520#0" expanded="true" />
+            <element signature="e#3951#3960#0" expanded="true" />
+            <element signature="e#4338#4347#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0040_CombinationSumII.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="86" column="5" lean-forward="true" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
+          <folding>
+            <element signature="e#1857#1872#0" expanded="true" />
+            <element signature="e#1975#1984#0" expanded="true" />
           </folding>
         </state>
       </provider>

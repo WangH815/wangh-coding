@@ -221,6 +221,7 @@ compress -d file.Z  #解压
 uncompress file.Z   #同上
 
 ##网络相关
+ip a                   #查看网络设备(已激活)信息
 ifconfig               #查看网络设备(已激活)信息;部分发行版(CentOS7等)无此命令
 ifconfig ens33 up/down #启动或关闭ens33(网络设备，一般是网卡)
 ifconfig eth0 add/del 33ffe:3240:800:1005::2/64 #为eth0(网卡)配置或删除IPv6地址
