@@ -43,16 +43,17 @@ type command      #判断命令类型;内置命令会提示 command is a shell b
 2.命令 + 空格 + Tab #提示命令选项或参数(文件或文件夹)
 
 ##用户及权限
-adduser username                #增加用户，默认添加 /home/username 目录等
-useradd username                #增加用户，不添加用户家目录
-groupadd groupname              #增加用户组
-usermod -aG groupname username  #user modify;将用户增加到用户组(多个用户组可用逗号隔开)
-su [username]                   #switch user;简单切换用户，不加载环境变量;不跟用户名默认切换到root
-su - [username]                 #切换登录用户，加载环境变量;不跟用户名默认切换到root
-su -l/--logon username          #同上
-sudo passwd root                #switch user do(execute);ubuntu启用root用户
-passwd [-u] [username]          #root用户修改指定用户密码，-u可不加;不跟用户名默认修改当前用户密码
-id [username]                   #显示指定用户uid、gid和groups等信息，不跟用户名显示当前用户相关信息
+adduser username        #增加用户，默认添加 /home/username 目录等
+useradd username        #增加用户，不添加用户家目录
+groupadd groupname      #增加用户组
+usermod -aG gname uname #user modify;将用户增加到用户组(多个用户组可用逗号隔开)
+su [username]           #switch user;简单切换用户，不加载环境变量;不跟用户名默认切换到root
+su - [username]         #切换登录用户，加载环境变量;不跟用户名默认切换到root
+su -l/--logon username  #同上
+sudo passwd root        #switch user do(execute);ubuntu启用root用户
+passwd [-u] [username]  #root用户修改指定用户密码，-u可不加;不跟用户名默认修改当前用户密码
+id [username]           #显示指定用户uid、gid和groups等信息，不跟用户名显示当前用户相关信息
+write user [ttyname]    #向其他用户发送给信息(message)，ttyname可以使用w查询，Ctrl + c结束
 
 ##文件目录操作
 ls -ltr [dir]  #list;按时间倒序排列指定文件夹下列表;默认显示当前文件夹列表非隐藏文件
@@ -69,6 +70,7 @@ pwd            #print working directory;打印当前工作目录绝对路径
 mkdir [path/]dir        #make directory;创建文件夹，多文件夹可空格隔开;要求上层目录必须存在
 mkdir -p dir1/dir2      #同上，不要st求上层目录存在;不存在会创建多级目录
 mkdir -p a/{b,c/{d,e}}  #创建复杂目录
+mkdir -p {q,w}a{e,r}    #创建qae/qar/wae/war四个目录
 mkdir -m 777 dir        #创建指定权限目录
 rmdir dir               #remove empty directory;删除空文件夹;多文件空格隔开
 rm file             #remove;删除文件;多文件空格隔开
@@ -236,8 +238,12 @@ at
 crontab   
 &
 
-at/crontab         #设置计划任务
-locate             #配合数据库查看文件位置
+##文件下载和传输
+curl -O url         #下载文件;O大写，不用O只是打印内容不会下载
+curl -O newname url #下载并重命名
+wget -o newname url #同上
+wget url            #下载文件
+
 
 ln                 #创建软(-s)/硬链接
 cut -b/c/d file    #按字节/字符/自定义分隔符切割文本
@@ -245,10 +251,9 @@ sort               #文本排序
 sed -a/d/c/i       #文本增删改查
 split              #按照指定行数或字节数切割大文件
 wc -c/m/l          #按照字节/字符/行数统计文本
-write user [ttyname]                 #向其他用户发送给信息(message)，ttyname可以使用who查询，Ctrl + c结束
-time [options] COMMAND [arguments]   #测量命令运行时间
-xargs [options] [command [options]]  #捕获命令输出作为其他命令标准输入
-command [options] | xargs [options]  #主要适用于不支持管道(|)的命令
+write user [ttyname]  #向其他用户发送给信息(message)，ttyname可以使用who查询，Ctrl + c结束
+#主要适用于不支持管道(|)的命令
+command [options] | xargs [options] [command [options]]   
 bc                                   #计算器模式，quit退出
 lscpu                                #显示cpu相关信息
 
@@ -305,7 +310,7 @@ J    #合并光标行与下一行，空格隔开
 以下为命令模式切换到输入模式
 i/I     #光标处输入/光标所在行第一个非空格(一般就是行首)处输入
 a/A     #光标处下一个字符处输入/光标所在行行尾处输入
-o/O     #光标下一行/
+o/O     #光标行之后/之前插入一行
 r/R     #替换光标处字符一次/一直替换光标处字符，直到按下Esc
 
 Insert  #功能键Insert用于输入模式中切换追加还是替换模式
@@ -316,6 +321,8 @@ ESC     #功能键ESC用于退出输入模式到命令模式
 n/N          #执行上一个搜索命令/执行上一个方向相反的搜索命令
 :set nu      #设置行号
 :set nonu    #取消行号
+:set ignorecase   #忽略大小写查找
+:set noignorecase #取消忽略
 :wq          #保存并退出。w,q可单独使用，!表示强制
 :x           #同上
 ZZ           #同上
