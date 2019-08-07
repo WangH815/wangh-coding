@@ -7,14 +7,14 @@ Docker支持将软件编译成一个镜像（image），在这个镜像里做好
 
 
 #常见操作
-docker ps                                   //查看正在运行的容器
-docker images                               //查看本地镜像，等价于docker image ls
+docker ps         //查看正在运行的容器
+docker images     //查看本地镜像
+docker image ls   //同上
 docker pull CONTAINER_NAME[:VERSION]        //从镜像站拉取镜像，默认拉取最新稳定版；可指定版本
 docker inspect CONTAINER_NAME[:VERSION]/ID  //查看本地镜像详细信息，可通过容器名或ID
 
 
-
-#使用教程
+#使用教程 
 环境：Ubuntu 18.04
 
 1.安装和卸载docker      //可暂时将阿里镜像源改为官方源
@@ -28,9 +28,10 @@ service docker stop      //停止
 service docker restart   //重启
 docker info              //查看docker概要信息
 
-3.docker使用权限
-groupadd docker  //可使用 cat /etc/group | grep docker 查看是否有docker用户组，如已存在可不执行
-usermod -aG docker wangh  //将用户wangh添加到docker用户组中
+3.增加其他用户使用docker的权限
+cat /etc/group | grep docker  //查看docker组是否存在
+groupadd docker               //增加docker;root操作
+usermod -aG docker username   //将用户用户添加到docker用户组中;root操作
 
 4.镜像源
 vi /etc/docker/daemon.json  //没有则创建此文件，重启docker后生效
@@ -79,7 +80,7 @@ docker stats --no-stream | sort -k8 -h  //统计容器信息并以使用流量�
 docker system df      //显示硬盘占用
 docker system events  //显示容器的实时事件
 docker system info    //显示系统信息
-docker system prune   //清理文件
+docker system prune   //清理文件  
 docker top ${CONTAINER NAME/ID}  //显示容器本身的top信息，类似于Linux top，更简洁
 docker logs ${CONTAINER NAME/ID} //显示运行容器的日志
 

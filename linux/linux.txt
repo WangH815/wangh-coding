@@ -43,16 +43,17 @@ type command      #判断命令类型;内置命令会提示 command is a shell b
 2.命令 + 空格 + Tab #提示命令选项或参数(文件或文件夹)
 
 ##用户及权限
-adduser username                #增加用户，默认添加 /home/username 目录等
-useradd username                #增加用户，不添加用户家目录
-groupadd groupname              #增加用户组
-usermod -aG groupname username  #user modify;将用户增加到用户组(多个用户组可用逗号隔开)
-su [username]                   #switch user;简单切换用户，不加载环境变量;不跟用户名默认切换到root
-su - [username]                 #切换登录用户，加载环境变量;不跟用户名默认切换到root
-su -l/--logon username          #同上
-sudo passwd root                #switch user do(execute);ubuntu启用root用户
-passwd [-u] [username]          #root用户修改指定用户密码，-u可不加;不跟用户名默认修改当前用户密码
-id [username]                   #显示指定用户uid、gid和groups等信息，不跟用户名显示当前用户相关信息
+adduser username        #增加用户，默认添加 /home/username 目录等
+useradd username        #增加用户，不添加用户家目录
+groupadd groupname      #增加用户组
+usermod -aG gname uname #user modify;将用户增加到用户组(多个用户组可用逗号隔开)
+su [username]           #switch user;简单切换用户，不加载环境变量;不跟用户名默认切换到root
+su - [username]         #切换登录用户，加载环境变量;不跟用户名默认切换到root
+su -l/--logon username  #同上
+sudo passwd root        #switch user do(execute);ubuntu启用root用户
+passwd [-u] [username]  #root用户修改指定用户密码，-u可不加;不跟用户名默认修改当前用户密码
+id [username]           #显示指定用户uid、gid和groups等信息，不跟用户名显示当前用户相关信息
+write user [ttyname]    #向其他用户发送给信息(message)，ttyname可以使用w查询，Ctrl + c结束
 
 ##文件目录操作
 ls -ltr [dir]  #list;按时间倒序排列指定文件夹下列表;默认显示当前文件夹列表非隐藏文件
@@ -69,6 +70,7 @@ pwd            #print working directory;打印当前工作目录绝对路径
 mkdir [path/]dir        #make directory;创建文件夹，多文件夹可空格隔开;要求上层目录必须存在
 mkdir -p dir1/dir2      #同上，不要st求上层目录存在;不存在会创建多级目录
 mkdir -p a/{b,c/{d,e}}  #创建复杂目录
+mkdir -p {q,w}a{e,r}    #创建qae/qar/wae/war四个目录
 mkdir -m 777 dir        #创建指定权限目录
 rmdir dir               #remove empty directory;删除空文件夹;多文件空格隔开
 rm file             #remove;删除文件;多文件空格隔开
@@ -194,6 +196,15 @@ watch -n m 'command'       #每m秒执行一次command
 watch -n m -d 'command'    #每m秒执行一次command，变化部分会高亮显示
 watch -n 1 -d netstat -ant #每1秒显示网络连接数情况
 vmstat                     #虚拟内存统计;可对操作系统的虚拟内存、进程、CPU活动进行监控
+lsof                       #查看当前系统打开文件(linux一切皆文件)的情况
+lsof /bin/bash             #查看正在使用/bin/bash的进程情况
+lsof /home                 #查看正在使用/home的情况
+lsof -u [^]username        #查看[除了]某个用户打开文件状况
+lsof -c bash               #查看命令bash开头的文件打开情况
+lsof -c a -c b             #查看命令a或b开头的文件打开情况
+lsof -p 1[,2,3]            #按照一个或多个进程号查看文件打开情况
+lsof -i [tcp/udp]          #查看所有网络[tcp/udp]连接情况
+lsof -i [tcp]:8080         #查看指定[TCP]端口使用情况
 
 ##打包压缩
 tar [-]cvf file.tar dir  #打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程，可不加
@@ -201,40 +212,48 @@ tar xvf file.tar         #解包;x表示extract(提取)，f表示指定文件;�
 tar -tf file.tar         #查看包中文件
 tar zcvf file.tar.gz dir #打包并压缩，压缩包结尾可能是.tgz，dir为文件或文件夹列表(空格隔开)
 tar zxvf file.tar.gz     #解压并解包，压缩包结尾可能是.tgz
-gzip file1 file2         #压缩，压缩完成会删除每个原文件;压缩后文件名为file.gz
-gzip -rv dir             #递归压缩dir下所有文件及子文件夹的文件
-gzip -d file.gz          #解压，解压完成会删除.gz文件
-gzip -rd dir             #递归解压dir下所有压缩文件
-gzip -l file.gz          #查看每个压缩文件信息(文件名/压缩前后大小/压缩率);不解压
-gunzip file.gz           #解压，同上
-compress file            #压缩,比较古老的unix/linux命令;不常用，现在gzip应用更广泛
-compress -d file.Z       #解压
-uncompress file.Z        #同上
+gzip file1 file2    #压缩，压缩完成会删除每个原文件;压缩后文件名为file.gz
+gzip -rv dir        #递归压缩dir下所有文件及子文件夹的文件
+gzip -d file.gz     #解压，解压完成会删除.gz文件
+gzip -rd dir        #递归解压dir下所有压缩文件
+gzip -l file.gz     #查看每个压缩文件信息(文件名/压缩前后大小/压缩率);不解压
+gunzip file.gz      #解压，同上
+compress file       #压缩,比较古老的unix/linux命令;不常用，现在gzip应用更广泛
+compress -d file.Z  #解压
+uncompress file.Z   #同上
+
+##网络相关
+ip a                   #查看网络设备(已激活)信息
+ifconfig               #查看网络设备(已激活)信息;部分发行版(CentOS7等)无此命令
+ifconfig ens33 up/down #启动或关闭ens33(网络设备，一般是网卡)
+ifconfig eth0 add/del 33ffe:3240:800:1005::2/64 #为eth0(网卡)配置或删除IPv6地址
+ifconfig eth0 hw ether 00:AA:BB:CC:DD:EE        #设置(修改)eth0的Mac地址
+####临时设置IPv4地址;建议通过修改配置文件实现，通过ifconfig修改的配置重启就不存在
+ifconfig eth0 192.168.1.56 [netmask 255.255.255.0] [broadcast 192.168.1.255]
+ifconfig eth0 arp/-arp  #开启和关闭eth0的arp协议
+ifconfig eth0 mtu 1500  #设置最大传输单元
+
+##计划任务后台
+at
+crontab   
+&
+
+##文件下载和传输
+curl -O url         #下载文件;O大写，不用O只是打印内容不会下载
+curl -O newname url #下载并重命名
+wget -o newname url #同上
+wget url            #下载文件
 
 
-ps/watch/top       #查看程序运行命令
-free/vmstat/iostat/netstat  #内存/虚拟内存/系统IO/网络 监控
-lsof               #查看文件(普通文件/目录/网络文件等)打开情况
-at/crontab         #设置计划任务
-chmod/chgrp/chown  #设置文件权限
-df/du              #磁盘文件空间大小
-whereis            #查看文件的位置 
-locate             #配合数据库查看文件位置
-find               #实际搜寻硬盘查询文件名称
-ifconfig           #网络配置信息
-ping               #测试主机连通性
-traceroute         #到达指定主机网络路径
-ss                 #socket统计信息
 ln                 #创建软(-s)/硬链接
 cut -b/c/d file    #按字节/字符/自定义分隔符切割文本
 sort               #文本排序
 sed -a/d/c/i       #文本增删改查
 split              #按照指定行数或字节数切割大文件
 wc -c/m/l          #按照字节/字符/行数统计文本
-write user [ttyname]                 #向其他用户发送给信息(message)，ttyname可以使用who查询，Ctrl + c结束
-time [options] COMMAND [arguments]   #测量命令运行时间
-xargs [options] [command [options]]  #捕获命令输出作为其他命令标准输入
-command [options] | xargs [options]  #主要适用于不支持管道(|)的命令
+write user [ttyname]  #向其他用户发送给信息(message)，ttyname可以使用who查询，Ctrl + c结束
+#主要适用于不支持管道(|)的命令
+command [options] | xargs [options] [command [options]]   
 bc                                   #计算器模式，quit退出
 lscpu                                #显示cpu相关信息
 
@@ -291,7 +310,7 @@ J    #合并光标行与下一行，空格隔开
 以下为命令模式切换到输入模式
 i/I     #光标处输入/光标所在行第一个非空格(一般就是行首)处输入
 a/A     #光标处下一个字符处输入/光标所在行行尾处输入
-o/O     #光标下一行/
+o/O     #光标行之后/之前插入一行
 r/R     #替换光标处字符一次/一直替换光标处字符，直到按下Esc
 
 Insert  #功能键Insert用于输入模式中切换追加还是替换模式
@@ -302,6 +321,8 @@ ESC     #功能键ESC用于退出输入模式到命令模式
 n/N          #执行上一个搜索命令/执行上一个方向相反的搜索命令
 :set nu      #设置行号
 :set nonu    #取消行号
+:set ignorecase   #忽略大小写查找
+:set noignorecase #取消忽略
 :wq          #保存并退出。w,q可单独使用，!表示强制
 :x           #同上
 ZZ           #同上
