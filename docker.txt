@@ -129,7 +129,7 @@ Mysql5.7部署
 1.下载镜像
 docker pull mysql:5.7
 2.创建守护容器
-docker run -di --name docker_mysql -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root mysql:5.7
+docker run -di --name docker_mysql5.7 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root mysql:5.7
 -p 代表端口映射，格式为 宿主机映射端口:容器运行端口
 -e 代表添加环境变量， MYSQL_ROOT_PASSWORD是root用户的登录密码
 3.登录容器
