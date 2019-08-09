@@ -6,6 +6,7 @@ Ctrl + Alt + L          //代码格式化
 Ctrl + d                //复制光标所在行到下一行
 Alt + Insert            //新建文件
 Alt + F6                //重命名
+Alt + Enter             //导入包
 
 
 sout       //快捷输出print()，一般输入so就有提示
