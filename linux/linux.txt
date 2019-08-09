@@ -319,9 +319,6 @@ rcp
 scp
 rsync
 
-##数据处理
-
-
 ##其他命令
 sudo command          #以系统管理员(root)身份运行命令
 sudo -u user command  #以指定用户身份执行命令
