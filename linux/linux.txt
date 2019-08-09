@@ -24,7 +24,9 @@ Linux使用
 
 
 #常用基础命令
-1.主要来源 https:#www.yiibai.com/linux  #易百教程Linux部分
+1.主要来源 
+  https:#www.yiibai.com/linux                       #易百教程
+  https://www.runoob.com/linux/linux-tutorial.html  #菜鸟教程  
 2.在上一条的基础上精简，只保留常用部分;还有部分是平时工作中能用的命令及技巧
 3.命令注释会给出相对完整的名称(非官方);见名知意的命令不说明
 4.file表示文件名，dir表示文件夹名称
@@ -83,21 +85,38 @@ mv file dir1 dir2   #移动文件或文件夹到指定目录(dir2);要求dir2必
 mv dir1 dir2        #移动或重命名，要求dir1必须存在;dir2存在表示移动否则表示重命名
 cp file1 file2      #copy;复制file1为file2;要求file1必须存在，file存在时会提示覆盖
 cp file dir         #复制并移动file到dir;要求file和dir存在;dir不存在时同上
-touch file     #摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
-touch -t       #设定文件时间戳，如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
-vi file        #文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
-cat file       #concatenate;显示文件内容
-cat -n file    #带行号输出
-view file      #只读模式查看文件;其他操作见vi
-head file      #显示文件开始10行
-head -n file   #显示文件开始n行
-tail file      #显示文件最后10行
-tail -n file   #显示文件最后n行
-tail -f file   #循环读取某文件最后10行，一般用于文件实时查看
-tail -nf file  #循环读取某文件最后n行
-more file      #分页查看文件，一次性加载，空格/b 翻页;大文件不建议使用
-less file      #分页查看文件，逐步加载，空格/b PgUp/PgDn 翻页
-file file      #显示文件或文件夹类型
+touch file       #摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
+touch -t         #设定文件时间戳，如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
+vi file          #文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
+cat file         #concatenate;显示文件内容
+cat -n file      #带行号输出
+view file        #只读模式查看文件;其他操作见vi
+head file        #显示文件开始10行
+head -n file     #显示文件开始n行
+tail file        #显示文件最后10行
+tail -n file     #显示文件最后n行
+tail -f file     #循环读取某文件最后10行，一般用于文件实时查看
+tail -nf file    #循环读取某文件最后n行
+more file        #分页查看文件，一次性加载，空格/b 翻页;大文件不建议使用
+less file        #分页查看文件，逐步加载，空格/b PgUp/PgDn 翻页
+file file        #显示文件或文件夹类型
+diff file1 file2 #文件差异对比
+ln file link     #创建file的硬连接(hard link,符号链接)为link
+ln -s file link  #创建file的软连接(symbolic link,符号链接)为link
+    #软链接：
+     1.软链接，以路径的形式存在。类似于Windows操作系统中的快捷方式
+     2.软链接可以 跨文件系统 ，硬链接不可以
+     3.软链接可以对一个不存在的文件名进行链接
+     4.软链接可以对目录进行链接
+    #硬链接：
+     1.硬链接，以文件副本的形式存在。但不占用实际空间。
+     2.不允许给目录创建硬链接
+     3.硬链接只有在同一个文件系统中才能创建
+cut -b/c/d file    #按字节/字符/自定义分隔符切割文本
+sort               #文本排序
+sed -a/d/c/i       #文本增删改查
+split              #按照指定行数或字节数切割大文件
+wc -c/m/l          #按照字节/字符/行数统计文本
 
 #文件查找
 which command           #查找命令位置;返回用户PATH变量中第一个匹配位置
@@ -155,6 +174,8 @@ find . -name 'xa*'|grep -v xaa|xargs rm -rf    #删除当前目录下所有除�
 find . -perm 755 -exec ls -ltr {} \;           #显示所有权限是755的文件(夹)
 find . -size +512k                             #大于512k的文件
 find . -type f -print | xargs rm -f            #逐条所有文件，不存在rm参数过长问题
+###捕获命令输出;主要适用于第一个command不是标准输出的后续处理
+command [options] | xargs [options] [command [options]] 
 
 ##文件权限
 chmod [-R] [who] [+/-/=][mode] file/dir  #change file mode bits;文件(夹)属主和root可使用
@@ -211,6 +232,9 @@ lsof -c a -c b             #查看命令a或b开头的文件打开情况
 lsof -p 1[,2,3]            #按照一个或多个进程号查看文件打开情况
 lsof -i [tcp/udp]          #查看所有网络[tcp/udp]连接情况
 lsof -i [tcp]:8080         #查看指定[TCP]端口使用情况
+lscpu      #显示CPU信息
+lshw       #显示所有硬件信息
+uname -a   #显示系统信息                      
 
 ##打包压缩
 tar [-]cvf file.tar dir  #打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程，可不加
@@ -255,11 +279,32 @@ ss -at[n]         #显示所有tcp的socket统计信息;-n表示local address显
 ss -s             #显示汇总(摘要)信息
 ss -l[p]          #显示所有的网络端口;-p显示进程
 
-
 ##计划任务后台
-at
-crontab   
-&
+at                         #指定一个时间执行一个任务，只能执行一次
+crontab [-u user] file     #周期性的执行任务(脚本或其他命令等);file为任务文件，规则见Example
+crontab [-u user] [-e|l|r] #参数分别是显示/编辑/删除(所有)某个用户自动任务;默认处理登录用户的自动任务
+
+    # Example of job definition:
+    # .---------------- 分钟(minute) (0 - 59)
+    # |  .------------- 小时 hour (0 - 23)
+    # |  |  .---------- 一个月中的第几天 day of month (1 - 31)
+    # |  |  |  .------- 月份 month (1 - 12) OR jan,feb,mar,apr ...
+    # |  |  |  |  .---- 周几 day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+    # |  |  |  |  |
+    # *  *  *  *  * username  command 
+### Examples
+### , - / 可组合使用，范围见上面job定义
+* * * * * sh /home/wangh/run.sh      #每分钟执行一次脚本
+1,3,5 * * * * sh /home/wangh/run.sh  #每小时的第1,3,5分执行
+0-30 * * * * sh /home/wanh/run.sh    #每小时的前30分钟每分钟执行
+0-30/2 * * * * sh /home/wanh/run.sh  #每小时的前30分钟每2分钟执行
+nohub command  #挂起命令永久执行并输出日志到当前目录nohup.out文件中;用户退出命令不会退出
+command &      #后台运行命令;用户退出命令退出(部分命令会启动守护进程的除外)
+
+##开关机
+shutdown
+init
+reboot
 
 ##文件下载和传输
 ###命令差异见  https://blog.csdn.net/qujinhua19851006/article/details/8666254
@@ -274,19 +319,19 @@ rcp
 scp
 rsync
 
+##数据处理
 
 
-ln                 #创建软(-s)/硬链接
-cut -b/c/d file    #按字节/字符/自定义分隔符切割文本
-sort               #文本排序
-sed -a/d/c/i       #文本增删改查
-split              #按照指定行数或字节数切割大文件
-wc -c/m/l          #按照字节/字符/行数统计文本
-write user [ttyname]  #向其他用户发送给信息(message)，ttyname可以使用who查询，Ctrl + c结束
-#主要适用于不支持管道(|)的命令
-command [options] | xargs [options] [command [options]]   
-bc                                   #计算器模式，quit退出
-lscpu                                #显示cpu相关信息
+##其他命令
+sudo command          #以系统管理员(root)身份运行命令
+sudo -u user command  #以指定用户身份执行命令
+sudo -l               #显示当前用户可用sudo命令权限
+history    #显示命令历史，一般是1000条
+history n  #显示最近执行的n条命令
+!!         #执行上一条命令
+!n         #执行历史记录的第n条命令
+ctrl + r   #可搜索之前执行过的命令;用于较长命令较为实用
+
 
 
 #vi/vim 常见操作
