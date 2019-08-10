@@ -1,31 +1,32 @@
 git笔记
 
 #####常用命令######
-git config --global user.name "username"             //设置本地用户名
-git config --global user.email example@example.com   //设置github注册时的邮箱
-git init [dir]                           //初始化本地仓库，会生成.git文件夹
-git clone https://github.com/XX/XX.git   //使用HTTPS克隆仓库到本地
-git clone git@github.com:XX/XX.git       //使用ssh方式克隆仓库到本地(推荐)，需配置ssh key
-git status                 //显示本地仓库文件详细状态
-git status -s              //显示本地仓库文件简略状态
-git pull                   //同步远程仓库到本地，修改本地仓库工作开始前的第一步(重要)
-git add ./*/file           //添加所有/指定文件到暂存区;空文件夹不会添加
-git commit -m '提交内容'   //提交到本地数据库
-git push                   //同步本地仓库到远程
-git mv oldfile newfile     //重命名文件或文件夹
-git mv file dir            //移动文件
-git rm file                //删除文件
-git rm -r dir              //删除文件夹
+git config --global user.name "username"             #设置本地用户名
+git config --global user.email example@example.com   #设置github注册时的邮箱
+git init [dir]                           #初始化本地仓库，会生成.git文件夹
+git clone https:#github.com/XX/XX.git    #使用HTTPS克隆仓库到本地
+git clone git@github.com:XX/XX.git       #使用ssh方式克隆仓库到本地(推荐)，需配置ssh key
+git status                 #显示本地仓库文件详细状态
+git status -s              #显示本地仓库文件简略状态
+git pull                   #同步远程仓库到本地，修改本地仓库工作开始前的第一步(重要)
+git add ./*/file           #添加所有/指定文件到暂存区;空文件夹不会添加
+git commit -m '提交说明'   #提交到本地数据库
+git push                   #同步本地仓库到远程
+git mv oldfile newfile     #重命名文件或文件夹
+git mv file dir            #移动文件
+git rm file                #删除文件
+git rm -r dir              #删除文件夹
+git add . && git commit -m '提交说明' && git push #提交当前文件夹内容到远程仓库
 
 
 
 
 # 教程地址
-http://www.runoob.com/git/git-tutorial.html                                           //runoob教程
-http://www.runoob.com/manual/git-guide/                                               //简明教程
-https://www.yiibai.com/git/git-quick-start.html#article-start                         //易百教程
-https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/  //廖雪峰
-https://git-scm.com/book/zh/v2                                                        //官方中文操作手册
+http:#www.runoob.com/git/git-tutorial.html                                           #runoob教程
+http:#www.runoob.com/manual/git-guide/                                               #简明教程
+https:#www.yiibai.com/git/git-quick-start.html#article-start                         #易百教程
+https:#www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/  #廖雪峰
+https:#git-scm.com/book/zh/v2                                                        #官方中文操作手册
 
 
 git简介
@@ -33,7 +34,7 @@ git简介
 分布式版本控制工具
 2005年由Linux 的缔造者 Linus Torvalds开发
 主要特点：
-1.速度快   //由C语言开发
+1.速度快   #由C语言开发
 2.设计简单
 3.对非线性开发模式的强力支持(允许成千上万个并行开发的分支)
 4.完全分布式
@@ -89,9 +90,9 @@ git 用以计算校验和的机制叫做 SHA-1 散列(hash，哈希)，用于保
 6.在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。
 
 文件的三种状态
-1.已提交(committed) //表示数据已经安全的保存在本地数据库中。 
-2.已修改(modified)  //表示修改了文件，但还没保存到数据库中。 
-3.已暂存(staged)    //表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。
+1.已提交(committed) #表示数据已经安全的保存在本地数据库中。 
+2.已修改(modified)  #表示修改了文件，但还没保存到数据库中。 
+3.已暂存(staged)    #表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。
 
 三个工作区
 1.工作区：就是你在电脑里能看到的目录。
@@ -102,96 +103,96 @@ git 用以计算校验和的机制叫做 SHA-1 散列(hash，哈希)，用于保
 
 使用简介
 1.安装
-sudo yum install git      //RHEL发行版本
-sudo apt-get install git  //基于 Debian 的发行版
+sudo yum install git      #RHEL发行版本
+sudo apt-get install git  #基于 Debian 的发行版
 
 2.配置用户名和Email/config
 git config --global user.name "username"
 git config --global user.email example@example.com
-git config --global core.editor emacs     //可选，修改git默认编辑器为emacs，默认为Vim
-git config --global merge.tool vimdiff    //可选，修改差异分析工具为vimdiff
-git config --list                         //显示配置信息
+git config --global core.editor emacs     #可选，修改git默认编辑器为emacs，默认为Vim
+git config --global merge.tool vimdiff    #可选，修改差异分析工具为vimdiff
+git config --list                         #显示配置信息
 
 3.创建仓库/repository
-git init [dir]               //在指定目录初始化仓库，当不写目录时默认在当前目录初始化仓库
-git clone [repo_url] [dir]   //克隆特定版本的仓库到指定目录，repo_url为仓库地址
+git init [dir]               #在指定目录初始化仓库，当不写目录时默认在当前目录初始化仓库
+git clone [repo_url] [dir]   #克隆特定版本的仓库到指定目录，repo_url为仓库地址
 
 4.基本操作命令
-git add filename/file_list  //将一个或多个文件快照添加到缓存区，一般会多次用到
-git status                  //查看项目状态
-git diff                    //尚未缓存的改动
-git diff --cached           //查看已缓存的改动
-git diff HEAD               //查看已缓存的与未缓存的所有改动
-git diff --stat             //显示摘要而非整个 diff
-git commit                  //将缓存区内容添加到仓库中。
-git commit -m [message]     //提交修改说明
-git reset HEAD              //用于取消已缓存的内容。
-git rm <file>               //删除工作区目录中的未缓存内容
-git rm -f <file>            //如果删除之前修改过并且已经放到暂存区域的话，则必须要用强制删除选项 -f
-git rm --cached <file>      //git add的逆操作，不会删除工作区文件
-git mv                      //用于移动或重命名一个文件、目录、软连接。
+git add filename/file_list  #将一个或多个文件快照添加到缓存区，一般会多次用到
+git status                  #查看项目状态
+git diff                    #尚未缓存的改动
+git diff --cached           #查看已缓存的改动
+git diff HEAD               #查看已缓存的与未缓存的所有改动
+git diff --stat             #显示摘要而非整个 diff
+git commit                  #将缓存区内容添加到仓库中。
+git commit -m [message]     #提交修改说明
+git reset HEAD              #用于取消已缓存的内容。
+git rm <file>               #删除工作区目录中的未缓存内容
+git rm -f <file>            #如果删除之前修改过并且已经放到暂存区域的话，则必须要用强制删除选项 -f
+git rm --cached <file>      #git add的逆操作，不会删除工作区文件
+git mv                      #用于移动或重命名一个文件、目录、软连接。
 
 5.分支管理/branch
 分支模型是的git从版本控制家族中脱颖而出的主要原因
-git branch                  //列出所有分支
-git branch branchname       //创建分支，多个分支不需要多个目录
-git merge branchname        //合并分支
-git checkout branchname     //切换分支
-git checkout -b branchname  //命令来创建新分支并立即切换到该分支下
-git checkout -d branchname  //删除分支
+git branch                  #列出所有分支
+git branch branchname       #创建分支，多个分支不需要多个目录
+git merge branchname        #合并分支
+git checkout branchname     #切换分支
+git checkout -b branchname  #命令来创建新分支并立即切换到该分支下
+git checkout -d branchname  #删除分支
 
 6.提交历史的查看/log
-git log                         //查看提交历史
-git log --oneline -n            //简洁形式显示前多少条改动，-n可以不加
-git log --graph                 //开启拓扑选项，查看分支合并情况
-git log --reverse               //逆向显示
-git log --author=Linus          //按作者查看日志
-git log --before={3.weeks.ago}  //三周前
-git log --after={2018-10-10}    //指定日期之后
-git log --no-merges             //不显示合并日志
+git log                         #查看提交历史
+git log --oneline -n            #简洁形式显示前多少条改动，-n可以不加
+git log --graph                 #开启拓扑选项，查看分支合并情况
+git log --reverse               #逆向显示
+git log --author=Linus          #按作者查看日志
+git log --before={3.weeks.ago}  #三周前
+git log --after={2018-10-10}    #指定日期之后
+git log --no-merges             #不显示合并日志
 还有--since/before/until/after等选项
 
 7.标签/tag
 通过标签可以让git记住那个重要阶段提交的快照
-git tag  //查看所有标签
-git tag -a v1.0  //添加带注解的标签v1.0，-a选项可以记录标签的时间作者等信息，可以不加但推荐使用
-git tag -a v0.9 85fc7e7 //追加标签，85fc7e7为最后一个文件提交的site，可通过git log查询
+git tag                 #查看所有标签
+git tag -a v1.0         #添加带注解的标签v1.0，-a选项可以记录标签的时间作者等信息，可以不加但推荐使用
+git tag -a v0.9 85fc7e7 #追加标签，85fc7e7为最后一个文件提交的site，可通过git log查询
 
 8.远程仓库/github
 基于git的代码托管平台
-git remote add [shortname] [url]  //添加远程库
+git remote add [shortname] [url]  #添加远程库
 
 远程仓库配置步骤
-a)注册github账号，地址：https://github.com
-b)在本地生成SSH Key               //本地git仓库和gitHub仓库是通过SSH加密的
-ssh-keygen -t rsa -C "Email"      //Email为gitHub注册的邮箱，生成过程会要求确认路径和输入密码
+a)注册github账号，地址：https:#github.com
+b)在本地生成SSH Key               #本地git仓库和gitHub仓库是通过SSH加密的
+ssh-keygen -t rsa -C "Email"      #Email为gitHub注册的邮箱，生成过程会要求确认路径和输入密码
 生成的公钥位置 ~/.ssh/id_rsa.pub
 c)在远程仓库配置公钥
 在github官网登陆后，在Accout-->Setting-->New SSH key中添加
 d)验证
 本地执行
-ssh -T git@github.com  //会提示成功
+ssh -T git@github.com  #会提示成功
 
 常用命令
-git remote                       //查看当前配置的远程仓库
-git remote -v                    //显示别名的实际链接地址
-git fetch repo_name              //从远程仓库下载新分支与数据，repo_name为别名
-git merge repo_name/branch_name  //从远程仓库的某分支提取数据并尝试合并到当前分支
-git push repo_name branch_name   //推送新分支到某个远程仓库
-git remote rm repo_name          //删除远程仓库
-git remote add repo_name url     //添加远程库
-                                 //例如：git remote add mygit git@github:wangh/mygit-test.git
+git remote                       #查看当前配置的远程仓库
+git remote -v                    #显示别名的实际链接地址
+git fetch repo_name              #从远程仓库下载新分支与数据，repo_name为别名
+git merge repo_name/branch_name  #从远程仓库的某分支提取数据并尝试合并到当前分支
+git push repo_name branch_name   #推送新分支到某个远程仓库
+git remote rm repo_name          #删除远程仓库
+git remote add repo_name url     #添加远程库
+                                 #例如：git remote add mygit git@github:wangh/mygit-test.git
 注：github由于服务器在国外，存在网速和连接不稳定方面的问题
-    可使用Cloud Studio平台(腾讯的)或码云(https://gitee.com/)替换，步骤与Girhub类似
+    可使用Cloud Studio平台(腾讯的)或码云(https:#gitee.com/)替换，步骤与Girhub类似
 
 9.git服务器搭建
 以CentOS为例
 1)安装git
 yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel
-yum install git     //安装git
+yum install git     #安装git
 注：在Ubuntu可使用apt install git来安装
-groupadd git        //新建git用户组
-useadd git -g git   //创建git用户(Linux)
+groupadd git        #新建git用户组
+useadd git -g git   #创建git用户(Linux)
 2)创建证书
 cd /home/git
 mkdir .ssh
@@ -208,19 +209,19 @@ git init --bare xx.git
 chown -R git:git xx.git
 4)克隆仓库
 在其他机器上执行
-git clone git@ip:/dir/xx.git  //ip为服务器ip
+git clone git@ip:/dir/xx.git  #ip为服务器ip
 
 特殊文件的处理
 由于系统、项目和编译等产生的一些文件，或不想同步某些文件可使用以下方法处理
 1.在工作区根目录(git init初始化的目录)建立 .gitignore 文件
 2.编辑此文件，格式如下：
-# Windows:   //#开头的为注释
+# Windows:   ##开头的为注释
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 
 # Python:
-*.py[cod]     //*通配任意字符，[]中通配括号中任意一个字符
+*.py[cod]     #*通配任意字符，[]中通配括号中任意一个字符
 *.so
 *.egg
 *.egg-info
