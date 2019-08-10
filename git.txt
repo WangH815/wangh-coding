@@ -212,7 +212,7 @@ git clone git@ip:/dir/xx.git  //ip为服务器ip
 
 特殊文件的处理
 由于系统、项目和编译等产生的一些文件，或不想同步某些文件可使用以下方法处理
-1.在工作区根目录建立 .gitignore 文件
+1.在工作区根目录(git init初始化的目录)建立 .gitignore 文件
 2.编辑此文件，格式如下：
 # Windows:   //#开头的为注释
 Thumbs.db
