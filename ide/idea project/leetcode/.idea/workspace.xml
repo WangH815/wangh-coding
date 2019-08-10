@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8ccc4c2b-0793-43a6-a5bd-83e9c3bd2d70" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../git.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../git.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0001_TwoSum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0001_TwoSum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0002_AddTwoNumbers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0002_AddTwoNumbers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0003_LengthOfSubstring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0003_LengthOfSubstring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0004_MidSortedArrays.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0004_MidSortedArrays.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0005_LongestPalindromeString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0005_LongestPalindromeString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0006_Convert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0006_Convert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0007_Reverse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0007_Reverse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0008_StringToInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0008_StringToInt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0009_IsPalindromeInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0009_IsPalindromeInt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0010_IsMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0010_IsMatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0011_MaxArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0011_MaxArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0012_IntToRoman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0012_IntToRoman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0013_RomanToInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0013_RomanToInt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0014_LongestCommonPrefix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0014_LongestCommonPrefix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0015_ThreeSum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0015_ThreeSum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0016_ThreeSumClosest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0016_ThreeSumClosest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0017_LetterCombinations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0017_LetterCombinations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0018_FourSum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0018_FourSum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0019_RemoveNthFromEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0019_RemoveNthFromEnd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0020_IsVaild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0020_IsVaild.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0021_MergeTwoLists.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0021_MergeTwoLists.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0022_GenerateParenthesis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0022_GenerateParenthesis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0023_MergeKLists.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0023_MergeKLists.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0024_SwapPairs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0024_SwapPairs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0025_ReverseKGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0025_ReverseKGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0026_RemoveDuplicates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0026_RemoveDuplicates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0027_RemoveElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0027_RemoveElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0028_IndexOfString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0028_IndexOfString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0029_Divide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0029_Divide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0030_LengthOfLongestSubstring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0030_LengthOfLongestSubstring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0031_NextPermutation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0031_NextPermutation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0032_LongestValidParentheses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0032_LongestValidParentheses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0033_SearchRotatedSortedArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0033_SearchRotatedSortedArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0034_FindFirstandLastPositionofElementinSortedArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0034_FindFirstandLastPositionofElementinSortedArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0035_SearchInsertPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0035_SearchInsertPosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0036_ValidSudoku.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0036_ValidSudoku.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0037_SolveSudoku.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0037_SolveSudoku.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0038_CountAndSay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0038_CountAndSay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0039_CombinationSum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0039_CombinationSum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0040_CombinationSumII.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0040_CombinationSumII.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0041_FirstMissingPositive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0041_FirstMissingPositive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0042_TrappingRainWater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0042_TrappingRainWater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0043_MultiplyStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0043_MultiplyStrings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0044_WildcardMatching.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0044_WildcardMatching.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0045_JumpGameII.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0045_JumpGameII.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0046_Permutations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0046_Permutations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../linux/shell/linux-text_processing.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../linux/shell/linux-text_processing.txt" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0041_FirstMissingPositive.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="33" column="36" selection-start-line="32" selection-end-line="33" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0042_TrappingRainWater.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2466">
+              <caret line="137" column="32" selection-start-line="137" selection-start-column="32" selection-end-line="137" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0043_MultiplyStrings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="954">
+              <caret line="53" column="24" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0044_WildcardMatching.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1260">
+              <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0045_JumpGameII.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0046_Permutations.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="70" column="18" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0041_FirstMissingPositive.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0042_TrappingRainWater.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0043_MultiplyStrings.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0044_WildcardMatching.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0045_JumpGameII.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/lintcode/p0001_0100/L_0046_Permutations.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0046_Permutations.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="225" />
+    <option name="y" value="141" />
+    <option name="width" value="1355" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="lintcode" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lintcode" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lintcode" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lintcode" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lintcode" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lintcode" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lintcode" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lintcode" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lintcode" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lintcode" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="p0001_0100" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <module name="leetcode" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <module name="leetcode" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8ccc4c2b-0793-43a6-a5bd-83e9c3bd2d70" name="Default Changelist" comment="" />
+      <created>1565337890475</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1565337890475</updated>
+      <workItem from="1565337895015" duration="2797000" />
+      <workItem from="1565433512046" duration="827000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="3624000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="225" y="141" width="1355" height="744" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17528957" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="10" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="Version Control" order="13" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0041_FirstMissingPositive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="36" selection-start-line="32" selection-end-line="33" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0042_TrappingRainWater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2466">
+          <caret line="137" column="32" selection-start-line="137" selection-start-column="32" selection-end-line="137" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0043_MultiplyStrings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="954">
+          <caret line="53" column="24" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0044_WildcardMatching.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0045_JumpGameII.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wangh/leetcode/p0001_0100/L_0046_Permutations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="70" column="18" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
