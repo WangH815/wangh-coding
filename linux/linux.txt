@@ -330,6 +330,16 @@ history n  #显示最近执行的n条命令
 ctrl + r   #可搜索之前执行过的命令;用于较长命令较为实用
 
 
+#问题处理
+1.文件误删恢复
+rm -f /root/selenium/Spider/MySql.Data.dll         #删除文件
+ls -ltr /root/selenium/Spider/MySql.Data.dll       #提示无法访问改文件
+lsof | grep /root/selenium/Spider/MySql.Data.dll   #查看访问此文件相关的进程
+#找到相关进程利用重定向恢复文件，/proc/进程号/fd/文件描述符;
+cat /proc/23778/fd/86 > /root/selenium/Spider/MySql.Data.dll
+
+
+
 
 #vi/vim 常见操作
 #三种模式
