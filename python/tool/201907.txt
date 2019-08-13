@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 dasfasd
 asdfaasdfa
@@ -120,7 +119,3 @@ jiluzt    jioybs
   2345
 
 
-
-
-
->>>>>>> 11961ec0f934f11742bff8d411eade786e251125
