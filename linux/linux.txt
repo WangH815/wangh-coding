@@ -25,7 +25,7 @@ Linux使用
 
 #常用基础命令
 1.主要来源 
-  https:#www.yiibai.com/linux                       #易百教程
+  https://www.yiibai.com/linux                       #易百教程
   https://www.runoob.com/linux/linux-tutorial.html  #菜鸟教程  
 2.在上一条的基础上精简，只保留常用部分;还有部分是平时工作中能用的命令及技巧
 3.命令注释会给出相对完整的名称(非官方);见名知意的命令不说明
@@ -103,20 +103,32 @@ file file        #显示文件或文件夹类型
 diff file1 file2 #文件差异对比
 ln file link     #创建file的硬连接(hard link,符号链接)为link
 ln -s file link  #创建file的软连接(symbolic link,符号链接)为link
-    #软链接：
+    ##软链接：
      1.软链接，以路径的形式存在。类似于Windows操作系统中的快捷方式
      2.软链接可以 跨文件系统 ，硬链接不可以
      3.软链接可以对一个不存在的文件名进行链接
      4.软链接可以对目录进行链接
-    #硬链接：
+    ##硬链接：
      1.硬链接，以文件副本的形式存在。但不占用实际空间。
      2.不允许给目录创建硬链接
      3.硬链接只有在同一个文件系统中才能创建
-cut -b/c/d file    #按字节/字符/自定义分隔符切割文本
-sort               #文本排序
-sed -a/d/c/i       #文本增删改查
-split              #按照指定行数或字节数切割大文件
-wc -c/m/l          #按照字节/字符/行数统计文本
+grep abc file         #查找文件中包含abc的行
+grep ^a file          #a开头
+grep a$ file          #a结尾
+grep ^[a-z] file      #小写字母开头，[]表示其中任意字符
+grep -E 正则表达 file #正则方式查找
+grep -i str file      #忽略大小写  
+cut                   #文本截取
+    -b/c/d/f          #文本截取方式，分别是字节/字符/指定分隔符/
+	
+	
+sort                  #文本排序
+sed -a/d/c/i          #文本增删改查
+split                 #按照指定行数或字节数切割大文件
+wc -c/m/l             #按照字节/字符/行数统计文本
+
+
+
 
 #文件查找
 which command           #查找命令位置;返回用户PATH变量中第一个匹配位置
@@ -125,7 +137,7 @@ whereis -b/m/s command  #查找命令(程序)的二进制/man说明/源码文件
 locate command          #查找command相关文件
 locate /etc/sh          #查找/etc目录下sh开头的文件
 find [path] [option value] [option2 value2] ... [operation]
-    #参数说明
+    ##参数说明
     [path]         #默认为当前路径
     [option value] #匹配选项及值，部分选项不需要value，绝大部分成对出现，取结果交集。
                    #如：-type d 表示查找所有文件夹，选项前加上!表示不匹配
@@ -139,7 +151,7 @@ find [path] [option value] [option2 value2] ... [operation]
                    #-ok：    同上，不同在于会让用户确认是否执行每个命令
                    #-delete: 删除文件或文件夹
                    #         如：find . -type f -delete 删除所有文件
-    #常用option(选项)
+    ##常用option(选项)
     -name file            #名称;最常用的选项
     -iname file           #忽略大小写
     -type b/d/c/p/l/f     #文件类型。块设备、目录、字符设备、管道、符号链接、普通文件

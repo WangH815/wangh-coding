@@ -3,7 +3,7 @@ Shift + F6           //重构重命名
 Ctrl + Shift + F10   //运行程序
 Ctrl + Alt + L       //格式化代码
 Ctrl + Enter         //运行SQL语句
-
+Ctrl + /             //备注或取消备注光标所在行或选中区域
 
 
 # pycharm 常见问题

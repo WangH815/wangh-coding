@@ -2,40 +2,40 @@ CentOS 7
 
 #软件安装
 https://www.cnblogs.com/gmlkl/p/9354254.html
-yum [options] [command] [package ...]  //yum命令形式
+yum [options] [command] [package ...]  #yum命令形式
 #安装
-yum install            //全部安装
-yum install package1   //安装指定的安装包package1
-yum groupinsall group1 //安装程序组group1
+yum install            #全部安装
+yum install package1   #安装指定的安装包package1
+yum groupinsall group1 #安装程序组group1
 #更新和升级
-yum update             //全部更新软件，包括系统
-yum update package1    //更新指定程序包package1
-yum check-update       //检查可更新的程序
-yum upgrade package1   //升级指定程序包package1
-yum groupupdate group1 //升级程序组group1
+yum update             #全部更新软件，包括系统
+yum update package1    #更新指定程序包package1
+yum check-update       #检查可更新的程序
+yum upgrade package1   #升级指定程序包package1
+yum groupupdate group1 #升级程序组group1
 #查找和显示
-yum search package1    //搜索软件包
-yum info package1      //显示安装包信息package1
-yum info installed     //显示所有已安装软件包信息
-yum list               //显示所有已经安装和可以安装的程序包
-yum list package1      //显示指定程序包安装情况package1
-yum list yum\*         //显示所有以yum开头的软件包
-yum groupinfo group1   //显示程序组group1信息yum search string 根据关键字string查找安装包
+yum search package1    #搜索软件包
+yum info package1      #显示安装包信息package1
+yum info installed     #显示所有已安装软件包信息
+yum list               #显示所有已经安装和可以安装的程序包
+yum list package1      #显示指定程序包安装情况package1
+yum list yum\*         #显示所有以yum开头的软件包
+yum groupinfo group1   #显示程序组group1信息yum search string 根据关键字string查找安装包
 #删除程序
-yum remove package1    //删除程序包package1
-yum groupremove group1 //删除程序组group1
-yum deplist package1   //查看程序package1依赖情况
+yum remove package1    #删除程序包package1
+yum groupremove group1 #删除程序组group1
+yum deplist package1   #查看程序package1依赖情况
 
 #rpm/红帽包管理器
-rpm -i package.rpm   //安装软件包
-rpm -iv package.rpm  //安装软件包并在安装过程中显示正在安装的文件信息；
-rpm -ivh package.rpm //安装软件包并在安装过程中显示正在安装的文件信息及安装进度
-rpm -Uvh package.rpm //更新软件包
-rpm -e package       //卸载软件包，不需要rpm结尾
-rpm -qa|grep package //查找已安装软件包
-rpm -qf '绝对路径'    //查看指定文件属于哪个软件包
-rpm -ql package      //查看软件包安装路径
-rpm -qi              //查看已安装软件包信息
+rpm -i package.rpm   #安装软件包
+rpm -iv package.rpm  #安装软件包并在安装过程中显示正在安装的文件信息；
+rpm -ivh package.rpm #安装软件包并在安装过程中显示正在安装的文件信息及安装进度
+rpm -Uvh package.rpm #更新软件包
+rpm -e package       #卸载软件包，不需要rpm结尾
+rpm -qa|grep package #查找已安装软件包
+rpm -qf '绝对路径'    #查看指定文件属于哪个软件包
+rpm -ql package      #查看软件包安装路径
+rpm -qi              #查看已安装软件包信息
 
 
 #修改yum/epel为阿里源
@@ -46,32 +46,32 @@ epel:Extra Packages for Enterprise Linux 。由 Fedora 社区打造，相当于�
 mkdir /etc/yum.repos.d.yyyymmdd
 mv /etc/yum.repos.d/* /etc/yum.repos.d.yyyymmdd
 2.下载阿里Base.repo和epel，wget无法使用可用 curl -o
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-wget -O /etc/yum.repos.d/epel-7.repo https://mirrors.aliyun.com/repo/epel-7.repo
+wget -O /etc/yum.repos.d/CentOS-Base.repo http:#mirrors.aliyun.com/repo/Centos-7.repo
+wget -O /etc/yum.repos.d/epel-7.repo https:#mirrors.aliyun.com/repo/epel-7.repo
 3.生成cache
 yum makecache
 
 
 #主机名相关
-static hostname    //静态或内核主机名。系统启动时从 /etc/hostname 初始化的主机名
-transient hostname //瞬态或临时主机名。系统临时分配，如：通过DHCP或mDNS服务器分配
-pretty hostname    //灵活或别名主机名。给终端用户展示的用户名，可包含特殊或空白字符
+static hostname    #静态或内核主机名。系统启动时从 /etc/hostname 初始化的主机名
+transient hostname #瞬态或临时主机名。系统临时分配，如：通过DHCP或mDNS服务器分配
+pretty hostname    #灵活或别名主机名。给终端用户展示的用户名，可包含特殊或空白字符
 
 #主机信息查看
-hostnamectl                             //查看主机信息
-hostnamectl --static/transient/pretty   //查看指定类型主机名
-hostnanme                               //查看transient主机名
-cat /etc/hostname                       //查看static主机名
-cat /etc/redhat-relese                  //查看redhat发行信息
-uname -a                                //查看系统详细信息，主机名为transient
+hostnamectl                             #查看主机信息
+hostnamectl --static/transient/pretty   #查看指定类型主机名
+hostnanme                               #查看transient主机名
+cat /etc/hostname                       #查看static主机名
+cat /etc/redhat-relese                  #查看redhat发行信息
+uname -a                                #查看系统详细信息，主机名为transient
                                         
 #主机信息修改                           
-hostname 主机名                         //修改transient主机名，重启后失效
-hostnamectl set-hostname 主机名         //永久修改所有主机名，大写字母会自动转小写，重启后生效
-                                        // /etc/hostname文件会被修改，建议同步修改 /etc/hosts
-vi /etc/hostname                        //同上
-hostnamectl set-hostname ""             //修改所有主机名为空
-hostnamectl set-hostname "" --static    //修改指定类型主机名
+hostname 主机名                         #修改transient主机名，重启后失效
+hostnamectl set-hostname 主机名         #永久修改所有主机名，大写字母会自动转小写，重启后生效
+                                        # /etc/hostname文件会被修改，建议同步修改 /etc/hosts
+vi /etc/hostname                        #同上
+hostnamectl set-hostname ""             #修改所有主机名为空
+hostnamectl set-hostname "" --static    #修改指定类型主机名
 hostnamectl set-hostname "" --transient 
 hostnamectl set-hostname "" --pretty    
 
@@ -83,12 +83,12 @@ vi /etc/sysconfig/network-scripts/ifcfg-eth0
 rm -f /etc/udev/rules.d/70-persistent-net.rules
 
 
-#静态IP设置   //root用户操作
+#静态IP设置   #root用户操作
 
 ##6.9  
 1.修改网卡配置文件 /etc/sysconfig/network-scripts/ifcfg-eth0
   增加或修改以下内容，具体配置参考vmware虚拟网络配置
-  设置多个IP参见 https://blog.csdn.net/javastart/article/details/79868187
+  设置多个IP参见 https:#blog.csdn.net/javastart/article/details/79868187
 BOOTPROTO=static         #静态IP，可以选择dhcp
 BROADCAST=192.168.99.255 #广播地址，非必需项
 NETWORK=192.168.99.0     #网段，非必需项

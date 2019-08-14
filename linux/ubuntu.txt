@@ -9,8 +9,8 @@ http://www.runoob.com/linux/linux-user-manage.html
 2.修改文件/etc/ssh/sshd_config 配置项 PermitRootLogin yes
 
 
-#静态IP设置   //VMWare Workstation 15 安装，网络使用net
-##14.04       //默认网卡名称为eth0
+#静态IP设置   #VMWare Workstation 15 安装，网络使用net
+##14.04       #默认网卡名称为eth0
 1.备份并修改网卡配置文件，具体设置依据VMWare中虚拟网络设置
 /etc/network/interfaces
 auto eth0
@@ -74,16 +74,16 @@ Most used commands:
   full-upgrade - upgrade the system by removing/installing/upgrading packages
   edit-sources - edit the source information file
   
-apt list --installed  //列出已安装软件包
+apt list --installed  #列出已安装软件包
 
 
 #zsh
 
 方式一：
-apt install zsh         //安装
-zsh --version           //查看版本
-chsh -s $(which zsh)    //设置默认shell，重新登录后生效
-echo $SHELL             //输出默认shell
+apt install zsh         #安装
+zsh --version           #查看版本
+chsh -s $(which zsh)    #设置默认shell，重新登录后生效
+echo $SHELL             #输出默认shell
 
 方式二：
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -92,13 +92,13 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 #mysql安装
 以下步骤以5.7.24版本为标准
 0.安装
-  apt install mysql-server  //apt安装软件mysql
+  apt install mysql-server  #apt安装软件mysql
 1.取消只能本机访问的限制
   a.修改/etc/mysql/mysql.conf.d/mysqld.cnf 中 bind-address为0.0.0.0或注销
-  b.执行update mysql.user set host='%' where user='root';  //mysql -uroot登录数据库
-  c.执行grant all PRIVILEGES on *.* to root@'%' identified by 'root'; //授权并设置密码
+  b.执行update mysql.user set host='%' where user='root';  #mysql -uroot登录数据库
+  c.执行grant all PRIVILEGES on *.* to root@'%' identified by 'root'; #授权并设置密码
 2.刷新
-  flush privileges;  //mysql命令行中执行
+  flush privileges;  #mysql命令行中执行
 3.重启Mysql服务
  service mysql restart
 注：如还不能正常访问可以考虑防火墙或者其他网络问题
@@ -106,21 +106,21 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 mysql软件源配置文件/etc/mysql/mysql.conf.d/mysqld.cnf
 deb http://archive.ubuntu.com/ubuntu bionic main
 deb http://archive.ubuntu.com/ubuntu bionic-security main
-##deb http://archive.ubuntu.com/ubuntu bionic-updates main  //##为注释
+##deb http://archive.ubuntu.com/ubuntu bionic-updates main  ###为注释
  
 ##mysql常见操作
-mysql -uroot -p                      //root用户登录mysql数据库
-mysql -u root -p                     //同上
-mysql -u root -p -h ip               //连接远程数据库
-show databases/tables;               //显示能查看的数据库/表
-desc table                           //显示表字段信息
-show columns from tablename;         //同上
-show index from tablename;           //显示表索引
-show table status from databasename；//显示数据库所有信息
-use database_name;                   //切换数据库
-select * from table_name \G;         //逐条显示数据
-exit                                 //退出命令行
-\q                                   //同上
+mysql -uroot -p                      #root用户登录mysql数据库
+mysql -u root -p                     #同上
+mysql -u root -p -h ip               #连接远程数据库
+show databases/tables;               #显示能查看的数据库/表
+desc table                           #显示表字段信息
+show columns from tablename;         #同上
+show index from tablename;           #显示表索引
+show table status from databasename；#显示数据库所有信息
+use database_name;                   #切换数据库
+select * from table_name \G;         #逐条显示数据
+exit                                 #退出命令行
+\q                                   #同上
 
 
 #安装指定版本Python
@@ -152,18 +152,18 @@ source.list文件条目格式
 [Archive type] [Repository URL] [Distribution] [Component]
 deb/deb-src    http://xxx       bionic/...      main/...
 
-deb/deb-src      //deb二进制包和deb源码包,Debian系统或以此为母版的系统软件包
+deb/deb-src      #deb二进制包和deb源码包,Debian系统或以此为母版的系统软件包
 
-bionic           //Ubuntu 18.04系统版本代号
-bionic-security  //Important Security Updates/重要的安全更新
-bionic-updates   //Recommended Updates/推荐更新
-bionic-proposed  //Pre-released Updates/预览版更新
-bionic-backports //Unsupported Updates/不受支持更新
+bionic           #Ubuntu 18.04系统版本代号
+bionic-security  #Important Security Updates/重要的安全更新
+bionic-updates   #Recommended Updates/推荐更新
+bionic-proposed  #Pre-released Updates/预览版更新
+bionic-backports #Unsupported Updates/不受支持更新
 
-main         //完全的自由软件
-restricted   //不完全的自由软件
-universe     //Ubuntu官方不提供支持与补丁，全靠社区支持
-multiverse   //非自由软件，完全不提供支持和补丁
+main         #完全的自由软件
+restricted   #不完全的自由软件
+universe     #Ubuntu官方不提供支持与补丁，全靠社区支持
+multiverse   #非自由软件，完全不提供支持和补丁
 
 #阿里源
 #18.04
@@ -201,7 +201,7 @@ deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted univer
 deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
 
 #中科大源
-https://mirrors.ustc.edu.cn/ubuntu/  //IP部分修改为中科大的即可，其他源同理
+https://mirrors.ustc.edu.cn/ubuntu/  #IP部分修改为中科大的即可，其他源同理
 
 #163/网易源
 http://mirrors.163.com/ubuntu/
@@ -212,19 +212,19 @@ https://mirrors.tuna.tsinghua.edu.cn/ubuntu/
 注：更改源之后需要执行apt-get update/apt update命令更新软件列表(索引)
 
 
-#jdk环境安装  //root用户操作
-1.apt remove openjdk*  //卸载openjdk
+#jdk环境安装  #root用户操作
+1.apt remove openjdk*  #卸载openjdk
 2.下载oracle jdk并解压文件
 3.编辑 /etc/profile 文件，追加以下内容
 # Java Path
-export JAVA_HOME=/jdkpath  //如: JAVA_HOME=/etc/java8/jdk1.8.0_191 
-export JRE_HOME=/jrepath   //如: JRE_HOME=${JAVA_HOME}/jre
+export JAVA_HOME=/jdkpath  #如: JAVA_HOME=/etc/java8/jdk1.8.0_191 
+export JRE_HOME=/jrepath   #如: JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export PATH=${PATH}:${JAVA_HOME}/bin:${JRE_HOME}/bin
-4.source /etc/profile      //生效配置
+4.source /etc/profile      #生效配置
 
 
 #修改时区
-tzselect                                                 //选择北京时间
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  //设置软连接，非root用户命令前加sudo
+tzselect                                                 #选择北京时间
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  #设置软连接，非root用户命令前加sudo
 

@@ -54,6 +54,7 @@ from somemodule import firstfunc, secondfunc #从某个模块中导入多个函�
 a = b = c = 1
 a, b, c = 1, 2, "runoob"
 del var_name,var_name2   #删除变量
+var_name = None          #变量重置(未定义)
 
 
 判断数据类型
@@ -79,52 +80,35 @@ List/Dictionary/Set  #可变数据
 0o开头为八进制
 int     var_name = 1       #无long
 bool    var_name = True    #还有False，Python2中没有布尔型
-float   var_name = 1.0
-complex var_name = 1 + 2j
+float   var_name = 1.0     #浮点
+complex var_name = 1 + 2j  #复数
 
-2)String（字符串）  #不可变
+2)String（字符串）   #不可变
 var_name = 'sdas'   #双引号也可以，使用完全相同；多行字符串可使用三引号指定
 var_name = r'sd \n' #\为转义符，字符串前加r可使转义失效
 
-3)Tuple（元组）     #不可变
+3)Tuple（元组）     #不可变可重复
 赋值可以不用括号
 var_name = ('asda','asda',12)
-一个值tuple
-var_name = (20,)
-空元组
-var_name = ()
+var_name = (20,)     #一个值tuple
+var_name = ()        #空元组
+var_name = tuple()   #空元组
 
-4)Sets（集合）        不可变
-集合元素是无序不重复
+4)Sets（集合）        #可变无序不重复
 var_name = {'asda','asda'}
 var_name = set() 空集
 
-5)List（列表）        可变
-有序
+5)List（列表）        #有序可变可重复
 var_name = ['asda','asda',12]
+var_name = []
+var_name = list()
 
-6)Dictionary（字典）  可变
-key-value形式，无序key不重复
-var_name = {}  空字典
-###
-dict = {}
-dict['one'] = "1 - 菜鸟教程"
-dict[2]     = "2 - 菜鸟工具"
-
-tinydict = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
-
-print (dict['one'])       # 输出键为 'one' 的值
-print (dict[2])           # 输出键为 2 的值
-print (tinydict)          # 输出完整的字典
-print (tinydict.keys())   # 输出所有键
-print (tinydict.values()) # 输出所有值
-
-1 - 菜鸟教程
-2 - 菜鸟工具
-{'name': 'runoob', 'site': 'www.runoob.com', 'code': 1}
-dict_keys(['name', 'site', 'code'])
-dict_values(['runoob', 'www.runoob.com', 1])
-###
+6)Dictionary（字典）  #可变,key-value形式，无序key不重复
+var_name = {}        #空字典
+var_name = dict()    #空字典
+var_name = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
+var_name.keys()      #返回键的列表格式
+var_name.values()    #返回值得列表格式
 
 
 运算符
