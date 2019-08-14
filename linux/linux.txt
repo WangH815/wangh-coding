@@ -89,7 +89,9 @@ touch file       #摸一下文件;文件不存在则创建文件;文件存在时
 touch -t         #设定文件时间戳，如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
 vi file          #文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
 cat file         #concatenate;显示文件内容
+cat -A file      #同上，同时显示结束符($)和制表符(Tab,显示为^I);等价于-vET
 cat -n file      #带行号输出
+cat -b file      #非空行带行号输出;空行也会输出
 view file        #只读模式查看文件;其他操作见vi
 head file        #显示文件开始10行
 head -n file     #显示文件开始n行
@@ -112,20 +114,67 @@ ln -s file link  #创建file的软连接(symbolic link,符号链接)为link
      1.硬链接，以文件副本的形式存在。但不占用实际空间。
      2.不允许给目录创建硬链接
      3.硬链接只有在同一个文件系统中才能创建
-grep abc file         #查找文件中包含abc的行
-grep ^a file          #a开头
-grep a$ file          #a结尾
-grep ^[a-z] file      #小写字母开头，[]表示其中任意字符
-grep -E 正则表达 file #正则方式查找
-grep -i str file      #忽略大小写  
-cut                   #文本截取
-    -b/c/d/f          #文本截取方式，分别是字节/字符/指定分隔符/
-	
-	
-sort                  #文本排序
-sed -a/d/c/i          #文本增删改查
-split                 #按照指定行数或字节数切割大文件
-wc -c/m/l             #按照字节/字符/行数统计文本
+###grep
+grep abc file              #查找文件中包含abc的行
+grep ^a file               #a开头
+grep a$ file               #a结尾
+grep -n ^$ file            #匹配空行并显示行号
+grep ^[a-z] file           #小写字母开头，[]表示其中任意字符
+grep -E 正则表达 file      #正则方式查找
+grep -nE [0-9]\{4\} file   #匹配出现4次(需开启正则)数字的区域，并显示行号
+grep -nE [0-9]\{2,4\} file #匹配出现2到4次(需开启正则)数字的区域，并显示行号
+grep -i str file           #忽略大小写
+grep -n str file           #显示行号
+grep -A/B/C n str file     #显示匹配行及其之后(after)/之前(before)/前后(center)的n行
+grep -nA m str file        #显示行号且显示匹配行之后的m行内容
+grep -n -A m str file      #同上
+###cut
+cut -b/c/d N/N-/N-M/-M file  #按照字节/字符/分隔符(默认为Tab)截取文本(标准输出);截取列范围分别是 =N、>=N、N<=x<=M和<=M
+echo '1234567'|cut -c 2      #结果为2;可写为 cut -c2，空格可省略
+echo '1234567'|cut -c2-5     #结果为2;可写为 cut -c2，空格可省略
+echo -e "123\t456"|cut -f2   #结果为456
+###paste
+paste file1 file2 ...        #列模式拼接，默认为Tab链接
+paste file1 file2 -d ","     #指定分隔符拼接
+###tr
+echo 12345 | tr '0-9' '9876543210'  #按规则替换字符。结果为87654
+cat file | tr '\t' ' '              #制表符替换为空格
+cat file | tr -d '0-9'              #删除所有数字
+cat file | tr -d -c '0-9\n'         #删除非数字数据，默认不换行，加上 \n
+cat file | tr -s ' '                #去除重复空格
+###split
+split -n file str  #将文件每n行切割为多个str开头(默认为x)的小文件，不改变原文件
+split -l n file    #同上
+split -b n fiel    #按字节切割
+split -C n fiel    #同上，尽量保证每行的完整性   
+###sort
+sort      #排序，默认按照字典顺序
+    -n    #按数字进行排序
+    -d    #按字典序进行排序，仅考虑空字符、字母和数字排序
+    -r    #降序排序
+    -k N  #指定按第N列排序
+    -b    #忽略像空格之类的前导空白字符
+sort -nrk 1 data.txt
+sort -bd data
+###wc
+wc -c/m/w/l file            #按照字节/字符/单词(Tab或空格分隔，多个分隔符算一个)/行数 统计文本或标准输出
+echo -e '1\t2  34 56'|wc -w #输出4
+###unip
+sort unsort.txt | uniq      #排序并去除重复行
+sort unsort.txt | uniq -c   #统计各行在文件中出现的次数
+sort unsort.txt | uniq -d   #找出重复行
+###sed
+sed -a/d/c/i                #文本增删改查
+sed 's/text/replace_text/' file      #替换每一行的第一处匹配的text，''可换为""，区别在于""会对表达式求值
+sed 's/text/replace_text/g' file     #全局替换
+sed -i 's/text/repalce_text/g' file  #全局替换并替换原文件
+sed '/^$/d' file                     #替换空行，会修改原文件
+sed 's/ //g' file                    #替换所有空格
+awk ' BEGIN{ statements } statements2 END{ statements } '
+
+
+
+
 
 
 
@@ -225,7 +274,7 @@ ps [-]aux |grep java #同上一条类似;BSD发行版语法
 free [-h/k/m]        #以易读/KB(默认)/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
 top                  #实时查看系统资源使用情况(快照)
     1                #top基本视图下，打开/关闭每个逻辑核心状况
-	b                #top基本视图下，打开/关闭高亮显示当前运行的进程
+	b                #top基本视图下，打开/关闭高亮(black)显示当前运行的进程
 	x                #top基本视图下，打开/关闭高亮显示排序列;默认按cpu使用率排序
 	shift + >/<      #top基本视图下，改变排序列视图
 top -c               #command会显示完整命令
@@ -332,6 +381,9 @@ scp
 rsync
 
 ##其他命令
+echo 'str'            #显示字符串作为标准输出;严格输出
+echo "str"            #显示字符串作为标准输出;可含变量
+echo -e 'str'         #支持转义输出
 sudo command          #以系统管理员(root)身份运行命令
 sudo -u user command  #以指定用户身份执行命令
 sudo -l               #显示当前用户可用sudo命令权限

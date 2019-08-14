@@ -132,7 +132,7 @@ sort unsort.txt | uniq -d  #找出重复行
 
 6、用tr进行转换，不改变原文件
 echo 12345 | tr '0-9' '9876543210'  #按规则替换字符。结果为87654
-cat text | tr '\t' ' '              #制表符替换为空格
+cat file | tr '\t' ' '              #制表符替换为空格
 cat file | tr -d '0-9'              #删除所有数字
 cat file | tr -d -c '0-9\n'         #删除非数字数据，默认不换行，加上 \n
 cat file | tr -s ' '                #去除重复空格
@@ -171,7 +171,7 @@ cut -c1-5 file //打印第一到5个字符
 cut -c-2 file  //打印前2个字符
    
 8、paste 按列拼接文本
-paste file1 file2         #列模式拼接
+paste file1 file2         #列模式拼接，默认为Tab链接
 paste file1 file2 -d ","  #默认的定界符是制表符，可以用-d指明分隔符
 
 9、wc 统计行和字符的工具
