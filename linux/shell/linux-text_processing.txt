@@ -186,7 +186,7 @@ sed 's/ //g' file                    #替换所有空格
 
 11、awk 数据流处理工具，逐行处理
 awk脚本结构
-awk ' BEGIN{ statements } statements2 END{ statements } '
+awk ' BEGIN{ statements } { statements2 } END{ statements } '
 
 工作方式
 1.执行begin中语句块；

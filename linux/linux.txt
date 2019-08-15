@@ -163,7 +163,7 @@ echo -e '1\t2  34 56'|wc -w #输出4
 sort unsort.txt | uniq      #排序并去除重复行
 sort unsort.txt | uniq -c   #统计各行在文件中出现的次数
 sort unsort.txt | uniq -d   #找出重复行
-###sed
+###sed   #stream editor(流编辑器)
 #动作说明
     a ：新增，a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)～
     c ：取代，c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！
@@ -176,12 +176,20 @@ sed 's/text/replace_text/g' file     #全局替换
 sed -i 's/text/repalce_text/g' file  #全局替换并替换原文件
 sed '/^$/d' file                     #替换空行，会修改原文件
 sed 's/ //g' file                    #替换所有空格
-
-awk ' BEGIN{ statements } statements2 END{ statements } '
-
-
-
-
+###awk   #数据流处理工具，逐行处理;上述文本处理命令都可用awk实现
+###常见用法参见 https://www.runoob.com/linux/linux-comm-awk.html
+awk '[BEGIN{statements}] {statements2} [END{statements}]'  #statements2是处理语句核心，BEGIN和END可不出现
+    #特殊变量
+	NR  #数据流行号
+    NF  #数据流字段数
+    $0  #数据流本身
+    $n  #处理后第n个字段，n > 0
+awk '{print $1,$4}' log.txt   #输出文本中第1,4列，默认以空格或Tab作为分隔符
+awk -F, '{print $4}' log.txt  #输出文本以逗号为分隔符的第4列; -F, <=> -F , <=> -F ',' <=> -F ","
+awk 'BEGIN{FS=","} ...'       #同上
+awk -F '[ ,.;]'               #指定多个分隔符
+awk -f cal.awk log.txt        #使用指定awk脚本处理文本
+awk '$1>2 && $2=="Are" {print $1}' log.txt  #指定过滤条件
 
 
 
