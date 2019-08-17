@@ -1,22 +1,33 @@
-Python3 
+#Python3 
 
 
-标识符规范
-1.由字母数字下划线构成，第一个字符不能是数字；长度不限制
+#标识符
+##作用
+用于开发者标识特定对象的名称，例如：变量、常量、函数、语句块、类名等
+##规范
+1.由字符(一般为字母、数字和下划线)构成，第一个字符不能是数字；长度不限制
 2.区分大小写
-3.Python3支持非ASCII字符，具体见unicodedata模块中的Unicode 字符数据库版本
-4.不能使用保留字，可通过标准库的keyword模块获取保留字
->>>import keyword
->>>keyword.kwlist
+3.python2仅仅支持ASCII字符
+4.Python3支持Unicode字符，具体见unicodedata模块中的Unicode 字符数据库版本
+5.不能使用保留字，可通过标准库的keyword模块获取保留字
+  import keyword
+  keyword.kwlist
+6.常见习惯
+a.尽量见名知意
+b.包名全小写
+c.常量全大写
+d.变量、函数名小驼峰(例如：listSort)
+e.类名大驼峰(例如：CheckList)
+f.其他命名(例如：Hello_World)
 
 
-字面量
+#字面量
 用于表示一些内置类型的常量
 
 
-注释
+#注释
 #                    单行注释
-#!/usr/bin/python3   声明使用的Python版本
+#!/usr/bin/python3   脚本中声明使用的Python版本
 '''
 多行注释
 '''
@@ -26,45 +37,37 @@ Python3
 """
 
 
-行与缩进
+#行与缩进
 缩进表示代码块，而不使用{}，多条语句写在同一行可使用分号隔开
 
 
-多行语句
+#多行语句
 单行字符建议不超过79
 sum = a + \        
       b + \
 	  c         #等价于 sum = a + b + c ,在[],{},()中无需使用 \
 
 
-输入输出
+#输入输出
 input("\n\n 按下enter退出")
 print(var_name)          #换行输出
 print(var_name,end="")   #不换行输出
 
 
-模块导入
+#模块导入
 import somemodule                            #导入模块(somemodule)
 from somemodule import *                     #同上
 from somemodule import somefunction          #从某个模块中导入某个函数
 from somemodule import firstfunc, secondfunc #从某个模块中导入多个函数 
 
 
-多变量赋值
-a = b = c = 1
-a, b, c = 1, 2, "runoob"
-del var_name,var_name2   #删除变量
-var_name = None          #变量重置(未定义)
-
-
-判断数据类型
+#数据类型的判断
 type()       #打印详细数据类型，例如 type(1) ,输出<class 'int'>
 isinstance() #判断类型之间的关系，isinstance(1, int) ,输出 True
 
 
-数据类型：(标准类型)
-
-Python3 中有六个标准的数据类型：
+#数据类型：(标准类型)
+##Python3 中有六个标准的数据类型：
 Number      #数字
 String      #字符串
 List        #列表
@@ -75,35 +78,35 @@ Dictionary  #字典
 Number/String/Tuple  #不可变数据
 List/Dictionary/Set  #可变数据
 
-1)Number（数字）  #不可变
+##1)Number（数字）  #不可变
 0x开头为十六进制
 0o开头为八进制
-int     var_name = 1       #无long
+int     var_name = 1       #python3无long
 bool    var_name = True    #还有False，Python2中没有布尔型
-float   var_name = 1.0     #浮点
+float   var_name = 1.0     #浮点，无double
 complex var_name = 1 + 2j  #复数
 
-2)String（字符串）   #不可变
+##2)String（字符串）   #不可变
 var_name = 'sdas'   #双引号也可以，使用完全相同；多行字符串可使用三引号指定
 var_name = r'sd \n' #\为转义符，字符串前加r可使转义失效
 
-3)Tuple（元组）     #不可变可重复
+##3)Tuple（元组）     #不可变可重复
 赋值可以不用括号
 var_name = ('asda','asda',12)
 var_name = (20,)     #一个值tuple
 var_name = ()        #空元组
 var_name = tuple()   #空元组
 
-4)Sets（集合）        #可变无序不重复
+##4)Sets（集合）        #可变无序不重复
 var_name = {'asda','asda'}
 var_name = set() 空集
 
-5)List（列表）        #有序可变可重复
+##5)List（列表）        #有序可变可重复
 var_name = ['asda','asda',12]
 var_name = []
 var_name = list()
 
-6)Dictionary（字典）  #可变,key-value形式，无序key不重复
+##6)Dictionary（字典）  #可变,key-value形式，无序key不重复
 var_name = {}        #空字典
 var_name = dict()    #空字典
 var_name = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
@@ -111,28 +114,49 @@ var_name.keys()      #返回键的列表格式
 var_name.values()    #返回值得列表格式
 
 
-运算符
-算术
-a%b   取模（支持浮点），值为余数部分
-a//b  取商的整数部分
-a**b  a的b次幂
+#运算符
+##算术
+a + b   #加
+a - b   #减
+a * b   #乘
+a / b   #除
+a % b   #取模（支持浮点），值为余数部分
+a // b  #整除，向(坐标轴)左取整
+a ** b  #a的b次幂
 
-比较
+##比较
+==	  #等于
+!=	  #不等于 
+>	  #大于
+<	  #小于
+>=	  #大于等于
+<=	  #小于等于
 
-赋值
-a = b
-a [算术运算符]= b  <=> a = a [算术运算符] b
+##赋值
+a = b   #简单赋值     
+a [算术运算符] = b  <=> a = a [算术运算符] b  #例如 a += b 等价于 a = a + b
 
-位运算
-&，|，^，~，<<，>> 分别为按位与，或，异或，取反，左移和右移
+#多变量赋值
+a = b = c = 1            #多变量赋相同值，实际指向同一(内存)位置
+a, b, c = 1, 2, "runoob" #多变量赋不同值
+del var_name,var_name2   #删除变量
+var_name = None          #变量重置(未定义)
 
-逻辑
-x and y  x,y为非零整数，返回大的数
-x or y   x,y为非零整数，返回小的数
-not x    x为非零整数，返回false
+##(二进制)位运算
+&	  #与
+|	  #或
+^	  #异或
+~	  #取反
+<<	  #左移
+>>	  #右移
 
-成员
-in，not in
+##逻辑
+x and y  #
+x or y   #
+not x    #
+
+##成员
+in，not in  #一般用于判断元素是否在序列中
 
 身份
 判断两个标识符是否引用同一对象
@@ -155,7 +179,7 @@ r/R 输出原始字符串，如print(r'\n') 输出\n
 %
 
 三引号
-'''/"""
+''''''/""""""
 允许一个字符串跨多行，所见即所得。典型场景为HTML、SQL、XML
 
 
