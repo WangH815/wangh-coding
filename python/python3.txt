@@ -79,14 +79,34 @@ Number/String/Tuple  #不可变数据
 List/Dictionary/Set  #可变数据
 
 ##1)Number（数字）  #不可变
-0x开头为十六进制
+
+###bool
+var_name = True/False    #bool，还有False，Python2中没有布尔型
+###int
+0b开头为二进制数
 0o开头为八进制
-int     var_name = 1       #python3无long
-bool    var_name = True    #还有False，Python2中没有布尔型
-float   var_name = 1.0     #浮点，无double
-complex var_name = 1 + 2j  #复数
+0x开头为十六进制
+var_name = 1             #int，python3无long;科学计数法参见float
+var_name = 0b101         #二进制整数，八进制和十六进制同理
+var_name = -0b101        #同上;负数
+var_name =  bin(5)       #int转二进制str
+var_name =  oct(5)       #int转八进制str
+var_name =  hex(5)       #int转二进制str
+var_name =  int('11',2)  #二进制str转int
+var_name =  int('11',8)  #八进制str转int
+var_name =  int('11',16) #十六进制str转int;第二个参数可为其他进制(不仅限于2,8,16)
+
+###float
+var_name = 1.0     #float，浮点，无double
+var_name = 1.      #同上;0可省略
+var_name = .1      #表示0.1;0可省略
+var_name = 0.1e2   #科学计数法(不严谨);表示0.1 * 10 ** 2;e可以大写为E
+var_name = 0.1e+2  #同上
+var_name = 0.1e-2  #表示0.1 * 10 ** (-2)
+var_name = 1 + 2j  #complex，复数
 
 ##2)String（字符串）   #不可变
+var_name = ''       #空字符串
 var_name = 'sdas'   #双引号也可以，使用完全相同；多行字符串可使用三引号指定
 var_name = r'sd \n' #\为转义符，字符串前加r可使转义失效
 
@@ -99,16 +119,16 @@ var_name = tuple()   #空元组
 
 ##4)Sets（集合）        #可变无序不重复
 var_name = {'asda','asda'}
-var_name = set() 空集
+var_name = set() #空集，不能使用{}，{}表示空字典
 
 ##5)List（列表）        #有序可变可重复
 var_name = ['asda','asda',12]
-var_name = []
-var_name = list()
+var_name = []      #空列表
+var_name = list()  #同上
 
 ##6)Dictionary（字典）  #可变,key-value形式，无序key不重复
 var_name = {}        #空字典
-var_name = dict()    #空字典
+var_name = dict()    #同上
 var_name = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
 var_name.keys()      #返回键的列表格式
 var_name.values()    #返回值得列表格式
@@ -124,8 +144,8 @@ a % b   #取模（支持浮点），值为余数部分
 a // b  #整除，向(坐标轴)左取整
 a ** b  #a的b次幂
 
-##比较
-==	  #等于
+##比较(关系)
+==	  #(对象)等于
 !=	  #不等于 
 >	  #大于
 <	  #小于
@@ -143,12 +163,12 @@ del var_name,var_name2   #删除变量
 var_name = None          #变量重置(未定义)
 
 ##(二进制)位运算
-&	  #与
-|	  #或
-^	  #异或
-~	  #取反
-<<	  #左移
->>	  #右移
+&	    #与
+|	    #或
+^	    #异或
+~ x	    #取反;等价于 -1 - x 
+x << n  #左移，23 << 3 等价于 9 * ( 2 ** 3 )
+x >> n	#右移，23 >> 3 等价于 9 // ( 2 ** 3 )
 
 ##逻辑
 x and y  #
