@@ -27,15 +27,12 @@ yum groupremove group1 #删除程序组group1
 yum deplist package1   #查看程序package1依赖情况
 
 #rpm/红帽包管理器
-rpm -i package.rpm   #安装软件包
-rpm -iv package.rpm  #安装软件包并在安装过程中显示正在安装的文件信息；
-rpm -ivh package.rpm #安装软件包并在安装过程中显示正在安装的文件信息及安装进度
-rpm -Uvh package.rpm #更新软件包
-rpm -e package       #卸载软件包，不需要rpm结尾
-rpm -qa|grep package #查找已安装软件包
-rpm -qf '绝对路径'    #查看指定文件属于哪个软件包
-rpm -ql package      #查看软件包安装路径
-rpm -qi              #查看已安装软件包信息
+rpm -i[v/h] package.rpm #安装[显示文件信息/进度]软件包
+rpm -U[v/h] package.rpm #更新软件包
+rpm -e package          #卸载软件包，不需要rpm结尾
+rpm -qa|grep package    #查找已安装软件包
+rpm -qf '绝对路径'      #查看指定文件属于哪个软件包
+rpm -q[l/i] package     #查看软件包[安装路径/已安装软件包信息]
 
 
 #修改yum/epel为阿里源
@@ -46,8 +43,8 @@ epel:Extra Packages for Enterprise Linux 。由 Fedora 社区打造，相当于�
 mkdir /etc/yum.repos.d.yyyymmdd
 mv /etc/yum.repos.d/* /etc/yum.repos.d.yyyymmdd
 2.下载阿里Base.repo和epel，wget无法使用可用 curl -o
-wget -O /etc/yum.repos.d/CentOS-Base.repo http:#mirrors.aliyun.com/repo/Centos-7.repo
-wget -O /etc/yum.repos.d/epel-7.repo https:#mirrors.aliyun.com/repo/epel-7.repo
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O /etc/yum.repos.d/epel-7.repo https://mirrors.aliyun.com/repo/epel-7.repo
 3.生成cache
 yum makecache
 
@@ -71,10 +68,8 @@ hostnamectl set-hostname 主机名         #永久修改所有主机名，大写
                                         # /etc/hostname文件会被修改，建议同步修改 /etc/hosts
 vi /etc/hostname                        #同上
 hostnamectl set-hostname ""             #修改所有主机名为空
-hostnamectl set-hostname "" --static    #修改指定类型主机名
-hostnamectl set-hostname "" --transient 
-hostnamectl set-hostname "" --pretty    
-
+hostnamectl set-hostname "" --static/transient/pretty    #修改指定类型主机名
+ 
 
 #CentOS 6.9 vmware虚拟机复制无法获取ip处理
     原因：复制之后mac和uuid与原系统一致导致
@@ -88,7 +83,7 @@ rm -f /etc/udev/rules.d/70-persistent-net.rules
 ##6.9  
 1.修改网卡配置文件 /etc/sysconfig/network-scripts/ifcfg-eth0
   增加或修改以下内容，具体配置参考vmware虚拟网络配置
-  设置多个IP参见 https:#blog.csdn.net/javastart/article/details/79868187
+  设置多个IP参见 https://blog.csdn.net/javastart/article/details/79868187
 BOOTPROTO=static         #静态IP，可以选择dhcp
 BROADCAST=192.168.99.255 #广播地址，非必需项
 NETWORK=192.168.99.0     #网段，非必需项

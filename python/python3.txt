@@ -62,8 +62,8 @@ from somemodule import firstfunc, secondfunc #从某个模块中导入多个函�
 
 
 #数据类型的判断
-type()       #打印详细数据类型，例如 type(1) ,输出<class 'int'>
-isinstance() #判断类型之间的关系，isinstance(1, int) ,输出 True
+type()       #打印详细数据具体类型，例如 type(1) ,输出<class 'int'>;父子类类型不同
+isinstance() #判断类型之间的关系，isinstance(1, int) ,输出 True;父子类类型相同
 
 
 #数据类型：(标准类型)
@@ -81,12 +81,12 @@ List/Dictionary/Set  #可变数据
 ##1)Number（数字）  #不可变
 
 ###bool
-var_name = True/False    #bool，还有False，Python2中没有布尔型
+var_name = True/False    #bool;Python2中没有布尔型
 ###int
 0b开头为二进制数
 0o开头为八进制
 0x开头为十六进制
-var_name = 1             #int，python3无long;科学计数法参见float
+var_name = 1             #int，python3无long;科学计数法参见float;
 var_name = 0b101         #二进制整数，八进制和十六进制同理
 var_name = -0b101        #同上;负数
 var_name =  bin(5)       #int转二进制str
@@ -99,7 +99,7 @@ var_name =  int('11',16) #十六进制str转int;第二个参数可为其他进�
 ###float
 var_name = 1.0     #float，浮点，无double
 var_name = 1.      #同上;0可省略
-var_name = .1      #表示0.1;0可省略
+var_name = .1      #表示0.1;0可省略hos   
 var_name = 0.1e2   #科学计数法(不严谨);表示0.1 * 10 ** 2;e可以大写为E
 var_name = 0.1e+2  #同上
 var_name = 0.1e-2  #表示0.1 * 10 ** (-2)
@@ -126,7 +126,7 @@ var_name = ['asda','asda',12]
 var_name = []      #空列表
 var_name = list()  #同上
 
-##6)Dictionary（字典）  #可变,key-value形式，无序key不重复
+##6)Dictionary（字典）  #可变,key-value形式，key不重复;
 var_name = {}        #空字典
 var_name = dict()    #同上
 var_name = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
@@ -163,37 +163,82 @@ del var_name,var_name2   #删除变量
 var_name = None          #变量重置(未定义)
 
 ##(二进制)位运算
-&	    #与
-|	    #或
-^	    #异或
-~ x	    #取反;等价于 -1 - x 
+###int(整型)数据存储方式
+1.python中int一般分为普通整型(一般是32位)和长整型(大于32位);长度可认为无限制，存在sys.maxsize
+2.数据存储方式
+a)原码: 最高位为符号位，0为正1为负;其余代表数值本身绝对值;正数的原码、反码和补码都相同
+b)反码: 除符号位外，其各位取反
+c)补码: 反码加1
+注: 0有 +0/-0之分
+&	    #(补码)按位与
+|	    #(补码)按位或
+^	    #(补码)异或
+~ x     #(补码)取反;等价于 -1 - x 
 x << n  #左移，23 << 3 等价于 9 * ( 2 ** 3 )
 x >> n	#右移，23 >> 3 等价于 9 // ( 2 ** 3 )
 
 ##逻辑
-x and y  #
-x or y   #
-not x    #
+###x/y为表达式，x=False/''/0/0.0/None/list() 等时表示False，不确定可使用bool(x)判断
+x and y  #x表达式的值为False时返回False;否则返回y表达式的值
+x or y   #x为True时返回x表达式的值;否则返回y表达式的值
+not x    #x为True返回False;否则返回True
 
 ##成员
-in，not in  #一般用于判断元素是否在序列中
+in，not in  #一般用于判断元素是否在序列中，返回True/False
 
-身份
-判断两个标识符是否引用同一对象
+##身份
+###判断两个标识符是否引用同一对象
 is，not is
 
 
-转义字符
-\           续行符，用于行尾，一般要求一行不超过59个字符
-\[特殊字符] 特殊字符正常输出
+#条件控制
+1.if else         #else可不存在
+if condition_1:   #condition为布尔表达式;True/False其他情况参见逻辑运算符x部分
+    statement_block_1
+else:
+    statement_block_3
+    
+2.if elif else    #else可不存在;每个statement_block中均可嵌套条件控制语句
+if condition_1:
+    statement_block_1
+elif condition_2:
+    statement_block_2
+else:
+    statement_block_3
+    
+
+#循环控制
+1.while     #else可不存在;一般很少出现else   
+while condition:
+    statement_block_1
+else:
+    statement_block_2
+    
+2.for       #else可不存在;一般很少出现else 
+for <variable> in <sequence>:
+    statement_block_1
+else:
+    statement_block_2
+
+3.break/continue
+break     #跳出当前循环体;对应else将不执行
+continue  #跳出当前循环，执行下一次循环
+
+4.pass  #空语句，是为了保持程序结构的完整性;一般用做占位语句
 
 
-字符串运算
-+   连接
-*   重复输出
-[]  通过索引获取字符
-[:] 截取
-r/R 输出原始字符串，如print(r'\n') 输出\n
+
+#转义字符
+\           #续行符，用于行尾，一般要求一行不超过59个字符
+\[特殊字符] #特殊字符正常输出
+
+
+#字符串运算
++           #连接
+*           #重复输出
+[]          #通过索引获取字符
+[:]         #截取
+r/R         #忽略转义，输出原始字符串，如print(r'\n') 输出\n
 
 格式化输出
 %

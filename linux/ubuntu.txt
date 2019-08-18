@@ -116,7 +116,7 @@ show databases/tables;               #显示能查看的数据库/表
 desc table                           #显示表字段信息
 show columns from tablename;         #同上
 show index from tablename;           #显示表索引
-show table status from databasename；#显示数据库所有信息
+show table status from databasename; #显示数据库所有信息
 use database_name;                   #切换数据库
 select * from table_name \G;         #逐条显示数据
 exit                                 #退出命令行
@@ -124,22 +124,22 @@ exit                                 #退出命令行
 
 
 #安装指定版本Python
-Step 1 – Prerequsiteis
+1.Prerequsiteis
 apt-get install build-essential checkinstall
 apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
 libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev
-	
-Step 2 – Download Python 3.7
+
+2.Download Python 3.7
 cd /usr/src
 wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz
 tar xzf Python-3.7.3.tgz
 
-Step 3 – Compile Python Source
+3.Compile Python Source
 cd Python-3.7.3
 ./configure --enable-optimizations
 make altinstall
 
-Step 4 – Check Python Version
+4.Check Python Version
 python3.7 -V
 
 
