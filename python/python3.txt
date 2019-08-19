@@ -1,5 +1,8 @@
 #Python3 
 
+#参考资料
+https://www.runoob.com/python3/python3-tutorial.html
+https://www.yiibai.com/python
 
 #标识符
 ##作用
@@ -29,7 +32,7 @@ f.其他命名(例如：Hello_World)
 #                    单行注释
 #!/usr/bin/python3   脚本中声明使用的Python版本
 '''
-多行注释
+多行注释  #或者声明跨多行的字符串
 '''
 
 """
@@ -45,7 +48,7 @@ f.其他命名(例如：Hello_World)
 单行字符建议不超过79
 sum = a + \        
       b + \
-	  c         #等价于 sum = a + b + c ,在[],{},()中无需使用 \
+      c         #等价于 sum = a + b + c ,在[],{},()中无需使用 \
 
 
 #输入输出
@@ -78,10 +81,22 @@ Dictionary  #字典
 Number/String/Tuple  #不可变数据
 List/Dictionary/Set  #可变数据
 
-##1)Number（数字）  #不可变
+##常见操作
+var_name = value            #变量赋值
+del var_name1,var_name2,... #删除对象引用
+var_name = None             #置为未定义
+
+##1)Number(数字)  #不可变
 
 ###bool
 var_name = True/False    #bool;Python2中没有布尔型
+bool()       #返回False
+bool('')     #返回False;其他字符串返回True
+bool(0)      #返回False;其余整数返回True
+bool(0.0)    #返回False;其余浮点数返回True
+bool(None)   #返回False
+bool(list()) #返回False;包括空列表/字典/元组等空对象
+
 ###int
 0b开头为二进制数
 0o开头为八进制
@@ -95,6 +110,13 @@ var_name =  hex(5)       #int转二进制str
 var_name =  int('11',2)  #二进制str转int
 var_name =  int('11',8)  #八进制str转int
 var_name =  int('11',16) #十六进制str转int;第二个参数可为其他进制(不仅限于2,8,16)
+int(1.1)    #返回1
+int(-1.1)   #返回-1
+int(1.1e2)  #返回110
+int(0b11)   #返回3
+int(True)   #返回1;False返回0
+int('11')   #返回11;不能转换非十进制字符串
+int(' 11 ') #同上，去除左右空格(包含制表符、换行符等)
 
 ###float
 var_name = 1.0     #float，浮点，无double
@@ -103,30 +125,49 @@ var_name = .1      #表示0.1;0可省略hos
 var_name = 0.1e2   #科学计数法(不严谨);表示0.1 * 10 ** 2;e可以大写为E
 var_name = 0.1e+2  #同上
 var_name = 0.1e-2  #表示0.1 * 10 ** (-2)
-var_name = 1 + 2j  #complex，复数
+float(x)           #将x转为浮点数
+float()       #返回0.0
+float(0)      #返回0.0
+float(False)  #返回0.0
+float(1)      #返回1.0;其他整数和进制数同理
+float('11')   #返回11.0;不能转换非十进制字符串
+float(' 11 ') #同上，去除左右空格(包含制表符、换行符等)
 
-##2)String（字符串）   #不可变
+###complex
+var_name = 1 + 2j   #complex，复数
+
+##2)String(字符串)  #不可变
 var_name = ''       #空字符串
+var_name = str()    #同上
 var_name = 'sdas'   #双引号也可以，使用完全相同；多行字符串可使用三引号指定
 var_name = r'sd \n' #\为转义符，字符串前加r可使转义失效
+###字符串切片
+var_name = '123456789'
+####正向索引为 [ 0, 8]
+####反向索引为 [-9,-1]
+####默认startIndex=0;endIndex=len(var_name)-1;step=1
+####
+var_name[starIndex:endIndex:step]
 
-##3)Tuple（元组）     #不可变可重复
-赋值可以不用括号
+var_name[]
+
+##3)Tuple(元组)      #不可变可重复
 var_name = ('asda','asda',12)
+var_name = 'asda','asda',12     #同上，不推荐使用
 var_name = (20,)     #一个值tuple
 var_name = ()        #空元组
 var_name = tuple()   #空元组
 
-##4)Sets（集合）        #可变无序不重复
+##4)Sets(集合)        #可变无序不重复
 var_name = {'asda','asda'}
 var_name = set() #空集，不能使用{}，{}表示空字典
 
-##5)List（列表）        #有序可变可重复
+##5)List(列表)        #有序可变可重复
 var_name = ['asda','asda',12]
 var_name = []      #空列表
 var_name = list()  #同上
 
-##6)Dictionary（字典）  #可变,key-value形式，key不重复;
+##6)Dictionary(字典)  #可变,key-value形式，key不重复;
 var_name = {}        #空字典
 var_name = dict()    #同上
 var_name = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
@@ -140,17 +181,17 @@ a + b   #加
 a - b   #减
 a * b   #乘
 a / b   #除
-a % b   #取模（支持浮点），值为余数部分
+a % b   #取模(支持浮点)，值为余数部分
 a // b  #整除，向(坐标轴)左取整
 a ** b  #a的b次幂
 
 ##比较(关系)
-==	  #(对象)等于
-!=	  #不等于 
->	  #大于
-<	  #小于
->=	  #大于等于
-<=	  #小于等于
+==      #(对象)等于
+!=      #不等于 
+>       #大于
+<       #小于
+>=      #大于等于
+<=      #小于等于
 
 ##赋值
 a = b   #简单赋值     
@@ -170,12 +211,12 @@ a)原码: 最高位为符号位，0为正1为负;其余代表数值本身绝对�
 b)反码: 除符号位外，其各位取反
 c)补码: 反码加1
 注: 0有 +0/-0之分
-&	    #(补码)按位与
-|	    #(补码)按位或
-^	    #(补码)异或
-~ x     #(补码)取反;等价于 -1 - x 
-x << n  #左移，23 << 3 等价于 9 * ( 2 ** 3 )
-x >> n	#右移，23 >> 3 等价于 9 // ( 2 ** 3 )
+&        #(补码)按位与
+|        #(补码)按位或
+^        #(补码)异或
+~ x      #(补码)取反;等价于 -1 - x 
+x << n   #左移，23 << 3 等价于 9 * ( 2 ** 3 )
+x >> n   #右移，23 >> 3 等价于 9 // ( 2 ** 3 )
 
 ##逻辑
 ###x/y为表达式，x=False/''/0/0.0/None/list() 等时表示False，不确定可使用bool(x)判断
@@ -227,25 +268,34 @@ continue  #跳出当前循环，执行下一次循环
 4.pass  #空语句，是为了保持程序结构的完整性;一般用做占位语句
 
 
+#迭代器(iterator)
+##用于遍历集合(String/List/Tuple)元素
+myList = [1,2,3,4]
+it = iter(myList)   #iter()用于创建迭代器对象;
+##方式一
+for x in it:
+    print(x, end='')
+##方式二
+while True:
+    try:
+        print(next(it))      #next()访问迭代器元素
+    except StopIteration:
+        sys.exit()           #退出程序
 
-#转义字符
-\           #续行符，用于行尾，一般要求一行不超过59个字符
-\[特殊字符] #特殊字符正常输出
 
-
-#字符串运算
-+           #连接
-*           #重复输出
-[]          #通过索引获取字符
-[:]         #截取
-r/R         #忽略转义，输出原始字符串，如print(r'\n') 输出\n
-
-格式化输出
-%
-
-三引号
-''''''/""""""
-允许一个字符串跨多行，所见即所得。典型场景为HTML、SQL、XML
+#生成器(generator)
+##使用了yield的函数称为生成器;返回(生成)了迭代器对象
+import sys
+ 
+def fibonacci(n):  # 生成器函数 - 斐波那契
+    a, b, counter = 0, 1, 0
+    while True:
+        if (counter > n): 
+            return
+        yield a
+        a, b = b, a + b
+        counter += 1
+f = fibonacci(10)  # f 是一个迭代器，由生成器返回生成
 
 
 列表 list
@@ -288,7 +338,7 @@ for x in it:
 
 输出：
 1 2 3 4
- 
+  
 #!/usr/bin/python3
  
 import sys         # 引入 sys 模块
@@ -318,19 +368,19 @@ import sys
 
 def fibonacci(n): # 生成器函数 - 斐波那契
     a, b, counter = 0,1,0
-	while True
-	    if (counter > n):
-		    return
-	    yield a
-		a, b = b, a + b
+    while True
+        if (counter > n):
+            return
+        yield a
+        a, b = b, a + b
         counter += 1
 f = fibonacci(10) # f 是一个迭代器，由生成器返回生成
 
 while True:
     try:
-	    print (next(f), end = " ")
-	except StopIteration:
-	    sys.exit()
+        print (next(f), end = " ")
+    except StopIteration:
+        sys.exit()
  
 输出:
 0 1 1 2 3 5 8 13 21 34 55
@@ -338,7 +388,7 @@ while True:
 
 函数
 
-def 函数名（参数列表）:
+def 函数名(参数列表):
     函数体
 
 匿名函数
@@ -348,10 +398,10 @@ lambda [arg1 [,arg2,.....argn]]:expression
 
 变量作用域
 
-L （Local）     局部作用域
-E （Enclosing） 闭包函数外的函数中
-G （Global）    全局作用域
-B （Built-in）  内建作用域
+L (Local)     局部作用域
+E (Enclosing) 闭包函数外的函数中
+G (Global)    全局作用域
+B (Built-in)  内建作用域
 
 以 L –> E –> G –>B 的规则查找 
 
@@ -364,8 +414,8 @@ def outer():
     def inner():
         i_count = 2  # 局部作用域
 
-Python 中只有模块（module），类（class）以及函数（def、lambda）才会引入新的作用域，
-其它的代码块（如 if/elif/else/、try/except、for/while等）是不会引入新的作用域的，
+Python 中只有模块(module)，类(class)以及函数(def、lambda)才会引入新的作用域，
+其它的代码块(如 if/elif/else/、try/except、for/while等)是不会引入新的作用域的，
 也就是说这些语句内定义的变量，外部也可以访问
 
 
@@ -376,7 +426,7 @@ import module1[, module2[,... moduleN] 导入模块
 
 例如导入 support.py
 import support
-support.函数名（参数列表） 使用module中定义的函数
+support.函数名(参数列表) 使用module中定义的函数
 
 from ... import 语句
 从模块中导入一个指定的部分到当前命名空间中
