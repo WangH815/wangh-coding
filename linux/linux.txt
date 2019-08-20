@@ -404,6 +404,7 @@ sudo -u user command  #以指定用户身份执行命令
 sudo -l               #显示当前用户可用sudo命令权限
 history    #显示命令历史，一般是1000条
 history n  #显示最近执行的n条命令
+history | grep command  #搜索特定命令执行历史
 !!         #执行上一条命令
 !n         #执行历史记录的第n条命令
 ctrl + r   #可搜索之前执行过的命令;用于较长命令较为实用
