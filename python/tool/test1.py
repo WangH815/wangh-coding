@@ -1,6 +1,13 @@
+import builtins
+
+
+def myFuction():
+
+    print(dir(builtins))
+
+
 def main():
-    var = 1 + 2j
-    print(complex(0b11+2j))
+    myFuction()
 
 
 if __name__ == '__main__':

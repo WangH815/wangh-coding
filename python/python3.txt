@@ -216,9 +216,9 @@ var.pop(n)        #移除指定索引的元素;默认为最后一个
 var.reverse()     #反向
 var.sort()        #排序;会改变列表
 var.insert(n,obj) #指定位置插入元素
-var.append(var2)  #追加单个新元素(对象)
+var.append(var2)  #追加单个新元素(对象);列表嵌套
 var.extend(var2)  #追加var2序列中的多个元素;序列为dict时，追加元素为key
-var.copy()        #复制列表
+var.copy()        #复制列表;浅复制，深复制使用var.copy.deedcopy(var)
 
 ##6)Dictionary(字典)  #可变,key-value形式，key不重复;key一般使用数字或字符串
 var = {}        #空字典
@@ -365,36 +365,97 @@ def function_name(args):
 ##函数调用
 function_name(args)
 
-##匿名函数    #使用lambda表达式
+##匿名函数    #使用lambda表达式;只能写一行;不能调用参数列表之外或全局参数
 lambda [arg1 [,arg2,.....argn]]:expression
     
 ##参数传递
-1.可变对象(list/set/dict等);会改变参数对象内容
-2.不可变对象(num/str/tuple等);会生成新对象引用
+1.可变对象(list/set/dict等);可能会改变参数对象内容
+2.不可变对象(num/str/tuple等);可能会生成新对象引用
+
+##参数类型
+1.必需参数
+def func(str,num):    #func('a',1)调用时参数顺序需与定义时保持一致
+2.关键字参数
+def func(str,num):    #func(num=1,str='a')调用时参数顺序需与定义时不一致也是可以的
+3.默认参数
+def func(str,num=1):  #func('a')调用时默认参数可以不提供
+4.不定长参数
+def func(str,*num):   #num参数会以tuple的形式传入;如：func('a','b','c')中，num=('b','c')
+def func(str,**num):  #num参数会以dict的形式传入;num参数以key=value的形式，如：func('a',2='b','c'=3)
+def func(str,*,str2): #*后面的参数需关键字参数的形式传入;其余待补充
+
+##return
+return [expression]表达式用于退出函数，但不是函数必需的语句
+return       #退出函数，不返回任何值
+return None  #同上
 
 
-变量作用域
+#变量作用域(范围)
+L (Local)       #局部作用域;一般为闭包函数或lambda表达式中
+E (Enclosing)   #闭包函数外的函数中
+G (Global)      #全局作用域;非闭包函数外
+B (Built-in)    #内建(内置)作用域;python语言内建，任何语句中皆可使用
 
-L (Local)     局部作用域
-E (Enclosing) 闭包函数外的函数中
-G (Global)    全局作用域
-B (Built-in)  内建作用域
-
-以 L –> E –> G –>B 的规则查找 
+##使用规则
+L –> E –> G –>B 的规则查找
 
 例如：
-x = int(2.9)         # 内建作用域
+x = int(2.9)         #内建作用域
  
-g_count = 0          # 全局作用域
+g_count = 0          #全局作用域
 def outer():
-    o_count = 1      # 闭包函数外的函数中
+    o_count = 1      #闭包函数外的函数中
     def inner():
-        i_count = 2  # 局部作用域
+        i_count = 2  #局部作用域
 
-Python 中只有模块(module)，类(class)以及函数(def、lambda)才会引入新的作用域，
-其它的代码块(如 if/elif/else/、try/except、for/while等)是不会引入新的作用域的，
-也就是说这些语句内定义的变量，外部也可以访问
+##作用域的引入
+1.模块(module)，类(class)以及函数(def、lambda)才会引入新的作用域，
+2.if/elif/else/、try/except、for/while 等代码块不会引入新的作用域，其语句内定义的变量，外部也可以访问
 
+##作用域修改
+num = 1          #全局变量
+def fun():
+    global num   #函数内使用global声明全局变量，使得函数内部可以修改全局变量
+    num = 10
+
+def outer():
+    num = 10           #Enclosing
+    def inner():
+        nonlocal num   #nonlocal关键字声明Enclosing作用域的变量，可以使得内部可以修改
+        num = 100
+        print(num)
+    inner()
+
+##内建作用域可使用下列语句查询
+import builtins
+dir(builtins)    #返回字符串格式列表
+
+##特殊情况
+###错误使用变量
+a = 10
+def test():
+    a = a + 1  #局部变量a未声明
+    print(a)
+###修改后
+a = 10
+def test(a):   #通过参数传递
+    a = a + 1
+    print(a)
+
+
+#数据结构
+##列表作为堆栈(先进后出，后进先出)
+stack = [1,2,3]
+stack.append(4)  #进栈
+stack.pop()      #出栈
+
+##列表作为队列使用(先进先出，后进后出)
+from collections import deque
+queue = deque(["Eric", "John", "Michael"])
+queue.append("Terry")    #进队
+queue.popleft()          #出队
+
+##列表推导(生成)式
 
 模块 module
 import语句
