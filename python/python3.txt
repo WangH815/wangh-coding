@@ -104,6 +104,7 @@ bool(list()) #返回False;包括空列表/字典/元组等空对象
 var = 1             #int，python3无long;科学计数法参见float;
 var = 0b101         #二进制整数，八进制和十六进制同理
 var = -0b101        #同上;负数
+
 var =  bin(5)       #int转二进制str
 var =  oct(5)       #int转八进制str
 var =  hex(5)       #int转二进制str
@@ -125,6 +126,7 @@ var = .1      #表示0.1;0可省略hos
 var = 0.1e2   #科学计数法(不严谨);表示0.1 * 10 ** 2;e可以大写为E
 var = 0.1e+2  #同上
 var = 0.1e-2  #表示0.1 * 10 ** (-2)
+
 float(x)           #将x转为浮点数
 float()       #返回0.0
 float(0)      #返回0.0
@@ -136,6 +138,7 @@ float(' 11 ') #同上，去除左右空格(包含制表符、换行符等)后处
 ###complex
 var = 1 + 2j   #complex，复数;默认表示 (1+2j)
 var = (1 + 2j) #同上
+
 var.real       #返回实部，浮点格式
 var.imag       #返回虚部，浮点格式
 complex(x)     #将x转为复数;x为数字类型或者数字类型(十进制)字符串
@@ -145,6 +148,8 @@ var = ''        #空字符串
 var = str()     #同上
 var = 'sdas'    #双引号也可以，使用完全相同；多行字符串可使用三引号指定
 var = r'sd \n'  #\为转义符，字符串前加r可使转义失效
+
+len(var)        #返回字符数
 var * n         #返回重复n次的字符串
 var1 + var2     #连接字符串
 str(x)          #将x转为字符串
@@ -178,34 +183,55 @@ var = ()        #空元组
 var = tuple()   #空元组
 
 var[n]          #按照索引访问
+len(var)        #返回元素数
+del var         #删除引用
 
-##4)Sets(集合)        #可变无序不重复
-var = {'asda','asda'}
-var = set()    #空集，不能使用{}，{}表示空字典
-var[n]         #按照索引访问
-var[n] = 123   #修改集合元素的值
-del var[n]     #删除指定元素
+##4)Sets(集合)         #可变无序不重复
+var = {'asda','asda'}  #不支持var[n]形式的访问及修改
+var = set()            #空集，不能使用{}，{}表示空字典
+
+len(var)       #返回元素数
 var.clear()    #删除(清空)所有元素
+var.add(x)     #增加单个元素
+var.update(x)  #向集合增加序列(list/tuple/dict)中的元素
+var.remove(x)  #删除指定元素;不存在会报错
+var.discard(x) #删除指定元素;不存在不报错 
+var.pop()      #随机删除一个元素
 var1 - var2    #返回在var1中且不在var2中元素的集合
 var1 | var2    #合并集合
 var1 & var2    #返回相同元素的集合
 var1 ^ var2    #返回两集合不同元素的集合
 
-
 ##5)List(列表)        #有序可变可重复
 var = ['asda','asda',12]
 var = []      #空列表
 var = list()  #同上
-var[n] = 123  #修改列表元素的值
-del var[n]    #删除元素
 
-##6)Dictionary(字典)  #可变,key-value形式，key不重复;
+var[1:5:2]        #切片见String
+len(var)          #返回元素数
+var[n] = 123      #修改列表元素的值
+del var[n]        #删除元素
+var.clear()       #删除(清空)所有元素
+var.pop(n)        #移除指定索引的元素;默认为最后一个
+var.reverse()     #反向
+var.sort()        #排序;会改变列表
+var.insert(n,obj) #指定位置插入元素
+var.append(var2)  #追加单个新元素(对象)
+var.extend(var2)  #追加var2序列中的多个元素;序列为dict时，追加元素为key
+var.copy()        #复制列表
+
+##6)Dictionary(字典)  #可变,key-value形式，key不重复;key一般使用数字或字符串
 var = {}        #空字典
 var = dict()    #同上
 var = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
-var.keys()      #返回键的列表格式
-var.values()    #返回值得列表格式
+
+len(var)        #返回元素数
+var.keys()      #返回键的迭代器
+var.values()    #返回值的迭代器
 var[key]        #返回key对应的值
+del var[key]    #删除指定元素(键值对)
+var.pop(key)    #同上
+var.clear()     #删除(清空)所有元素
 
 
 #运算符
@@ -331,102 +357,20 @@ def fibonacci(n):  # 生成器函数 - 斐波那契
 f = fibonacci(10)  # f 是一个迭代器，由生成器返回生成
 
 
-列表 list
-可修改
-访问方式
-list_name[i]   第i+1个元素      0<=i<len(list_name)
-list_name[-j]  倒数第j个元素    0<j<=len(list_name)
-list_name[x:y] x+1倒y之间的元素 0<=x<y<len(list_name)
-list_name[k:]  k+1开始之后的元素
-list_name[:t]  t之前的元素
-del list_name[访问方式] 删除元素
-list可以嵌套，访问方式同C语言中多维数组
+#函数(function)
+##定义
+def function_name(args):
+    statement
 
-元组 tuple
-不可修改
-tuple_name = ('sdfsd','s',1231)/'sdfsd','s',1231
-访问方式类似于list
-删除只能删除全部元素，不能删除特定元素。删除元组会出现异常
+##函数调用
+function_name(args)
 
-字典 dictionary
-key不能为列表，可以为数字，字符串，元组；value无限制
-dic_name = {key1 : value1, key2 : value2 }
-访问方式
-dic_name[key]
-
-
-迭代器 iterator
-迭代是Python最强大的功能之一，是访问集合元素的一种方式。
-迭代器是一个可以记住遍历的位置的对象。
-迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。
-迭代器有两个基本的方法：iter() 和 next()。
-字符串，列表或元组对象都可用于创建迭代器
-
-#!/usr/bin/python3
- 
-list=[1,2,3,4]
-it = iter(list)    # 创建迭代器对象
-for x in it:
-    print (x, end=" ")
-
-输出：
-1 2 3 4
-  
-#!/usr/bin/python3
- 
-import sys         # 引入 sys 模块
- 
-list=[1,2,3,4]
-it = iter(list)    # 创建迭代器对象
- 
-while True:
-    try:
-        print (next(it))
-    except StopIteration:
-        sys.exit()
-
-输出:
-1
-2
-3
-4
-
-
-生成器  generator
-使用了 yield 的函数被称为生成器
-
-#!/usr/bin/python3
-
-import sys
-
-def fibonacci(n): # 生成器函数 - 斐波那契
-    a, b, counter = 0,1,0
-    while True
-        if (counter > n):
-            return
-        yield a
-        a, b = b, a + b
-        counter += 1
-f = fibonacci(10) # f 是一个迭代器，由生成器返回生成
-
-while True:
-    try:
-        print (next(f), end = " ")
-    except StopIteration:
-        sys.exit()
- 
-输出:
-0 1 1 2 3 5 8 13 21 34 55
-
-
-函数
-
-def 函数名(参数列表):
-    函数体
-
-匿名函数
-python 使用 lambda 来创建匿名函数
+##匿名函数    #使用lambda表达式
 lambda [arg1 [,arg2,.....argn]]:expression
+    
+##参数传递
+1.可变对象(list/set/dict等);会改变参数对象内容
+2.不可变对象(num/str/tuple等);会生成新对象引用
 
 
 变量作用域
