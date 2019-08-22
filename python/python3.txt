@@ -6,13 +6,13 @@ https://www.yiibai.com/python
 
 #标识符
 ##作用
-用于开发者标识特定对象的名称，例如：变量、常量、函数、语句块、类名等
+用于开发者标识特定对象的名称,例如：变量、常量、函数、语句块、类名等
 ##规范
-1.由字符(一般为字母、数字和下划线)构成，第一个字符不能是数字；长度不限制
+1.由字符(一般为字母、数字和下划线)构成,第一个字符不能是数字；长度不限制
 2.区分大小写
 3.python2仅仅支持ASCII字符
-4.Python3支持Unicode字符，具体见unicodedata模块中的Unicode 字符数据库版本
-5.不能使用保留字，可通过标准库的keyword模块获取保留字
+4.Python3支持Unicode字符,具体见unicodedata模块中的Unicode 字符数据库版本
+5.不能使用保留字,可通过标准库的keyword模块获取保留字
   import keyword
   keyword.kwlist
 6.常见习惯
@@ -41,7 +41,7 @@ f.其他命名(例如：Hello_World)
 
 
 #行与缩进
-缩进表示代码块，而不使用{}，多条语句写在同一行可使用分号隔开
+缩进表示代码块,而不使用{},多条语句写在同一行可使用分号隔开
 
 
 #多行语句
@@ -65,8 +65,8 @@ from somemodule import firstfunc, secondfunc #从某个模块中导入多个函�
 
 
 #数据类型的判断
-type()       #打印详细数据具体类型，例如 type(1) ,输出<class 'int'>;父子类类型不同
-isinstance() #判断类型之间的关系，isinstance(1, int) ,输出 True;父子类类型相同
+type()       #打印详细数据具体类型,例如 type(1) ,输出<class 'int'>;父子类类型不同
+isinstance() #判断类型之间的关系,isinstance(1, int) ,输出 True;父子类类型相同
 
 
 #数据类型：(标准类型)
@@ -101,8 +101,8 @@ bool(list()) #返回False;包括空列表/字典/元组等空对象
 0b开头为二进制数
 0o开头为八进制
 0x开头为十六进制
-var = 1             #int，python3无long;科学计数法参见float;
-var = 0b101         #二进制整数，八进制和十六进制同理
+var = 1             #int,python3无long;科学计数法参见float;
+var = 0b101         #二进制整数,八进制和十六进制同理
 var = -0b101        #同上;负数
 
 var =  bin(5)       #int转二进制str
@@ -117,10 +117,10 @@ int(1.1e2)  #返回110
 int(0b11)   #返回3
 int(True)   #返回1;False返回0
 int('11')   #返回11;不能转换非十进制字符串
-int(' 11 ') #同上，去除左右空格(包含制表符、换行符等)
+int(' 11 ') #同上,去除左右空格(包含制表符、换行符等)
 
 ###float
-var = 1.0     #float，浮点，无double
+var = 1.0     #float,浮点,无double
 var = 1.      #同上;0可省略
 var = .1      #表示0.1;0可省略hos   
 var = 0.1e2   #科学计数法(不严谨);表示0.1 * 10 ** 2;e可以大写为E
@@ -133,28 +133,34 @@ float(0)      #返回0.0
 float(False)  #返回0.0
 float(1)      #返回1.0;其他整数和进制数同理
 float('11')   #返回11.0;不能转换非十进制字符串
-float(' 11 ') #同上，去除左右空格(包含制表符、换行符等)后处理
+float(' 11 ') #同上,去除左右空格(包含制表符、换行符等)后处理
 
 ###complex
-var = 1 + 2j   #complex，复数;默认表示 (1+2j)
+var = 1 + 2j   #complex,复数;默认表示 (1+2j)
 var = (1 + 2j) #同上
 
-var.real       #返回实部，浮点格式
-var.imag       #返回虚部，浮点格式
+var.real       #返回实部,浮点格式
+var.imag       #返回虚部,浮点格式
 complex(x)     #将x转为复数;x为数字类型或者数字类型(十进制)字符串
 
 ##2)String(字符串)  #不可变
 var = ''        #空字符串
 var = str()     #同上
-var = 'sdas'    #双引号也可以，使用完全相同；多行字符串可使用三引号指定
-var = r'sd \n'  #\为转义符，字符串前加r可使转义失效
+var = 'sdas'    #双引号也可以,使用完全相同；多行字符串可使用三引号指定
+var = r'sd \n'  #\为转义符,字符串前加r可使转义失效
 
 len(var)        #返回字符数
 var * n         #返回重复n次的字符串
 var1 + var2     #连接字符串
 str(x)          #将x转为字符串
-str(5).zfill(2) #返回'05';
-var1 [not] in var2   #判断字符串是否var1属于var2的子串
+str(5).zfill(2) #返回'05'
+str(-5).zfill(2)#返回'-05'
+str(5).rjust(3) #右对齐;返回'  5'
+str(5).ljust(3) #右对齐;返回'5  '
+var.strip()     #去除字符串左右的空格/制表符/换行符等;lstrip()/rstrip()是去除左/右的
+var.strip(str)  #去除字符串左右的指定字符序列(str)
+'1223212==341'.strip('123') #返回 '==34'
+var1 [not] in var2          #判断字符串是否var1属于var2的子串
 
 ###字符串切片
 var[starIndex:endIndex:step]  #返回 starIndex <= index < endIndex 的数据;索引表示相对位置
@@ -173,11 +179,11 @@ var[:2]      #返回'12'
 var[2::-1]   #返回'321'
 var[:2:-1]   #返回'987654'
 var[:]       #返回字符串本身
-var[::-1]    #取反，返回987654321
+var[::-1]    #取反,返回987654321
 
 ##3)Tuple(元组)      #不可变可重复
 var = ('asda','asda',12)
-var = 'asda','asda',12     #同上，不推荐使用
+var = 'asda','asda',12     #同上,不推荐使用
 var = (20,)     #一个值tuple
 var = ()        #空元组
 var = tuple()   #空元组
@@ -188,7 +194,7 @@ del var         #删除引用
 
 ##4)Sets(集合)         #可变无序不重复
 var = {'asda','asda'}  #不支持var[n]形式的访问及修改
-var = set()            #空集，不能使用{}，{}表示空字典
+var = set()            #空集,不能使用{},{}表示空字典
 
 len(var)       #返回元素数
 var.clear()    #删除(清空)所有元素
@@ -215,12 +221,13 @@ var.clear()       #删除(清空)所有元素
 var.pop(n)        #移除指定索引的元素;默认为最后一个
 var.reverse()     #反向
 var.sort()        #排序;会改变列表
+sorted(var)       #排序;不会改变列表
 var.insert(n,obj) #指定位置插入元素
 var.append(var2)  #追加单个新元素(对象);列表嵌套
-var.extend(var2)  #追加var2序列中的多个元素;序列为dict时，追加元素为key
-var.copy()        #复制列表;浅复制，深复制使用var.copy.deedcopy(var)
+var.extend(var2)  #追加var2序列中的多个元素;序列为dict时,追加元素为key
+var.copy()        #复制列表;浅复制,深复制使用var.copy.deedcopy(var)
 
-##6)Dictionary(字典)  #可变,key-value形式，key不重复;key一般使用数字或字符串
+##6)Dictionary(字典)  #可变,key-value形式,key不重复;key一般使用数字或字符串
 var = {}        #空字典
 var = dict()    #同上
 var = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
@@ -240,8 +247,8 @@ a + b   #加
 a - b   #减
 a * b   #乘
 a / b   #除
-a % b   #取模(支持浮点)，值为余数部分
-a // b  #整除，向(坐标轴)左取整
+a % b   #取模(支持浮点),值为余数部分
+a // b  #整除,向(坐标轴)左取整
 a ** b  #a的b次幂
 
 ##比较(关系)
@@ -257,38 +264,38 @@ a = b   #简单赋值
 a [算术运算符] = b  <=> a = a [算术运算符] b  #例如 a += b 等价于 a = a + b
 
 #多变量赋值
-a = b = c = 1            #多变量赋相同值，实际指向同一(内存)位置
+a = b = c = 1            #多变量赋相同值,实际指向同一(内存)位置
 a, b, c = 1, 2, "runoob" #多变量赋不同值
 del var,var2   #删除变量
 var = None          #变量重置(未定义)
 
 ##(二进制)位运算
 ###int(整型)数据存储方式
-1.python中int一般分为普通整型(一般是32位)和长整型(大于32位);长度可认为无限制，存在sys.maxsize
+1.python中int一般分为普通整型(一般是32位)和长整型(大于32位);长度可认为无限制,存在sys.maxsize
 2.数据存储方式
-a)原码: 最高位为符号位，0为正1为负;其余代表数值本身绝对值;正数的原码、反码和补码都相同
-b)反码: 除符号位外，其各位取反
+a)原码: 最高位为符号位,0为正1为负;其余代表数值本身绝对值;正数的原码、反码和补码都相同
+b)反码: 除符号位外,其各位取反
 c)补码: 反码加1
 注: 0有 +0/-0之分
 &        #(补码)按位与
 |        #(补码)按位或
 ^        #(补码)异或
 ~ x      #(补码)取反;等价于 -1 - x 
-x << n   #左移，23 << 3 等价于 9 * ( 2 ** 3 )
-x >> n   #右移，23 >> 3 等价于 9 // ( 2 ** 3 )
+x << n   #左移,23 << 3 等价于 9 * ( 2 ** 3 )
+x >> n   #右移,23 >> 3 等价于 9 // ( 2 ** 3 )
 
 ##逻辑
-###x/y为表达式，x=False/''/0/0.0/None/list() 等时表示False，不确定可使用bool(x)判断
+###x/y为表达式,x=False/''/0/0.0/None/list() 等时表示False,不确定可使用bool(x)判断
 x and y  #x表达式的值为False时返回False;否则返回y表达式的值
 x or y   #x为True时返回x表达式的值;否则返回y表达式的值
 not x    #x为True返回False;否则返回True
 
 ##成员
-in，not in  #一般用于判断元素是否在序列(字符串、列表、元组等)中，返回True/False
+in,not in  #一般用于判断元素是否在序列(字符串、列表、元组等)中,返回True/False
 
 ##身份
 ###判断两个标识符是否引用同一对象
-is，not is
+is,not is
 
 
 #条件控制
@@ -322,9 +329,9 @@ else:
 
 3.break/continue
 break     #跳出当前循环体;对应else将不执行
-continue  #跳出当前循环，执行下一次循环
+continue  #跳出当前循环,执行下一次循环
 
-4.pass  #空语句，是为了保持程序结构的完整性;一般用做占位语句
+4.pass  #空语句,是为了保持程序结构的完整性;一般用做占位语句
 
 
 #迭代器(iterator)
@@ -354,7 +361,7 @@ def fibonacci(n):  # 生成器函数 - 斐波那契
         yield a
         a, b = b, a + b
         counter += 1
-f = fibonacci(10)  # f 是一个迭代器，由生成器返回生成
+f = fibonacci(10)  # f 是一个迭代器,由生成器返回生成
 
 
 #函数(function)
@@ -380,21 +387,21 @@ def func(str,num):    #func(num=1,str='a')调用时参数顺序需与定义时�
 3.默认参数
 def func(str,num=1):  #func('a')调用时默认参数可以不提供
 4.不定长参数
-def func(str,*num):   #num参数会以tuple的形式传入;如：func('a','b','c')中，num=('b','c')
-def func(str,**num):  #num参数会以dict的形式传入;num参数以key=value的形式，如：func('a',2='b','c'=3)
+def func(str,*num):   #num参数会以tuple的形式传入;如：func('a','b','c')中,num=('b','c')
+def func(str,**num):  #num参数会以dict的形式传入;num参数以key=value的形式,如：func('a',2='b','c'=3)
 def func(str,*,str2): #*后面的参数需关键字参数的形式传入;其余待补充
 
 ##return
-return [expression]表达式用于退出函数，但不是函数必需的语句
-return       #退出函数，不返回任何值
+return [expression]表达式用于退出函数,但不是函数必需的语句
+return       #退出函数,不返回任何值
 return None  #同上
 
 
 #变量作用域(范围)
 L (Local)       #局部作用域;一般为闭包函数或lambda表达式中
-E (Enclosing)   #闭包函数外的函数中
+E (Enclosing)   #闭包函数外的函数中;也可看做是局部变量
 G (Global)      #全局作用域;非闭包函数外
-B (Built-in)    #内建(内置)作用域;python语言内建，任何语句中皆可使用
+B (Built-in)    #内建(内置)作用域;python语言内建,任何语句中皆可使用
 
 ##使用规则
 L –> E –> G –>B 的规则查找
@@ -409,19 +416,19 @@ def outer():
         i_count = 2  #局部作用域
 
 ##作用域的引入
-1.模块(module)，类(class)以及函数(def、lambda)才会引入新的作用域，
-2.if/elif/else/、try/except、for/while 等代码块不会引入新的作用域，其语句内定义的变量，外部也可以访问
+1.模块(module),类(class)以及函数(def、lambda)才会引入新的作用域,
+2.if/elif/else/、try/except、for/while 等代码块不会引入新的作用域,其语句内定义的变量,外部也可以访问
 
 ##作用域修改
 num = 1          #全局变量
 def fun():
-    global num   #函数内使用global声明全局变量，使得函数内部可以修改全局变量
+    global num   #函数内使用global声明全局变量,使得函数内部可以修改全局变量
     num = 10
 
 def outer():
     num = 10           #Enclosing
     def inner():
-        nonlocal num   #nonlocal关键字声明Enclosing作用域的变量，可以使得内部可以修改
+        nonlocal num   #nonlocal关键字声明Enclosing作用域的变量,可以使得内部可以修改
         num = 100
         print(num)
     inner()
@@ -444,83 +451,147 @@ def test(a):   #通过参数传递
 
 
 #数据结构
-##列表作为堆栈(先进后出，后进先出)
+##列表作为堆栈(先进后出,后进先出)
 stack = [1,2,3]
 stack.append(4)  #进栈
 stack.pop()      #出栈
 
-##列表作为队列使用(先进先出，后进后出)
+##列表作为队列使用(先进先出,后进后出)
 from collections import deque
 queue = deque(["Eric", "John", "Michael"])
 queue.append("Terry")    #进队
 queue.popleft()          #出队
 
 ##列表推导(生成)式
+var = [1,2,3]
+[3*x for x in var]        #返回[3,6,9]
+[x**2 for x in range(3)]  #返回[0,1,4]
+[x*2 for x in [1,2,'3']]  #返回[2,4,'33']
+[[x,x**2] for x in var]   #返回[[1,1],[2,4],[3,9]]
+[x for x in range(3) if x > 1]    #if为过滤条件
+[x*y for x in var1 for y in var2] #双重for循环
 
-模块 module
-import语句
-多次执行import，模块只会导入一次
-import module1[, module2[,... moduleN] 导入模块
+##遍历
+###dict遍历
+knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+for k, v in knights.items():
+    print(k, v)
 
-例如导入 support.py
-import support
-support.函数名(参数列表) 使用module中定义的函数
+###遍历多个序列   
+for q, a in zip([1,2,3], ['a','b','c']):
+    print(q, a)
 
-from ... import 语句
-从模块中导入一个指定的部分到当前命名空间中
-from modname import name1[, name2[, ... nameN]] 部分内容
-from modname import *                           全部
-
-内置函数 dir()
-可以找到模块内定义的所有名称。以一个字符串列表的形式返回
-
-
->>> 主提示符由标准module sys.ps1定义，可修改
-... 副提示符由标准module sys.ps2定义，亦可修改
-
-
-包
-模块的名称是 A.B， 那么他表示一个包 A中的子模块 B 
+###同时获取索引和序列元素值 
+for i, v in enumerate(['tic', 'tac', 'toe']):
+    print(i, v)
 
 
-输出
-Python两种输出值的方式: 
-表达式语句和 print() 函数。
+#module(模块)
+import module1[, module2[,... moduleN]          #模块导入,
+from modname import name1[, name2[, ... nameN]] #部分内容
+from modname import *                           #全部
 
-第三种方式是使用文件对象的 write() 方法，
-标准输出文件可以用 sys.stdout 引用。
+import support    #导入support.py
 
-如果你希望输出的形式更加多样，
-可以使用 str.format() 函数来格式化输出值。
+dir(modname)  #返回模块内定义的所有名称的字符串列表的形式
 
-如果你希望将输出的值转成字符串，
-可以使用 repr() 或 str() 函数来实现。
-
-str()： 函数返回一个用户易读的表达形式，可以转义字符串中的特殊字符
-repr()： 产生一个解释器易读的表达形式，其的参数可以是 Python 的任何对象
+##命令行提示符
+sys.ps1  #主提示符'>>>'由ps1定义,可修改
+sys.ps2  #副提示符'...'由ps2定义,可修改
 
 
-输入  
-input()函数，读取键盘内容
+#输入和输出
+##输出格式美化
+1.表达式语句             #输出值
+2.print()函数            #输出值
+3.文件对象的write()方法  #输出到文件;标准输出文件可使用sys.stout引用
+
+##输出字符串化
+1.str()        #输出字符串化(用户易读);数据类型
+2.var.format() #字符串格式化输出
+2.rstr()       #输出字符串化(解释器易读);函数,参数可以是任意python对象;可以转义特殊字符
+
+##print()   #调试输出最常用的函数
+print(var)                   #输出var的值;输出后换行
+print(var,end='')            #输出后不换行;end默认值为换行符(\n)
+print(var,end='...')         #指定结束符 
+print(var1,var2,...varn)     #输出多个变量的值,默认以空格隔开
+print('PI：%5.3f' % 3.1415)  #老版格式化输出;推荐使用format()格式化
+
+##format()  #格式化函数
+'{} == {}'.format(var0,var1)       #{}表示变量位置,其数量参数数量保持一致(少于也是可以，但没有实际意义)
+'{1} == {0}'.format(var0,var1)     #{}中含数字表示格式化参数的索引
+'{0[key1]} {0[key2]}'.format(dict) #字典(value)格式化
+'{key1} {key2}'.format(**dict)     #同上
+{:.3f}    #表示float的格式化;保留小数点后3位
+{1:6.3f}  #表示格式化第二个参数;有效位(包括小数点)6位,不足补空格;保留三位小数
+{0:10}    #格式化字符串,保留10位,左对齐,不足补空格
+
+##input()  
+str = input("请输入：")  #读取键盘输入并赋值给str
 
 
-文件的读写
-open()返回一个file的文件对象
-基本格式 open(filename,mode)
+#文件读写
+f = open(filename, mode)
+with open(filename, mode) as f:   #同上,在异常情况能关闭文件
 
-f = open("path/filename", "w")
+##filename
+filename = './tmp/1.txt'  #相对路径
+filename = '/tmp/1.txt'   #绝对路径
 
-文件对象的读写方法用于操作文件
+##mode   #非必需参数,默认为读模式,模式组合参见 https://www.runoob.com/python3/python3-file-methods.html
+r   #读模式
+w   #写模式
+b   #二进制
+a   #追加
+
+##常用方法
+f.read()      #读取全部数据,返回字符串或二进制对象
+f.readline()  #读取一行数据;返回为空表示到了最后一行
+f.readlines() #读取所有行
+f.write(str)  #写入文件并返回写入字符数  
+f.tell()      #返回操作指针位置(字节数)
+f.seek()      #移动操作指针位置(字符)
+f.seek(n,0)   #从起始位置即文件首行首字符开始移动n个字符
+f.seek(n,1)   #表示从当前位置往后移动n个字符
+f.seek(-n,2)  #表示从文件的结尾往前移动n个字符
+f.close()     #关闭文件 
+
+##序列化和反序列化
+pickle.dump(obj, file, [,protocol]) 
+pickle.load(file)
 
 
-基本数据的序列化合反序列化
-pickle模块
+#file
+f = open(filename, mode)  #常见方式
+##完整方式
+f = open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
+###参数说明
+file        #必需,文件路径（相对或者绝对路径）
+mode        #可选,文件打开模式;具体见 https://www.runoob.com/python3/python3-file-methods.html
+buffering   #设置缓冲
+encoding    #一般使用utf8
+errors      #报错级别
+newline     #区分换行符
+closefd     #传入的file参数类型
+opener
+
+##常用方法
+file.close()                 #关闭文件
+file.flush()                 #刷新文件内部缓冲，缓冲区的数据立刻写入文件。
+file.fileno()                #返回一个整型的文件描述符(file descriptor FD 整型)
+file.isatty()                #如果文件连接到一个终端设备返回 True，否则返回 False。
+file.next()                  #返回文件下一行,python3不支持
+file.read([size])            #从文件读取指定的字节数，未给定或为负则读取所有。
+file.readline([size])        #读取整行，包括 "\n" 字符。
+file.readlines([sizeint])    #读取所有行并返回列表，若给定sizeint>0，返回总和大约为sizeint字节的行, 实际读取值可能比 sizeint 较大, 因为需要填充缓冲区。
+file.seek(offset[, whence])  #设置文件当前位置
+file.tell()                  #返回文件当前位置。
+file.truncate([size])        #从文件的首行首字符开始截断，截断文件为 size 个字符，无 size 表示从当前位置截断；截断之后后面的所有字符被删除，其中 Widnows 系统下的换行代表2个字符大小。
+file.write(str)              #将字符串写入文件，返回的是写入的字符长度。
+file.writelines(sequence)    #向文件写入一个序列字符串列表，如果需要换行则要自己加入每行的换行符。
 
 
-os模块提供非常丰富的方法来处理文件和目录
-
-
-异常处理
-
-20
-
+#os文件和目录操作
+##具体参见
+https://www.runoob.com/python3/python3-os-file-methods.html
