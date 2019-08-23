@@ -812,7 +812,7 @@ db = pymysql.connect('主机地址','用户名','密码','数据库' )  #打开�
 cursor = db.cursor()                     #创建一个游标对象 cursor
 sql = 'SELECT VERSION()'                 #构建sql语句;语句较长时可使用'''/"""(使用 \ 也可以)构建换行的sql语句
 cursor.execute(sql)                      #执行sql
-data = cursor.fetchone()                 #获取单条返回数据 
+data = cursor.fetchone()                 #获取单条返回数据;多条数据可使用fetchall()
 print ('Database version : %s ' % data)  #打印获取的信息
 db.close()                               #关闭数据库连接
 
@@ -820,14 +820,40 @@ db.close()                               #关闭数据库连接
 sql = '''INSERT INTO EMPLOYEE(FIRST_NAME,
          LAST_NAME, AGE, SEX, INCOME)
          VALUES ('Mac', 'Mohan', 20, 'M', 2000)'''
-####另一种书写方式
+####sql另一种书写方式
 sql = '''INSERT INTO EMPLOYEE(FIRST_NAME,
          LAST_NAME, AGE, SEX, INCOME)
          VALUES ('%s', '%s',  %s,  '%s',  %s)" % 
          ('Mac', 'Mohan', 20, 'M', 2000)'''        
 try:   
    cursor.execute(sql)  #执行sql语句
-   db.commit()          #提交
+   db.commit()          #提交;涉及修改库表的都需要commit()
 except:  
    db.rollback()        #发生异常则回滚
+   
+##事务操作的简单封装
+import pymysql
+
+class DB():
+    def __init__(self, host='localhost', port=3306, db='', user='root', passwd='root', charset='utf8'):
+        #建立连接 
+        self.conn = pymysql.connect(host=host, port=port, db=db, user=user, passwd=passwd, charset=charset)
+        #创建游标,操作设置为字典类型        
+        self.cur = self.conn.cursor(cursor = pymysql.cursors.DictCursor)
+
+    def __enter__(self):       
+        return self.cur   #返回游标
+
+    def __exit__(self, exc_type, exc_val, exc_tb):      
+        self.conn.commit()    #提交执行  
+        self.cur.close()      #关闭游标
+        self.conn.close()     #关闭数据库连接
+
+
+if __name__ == '__main__':
+    with DB(host='192.168.99.1',user='root',passwd='root',db='mysql') as db:
+        db.execute('select * from course')
+        print(db)
+        for i in db:
+            print(i)
 
