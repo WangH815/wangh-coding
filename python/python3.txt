@@ -1,8 +1,9 @@
 #Python3 
 
 #参考资料
-https://www.runoob.com/python3/python3-tutorial.html
-https://www.yiibai.com/python
+https://www.runoob.com/python3/python3-tutorial.html   #菜鸟教程
+https://www.yiibai.com/python                          #易百教程
+https://docs.python.org/zh-cn/3.7/                     #官方文档(3.7)
 
 #标识符
 ##作用
@@ -463,6 +464,7 @@ queue.append("Terry")    #进队
 queue.popleft()          #出队
 
 ##列表推导(生成)式
+range
 var = [1,2,3]
 [3*x for x in var]        #返回[3,6,9]
 [x**2 for x in range(3)]  #返回[0,1,4]
@@ -879,7 +881,7 @@ while True:
     print("连接地址: %s" % str(addr))    
     msg='欢迎访问菜鸟教程！'+ "\r\n"
     clientsocket.send(msg.encode('utf-8'))     #向客户端发送数据,数据指定为utf-8编码
-    clientsocket.close()                       #关闭客户端连接
+    clientsocket.close()                       #关闭连接
 
 #!/usr/bin/python3
 # 文件名：client.py
@@ -892,6 +894,67 @@ host = socket.gethostname() #获取本地主机名
 port = 9999                 #设置端口号
 s.connect((host, port))     #连接服务，指定主机和端口
 msg = s.recv(1024)          #接收小于 1024 字节的数据
-s.close()
+s.close()                   #关闭连接
+print(msg.decode('utf-8'))  #打印服务端发送的信息;使用utf-8解码
 
-print (msg.decode('utf-8'))
+
+#xml解析
+##xml示例
+<collection shelf="New Arrivals">
+    <movie title="Enemy Behind">
+        <type>War, Thriller</type>
+        <format>DVD</format>
+        <year>2003</year>
+        <rating>PG</rating>
+        <stars>10</stars>
+        <description>Talk about a US-Japan war</description>
+    </movie>
+</collection>
+
+##解析方式
+SAX(simple API for XML)     #python标准库支持,采用事件驱动
+DOM(Document Object Model)  #解析为树模型;一次性加载到内存中;较大的xml不建议使用此方式
+ElementTree
+
+###SAX    ####待补充
+import xml.sax                  #导入模块
+parser = xml.sax.make_parser()  #创建一个新的解析器对象并返回
+
+###DOM
+import xml.dom.minidom
+DOMTree = xml.dom.minidom.parse('xx.xml')      #获取DOMTree对象
+elist = DOMTree.documentElement                #获取文档成员对象集合
+movie = elist.getElementsByTagName('movie')[0] #获取第一个movie节点对象;xml中的collection、movie和type等称为TagName
+type = movie.getElementsByTagName('type')[0]   #同上
+typeData = type.childNodes[0].data             #获取节点内容;返回'War, Thriller'
+movie.hasAttribute("title")                    #判断节点是否存在Attribute(属性)
+movie.getAttribute("title")                    #获取属性值;返回'Enemy Behind'
+
+
+#json编码解析
+json.dumps()    #对数据进行编码
+json.loads()    #对数据进行解码
+
+##解码编码数据类型转换表
+https://www.runoob.com/python3/python3-json.html
+
+##编码      #python的dict编码为json对象
+import json
+data = {
+    'no' : 1,
+    'name' : 'Runoob',
+    'url' : 'http://www.runoob.com'
+}
+repr(data)                  #Python数据;{'url': 'http://www.runoob.com', 'no': 1, 'name': 'Runoob'}
+json_str = json.dumps(data) #json对象;{"url": "http://www.runoob.com", "no": 1, "name": "Runoob"}
+
+##解码      #json对象解码为python的dict
+data2 = json.loads(json_str)
+
+##json的序列化和反序列化
+with open('data.json', 'w') as f:  #将python的dict以json数据格式写入文件
+    json.dump(data, f)
+
+with open('data.json', 'r') as f:  #读取文件中的json数据以python的dict形式读取
+    data = json.load(f)
+

@@ -129,7 +129,9 @@ grep -A/B/C n str file     #显示匹配行及其之后(after)/之前(before)/�
 grep -nA m str file        #显示行号且显示匹配行之后的m行内容
 grep -n -A m str file      #同上
 ###cut
-cut -b/c/d N/N-/N-M/-M file  #按照字节/字符/分隔符(默认为Tab)截取文本(标准输出);截取列范围分别是 =N、>=N、N<=x<=M和<=M
+cut -b/c N/N-/N-M/-M file    #按照字节(bytes)/字符(characters)截取文本(标准输出);截取列范围分别是 =N、>=N、N<=x<=M和<=M
+cut -f N/N-/N-M/-M file      #按照Tab(制表符)截取文本(标准输出);-f表示fields(域)
+cut -d ',' -f N file         #-d(delimiter)指定分隔符,与-f一起使用
 echo '1234567'|cut -c 2      #结果为2;可写为 cut -c2,空格可省略
 echo '1234567'|cut -c2-5     #结果为2;可写为 cut -c2,空格可省略
 echo -e "123\t456"|cut -f2   #结果为456
