@@ -857,3 +857,41 @@ if __name__ == '__main__':
         for i in db:
             print(i)
 
+
+#网络编程
+1.Socket       #低级别网络服务支持,提供操作系统Socket接口的全部功能
+2.SoketServer  #高级别网络服务,提供了服务中心类,简化了开发
+
+##scoket
+###实例
+#!/usr/bin/python3
+# 文件名：server.py
+import socket
+import sys
+
+serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #创建 socket 对象
+host = socket.gethostname()                    #获取本地主机名
+port = 9999                                    #设置端口号
+serversocket.bind((host, port))                #绑定端口号
+serversocket.listen(5)                         #设置最大连接数，超过后排队
+while True:   
+    clientsocket,addr = serversocket.accept()  #建立客户端连接   
+    print("连接地址: %s" % str(addr))    
+    msg='欢迎访问菜鸟教程！'+ "\r\n"
+    clientsocket.send(msg.encode('utf-8'))     #向客户端发送数据,数据指定为utf-8编码
+    clientsocket.close()                       #关闭客户端连接
+
+#!/usr/bin/python3
+# 文件名：client.py
+
+import socket
+import sys
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #创建 socket 对象
+host = socket.gethostname() #获取本地主机名
+port = 9999                 #设置端口号
+s.connect((host, port))     #连接服务，指定主机和端口
+msg = s.recv(1024)          #接收小于 1024 字节的数据
+s.close()
+
+print (msg.decode('utf-8'))
