@@ -120,7 +120,7 @@ grep ^a file               #a开头
 grep a$ file               #a结尾
 grep -n ^$ file            #匹配空行并显示行号
 grep ^[a-z] file           #小写字母开头,[]表示其中任意字符
-grep -E 正则表达 file      #正则方式查找
+grep -E 正则表达 file      #正则方式查找;等价于 egrep
 grep -nE [0-9]\{4\} file   #匹配出现4次(需开启正则)数字的区域,并显示行号
 grep -nE [0-9]\{2,4\} file #匹配出现2到4次(需开启正则)数字的区域,并显示行号
 grep -i str file           #忽略大小写

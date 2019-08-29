@@ -170,9 +170,10 @@ var1 [not] in var2          #判断字符串是否var1属于var2的子串
 
 ###字符串切片
 var[starIndex:endIndex:step]  #返回 starIndex <= index < endIndex 的数据;索引表示相对位置
-####     var = '1  2  3  4  5  6  7  8  9'     #实际无空格
+####     var = '1  2  3  4  5  6  7  8  9'     #忽略空格
 ####正向索引为  0  1  2  3  4  5  6  7  8
-####反向索引为 -9 -8 -7 -6 -5 -4 -3 -2 -1 
+####反向索引为 -9 -8 -7 -6 -5 -4 -3 -2 -1      #实际使用很少
+
 ####默认startIndex=0;endIndex=len(var);step=1
 var[index]   #截取单个字符
 var[2:6]     #返回'3456'
