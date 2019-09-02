@@ -376,10 +376,20 @@ crontab [-u user] [-e|l|r] #参数分别是显示/编辑/删除(所有)某个用
 nohub command  #挂起命令永久执行并输出日志到当前目录nohup.out文件中;用户退出命令不会退出
 command &      #后台运行命令;用户退出命令退出(部分命令会启动守护进程的除外)
 
-##开关机
-shutdown
-init
-reboot
+##开关机   #建议使用shutdown命令
+shutdown [-t n] -r/h   #指定n秒之后重启/关机;不指定-t,默认一分钟;shutdown -c取消当前命令
+shutdown -h now        #立即关机
+init n                 #切换运行级别;当前运行级别可使用runlevel查看
+    #runlevel
+	0:停机或者关机(千万不能将initdefault设置为0)
+    1:单用户模式,只root用户进行维护
+    2:多用户模式,不能使用NFS(Net File System)
+    3:完全多用户模式(标准的运行级别)
+    4:安全模式
+    5:图形化(即图形界面)
+    6:重启(千万不要把initdefault设置为6)
+reboot     #重启
+poweroff   #关机
 
 ##文件下载和传输
 ###命令差异见  https://blog.csdn.net/qujinhua19851006/article/details/8666254
@@ -387,8 +397,23 @@ curl -O url         #下载文件;O大写,不用O只是打印内容不会下载
 curl -O newname url #下载并重命名
 wget -o newname url #同上
 wget url            #下载文件
-ftp
-sftp
+ftp ip/hostname          #ftp到指定服务器,输入用户密码即可登录;file transfer program
+ftp username@ip/hostname #同上,指定用户名
+    #常用子命令
+	assii/binary/bi      #设置文件传输格式,非文本文件请使用bin
+	prompt               #关闭或打开交互模式;默认是打开的
+	lcd dir              #切换本地工作目录;dir缺省则切换到本地$HOME目录
+	cd dir               #切换远程工作目录
+	ls/dir               #列出远程目录及文件
+	pwd                  #打印远程工作目录
+	get/put file [file1] #上传/下载单文件,并重命名为file1;file1缺省时文件名保持一致
+	mget/mput files      #上传/下载多文件;支持通配符
+	?                    #帮助;同help
+	!command             #执行本地shell命令
+	bye/quit             #退出ftp
+sftp user@ip/hostname    #secure file transfer program;相比ftp安全但速度较慢
+    #常用子命令
+	ls/lls/cd/lcd/pwd/lpwd/get/mget/put/mput
 lsftp
 rcp
 scp
@@ -428,9 +453,9 @@ cat /proc/23778/fd/86 > /root/selenium/Spider/MySql.Data.dll
 
 #vi/vim 常见操作
 #三种模式
-1.命令模式（Command mode）   #用于光标移动、复制粘贴、搜索替换等
-2.输入模式（Insert mode）    #用于基本输入
-3.底线模式（Last line mode） #用于搜索替换
+1.命令模式(Command mode)   #用于光标移动、复制粘贴、搜索替换等
+2.输入模式(Insert mode)    #用于基本输入
+3.底线模式(Last line mode) #用于搜索替换
 
 #其他命令
 u           #撤销上一个命令  

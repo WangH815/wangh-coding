@@ -18,8 +18,6 @@ git rm -r dir              #删除文件夹
 git add . && git commit -m '提交说明' && git push #提交当前文件夹内容到远程仓库
 
 
-
-
 # 教程地址
 http:#www.runoob.com/git/git-tutorial.html                                           #菜鸟教程
 http:#www.runoob.com/manual/git-guide/                                               #简明教程
