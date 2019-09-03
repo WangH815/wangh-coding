@@ -5,7 +5,7 @@ git config --global user.name "username"             #设置本地用户名
 git config --global user.email example@example.com   #设置github注册时的邮箱
 git init [dir]                           #初始化本地仓库(默认为当前文件夹)，会生成.git文件夹
 git clone git@github.com:XX/XX.git       #使用ssh方式克隆仓库到本地(推荐)，需配置ssh key
-git clone https:#github.com/XX/XX.git    #使用HTTPS克隆仓库到本地
+git clone https://github.com/XX/XX.git    #使用HTTPS克隆仓库到本地
 git status [-s]            #显示本地仓库文件详细[简略]状态
 git pull                   #同步远程仓库到本地，修改本地仓库工作开始前的第一步(重要)
 git add ./*/file           #添加所有/指定文件到暂存区;空文件夹不会添加
@@ -15,10 +15,10 @@ git mv oldfile newfile     #重命名文件或文件夹
 git mv file dir            #移动文件
 git rm file                #删除文件
 git rm -r dir              #删除文件夹
-git add . && git commit -m '提交说明' && git push #提交当前文件夹内容到远程仓库
+git add . && git commit -m '提交说明' && git push   #提交当前文件夹内容到远程仓库
 
 
-# 教程地址
+#教程地址
 http://www.runoob.com/git/git-tutorial.html                                           #菜鸟教程
 http://www.runoob.com/manual/git-guide/                                               #简明教程
 https://www.yiibai.com/git/git-quick-start.html#article-start                         #易百教程
@@ -26,9 +26,9 @@ https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b
 https://git-scm.com/book/zh/v2                                                        #官方中文手册
 
 
-git简介
+#git简介
 
-分布式版本控制工具
+##分布式版本控制工具
 2005年由Linux 的缔造者 Linus Torvalds开发
 主要特点：
 1.速度快   #由C语言开发
@@ -37,7 +37,7 @@ git简介
 4.完全分布式
 5.有能力高效管理类似 Linux 内核(截止2018年底最新内核代码量在2500万行左右)一样的超大规模项目(速度和数据量)
 
-与集中式版本控制工具(SVN)相比
+##与集中式版本控制工具(SVN)相比
 1.git是分布式的，SVN不是：
    这是git和其它非分布式的版本控制系统，例如SVN，CVS等，最核心的区别。
 2.git把内容按元数据方式存储，而SVN是按文件：
@@ -50,10 +50,10 @@ git简介
    git的内容存储使用的是SHA-1哈希算法。这能确保代码内容的完整性，
    确保在遇到磁盘故障和网络问题时降低对版本库的破坏。
 
-基本概念
+##基本概念
 版本控制工具(系统)：记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。
 
-发展历程
+##发展历程
 本地化-->集中式-->分布式
 
 本地化
@@ -77,8 +77,8 @@ Distributed Version Control System，简称 DVCS
 git 用以计算校验和的机制叫做 SHA-1 散列(hash，哈希)，用于保证数据的完整性
 
 
-工作流程
-一般工作流程如下：
+#工作流程
+##一般工作流程如下：
 1.克隆 git 资源作为工作目录
 2.在克隆的资源上添加或修改文件
 3.如果其他人修改了，你可以更新资源
@@ -86,19 +86,19 @@ git 用以计算校验和的机制叫做 SHA-1 散列(hash，哈希)，用于保
 5.提交修改
 6.在修改完成后，如果发现错误，可以撤回提交并再次修改并提交
 
-文件的三种状态
+##文件的三种状态
 1.已提交(committed) #表示数据已经安全的保存在本地数据库中。 
 2.已修改(modified)  #表示修改了文件，但还没保存到数据库中。 
 3.已暂存(staged)    #表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。
 
-三个工作区
+##三个工作区
 1.工作区：就是你在电脑里能看到的目录。
 2.暂存区：英文叫stage, 或index。一般存放在 ".git目录下" 下的index文件（.git/index）中，
           所以我们把暂存区有时也叫作索引（index）。
 3.版本库：工作区有一个隐藏目录.git，这个不算工作区，而是git的版本库，也叫仓库。
 
 
-使用简介
+#使用简介
 1.安装
 sudo yum install git      #RHEL发行版本
 sudo apt-get install git  #基于 Debian 的发行版
