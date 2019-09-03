@@ -1,0 +1,115 @@
+
+python3 脚本基础
+
+
+#脚本声明
+#!/usr/bin/env python3     #指定使用的python版本,python脚本第一行
+
+
+#获取标准输入
+import fileinput
+
+with fileinput.input() as f_input:   
+    for line in f_input:
+        print(line, end='')
+        
+chmod 755 xx.py   #赋执行权限
+./xx.py           #实现相同的输入输出(键盘输入什么则输出什么)
+ls | ./xx.py      #获取标准输入并输出;其他命令类似
+
+
+#脚本错误退出
+import sys
+sys.stderr.write('It failed!\n')    #输出错误信息
+raise SystemExit(1)                 #抛出 SystemExit 异常,并返回状态码 1
+
+
+#解析命令行选项
+可使用 argparse 模块
+
+
+#密码输入提示
+import getpass
+
+def svc_login(user, passwd):  #可自定义判断函数
+    if passwd == 'root':
+        return True
+    else:
+        return False
+
+user = getpass.getuser()
+passwd = getpass.getpass()
+
+if svc_login(user, passwd):
+    print('欢迎' + user + ',登陆成功！')
+else:
+    print('登录失败！')
+    
+    
+#获取终端大小      #主要用于正确的格式化输出
+import os
+size = os.get_terminal_size()
+
+
+#执行外部命令(一般是shell命令)
+import subprocess     #此模块对依赖tty的外部命令不适用           
+out_bytes = subprocess.check_output(['ls','-ltr'])  #返回命令的字节字符串;仅返回标准输出的值;只能执行简单cmd
+out_text = out_bytes.decode('utf-8')                #解码为utf-8编码的字符串
+print(out_text)                                     #打印返回结果
+
+##捕获异常并获取返回码
+try:
+    out_bytes = subprocess.check_output(['cmd','arg1','arg2'])
+except subprocess.CalledProcessError as e:
+    out_bytes = e.output  # Output generated before error
+    code = e.returncode   # Return code
+
+##获取错误输出
+out_bytes = subprocess.check_output(['cmd','arg1','arg2'], stderr=subprocess.STDOUT, timeout=5)
+
+##执行复杂shell
+out_bytes = subprocess.check_output('grep python | wc > out', shell=True)  #
+
+##执行复杂交互的shell
+text = b'''
+hello world
+goodbye
+'''
+p = subprocess.Popen(['wc'], stdout = subprocess.PIPE, stdin = subprocess.PIPE)  #载入命令通道并设置标准输入输出
+stdout, stderr = p.communicate(text)  #向通道发送数据
+out = stdout.decode('utf-8')          #输出解码
+err = stderr.decode('utf-8')          #错误输出解码
+
+
+#复制或移动文件
+import shutil
+shutil.copy(src, dst)                     # cp src dst
+shutil.copy2(src, dst)                    # cp -p src dst;保留元数据的复制
+shutil.copytree(src, dst)                 # cp -R src dst
+shutil.copytree(src, dst, symlinks=True)  # 同上;保留符号链接
+shutil.move(src, dst)                     # mv src dst
+
+##忽略特定文件或目录的复制
+def ignore_pyc_files(dirname, filenames):
+    return [name in filenames if name.endswith('.pyc')]
+shutil.copytree(src, dst, ignore=ignore_pyc_files)
+
+shutil.copytree(src, dst, ignore=shutil.ignore_patterns('*~', '*.pyc'))  #同上
+
+##含错误处理的文件复制
+try:
+    shutil.copytree(src, dst)
+except shutil.Error as e:
+    for src, dst, msg in e.args[0]:   # msg用于获取错误信息
+        print(dst, src, msg)
+
+
+#压缩或解压
+import shutil
+shutil.unpack_archive('Python-3.3.0.tgz')        #解压
+shutil.make_archive('py33','zip','Python-3.3.0') #压缩
+
+
+#简单脚本增加日志功能
+import logging      #使用logging模块
+
