@@ -229,7 +229,7 @@ var.clear()       #删除(清空)所有元素
 var.pop(n)        #移除指定索引的元素;默认为最后一个
 var.reverse()     #反向
 var.sort()        #排序;会改变列表
-sorted(var)       #排序;不会改变列表
+sorted(var)       #排序;不会改变列表;生成新的列表
 var.insert(n,obj) #指定位置插入元素
 var.append(var2)  #追加单个新元素(对象);列表嵌套
 var.extend(var2)  #追加var2序列中的多个元素;序列为dict时,追加元素为key
@@ -486,7 +486,7 @@ random.randrange(-1,5,2)          #返回[-1,5)之间的一个奇数
 random.choice(seq)                #返回序列中的一个元素;序列一般是list和tuple;seq不能为空
 random.randint(a,b)               #等价于random.randrange(a,b+1)
 random.shuffle(seq)               #打乱序列(有序可修改)元素位置
-random.sample(seq,n)              #生成一个长度为n(<=len(seq))随机序列;不改变原序列
+random.sample(seq,n)              #生成一个长度为n(<=len(seq))随机列表;不改变原序列
 var = [1,2,3]
 [3*x for x in var]                #返回[3,6,9]
 [x**2 for x in range(3)]          #返回[0,1,4]

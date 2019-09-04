@@ -34,6 +34,7 @@ Linux使用
 
 ##命令帮助
 man cmd       #manual(手册);命令详细说明
+info cmd      #类似于man;info格式命令帮助
 help cmd      #使用help命令获取简要帮助
 cmd --help    #同上;部分命令也可使用cmd -h
 which cmd     #显示命令绝对路径
@@ -71,7 +72,7 @@ cd ../..       #切换到上上层目录
 pwd            #print working directory;打印当前工作目录绝对路径
 mkdir [path/]dir        #make directory;创建文件夹,多文件夹可空格隔开;要求上层目录必须存在
 mkdir -p dir1/dir2      #同上,不要st求上层目录存在;不存在会创建多级目录
-mkdir -p a/{b,c/{d,e}}  #创建复杂目录
+mkdir -p a/{b,c/{d,e}}  #创建复杂目录;/表示子目录,{}中逗号隔开的为平级目录
 mkdir -p {q,w}a{e,r}    #创建qae/qar/wae/war四个目录
 mkdir -m 777 dir        #创建指定权限目录
 rmdir dir               #remove empty directory;删除空文件夹;多文件空格隔开
@@ -103,17 +104,18 @@ more file               #分页查看文件,一次性加载,空格/b 翻页;大�
 less file               #分页查看文件,逐步加载,空格/b PgUp/PgDn 翻页
 file file               #显示文件或文件夹类型
 diff file1 file2        #文件差异对比
-ln file link            #创建file的硬连接(hard link,符号链接)为link
-ln -s file link         #创建file的软连接(symbolic link,符号链接)为link
+ln file link            #创建file的硬连接(hard link)为link
+ln -s file link         #创建file的软连接(symbolic link,符号链接)为link;link不能创建前存在
     ##软链接：
      1.软链接,以路径的形式存在。类似于Windows操作系统中的快捷方式
-     2.软链接可以 跨文件系统 ,硬链接不可以
+     2.软链接可以跨文件系统,硬链接不可以
      3.软链接可以对一个不存在的文件名进行链接
      4.软链接可以对目录进行链接
     ##硬链接：
      1.硬链接,以文件副本的形式存在。但不占用实际空间。
      2.不允许给目录创建硬链接
      3.硬链接只有在同一个文件系统中才能创建
+	 4.通过指索引节点（inode）来进行链接
 ###grep
 grep abc file              #查找文件中包含abc的行
 grep ^a file               #a开头
@@ -475,7 +477,8 @@ $/End     #移动光标到行尾。End为键盘功能键
 G         #移动光标到最后一行行首
 nG        #移动光标到第n行行首
 n<Enter>  #光标向下移动n行
-gg        #移动光标到第一行行首,等价于1G
+gg        #移动光标到第一行行首,等价于1G;G等价于gg
+ngg       #移动光标到第n行行首,同nG
 
 ###删除
 x/X    #向后删除单个字符/向前删除单个字符
