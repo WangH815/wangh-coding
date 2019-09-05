@@ -73,7 +73,7 @@ pwd            #print working directory;打印当前工作目录绝对路径
 mkdir [path/]dir        #make directory;创建文件夹,多文件夹可空格隔开;要求上层目录必须存在
 mkdir -p dir1/dir2      #同上,不要st求上层目录存在;不存在会创建多级目录
 mkdir -p a/{b,c/{d,e}}  #创建复杂目录;/表示子目录,{}中逗号隔开的为平级目录
-mkdir -p {q,w}a{e,r}    #创建qae/qar/wae/war四个目录
+mkdir -p {q,w}a{e,r}    #创建qae/qar/wae/war四个目录;{}中逗号必须存在,否则{}会解析为'{}'字符串
 mkdir -m 777 dir        #创建指定权限目录
 rmdir dir               #remove empty directory;删除空文件夹;多文件空格隔开
 rm file                 #remove;删除文件;多文件空格隔开
@@ -460,7 +460,7 @@ cat /proc/23778/fd/86 > /root/selenium/Spider/MySql.Data.dll
 3.底线模式(Last line mode) #用于搜索替换
 
 #其他命令
-u           #撤销上一个命令  
+u           #undo;撤销上一个命令
 <Ctrl> + r  #重复上一个命令
 .           #小数点,功能同上
 
@@ -496,6 +496,7 @@ dG     #删除光标行到最后一行
 yy   #复制光标所在行
 nyy  #复制光标行(包含)以下n行
 y1G  #复制第一行到光标行
+ynG  #复制光标所在行到第n行之间的数据
 yG   #复制光标行到最后一行
 y0   #复制行首到光标所在位置数据
 y$   #复制光标位置到行尾数据
