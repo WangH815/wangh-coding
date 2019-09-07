@@ -73,10 +73,11 @@ pwd            #print working directory;打印当前工作目录绝对路径
 mkdir [path/]dir        #make directory;创建文件夹,多文件夹可空格隔开;要求上层目录必须存在
 mkdir -p dir1/dir2      #同上,不要st求上层目录存在;不存在会创建多级目录
 mkdir -p a/{b,c/{d,e}}  #创建复杂目录;/表示子目录,{}中逗号隔开的为平级目录
-mkdir -p {q,w}a{e,r}    #创建qae/qar/wae/war四个目录;{}中逗号必须存在,否则{}会解析为'{}'字符串
+mkdir -p {q,w}a{e,r}    #创建qae/qar/wae/war四个目录;{}中逗号必须存在,否则{}会解析为'{}'字符串;touch/rm支持类似操作
 mkdir -m 777 dir        #创建指定权限目录
 rmdir dir               #remove empty directory;删除空文件夹;多文件空格隔开
 rm file                 #remove;删除文件;多文件空格隔开
+rm *[0-9a-zA-Z]         #删除数字或字母结尾的文件
 rm -rf dir              #递归删除文件或文件夹(不要求非空);f表示强制删除不做提示;可跟多文件(夹)
 mv file1 file2          #move;file1重命名为file2,要求file1必须存在,file2已存在则覆盖
 mv file1 path/file2     #移动并重命名,其余同上
@@ -87,6 +88,7 @@ mv dir1 dir2            #移动或重命名,要求dir1必须存在;dir2存在表
 cp file1 file2          #copy;复制file1为file2;要求file1必须存在,file存在时会提示覆盖
 cp file dir             #复制并移动file到dir;要求file和dir存在;dir不存在时同上
 touch file              #摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
+touch a[0-9]            #创建a0-a9(共10个文件);[]中表示所有可能
 touch -t                #设定文件时间戳,如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
 vi file                 #文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
 cat file                #concatenate;显示文件内容

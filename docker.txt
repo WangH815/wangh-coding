@@ -1,4 +1,4 @@
-#docker  //表意为码头工人。现指一种轻量级容器技术
+#docker   #表意为码头工人。现指一种轻量级容器技术
 简介
 Docker是一个轻量级容器技术，类似于虚拟机。一般运行在Linux系统中，实现了虚拟机技术的资源隔离，性能远远高于虚拟机技术。    
 Docker支持将软件编译成一个镜像（image），在这个镜像里做好对软件的各种配置，然后发布这个镜像，使用者可以运行这个镜像，
@@ -7,47 +7,47 @@ Docker支持将软件编译成一个镜像（image），在这个镜像里做好
 
 
 #常见操作
-docker ps         //查看正在运行的容器
-docker images     //查看本地镜像
-docker image ls   //同上
-docker pull CONTAINER_NAME[:VERSION]        //从镜像站拉取镜像，默认拉取最新稳定版；可指定版本
-docker inspect CONTAINER_NAME[:VERSION]/ID  //查看本地镜像详细信息，可通过容器名或ID
+docker ps                                    #查看正在运行的容器
+docker images                                #查看本地镜像
+docker image ls                              #同上
+docker pull CONTAINER_NAME[:VERSION]         #从镜像站拉取镜像，默认拉取最新稳定版；可指定版本
+docker inspect CONTAINER_NAME[:VERSION]/ID   #查看本地镜像详细信息，可通过容器名或ID
 
 
 #使用教程 
 环境：Ubuntu 18.04
 
-1.安装和卸载docker      //可暂时将阿里镜像源改为官方源
-apt install docker.io
-apt remove docker.io    //卸载
-docker -v/--version     //查看docker版本
+1.安装和卸载docker       #可暂时将阿里镜像源改为官方源
+apt install docker.io    #安装docker
+apt remove docker.io     #卸载
+docker -v/--version      #查看docker版本
 
 2.启动和关闭docker服务
-service docker start     //启动
-service docker stop      //停止
-service docker restart   //重启
-docker info              //查看docker概要信息
+service docker start      #启动
+service docker stop       #停止
+service docker restart    #重启
+docker info               #查看docker概要信息
 
 3.增加其他用户使用docker的权限
-cat /etc/group | grep docker  //查看docker组是否存在
-groupadd docker               //增加docker;root操作
-usermod -aG docker username   //将用户用户添加到docker用户组中;root操作
+cat /etc/group | grep docker   #查看docker组是否存在
+groupadd docker                #增加docker;root操作
+usermod -aG docker username    #将用户用户添加到docker用户组中;root操作
 
 4.镜像源
-vi /etc/docker/daemon.json  //没有则创建此文件，重启docker后生效
+vi /etc/docker/daemon.json     #没有则创建此文件，重启docker后生效
 service docker restart
 #设置为网易镜像源
 {
 
-"registry-mirrors": ["http://hub-mirror.c.163.com"]  
+"registry-mirrors": ["http: #hub-mirror.c.163.com"]  
 
 }
 其他常用镜像源
-https://registry.docker-cn.com      //Docker官方中国区镜像源
-https://docker.mirrors.ustc.edu.cn  //中科大镜像源
+https: #registry.docker-cn.com       #Docker官方中国区镜像源
+https: #docker.mirrors.ustc.edu.cn   #中科大镜像源
 
 常用命令
-docker --help   //docker命令帮助
+docker --help    #docker命令帮助
 
 镜像操作
 #列出本地镜像，默认位于 /var/lib/docker 目录下
@@ -59,64 +59,64 @@ IMAGE ID：  镜像ID
 CREATED：   镜像的创建日期（不是获取该镜像的日期）
 SIZE：      镜像大小
 
-docker search ${CONTAINER NAME}         //搜索镜像源可用镜像
-docker pull ${CONTAINER NAME}           //从镜像源下载指定镜像，下同
-docker pull ${CONTAINER NAME:VERSION}
-docker rmi ${IMAGE NAME/ID}             //删除本地指定镜像
-docker rmi $(docker images -q)          //删除本地所有镜像
+docker search ${CONTAINER NAME}          #搜索镜像源可用镜像
+docker pull ${CONTAINER NAME}            #从镜像源下载指定镜像
+docker pull ${CONTAINER NAME:VERSION}    #同上;指定版本
+docker rmi ${IMAGE NAME/ID}              #删除本地指定镜像
+docker rmi $(docker images -q)           #删除本地所有镜像
 
-容器操作  //可认为是镜像的实例
-docker ps                       //查看正在运行的容器       
-docker ps -a                    //查看所用容器，包括启动过的历史容器
-docker ps -a -q                 //显示所有容器ID
-docker ps -|                    //查看最后一次运行的容器
-docker ps -f status=exited      //查看停止的容器
-docker rm ${CONTAINER NAME/ID}  //删除已停止容器
-docker rm $(docker ps -a -q)    //删除所有容器,前提是所有容器都是停止的
-docker rm $(docker ps -f "status=exited" -q)   //删除所有退出的容器
-docker rm $(docker stop $(docker ps -a -q))     //停止并删除所有容器
-docker stats -a --no-stream             //显示所有容器的统计信息(包括没有运行的) ，只显示一次
-docker stats --no-stream | sort -k8 -h  //统计容器信息并以使用流量作为倒序
-docker system df      //显示硬盘占用
-docker system events  //显示容器的实时事件
-docker system info    //显示系统信息
-docker system prune   //清理文件  
-docker top ${CONTAINER NAME/ID}  //显示容器本身的top信息，类似于Linux top，更简洁
-docker logs ${CONTAINER NAME/ID} //显示运行容器的日志
+容器操作   #可认为是镜像的实例
+docker ps                       #查看正在运行的容器       
+docker ps -a                    #查看所用容器，包括启动过的历史容器
+docker ps -a -q                 #显示所有容器ID
+docker ps -|                    #查看最后一次运行的容器
+docker ps -f status=exited      #查看停止的容器
+docker rm ${CONTAINER NAME/ID}  #删除已停止容器
+docker rm $(docker ps -a -q)    #删除所有容器,前提是所有容器都是停止的
+docker rm $(docker ps -f "status=exited" -q)  #删除所有退出的容器
+docker rm $(docker stop $(docker ps -a -q))   #停止并删除所有容器
+docker stats -a --no-stream                   #显示所有容器的统计信息(包括没有运行的) ，只显示一次
+docker stats --no-stream | sort -k8 -h        #统计容器信息并以使用流量作为倒序
+docker system df       #显示硬盘占用
+docker system events   #显示容器的实时事件
+docker system info     #显示系统信息
+docker system prune    #清理文件  
+docker top ${CONTAINER NAME/ID}   #显示容器本身的top信息，类似于Linux top，更简洁
+docker logs ${CONTAINER NAME/ID}  #显示运行容器的日志
 
 创建启动容器
 docker run
 #参数
---name ${container name}                          //设置容器名称
--p ${host port}:${container port}                 //映射主机和容器内的端口
--e ${env name}=${env value}                       //添加环境变量
--v ${host folder path}:${container folder path}   //将主机目录挂在到容器内
--d    //后台运行，守护式容器方式
--i    //表示运行容器
--t    //表示容器启动后会进入其命令行，加入 -it，创建并登录进去。即分配一个伪终端。
+--name ${container name}                           #设置容器名称
+-p ${host port}:${container port}                  #映射主机和容器内的端口
+-e ${env name}=${env value}                        #添加环境变量
+-v ${host folder path}:${container folder path}    #将主机目录挂在到容器内
+-d     #后台运行，守护式容器方式
+-i     #表示运行容器
+-t     #表示容器启动后会进入其命令行，加入 -it，创建并登录进去。即分配一个伪终端。
 
 交互式容器
 docker run -it --name=mycentos7 centos:7 /bin/bash  
 exit 命令可退出当前容器，退出后容器停止
 
 守护式容器
-docker run -di --name=mycentos7 centos:7  //创建容器
-docker exec -it ${CONTAINER NAME/ID} /bin/bash                   //进入/登录容器
-docker exec -it ${CONTAINER NAME/ID} ping ${CONTAINER NAME/ID}   //一个容器ping另外一个容器
+docker run -di --name=mycentos7 centos:7   #创建容器
+docker exec -it ${CONTAINER NAME/ID} /bin/bash                  #进入/登录容器
+docker exec -it ${CONTAINER NAME/ID} ping ${CONTAINER NAME/ID}  #一个容器ping另外一个容器
 exit 退出容器后容器仍然在运行
 
 启停容器
 docker stop ${CONTAINER NAME/ID}
-docker stop $(docker ps -a -q)     //停止所有容器
+docker stop $(docker ps -a -q)      #停止所有容器
 docker start ${CONTAINER NAME/ID}
 docker restart ${CONTAINER NAME/ID}
-docker restart $(docker ps -q)     //重启所有正在运行的容器
+docker restart $(docker ps -q)      #重启所有正在运行的容器
 
 文件拷贝
-docker cp 需要拷贝的文件或目录 容器名称:容器目录  //拷贝到容器
-docker cp 容器名称:容器目录 需要拷贝的文件或目录  //反向
-docker save ${IMAGE NAME} > ${FILE NAME}.tar      //将镜像保存成文件
-docker load < ${FILE NAME}.tar                    //从文件加载镜像
+docker cp 需要拷贝的文件或目录 容器名称:容器目录   #拷贝到容器
+docker cp 容器名称:容器目录 需要拷贝的文件或目录   #反向
+docker save ${IMAGE NAME} > ${FILE NAME}.tar       #将镜像保存成文件
+docker load < ${FILE NAME}.tar                     #从文件加载镜像
 
 目录挂载
 在创建容器的时候，将宿主机的目录和容器内的目录进行映射，这样我们就可以通过修改宿主机某个目录的文件从而影响容器。格式为：
@@ -133,7 +133,7 @@ docker run -di --name docker_mysql5.7 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root m
 -p 代表端口映射，格式为 宿主机映射端口:容器运行端口
 -e 代表添加环境变量， MYSQL_ROOT_PASSWORD是root用户的登录密码
 3.登录容器
-docker exec -it docker_mysql /bin/bash   //登录容器
-mysql -uroot -p                          //登录mysql
+docker exec -it docker_mysql /bin/bash    #登录容器
+mysql -uroot -p                           #登录mysql
 
 
