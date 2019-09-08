@@ -34,6 +34,16 @@ Linux使用
 
 ##命令帮助
 man cmd       #manual(手册);命令详细说明
+    #区域号 说明
+       1    可执行程序或shell命令
+       2    系统调用
+       3    库调用
+       4    特殊文件
+       5    文件格式与约定
+       6    游戏
+       7    概览、约定及杂项
+       8    超级用户和系统管理员命令
+       9    内核例程   
 info cmd      #类似于man;info格式命令帮助
 help cmd      #使用help命令获取简要帮助
 cmd --help    #同上;部分命令也可使用cmd -h
@@ -57,6 +67,8 @@ sudo passwd root        #switch user do(execute);ubuntu启用root用户
 passwd [-u] [username]  #root用户修改指定用户密码,-u可不加;不跟用户名默认修改当前用户密码
 id [username]           #显示指定用户uid、gid和groups等信息,不跟用户名显示当前用户相关信息
 write user [ttyname]    #向其他用户发送给信息(message),ttyname可以使用w查询,Ctrl + c结束
+tty                     #teletypewriter(电传打印机);显示连接到标准输入终端名称(虚拟控制台名称)
+echo 'msg' >/dev/pts/n  #向终端n发送消息;与write类似
 
 ##文件目录操作
 ls -ltr [dir]  #list;按时间倒序排列指定文件夹下列表;默认显示当前文件夹列表非隐藏文件
@@ -68,7 +80,7 @@ cd ~           #同上
 cd -           #切换到切换前目录
 cd path        #切换到指定路径目录;路径分为相对路径(相对于当前目录)和绝对路径(/开头)
 cd ..          #切换到上层目录
-cd ../..       #切换到上上层目录
+cd ../..       #切换到上上层目录;Linux使用正斜线(/)表示路径分隔,windows使用反斜线(\)表示
 pwd            #print working directory;打印当前工作目录绝对路径
 mkdir [path/]dir        #make directory;创建文件夹,多文件夹可空格隔开;要求上层目录必须存在
 mkdir -p dir1/dir2      #同上,不要st求上层目录存在;不存在会创建多级目录
@@ -442,7 +454,11 @@ seq 0 3      #返回0,1,2,3;设定最小值和最大值
 seq -1 2     #返回-1,0,1,2;最小值可以小于0
 seq 2 2 10   #返回2,4,6,8,10;中间数值为步长;两边为最小值和最大值
 seq 5 -1 1   #返回5,3,1;步长为负数表示递减;两边为最大值和最小值
-
+env          #打印全局环境变量;同 printenv
+env var      #打印变量值;同 echo $var
+set          #打印全局变量、用户自定义变量和局部变量(当前shell定义)
+unset var    #删除环境变量
+echo $PATH   #用户执行外部命令搜索路径
 
 
 #问题处理
