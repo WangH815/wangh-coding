@@ -58,6 +58,7 @@ type cmd      #判断命令类型;内置命令会提示 cmd is a shell builtin
 ##用户及权限
 adduser username        #增加用户,默认添加 /home/username 目录等
 useradd username        #增加用户,不添加用户家目录
+useradd -m username     #增加用户,添加用户家目录
 groupadd groupname      #增加用户组
 usermod -aG gname uname #user modify;将用户增加到用户组(多个用户组可用逗号隔开)
 su [username]           #switch user;简单切换用户,不加载环境变量;不跟用户名默认切换到root
