@@ -1,6 +1,6 @@
 Shell编程
 
-Shell是C语言编写，既是命令语言又是程序设计语言;通过Shell提供的界面访问操作系统内核
+Shell是C语言编写,既是命令语言又是程序设计语言;通过Shell提供的界面访问操作系统内核
 
 常见Shell
 Bourne Shell（/usr/bin/sh或/bin/sh）
@@ -15,17 +15,17 @@ chsh -s /bin/zsh  #设置用户默认Shell或者修改 /etc/passwd 文件中对�
 
 
 Shell脚本
-#!/bin/bash       #脚本第一行，指明运行脚本的Shell
+#!/bin/bash      #脚本第一行,指明运行脚本的Shell
 
 脚本运行方式
-1 . xx.sh        #一般用于生效用户配置而不需要重新登录shell，xx.sh有读权限即可
-2 source xx.sh   #同上。常见用于执行 profile 配置，脚本本身在当前进程中执行
-3 sh xx.sh       #读权限即可，脚本本身会在子进程中执行
-4 ./xx.sh        #需要执行权限，脚本本身会在子进程中执行
+1 . xx.sh        #一般用于生效用户配置而不需要重新登录shell,xx.sh有读权限即可
+2 source xx.sh   #同上。常见用于执行 profile 配置,脚本本身在当前进程中执行
+3 sh xx.sh       #读权限即可,脚本本身会在子进程中执行
+4 ./xx.sh        #需要执行权限,脚本本身会在子进程中执行
 
 注释
-#                   #单行注释，例外：#!
-:<<EOF              #多行注释，EOF可由单引号或感叹号等替代;结束EOF单独占一行，前后不能有字符
+#                   #单行注释,例外：#!
+:<<EOF              #多行注释,EOF可由单引号或感叹号等替代;结束EOF单独占一行,前后不能有字符
 注释内容
 注释内容
 注释内容
@@ -40,13 +40,13 @@ EOF
 
 变量类型
 1) 局部变量
-   在脚本或命令中定义，仅在当前shell中有效，其他shell启动的程序不能访问局部变量。
-   一般是在函数中定义，如：local var
+   在脚本或命令中定义,仅在当前shell中有效,其他shell启动的程序不能访问局部变量。
+   一般是在函数中定义,如：local var
 2) 环境变量
-所有的程序都能访问环境变量，有些程序需要环境变量来保证其正常运行。
+所有的程序都能访问环境变量,有些程序需要环境变量来保证其正常运行。
 必要的时候shell脚本也可以定义环境变量。
 3) shell变量
-由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，
+由shell程序设置的特殊变量。shell变量中有一部分是环境变量,有一部分是局部变量,
 这些变量保证了shell的正常运行
 
 环境变量的设置
@@ -58,46 +58,47 @@ EOF
 
 
 变量声明赋值
-1.一般连续字符、数字、路径等可以不加任何引号，但建议使用双引号
+1.一般连续字符、数字、路径等可以不加任何引号,但建议使用双引号
 2.其他情况建议使用双引号或单引号
 3.反引号一般配合命令使用。如 AAA=`ls` 等价于 AAA=$(ls)
 
 var=""                #变量置空
 unset var             #同上
-var=123               #等号两边不能有空格，默认var[0]=123 (数组)
-var="ad"              #字符串赋值，也可用单引号(更严格),它可以防止任何变量扩展。
-                      # 双引号可防止通配符扩展但允许变量扩展
-var1=1;var2=2;var3=3  #同时赋值，分号隔开就可以
-
+var=123               #等号两边不能有空格,默认var[0]=123 (数组)
+var="ad"              #字符串赋值,也可用单引号(更严格),它可以防止任何变量扩展。
+                      #双引号可防止通配符扩展但允许变量扩展
+var1=1;var2=2;var3=3  #同时赋值,分号隔开就可以
+var=`cmd`             #命令执行结果赋值给变量
+var=$(cmd)            #同上
 
 
 变量使用
 env                          #查看所有环境变量
 set                          #查看所有变量
 echo $var                    #打印输出变量值
-echo ${var}                  #同上，另一种方式。能识别变量边界，例如$a/$ab/${a}b
+echo ${var}                  #同上,另一种方式。能识别变量边界,例如$a/$ab/${a}b
 readonly var                 #设置变量只读
 echo ${#var}                 #输出字符串字符数
 echo `expr index "$var" io`  #查找i或o第一次出现的位置(非数组下标)
-echo ${var-default}          #var未声明时输出default(可为其他字符串)，否则输出var的值。
+echo ${var-default}          #var未声明时输出default(可为其他字符串),否则输出var的值。
 echo ${var=default}          #同上并赋值
-echo ${var:-default}         #var为空或未声明时输出default，否则输出var的值。
+echo ${var:-default}         #var为空或未声明时输出default,否则输出var的值。
 echo ${var:=default}         #同上并赋值
-echo ${var+default}          #var没有声明则为空，否则为default
-echo ${var:+default}         #var的值为非空则为default，否则为空
-echo ${var?default}          #var已声明则输出var的值，否则输出default
-echo ${var:?default}         #var的值为非空则输出var的值，否则输出default
+echo ${var+default}          #var没有声明则为空,否则为default
+echo ${var:+default}         #var的值为非空则为default,否则为空
+echo ${var?default}          #var已声明则输出var的值,否则输出default
+echo ${var:?default}         #var的值为非空则输出var的值,否则输出default
 
 变量截取替换(位置从1开始)
 var=abcdef
-${var:pos}                   #截取从数组下标为pos(不含pos，下同)之后的子串
+${var:pos}                   #截取从数组下标为pos(不含pos,下同)之后的子串
 ${var:pos:len}               #截取pos之后长度为len的子串
 ${var/Pattern/Replacement}   #使用Replacement来替换var中第一次匹配Pattern的字符串
 ${var#Pattern/Replacement}   #全部替换
-${var/#Pattern/Replacement}  #从var开头匹配，匹配到则替换
-${var/%Pattern/Replacement}  #从var结尾匹配，匹配到则替换
+${var/#Pattern/Replacement}  #从var开头匹配,匹配到则替换
+${var/%Pattern/Replacement}  #从var结尾匹配,匹配到则替换
 
-${!varpre*}                  #匹配所有已声明变量名以varpre开头的所有变量名，以空格隔开
+${!varpre*}                  #匹配所有已声明变量名以varpre开头的所有变量名,以空格隔开
 ${!varpre@}                  #同上
 
 
@@ -109,7 +110,7 @@ ${a}'str'${b}
 
 
 数组
-仅支持一维数组，不限定长度
+仅支持一维数组,不限定长度
 array_name=(arr1 arr2 arr3 ...)  #赋值
 array_name=(
 arr1
@@ -119,24 +120,24 @@ arr2
 array_name[0]=value0   #单独定义
 array_name[1]=value1   #单独定义
 ...                    #单独定义
-array_name[n]=valuen   #单独定义，数组下标可以不连续
+array_name[n]=valuen   #单独定义,数组下标可以不连续
 echo ${array_name[n]}  #打印输出某个数组元素
-echo ${#array_name[@]} #打印输出数组元素长度，未定义的不统计
+echo ${#array_name[@]} #打印输出数组元素长度,未定义的不统计
 echo ${#array_name[*]} #同上
-echo ${array_name[@]}  #打印输出数组所有元素(未定义的不打印)，以多个字符串的形式，元素之间空格分隔
-echo ${array_name[*]}  #以一个字符串的形式，其余同上
+echo ${array_name[@]}  #打印输出数组所有元素(未定义的不打印),以多个字符串的形式,元素之间空格分隔
+echo ${array_name[*]}  #以一个字符串的形式,其余同上
 
 参数传递
-xx.sh arg1 arg2 arg3 ...  #脚本有执行权限，arg开头的为参数
-$0  #执行脚本名称，可在脚本中调用
-$1/$2/$3  #参数，可在脚本中调用,当n>=10时，需要使用${n}来调用
+xx.sh arg1 arg2 arg3 ...  #脚本有执行权限,arg开头的为参数
+$0  #执行脚本名称,可在脚本中调用
+$1/$2/$3  #参数,可在脚本中调用,当n>=10时,需要使用${n}来调用
 $#  #传递到脚本的参数个数
 $*  #以一个单字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。
 $$  #脚本运行的当前进程ID号
 $!  #后台运行的最后一个进程的ID号
-$@  #与$*相同，但是使用时加引号，并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
-$-  #显示Shell使用的当前选项，与set命令功能相同。
-$?  #显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。
+$@  #与$*相同,但是使用时加引号,并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
+$-  #显示Shell使用的当前选项,与set命令功能相同。
+$?  #显示最后命令的退出状态。0表示没有错误,其他任何值表明有错误。
 
 基本运算符
 主要包括以下这些：
@@ -145,17 +146,18 @@ $?  #显示最后命令的退出状态。0表示没有错误，其他任何值�
 3)布尔运算符
 4)字符串运算符
 5)文件测试运算符
-注：原生bash不支持简单数学运算，主要通过awk和expr实现，expr最常用(也可用于字符串处理)
+注：原生bash不支持简单数学运算,主要通过awk和expr实现,expr最常用(也可用于字符串处理)
 
 算数运算
 a=10,b=20
-加法	`expr $a + $b`  #+左右无空格的会解析为"10+20"，其余同理;等价于 $[a + b]/$[a+b]
+加法	`expr $a + $b`  #+左右无空格的会解析为"10+20",其余同理;等价于 $[a + b]/$[a+b]
+        $[$a + $b]      #同上;乘法不需要加转义
 减法	`expr $a - $b`
 乘法	`expr $a \* $b` #*需要转义
 除法	`expr $b / $a`
 取余	`expr $b % $a`
 赋值	a=$b
-相等    [ $a == $b ]    #注意空格，无空格会解析成字符串拼接
+相等    [ $a == $b ]    #注意空格,无空格会解析成字符串拼接
 不相等  [ $a != $b ]
 
 关系运算
@@ -198,21 +200,20 @@ a=10,b=20
 存在 	                  [ -e $filename ]
 
 标准输入输出
-read var               #输入        
-echo $var/${var}  #输出，输出后自动换行
-echo -e                     #开启转义
-echo `commands`             #输出命令结果
-printf  format-string  [arguments...]  #格式化输出，不自动换行
-例如：
-printf "%-10s %-8s\n" 姓名 性别  #格式化字符串与C语言相同，移植性比echo好
+read var            #输入        
+echo $var/${var}    #输出,输出后自动换行
+echo -e             #开启转义
+echo `cmd`          #输出命令结果
+printf  format-string  [arguments...]  #格式化输出,不自动换行
+printf "%-10s %-8s\n" 姓名 性别        #格式化字符串与C语言相同,移植性比echo好
 
 printf转义序列
-\a	   #警告字符，通常为ASCII的BEL字符
+\a	   #警告字符,通常为ASCII的BEL字符
 \b	   #后退
 \c	   #抑制（不显示）输出结果中任何结尾的换行字符
-       #（只在%b格式指示符控制下的参数字符串中有效），
-	   #而且，任何留在参数里的字符、任何接下来的参数
-	   #以及任何留在格式字符串中的字符，都被忽略
+       #（只在%b格式指示符控制下的参数字符串中有效）,
+	   #而且,任何留在参数里的字符、任何接下来的参数
+	   #以及任何留在格式字符串中的字符,都被忽略
 \f	   #换页（formfeed）
 \n	   #换行
 \r	   #回车（Carriage return）
@@ -223,7 +224,7 @@ printf转义序列
 \0ddd  #表示1到3位的八进制值字符
 
 test命令    #等价于 []
-用于检查某个条件是否成立，它可以进行数值、字符串和文件三个方面的测试。
+用于检查某个条件是否成立,它可以进行数值、字符串和文件三个方面的测试。
 1)数值测试
 -eq	等于则为真
 -ne	不等于则为真
@@ -339,8 +340,8 @@ esac
     [return int;]
 }
 说明：
-1、可以带function fun() 定义，也可以直接fun() 定义,不带任何参数。
-2、参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n(0-255)
+1、可以带function fun() 定义,也可以直接fun() 定义,不带任何参数。
+2、参数返回,可以显示加：return 返回,如果不加,将以最后一条命令运行结果,作为返回值。 return后跟数值n(0-255)
 
 输入输出重定向
 command > file	#将输出重定向到 file。
@@ -353,11 +354,11 @@ n <& m	        #将输入文件 m 和 n 合并。
 << tag	        #将开始标记 tag 和结束标记 tag 之间的内容作为输入。
 tag
 注：需要注意的是文件描述符 
-    0 通常是标准输入（STDIN），
-	1 是标准输出（STDOUT），
+    0 通常是标准输入（STDIN）,
+	1 是标准输出（STDOUT）,
 	2 是标准错误输出（STDERR）。
 
-command < infile > outfile  #infile作为命令参数输入，结果输出到outfile
+command < infile > outfile  #infile作为命令参数输入,结果输出到outfile
 command 2 > file  #标准错误输出
 command 2 >> file  #标准错误追加输出
 command > file 2>&1  #标准输出(包括错误)
@@ -366,7 +367,7 @@ command > /dev/null 2>&1  #屏蔽命令输出
 
 Here Document  #特殊重定向方式
 格式：
-command << delimiter  #分隔符可以使EOF等任意合法字符;结束分隔符顶格写，后面不能有任何字符(包含空格等)
+command << delimiter  #分隔符可以使EOF等任意合法字符;结束分隔符顶格写,后面不能有任何字符(包含空格等)
     document
 delimiter
 
