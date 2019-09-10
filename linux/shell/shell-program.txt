@@ -23,6 +23,20 @@ Shell脚本
 3 sh xx.sh       #读权限即可,脚本本身会在子进程中执行
 4 ./xx.sh        #需要执行权限,脚本本身会在子进程中执行
 
+#脚本退出状态
+一般使用 exit 状态码 指定
+echo $?   #打印上一个命令或脚本的退出状态码
+状态码    说明
+  0       #命令成功结束
+  1       #一般性未知错误
+  2       #不适合的shell命令
+  126     #命令不可执行
+  127     #没找到命令
+  128     #无效的退出参数
+  128+x   #与Linux信号x相关的严重错误
+  130     #通过Ctrl+C终止的命令
+  255     #正常范围之外的退出状态码;大于255则取余
+
 注释
 #                   #单行注释,例外：#!
 :<<EOF              #多行注释,EOF可由单引号或感叹号等替代;结束EOF单独占一行,前后不能有字符
@@ -90,7 +104,7 @@ echo ${var?default}          #var已声明则输出var的值,否则输出default
 echo ${var:?default}         #var的值为非空则输出var的值,否则输出default
 
 变量截取替换(位置从1开始)
-var=abcdef
+var="abcdef"
 ${var:pos}                   #截取从数组下标为pos(不含pos,下同)之后的子串
 ${var:pos:len}               #截取pos之后长度为len的子串
 ${var/Pattern/Replacement}   #使用Replacement来替换var中第一次匹配Pattern的字符串
@@ -100,7 +114,6 @@ ${var/%Pattern/Replacement}  #从var结尾匹配,匹配到则替换
 
 ${!varpre*}                  #匹配所有已声明变量名以varpre开头的所有变量名,以空格隔开
 ${!varpre@}                  #同上
-
 
 
 变量拼接
@@ -148,14 +161,38 @@ $?  #显示最后命令的退出状态。0表示没有错误,其他任何值表�
 5)文件测试运算符
 注：原生bash不支持简单数学运算,主要通过awk和expr实现,expr最常用(也可用于字符串处理)
 
-算数运算
+算数运算                #只能用于整数运算
+expr                    #evaluate expressions(表达式计算)
 a=10,b=20
-加法	`expr $a + $b`  #+左右无空格的会解析为"10+20",其余同理;等价于 $[a + b]/$[a+b]
-        $[$a + $b]      #同上;乘法不需要加转义
+加法	`expr $a + $b`  #+左右无空格的会解析为"10+20",其余同理
+        $[$a + $b]      #同上;乘法不需要加转义;$[$a+$b]也可以
+		$[2*(100-3)]    #带有括号的运算
 减法	`expr $a - $b`
 乘法	`expr $a \* $b` #*需要转义
 除法	`expr $b / $a`
 取余	`expr $b % $a`
+还可以使用如下方法
+exp="$var1 + $var2 \* $var3"
+expr $exp
+#浮点运算可使用 bc 命令
+var=`echo "scale=4; 3.44 / 5" | bc`   #scala变量指定小数位数
+var=$(echo "scale=4; 3.44 / 5" | bc)  #同上;形式:echo "options; expression" | bc
+##复杂运算
+var=$(bc << EOF
+options
+statements
+expressions
+EOF
+)
+##例如
+var5=$(bc << EOF
+scale = 4
+a1 = ($var1 * $var2)
+b1 = ($var3 * $var4)
+a1 + b1
+EOF
+)
+
 赋值	a=$b
 相等    [ $a == $b ]    #注意空格,无空格会解析成字符串拼接
 不相等  [ $a != $b ]
