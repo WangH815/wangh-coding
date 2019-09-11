@@ -1,15 +1,24 @@
 Shell编程
 
+
+#参考文档
+https://www.runoob.com/linux/linux-shell.html
+Linux命令行与shell脚本编程大全.第3版
+
+
+#简介
 Shell是C语言编写,既是命令语言又是程序设计语言;通过Shell提供的界面访问操作系统内核
 
 常见Shell
 Bourne Shell（/usr/bin/sh或/bin/sh）
-Bourne Again Shell（/bin/bash） #适用范围最广
+Bourne Again Shell（/bin/bash）      #适用范围最广,绝大多数Linux发行版默认Shell
 C Shell（/usr/bin/csh）
 K Shell（/usr/bin/ksh）
 Shell for Root（/sbin/sh）
+zsh
+dsh
 
-cat /etc/shells   #查看系统可使用的Shell
+cat /etc/shells   #查看系统可使用的Shell不同版本
 echo $SHELL       #查看当前使用的shell
 chsh -s /bin/zsh  #设置用户默认Shell或者修改 /etc/passwd 文件中对应Shell
 
@@ -38,7 +47,7 @@ echo $?   #打印上一个命令或脚本的退出状态码
   255     #正常范围之外的退出状态码;大于255则取余
 
 注释
-#                   #单行注释,例外：#!
+#                   #单行注释,例外:#!
 :<<EOF              #多行注释,EOF可由单引号或感叹号等替代;结束EOF单独占一行,前后不能有字符
 注释内容
 注释内容
@@ -55,7 +64,7 @@ EOF
 变量类型
 1) 局部变量
    在脚本或命令中定义,仅在当前shell中有效,其他shell启动的程序不能访问局部变量。
-   一般是在函数中定义,如：local var
+   一般是在函数中定义,如:local var
 2) 环境变量
 所有的程序都能访问环境变量,有些程序需要环境变量来保证其正常运行。
 必要的时候shell脚本也可以定义环境变量。
@@ -153,13 +162,13 @@ $-  #显示Shell使用的当前选项,与set命令功能相同。
 $?  #显示最后命令的退出状态。0表示没有错误,其他任何值表明有错误。
 
 基本运算符
-主要包括以下这些：
+主要包括:
 1)算数运算符
 2)关系运算符
 3)布尔运算符
 4)字符串运算符
 5)文件测试运算符
-注：原生bash不支持简单数学运算,主要通过awk和expr实现,expr最常用(也可用于字符串处理)
+注:原生bash不支持简单数学运算,主要通过awk和expr实现,expr最常用(也可用于字符串处理);浮点运算使用bc
 
 算数运算                #只能用于整数运算
 expr                    #evaluate expressions(表达式计算)
@@ -269,13 +278,13 @@ test命令    #等价于 []
 -ge	大于等于则为真
 -lt	小于则为真
 -le	小于等于则为真
-格式：test $[算术表达式1] -eq $[算术表达式2]  #返回布尔值
+格式:test $[算术表达式1] -eq $[算术表达式2]  #返回布尔值
 2)字符串测试
 =	等于则为真
 !=	不相等则为真
 -z  长度为零
 -n  长度不为零
-格式：同1),[]中为字符串或字符串表达式
+格式:同1),[]中为字符串或字符串表达式
 3)文件测试
 -e 文件名	文件存在
 -r 文件名	存在且可读
@@ -286,7 +295,7 @@ test命令    #等价于 []
 -f 文件名	存在且为普通文件
 -c 文件名	存在且为字符型特殊文件
 -b 文件名	存在且为块特殊文件
-格式：if test -e ./bash  #判断./bash文件是否存在
+格式:if test -e ./bash  #判断./bash文件是否存在;等价于 if [ -e ./bash ]
 
 流程控制
 if else
@@ -357,7 +366,7 @@ case $var in
     commandN
     ;;
 esac  #casec反序
-如：
+如:
 echo -n "输入 1 到 5 之间的数字: "
 read aNum
 case $aNum in
@@ -370,15 +379,15 @@ case $aNum in
 esac
 
 函数
-格式：
+格式:
 [ function ] funname [()]
 {
     action;
     [return int;]
 }
-说明：
+说明:
 1、可以带function fun() 定义,也可以直接fun() 定义,不带任何参数。
-2、参数返回,可以显示加：return 返回,如果不加,将以最后一条命令运行结果,作为返回值。 return后跟数值n(0-255)
+2、参数返回,可以显示加:return 返回,如果不加,将以最后一条命令运行结果,作为返回值。 return后跟数值n(0-255)
 
 输入输出重定向
 command > file	#将输出重定向到 file。
@@ -390,7 +399,7 @@ n >& m	        #将输出文件 m 和 n 合并。
 n <& m	        #将输入文件 m 和 n 合并。
 << tag	        #将开始标记 tag 和结束标记 tag 之间的内容作为输入。
 tag
-注：需要注意的是文件描述符 
+注:需要注意的是文件描述符 
     0 通常是标准输入（STDIN）,
 	1 是标准输出（STDOUT）,
 	2 是标准错误输出（STDERR）。
@@ -403,7 +412,7 @@ command > /dev/null  #屏蔽标准输出
 command > /dev/null 2>&1  #屏蔽命令输出
 
 Here Document  #特殊重定向方式
-格式：
+格式:
 command << delimiter  #分隔符可以使EOF等任意合法字符;结束分隔符顶格写,后面不能有任何字符(包含空格等)
     document
 delimiter
