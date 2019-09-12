@@ -82,16 +82,16 @@ varchar2(n)    --max(n) = 4000;空间动态变化
 nvarchar2(n)   --max(n) = 2000;数据以unicode存储
 
 数值型：
-number(p,s)  --p为有效位;s为小数点后位数
+number(p,s)    --p为有效位;s为小数点后位数
 float(n)
 
 日期型：
-date        -- -4712.01.01到9999.12.31,可精确到秒
-timestamp   --可精确到小数秒
+date           -- -4712.01.01到9999.12.31,可精确到秒
+timestamp      --可精确到小数秒
 		
 其他类型：
-blob   --最大4G,二进制方式存放;Binary Large Object
-clob   --最大4G,字符串方式存放;Character Large Object
+blob           --最大4G,二进制方式存放;Binary Large Object
+clob           --最大4G,字符串方式存放;Character Large Object
 
 创建表
 同一用户下表名唯一
@@ -168,13 +168,13 @@ modify cloumn_name datatype NOT NULL|NULL;
 
 主键约束
 创建表时
-create table table_name  //单一主键
+create table table_name  --单一主键
 (
   cloumn_name_1 datatype PRIMARY KEY,
   ...
   cloumn_name_n datatype
 );
-create table table_name  //联合主键或复合主键
+create table table_name  --联合主键或复合主键
 (
   cloumn_name_1 datatype,
   ...
@@ -207,14 +207,14 @@ drop constraint constraints_name;
 
 删除主键约束（一个表只有一个主键）
 alter table_name
-drop constraint primary key [cascade];  //cascade 用于级联删除,涉及到外键
+drop constraint primary key [cascade];  --cascade 用于级联删除,涉及到外键
 
 外键约束
 创建表时
 create table table_name
-//table_name为从表,new_table_name为主表,
-//约束的字段为同一数据类型且主表字段为主键
-//从表中约束的字段的值必须来源于主表约束字段中的值或者NULL
+--table_name为从表,new_table_name为主表,
+--约束的字段为同一数据类型且主表字段为主键
+--从表中约束的字段的值必须来源于主表约束字段中的值或者NULL
 (
   cloumn_name_1 datatype references new_table_name(column_name),
   ...
@@ -230,8 +230,8 @@ create table table_name
   FOREIGN KEY (cloumn_name) 
   references new_table_name(new_column_name)
   [ON DELETE CASCADE] 
-  //[]中表示级联删除,当主表中主键字段记录删除时,
-  //同时删除从表中使用到字段数值的记录,保证主从表数据一致性
+  --[]中表示级联删除,当主表中主键字段记录删除时,
+  --同时删除从表中使用到字段数值的记录,保证主从表数据一致性
 );
 修改表时
 alter table_name
@@ -261,16 +261,16 @@ column/col column_name heading new_name;
 设置显示格式
 column/col column_name format dataformat;
 例如：
-col column_name format a10;     //字符格式,a表示字符,10表示位数
-col column_name format 999.99;  //数字格式,9表示一位数字;此句表示3位整数位两位小数位,右对齐显示。
-col column_name format $999.99; //在数字显示结果前面加上$
+col column_name format a10;     --字符格式,a表示字符,10表示位数
+col column_name format 999.99;  --数字格式,9表示一位数字;此句表示3位整数位两位小数位,右对齐显示。
+col column_name format $999.99; --在数字显示结果前面加上$
 
 清除显示格式
 col column_name clear;
 
 基本格式
 单表查询
-select [distinct] column_name_1,...|* //distinct用于去重
+select [distinct] column_name_1,...|* --distinct用于去重
 from table_name
 [where conditions]
 
@@ -278,9 +278,9 @@ from table_name
 select * from table_name;
 
 查询自定字段
-select column_name_1,... from table_name; //字段显示顺序与语句中保持一致
+select column_name_1,... from table_name; --字段显示顺序与语句中保持一致
 
-设置字段显示别名  //不限于sqlplus中
+设置字段显示别名  --不限于sqlplus中
 select column_name_1 [as] new_col,... from table_name;
 
 where字句中条件由and,or,between ... and ...
@@ -289,26 +289,26 @@ where字句中
 not(column_name = *)  <=>  column_name <> *
 
 模糊查询
-column_name like '_a%' //表示匹配第二个字符是a的字段值,_表示一个字符,%表示是零个或多个字符
+column_name like '_a%'              --表示匹配第二个字符是a的字段值,_表示一个字符,%表示是零个或多个字符
 
 范围查询
-column_name between 800 and 2000 //匹配800到2000之前的数,闭合区间[800,2000]
-column_name [not] in ('a','b','c')     //匹配字段[不]为a,b,或者c的记录
+column_name between 800 and 2000    --匹配800到2000之前的数,闭合区间[800,2000]
+column_name [not] in ('a','b','c')  --匹配字段[不]为a,b,或者c的记录
 
 查询结果排序
 select column_name_1,...
 from table_name
-order by column_name_1 desc/asc,column_name_2 desc/asc,...  //asc为默认排序,desc为降序
+order by column_name_1 desc/asc,column_name_2 desc/asc,...  --asc为默认排序,desc为降序
 
 case ... when语句,放在select语句中作为一个字段
-形式1  //column_name字段值为values,显示result1;else语句存在时不在条件里显示result,不存在else语句且不在条件里的字段显示为空
+形式1  --column_name字段值为values,显示result1;else语句存在时不在条件里显示result,不存在else语句且不在条件里的字段显示为空
 case column_name
 when value1 then result1,
 when value2 then result2,
 ...
 [else result] end
 
-形式2 //conditions1为某字段满足的条件
+形式2 --conditions1为某字段满足的条件
 case
 when conditions1 then result1,
 when conditions2 then result2,
@@ -319,5 +319,5 @@ decode函数跟case ... when语句形式1类似
 decode(column_name,value1,result1,
                    value2,result2,
 				   ...,...,
-				   result)  //类似于case ... when语句形式1中的else
+				   result)  --类似于case ... when语句形式1中的else
 
