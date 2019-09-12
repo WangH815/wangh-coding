@@ -149,6 +149,7 @@ echo ${#array_name[*]} #同上
 echo ${array_name[@]}  #打印输出数组所有元素(未定义的不打印),以多个字符串的形式,元素之间空格分隔
 echo ${array_name[*]}  #以一个字符串的形式,其余同上
 
+
 参数传递
 xx.sh arg1 arg2 arg3 ...  #脚本有执行权限,arg开头的为参数
 $0  #执行脚本名称,可在脚本中调用
@@ -160,6 +161,7 @@ $!  #后台运行的最后一个进程的ID号
 $@  #与$*相同,但是使用时加引号,并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
 $-  #显示Shell使用的当前选项,与set命令功能相同。
 $?  #显示最后命令的退出状态。0表示没有错误,其他任何值表明有错误。
+
 
 基本运算符
 主要包括:
@@ -272,35 +274,35 @@ printf转义序列
 test命令    #等价于 []
 用于检查某个条件是否成立,它可以进行数值、字符串和文件三个方面的测试。
 1)数值测试
--eq	等于则为真
--ne	不等于则为真
--gt	大于则为真
--ge	大于等于则为真
--lt	小于则为真
--le	小于等于则为真
+-eq	   #等于则为真
+-ne	   #不等于则为真
+-gt	   #大于则为真
+-ge	   #大于等于则为真
+-lt	   #小于则为真
+-le	   #小于等于则为真
 格式:test $[算术表达式1] -eq $[算术表达式2]  #返回布尔值
 2)字符串测试
-=	等于则为真
-!=	不相等则为真
--z  长度为零
--n  长度不为零
+=	   #等于则为真
+!=	   #不相等则为真
+-z     #长度为零
+-n     #长度不为零
 格式:同1),[]中为字符串或字符串表达式
 3)文件测试
--e 文件名	文件存在
--r 文件名	存在且可读
--w 文件名	存在且可写
--x 文件名	存在且可执行
--s 文件名	存在且至少有一个字符
--d 文件名	存在且为目录
--f 文件名	存在且为普通文件
--c 文件名	存在且为字符型特殊文件
--b 文件名	存在且为块特殊文件
+-e 文件名	#文件存在
+-r 文件名	#存在且可读
+-w 文件名	#存在且可写
+-x 文件名	#存在且可执行
+-s 文件名	#存在且至少有一个字符
+-d 文件名	#存在且为目录
+-f 文件名	#存在且为普通文件
+-c 文件名	#存在且为字符型特殊文件
+-b 文件名	#存在且为块特殊文件
 格式:if test -e ./bash  #判断./bash文件是否存在;等价于 if [ -e ./bash ]
 
 流程控制
 if else
 1)格式1/if/脚本格式
-if condition
+if conditions
 then
     command1 
     command2
@@ -308,9 +310,9 @@ then
     commandN 
 fi
 2)格式2/if/命令行格
-if condition;then command1;command2;...;commandN;fi 
+if conditions;then command1;command2;...;commandN;fi 
 3)格式3/if else
-if condition
+if conditions
 then
     command1 
     command2
@@ -340,13 +342,13 @@ do
 done
 
 while循环         #先判断后执行循环体
-while condition   #while true或while :可实现无限循环
+while conditions   #while true或while :可实现无限循环
 do
     command
 done
 
 util循环          #先执行循环体再判断
-until condition
+until conditions
 do
     command
 done
@@ -414,9 +416,9 @@ command > /dev/null 2>&1  #屏蔽命令输出
 Here Document  #特殊重定向方式
 格式:
 command << delimiter  #分隔符可以使EOF等任意合法字符;结束分隔符顶格写,后面不能有任何字符(包含空格等)
-    document
+context
 delimiter
 
 Shell引用其他文件
-sourse filename  #可引用其他文件中变量
+sourse filename    #可引用其他文件中变量
 . /path/filename
