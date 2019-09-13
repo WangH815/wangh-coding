@@ -89,7 +89,7 @@ var=""                #变量置空
 unset var             #同上
 var=123               #等号两边不能有空格,默认var[0]=123 (数组)
 var="ad"              #字符串赋值,也可用单引号(更严格),它可以防止任何变量扩展。
-                      #双引号可防止通配符扩展但允许变量扩展
+var='ad'              #双引号可防止通配符扩展但允许变量扩展
 var1=1;var2=2;var3=3  #同时赋值,分号隔开就可以
 var=`cmd`             #命令执行结果赋值给变量
 var=$(cmd)            #同上
@@ -152,15 +152,15 @@ echo ${array_name[*]}  #以一个字符串的形式,其余同上
 
 参数传递
 xx.sh arg1 arg2 arg3 ...  #脚本有执行权限,arg开头的为参数
-$0  #执行脚本名称,可在脚本中调用
+$0        #执行脚本名称,可在脚本中调用
 $1/$2/$3  #参数,可在脚本中调用,当n>=10时,需要使用${n}来调用
-$#  #传递到脚本的参数个数
-$*  #以一个单字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。
-$$  #脚本运行的当前进程ID号
-$!  #后台运行的最后一个进程的ID号
-$@  #与$*相同,但是使用时加引号,并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
-$-  #显示Shell使用的当前选项,与set命令功能相同。
-$?  #显示最后命令的退出状态。0表示没有错误,其他任何值表明有错误。
+$#        #传递到脚本的参数个数
+$*        #以一个字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。
+$$        #脚本运行的当前进程ID号
+$!        #后台运行的最后一个进程的ID号
+$@        #与$*相同,但是使用时加引号,并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
+$-        #显示Shell使用的当前选项,与set命令功能相同。
+$?        #显示最后命令的退出状态。0表示没有错误,其他任何值表明有错误。
 
 
 基本运算符
@@ -288,84 +288,112 @@ test命令    #等价于 []
 -n     #长度不为零
 格式:同1),[]中为字符串或字符串表达式
 3)文件测试
--e 文件名	#文件存在
--r 文件名	#存在且可读
--w 文件名	#存在且可写
--x 文件名	#存在且可执行
--s 文件名	#存在且至少有一个字符
--d 文件名	#存在且为目录
--f 文件名	#存在且为普通文件
--c 文件名	#存在且为字符型特殊文件
--b 文件名	#存在且为块特殊文件
+-e $var	#文件存在
+-r $var	#存在且可读
+-w $var	#存在且可写
+-x $var	#存在且可执行
+-s $var	#存在且至少有一个字符
+-d $var	#存在且为目录
+-f $var	#存在且为普通文件
+-c $var	#存在且为字符型特殊文件
+-b $var	#存在且为块特殊文件
 格式:if test -e ./bash  #判断./bash文件是否存在;等价于 if [ -e ./bash ]
+##重要
+上述命令推荐使用 "$var" 形式,而不是 $var ;若文件(夹)名称中含有空格或.等时使用 $var 会出错
+
 
 流程控制
+
 if else
 1)格式1/if/脚本格式
+#1.conditions可以条件表达式或shell命令(返回值为0表示真)等可以正确执行的指令;其他流程语句条件也是一样
+#2.多数条件都是中括号,例如: if [ -f $file ];中括号内左右必须有空格
+#3.上一条可使用 if test -f $file 替换
+#4.多条件可使用&&(与)和||(或)连接
+#5.数学表达式条件可使用双括号,例如: if (( $var ** 2 > 90 ))/if (($var**2>90 ))
+#  大于号无需转;变量引用$也可以不加;还支持c语言中的自增自减/逻辑(与或非)/位运算等操作
+#6.双括号还可以用于赋值,且等号左右y有无空格都可以;(( val2 = $val1 ** 2 ))
+#7.双中括号还支持字符串的匹配,例如: if [[ $var == *as* ]]
 if conditions
 then
-    command1 
-    command2
-    ...
-    commandN 
+    cmds 
 fi
 2)格式2/if/命令行格
-if conditions;then command1;command2;...;commandN;fi 
+if conditions;then cmd1;cmd2;...;cmdN;fi 
 3)格式3/if else
 if conditions
 then
-    command1 
-    command2
-    ...
-    commandN
+    cmds
 else
-    command
+    cmds
 fi
 4)格式4/if else-if else
 if condition1
 then
-    command1
+    cmds
 elif condition2 
 then 
-    command2
+    cmds
 else
-    commandN
+    cmds
 fi
 
 for循环
-for var in item1 item2 ... itemN  #for (( ; ; ))可实现无限循环
+for var in list
 do
-    command1
-    command2
-    ...
-    commandN
+    cmds
+done
+#list形式
+#1.字符串(数字也算),例如:for var in 1 2 3;"1 2 3"被认为单字符串;分隔符(多个算一个)可以是空格/制表符/换行符
+#2.普通变量,例如:$var="a b c";for var in $var
+#3.数组,例如:$var=(a b c);for var in ${var[*]}
+#4.shell命令结果,例如: for var in `ls`;`cmd`或$(cmd)的命令形式都可以
+#5.文件(夹)通配符,例如: for var in ./*;表示匹配当前路径所有可见文件(夹),相对路径类似
+
+##分隔符注释,bash shell默认使用IFS(环境变量)表示分隔符(空格/制表符/换行符)
+需要修改
+IFS_OLD=$IFS
+IFS=$'\n'  #修改为换行符;IFS=:表示修改为冒号;多分隔符可使用 IFS=$'\n':;"
+<在代码中使用新的IFS值>
+IFS=$IFS_OLD
+
+C语言风格的循环
+for (( variable assignment ; condition ; iteration process ))  #do ... done循环体遵循bash shell语法
+例如:
+for (( a = 1; a < 10; a++ ))
+for (( a=1, b=10; a <= 10; a++, b-- ))
+for (( ; ; ))      #可实现无限循环
+
+while循环          #先判断后执行循环体
+while conditions
+do
+    cmds
 done
 
-while循环         #先判断后执行循环体
-while conditions   #while true或while :可实现无限循环
-do
-    command
-done
+while conditions;do cmds;done      #单行写的形式
+while :;do cmds;done               #无限循环形式
+while [];[];[];do cmds;done        #多测试条件形式;某个测试条件不满足则退出循环
+while [] && [] && [];do cmds;done  #同上
+while cmd;do sleep 10;done         #可实现是定时间执行cmd;标准为cmd成功执行(返回码为0);cmd成功执行后开始计时
+while sleep 1;do date;sleep 1;done #每2s输出一次时间
 
-util循环          #先执行循环体再判断
+util循环           #先执行循环体再判断,其余与while相同
 until conditions
 do
-    command
+    cmds
 done
 
-case              #类似于C的switch case
+循环控制
+break      #退出循环;多层循环只会退出内层循环;break n 可退出指定层数循环,n为1时表示当前内层循环
+continue   #与C语言中continue一致
+
+case               #类似于C的switch case
 case $var in
 模式1)
-    command1
-    command2
-    ...
-    commandN      #break和continue作为循环控制
+    cmds           #break和continue作为循环控制
     ;;
 模式2）
-    command1
-    command2
-    ...
-    commandN
+    cmds
     ;;
 esac  #casec反序
 如:
@@ -392,30 +420,30 @@ esac
 2、参数返回,可以显示加:return 返回,如果不加,将以最后一条命令运行结果,作为返回值。 return后跟数值n(0-255)
 
 输入输出重定向
-command > file	#将输出重定向到 file。
-command < file	#将输入重定向到 file。
-command >> file	#将输出以追加的方式重定向到 file。
-n > file	    #将文件描述符为 n 的文件重定向到 file。
-n >> file	    #将文件描述符为 n 的文件以追加的方式重定向到 file。
-n >& m	        #将输出文件 m 和 n 合并。
-n <& m	        #将输入文件 m 和 n 合并。
-<< tag	        #将开始标记 tag 和结束标记 tag 之间的内容作为输入。
+cmd > file	  #将输出重定向到 file
+cmd < file	  #将输入重定向到 file
+cmd >> file	  #将输出以追加的方式重定向到 file
+n > file	  #将文件描述符为 n 的文件重定向到 file
+n >> file	  #将文件描述符为 n 的文件以追加的方式重定向到 file
+n >& m	      #将输出文件 m 和 n 合并
+n <& m	      #将输入文件 m 和 n 合并
+<< tag	      #将开始标记 tag 和结束标记 tag 之间的内容作为输入
 tag
 注:需要注意的是文件描述符 
     0 通常是标准输入（STDIN）,
 	1 是标准输出（STDOUT）,
 	2 是标准错误输出（STDERR）。
 
-command < infile > outfile  #infile作为命令参数输入,结果输出到outfile
-command 2 > file  #标准错误输出
-command 2 >> file  #标准错误追加输出
-command > file 2>&1  #标准输出(包括错误)
-command > /dev/null  #屏蔽标准输出
-command > /dev/null 2>&1  #屏蔽命令输出
+cmd < infile > outfile  #infile作为命令参数输入,结果输出到outfile
+cmd 2> file             #标准错误输出
+cmd 2>> file            #标准错误追加输出
+cmd > file 2>&1         #标准输出(包括错误)
+cmd > /dev/null         #屏蔽标准输出(不含错误)
+cmd > /dev/null 2>&1    #屏蔽命令输出
 
-Here Document  #特殊重定向方式
+Here Document     #特殊重定向方式
 格式:
-command << delimiter  #分隔符可以使EOF等任意合法字符;结束分隔符顶格写,后面不能有任何字符(包含空格等)
+cmd << delimiter  #分隔符可以使EOF等任意合法字符;结束分隔符顶格写,后面不能有任何字符(包含空格等)
 context
 delimiter
 
