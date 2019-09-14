@@ -10,11 +10,11 @@ Linux命令行与shell脚本编程大全.第3版
 Shell是C语言编写,既是命令语言又是程序设计语言;通过Shell提供的界面访问操作系统内核
 
 常见Shell
-Bourne Shell（/usr/bin/sh或/bin/sh）
-Bourne Again Shell（/bin/bash）      #适用范围最广,绝大多数Linux发行版默认Shell
-C Shell（/usr/bin/csh）
-K Shell（/usr/bin/ksh）
-Shell for Root（/sbin/sh）
+Bourne Shell(/usr/bin/sh或/bin/sh)
+Bourne Again Shell(/bin/bash)      #适用范围最广,绝大多数Linux发行版默认Shell
+C Shell(/usr/bin/csh)
+K Shell(/usr/bin/ksh)
+Shell for Root(/sbin/sh)
 zsh
 dsh
 
@@ -170,21 +170,23 @@ $?        #显示最后命令的退出状态。0表示没有错误,其他任何�
 3)布尔运算符
 4)字符串运算符
 5)文件测试运算符
-注:原生bash不支持简单数学运算,主要通过awk和expr实现,expr最常用(也可用于字符串处理);浮点运算使用bc
+注:整数运算主要通过[]、awk(编程语言)、expr和(())实现,[]和expr(也可用于字符串处理)最常用;浮点运算使用bc
 
 算数运算                #只能用于整数运算
 expr                    #evaluate expressions(表达式计算)
 a=10,b=20
-加法	`expr $a + $b`  #+左右无空格的会解析为"10+20",其余同理
-        $[$a + $b]      #同上;乘法不需要加转义;$[$a+$b]也可以
-		$[2*(100-3)]    #带有括号的运算
-减法	`expr $a - $b`
-乘法	`expr $a \* $b` #*需要转义
-除法	`expr $b / $a`
-取余	`expr $b % $a`
+加法  expr $a + $b      #+左右无空格的会解析为"10+20",其余同理;a,b为数字型字符串也可以;var=$(expr $a + $b)/`expr $a + $b`
+      [$a + $b]         #同上;乘法不需要加转义;$[$a+$b]也可以;a,b为数字型字符串部分bash版本支持;var=$[$a+$b]
+      [2*(100-3)]       #可使用括号;*等特殊字符无需转义
+      ((a+b))/(($a+$b)) #C语言风格计算;推荐使用前者,*等特殊字符无需转义;var=$((a+b))
+减法  expr $a - $b
+乘法  expr $a \* $b     #*需要转义
+除法  expr $b / $a
+取余  expr $b % $a
 还可以使用如下方法
 exp="$var1 + $var2 \* $var3"
 expr $exp
+
 #浮点运算可使用 bc 命令
 var=`echo "scale=4; 3.44 / 5" | bc`   #scala变量指定小数位数
 var=$(echo "scale=4; 3.44 / 5" | bc)  #同上;形式:echo "options; expression" | bc
@@ -204,48 +206,46 @@ a1 + b1
 EOF
 )
 
-赋值	a=$b
-相等    [ $a == $b ]    #注意空格,无空格会解析成字符串拼接
-不相等  [ $a != $b ]
-
-关系运算
+关系运算(数字)
+相等     [ $a == $b ]     #等价于 -eq ;注意空格,无空格会解析成字符串拼接;[ $a = $b ]也可以
+不相等   [ $a != $b ]     #
 相等     [ $a -eq $b ]    #equal简写
-不相等	 [ $a -ne $b ]    #not equal
+不相等   [ $a -ne $b ]    #not equal
 大于     [ $a -gt $b ]    #greater than
-小于	 [ $a -lt $b ]    #less than
+小于     [ $a -lt $b ]    #less than
 大于等于 [ $a -ge $b ]    #greater than or equal
 小于等于 [ $a -le $b ]    #less than or equal
 
 布尔运算
 非  [ ! 布尔表达式 ] 
-或	[ 布尔表达式1 -o 布尔表达式2 ]
-与	[ 布尔表达式1 -a 布尔表达式2 ]
+或  [ 布尔表达式1 -o 布尔表达式2 ]
+与  [ 布尔表达式1 -a 布尔表达式2 ]
 
 逻辑运算
 [[ 布尔表达式1 && 布尔表达式2 ]]  #
 [[ 布尔表达式1 || 布尔表达式2 ]]  #or
 
 字符串运算
-相等       [ $a = $b ]
-不相等     [ $a != $b ]
-长度为0    [ -z $a ]
-长度不为0  [ -n "$a" ]
-不为空     [ $a ]
+[ $a = $b ]    #相等;[ $a == $b ]也可以
+[ $a != $b ]   #不相等     
+[ -z $a ]      #长度为0    
+[ -n "$a" ]    #长度不为0  
+[ $a ]         #不为空     
 
 文件测试运算
-设备文件                  [ -b $filename ]
-字符设备文件              [ -c $filename ]
-目录                      [ -d $filename ]
-普通文件                  [ -f $filename ]
-设置了 SGID 位            [ -g $filename ]
-设置了粘着位(Sticky Bit)  [ -k $filename ]
-管道文件                  [ -p $filename ]
-设置了 SUID 位            [ -u $filename ]
-可读                      [ -r $filename ]
-可写                      [ -w $filename ]
-可执行                    [ -x $filename ]
-不为空（文件大小大于0）   [ -s $filename ]
-存在 	                  [ -e $filename ]
+[ -b $filename ]  #设备文件
+[ -c $filename ]  #字符设备文件
+[ -d $filename ]  #目录
+[ -f $filename ]  #普通文件
+[ -g $filename ]  #设置了 SGID 位
+[ -k $filename ]  #设置了粘着位(Sticky Bit)
+[ -p $filename ]  #管道文件
+[ -u $filename ]  #设置了 SUID 位
+[ -r $filename ]  #可读
+[ -w $filename ]  #可写
+[ -x $filename ]  #可执行
+[ -s $filename ]  #不为空(文件大小大于0)
+[ -e $filename ]  #存在
 
 标准输入输出
 read var            #输入        
@@ -256,47 +256,47 @@ printf  format-string  [arguments...]  #格式化输出,不自动换行
 printf "%-10s %-8s\n" 姓名 性别        #格式化字符串与C语言相同,移植性比echo好
 
 printf转义序列
-\a	   #警告字符,通常为ASCII的BEL字符
-\b	   #后退
-\c	   #抑制（不显示）输出结果中任何结尾的换行字符
-       #（只在%b格式指示符控制下的参数字符串中有效）,
-	   #而且,任何留在参数里的字符、任何接下来的参数
-	   #以及任何留在格式字符串中的字符,都被忽略
-\f	   #换页（formfeed）
-\n	   #换行
-\r	   #回车（Carriage return）
-\t	   #水平制表符
-\v	   #垂直制表符
-\\	   #一个字面上的反斜杠字符
-\ddd   #表示1到3位数八进制值的字符。仅在格式字符串中有效
-\0ddd  #表示1到3位的八进制值字符
+\a       #警告字符,通常为ASCII的BEL字符
+\b       #后退
+\c       #抑制(不显示)输出结果中任何结尾的换行字符
+         #(只在%b格式指示符控制下的参数字符串中有效),
+         #而且,任何留在参数里的字符、任何接下来的参数
+         #以及任何留在格式字符串中的字符,都被忽略
+\f       #换页(formfeed)
+\n       #换行
+\r       #回车(Carriage return)
+\t       #水平制表符
+\v       #垂直制表符
+\\       #一个字面上的反斜杠字符
+\ddd     #表示1到3位数八进制值的字符。仅在格式字符串中有效
+\0ddd    #表示1到3位的八进制值字符
 
 test命令    #等价于 []
 用于检查某个条件是否成立,它可以进行数值、字符串和文件三个方面的测试。
 1)数值测试
--eq	   #等于则为真
--ne	   #不等于则为真
--gt	   #大于则为真
--ge	   #大于等于则为真
--lt	   #小于则为真
--le	   #小于等于则为真
+-eq       #等于则为真
+-ne       #不等于则为真
+-gt       #大于则为真
+-ge       #大于等于则为真
+-lt       #小于则为真
+-le       #小于等于则为真
 格式:test $[算术表达式1] -eq $[算术表达式2]  #返回布尔值
 2)字符串测试
-=	   #等于则为真
-!=	   #不相等则为真
--z     #长度为零
--n     #长度不为零
+=         #等于则为真
+!=        #不相等则为真
+-z        #长度为零
+-n        #长度不为零
 格式:同1),[]中为字符串或字符串表达式
 3)文件测试
--e $var	#文件存在
--r $var	#存在且可读
--w $var	#存在且可写
--x $var	#存在且可执行
--s $var	#存在且至少有一个字符
--d $var	#存在且为目录
--f $var	#存在且为普通文件
--c $var	#存在且为字符型特殊文件
--b $var	#存在且为块特殊文件
+-e $var    #文件存在
+-r $var    #存在且可读
+-w $var    #存在且可写
+-x $var    #存在且可执行
+-s $var    #存在且至少有一个字符
+-d $var    #存在且为目录
+-f $var    #存在且为普通文件
+-c $var    #存在且为字符型特殊文件
+-b $var    #存在且为块特殊文件
 格式:if test -e ./bash  #判断./bash文件是否存在;等价于 if [ -e ./bash ]
 ##重要
 上述命令推荐使用 "$var" 形式,而不是 $var ;若文件(夹)名称中含有空格或.等时使用 $var 会出错
@@ -392,7 +392,7 @@ case $var in
 模式1)
     cmds           #break和continue作为循环控制
     ;;
-模式2）
+模式2)
     cmds
     ;;
 esac  #casec反序
@@ -420,19 +420,19 @@ esac
 2、参数返回,可以显示加:return 返回,如果不加,将以最后一条命令运行结果,作为返回值。 return后跟数值n(0-255)
 
 输入输出重定向
-cmd > file	  #将输出重定向到 file
-cmd < file	  #将输入重定向到 file
-cmd >> file	  #将输出以追加的方式重定向到 file
-n > file	  #将文件描述符为 n 的文件重定向到 file
-n >> file	  #将文件描述符为 n 的文件以追加的方式重定向到 file
-n >& m	      #将输出文件 m 和 n 合并
-n <& m	      #将输入文件 m 和 n 合并
-<< tag	      #将开始标记 tag 和结束标记 tag 之间的内容作为输入
+cmd > file      #将输出重定向到 file
+cmd < file      #将输入重定向到 file
+cmd >> file      #将输出以追加的方式重定向到 file
+n > file      #将文件描述符为 n 的文件重定向到 file
+n >> file      #将文件描述符为 n 的文件以追加的方式重定向到 file
+n >& m          #将输出文件 m 和 n 合并
+n <& m          #将输入文件 m 和 n 合并
+<< tag          #将开始标记 tag 和结束标记 tag 之间的内容作为输入
 tag
 注:需要注意的是文件描述符 
-    0 通常是标准输入（STDIN）,
-	1 是标准输出（STDOUT）,
-	2 是标准错误输出（STDERR）。
+    0 通常是标准输入(STDIN),
+    1 是标准输出(STDOUT),
+    2 是标准错误输出(STDERR)。
 
 cmd < infile > outfile  #infile作为命令参数输入,结果输出到outfile
 cmd 2> file             #标准错误输出
