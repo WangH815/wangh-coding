@@ -9,7 +9,7 @@ Linux命令行与shell脚本编程大全.第3版
 #简介
 Shell是C语言编写,既是命令语言又是程序设计语言;通过Shell提供的界面访问操作系统内核
 
-常见Shell
+##常见Shell
 Bourne Shell(/usr/bin/sh或/bin/sh)
 Bourne Again Shell(/bin/bash)      #适用范围最广,绝大多数Linux发行版默认Shell
 C Shell(/usr/bin/csh)
@@ -23,16 +23,16 @@ echo $SHELL       #查看当前使用的shell
 chsh -s /bin/zsh  #设置用户默认Shell或者修改 /etc/passwd 文件中对应Shell
 
 
-Shell脚本
+#Shell脚本
 #!/bin/bash      #脚本第一行,指明运行脚本的Shell
 
-脚本运行方式
+##脚本运行方式
 1 . xx.sh        #一般用于生效用户配置而不需要重新登录shell,xx.sh有读权限即可
 2 source xx.sh   #同上。常见用于执行 profile 配置,脚本本身在当前进程中执行
 3 sh xx.sh       #读权限即可,脚本本身会在子进程中执行
 4 ./xx.sh        #需要执行权限,脚本本身会在子进程中执行
 
-#脚本退出状态
+##脚本退出状态
 一般使用 exit 状态码 指定
 echo $?   #打印上一个命令或脚本的退出状态码
 状态码    说明
@@ -46,7 +46,7 @@ echo $?   #打印上一个命令或脚本的退出状态码
   130     #通过Ctrl+C终止的命令
   255     #正常范围之外的退出状态码;大于255则取余
 
-注释
+##注释
 #                   #单行注释,例外:#!
 :<<EOF              #多行注释,EOF可由单引号或感叹号等替代;结束EOF单独占一行,前后不能有字符
 注释内容
@@ -54,37 +54,38 @@ echo $?   #打印上一个命令或脚本的退出状态码
 注释内容
 EOF
 
-变量
-1.字母、数字和下划线构成
-2.不以数字开头
-3.系统关键字不能作为变量名
-4.字母大小写敏感
-5.变量类型默认是字符型
 
-变量类型
-1) 局部变量
+#变量
+
+##变量类型
+1)局部变量
    在脚本或命令中定义,仅在当前shell中有效,其他shell启动的程序不能访问局部变量。
    一般是在函数中定义,如:local var
-2) 环境变量
+2)环境变量
 所有的程序都能访问环境变量,有些程序需要环境变量来保证其正常运行。
 必要的时候shell脚本也可以定义环境变量。
-3) shell变量
+3)shell变量
 由shell程序设置的特殊变量。shell变量中有一部分是环境变量,有一部分是局部变量,
 这些变量保证了shell的正常运行
 
-环境变量的设置
+###环境变量的设置
 1)设置永久环境变量:修改 /etc/profile /etc/bashrc
 2)设置用户环境变量:修改 ~/.bash_profile ~/.bash_bashrc
 3)临时环境变量: export var="value"
 4)显示环境变量: env/set
 5)临时取消环境变量: unset var
 
+##命名规则
+1.字母、数字和下划线构成
+2.不以数字开头
+3.系统关键字不能作为变量名
+4.字母大小写敏感
+5.变量类型默认是字符型
+6.一般连续字符、数字、路径等可以不加任何引号,但建议使用双引号
+7.其他情况建议使用双引号或单引号
+8.反引号一般配合命令使用。如 var=`ls` 等价于 var=$(ls)
 
-变量声明赋值
-1.一般连续字符、数字、路径等可以不加任何引号,但建议使用双引号
-2.其他情况建议使用双引号或单引号
-3.反引号一般配合命令使用。如 AAA=`ls` 等价于 AAA=$(ls)
-
+##变量声赋值
 var=""                #变量置空
 unset var             #同上
 var=123               #等号两边不能有空格,默认var[0]=123 (数组)
@@ -94,8 +95,7 @@ var1=1;var2=2;var3=3  #同时赋值,分号隔开就可以
 var=`cmd`             #命令执行结果赋值给变量
 var=$(cmd)            #同上
 
-
-变量使用
+##变量使用
 env                          #查看所有环境变量
 set                          #查看所有变量
 echo $var                    #打印输出变量值
@@ -112,7 +112,7 @@ echo ${var:+default}         #var的值为非空则为default,否则为空
 echo ${var?default}          #var已声明则输出var的值,否则输出default
 echo ${var:?default}         #var的值为非空则输出var的值,否则输出default
 
-变量截取替换(位置从1开始)
+##变量截取替换(位置从1开始)
 var="abcdef"
 ${var:pos}                   #截取从数组下标为pos(不含pos,下同)之后的子串
 ${var:pos:len}               #截取pos之后长度为len的子串
@@ -120,59 +120,43 @@ ${var/Pattern/Replacement}   #使用Replacement来替换var中第一次匹配Pat
 ${var#Pattern/Replacement}   #全部替换
 ${var/#Pattern/Replacement}  #从var开头匹配,匹配到则替换
 ${var/%Pattern/Replacement}  #从var结尾匹配,匹配到则替换
-
 ${!varpre*}                  #匹配所有已声明变量名以varpre开头的所有变量名,以空格隔开
-${!varpre@}                  #同上
+${!varpre@}                  #同上;单字符串
 
-
-变量拼接
+##变量拼接
 ${a}${b}
 ${a}"str"${b}
 ${a}'str'${b}
 
-
-数组
-仅支持一维数组,不限定长度
-array_name=(arr1 arr2 arr3 ...)  #赋值
+##数组变量                       #仅支持一维数组,不限定长度
+array_name=(arr1 arr2 arr3 ...)  #赋值,下同
 array_name=(
 arr1
 arr2
 ...
-)  #同上
-array_name[0]=value0   #单独定义
-array_name[1]=value1   #单独定义
-...                    #单独定义
-array_name[n]=valuen   #单独定义,数组下标可以不连续
-echo ${array_name[n]}  #打印输出某个数组元素
-echo ${#array_name[@]} #打印输出数组元素长度,未定义的不统计
-echo ${#array_name[*]} #同上
-echo ${array_name[@]}  #打印输出数组所有元素(未定义的不打印),以多个字符串的形式,元素之间空格分隔
-echo ${array_name[*]}  #以一个字符串的形式,其余同上
+)
+array_name[0]=value0   #单独赋值
+array_name[1]=value1   #单独赋值
+...                    #单独赋值
+array_name[n]=valuen   #单独赋值,数组下标可以不连续
+${array_name[n]}       #打印输出某个数组元素
+${#array_name[@]}      #打印输出数组元素长度,未定义的不统计
+${#array_name[*]}      #同上
+${array_name[@]}       #打印输出数组所有元素(未定义的不打印),以多个字符串的形式,元素之间空格分隔
+${array_name[*]}       #以一个字符串的形式,其余同上
 
 
-参数传递
-xx.sh arg1 arg2 arg3 ...  #脚本有执行权限,arg开头的为参数
-$0        #执行脚本名称,可在脚本中调用
-$1/$2/$3  #参数,可在脚本中调用,当n>=10时,需要使用${n}来调用
-$#        #传递到脚本的参数个数
-$*        #以一个字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。
-$$        #脚本运行的当前进程ID号
-$!        #后台运行的最后一个进程的ID号
-$@        #与$*相同,但是使用时加引号,并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
-$-        #显示Shell使用的当前选项,与set命令功能相同。
-$?        #显示最后命令的退出状态。0表示没有错误,其他任何值表明有错误。
+#基本运算符
 
-
-基本运算符
-主要包括:
-1)算数运算符
+##运算符类型
+1)算数运算符     #主要用于计算或赋值;其他运算符主要用于条件判断
 2)关系运算符
-3)布尔运算符
+3)布尔运算符     #连接表达式
 4)字符串运算符
 5)文件测试运算符
 注:整数运算主要通过[]、awk(编程语言)、expr和(())实现,[]和expr(也可用于字符串处理)最常用;浮点运算使用bc
 
-算数运算                #只能用于整数运算
+#算数运算               #只能用于整数运算
 expr                    #evaluate expressions(表达式计算)
 a=10,b=20
 加法  expr $a + $b      #+左右无空格的会解析为"10+20",其余同理;a,b为数字型字符串也可以;var=$(expr $a + $b)/`expr $a + $b`
@@ -217,35 +201,35 @@ EOF
 小于等于 [ $a -le $b ]    #less than or equal
 
 布尔运算
-非  [ ! 布尔表达式 ] 
-或  [ 布尔表达式1 -o 布尔表达式2 ]
-与  [ 布尔表达式1 -a 布尔表达式2 ]
+[ ! expression ]                #非
+[ expression1 -a expression2 ]  #与
+[ expression1 -o expression2 ]  #或
 
 逻辑运算
-[[ 布尔表达式1 && 布尔表达式2 ]]  #
-[[ 布尔表达式1 || 布尔表达式2 ]]  #or
+[[ expression1 && expression2 ]]  #and
+[[ expression1 || expression2 ]]  #or
 
 字符串运算
 [ $a = $b ]    #相等;[ $a == $b ]也可以
 [ $a != $b ]   #不相等     
 [ -z $a ]      #长度为0    
-[ -n "$a" ]    #长度不为0  
+[ -n "$a" ]    #长度不为0;常用与命令行参数测试,例如:if [ -n $1 ] 来判断是否传递第一个参数
 [ $a ]         #不为空     
 
 文件测试运算
-[ -b $filename ]  #设备文件
-[ -c $filename ]  #字符设备文件
-[ -d $filename ]  #目录
-[ -f $filename ]  #普通文件
-[ -g $filename ]  #设置了 SGID 位
-[ -k $filename ]  #设置了粘着位(Sticky Bit)
-[ -p $filename ]  #管道文件
-[ -u $filename ]  #设置了 SUID 位
-[ -r $filename ]  #可读
-[ -w $filename ]  #可写
-[ -x $filename ]  #可执行
-[ -s $filename ]  #不为空(文件大小大于0)
-[ -e $filename ]  #存在
+[ -b $file ]  #设备文件
+[ -c $file ]  #字符设备文件
+[ -d $file ]  #目录
+[ -f $file ]  #普通文件
+[ -g $file ]  #设置了 SGID 位
+[ -k $file ]  #设置了粘着位(Sticky Bit)
+[ -p $file ]  #管道文件
+[ -u $file ]  #设置了 SUID 位
+[ -r $file ]  #可读
+[ -w $file ]  #可写
+[ -x $file ]  #可执行
+[ -s $file ]  #不为空(文件大小大于0)
+[ -e $file ]  #存在
 
 标准输入输出
 read var            #输入        
@@ -274,38 +258,38 @@ printf转义序列
 test命令    #等价于 []
 用于检查某个条件是否成立,它可以进行数值、字符串和文件三个方面的测试。
 1)数值测试
--eq       #等于则为真
--ne       #不等于则为真
--gt       #大于则为真
--ge       #大于等于则为真
--lt       #小于则为真
--le       #小于等于则为真
-格式:test $[算术表达式1] -eq $[算术表达式2]  #返回布尔值
+-eq       # =
+-ne       # !=
+-gt       # >
+-ge       # >=
+-lt       # <
+-le       # <=
+格式:if test $var1 -eq $var2    #变量中含有数字之外的字符会报错;var=123/'123'/"123"是合法的
 2)字符串测试
-=         #等于则为真
+=/==      #等于则为真
 !=        #不相等则为真
 -z        #长度为零
 -n        #长度不为零
 格式:同1),[]中为字符串或字符串表达式
 3)文件测试
--e $var    #文件存在
--r $var    #存在且可读
--w $var    #存在且可写
--x $var    #存在且可执行
--s $var    #存在且至少有一个字符
--d $var    #存在且为目录
--f $var    #存在且为普通文件
--c $var    #存在且为字符型特殊文件
--b $var    #存在且为块特殊文件
+-e $file    #文件存在;exist
+-r $file    #存在且可读;read
+-w $file    #存在且可写;write
+-x $file    #存在且可执行;execute
+-s $file    #存在且至少有一个字符
+-d $file    #存在且为目录;directory
+-f $file    #存在且为普通文件;file
+-c $file    #存在且为字符型特殊文件;char
+-b $file    #存在且为块特殊文件;block
 格式:if test -e ./bash  #判断./bash文件是否存在;等价于 if [ -e ./bash ]
 ##重要
 上述命令推荐使用 "$var" 形式,而不是 $var ;若文件(夹)名称中含有空格或.等时使用 $var 会出错
 
 
-流程控制
+#结构化命令
 
-if else
-1)格式1/if/脚本格式
+##if 语句
+1)if
 #1.conditions可以条件表达式或shell命令(返回值为0表示真)等可以正确执行的指令;其他流程语句条件也是一样
 #2.多数条件都是中括号,例如: if [ -f $file ];中括号内左右必须有空格
 #3.上一条可使用 if test -f $file 替换
@@ -318,16 +302,38 @@ if conditions
 then
     cmds 
 fi
-2)格式2/if/命令行格
-if conditions;then cmd1;cmd2;...;cmdN;fi 
-3)格式3/if else
+###常用示例
+if [ $var1 -eq $var2 ]  #判断变量(数值)是否相等;多条件参考布尔和逻辑运算
+if test $var1 -eq $var2 #同上
+if [ $var1 -eq $var2 ]  #判断变量(数值)是否相等
+if [ -f $file ]         #判断是否为文件
+if test -f $file        #同上
+if ls                   #执行shell命令(输出结果);命令返回码作为条件判断依据
+if (ls)                 #同上
+if [ ls ]               #同上;不会输出ls的结果
+if cd $var              #跳转目录作为条件
+if cd $var;pwd          #跳转目录后执行打印绝对路径作为条件
+if (cd $var;pwd)        #操作在子shell中执行
+if ./xx.sh              #执行自定义脚本再执行操作
+if var=`date`           #赋值语句也是可以的
+if var=$(date)          #同上
+
+2)单行格式
+if conditions;then cmds;fi                #cmds为多命令使用分号隔开;其他类似
+if (conditions) then (cmds) fi            #cmds为多命令使用分号隔开;括号内命令(或条件)在子shell中执行;其他类似
+if conditions;then cmds;else cmds;fi
+if (conditions) then (cmds) else (cmds) fi
+if conditions;then cmds;elif cmds;else cmds;fi
+
+3)if else
 if conditions
 then
     cmds
 else
     cmds
 fi
-4)格式4/if else-if else
+
+4)if elif else
 if condition1
 then
     cmds
@@ -338,17 +344,52 @@ else
     cmds
 fi
 
-for循环
+##case
+case $var in
+pattern1 | pattern2) cmds1;;  #无需break
+pattern3) cmds2;;
+*) default cmds;;
+esac
+
+###示例
+echo -n "输入 1 到 5 之间的数字: "
+read aNum
+case $aNum in
+    1|2|3|4|5) echo "你输入的数字为 $aNum!"    #模式之间可用 | 分割
+    ;;
+    *) echo "你输入的数字不是 1 到 5 之间的!"  # deflaut处理
+        continue
+        echo "游戏结束"
+    ;;
+esac
+
+
+#for循环
 for var in list
 do
     cmds
 done
 #list形式
 #1.字符串(数字也算),例如:for var in 1 2 3;"1 2 3"被认为单字符串;分隔符(多个算一个)可以是空格/制表符/换行符
-#2.普通变量,例如:$var="a b c";for var in $var
+#2.普通变量,例如:var="a b c";for var in $var
 #3.数组,例如:$var=(a b c);for var in ${var[*]}
 #4.shell命令结果,例如: for var in `ls`;`cmd`或$(cmd)的命令形式都可以
 #5.文件(夹)通配符,例如: for var in ./*;表示匹配当前路径所有可见文件(夹),相对路径类似
+##常用示例
+var="a b c";for var in $var
+var=(a b c);for var in $var
+for var in 1 2 3
+for var in '1' '2' '3'   #同上
+for var in '1 2 3'       #单双引号会被认为是一个值
+for var in `cmds`        #命令结果按照空格/制表符/换行符分隔;多命令以分号隔开
+for var in $(cmds)       #同上
+for var in `seq 10`      #1-10数组
+for var in `seq -1 5`    #指定首尾值
+for var in `seq 1 2 10`  #指定首尾及step;实际为1到10的奇数
+for var in `seq 10 -2 2` #指定首尾及step;递减
+for var in `ls`          #匹配当前文件夹文件(非隐藏)
+for var in /home/*       #*匹配/home目录下文件(非隐藏);不会递归匹配
+for var in /home/[0-9]*  #带有通配形式的匹配
 
 ##分隔符注释,bash shell默认使用IFS(环境变量)表示分隔符(空格/制表符/换行符)
 需要修改
@@ -360,9 +401,9 @@ IFS=$IFS_OLD
 C语言风格的循环
 for (( variable assignment ; condition ; iteration process ))  #do ... done循环体遵循bash shell语法
 例如:
-for (( a = 1; a < 10; a++ ))
-for (( a=1, b=10; a <= 10; a++, b-- ))
-for (( ; ; ))      #可实现无限循环
+for (( a = 1; a < 10; a++ ))            #单变量形式
+for (( a=1, b=10; a <= 10; a++, b-- ))  #多变量形式
+for (( ; ; ))                           #可实现无限循环
 
 while循环          #先判断后执行循环体
 while conditions
@@ -374,7 +415,7 @@ while conditions;do cmds;done      #单行写的形式
 while :;do cmds;done               #无限循环形式
 while [];[];[];do cmds;done        #多测试条件形式;某个测试条件不满足则退出循环
 while [] && [] && [];do cmds;done  #同上
-while cmd;do sleep 10;done         #可实现是定时间执行cmd;标准为cmd成功执行(返回码为0);cmd成功执行后开始计时
+while cmds;do sleep 10;done        #可实现是定时间执行cmd;标准为cmd成功执行(返回码为0);cmd成功执行后开始计时
 while sleep 1;do date;sleep 1;done #每2s输出一次时间
 
 util循环           #先执行循环体再判断,其余与while相同
@@ -387,28 +428,56 @@ done
 break      #退出循环;多层循环只会退出内层循环;break n 可退出指定层数循环,n为1时表示当前内层循环
 continue   #与C语言中continue一致
 
-case               #类似于C的switch case
-case $var in
-模式1)
-    cmds           #break和continue作为循环控制
-    ;;
-模式2)
-    cmds
-    ;;
-esac  #casec反序
-如:
-echo -n "输入 1 到 5 之间的数字: "
-read aNum
-case $aNum in
-    1|2|3|4|5) echo "你输入的数字为 $aNum!"    #模式之间可用 | 分割
-    ;;
-    *) echo "你输入的数字不是 1 到 5 之间的!"  # * 类似于deflaut
-        continue
-        echo "游戏结束"
-    ;;
-esac
 
-函数
+#处理用户输入
+
+##命令行参数
+###参数读取
+./xx.sh arg1 arg2 arg3 ...  #脚本有执行权限,arg开头的为参数
+$0        #执行脚本名称,可在脚本中调用
+$1/$2/$3  #参数,可在脚本中调用,当n>=10时,需要使用${n}来调用
+$#        #传递到脚本的参数个数
+$*        #以一个字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。
+$$        #脚本运行的当前进程ID号
+$!        #后台运行的最后一个进程的ID号
+$@        #与$*相同,但是使用时加引号,并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
+$-        #显示Shell使用的当前选项,与set命令功能相同
+$?        #显示最后命令的退出状态;0表示没有错误,其他任何值表明有错误
+
+###移动变量
+./xx.sh 1 2 3 4
+
+#!/bin/bash
+echo "The original parameters: $*"        #输出 1 2 3 4
+shift 2                                   #向右移动变量两位;不跟数字移动一位
+echo "Here's the new first parameter: $1" #输出 3
+
+###模拟命令参数获取
+./xx.sh -a -b -c -d
+
+#!/bin/bash
+while [ -n "$1" ]
+do
+    case "$1" in
+        -a) echo "Found the -a option" ;;
+        -b) echo "Found the -b option" ;;
+        -c) echo "Found the -c option" ;;
+        *) echo "$1 is not an option" ;;
+    esac
+    shift
+done
+
+输出
+Found the -a option
+Found the -b option
+Found the -c option
+-d is not an option
+
+##getopt     #用于处理命令行选项和参数的工具
+
+
+
+#函数
 格式:
 [ function ] funname [()]
 {
@@ -448,5 +517,5 @@ context
 delimiter
 
 Shell引用其他文件
-sourse filename    #可引用其他文件中变量
-. /path/filename
+sourse file    #可引用其他文件中变量
+. /path/file
