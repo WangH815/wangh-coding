@@ -24,13 +24,13 @@ chsh -s /bin/zsh  #设置用户默认Shell或者修改 /etc/passwd 文件中对�
 
 
 #Shell脚本
-#!/bin/bash      #脚本第一行,指明运行脚本的Shell
+#!/bin/bash       #脚本第一行,指明运行脚本的Shell
 
 ##脚本运行方式
-1 . xx.sh        #一般用于生效用户配置而不需要重新登录shell,xx.sh有读权限即可
-2 source xx.sh   #同上。常见用于执行 profile 配置,脚本本身在当前进程中执行
-3 sh xx.sh       #读权限即可,脚本本身会在子进程中执行
-4 ./xx.sh        #需要执行权限,脚本本身会在子进程中执行
+1 . ./xx.sh       #一般用于生效用户配置而不需要重新登录shell,xx.sh有读权限即可
+2 source ./xx.sh  #同上。常见用于执行 profile 配置,脚本本身在当前进程中执行
+3 sh ./xx.sh      #读权限即可,脚本本身会在子进程中执行
+4 ./xx.sh         #需要执行权限,脚本本身会在子进程中执行
 
 ##脚本退出状态
 一般使用 exit 状态码 指定
