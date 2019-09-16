@@ -489,13 +489,14 @@ Parameter #1: 1
 Parameter #2: 2
 Parameter #3: 3
 
-##getopt     #用于处理命令行选项和参数解析的工具
+##选项参数解析
+###getopt
 getopt ab:cd -a -b test1 -cd test2 test3     #:表示-b选项需要一个参数;实际打印  -a -b test1 -c -d -- test2 test3
 getopt ab:cd -a -b test1 -cde test2 test3    #会先输出getopt: invalid option -- e,然后输出正确的解析结果
 getopt -q ab:cd -a -b test1 -cde test2 test3 #-q会屏蔽错误选项e
 set -- $(getopt -q ab:cd "$@")               #用于格式化选项及参数;./xx.sh -a -b test1 -cd test2 test3会按照上述去解析选项参数
 
-##getopts    #比getopt更高级
+###getopts    #比getopt更高级
 getopts optstring var      #optstring为选项表达式
 while getopts :ab:c opt    #表达式第一个:表示去除错误信息;选项如需参数则增加:即可
 do
@@ -507,19 +508,34 @@ do
     esac
 done
 
+##用户输入获取
+read            #获取用户输入赋值给 REPLY
+read var        #获取用户输入赋值给变量 var
+read -s passwd  #用于输入密码不显示在前台,变量中可以使用
 
-#函数
-格式:
-[ function ] funname [()]
-{
-    action;
-    [return int;]
-}
-说明:
-1、可以带function fun() 定义,也可以直接fun() 定义,不带任何参数
-2、参数返回,可以显示加:return 返回,如果不加,将以最后一条命令运行结果,作为返回值;return返回码范围(0-255),超过取余
+###命令超时
+if read -t 5 -p "Please enter your name: " name  #设定超时(-t)和提醒(-p)
+then
+    echo "Hello $name"
+else
+	echo "Sorry, too slow..."                    #超时后处理
+fi
 
-输入输出重定向
+###选择命令
+read -n1 -p "Do you want to continue [Y/N]? " answer  #-n1表示接受一个字符后赋值给变量而无需回车
+case $answer in
+    Y | y) echo "fine, continue on…" ;;
+    N | n) echo "OK, goodbye"
+	       exit;;
+	*) echo "Input Error..."
+       exit;;
+esac
+
+###文件中读取
+cat test | while read line  #从标准输出中读取;逐行读取
+
+
+#输入输出重定向
 cmd > file      #将输出重定向到 file
 cmd < file      #将输入重定向到 file
 cmd >> file     #将输出以追加的方式重定向到 file
@@ -550,3 +566,14 @@ delimiter
 Shell引用其他文件
 sourse file    #可引用其他文件中变量
 . /path/file
+
+
+#函数
+格式:
+[ function ] funname [()]
+{
+    cmds
+}
+说明:
+1.可以带function fun() 定义,也可以直接fun() 定义,不带任何参数
+2.参数返回,可以显示加:return 返回,如果不加,将以最后一条命令运行结果,作为返回值;return返回码范围(0-255),超过取余
