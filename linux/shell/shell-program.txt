@@ -355,7 +355,7 @@ esac
 echo -n "输入 1 到 5 之间的数字: "
 read aNum
 case $aNum in
-    1|2|3|4|5) echo "你输入的数字为 $aNum!"    #模式之间可用 | 分割
+    1|2|3|4|5) echo "你输入的数字为 $aNum!"    #模式之间可用|分割
     ;;
     *) echo "你输入的数字不是 1 到 5 之间的!"  # deflaut处理
         continue
@@ -364,7 +364,8 @@ case $aNum in
 esac
 
 
-#for循环
+#循环语句
+##for循环
 for var in list
 do
     cmds
@@ -398,14 +399,14 @@ IFS=$'\n'  #修改为换行符;IFS=:表示修改为冒号;多分隔符可使用 
 <在代码中使用新的IFS值>
 IFS=$IFS_OLD
 
-C语言风格的循环
+###C语言风格的for循环
 for (( variable assignment ; condition ; iteration process ))  #do ... done循环体遵循bash shell语法
 例如:
 for (( a = 1; a < 10; a++ ))            #单变量形式
 for (( a=1, b=10; a <= 10; a++, b-- ))  #多变量形式
 for (( ; ; ))                           #可实现无限循环
 
-while循环          #先判断后执行循环体
+##while循环          #先判断后执行循环体
 while conditions
 do
     cmds
@@ -418,13 +419,13 @@ while [] && [] && [];do cmds;done  #同上
 while cmds;do sleep 10;done        #可实现是定时间执行cmd;标准为cmd成功执行(返回码为0);cmd成功执行后开始计时
 while sleep 1;do date;sleep 1;done #每2s输出一次时间
 
-util循环           #先执行循环体再判断,其余与while相同
+##util循环           #先执行循环体再判断,其余与while相同
 until conditions
 do
     cmds
 done
 
-循环控制
+##循环控制
 break      #退出循环;多层循环只会退出内层循环;break n 可退出指定层数循环,n为1时表示当前内层循环
 continue   #与C语言中continue一致
 
@@ -449,32 +450,62 @@ $?        #显示最后命令的退出状态;0表示没有错误,其他任何值
 
 #!/bin/bash
 echo "The original parameters: $*"        #输出 1 2 3 4
-shift 2                                   #向右移动变量两位;不跟数字移动一位
+shift 2                                   #移除前两个参数;不跟数字移动一位;移除数据无法恢复
 echo "Here's the new first parameter: $1" #输出 3
 
-###模拟命令参数获取
-./xx.sh -a -b -c -d
+###模拟命令选项和参数的获取     #大部分选项是有对应含义的,可以参考相关文档;
+./xx.sh -a -b -c -d -- 1 2
 
 #!/bin/bash
-while [ -n "$1" ]
+while [ -n "$1" ]   #循环读取每一个选项
 do
     case "$1" in
         -a) echo "Found the -a option" ;;
         -b) echo "Found the -b option" ;;
         -c) echo "Found the -c option" ;;
-        *) echo "$1 is not an option" ;;
+#		-d) param="$2"                     #以下注释的三行为选项后带有参数的处理
+#           echo "Found the -b option, with parameter value $param"
+#           shift ;;
+        --) shift                          #一般认为--为选项结束标志;移除--并跳出循环
+		    break ;;
+        *) echo "$1 is not an option"  ;;  #其他选项处理
     esac
-    shift
+    shift                                  #移除第一个选项;类似于出队列
 done
 
-输出
+count=1
+for param in $@                            #获取--后参数列表
+do
+    echo "Parameter #$count: $param"       #打印每个参数
+    count=$[ $count + 1 ]                  #参数计数
+done
+
+输出 
 Found the -a option
 Found the -b option
 Found the -c option
 -d is not an option
+Parameter #1: 1
+Parameter #2: 2
+Parameter #3: 3
 
-##getopt     #用于处理命令行选项和参数的工具
+##getopt     #用于处理命令行选项和参数解析的工具
+getopt ab:cd -a -b test1 -cd test2 test3     #:表示-b选项需要一个参数;实际打印  -a -b test1 -c -d -- test2 test3
+getopt ab:cd -a -b test1 -cde test2 test3    #会先输出getopt: invalid option -- e,然后输出正确的解析结果
+getopt -q ab:cd -a -b test1 -cde test2 test3 #-q会屏蔽错误选项e
+set -- $(getopt -q ab:cd "$@")               #用于格式化选项及参数;./xx.sh -a -b test1 -cd test2 test3会按照上述去解析选项参数
 
+##getopts    #比getopt更高级
+getopts optstring var      #optstring为选项表达式
+while getopts :ab:c opt    #表达式第一个:表示去除错误信息;选项如需参数则增加:即可
+do
+    case "$opt" in      
+        a) echo "Found the -a option" ;;
+        b) echo "Found the -b option, with value $OPTARG";;  #OPTARG变量用于获取参数后选项
+        c) echo "Found the -c option" ;;
+        *) echo "Unknown option: $opt";;
+    esac
+done
 
 
 #函数
@@ -485,23 +516,23 @@ Found the -c option
     [return int;]
 }
 说明:
-1、可以带function fun() 定义,也可以直接fun() 定义,不带任何参数。
-2、参数返回,可以显示加:return 返回,如果不加,将以最后一条命令运行结果,作为返回值。 return后跟数值n(0-255)
+1、可以带function fun() 定义,也可以直接fun() 定义,不带任何参数
+2、参数返回,可以显示加:return 返回,如果不加,将以最后一条命令运行结果,作为返回值;return返回码范围(0-255),超过取余
 
 输入输出重定向
 cmd > file      #将输出重定向到 file
 cmd < file      #将输入重定向到 file
-cmd >> file      #将输出以追加的方式重定向到 file
-n > file      #将文件描述符为 n 的文件重定向到 file
-n >> file      #将文件描述符为 n 的文件以追加的方式重定向到 file
-n >& m          #将输出文件 m 和 n 合并
-n <& m          #将输入文件 m 和 n 合并
+cmd >> file     #将输出以追加的方式重定向到 file
+n> file         #将文件描述符为 n 的文件重定向到 file
+n>> file        #将文件描述符为 n 的文件以追加的方式重定向到 file
+n>&m            #将输出文件 m 和 n 合并
+n<&m            #将输入文件 m 和 n 合并
 << tag          #将开始标记 tag 和结束标记 tag 之间的内容作为输入
 tag
 注:需要注意的是文件描述符 
-    0 通常是标准输入(STDIN),
-    1 是标准输出(STDOUT),
-    2 是标准错误输出(STDERR)。
+    0 通常是标准输入(STDIN)
+    1 是标准输出(STDOUT)
+    2 是标准错误输出(STDERR)
 
 cmd < infile > outfile  #infile作为命令参数输入,结果输出到outfile
 cmd 2> file             #标准错误输出

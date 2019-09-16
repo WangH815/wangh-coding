@@ -34,6 +34,9 @@ rpm -qa|grep package    #查找已安装软件包
 rpm -qf '绝对路径'      #查看指定文件属于哪个软件包
 rpm -q[l/i] package     #查看软件包[安装路径/已安装软件包信息]
 
+#常用软件安装
+yum install psmisc -y   #centos7安装pstree工具;psmisc为系统进程管理工具,包含pstree、killall和fuser三个命令
+
 
 #修改yum/epel为阿里源
 rpm:Redhat Package Manager
