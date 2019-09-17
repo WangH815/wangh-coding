@@ -569,7 +569,7 @@ delimiter
 echo "error context" >&2  #临时重定向,;./xx.sh运行时按照标准输出;./xx.sh 2>file会按照错误输出到file中(脚本中指定了exec除外)
 exec 1>file               #永久重定向;脚本中使用(一般是开头)会将所有标准输出到file中,而不是控制台
 exec 2>file               #错误输出重定向;与上类似
-exec 0>file               #输入重定向;与上类似
+exec 0<file               #输入重定向;与上类似
 exec 1>>file              #追加形式
 exec 1>&-                 #关闭脚本中文件描述符
 
@@ -579,7 +579,60 @@ exec 3>file            #文件描述符为3的输出到file中
 exec 3>>file           #文件描述符为3的输出到file中
 exec 3>&-              #关闭脚本中文件描述符
 
+##重定向示例
+./xx.sh < insert.csv
+#!/bin/bash
+# read file and create INSERT statements for MySQL
 
+outfile='members.sql'   #设定输出文件
+IFSOLD=$IFS             #备份分隔符
+IFS=','                 #设定逗号为分隔符
+while read lname fname address city state zip    #读取每一行数据,设置不同变量
+do
+  cat >> $outfile << EOF
+  INSERT INTO members (lname,fname,address,city,state,zip) VALUES
+  ('$lname', '$fname', '$address', '$city', '$state', '$zip');
+EOF
+done < $1   
+IFS=$IFSOLD  #还原默认分隔符
+
+
+#控制脚本
+
+##信号生成与捕获
+Ctrl + c    #中断进程
+Ctrl + z    #暂停进程;会给暂停的每个进程一个作业号 n
+bg n        #将作业号为 n 的进程转入后台程序
+trap        #脚本中使用trap相关命令可捕获信号并处理
+
+##后台运行
+cmd &            #后台运行命令;终端退出后即停止执行(会创建守护进程的除外)
+./xx.sh &        #后台运行脚本;终端退出后即停止执行(会创建守护进程的除外)
+nohup ./xx.sh &  #后台运行且独立于终端;日志会输出到 nohup.out
+jobs -l          #查看后台运行的作业(命令或脚本),含PID
+kill PID         #停止进程
+kill -9 PID      #强制停止进程
+nice/renice      #调整进程运行优先级 
+
+##执行计划
+at       #用于设置执行计划;会分配作业号
+atq      #查看等待运行的执行计划
+atrm  n  #删除作业号为n的计划
+crontab  #周期执行计划;具体使用参见Linux.txt
+
+
+#函数
+
+##格式
+[ function ] funname [()]
+{
+    cmds
+}
+
+##返回值
+1.默认返回最后一条命令的返回码
+2.使用return n;n取值范围为0-255,超过取余
+3.使用输出语句,例如:echo/print等
 
 
 
@@ -587,14 +640,3 @@ exec 3>&-              #关闭脚本中文件描述符
 Shell引用其他文件
 sourse /path/file    #可引用其他文件中变量及函数
 . /path/file         #同上
-
-
-#函数
-格式:
-[ function ] funname [()]
-{
-    cmds
-}
-说明:
-1.可以带function fun() 定义,也可以直接fun() 定义,不带任何参数
-2.参数返回,可以显示加:return 返回,如果不加,将以最后一条命令运行结果,作为返回值;return返回码范围(0-255),超过取余
