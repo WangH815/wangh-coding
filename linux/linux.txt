@@ -466,11 +466,11 @@ date "+%Y-%m-%d %H:%M:%S"  #格式为YYYY-mm-dd HH:MM:SS
 #基于当前时间的计算并格式化
 date "+%Y-%m-%d %H:%M:%S" -d "-1 month +1 day -1 year"
 date -d "-1 month +1 day -1 year" "+%Y-%m-%d %H:%M:%S"
-cmd1;cmd2    #顺序执行命令;cmd1出错也会执行cmd2
-cmd1 && cmd2 #cmd1执行成功才执行cmd2
-cmd1 || cmd2 #cmd1执行失败则执行cmd2
-
-
+cmd1;cmd2         #顺序执行命令;cmd1出错也会执行cmd2
+cmd1 && cmd2      #cmd1执行成功才执行cmd2
+cmd1 || cmd2      #cmd1执行失败则执行cmd2
+cmd | tee file    #输出内容的同时写入文件 
+cmd | tee -a file #追加模式
 
 
 #问题处理

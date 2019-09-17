@@ -416,6 +416,7 @@ while conditions;do cmds;done      #单行写的形式
 while :;do cmds;done               #无限循环形式
 while [];[];[];do cmds;done        #多测试条件形式;某个测试条件不满足则退出循环
 while [] && [] && [];do cmds;done  #同上
+while [] || [] || [];do cmds;done  #或条件
 while cmds;do sleep 10;done        #可实现是定时间执行cmd;标准为cmd成功执行(返回码为0);cmd成功执行后开始计时
 while sleep 1;do date;sleep 1;done #每2s输出一次时间
 
@@ -535,37 +536,57 @@ esac
 cat test | while read line  #从标准输出中读取;逐行读取
 
 
-#输入输出重定向
-cmd > file      #将输出重定向到 file
-cmd < file      #将输入重定向到 file
-cmd >> file     #将输出以追加的方式重定向到 file
-n> file         #将文件描述符为 n 的文件重定向到 file
-n>> file        #将文件描述符为 n 的文件以追加的方式重定向到 file
-n>&m            #将输出文件 m 和 n 合并
-n<&m            #将输入文件 m 和 n 合并
-<< tag          #将开始标记 tag 和结束标记 tag 之间的内容作为输入
-tag
-注:需要注意的是文件描述符 
-    0 通常是标准输入(STDIN)
-    1 是标准输出(STDOUT)
-    2 是标准错误输出(STDERR)
+#重定向
+##注:需要注意的是文件描述符,以下三个是shell保留的;每个进程最多同时有9个文件描述符 
+ 0  #标准输入(STDIN)
+ 1  #标准输出(STDOUT)
+ 2  #标准错误输出(STDERR)
 
-cmd < infile > outfile  #infile作为命令参数输入,结果输出到outfile
+#命令重定向
+cmd > file              #将输出重定向到 file
+cmd 1> file             #同上
+cmd >> file             #将输出以追加的方式重定向到 file
+cmd 1>> file            #同上
 cmd 2> file             #标准错误输出
 cmd 2>> file            #标准错误追加输出
-cmd > file 2>&1         #标准输出(包括错误)
-cmd > /dev/null         #屏蔽标准输出(不含错误)
-cmd > /dev/null 2>&1    #屏蔽命令输出
-
-Here Document     #特殊重定向方式
-格式:
-cmd << delimiter  #分隔符可以使EOF等任意合法字符;结束分隔符顶格写,后面不能有任何字符(包含空格等)
+cmd < file              #将输入重定向到 file
+cmd 0< file             #同上
+cmd < infile > outfile  #infile作为命令参数输入,结果输出到outfile
+cmd > file 2>&1         #合并标准输出和错误输出到file;一般错误信息先输出
+cmd &> file             #同上
+cmd > /dev/null         #屏蔽标准输出(不含错误);/dev/null
+cmd > /dev/null 2>&1    #屏蔽所有输出
+cmd 1> file1 2> file2   #按文件标识符输出到不同文件      
+n> file                 #将文件描述符为 n 的文件重定向到 file
+n>> file                #将文件描述符为 n 的文件以追加的方式重定向到 file
+n>&m                    #将输出文件 m 和 n 合并
+n<&m                    #将输入文件 m 和 n 合并
+cmd << delimiter        #分隔符可以使EOF/!等任意合法字符;结束分隔符顶格写,后面不能有任何字符(包含空格等)
 context
 delimiter
 
+##脚本中重定向
+echo "error context" >&2  #临时重定向,;./xx.sh运行时按照标准输出;./xx.sh 2>file会按照错误输出到file中(脚本中指定了exec除外)
+exec 1>file               #永久重定向;脚本中使用(一般是开头)会将所有标准输出到file中,而不是控制台
+exec 2>file               #错误输出重定向;与上类似
+exec 0>file               #输入重定向;与上类似
+exec 1>>file              #追加形式
+exec 1>&-                 #关闭脚本中文件描述符
+
+##自定义重定向
+echo "my context" >&3  #自定义重定向,与>&2逻辑类似;自定义文件描述符可使用3-8
+exec 3>file            #文件描述符为3的输出到file中
+exec 3>>file           #文件描述符为3的输出到file中
+exec 3>&-              #关闭脚本中文件描述符
+
+
+
+
+
+
 Shell引用其他文件
-sourse file    #可引用其他文件中变量
-. /path/file
+sourse /path/file    #可引用其他文件中变量及函数
+. /path/file         #同上
 
 
 #函数
