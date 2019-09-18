@@ -710,7 +710,6 @@ sed -n 'l' file                  #列出文本及不可打印ASCII字符(\八进
 sed -n '2,4w newfile' file       #指定范围行写入新文件;只打印匹配到的行;不加-n也只会将匹配行写入新文件,但终端会显示全部行
 sed -n '/str/w newfile' file     #匹配到str的行写入新文件
 
-
 ##gawk
 gawk options program file  #命令格式
 ###options
@@ -722,5 +721,8 @@ gawk options program file  #命令格式
 -W keyword    #指定gawk的兼容模式或警告等级
 
 
+#正则表达式
 
+##作用
+用于过滤数据
 
