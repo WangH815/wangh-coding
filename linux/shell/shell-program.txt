@@ -721,8 +721,23 @@ gawk options program file  #命令格式
 -W keyword    #指定gawk的兼容模式或警告等级
 
 
-#正则表达式
+#正则表达式(Linux)
 
 ##作用
-用于过滤数据
+通过正则表达式匹配过滤数据
+
+##正则表达式类型
+POSIX基础正则表达式（basic regular expression，BRE）引擎
+POSIX扩展正则表达式（extended regular expression，ERE）引擎
+
+###BRE
+1.纯文本     #匹配含有纯文本的内容
+2.特殊字符   #在正则表达式中有特殊含义;如需匹配特殊字符可在之前加上 \
+.*[]^${}\+?|()
+sed -n '/\\/p' file  #打印文件中含有\的行
+sed -n '/\$/p' file  #打印文件中含有$的行;其他类似
+
+
+
+
 
