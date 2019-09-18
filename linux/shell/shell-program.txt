@@ -129,15 +129,15 @@ ${a}"str"${b}
 ${a}'str'${b}
 
 ##数组变量                       #仅支持一维数组,不限定长度
-array_name=(arr1 arr2 arr3 ...)  #赋值,下同
+array_name=(arr1 arr2 arr3 ...)  #赋值,下同;元素间以空格隔开
 array_name=(
 arr1
 arr2
 ...
 )
+array_name=(`cmds`)    #将命令结果赋值给数组;$(cmds)为单个字符串
+array_name=($(cmds))   #同上
 array_name[0]=value0   #单独赋值
-array_name[1]=value1   #单独赋值
-...                    #单独赋值
 array_name[n]=valuen   #单独赋值,数组下标可以不连续
 ${array_name[n]}       #打印输出某个数组元素
 ${#array_name[@]}      #打印输出数组元素长度,未定义的不统计
@@ -641,6 +641,85 @@ funcname () {
 1.脚本中与正常shell使用类似;只需要函数名(有参数的带参数)即可
 2.终端中可使用 source ./xx.sh或 . ./xx.sh 生效函数库,然后终端可以像shell命令一样使用其中的函数及变量  #xx.sh为函数库
 3.脚本中可使用上一条提到的方式引入函数库使用
+
+
+#文本处理
+
+##主要命令
+cut     #逐行按指定分隔符截取数据
+paste   #列模式拼接,默认为Tab链接
+tr      #逐行转换字符
+split   #将大文件分割为小文件
+sort    #文本排序
+uniq    #去重
+sed     #stream editor(流编辑器);逐行对文本处理
+gawk    #数据流处理工具,逐行处理;可实现更复杂的数据处理;多数发行版可以使用awk,实际指向gawk
+
+##sed
+sed options script file   #命令格式;逐行处理
+###options
+-e script   #在处理输入时,将script中指定的命令添加到已有的命令中
+-f file     #在处理输入时,将file中指定的命令添加到已有的命令中
+-n          #不产生命令输出,使用print命令来完成输出
+
+sed 's/pattern/replacement/flags' file  #替换模式
+
+sed 's/old/new/' file                   #替换每行出现的第一个old为new;部分字符需要使用转义
+sed '2s/old/new/' file                  #处理指定第2行
+sed '2,4s/old/new/' file                #指定处理行数范围
+sed '2,$s/old/new/' file                #$表示最后一行
+sed 's!old/old!new/new!' file           #使用 ! 作为字符串替换分隔符
+sed 's/old/new/2' file                  #指定出现的第几次
+sed 's/old/new/g' file                  #全部替换
+sed -n 's/old/new/p' file               #只输出修改的内容;p表示只输出匹配到的行
+sed 's/old/new/w newfile' file          #输出到newfile
+sed '/username/s/bash/csh/' /etc/passwd #文本过滤后替换;搜索/etc/passwd中含有username的行替换bash为csh
+sed '{2,4s/1/0/;4s/4/9/}' file          #多模式替换;指定每个模式处理不同行
+sed '2,4s/1/0/;4s/4/9/' file            #同上
+sed '2,4{s/1/0/;s/4/9/}' file           #多模式替换;每个模式处理行相同
+sed '2,4{
+s/1/0/
+s/4/9/
+}' file                                 #同上;另一种写法
+
+sed 'd' file                #删除所有行
+sed '2d' file               #删除指定行
+sed '2,4d' file             #删除指定范围行
+sed '2,$d' file             #删除指定范围行;第二行到结尾
+sed '/str/d' file           #删除含str的行
+sed '/start/,/end/d' file   #指定删除开始行(含start)直到结束行(含有end);会循环处理;匹配不到结束符则删除开始到尾行
+
+sed 'i/str' file                #在每一行前插入文本
+sed '2i/str' file               #在指定行前插入;指定范围参见sed其他操作
+sed '2a/str' file               #在指定行后插入;指定范围参见sed其他操作
+sed '3r data.txt' file          #读取data.txt内容插入到指定行之后
+sed '/str/r data.txt' file      #读取data.txt内容插入到匹配行之后
+sed '/str/{r data.txt;p}' file  #读取data.txt内容替换匹配行内容
+sed '$r data.txt' file          #读取data.txt内容插入到匹配行之后
+
+sed '2c/str' file           #修改指定行内容为str
+sed '/str/c' file           #同上;另一种写法
+
+sed 'y/abc/123/' file       #将每一行的1/2/3分别替换为a/b/c
+sed '2,$y/abc/123/' file    #指定范围
+
+sed -n '/str/{p;s/a/b/p}' file   #打印匹配行修改前后内容
+sed -n '/str/=}' file            #输出匹配行行号
+sed -n 'l' file                  #列出文本及不可打印ASCII字符(\八进制表示);制表符和结尾都会被转义
+
+sed -n '2,4w newfile' file       #指定范围行写入新文件;只打印匹配到的行;不加-n也只会将匹配行写入新文件,但终端会显示全部行
+sed -n '/str/w newfile' file     #匹配到str的行写入新文件
+
+
+##gawk
+gawk options program file  #命令格式
+###options
+-F fs         #指定行中划分数据字段的字段分隔符
+-f file       #从指定的文件中读取程序
+-v var=value  #定义gawk程序中的一个变量及其默认值
+-mf N         #指定要处理的数据文件中的最大字段数
+-mr N         #指定数据文件中的最大数据行数
+-W keyword    #指定gawk的兼容模式或警告等级
 
 
 
