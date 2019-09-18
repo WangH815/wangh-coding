@@ -621,22 +621,27 @@ atrm  n  #删除作业号为n的计划
 crontab  #周期执行计划;具体使用参见Linux.txt
 
 
-#函数
+#函数    #可认为是子脚本,在脚本中跟正常shell一样使用
 
 ##格式
-[ function ] funname [()]
-{
+function funcname {
+    cmds
+}
+or
+funcname () {
     cmds
 }
 
 ##返回值
 1.默认返回最后一条命令的返回码
 2.使用return n;n取值范围为0-255,超过取余
-3.使用输出语句,例如:echo/print等
+3.使用输出语句,例如:echo/print等带有输出性质的语句
+
+##函数使用
+1.脚本中与正常shell使用类似;只需要函数名(有参数的带参数)即可
+2.终端中可使用 source ./xx.sh或 . ./xx.sh 生效函数库,然后终端可以像shell命令一样使用其中的函数及变量  #xx.sh为函数库
+3.脚本中可使用上一条提到的方式引入函数库使用
 
 
 
 
-Shell引用其他文件
-sourse /path/file    #可引用其他文件中变量及函数
-. /path/file         #同上

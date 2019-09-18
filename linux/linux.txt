@@ -199,16 +199,16 @@ sed 's/ //g' file                    #替换所有空格
 ###常见用法参见 https://www.runoob.com/linux/linux-comm-awk.html
 awk '[BEGIN{statements}] {statements2} [END{statements}]'  #statements2是处理语句核心,BEGIN和END可不出现
     #特殊变量
-	NR  #数据流行号
-    NF  #数据流字段数
-    $0  #数据流本身
-    $n  #处理后第n个字段,n > 0
+	NR     #数据流行号
+    NF     #数据流字段数
+    $0     #数据流本身
+    $n     #处理后第n个字段,n > 0
 awk '{print $1,$4}' log.txt   #输出文本中第1,4列,默认以空格或Tab作为分隔符
 awk -F, '{print $4}' log.txt  #输出文本以逗号为分隔符的第4列; -F, <=> -F , <=> -F ',' <=> -F ","
 awk 'BEGIN{FS=","} ...'       #同上
 awk -F '[ ,.;]'               #指定多个分隔符
 awk -f cal.awk log.txt        #使用指定awk脚本处理文本
-awk '$1>2 && $2=="Are" {print $1}' log.txt  #指定过滤条件
+awk '$1>2 && $2=="Are" {print $1}' log.txt   #指定过滤条件
 
 #文件查找
 which cmd               #查找命令位置;返回用户PATH变量中第一个匹配位置
