@@ -727,16 +727,45 @@ gawk options program file  #命令格式
 通过正则表达式匹配过滤数据
 
 ##正则表达式类型
-POSIX基础正则表达式（basic regular expression，BRE）引擎
-POSIX扩展正则表达式（extended regular expression，ERE）引擎
+POSIX基础正则表达式（basic regular expression，BRE）引擎      #sed使用BRE处理
+POSIX扩展正则表达式（extended regular expression，ERE）引擎   #gawk使用ERE处理
 
 ###BRE
 1.纯文本     #匹配含有纯文本的内容
+sed -n '/str/p' file  #打印文件中含有str的行
+sed -n '/  /p' file   #打印文件中含有两个空格的行
+
 2.特殊字符   #在正则表达式中有特殊含义;如需匹配特殊字符可在之前加上 \
 .*[]^${}\+?|()
-sed -n '/\\/p' file  #打印文件中含有\的行
-sed -n '/\$/p' file  #打印文件中含有$的行;其他类似
+sed -n '/\\/p' file    #打印文件中含有\的行
+sed -n '/\$/p' file    #含有$的行;其他类似
+sed -n '/^str/p' file  #str开头;^和$称为锚字符,用于指定字符位置
+sed -n '/str$/p' file  #str结尾
+sed -n '/str^/p' file  #匹配"str^";^被认为是字符
+sed -n '/$str/p' file  #类似上一条
+sed -n '/^$/p' file    #匹配无内容空行(不计\n)
+sed -n '/^/p' file     #匹配任意行
+sed -n '/$/p' file     #同上
 
+3.其他模式
+sed -n '/.str/p' file      # . 表示至少匹配一个字符
+sed -n '/[ab]str/p' file   #[]为字符组,表示匹配字符组中任意一个字符
+sed -n '/[^ab]str/p' file  #str前至少有一个字符,但不是a或b
+sed -n '/[a-z]str/p' file  #[]连续数字或字母可首尾加短杠表示;[a-zA-Z0-9]表示任意字母数字,等价于[[:alnum:]]
+
+sed -n '/a*b/p' file       #a出现任意次(包括不出现)
+sed -n '/a[bc]*d/p' file   #ad之间出现任意个b或c或bc的任意组合;如: ad/abd/acd/abbd/accd/abcd/acbd/abbcd等
+
+###ERE
+gawk '/ab?c/{print $0}' file      #?表示前面字符出现或不出现;本例可匹配ac和abc
+gawk '/a[bc]?d/{print $0}' file   #b或c出现或不出现;本例匹配ad/abd/acd
+
+gawk '/ab+c/{print $0}' file      #b至少出现一次
+gawk '/a[bc]+d/{print $0}' file   #b或c至少出现一次
+
+gawk -r '/ab{2,4}c/{print $0}' file   #b出现2-4次;-r开启区间表达式,{}表示出现次数区间
+
+gawk '/a(bc)?d/{print $0}' file       #()中字符串当做一个字符处理,其他模式同理;本例可匹配ad和abcd
 
 
 
