@@ -736,7 +736,18 @@ sed -n '/str/p' file  #打印文件中含有str的行
 sed -n '/  /p' file   #打印文件中含有两个空格的行
 
 2.特殊字符   #在正则表达式中有特殊含义;如需匹配特殊字符可在之前加上 \
-.*[]^${}\+?|()
+.    #表示任意一个字符
+*    #表示匹配任意次
+[]   #表示匹配[]中任意一个字符
+^    #表示匹配行首
+$    #表示匹配行尾
+{}   #表示区间表达式
+\    #表示转义
++    #表示至少匹配一次
+?    #表示匹配或者不匹配
+|    #表示匹配模式连接符
+()   #表示字符串当做一个字符处理
+
 sed -n '/\\/p' file    #打印文件中含有\的行
 sed -n '/\$/p' file    #含有$的行;其他类似
 sed -n '/^str/p' file  #str开头;^和$称为锚字符,用于指定字符位置
@@ -763,10 +774,17 @@ gawk '/a[bc]?d/{print $0}' file   #b或c出现或不出现;本例匹配ad/abd/ac
 gawk '/ab+c/{print $0}' file      #b至少出现一次
 gawk '/a[bc]+d/{print $0}' file   #b或c至少出现一次
 
+gawk -r '/ab{2}c/{print $0}' file     #b出现2
 gawk -r '/ab{2,4}c/{print $0}' file   #b出现2-4次;-r开启区间表达式,{}表示出现次数区间
 
-gawk '/a(bc)?d/{print $0}' file       #()中字符串当做一个字符处理,其他模式同理;本例可匹配ad和abcd
+gawk '/a(bc)?d/{print $0}' file       #()中字符串当做一个标准字符处理,其他模式同理;本例可匹配ad和abcd
+gawk '/(a|b)c(d|e)/{print $0}'        #|表示或;匹配含有 acd/ace/bcd/bce
+gawk '/ab|cd/{print $0}'              #匹配含有ab或cd
 
-
+##正则匹配示例
+for var in $(echo $PATH|sed 's/:/ /g');do echo $var;done  #打印所有$PATH路径
+for var in `echo $PATH|sed 's/:/ /g'`;do echo $var;done   #同上
+count=$(ls /usr/bin | wc -l)    #统计$PATH中/usr/bin目录下文件(命令)数量
+count=`ls /usr/bin | wc -l`     #同上
 
 
