@@ -127,8 +127,8 @@ ${!varpre@}                  #同上;单字符串
 
 ###示例
 var=/dir1/dir2/dir3/my.file.txt
-${var#*/}    #截取第一个/之后内容;返回dir1/dir2/dir3/my.file.txt
-${var##*/}   #拿掉最后一条 / 及其左边的字符串：my.file.txt
+${var#*/}    #截取第一个/后的字符串;返回dir1/dir2/dir3/my.file.txt
+${var##*/}   #截取最后一个/后的字符串;返回my.file.txt
 ${var#*.}    #拿掉第一个 . 及其左边的字符串  ：file.txt
 ${var##*.}   #拿掉最后一个 . 及其左边的字符串：txt
 ${var%/*}    #拿掉最后条 / 及其右边的字符串  ：/dir1/dir2/dir3
