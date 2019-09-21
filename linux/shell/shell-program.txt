@@ -3,7 +3,7 @@ Shell编程
 
 #参考文档
 https://www.runoob.com/linux/linux-shell.html
-Linux命令行与shell脚本编程大全.第3版
+Linux命令行与shell脚本编程大全 第3版
 
 
 #简介
@@ -95,7 +95,7 @@ var='ad'              #双引号可防止通配符扩展但允许变量扩展
 var1=1;var2=2;var3=3  #同时赋值,分号隔开就可以
 var=`cmd`             #命令执行结果赋值给变量;所有Shell都支持
 var=$(cmd)            #同上;少部分Shell不支持
-unset var             #同上
+unset var             #设置变量为未定义
 
 ##变量使用
 env                          #查看所有环境变量
@@ -105,37 +105,47 @@ echo ${var}                  #同上,另一种方式。能识别变量边界,例
 readonly var                 #设置变量只读
 echo ${#var}                 #输出字符串字符数
 echo `expr index "$var" io`  #查找i或o第一次出现的位置(非数组下标)
-echo ${var-default}          #var未声明时输出default(可为其他字符串),否则输出var的值。
-echo ${var=default}          #同上并赋值
-echo ${var:-default}         #var为空或未声明时输出default,否则输出var的值。
+
+echo ${var-default}          #var未声明时输出default(可为其他字符串),否则输出var的值
+echo ${var=default}          #同上并赋值;推荐使用
+echo ${var:-default}         #var为空或未声明时输出default,否则输出var的值;var=/var=""/var=''被认为是空,var=" "不是
 echo ${var:=default}         #同上并赋值
 echo ${var+default}          #var没有声明则为空,否则为default
 echo ${var:+default}         #var的值为非空则为default,否则为空
 echo ${var?default}          #var已声明则输出var的值,否则输出default
 echo ${var:?default}         #var的值为非空则输出var的值,否则输出default
 
-##变量截取替换(位置从0开始)
+##变量截取替换
 var="abcdef"
 ${var:pos}                   #截取从数组下标为pos(不含pos,下同)之后的子串
 ${var:pos:len}               #截取pos之后长度为len的子串
+
 ${var/Pattern/Replacement}   #使用Replacement来替换var中第一次匹配Pattern的字符串
 ${var//Pattern/Replacement}  #全部替换
+
 ${var/#Pattern/Replacement}  #从var开头匹配,匹配到则替换
 ${var/%Pattern/Replacement}  #从var结尾匹配,匹配到则替换
-${!varpre*}                  #匹配所有已声明变量名以varpre开头的所有变量名,以空格隔开
-${!varpre@}                  #同上;单字符串
 
-###示例
+${!str*}                     #匹配所有已声明变量名以varpre开头的所有变量名数组,以空格隔开
+${!str@}                     #同上;单字符串
+
 var=/dir1/dir2/dir3/my.file.txt
-${var#*/}    #截取第一个/后的字符串;返回dir1/dir2/dir3/my.file.txt
-${var##*/}   #截取最后一个/后的字符串;返回my.file.txt
-${var#*.}    #拿掉第一个 . 及其左边的字符串  ：file.txt
-${var##*.}   #拿掉最后一个 . 及其左边的字符串：txt
-${var%/*}    #拿掉最后条 / 及其右边的字符串  ：/dir1/dir2/dir3
-${var%%/*}   #拿掉第一条 / 及其右边的字符串  ：(空值)
-${var%.*}    #拿掉最后一个 . 及其右边的字符串：/dir1/dir2/dir3/my.file
-${var%%.*}   #拿掉第一个 . 及其右边的字符串  ：/dir1/dir2/dir3/my
+${var#*str}    #截取第一个str后的字符串;#表示之前($的ASCII码),取str # *中的*
+${var#*/}      #返回dir1/dir2/dir3/my.file.txt
+${var#*.}      #返回file.txt
 
+${var##*str}   #截取最后一个str后的字符串
+${var##*/}     #返回my.file.txt;截取完整路径中的文件名比较方便
+${var##*.}     #返回txt;截取文件后缀比较方便
+ 
+${var%str*}    #截取最后一个str前的字符串;%表示之后($的ASCII码),取* % str中的*
+${var%/*}      #返回/dir1/dir2/dir3;截取完整路径中文件所在目录
+${var%.*}      #返回/dir1/dir2/dir3/my.file;去除文件后缀比较方便
+
+${var%%str*}   #截取第一个str前的字符串
+${var%%/*}     #返回""(空值)
+${var%%.*}     #返回/dir1/dir2/dir3/my
+  
 ##变量拼接
 ${a}${b}
 ${a}"str"${b}
@@ -167,15 +177,15 @@ ${array_name[*]}       #以一个字符串的形式,其余同上
 3)布尔运算符     #连接表达式
 4)字符串运算符
 5)文件测试运算符
-注:整数运算主要通过[]、awk(编程语言)、expr和(())实现,[]和expr(也可用于字符串处理)最常用;浮点运算使用bc
+注:整数运算主要通过[]、awk(编程语言)、expr和(())实现;[]和expr(也可用于字符串处理)最常用;浮点运算使用bc
 
 #算数运算               #只能用于整数运算
 expr                    #evaluate expressions(表达式计算)
 a=10,b=20
 加法  expr $a + $b      #+左右无空格的会解析为"10+20",其余同理;a,b为数字型字符串也可以;var=$(expr $a + $b)/`expr $a + $b`
-      [$a + $b]         #同上;乘法不需要加转义;$[$a+$b]也可以;a,b为数字型字符串部分bash版本支持;var=$[$a+$b]
+      [$a + $b]         #同上;乘法不需要加转义;$[$a+$b]/$[a+b]也可以;a,b为数字型字符串部分bash版本支持;var=$[$a+$b]
       [2*(100-3)]       #可使用括号;*等特殊字符无需转义
-      ((a+b))/(($a+$b)) #C语言风格计算;推荐使用前者,*等特殊字符无需转义;var=$((a+b))
+      ((a+b))/(($a+$b)) #C语言风格计算,包括位运算及数值比较等。支持+-*/%&|^!;推荐使用前者,*等特殊字符无需转义;var=$((a+b))
 减法  expr $a - $b
 乘法  expr $a \* $b     #*需要转义
 除法  expr $b / $a
@@ -212,6 +222,7 @@ EOF
 小于     [ $a -lt $b ]    #less than
 大于等于 [ $a -ge $b ]    #greater than or equal
 小于等于 [ $a -le $b ]    #less than or equal
+(($a==$b))/((a==b))       #也可用数字条件判断,类似的还有 > < >= <= !=
 
 布尔运算
 [ ! expression ]                #非
