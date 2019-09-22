@@ -669,6 +669,9 @@ funcname () {
 
 #文本处理
 
+##说明
+RE   #表示正则表达式;多个使用RE1/RE2/...表示
+
 ##主要命令
 cut     #逐行按指定分隔符截取数据
 paste   #列模式拼接,默认为Tab链接
@@ -686,56 +689,66 @@ sed options script file   #命令格式;逐行处理
 -f file     #在处理输入时,将file中指定的命令添加到已有的命令中
 -n          #不产生命令输出,使用print命令来完成输出
 
+##处理空间
+1.模式空间(pattern space)    #活跃缓冲区,sed命令处理区域
+2.保持空间(hold space)       #用于临时存储一些行
+###保持空间命令
+  h   #将模式空间复制到保持空间
+  H   #将模式空间附加到保持空间
+  g   #将保持空间复制到模式空间
+  G   #将保持空间附加到模式空间
+  x   #交换模式空间和保持空间的内容
+
+
 ###替换
-sed 's/pattern/replacement/flags' file  #替换模式
+sed 's/old/new/' file             #将每行第一个old替换为new,匹配不到old则不处理;falgs可选;未被处理的行也会被输出
+sed 's/old/new/g' file            #替换每行出现的所有old
+sed 'ns/old/new/' file            #指定处理文本的第n行;其他同上
+sed 'm,ns/old/new/' file          #指定处理文本的第m到n行;其他同上
+sed '/RE/s/old/new/' file         #使用正则表达式RE匹配处理哪些行
+sed '/RE1/,/RE2/s/old/new/' file  #RE1匹配开始处理行,RE2匹配结束行;每一个RE1/RE2构成一个处理单元;若只匹配到RE1则会处理到尾行
+sed '/RE/,ns/old/new/' file       #处理方式与上一条类似;结束行已指定
+sed '/RE/,$s/old/new/' file       #同上;$表示最后一行
+sed 'n,/RE/s/old/new/' file       #处理方式与上一条类似;开始行已指定
 
-sed 's/old/new/' file                   #替换每行出现的第一个old为new;部分字符需要使用转义
-sed '2s/old/new/' file                  #处理指定第2行
-sed '2,4s/old/new/' file                #指定处理行数范围
-sed '2,$s/old/new/' file                #$表示最后一行
-sed 's!old/old!new/new!' file           #使用 ! 作为字符串替换分隔符
-sed 's/old/new/2' file                  #指定出现的第几次
-sed 's/old/new/g' file                  #全部替换
-sed -n 's/old/new/p' file               #只输出修改的内容;p表示只输出匹配到的行
-sed 's/old/new/w newfile' file          #输出到newfile
-sed '/username/s/bash/csh/' /etc/passwd #文本过滤后替换;搜索/etc/passwd中含有username的行替换bash为csh
-sed '{2,4s/1/0/;4s/4/9/}' file          #多模式替换;指定每个模式处理不同行
-sed '2,4s/1/0/;4s/4/9/' file            #同上
-sed '2,4{s/1/0/;s/4/9/}' file           #多模式替换;每个模式处理行相同
-sed '2,4{
-s/1/0/
-s/4/9/
-}' file                                 #同上;另一种写法
+sed 's/old/new/n' file            #替换每行出现的第n个old
 
-###删除行
-sed 'd' file                #删除所有行
-sed '2d' file               #删除指定行
-sed '2,4d' file             #删除指定范围行
-sed '2,$d' file             #删除指定范围行;第二行到结尾
-sed '/str/d' file           #删除含str的行
-sed '/start/,/end/d' file   #指定删除开始行(含start)直到结束行(含有end);会循环处理;匹配不到结束符则删除开始到尾行
+sed 's/old/new/w newfile' file    #输出处理后内容到newfile文件(不存在则创建,存在则覆盖)
 
-###插入行
-sed 'i str' file                #在每一行前插入文本
-sed '2i str' file               #在指定行前插入;指定范围参见sed其他操作
-sed '2a str' file               #在指定行后插入;指定范围参见sed其他操作
-sed '3r data.txt' file          #读取data.txt内容插入到指定行之后
-sed '/str/r data.txt' file      #读取data.txt内容插入到匹配行之后
-sed '/str/{r data.txt;p}' file  #读取data.txt内容替换匹配行内容
-sed '$r data.txt' file          #读取data.txt内容插入到匹配行之后
+sed 's!old!new!' file             #使用 ! 替换 / ;在old和new中可使用含 / 的字符串
 
-sed '2c/str' file               #修改指定行内容为str
-sed '/str/c' file               #同上;另一种写法
-							    
-sed 'y/abc/123/' file           #将每一行的1/2/3分别替换为a/b/c
-sed '2,$y/abc/123/' file        #指定范围
+sed 's/old/new/;m,n/old/new/' file        #多模式替换;每行依次处理每一个模式
+sed '{s/old/new/;m,n/old/new/}' file      #同上
+sed 'm,n{s/old1/new1/;s/old1/new1/}' file #处理行相同可以放到{}前
+sed 'm,n{
+s/old1/new1/
+s/old1/new1/
+}' file                                   #同上,另一种写法
 
-sed -n '/str/{p;s/a/b/p}' file  #打印匹配行修改前后内容
-sed -n '/str/=}' file           #输出匹配行行号
-sed -n 'l' file                 #列出文本及不可打印ASCII字符(\八进制表示);制表符和结尾都会被转义
+sed 'd' file             #删除所有行;带有正则的行选择的操作参考替换模式,下同
+sed 'c str' file         #修改每行内容为str
+sed 'i str' file         #在每行前插入内容为str的新行
+sed 'a str' file         #在每行后插入内容为str的新行
+sed 'r data.txt' file    #读取data.txt内容插入到每行之后(另起一行)
+sed 'y/abc/123/' file    #将每一行的1/2/3分别替换为a/b/c;每行所有内容都会被替换              
+sed -n 'l' file          #输出输入流转义内容,使用ASCII码表示(非ASCII码字八进制表示);控制字符也会显示
+sed -n 'p' file          #输出匹配文本;可结合其他命令输出修改内容
+sed -n '=' file          #输出匹配行行号;可结合其他命令输出处理行号
+sed -n 'w newfile' file  #将匹配文本写入新文件或覆盖文件;
 
-sed -n '2,4w newfile' file      #指定范围行写入新文件;只打印匹配到的行;不加-n也只会将匹配行写入新文件,但终端会显示全部行
-sed -n '/str/w newfile' file    #匹配到str的行写入新文件
+sed -n 's/old/new/p' file       #只输出修改的内容;-n和p配合使用
+sed -n 'p;s/old/new/p}' file    #打印匹配行修改前后内容
+
+sed 'n;d' file                  #删除偶数行;n表示移动到下一行处理
+sed '/RE/{n;d}' file            #删除每个RE匹配行的下一行
+sed '/RE/n;d' file              #保留RE匹配行;命令结果与 grep 'RE' file 相同
+
+sed '/RE/{N;s/\n/str/}' file    #合并每个匹配行及下一行,使用str连接;实际打印还是两行,主要用于后续命令处理这两行
+sed '/RE/{N;d}' file            #删除每个匹配行及下一行;N表示将数据流与下一行合并处理,使用换行符连接;匹配行是最后一行不处理
+sed 'N;/RE/d' file              #每两行为一组,删除RE匹配的组;若总行数为奇数则无法处理最后一行
+sed 'N;/RE/D' file              #每两行为一组,删除RE匹配组的第一行
+sed '/RE1/{N;/RE2/D}' file      #通过RE1设定处理行
+
 
 ##gawk
 gawk options program file  #命令格式
@@ -813,5 +826,10 @@ for var in $(echo $PATH|sed 's/:/ /g');do echo $var;done  #打印所有$PATH路�
 for var in `echo $PATH|sed 's/:/ /g'`;do echo $var;done   #同上
 count=$(ls /usr/bin | wc -l)    #统计$PATH中/usr/bin目录下文件(命令)数量
 count=`ls /usr/bin | wc -l`     #同上
+
+
+
+
+
 
 
