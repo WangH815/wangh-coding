@@ -32,6 +32,12 @@ chsh -s /bin/zsh  #设置用户默认Shell或者修改 /etc/passwd 文件中对�
 3 sh ./xx.sh      #读权限即可,脚本本身会在子进程中执行
 4 ./xx.sh         #需要执行权限,脚本本身会在子进程中执行
 
+##调试(待补充)
+bash -n xx.sh   #检查脚本是否有语法错误;以bash为例
+bash -x xx.sh   #调试脚本,会输出程序的每一步;带+表示调试器输出,不带则为脚本输出
+set -e          #在脚本中添加时表示从当前位置开始任何错误都将触发exit
+set +e          #与上相反,出现任何错误都不触发exit
+
 ##脚本退出状态
 #一般使用 exit n 指定
 echo $?   #打印上一个命令或脚本的退出状态码
@@ -90,20 +96,21 @@ var=""                #变量置空;变量还存在
 var=''                #同上
 var=                  #=后不跟任何字符;同上
 var=123               #等号两边不能有空格,默认var[0]=123 (数组)
-var="ad"              #字符串赋值,也可用单引号(更严格),它可以防止任何变量扩展。
-var='ad'              #双引号可防止通配符扩展但允许变量扩展
+var="str"             #双引号可防止通配符扩展但允许变量扩展
+var='str'             #单引号(更严格),可以防止任何变量扩展
 var1=1;var2=2;var3=3  #同时赋值,分号隔开就可以
 var=`cmd`             #命令执行结果赋值给变量;所有Shell都支持
 var=$(cmd)            #同上;少部分Shell不支持
-unset var             #设置变量为未定义
+
 
 ##变量使用
 env                          #查看所有环境变量
 set                          #查看所有变量
 echo $var                    #打印输出变量值
 echo ${var}                  #同上,另一种方式。能识别变量边界,例如$a/$ab/${a}b
-readonly var                 #设置变量只读
-echo ${#var}                 #输出字符串字符数
+readonly var                 #设置变量只读;不可被删除
+unset var                    #设置变量为未定义
+echo ${#var}                 #输出字符串长度(字符数)
 echo `expr index "$var" io`  #查找i或o第一次出现的位置(非数组下标)
 
 echo ${var-default}          #var未声明时输出default(可为其他字符串),否则输出var的值
@@ -195,7 +202,7 @@ exp="$var1 + $var2 \* $var3"
 expr $exp
 
 #浮点运算可使用 bc 命令
-var=`echo "scale=4; 3.44 / 5" | bc`   #scala变量指定小数位数
+var=`echo "scale=4; 3.44 / 5" | bc`   #scala变量指定小数位数(待补充);0.68会显示.68(原因待查)
 var=$(echo "scale=4; 3.44 / 5" | bc)  #同上;形式:echo "options; expression" | bc
 ##复杂运算
 var=$(bc << EOF
@@ -262,6 +269,8 @@ echo -e             #开启转义
 echo `cmd`          #输出命令结果
 printf  format-string  [arguments...]  #格式化输出,不自动换行
 printf "%-10s %-8s\n" 姓名 性别        #格式化字符串与C语言相同,移植性比echo好
+printf '%-10s %-8s\n' 姓名 性别        #同上
+printf '%-10s %-8s\n' $var1 $var2      #与上类似
 
 printf转义序列
 \a       #警告字符,通常为ASCII的BEL字符
@@ -417,7 +426,6 @@ for var in /home/*       #*匹配/home目录下文件(非隐藏);不会递归匹
 for var in /home/[0-9]*  #带有通配形式的匹配
 
 ##分隔符注释,bash shell默认使用IFS(环境变量)表示分隔符(空格/制表符/换行符)
-需要修改
 IFS_OLD=$IFS
 IFS=$'\n'  #修改为换行符;IFS=:表示修改为冒号;多分隔符可使用 IFS=$'\n':;"
 <在代码中使用新的IFS值>
