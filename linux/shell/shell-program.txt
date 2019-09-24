@@ -267,10 +267,22 @@ read var            #输入
 echo $var/${var}    #输出,输出后自动换行
 echo -e             #开启转义
 echo `cmd`          #输出命令结果
-printf  format-string  [arguments...]  #格式化输出,不自动换行
-printf "%-10s %-8s\n" 姓名 性别        #格式化字符串与C语言相同,移植性比echo好
+printf  format-string  [arguments...]  #格式化输出,不自动换行;print支持换行
+printf "%-10s %-8s\n" 姓名 性别        #格式化字符串与C语言相同,移植性比echo好;-表示左对齐
 printf '%-10s %-8s\n' 姓名 性别        #同上
 printf '%-10s %-8s\n' $var1 $var2      #与上类似
+
+格式化字符
+字符  格式化内容
+c     #ASCII字符
+d/i   #十进制整数;d常用
+e     #科学计数法显示
+f     #浮点数
+g     #较短格式科学计数法或浮点数
+o     #八进制
+s     #文本字符串;最常用
+x     #十六进制(字母小写)
+X     #同上(字母大写)
 
 printf转义序列
 \a       #警告字符,通常为ASCII的BEL字符
@@ -287,6 +299,9 @@ printf转义序列
 \\       #一个字面上的反斜杠字符
 \ddd     #表示1到3位数八进制值的字符。仅在格式字符串中有效
 \0ddd    #表示1到3位的八进制值字符
+
+
+
 
 test命令    #等价于 []
 用于检查某个条件是否成立,它可以进行数值、字符串和文件三个方面的测试。
@@ -425,7 +440,7 @@ for var in `ls`          #匹配当前文件夹文件(非隐藏)
 for var in /home/*       #*匹配/home目录下文件(非隐藏);不会递归匹配
 for var in /home/[0-9]*  #带有通配形式的匹配
 
-##分隔符注释,bash shell默认使用IFS(环境变量)表示分隔符(空格/制表符/换行符)
+##分隔符注释,bash shell中$IFS(Internal Field Separator,内部域分隔符)为空格/制表符/换行符
 IFS_OLD=$IFS
 IFS=$'\n'  #修改为换行符;IFS=:表示修改为冒号;多分隔符可使用 IFS=$'\n':;"
 <在代码中使用新的IFS值>
@@ -688,7 +703,7 @@ split   #将大文件分割为小文件
 sort    #文本排序
 uniq    #去重
 sed     #stream editor(流编辑器);逐行对文本处理
-gawk    #数据流处理工具,逐行处理;可实现更复杂的数据处理;多数发行版可以使用awk,实际指向gawk
+awk     #数据流处理工具,逐行处理;可实现更复杂的数据处理;多数发行版可以使用awk,实际指向gawk
 
 ##sed
 sed options script file   #命令格式;逐行处理
@@ -776,15 +791,108 @@ sed 'N;/RE/D' file              #每两行为一组,删除RE匹配组的第一�
 sed '/RE1/{N;/RE2/D}' file      #通过RE1设定处理行
 
 
-##gawk
-gawk options program file  #命令格式
+##awk
+1.一种编程语言,主要用于Linux/Unix环境处理文本、生成报表等
+2.一般处理方式也是逐行处理
+
 ###options
 -F fs         #指定行中划分数据字段的字段分隔符
--f file       #从指定的文件中读取程序
+-f xx.awk     #从指定的文件中读取程序
 -v var=value  #定义gawk程序中的一个变量及其默认值
 -mf N         #指定要处理的数据文件中的最大字段数
 -mr N         #指定数据文件中的最大数据行数
 -W keyword    #指定gawk的兼容模式或警告等级
+
+###命令格式
+awk -f xx.awk file    #xx.awk文件表示awk程序
+awk options '[BEGIN{statements}]
+[/RE/]{statements2}
+[END{statements}]' file1 file2            #BEGIN和END语句可不加,中间语句为文本处理核心
+
+###常用内建变量                  #更多内建变量可查找相关文档
+变 量        描 述
+FIELDWIDTHS  #域宽;由空格分隔的一列数字,定义了每个数据字段确切宽度;指定后FS会被忽略
+FS           #Field Separator;输入流域分隔符,默认为空格或制表符;多连续分隔符会被认定为一个,下同
+RS           #Records Separator;输入流记录分隔符,默认为换行符\n
+OFS          #Output Field Separator;输出流域分隔符,默认为空格
+ORS          #Output Records Separator;输出流行分隔符,默认为换行符\n
+NR           #Number of Records;已处理数据流记录数
+NF           #Number of Fields;输入流字段数;默认以FS指定
+FNR          #Field Number of Records;域数据流记录数;处理第二个文件后会被重置
+FILENAME     #处理的文件名
+$0           #输入流本身
+$n           #按FS分割后的第几个元素;n为正整数
+
+###示例
+awk '{print $1,$2,$NF,$(NF-1)}' file               #打印开始两个元素和最后两个元素;输出流以空格(OFS)隔开
+awk '/RE/{print $1,$2,$NF,$(NF-1)}' file           #使用正则表达式筛选需要处理的行
+awk '$1 ~ /RE/{print $1,$2,$NF,$(NF-1)}' file      #RE表达式匹配指定的元素,这里是$1
+awk '$1 !~ /RE/{print $1,$2,$NF,$(NF-1)}' file     #上一条取反
+awk '$1 == 0{print $1,$2,$NF,$(NF-1)}' file        #指定元素判断;>/</>=/<=也支持;字符串可使用 $1 == "str"
+awk '$1 == 0{if ($2 < 1) print $NF}' file          #带有条件判断;还支持循环等,语法风格与C语言类似
+awk '{print $1 $2 $NF $(NF-1)}' file               #输出流元素间无分隔符
+awk 'BEGIN{FS=":";OFS=";"} {print $1,$2}' file     #指定FS和OFS
+awk -F: '{print $1,$2}' file                       #以option方式指定FS; -F :/-F ":"都可以
+awk -F"[:;]" '{print $1,$2}' file                  #指定多个分隔符;连续相同分隔符算一个
+awk 'BEGIN{FIELDWIDTHS="1 2"} {print $1,$2}' file  #按照字符数分割而不是FS;输出由OFS确定
+awk '{print ENVIRON["HOME"],$1}' file              #ENVIRON[]使用Shell环境变量;变量名前无需$
+
+###awk数据格式化
+参考 标准输入输出
+
+###awk自定义变量
+var = 123          #一般在BENGIN{}中或-v var="str"定义,=前后空格可忽略;awk中使用无需$前缀
+var = 1 2 3        #同上;不在""内的空格会被忽略,解析为123
+var = "1 2 3"      #使用双引号保留空格,不支持单引号;推荐定义方式
+
+###awk数组
+var[index]         #数组定义方式;index一般是双引号的字符串;类似于map
+var[1]             #索引为数字
+delete var[index]  #删除数组元素
+for (test in var)  #数组遍历
+{
+    print test
+}
+
+###awk内置函数
+####数学函数
+atan2(x, y)   #x/y的反正切，x和y以弧度为单位
+cos(x)        #x的余弦，x以弧度为单位
+exp(x)        #x的指数函数
+int(x)        #x的整数部分，取靠近零一侧的值
+log(x)        #x的自然对数
+rand( )       #比0大比1小的随机浮点值
+sin(x)        #x的正弦，x以弧度为单位
+sqrt(x)       #x的平方根
+srand(x)      #为计算随机数指定一个种子值
+
+####位运算函数
+and(v1, v2)         #执行值v1和v2的按位与运算
+compl(val)          #执行val的补运算
+lshift(val, count)  #将值val左移count位
+or(v1, v2)          #执行值v1和v2的按位或运算
+rshift(val, count)  #将值val右移count位
+xor(v1, v2)         #执行值v1和v2的按位异或运算
+
+####字符串函数
+asort(s [,d])              #按数组元素值排序;索引值会被替换为连续数字;可指定新数组存储到数组d中
+asorti(s [,d])             #按数组索引值作为元素值排序;其他同上
+gensub(r, s, h [, t])      #查找$0或字符串t来匹配正则表达式r;如果h是一个以g或G开头的字符串,就用s替换掉匹配的文本;如果h是一个数字,它表示要替换掉第h处r匹配的地方
+gsub(r, s [,t])            #查找$0或字符串t来匹配正则表达式r;如果找到了，就全部替换成字符串s
+index(s, t)                #返回字符串t在字符串s中的索引值;未找到返回0
+length([s])                #返回字符串s的长度;未指定返回$0的长度
+match(s, r [,a])           #返回字符串s中正则表达式r出现位置的索引;如果指定了数组a,它会存储s中匹配正则表达式的那部分
+split(s, a [,r])           #将s用FS字符或正则表达式r(如果指定了的话)分开放到数组a中;返回字段的总数
+sprintf(format, variables) #用提供的format和variables返回一个类似于printf输出的字符串
+sub(r, s [,t])             #在变量$0或目标字符串t中查找正则表达式r的匹配;如果找到了，就用字符串s替换掉第一处匹配
+substr(s, i [,n])          #返回s中从索引值i开始的n个字符组成的子字符串;未提供n返回s剩下的部分
+tolower(s)                 #转小写
+toupper(s)                 #转大写
+
+####时间函数
+mktime(datespec) 将一个按YYYY MM DD HH MM SS [DST]格式指定的日期转换成时间戳值①
+strftime(format [,timestamp]) 将当前时间的时间戳或timestamp（如果提供了的话）转化格式化日期（采用shell函数date()的格式）
+systime( ) 返回当前时间的时间戳
 
 
 #正则表达式(Linux)
