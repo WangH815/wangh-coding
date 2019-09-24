@@ -267,10 +267,11 @@ read var            #输入
 echo $var/${var}    #输出,输出后自动换行
 echo -e             #开启转义
 echo `cmd`          #输出命令结果
-printf  format-string  [arguments...]  #格式化输出,不自动换行;print支持换行
+printf  format-string  [arguments...]  #格式化输出,不自动换行
 printf "%-10s %-8s\n" 姓名 性别        #格式化字符串与C语言相同,移植性比echo好;-表示左对齐
 printf '%-10s %-8s\n' 姓名 性别        #同上
 printf '%-10s %-8s\n' $var1 $var2      #与上类似
+printf "%-10s %-8s\n",$1,$2            #awk内调用格式,以逗号隔开各参数;格式化字符串不支持单引号
 
 格式化字符
 字符  格式化内容
@@ -705,6 +706,50 @@ uniq    #去重
 sed     #stream editor(流编辑器);逐行对文本处理
 awk     #数据流处理工具,逐行处理;可实现更复杂的数据处理;多数发行版可以使用awk,实际指向gawk
 
+##cut
+cut -b/c N/N-/N-M/-M file  #按照字节(bytes)/字符(characters)截取文本(标准输出);截取列范围分别是 =N、>=N、N<=x<=M和<=M
+cut -f N/N-/N-M/-M file    #按照Tab(制表符)截取文本(标准输出);-f表示fields(域),多个域可用逗号隔开,单行域返回结果会去重
+cut -d ',' -f N file       #-d(delimiter)指定分隔符,与-f一起使用
+echo '1234567'|cut -c 2    #结果为2;可写为 cut -c2,空格可省略
+echo '1234567'|cut -c2-5   #结果为2;可写为 cut -c2,空格可省略
+echo -e "123\t456"|cut -f2 #结果为456
+
+##paste
+paste file1 file2 ...      #列模式拼接,默认为Tab链接
+paste file1 file2 -d ","   #指定分隔符拼接
+
+##tr
+echo 12345 | tr '0-9' '9876543210'  #按规则替换字符。结果为87654
+cat file | tr '\t' ' '              #制表符替换为空格
+cat file | tr -d '0-9'              #删除所有数字
+cat file | tr -d -c '0-9\n'         #删除非数字数据,默认不换行,加上 \n
+cat file | tr -s ' '                #去除重复空格
+
+##split
+split -n file str  #将文件每n行切割为多个str开头(默认为x)的小文件,不改变原文件
+split -l n file    #同上
+split -b n file    #按字节切割
+split -C n file    #同上,尽量保证每行的完整性   
+
+##sort
+sort      #排序,默认按照字典顺序
+    -n    #按数字进行排序
+    -d    #按字典序进行排序,仅考虑空字符、字母和数字排序
+    -r    #降序排序
+    -k N  #指定按第N列排序
+    -b    #忽略像空格之类的前导空白字符
+sort -nrk 1 data.txt
+sort -bd data
+
+##wc
+wc -c/m/w/l file            #按照字节/字符/单词(Tab或空格分隔,多个分隔符算一个)/行数 统计文本或标准输出
+echo -e '1\t2  34 56'|wc -w #输出4
+
+##uniq
+sort file | uniq      #排序并去除重复行
+sort file | uniq -c   #统计各行在文件中出现的次数
+sort file | uniq -d   #找出重复行
+
 ##sed
 sed options script file   #命令格式;逐行处理
 ###options
@@ -712,7 +757,7 @@ sed options script file   #命令格式;逐行处理
 -f file     #在处理输入时,将file中指定的命令添加到已有的命令中
 -n          #不产生命令输出,使用print命令来完成输出
 
-##处理空间
+##处理空间(待补充)
 1.模式空间(pattern space)    #活跃缓冲区,sed命令处理区域
 2.保持空间(hold space)       #用于临时存储一些行
 ###保持空间命令
@@ -836,6 +881,7 @@ awk -F: '{print $1,$2}' file                       #以option方式指定FS; -F 
 awk -F"[:;]" '{print $1,$2}' file                  #指定多个分隔符;连续相同分隔符算一个
 awk 'BEGIN{FIELDWIDTHS="1 2"} {print $1,$2}' file  #按照字符数分割而不是FS;输出由OFS确定
 awk '{print ENVIRON["HOME"],$1}' file              #ENVIRON[]使用Shell环境变量;变量名前无需$
+awk 'BEGIN{} END{}'                                #单独使用BEGIN或END部分可不加file
 
 ###awk数据格式化
 参考 标准输入输出
@@ -890,9 +936,50 @@ tolower(s)                 #转小写
 toupper(s)                 #转大写
 
 ####时间函数
-mktime(datespec) 将一个按YYYY MM DD HH MM SS [DST]格式指定的日期转换成时间戳值①
-strftime(format [,timestamp]) 将当前时间的时间戳或timestamp（如果提供了的话）转化格式化日期（采用shell函数date()的格式）
-systime( ) 返回当前时间的时间戳
+mktime(datespec)               #YYYY MM DD HH MM SS [DST]日期格式转换成时间戳值
+strftime(format [,timestamp])  #当前时间的时间戳或timestamp（时间戳）转化格式化日期（采用shell函数date()的格式）
+systime()                      #返回当前时间的时间戳
+
+####自定义函数
+方式一:BEGIN{}部分添加
+function name([args])
+{
+statements
+}
+
+基本语法结构
+if (conditions) {statements}   #if单行形式;statements为多语句分号隔开,单条语句则{}可不加
+ 
+if (conditions)                #if多行
+{
+  statements
+}
+
+if (conditions)                #if-else
+{
+  statements
+}else
+{
+  statements
+}
+
+while (conditions)  #while循环
+{
+  statements
+}
+
+do                  #do-while循环
+{
+  statements
+}while(conditions)
+
+for( variable assignment; condition; iteration process)  #C语言风格for循环
+{
+  statements
+}
+
+方式二:外部自定义文件,函数格式与方式一一致,可添加多个函数
+awk -f funclibs ...   #通过-f引用外部自定义函数库funclibs后即可通过函数名使用
 
 
 #正则表达式(Linux)
