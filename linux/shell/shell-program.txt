@@ -719,7 +719,7 @@ paste file1 file2 ...      #列模式拼接,默认为Tab链接
 paste file1 file2 -d ","   #指定分隔符拼接
 
 ##tr
-echo 12345 | tr '0-9' '9876543210'  #按规则替换字符。结果为87654
+echo 12345 | tr '0-9' '9876543210'  #按规则替换字符;结果为87654
 cat file | tr '\t' ' '              #制表符替换为空格
 cat file | tr -d '0-9'              #删除所有数字
 cat file | tr -d -c '0-9\n'         #删除非数字数据,默认不换行,加上 \n
@@ -886,7 +886,7 @@ awk '$1 == 0{print $1,$2,$NF,$(NF-1)}' file        #指定元素判断;>/</>=/<=
 awk '$1 == 0{if ($2 < 1) print $NF}' file          #带有条件判断;还支持循环等,语法风格与C语言类似
 awk '{print $1 $2 $NF $(NF-1)}' file               #输出流元素间无分隔符
 awk 'BEGIN{FS=":";OFS=";"} {print $1,$2}' file     #指定FS和OFS
-awk -F: '{print $1,$2}' file                       #以option方式指定FS; -F :/-F ":"都可以
+awk -F: '{print $1,$2}' file                       #以option方式指定FS; -F :/-F ':'/-F ":"都可以
 awk -F"[:;]" '{print $1,$2}' file                  #指定多个分隔符;连续相同分隔符算一个
 awk 'BEGIN{FIELDWIDTHS="1 2"} {print $1,$2}' file  #按照字符数分割而不是FS;输出由OFS确定
 awk '{print ENVIRON["HOME"],$1}' file              #ENVIRON[]使用Shell环境变量;变量名前无需$
