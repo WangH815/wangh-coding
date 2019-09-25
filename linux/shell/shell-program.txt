@@ -707,6 +707,11 @@ awk     #数据流处理工具,逐行处理;可实现更复杂的数据处理;�
 
 ##sed
 sed options script file   #命令格式;逐行处理
+
+###参考文档
+https://www.runoob.com/linux/linux-comm-sed.html    #菜鸟教程
+http://www.gnu.org/software/sed/                    #官方文档
+
 ###options
 -e script   #在处理输入时,将script中指定的命令添加到已有的命令中
 -f file     #在处理输入时,将file中指定的命令添加到已有的命令中
@@ -791,9 +796,13 @@ sed 'N;/RE/D' file              #每两行为一组,删除RE匹配组的第一�
 sed '/RE1/{N;/RE2/D}' file      #通过RE1设定处理行
 
 
-##awk
+##awk/gawk
 1.一种编程语言,主要用于Linux/Unix环境处理文本、生成报表等
 2.一般处理方式也是逐行处理
+
+###参考文档
+https://www.runoob.com/linux/linux-comm-awk.html     #菜鸟教程
+http://www.gnu.org/software/gawk/manual/gawk.html    #官方文档
 
 ###options
 -F fs         #指定行中划分数据字段的字段分隔符
