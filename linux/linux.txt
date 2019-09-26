@@ -113,7 +113,7 @@ head file               #显示文件开始10行
 head -n file            #显示文件开始n行
 tail file               #显示文件最后10行
 tail -n file            #显示文件最后n行
-tail -f file            #循环读取某文件最后10行,一般用于文件实时查看
+tail -f file            #循环读取某文件最后10行,一般用于文件实时查看;rehad系列还支持tailf,效果类似
 tail -nf file           #循环读取某文件最后n行
 more file               #分页查看文件,一次性加载,空格/b 翻页;大文件不建议使用
 less file               #分页查看文件,逐步加载,空格/b PgUp/PgDn 翻页
