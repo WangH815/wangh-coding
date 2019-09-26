@@ -860,7 +860,7 @@ http://www.gnu.org/software/gawk/manual/gawk.html    #官方文档
 -W keyword    #指定gawk的兼容模式或警告等级
 
 ###命令格式
-awk -f xx.awk file    #xx.awk文件表示awk程序
+awk -f xx.awk file    #xx.awk文件表示awk程序,等价于单行命令中''中的命令
 awk options '[BEGIN{statements}]
 [/RE/]{statements2}
 [END{statements}]' file1 file2            #BEGIN和END语句可不加,中间语句为文本处理核心
