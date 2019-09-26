@@ -4,14 +4,14 @@ Linux使用
 
 #shell脚本的运行方式
 1 . xx.sh      #一般用于生效用户配置而不需要重新登录shell,xx.sh有读权限即可
-2 source xx.sh #同上。常见用于执行 profile 配置,脚本本身在当前进程中执行
+2 source xx.sh #同上;常见用于执行 profile 配置,脚本本身在当前进程中执行
 3 sh xx.sh     #读权限即可,脚本本身会在子进程中执行
 4 ./xx.sh      #需执行权限,脚本本身会在子进程中执行;如不指定当前路径,会优先根据PATH查找相应命令
 
 
 #shell命令类型
 1.内置命令
-  shell解释器包含的命令,只有内置命令能改变shell命令行环境变量。
+  shell解释器包含的命令,只有内置命令能改变shell命令行环境变量;
   在当前进程(一般是bash,跟随shell版本)中执行
   内置命令可使用 compgen -b | column 显示     #column格式化显示
   man cmd 会显示无相关使用手册,一般可通过 help cmd 或 cmd --help 获取帮助
@@ -124,12 +124,12 @@ diff file1 file2        #文件差异对比
 ln file link            #创建file的硬连接(hard link)为link
 ln -s file link         #创建file的软连接(symbolic link,符号链接)为link;link不能创建前存在
     ##软链接：
-     1.软链接,以路径的形式存在。类似于Windows操作系统中的快捷方式
+     1.软链接,以路径的形式存在;类似于Windows操作系统中的快捷方式
      2.软链接可以跨文件系统,硬链接不可以
      3.软链接可以对一个不存在的文件名进行链接
      4.软链接可以对目录进行链接
     ##硬链接：
-     1.硬链接,以文件副本的形式存在。但不占用实际空间。
+     1.硬链接,以文件副本的形式存在;但不占用实际空间;
      2.不允许给目录创建硬链接
      3.硬链接只有在同一个文件系统中才能创建
 	 4.通过指索引节点（inode）来进行链接
@@ -158,7 +158,7 @@ echo -e "123\t456"|cut -f2 #结果为456
 paste file1 file2 ...      #列模式拼接,默认为Tab链接
 paste file1 file2 -d ","   #指定分隔符拼接
 ###tr
-echo 12345 | tr '0-9' '9876543210'  #按规则替换字符。结果为87654
+echo 12345 | tr '0-9' '9876543210'  #按规则替换字符;结果为87654
 cat file | tr '\t' ' '              #制表符替换为空格
 cat file | tr -d '0-9'              #删除所有数字
 cat file | tr -d -c '0-9\n'         #删除非数字数据,默认不换行,加上 \n
@@ -186,12 +186,12 @@ sort unsort.txt | uniq -c   #统计各行在文件中出现的次数
 sort unsort.txt | uniq -d   #找出重复行
 ###sed   #stream editor(流编辑器)
 #动作说明
-    a ：新增,a 的后面可以接字串,而这些字串会在新的一行出现(目前的下一行)～
-    c ：取代,c 的后面可以接字串,这些字串可以取代 n1,n2 之间的行！
+    a ：新增,a 的后面可以接字串,而这些字串会在新的一行出现(目前的下一行)
+    c ：取代,c 的后面可以接字串,这些字串可以取代 n1,n2 之间的行
     d ：删除
     i ：插入,i 的后面可以接字串,而这些字串会在新的一行出现(目前的上一行);
-    p ：打印,亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行～
-    s ：取代,可以直接进行取代的工作;通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g 就是啦！
+    p ：打印,亦即将某个选择的数据印出;通常 p 会与参数 sed -n 一起运行
+    s ：取代,可以直接进行取代的工作;通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g
 sed 's/text/replace_text/' file      #替换每一行的第一处匹配的text,''可换为"",区别在于""会对表达式求值
 sed 's/text/replace_text/g' file     #全局替换
 sed -i 's/text/repalce_text/g' file  #全局替换并替换原文件
@@ -221,14 +221,14 @@ locate /etc/sh          #查找/etc目录下sh开头的文件
 find [path] [option value] [option2 value2] ... [operation]
     ##参数说明
     [path]         #默认为当前路径
-    [option value] #匹配选项及值,部分选项不需要value,绝大部分成对出现,取结果交集。
+    [option value] #匹配选项及值,部分选项不需要value,绝大部分成对出现,取结果交集;
                    #如：-type d 表示查找所有文件夹,选项前加上!表示不匹配
                    #选择性强的放前面可提高查询效率,例如 -depth/mindepth/maxdepth               
     [operation]    #对于查找结果的操作,常用操作如下：
-                   #-print： 将匹配结果输出到标准输出,一般可不加。shell脚本中建议加上。
-                   #-print0：同上,但不换行。
-                   #-exec：  用于下一步的命令执行。形式为 "cmd {} \;" 
-                   #         如：find . -type f -exec rm -rf {} \; 表示删除所有文件。{}表示每条查找结果
+                   #-print： 将匹配结果输出到标准输出,一般可不加;shell脚本中建议加上
+                   #-print0：同上,但不换行;
+                   #-exec：  用于下一步的命令执行;形式为 "cmd {} \;" 
+                   #         如：find . -type f -exec rm -rf {} \; 表示删除所有文件;{}表示每条查找结果
                    #         find . -type f|xargs rm -rf 可实现同-exec功能
                    #-ok：    同上,不同在于会让用户确认是否执行每个命令
                    #-delete: 删除文件或文件夹
@@ -236,8 +236,8 @@ find [path] [option value] [option2 value2] ... [operation]
     ##常用option(选项)
     -name file            #名称;最常用的选项
     -iname file           #忽略大小写
-    -type b/d/c/p/l/f     #文件类型。块设备、目录、字符设备、管道、符号链接、普通文件
-    -size [-/+]n[cwbkMG]  #大小为[小于/大于]n字节/字/块(一般为512bit)/KB/MB/GB的文件
+    -type b/d/c/p/l/f     #文件类型;块设备、目录、字符设备、管道、符号链接、普通文件
+    -size [-/+]n[cwbkMG]  #大小为[小于/大于]n[字节/字/块(一般为512bit)/KB/MB/GB]的文件
     -depth                #使查找在进入子目录前先行查找完本目录
     -mindepth n           #指定目录的第n级目录开始查找
     -maxdepth n           #最多查询到指定目录的第n级目录
@@ -263,7 +263,7 @@ find . -name   "*.txt" -print                  #.txt结尾的文件,双引�
 find . ! -name "*.txt" -print                  #查找所有非 .txt 结尾文件
 find . -name "[a-z][0–9].txt" -print           #查以小写字母和数字开头的txt文件     
 find . -name "*.txt" -o -name "*.pdf"  -print  #查找txt或pdf文件,-o表示或
-find . -regex  ".*\(\.txt|\.pdf\)$" -print     #同上。-iregex:忽略大小写
+find . -regex  ".*\(\.txt|\.pdf\)$" -print     #同上;-iregex:忽略大小写
 find . -name 'xa*'|grep -v xaa|xargs rm -rf    #删除当前目录下所有除了xaa的xa*文件
 find . -perm 755 -exec ls -ltr {} \;           #显示所有权限是755的文件(夹)
 find . -size +512k                             #大于512k的文件
@@ -297,7 +297,7 @@ df -i      #以inode(文件索引节点)显示
 df -h/k/m  #以易读/KB(默认)/MB显示
 df -l      #只显示本地文件系统
 df -T      #显示文件系统类型
-du                   #文件(夹)空间占用;默认递归显示当前文件夹下文件(夹)占用空间
+du                   #disk usage;文件(夹)空间占用;默认递归显示当前文件夹下文件(夹)占用空间
 du -h/b/k/m          #以易读/Byte/KB(默认)/MB递归显示当前文件夹下文件(夹)占用空间
 du -h/b/k/m file/dir #指定显示特定文件或文件夹,其余同上;文件或文件夹可跟多个   
 du -sh               #以易读方式显示当前文件夹占用总空间
@@ -312,9 +312,9 @@ top                  #实时查看系统资源使用情况(快照)
 	shift + >/<      #top基本视图下,改变排序列视图
 top -c               #cmd会显示完整命令
 top -p pid           #查看指定进程(pid)的情况
-watch 'cmd'                #每2秒执行一次cmd;可用于监控网络,文件,用户登录情况等等
-watch -n m 'cmd'           #每m秒执行一次cmd
-watch -n m -d 'cmd'        #每m秒执行一次cmd,变化部分会高亮显示
+watch cmd                  #每2秒执行一次cmd;可用于监控网络,文件,用户登录情况等等
+watch -n m cmd             #每m秒执行一次cmd
+watch -n m -d cmd          #每m秒执行一次cmd,变化部分会高亮显示
 watch -n 1 -d netstat -ant #每1秒显示网络连接数情况
 vmstat                     #虚拟内存统计;可对操作系统的虚拟内存、进程、CPU活动进行监控
 lsof                       #查看当前系统打开文件(linux一切皆文件)的情况
@@ -501,11 +501,11 @@ vi/vim [file] 进入命令模式
 光标指定单个字符
 
 ###光标移动和翻页
-←/h 、↓/j 、↑/k 、→/l  #上下左右移动光标。n→表示光标向右移动n个字符,不跨行;其余同理
+←/h 、↓/j 、↑/k 、→/l  #上下左右移动光标;n→表示光标向右移动n个字符,不跨行;其余同理
 PgUp/PgDn              #上下翻页
-n<space>  #<space>表示空格。向后移动n个字符,可能会跨行
-0/Home    #移动光标到行首。Home为键盘功能键Home
-$/End     #移动光标到行尾。End为键盘功能键
+n<space>  #<space>表示空格;向后移动n个字符,可能会跨行
+0/Home    #移动光标到行首;Home为键盘功能键Home
+$/End     #移动光标到行尾;End为键盘功能键
 G         #移动光标到最后一行行首
 nG        #移动光标到第n行行首
 n<Enter>  #光标向下移动n行
@@ -552,7 +552,7 @@ n/N          #执行上一个搜索命令/执行上一个方向相反的搜索�
 :set nonu    #取消行号
 :set ignorecase   #忽略大小写查找
 :set noignorecase #取消忽略
-:wq          #保存并退出。w,q可单独使用,!表示强制
+:wq          #保存并退出;w,q可单独使用,!表示强制
 :x           #同上
 ZZ           #同上
 :w file      #另存为file
