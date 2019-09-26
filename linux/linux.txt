@@ -26,24 +26,25 @@ Linux使用
 #常用基础命令
 1.主要来源 
   https://www.yiibai.com/linux                       #易百教程
-  https://www.runoob.com/linux/linux-tutorial.html  #菜鸟教程  
+  https://www.runoob.com/linux/linux-tutorial.html   #菜鸟教程 
+  Linux命令行与shell脚本编程大全 第3版
 2.在上一条的基础上精简,只保留常用部分;还有部分是平时工作中能用的命令及技巧
 3.命令注释会给出相对完整的名称(非官方);见名知意的命令不说明
-4.file表示文件名,dir表示文件夹名称
+4.file表示文件名;dir表示文件夹名称;cmd(command简写)表示shell命令(脚本也算),cmds表示多条命令
 5.[]中内容表示可选项
 
 ##命令帮助
 man cmd       #manual(手册);命令详细说明
-    #区域号 说明
-       1    可执行程序或shell命令
-       2    系统调用
-       3    库调用
-       4    特殊文件
-       5    文件格式与约定
-       6    游戏
-       7    概览、约定及杂项
-       8    超级用户和系统管理员命令
-       9    内核例程   
+#区域号 说明
+  1     #可执行程序或shell命令
+  2     #系统调用
+  3     #库调用
+  4     #特殊文件
+  5     #文件格式与约定
+  6     #游戏
+  7     #概览、约定及杂项
+  8     #超级用户和系统管理员命令
+  9     #内核例程
 info cmd      #类似于man;info格式命令帮助
 help cmd      #使用help命令获取简要帮助
 cmd --help    #同上;部分命令也可使用cmd -h
@@ -77,6 +78,7 @@ ls -a          #显示所有文件列表,包含隐藏文件
 ll             #ubunt系统中由 alias 指定,实际执行ls -alF
 stat file/dir  #显示文件详细信息(大小、属组、访问/修改时间等);stat还可显示文件系统状态
 cd             #change directory;切换到用户家目录,由当前用户$HOME指定
+cd $HOME       #同上
 cd ~           #同上
 cd -           #切换到切换前目录
 cd path        #切换到指定路径目录;路径分为相对路径(相对于当前目录)和绝对路径(/开头)
@@ -84,7 +86,7 @@ cd ..          #切换到上层目录
 cd ../..       #切换到上上层目录;Linux使用正斜线(/)表示路径分隔,windows使用反斜线(\)表示
 pwd            #print working directory;打印当前工作目录绝对路径
 mkdir [path/]dir        #make directory;创建文件夹,多文件夹可空格隔开;要求上层目录必须存在
-mkdir -p dir1/dir2      #同上,不要st求上层目录存在;不存在会创建多级目录
+mkdir -p dir1/dir2      #同上,不要求上层目录存在;不存在会创建多级目录
 mkdir -p a/{b,c/{d,e}}  #创建复杂目录;/表示子目录,{}中逗号隔开的为平级目录
 mkdir -p {q,w}a{e,r}    #创建qae/qar/wae/war四个目录;{}中逗号必须存在,否则{}会解析为'{}'字符串;touch/rm支持类似操作
 mkdir -m 777 dir        #创建指定权限目录
@@ -137,7 +139,7 @@ grep ^a file               #a开头
 grep a$ file               #a结尾
 grep -n ^$ file            #匹配空行并显示行号
 grep ^[a-z] file           #小写字母开头,[]表示其中任意字符
-grep -E 正则表达 file      #正则方式查找;等价于 egrep
+grep -E 正则表达 file      #正则方式查找;等价于egrep
 grep -nE [0-9]\{4\} file   #匹配出现4次(需开启正则)数字的区域,并显示行号
 grep -nE [0-9]\{2,4\} file #匹配出现2到4次(需开启正则)数字的区域,并显示行号
 grep -i str file           #忽略大小写
@@ -147,7 +149,7 @@ grep -nA m str file        #显示行号且显示匹配行之后的m行内容
 grep -n -A m str file      #同上
 ###cut
 cut -b/c N/N-/N-M/-M file  #按照字节(bytes)/字符(characters)截取文本(标准输出);截取列范围分别是 =N、>=N、N<=x<=M和<=M
-cut -f N/N-/N-M/-M file    #按照Tab(制表符)截取文本(标准输出);-f表示fields(域),多个域可用逗号隔开,单行域返回结果会去重
+cut -f N/N-/N-M/-M file    #按照Tab(制表符)截取文本(标准输出);-f表示field(域),多个域可用逗号隔开,单行域返回结果会去重
 cut -d ',' -f N file       #-d(delimiter)指定分隔符,与-f一起使用
 echo '1234567'|cut -c 2    #结果为2;可写为 cut -c2,空格可省略
 echo '1234567'|cut -c2-5   #结果为2;可写为 cut -c2,空格可省略
