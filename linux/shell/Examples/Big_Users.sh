@@ -11,7 +11,7 @@ echo "for $CHECK_DIRECTORIES Directories"
 
 for DIR_CHECK in $CHECK_DIRECTORIES
 do
-  echo ""
+  echo
   echo "The $DIR_CHECK Directory:"
 
   du -S $DIR_CHECK 2>/dev/null |
