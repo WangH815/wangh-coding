@@ -32,6 +32,18 @@ chsh -s /bin/zsh  #设置用户默认Shell或者修改 /etc/passwd 文件中对�
 3 sh ./xx.sh      #读权限即可,脚本本身会在子进程中执行
 4 ./xx.sh         #需要执行权限,脚本本身会在子进程中执行
 
+##shell的类型
+###查看指定用户默认shell
+grep username /etc/passwd | awk -F: {print $7}     #由/etc/passwd中冒号分割的第七个参数决定;一般为/bin/bash (B Shell)
+echo $SHELL      #查看当前用户运行的shell
+cat /etc/shells  #查看系统支持的所有shell类型
+bash             #进入当前shell的子shell;退出shell使用exit,退出最后一个shell会退出终端;可使用pstree -p/ps --forest查看父子shell关系
+cmd1;cmd2;cmd3;echo $BASH_SUBSHELL   #依次shell命令;在当前shell中执行;BASH_SUBSHELL返回值为0表示在当前shell执行
+(cmd1;cmd2;cmd3;echo $BASH_SUBSHELL) #依次shell命令;在当前shell的子shell中执行;BASH_SUBSHELL返回值为1
+echo $BASH_SUBSHELL                  #返回0
+echo $(echo $BASH_SUBSHELL)          #返回1
+echo `echo $BASH_SUBSHELL`           #返回1;同上
+
 ##调试(待补充)
 bash -n xx.sh   #检查脚本是否有语法错误;以bash为例
 bash -x xx.sh   #调试脚本,会输出程序的每一步;带+表示调试器输出,不带则为脚本输出
@@ -80,6 +92,7 @@ EOF
 3)临时环境变量: export var="value"
 4)显示环境变量: env/set
 5)临时取消环境变量: unset var
+注:脚本中使用的环境变量依次由1/2/3及脚本中的设置的构成;后面设置的同名环境变量会覆盖前面的
 
 ##命名规则
 1.字母、数字和下划线构成

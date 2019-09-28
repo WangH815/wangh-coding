@@ -17,10 +17,57 @@ Linux使用
   man cmd 会显示无相关使用手册,一般可通过 help cmd 或 cmd --help 获取帮助
   内置命令可使用 type cmd 判断,内置命令会提示 cmd is a shell builtin
   常见内置命令 cd/help/pwd/export/set/alias/umask/kill/source/test等
-2.shell函数
-  shell编写的函数,可引用
+  作为shell的一部分,执行效率比shell函数、脚本或外部命令高很多
+2.shell函数或脚本
+  shell编写的函数或脚本,可引用;
 3.外部命令
   独立的shell可执行命令,在子进程中执行(Linux内核调用fork()函数实现),不会改变父进程的环境变量
+
+
+#shell环境变量
+1)设置永久环境变量:修改 /etc/profile /etc/bashrc
+2)设置用户环境变量:修改 ~/.bash_profile ~/.bash_bashrc
+3)临时环境变量: export var="value"
+4)显示环境变量: env/set
+5)临时取消环境变量: unset var
+注:shell中使用的环境变量依次由1/2/3中的设置的构成;后面设置的同名环境变量会覆盖前面的
+
+
+#shell类型
+##查看指定用户默认shell
+grep username /etc/passwd | awk -F: {print $7}     #由/etc/passwd中冒号分割的第七个参数决定;一般为/bin/bash (B Shell)
+echo $SHELL      #查看当前用户运行的shell
+cat /etc/shells  #查看系统支持的所有shell类型
+bash             #进入当前shell的子shell;退出shell使用exit,退出最后一个shell会退出终端;可使用pstree -p/ps --forest查看父子shell关系
+cmd1;cmd2;cmd3;echo $BASH_SUBSHELL   #依次shell命令;在当前shell中执行;BASH_SUBSHELL返回值为0表示在当前shell执行
+(cmd1;cmd2;cmd3;echo $BASH_SUBSHELL) #依次shell命令;在当前shell的子shell中执行;BASH_SUBSHELL返回值为1
+echo $BASH_SUBSHELL                  #返回0
+echo $(echo $BASH_SUBSHELL)          #返回1
+echo `echo $BASH_SUBSHELL`           #返回1;同上
+
+
+#命令形式
+##常见形式
+cmd               #无选项及参数;例如:ls
+cmd arg           #无选项单参数;例如:ls /root
+cmd args          #无选项及参数;例如:mv file1 file2;命令参数的长度和数量是有限制的,一般是用户缓冲空间(内核分配)的大小决定
+cmd -option       #单选项无参;例如:ls -l
+cmd -option arg   #单选项单参;例如:ls -l /root
+cmd -option args  #单选项多参;例如:cp -r path1 path2
+cmd -options      #多选项无参;例如:ls -ltr
+cmd -option1 arg1 -option2 arg2   #选项参数对;例如:find -name a* -size 100
+##命令风格
+###以ps命令为例
+ps -a      #Unix风格的参数,前面加短杠;多数命令支持这种形式;多数参数命令都有对应意义
+ps aux     #BSD风格的参数,前面不加短杠;少部分命令支持这种形式,例如: tar cvf/-cvf
+ps --help  #GNU风格的长参数,前面加双短杠;部分短杠有对应的双短杠长参数(一般为参数全程)命令
+##多命令格式
+cmd1 | cmd2       #"|"为管道符,用于将第一个命令的输出作为第二个命令的参数;
+                  #cmd1输出中的空字符和换行会被替换为空格,cmd1输出过多时可能会导致cmd2参数超长
+cmd1 | xargs cmd2 #当cmd1不支持管道符时实现管道符的功能;xargs会保持cmd1的原始输出模式(包含空字符和换行)
+cmd1;cmd2         #顺序执行命令;cmd1出错也会执行cmd2
+cmd1 && cmd2      #cmd1执行成功才执行cmd2
+cmd1 || cmd2      #cmd1执行失败则执行cmd2
 
 
 #常用基础命令
@@ -111,12 +158,12 @@ cat -A file             #同上,同时显示结束符($)和制表符(Tab,显示�
 cat -n file             #带行号输出
 cat -b file             #非空行带行号输出;空行也会输出
 view file               #只读模式查看文件;其他操作见vi
-head file               #显示文件开始10行
-head -n file            #显示文件开始n行
-tail file               #显示文件最后10行
-tail -n file            #显示文件最后n行
-tail -f file            #循环读取某文件最后10行,一般用于文件实时查看;rehad系列还支持tailf,效果类似
-tail -nf file           #循环读取某文件最后n行
+head file               #显示文件前10行
+head -n file            #显示文件前n行
+tail file               #显示文件后10行
+tail -n file            #显示文件后n行
+tail -f file            #循环读取某文件后10行,一般用于文件实时查看;redhat系列还支持tailf,效果类似
+tail -nf file           #循环读取某文件后n行
 more file               #分页查看文件,一次性加载,空格/b 翻页;大文件不建议使用
 less file               #分页查看文件,逐步加载,空格/b PgUp/PgDn 翻页
 file file               #显示文件或文件夹类型
@@ -124,10 +171,10 @@ diff file1 file2        #文件差异对比
 ln file link            #创建file的硬连接(hard link)为link
 ln -s file link         #创建file的软连接(symbolic link,符号链接)为link;link不能创建前存在
     ##软链接：
-     1.软链接,以路径的形式存在;类似于Windows操作系统中的快捷方式
-     2.软链接可以跨文件系统,硬链接不可以
-     3.软链接可以对一个不存在的文件名进行链接
-     4.软链接可以对目录进行链接
+     1.以路径的形式存在;类似于Windows操作系统中的快捷方式
+     2.可以跨文件系统,硬链接不可以
+     3.可以对一个不存在的文件名进行链接
+     4.可以对目录进行链接
     ##硬链接：
      1.硬链接,以文件副本的形式存在;但不占用实际空间;
      2.不允许给目录创建硬链接
@@ -468,13 +515,11 @@ set                   #打印全局变量、用户自定义变量和局部变量
 unset var             #删除环境变量
 echo $PATH            #用户执行外部命令搜索路径
 date "+%Y%m%d%H%M%S"       #打印年月日时分秒;格式为YYYYmmddHHMMSS;可用于日志文件名生成
+date '+%Y%m%d%H%M%S'       #同上; date_format='+%Y%m%d%H%M%S';date ${date_format} ;date后面跟格式化字符串
 date "+%Y-%m-%d %H:%M:%S"  #格式为YYYY-mm-dd HH:MM:SS
 #基于当前时间的计算并格式化
 date "+%Y-%m-%d %H:%M:%S" -d "-1 month +1 day -1 year"
 date -d "-1 month +1 day -1 year" "+%Y-%m-%d %H:%M:%S"
-cmd1;cmd2         #顺序执行命令;cmd1出错也会执行cmd2
-cmd1 && cmd2      #cmd1执行成功才执行cmd2
-cmd1 || cmd2      #cmd1执行失败则执行cmd2
 cmd | tee file    #输出内容的同时写入文件 
 cmd | tee -a file #追加模式
 
