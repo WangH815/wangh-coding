@@ -35,7 +35,7 @@ Linux使用
 
 #shell类型
 ##查看指定用户默认shell
-grep username /etc/passwd | awk -F: {print $7}     #由/etc/passwd中冒号分割的第七个参数决定;一般为/bin/bash (B Shell)
+grep username /etc/passwd | awk -F: '{print $7}'  #由/etc/passwd中冒号分割的第七个参数决定;一般为/bin/bash (B Shell)
 echo $SHELL      #查看当前用户运行的shell
 cat /etc/shells  #查看系统支持的所有shell类型
 bash             #进入当前shell的子shell;退出shell使用exit,退出最后一个shell会退出终端;可使用pstree -p/ps --forest查看父子shell关系
