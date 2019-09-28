@@ -23,7 +23,7 @@ update   --用于修改表中的数据
 select:用于查询表中的数据   --使用率在80%以上
 4.DCL (Data Control Language 数据控制语句)
 --用于操作数据库对象的权限
-greate   --分配权限给用户
+grant    --分配权限给用户
 revoke   --废除数据库中某用户的权限
 
 

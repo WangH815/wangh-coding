@@ -1,0 +1,41 @@
+MySQL使用
+
+
+参考文档
+https://www.runoob.com/sql/sql-tutorial.html       --菜鸟教程sql
+https://www.runoob.com/mysql/mysql-tutorial.html   --菜鸟教程mysql
+https://www.yiibai.com/mysql/transaction.html      --易百教程mysql
+https://dev.mysql.com/doc/refman/5.7/en/           --MySQL 5.7 官方文档
+
+
+SQL语言分类
+1.DDL (Data Definition Language 数据定义语言)
+create   --创建对象(数据库/表/视图等)
+drop     --删除对象或对象属性(索引/权限等)
+alter    --修改对象属性
+2.DML (Data Manipulation Language 数据操控语言)
+insert   --插入数据
+delete   --删除数据
+update   --更新数据
+3.DQL (Data Query Language 数据查询语言)
+select   --查询数据
+4.DCL (Data Control Language 数据控制语句)
+grant    --权限分配
+revoke   --权限回收
+
+
+数据库连接及管理(Linux平台)
+mysql -uroot -p     --以root用户登录本地数据库;-uroot等价于-u root
+mysql -uroot@ip -p  --以root用户登录远程数据库
+
+show databases;            --显示数据库列表
+use db;                    --选择db数据库,之后操作只针对该数据库
+show tables;               --显示当前数据库下数据表列表
+show column from tb;       --显示tb表字段信息(Field/Type/Null/Key/Default/Extra)
+show index from tb;        --显示索引信息
+show table status from tb; --显示表状态
+
+
+
+
+
