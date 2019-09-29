@@ -764,7 +764,10 @@ sort file | uniq -c   #统计各行在文件中出现的次数
 sort file | uniq -d   #找出重复行
 
 ##sed
-sed options script file   #命令格式;逐行处理
+sed options script inputfile > outfile          #命令格式;逐行处理
+sed options script < inputfile > outfile        #同上
+cat inputfile | sed options script - > outfile  #同上
+
 
 ###参考文档
 https://www.runoob.com/linux/linux-comm-sed.html    #菜鸟教程            
@@ -1020,7 +1023,7 @@ POSIX扩展正则表达式（extended regular expression，ERE）引擎   #gawk�
 sed -n '/str/p' file  #打印文件中含有str的行
 sed -n '/  /p' file   #打印文件中含有两个空格的行
 
-2.特殊字符   #在正则表达式中有特殊含义;如需匹配特殊字符可在之前加上 \
+2.特殊字符   #在正则表达式中有特殊含义;如需匹配特殊字符本身可在之前加上 \
 .    #表示任意一个字符
 *    #表示匹配任意次
 []   #表示匹配[]中任意一个字符
@@ -1037,7 +1040,7 @@ sed -n '/\\/p' file    #打印文件中含有\的行
 sed -n '/\$/p' file    #含有$的行;其他类似
 sed -n '/^str/p' file  #str开头;^和$称为锚字符,用于指定字符位置
 sed -n '/str$/p' file  #str结尾
-sed -n '/str^/p' file  #匹配"str^";^被认为是字符
+sed -n '/str^/p' file  #匹配"str^";不在行首的^被认为是字符本身,推荐使用str\^
 sed -n '/$str/p' file  #类似上一条
 sed -n '/^$/p' file    #匹配无内容空行(不计\n)
 sed -n '/^/p' file     #匹配任意行
