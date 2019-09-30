@@ -3,13 +3,13 @@ Java 反射
 
 反射机制提供的功能
 1.在运行时判定任意一个对象所属的类
-2.在运行时构造任意一个类的对象；
-3.在运行时判定任意一个类所具有的成员变量和方法；
-4.在运行时调用任意一个对象的方法；
-5.生成动态代理；
+2.在运行时构造任意一个类的对象
+3.在运行时判定任意一个类所具有的成员变量和方法
+4.在运行时调用任意一个对象的方法
+5.生成动态代理
 
 
-Java反射机制类：
+Java反射机制类:
 java.lang.Class;                 //类               
 java.lang.reflect.Constructor;   //构造方法 
 java.lang.reflect.Field;         //类的成员变量       
@@ -17,37 +17,37 @@ java.lang.reflect.Method;        //类的方法
 java.lang.reflect.Modifier;      //访问权限
 
 
-反射机制的应用场景：
-1.逆向代码 ，例如反编译
+反射机制的应用场景:
+1.逆向代码,例如反编译
 2.与注解相结合的框架 例如Retrofit
 3.单纯的反射机制应用框架 例如EventBus 2.x
 4.动态生成类框架 例如Gson
 
 
-反射机制的优缺点：
-优点：运行期类型的判断，动态类加载，动态代理使用反射。
-缺点：性能是一个问题，反射相当于一系列解释操作，通知jvm要做的事情，性能比直接的java代码要慢很多。
+反射机制的优缺点:
+优点:运行期类型的判断,动态类加载,动态代理使用反射
+缺点:性能是一个问题,反射相当于一系列解释操作,通知jvm要做的事情,性能比直接的java代码要慢很多
 
-Java的反射机制在平时的业务开发过程中很少使用到，但是在一些基础框架的搭建上应用非常广泛。
+Java的反射机制在平时的业务开发过程中很少使用到,但是在一些基础框架的搭建上应用非常广泛
 
 
 类加载器/ClassLoader
 https://www.cnblogs.com/doit8791/p/5820037.html
 
 
-Java反射机制实现：
+Java反射机制实现:
 
 1)Class对象的获取
 class Foo{...}
 Foo f = new Foo(); //常规实例化对象
 /**
-*c1、c2和c3表示Foo类的类类型(class type)，c1=c2=c3 
+*c1、c2和c3表示Foo类的类类型(class type),c1=c2=c3 
 */
-//第一种，通过类的隐含静态成员变量获取类类型
+//第一种,通过类的隐含静态成员变量获取类类型
 Class c1 = Foo.Class;
-//第二种，通过实例化对象的getClass()方法
+//第二种,通过实例化对象的getClass()方法
 Class c2 = f.getClass();
-//第三种，通过Class类的forName()的参数最好是带完整的包名，动态加载类。需要try catch获取异常
+//第三种,通过Class类的forName()的参数最好是带完整的包名,动态加载类。需要try catch获取异常
 Class c3 = Class.forName("Foo");
 
 Foo foo = c1.newInstance();   //通过Class类的newInstance()方法创建实例对象
@@ -80,7 +80,7 @@ Class parentClass    = c1.getSuperclass();         //获取class对象的父类
 Class<?>[] interfaceClasses = c1.getInterfaces();  //获取class对象的所有接口
 Constructor<?>[] allConstructors    = c1.getDeclaredConstructors();  //获取class对象的所有声明构造函数
 Constructor<?>[] publicConstructors = c1.getConstructors();          //获取class对象public构造函数
-Constructor<?> constructor          = c1.getDeclaredConstructor(new Class[]{String.class});//获取指定声明构造函数
+Constructor<?> constructor          = c1.getDeclaredConstructor(new Class[]{String.class}); //获取指定声明构造函数
 Constructor publicConstructor       = c1.getConstructor(new Class[]{});   //获取指定声明的public构造函数
 Annotation[] annotations            = c1.getAnnotations();                //获取class对象的所有注解
 Annotation annotation               = c1.getAnnotation(Deprecated.class); //获取class对象指定注解
@@ -90,13 +90,13 @@ Type[] interfaceTypes               = c1.getGenericInterfaces();          //获�
 4)class对象动态生成
 //第一种方式 Class对象调用newInstance()方法生成
 Object obj = c1.newInstance();
-//第二种方式 对象获得对应的Constructor对象，再通过该Constructor对象的newInstance()方法生成
+//第二种方式 对象获得对应的Constructor对象,再通过该Constructor对象的newInstance()方法生成
 Constructor<?> constructor = c1.getDeclaredConstructor(new Class[]{String.class});//获取指定声明构造函数
 obj = constructor.newInstance(new Object[]{"lcj"});
 
 5)动态调用函数
 try {    
-    Object obj = c1.newInstance();                // 生成新的对象：用newInstance()方法    
+    Object obj = c1.newInstance();                // 生成新的对象:用newInstance()方法    
     boolean isInstanceOf = obj instanceof Person; //判断该对象是否是Person的子类  
     Method method = c1.getDeclaredMethod("setAge", new Class[]{int.class}); //首先需要获得与该方法对应的Method对象    
     method.invoke(obj, 28);                       //调用指定的函数并传递参数
@@ -161,13 +161,13 @@ try {
 }
 
 
-c1.getName();                                       //返回类名，包含包名
+c1.getName();                                       //返回类名,包含包名
 Method[] ms1        = c1.getMethids();              //返回类中所有public方法
 Method[] ms2        = c1.getDeclaredMethids();      //返回类中自己申明的方法
 ms1[i].getName();                                   //返回方法名
 Class[] paramTypes  = ms1[i].getParameterType();    //返回参数列表类类型
 Class[] returnTypes = ms1[i].getReturnType();       //返回返回值类类型
-Field[] fs          = c1.getFields();               //获取public成员变量的类类型，自定义变量同上
+Field[] fs          = c1.getFields();               //获取public成员变量的类类型,自定义变量同上
 Constructor[] cs    = c1.getDeclaredConstructors(); //获取自定义构造器类类型
-c1.get...();                                        //可以还得到类的访问权限，接口，包名，父类等等
+c1.get...();                                        //可以还得到类的访问权限,接口,包名,父类等等
 
