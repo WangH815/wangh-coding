@@ -450,9 +450,9 @@ init n                 #切换运行级别;当前运行级别可使用runlevel�
 	0:停机或者关机(千万不能将initdefault设置为0)
     1:单用户模式,只root用户进行维护
     2:多用户模式,不能使用NFS(Net File System)
-    3:完全多用户模式(标准的运行级别)
+    3:完全多用户模式(标准的运行级别)              #RedHat Server默认运行级别
     4:安全模式
-    5:图形化(即图形界面)
+    5:图形化(即图形界面)                          #Ubuntu Server默认运行级别
     6:重启(千万不要把initdefault设置为6)
 reboot     #重启
 poweroff   #关机
