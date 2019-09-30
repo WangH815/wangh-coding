@@ -35,7 +35,7 @@ Java的反射机制在平时的业务开发过程中很少使用到,但是在一
 https://www.cnblogs.com/doit8791/p/5820037.html
 
 
-Java反射机制实现:
+Java反射机制实现
 
 1)Class对象的获取
 class Foo{...}
@@ -102,7 +102,7 @@ try {
     method.invoke(obj, 28);                       //调用指定的函数并传递参数
     method = c1.getDeclaredMethod("getAge");
     Object result = method.invoke(obj, new Class[]{});
-} catch (InstantiationException e) {
+} catch (InstantiationException e) {   //实例化异常
     e.printStackTrace();
 } catch (IllegalAccessException e) {
     e.printStackTrace();
@@ -112,7 +112,7 @@ try {
     e.printStackTrace();
 }
 
-6.)通过反射机制获取泛型类型
+6)通过反射机制获取泛型类型
 public class People<T> {}               //People类
 public class Person<T> extends People<String> implements PersonInterface<Integer> {}  //Person类继承People类
 public interface PersonInterface<T> {}  //PersonInterface接口
@@ -143,7 +143,7 @@ private Class<?> getComponentType(Type type) {
     return componentType;
 }
 
-6.)通过反射机制获取注解信息
+7)通过反射机制获取注解信息
 以获取Method的注解信息为例
 try {
     //首先需要获得与该方法对应的Method对象
