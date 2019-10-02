@@ -1340,7 +1340,7 @@ int min = (int) Collections.min(Arrays.asList(array)); //求最小值
 int max = (int) Collections.max(Arrays.asList(array)); //求最大值
 String str = Arrays.toString(array);                   //一维转为单个字符串,输出:[1, 5, 7, 0, 3, 7, 8]
 String str = Arrays.deepToString(array);               //二维或以上转为单个字符串
-Arrays.equals(array1, array2);                         //比较两个数组对应元素是否都相等
+boolean isEqual = Arrays.equals(array1, array2);       //比较两个数组对应元素是否都相等
 array1 == array2;                                      //比较两个数组引用是否都相等
 
 //二维数组
@@ -1369,9 +1369,13 @@ arr.remove(value);     //按照值删除;value为引用
 
 //数组集合运算
 ArrayList arr = new ArrayList();
-ArrayList arr1 = new ArrayList();
 arr.removeAll(arr1);   //删除arr中arr1存在的元素
 arr.retainAll(arr1);   //保留arr和arr1交集元素
+
+//数据包含关系
+ArrayList<String> arr = new ArrayList<String>();
+boolean isContains = arr.contains(arr1);        //arr1是否是arr的子集
+boolean isContains = arr.contains(String str);  //arr是否包含str字符串
 
 
 
@@ -1442,14 +1446,21 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a"); //a表示�
 String DateToStr = sdf.format(d1);                                    //格式化时间
 
 Calendar类   //时间日期的复杂实现
-Calendar cl = Calendar.getInstance();  //实例化Calendar(抽象类),默认是当前时间
-cl.setTime(d1);                        //设置时间
-cl.add(Calendar.HOUR, 7);              //当前时间增加7小时,第二个参数可以是整数,负数表示相减;下面类似
-cl.add(Calendar.MONTH, 1);
-cl.add(Calendar.YEAR, 3);
-cl.roll(Calendar.HOUR, 1);             //当前时间增加一小时,除小时其他不变,按进制变化,负数表示相减
-cl.get(Calendar.MINUTE);               //获取c1的分钟数
-cl.get(Calendar.HOUR_OF_DAY);          //获取c1的小时数,类似的还是年月日、当月第几周和当年第几周等
+Calendar cal = Calendar.getInstance();  //通过getInstance()实例化Calendar(抽象类),默认是当前时间
+cal.setTime(d1);                        //设置时间
+cal.add(Calendar.HOUR, 7);              //当前时间增加7小时,第二个参数可以是整数,负数表示相减;下面类似
+cal.add(Calendar.MONTH, 1);
+cal.add(Calendar.YEAR, 3);
+cal.roll(Calendar.HOUR, 1);             //当前时间增加一小时,除小时其他不变,按进制变化,负数表示相减
+int min = cal.get(Calendar.MINUTE);     //获取c1的分钟数;其他类似
+int day = cal.get(Calendar.DATE);       //当月多少号,下同
+int month = cal.get(Calendar.MONTH) + 1;  
+int year = cal.get(Calendar.YEAR);
+int dow = cal.get(Calendar.DAY_OF_WEEK);
+int dom = cal.get(Calendar.DAY_OF_MONTH);
+int doy = cal.get(Calendar.DAY_OF_YEAR);
+cal.get(Calendar.HOUR_OF_DAY);           //获取c1的小时数,类似的还是年月日、当月第几周和当年第几周等
+String time = cal.getTime();             //格式例如Fri Mar 27 21:44:15 CST 2015
 
 //创建字符串格式化类的实例,String.format()也是调用此类中的fmt.format()
 Formatter fmt = new Formatter();
@@ -1478,6 +1489,12 @@ String str = sdf[i].format(new Date());
 
 String[] shortMonths = new DateFormatSymbols().getShortMonths();    //获取月份
 String[] weekdays = new DateFormatSymbols().getWeekdays();          //获取工作日
+
+//时间戳转换成时间
+Long timeStamp = System.currentTimeMillis();                     //获取当前时间戳
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+Date date = new Date(Long.parseLong(String.valueof(timeStamp))); //转化时间对象
+String sd = sdf(date);                                           //格式化时间为字符串
 
 
 文件与目录
@@ -1578,80 +1595,7 @@ out.close();
                               java-runnoob_java示例
 =======================================================================================
 
-环境设置
-1.1 编译运行java文件-HelloWorld.java
-先配置好系统java运行环境
-将代码通过文本编辑器(推荐使用Notepad++)写入HelloWorld.java文件中
-命令行执行:
-javac /path/HelloWorld.java  //编译java文件,生成.class字节码文件
-java /path/HelloWorld        //调用jvm并加载java类库,解释执行字节码文件
 
-1.2 查看java版本
-命令行执行
-java -version
-
-
-数组
-
-
-3.9  删除数组元素
-
-
-3.12 数组包含关系
-ArrayList<String> arr = new ArrayList<String>();
-ArrayList<String> arr1 = new ArrayList<String>();
-boolean isContains = arr.contains(arr1);        //arr1是否是arr的子集
-boolean isContains = arr.contains(String str);  //arr是否包含str字符串
-
-3.13 判断数组是否相等
-boolean isEqual = Arrays.equals(String[] str, String[] str1);  //判断str和str1是否相等
-
-3.14 数组并集
-String[] str = new String[];
-String[] str1 = new String[];
-String[] str2 = union(str, str1);
-
-public static String[] union(String[] str1, String[] str2) {
-    Set<String> set = new HashSet<String>();  //通过HashSet实现元素唯一性
-    for (String str : str1) {
-        set.add(str);  //向集合中添加元素
-    }
-    for (String str : str2) {
-        set.add(str);
-    }
-    String[] result = {};
-    return set.toArray(result);
-}
-
-
-时间处理
-4.1 时间格式化
-Date date = new Date();
-String strDateFormat = "yyyy-MM-dd HH:mm:ss";
-SimpleDateFormat sdf = new SimpleDateFormat(sreDateFormat);
-System.out.println(sdf.format(date));
-
-4.2 获取当前时间
-SimpleDateFormat sdf = new SimpleDateFormat(); //格式化时间
-sdf.applyPattern("yyyy-MM-dd HH:mm:ss a");     //a为am标记
-Date date = new Date();                        //获取当前时间
-System.out.println("现在时间" + sdf.format(date));
-
-4.3 获取年份/月份
-Calendar cal = Calendar.getInstance();
-int day = cal.get(Calendar.DATE);         //当月多少号,下同
-int month = cal.get(Calendar.MONTH) + 1;
-int year = cal.get(Calendar.YEAR);
-int dow = cal.get(Calendar.DAY_OF_WEEK);
-int dom = cal.get(Calendar.DAY_OF_MONTH);
-int doy = cal.get(Calendar.DAY_OF_YEAR);
-String time = cal.getTime();             //格式例如Fri Mar 27 21:44:15 CST 2015
-
-4.4 时间戳转换成时间
-Long timeStamp = System.currentTimeMillis();                     //获取当前时间戳
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-Date date = new Date(Long.parseLong(String.valueof(timeStamp))); //转化时间对象
-String sd = sdf(date);                                           //格式化时间为字符串
 
 
 方法
