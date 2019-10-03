@@ -252,7 +252,7 @@ super 用法如下:
 重载 main()方法
 
 可通过方法重载在类中有任意数量的main方法。
- 但是JVM调用main()方法,它只接收字符串数组作为参数。
+但是JVM调用main()方法,它只接收字符串数组作为参数。
 
 class Test{  
     public static void main(String[] args){System.out.println("main with String[]");}  
@@ -582,7 +582,7 @@ String(String original)
 String(char value[])
 String(char value[], int offset, int count)
 String(int[] codePoints, int offset, int count)
-String(byte ascii[], int hibyte, int offset, int count)          @Deprecated
+String(byte ascii[], int hibyte, int offset, int count)          @Deprecated(弃用)
 String(byte ascii[], int hibyte)                                 @Deprecated
 String(byte bytes[], int offset, int length, String charsetName)
 String(byte bytes[], int offset, int length, Charset charset)
