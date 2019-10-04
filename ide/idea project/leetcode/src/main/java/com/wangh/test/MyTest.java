@@ -1,21 +1,44 @@
 package com.wangh.test;
 
-import java.util.ArrayList;
 
 public class MyTest {
     public static void main(String[] args) {
-        String str = new String("afasdfawef");
-        String str1 = new String("afasdfawef");
-        String str2 = "afasdfawef";
-//        str.intern();
-        System.out.println(str.hashCode());
-        System.out.println(str1.hashCode());
-        System.out.println(str2.hashCode());
+        int[] is = {6, 1, 7, 9, 0, 2};
+        for (int i : is) {
+            System.out.println(i);
+        }
 
-        ArrayList arr = new ArrayList();
-        arr.add("0");
-        arr.add(0);
-        arr.remove(new Integer(0));
+        System.out.println("============");
+        for (int i : sortMaopao(is)) {
+            System.out.println(i);
+        }
+
 
     }
+
+    static int[] sortMaopao(int[] inta) {
+//        int lenght = inta.length;
+        int temp;
+        for (int i = 0; i < inta.length; i++) {
+            System.out.println("i:" + i);
+            for (int j = i; j < inta.length - 1; j++) {
+                if (inta[j] > inta[j + 1]) {
+                    temp = inta[j];
+                    inta[j] = inta[j + 1];
+                    inta[j + 1] = temp;
+                }
+            }
+        }
+
+        return inta;
+    }
+
 }
+
+class FreshJuice {
+    enum aa {A, B, C}
+}
+
+
+
+
