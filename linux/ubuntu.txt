@@ -225,6 +225,36 @@ export PATH=${PATH}:${JAVA_HOME}/bin:${JRE_HOME}/bin
 
 
 #修改时区
-tzselect                                                 #选择北京时间
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  #设置软连接，非root用户命令前加sudo
+tzselect                                                 #根据提示选择北京时间
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  #设置软连接(root操作)
+
+
+#挂载磁盘       
+##其他更复杂的挂载与之相似
+1.创建新磁盘
+vmware虚拟机设置中添加SCSI硬盘,容量名称自定
+2.磁盘分区
+#重启后使用root登录或者其他用户切换到root用户操作
+fdisk -l                #查看磁盘列表;一般磁盘设备可在/dev目录中,以sd开头(后面是a-z,例如sda是第一块磁盘)
+fdisk /dev/sdb          #根据提示进行磁盘分区;可设置主分区还是逻辑分区以及分区大小;分区名称一般是/dev/sdb1 /dev/sdb2 等
+3.格式化分区
+mkfs -t ext3 /dev/sdb1  #以ext3格式对/dev/sdb1进行格式化
+4.挂载分区
+mkdir /home/mydisk            #创建挂载点目录
+mount /dev/sdb1 /home/mydisk  #挂载(重启后不会自动挂载)
+#设置自动挂载,追加以下内容到 /etc/fstab 文件
+/dev/sdb1  /media  ext3  defaults   0   1   #编辑时以Tab作为分隔
+
+
+#卸载磁盘
+##root用户操作
+1.备份数据
+2.卸载分区挂载
+umount /dev/sdb1     #确保无文件读写磁盘情况下卸载分区挂载;umount /home/mydisk也可以;此操作不会分区
+3.删除挂载点目录
+rm -rf /home/mydisk
+4.删除自动挂载(如有设置)
+删除/etc/fstab文件中相关挂载的信息
+
+
 

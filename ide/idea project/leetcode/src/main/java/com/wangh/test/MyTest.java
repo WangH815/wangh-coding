@@ -13,15 +13,12 @@ public class MyTest {
             System.out.println(i);
         }
 
-
     }
 
-    static int[] sortMaopao(int[] inta) {
-//        int lenght = inta.length;
+    private static int[] sortMaopao(int[] inta) {
         int temp;
         for (int i = 0; i < inta.length; i++) {
-            System.out.println("i:" + i);
-            for (int j = i; j < inta.length - 1; j++) {
+            for (int j = 0; j < inta.length - i - 1; j++) {
                 if (inta[j] > inta[j + 1]) {
                     temp = inta[j];
                     inta[j] = inta[j + 1];
