@@ -221,7 +221,7 @@ export JAVA_HOME=/jdkpath  #如: JAVA_HOME=/etc/java8/jdk1.8.0_191
 export JRE_HOME=/jrepath   #如: JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export PATH=${PATH}:${JAVA_HOME}/bin:${JRE_HOME}/bin
-4.source /etc/profile      #生效配置
+4.source /etc/profile      #生效配置 
 
 
 #修改时区
