@@ -19,9 +19,30 @@ Data structure    //数据结构(Java版)
 
 
 1.数组
+int[] intArr = new int[100];        //声明
+int[] intArr = new int[]{1,3,7,2};  //声明并赋值
+int[] intArr = {1,3,7,2};           //同上
+int[][] intArr = int [4][5];        //二维数组
+
 
 
 2.简单排序
+冒泡排序
+int[] sortMaopao(int[] intArr) {
+    int temp;
+    for (int i = 0; i < intArr.length; i++) {
+        for (int j = 0; j < intArr.length - i - 1; j++) {  
+            if (intArr[j] > intArr[j + 1]) {
+                temp = intArr[j];
+                intArr[j] = intArr[j + 1];
+                intArr[j + 1] = temp;
+            }
+        }
+    }
+    return intArr;
+}
+
+
 
 
 3.栈和队列

@@ -93,9 +93,9 @@ public static void main(String... args){
 匿名对象
 匿名只是表示没有名。没有引用的对象(也就是不使用实例变量)称为匿名对象。它只能在创建对象时使用。如果只需要使用一个对象,匿名对象是一个很好的方法。 例如:
 
-new Calculation();//匿名对象
-Calculation c = new Calculation();// 使用实例变量,所以不是匿名对象
-new Calculation().fact(5); //通过匿名对象调用方法
+new Calculation();                  //匿名对象
+Calculation c = new Calculation();  // 使用实例变量,所以不是匿名对象
+new Calculation().fact(5);          //通过匿名对象调用方法
 
 
 构造函数/构造器 
