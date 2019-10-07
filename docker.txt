@@ -136,4 +136,5 @@ docker run -di --name docker_mysql5.7 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root m
 docker exec -it docker_mysql5.7 /bin/bash #登录容器
 mysql -uroot -p                           #登录mysql
 
+#注:docker run xx --restart always 可指定容器开机自启动;也可在后续修改 docker update --restart always xx
 

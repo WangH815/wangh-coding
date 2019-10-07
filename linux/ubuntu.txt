@@ -256,5 +256,3 @@ rm -rf /home/mydisk
 4.删除自动挂载(如有设置)
 删除/etc/fstab文件中相关挂载的信息
 
-
-
