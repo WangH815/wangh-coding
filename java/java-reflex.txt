@@ -41,7 +41,7 @@ Java反射机制实现
 class Foo{...}
 Foo f = new Foo(); //常规实例化对象
 /**
-*c1、c2和c3表示Foo类的类类型(class type),c1=c2=c3 
+*c1、c2和c3表示Foo类的类类型(class type)对象,c1=c2=c3 
 */
 //第一种,通过类的隐含静态成员变量获取类类型
 Class c1 = Foo.Class;
@@ -78,8 +78,8 @@ Method[] methods     = c1.getDeclaredMethods();    //获取class对象的所有�
 Method[] allMethods  = c1.getMethods();            //获取class对象的所有方法 包括父类的方法
 Class parentClass    = c1.getSuperclass();         //获取class对象的父类
 Class<?>[] interfaceClasses = c1.getInterfaces();  //获取class对象的所有接口
-Constructor<?>[] allConstructors    = c1.getDeclaredConstructors();  //获取class对象的所有声明构造函数
-Constructor<?>[] publicConstructors = c1.getConstructors();          //获取class对象public构造函数
+Constructor<?>[] allConstructors    = c1.getDeclaredConstructors();       //获取class对象的所有声明构造函数
+Constructor<?>[] publicConstructors = c1.getConstructors();               //获取class对象public构造函数
 Constructor<?> constructor          = c1.getDeclaredConstructor(new Class[]{String.class}); //获取指定声明构造函数
 Constructor publicConstructor       = c1.getConstructor(new Class[]{});   //获取指定声明的public构造函数
 Annotation[] annotations            = c1.getAnnotations();                //获取class对象的所有注解
@@ -91,7 +91,7 @@ Type[] interfaceTypes               = c1.getGenericInterfaces();          //获�
 //第一种方式 Class对象调用newInstance()方法生成
 Object obj = c1.newInstance();
 //第二种方式 对象获得对应的Constructor对象,再通过该Constructor对象的newInstance()方法生成
-Constructor<?> constructor = c1.getDeclaredConstructor(new Class[]{String.class});//获取指定声明构造函数
+Constructor<?> constructor = c1.getDeclaredConstructor(new Class[]{String.class});  //获取指定声明构造函数
 obj = constructor.newInstance(new Object[]{"lcj"});
 
 5)动态调用函数
@@ -102,11 +102,11 @@ try {
     method.invoke(obj, 28);                       //调用指定的函数并传递参数
     method = c1.getDeclaredMethod("getAge");
     Object result = method.invoke(obj, new Class[]{});
-} catch (InstantiationException e) {   //实例化异常
+} catch (InstantiationException e) {              //实例化异常
     e.printStackTrace();
-} catch (IllegalAccessException e) {
+} catch (IllegalAccessException e) {              //访问异常
     e.printStackTrace();
-} catch (NoSuchMethodException e) {
+} catch (NoSuchMethodException e) {               //函数访问异常
     e.printStackTrace();
 } catch (InvocationTargetException e) {
     e.printStackTrace();
@@ -119,7 +119,7 @@ public interface PersonInterface<T> {}  //PersonInterface接口
 Person<String> person = new Person<>();
 //第一种方式 通过对象getClass方法
 Class<?> c1 = person.getClass();
-Type genericSuperclass = c1.getGenericSuperclass(); //获取class对象的直接超类的 Type
+Type genericSuperclass = c1.getGenericSuperclass(); //获取class对象的直接父类的Type
 Type[] interfaceTypes  = c1.getGenericInterfaces(); //获取class对象的所有接口的Type集合
 
 getComponentType(genericSuperclass);

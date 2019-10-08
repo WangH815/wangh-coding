@@ -444,9 +444,14 @@ lsof -c a -c b             #查看命令a或b开头的文件打开情况
 lsof -p 1[,2,3]            #按照一个或多个进程号查看文件打开情况
 lsof -i [tcp/udp]          #查看所有网络[tcp/udp]连接情况
 lsof -i [tcp]:8080         #查看指定[TCP]端口使用情况
-lscpu      #显示CPU信息
-lshw       #显示所有硬件信息
-uname -a   #显示系统信息                      
+lscpu                      #显示CPU信息
+lsmem                      #显示内存相关信息
+lspci                      #显示pci设备相关信息
+lshw                       #显示所有硬件信息
+uname -a                   #显示系统内核相关信息
+cat /etc/redhad-release    #查看红帽发行版相关信息
+cat /etc/issue             #查看发行版
+cat /etc/lsb-release       #查看Ubuntu版本
 
 ##打包压缩
 tar [-]cvf file.tar dir  #打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程,可不加
