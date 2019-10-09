@@ -23,12 +23,12 @@ journal   #日志
 #前两代文件系统都需要通过更新索引节点表处理文件,当系统崩溃或断电会损坏文件
 #基于安全考虑,开发人员开发了日志文件系统,先写日志再更新索引节点表,成功后再删除日志文件
 #日志系统模式
-1.数据模式  #索引节点和文件都会被写入日志;丢失数据风险低,但性能差
+1.数据模式  #索引节点和文件都会被写入日志;丢失数据风险低,但性能差;数据丢失风险最低
 2.有序模式  #只有索引节点数据会被写入日志,但只有数据成功写入后才删除;在性能和安全性之间取得了良好的折中
 3.回写模式  #只有索引节点数据会被写入日志,但不控制文件数据何时写入;丢失数据风险高,但仍比不用日志好
 
 常见日志文件系统
-1.ReiserFS  #只支持回写模式,速度快;2001年Hans Reiser为Linux创建
+1.ReiserFS  #只支持回写模式,速度快;2001年Hans Reiser(人名)为Linux创建
 2.JFS       #Journaled File System,日志化文件系统;1990年IBM为IBM开发,第二版JFS2(一般称JFS)才被引入Linux;采用有序模式
 3.XFS       #1994年SGI(美国硅图公司)为IRIX Unix系统开发,2002年被引入Linux;采用回写模式
 
@@ -97,8 +97,8 @@ var      #variable;用于存放运行时需要改变数据的文件
 
 
 #shell环境变量
-1)设置永久环境变量:修改 /etc/profile /etc/bashrc
-2)设置用户环境变量:修改 ~/.bash_profile ~/.bash_bashrc
+1)设置永久环境变量:修改 /etc/profile       #具体参见此文件逻辑
+2)设置用户环境变量:修改 ~/.bash_profile    #同上;ubuntu文件为 ~/.profile
 3)临时环境变量: export var="value"
 4)显示环境变量: env/set
 5)临时取消环境变量: unset var
@@ -180,8 +180,8 @@ useradd username        #增加用户,不添加用户家目录
 useradd -m username     #增加用户,添加用户家目录
 groupadd groupname      #增加用户组
 usermod -aG gname uname #user modify;将用户增加到用户组(多个用户组可用逗号隔开)
-su [username]           #switch user;简单切换用户,不加载环境变量;不跟用户名默认切换到root
-su - [username]         #切换登录用户,加载环境变量;不跟用户名默认切换到root
+su username             #switch user;简单切换用户,不加载环境变量;不跟用户名默认切换到root
+su - username           #切换登录用户,加载环境变量;不跟用户名默认切换到root
 su -l/--logon username  #同上
 sudo passwd root        #switch user do(execute);ubuntu启用root用户
 passwd [-u] [username]  #root用户修改指定用户密码,-u可不加;不跟用户名默认修改当前用户密码
