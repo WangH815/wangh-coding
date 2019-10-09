@@ -59,19 +59,54 @@ umount  #卸载分区;不会删除分区
 df -T   #查看挂载点文件系统类型
 
 
+#MBR/GPT分区
+BIOS     #Basic Input/Output System(基本输入输出系统)
+         #可分为Legacy BIOS和EFI BIOS(也可称为UEFI),分别搭配MBR和GPT
+		 
+MBR      #Master Boot Record(主引导记录);
+         #MBR分区表存储在硬盘的第一个扇区(64Bytes)
+		 #MBR分区表只能记录4主分区或者3主分区和1扩展分区,扩展分区可以有多个逻辑分区
+         #单硬盘或单分区大小都不能超过2T
+		 
+GPT      #GUID Partition Table(全局唯一识别分区表);主分区无4个限制,分区大小也可认为无限制
+
+
+#Linux分区管理
+PV   #Physical Volume(物理卷);硬盘分区或整块硬盘可标记为一个PV
+VG   #Volume Group(卷组);一个或多个PV可加入一个VG
+LV   #Logical Volume(逻辑卷);将卷组按需要分为不同的分区,单个分区称为一个LV
+LVM  #Logical Volume Manager(逻辑卷管理器);用于管理逻辑卷(LV),可用于MBR或GPT
+
+
 #linux文件系统根目录(/)结构
-bin      #binaries;存放二进制可执行文件
-sbin     #super user binaries;存放二进制可执行文件;只有root才能访问
-etc      #etcetera;存放系统配置文件
-usr      #unix shared resources;用于存放共享的系统资源
-home     #存放用户文件的根目录
-root     #超级用户目录
-dev      #devices;用于存放设备文件
-lib      #library;存放跟文件系统中的程序运行所需要的共享库及内核模块
-mnt      #mount;系统管理员安装临时文件系统的安装点
-boot     #存放用于系统引导时使用的各种文件
-tmp      #temporary;用于存放各种临时文件
-var      #variable;用于存放运行时需要改变数据的文件
+/bin      #binaries;存放二进制可执行文件
+/sbin     #super user binaries;存放二进制可执行文件;只有root才能访问
+/etc      #etcetera;存放系统配置文件
+/usr      #unix shared resources;用于存放共享的系统资源
+/home     #存放用户文件的根目录
+/root     #超级用户目录
+/dev      #devices;用于存放设备文件
+/lib      #library;存放跟文件系统中的程序运行所需要的共享库及内核模块
+/mnt      #mount;系统管理员安装临时文件系统的安装点
+/boot     #存放用于系统引导时使用的各种文件
+/tmp      #temporary;用于存放各种临时文件
+/var      #variable;用于存放运行时需要改变数据的文件
+
+#其他特殊文件
+/proc               #process(进程)相关的虚拟文件系统;可查看和修改内核运行状况
+  /proc/1           #PID=1的进程相关信息文件夹;系统初始化进程(init/systemd)号为1,其他进程类似
+  /proc/loadavg     #前三列分别保存最近1分钟，5分钟，及15分钟的平均负载。
+  /proc/meminfo     #当前内存使用信息
+  /proc/diskstats   #磁盘I/O统计信息列表
+  /proc/net/dev     #网络流入流出统计信息
+  /proc/filesystems #支持的文件系统
+  /proc/cpuinfo     #CPU的详细信息
+  /proc/cmdline     #启动时传递至内核的启动参数,通常由grub进行传递
+  /proc/mounts      #系统当前挂在的文件系统
+  /proc/uptime      #系统运行时间
+  /poc/version      #当前运行的内核版本号等信息
+  /proc/devices     #可用设备的列表
+  /proc/modules     #已加载的模块
 
 
 #shell脚本的运行方式
@@ -97,8 +132,8 @@ var      #variable;用于存放运行时需要改变数据的文件
 
 
 #shell环境变量
-1)设置永久环境变量:修改 /etc/profile       #具体参见此文件逻辑
-2)设置用户环境变量:修改 ~/.bash_profile    #同上;ubuntu文件为 ~/.profile
+1)设置永久环境变量:修改 /etc/profile         #具体参见此文件逻辑
+2)设置用户环境变量:修改 $HOME/.bash_profile  #同上;ubuntu文件为 $HOME/.profile
 3)临时环境变量: export var="value"
 4)显示环境变量: env/set
 5)临时取消环境变量: unset var
@@ -444,7 +479,7 @@ lsof -c a -c b             #查看命令a或b开头的文件打开情况
 lsof -p 1[,2,3]            #按照一个或多个进程号查看文件打开情况
 lsof -i [tcp/udp]          #查看所有网络[tcp/udp]连接情况
 lsof -i [tcp]:8080         #查看指定[TCP]端口使用情况
-lscpu                      #显示CPU信息
+lscpu                      #显示CPU信息;单颗处理显示一组
 lsmem                      #显示内存相关信息
 lspci                      #显示pci设备相关信息
 lshw                       #显示所有硬件信息
@@ -452,6 +487,9 @@ uname -a                   #显示系统内核相关信息
 cat /etc/redhad-release    #查看红帽发行版相关信息
 cat /etc/issue             #查看发行版
 cat /etc/lsb-release       #查看Ubuntu版本
+cat /proc/cpuinfo          #显示每个CPU核心信息
+cat /proc/meminfo          #显示内存信息
+
 
 ##打包压缩
 tar [-]cvf file.tar dir  #打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程,可不加
