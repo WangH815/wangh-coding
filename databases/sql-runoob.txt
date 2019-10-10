@@ -90,21 +90,25 @@ FROM table_name
 WHERE conditions;     --带有where条件的查询语句
 
 WHERE 子句中的运算符
-=                      --等于
-<>                      --不等于。注释：在 SQL 的一些版本中,该操作符可被写成 !=
->                      --大于
-<                      --小于
+=                       --等于
+<>                      --不等于;注释:在 SQL 的一些版本中,该操作符可被写成 !=
+>                       --大于
+<                       --小于
 >=                      --大于等于
 <=                      --小于等于
-BETWEEN    ... AND ...   --在某个范围内
-LIKE                  --搜索某种模式
+BETWEEN  AND            --在某个范围内
+LIKE                    --搜索某种模式
 IN                      --指定针对某个列的多个可能值
 
-AND & OR              --条件之间的连接;与和或条件
+AND & OR                --条件之间的连接;与和或条件
 
 SELECT column_name,column_name
 FROM table_name
 ORDER BY column_name DESC,column_name ASC; --默认排序为ASC(升序),降序可用DESC
+
+SELECT column_name,column_name
+FROM table_name
+ORDER BY 1 DESC,2 ASC;                     --部分排序支持查询字段相对位置(select中),字段较少可使用;不推荐使用
 
 
 INSERT INTO
@@ -144,7 +148,11 @@ FROM table_name;
 MySQL 
 SELECT column_name(s)
 FROM table_name
-LIMIT number;
+LIMIT number;            --返回前number条数据;等价于 limit 0,number
+
+SELECT column_name(s)
+FROM table_name
+LIMIT index,number;      --从位置index(不包括)后返回number条数据;一般都会结合order by使用,一般形式为 select ... from ... order by ... limit ...
 
 Oracle
 SELECT column_name(s)
@@ -159,7 +167,7 @@ SELECT column_name(s)
 FROM table_name
 WHERE column_name LIKE pattern;
 
-常用通配
+like中常用通配
 %                       --多个(包含0,1)字符
 _                       --一个字符
 [charlist]              --字符列中的任何单一字符;[0-9]/[a-z]分别表示数字和小写字母
@@ -223,26 +231,24 @@ SELECT column_name(s)
 FROM table1 
 [INNER] JOIN table2
 ON table1.column_name = table2.column_name;    --连接条件使用 ON 关键词
+
 SELECT column_name(s)
 FROM table1, table2
 where table1.column_name = table2.column_name; --部分数据库支持这种形式
 
 LEFT JOIN
-
 SELECT column_name(s)
 FROM table1
 LEFT [OUTER] JOIN table2
 ON table1.column_name=table2.column_name;
 
 RIGHT JOIN
-
 SELECT column_name(s)
 FROM table1
 RIGHT OUTER JOIN table2
 ON table1.column_name=table2.column_name;
 
 FULL JOIN
-
 SELECT column_name(s) 
 FROM table1
 FULL [OUTER] JOIN table2
@@ -646,7 +652,7 @@ AUTO INCREMENT
 MySQL
 CREATE TABLE Persons
 (
-ID int NOT NULL AUTO_INCREMENT,  --默认地,AUTO_INCREMENT 的初始值是 1,每条新记录递增 1。
+ID int NOT NULL AUTO_INCREMENT,  --默认地,AUTO_INCREMENT 的初始值是 1,每条新记录递增 1
 LastName varchar(255) NOT NULL,  --可通过ALTER TABLE Persons AUTO_INCREMENT=100; 语句修改递增值
 FirstName varchar(255),
 Address varchar(255),
@@ -658,7 +664,7 @@ SQL Server
 CREATE TABLE Persons
 (
 ID int IDENTITY(1,1) PRIMARY KEY, --使用 IDENTITY 关键字来执行 auto-increment 任务
-LastName varchar(255) NOT NULL,   --默认IDENTITY 的开始值是 1,每条新记录递增 1。
+LastName varchar(255) NOT NULL,   --默认IDENTITY 的开始值是 1,每条新记录递增 1
 FirstName varchar(255),           --identity 改为 IDENTITY(10,5),表示初始值时10,以5递增
 Address varchar(255),
 City varchar(255)
@@ -667,15 +673,15 @@ City varchar(255)
 Access
 CREATE TABLE Persons
 (
-ID Integer PRIMARY KEY AUTOINCREMENT, --使用 AUTOINCREMENT 关键字来执行 auto-increment 任务。
-LastName varchar(255) NOT NULL,       --默认AUTOINCREMENT 的开始值是 1,每条新记录递增 1。
-FirstName varchar(255),               --AUTOINCREMENT 改为 AUTOINCREMENT(10,5)。
+ID Integer PRIMARY KEY AUTOINCREMENT, --使用 AUTOINCREMENT 关键字来执行 auto-increment 任务
+LastName varchar(255) NOT NULL,       --默认AUTOINCREMENT 的开始值是 1,每条新记录递增 1
+FirstName varchar(255),               --AUTOINCREMENT 改为 AUTOINCREMENT(10,5)
 Address varchar(255),
 City varchar(255)
 );
 
 Oracle
---通过 sequence 对象(该对象生成数字序列)创建 auto-increment 字段。
+--通过 sequence 对象(该对象生成数字序列)创建 auto-increment 字段
 
 CREATE SEQUENCE seq_person  --指定序列名
 MINVALUE 1                  --设置最小
@@ -709,24 +715,24 @@ Date 函数
 MySQL Date 函数
 
 函数            描述
-NOW()            返回当前的日期和时间
-CURDATE()        返回当前的日期
-CURTIME()        返回当前的时间
-DATE()            提取日期或日期/时间表达式的日期部分
-EXTRACT()        返回日期/时间的单独部分
-DATE_ADD()        向日期添加指定的时间间隔
-DATE_SUB()        从日期减去指定的时间间隔
-DATEDIFF()        返回两个日期之间的天数
-DATE_FORMAT()    用不同的格式显示日期/时间
+NOW()           返回当前的日期和时间
+CURDATE()       返回当前的日期
+CURTIME()       返回当前的时间
+DATE()          提取日期或日期/时间表达式的日期部分
+EXTRACT()       返回日期/时间的单独部分
+DATE_ADD()      向日期添加指定的时间间隔
+DATE_SUB()      从日期减去指定的时间间隔
+DATEDIFF()      返回两个日期之间的天数
+DATE_FORMAT()   用不同的格式显示日期/时间
 
 SQL Server Date 函数
 
 函数         描述
-GETDATE()     返回当前的日期和时间
-DATEPART()     返回日期/时间的单独部分
-DATEADD()     在日期中添加或减去指定的时间间隔
-DATEDIFF()     返回两个日期之间的时间
-CONVERT()     用不同的格式显示日期/时间
+GETDATE()    返回当前的日期和时间
+DATEPART()   返回日期/时间的单独部分
+DATEADD()    在日期中添加或减去指定的时间间隔
+DATEDIFF()   返回两个日期之间的时间
+CONVERT()    用不同的格式显示日期/时间
 
 Date 数据类型
 MySQL
@@ -743,11 +749,11 @@ TIMESTAMP      --格式：时间戳类型
 
 
 NULL
---表的列默认可以存放 NULL 值。
---NULL 值的处理方式与其他值不同。
---NULL 用作未知的或不适用的值的占位符。
---无法比较 NULL 和 0；它们是不等价的。
---无法使用比较运算符来测试 NULL 值,比如 =、< 或 <>。
+--表的列默认可以存放 NULL 值
+--NULL 值的处理方式与其他值不同
+--NULL 用作未知的或不适用的值的占位符
+--无法比较 NULL 和 0;它们是不等价的
+--无法使用比较运算符来测试 NULL 值,比如 =、< 或 <>
 
 IS NULL
 
@@ -785,44 +791,44 @@ FROM table_name;
 通用数据类型
 
 数据类型                描述
-CHARACTER(n)            字符/字符串。固定长度 n。
+CHARACTER(n)            字符/字符串。固定长度 n
 VARCHAR(n) 或
-CHARACTER VARYING(n)    字符/字符串。可变长度。最大长度 n。
-BINARY(n)                二进制串。固定长度 n。
-BOOLEAN                    存储 TRUE 或 FALSE 值
+CHARACTER VARYING(n)    字符/字符串;可变长度,最大长度 n
+BINARY(n)               二进制串;固定长度 n
+BOOLEAN                 存储 TRUE 或 FALSE 值
 VARBINARY(n) 或
-BINARY VARYING(n)        二进制串。可变长度。最大长度 n。
-INTEGER(p)                整数值(没有小数点)。精度 p。
-SMALLINT                整数值(没有小数点)。精度 5。
-INTEGER                    整数值(没有小数点)。精度 10。
-BIGINT                    整数值(没有小数点)。精度 19。
-DECIMAL(p,s)            精确数值,精度 p,小数点后位数 s。例如：decimal(5,2) 是一个小数点前有 3 位数小数点后有 2 位数的数字。
+BINARY VARYING(n)       二进制串。可变长度。最大长度 n
+INTEGER(p)              整数值(没有小数点)。精度 p
+SMALLINT                整数值(没有小数点)。精度 5
+INTEGER                 整数值(没有小数点)。精度 10
+BIGINT                  整数值(没有小数点)。精度 19
+DECIMAL(p,s)            精确数值,精度 p,小数点后位数 s。例如：decimal(5,2) 是一个小数点前有 3 位数小数点后有 2 位数的数字
 NUMERIC(p,s)            精确数值,精度 p,小数点后位数 s。(与 DECIMAL 相同)
-FLOAT(p)                近似数值,尾数精度 p。一个采用以 10 为基数的指数计数法的浮点数。该类型的 size 参数由一个指定最小精度的单一数字组成。
-REAL                    近似数值,尾数精度 7。
-FLOAT                    近似数值,尾数精度 16。
-DOUBLE PRECISION        近似数值,尾数精度 16。
-DATE                    存储年、月、日的值。
-TIME                    存储小时、分、秒的值。
-TIMESTAMP                存储年、月、日、小时、分、秒的值。
-INTERVAL                由一些整数字段组成,代表一段时间,取决于区间的类型。
-ARRAY                    元素的固定长度的有序集合
+FLOAT(p)                近似数值,尾数精度 p。一个采用以 10 为基数的指数计数法的浮点数。该类型的 size 参数由一个指定最小精度的单一数字组成
+REAL                    近似数值,尾数精度 7
+FLOAT                   近似数值,尾数精度 16
+DOUBLE PRECISION        近似数值,尾数精度 16
+DATE                    存储年、月、日的值
+TIME                    存储小时、分、秒的值
+TIMESTAMP               存储年、月、日、小时、分、秒的值
+INTERVAL                由一些整数字段组成,代表一段时间,取决于区间的类型
+ARRAY                   元素的固定长度的有序集合
 MULTISET                元素的可变长度的无序集合
-XML                        存储 XML 数据
+XML                     存储 XML 数据
 
 SQL 数据类型快速参考手册
 不同的数据库对数据类型定义提供不同的选择。
 
-数据类型            Access                  SQLServer                 Oracle        MySQL         PostgreSQL
-boolean                Yes/No                  Bit                     Byte        N/A             Boolean
-integer                Number(integer)          Int                     Number        Int    Integer     Int Integer                                                                
-float                Number(single)          Float Real             Number        Float         Numeric                                                    
-currency            Currency              Money                     N/A        N/A             Money
-string (fixed)        N/A                      Char                     Char        Char         Char
-string (variable)    Text(<256)/Memo(65k+) Varchar                 Varchar    Varchar         Varchar                                    
-binary object        OLE/Object/Memo/      Binary(fixed up to 8K) Long        Blob         Binary
-                                          Varbinary (<8K)         Raw        Text         Varbinary
-                                          Image (<2GB)            
+数据类型            Access                  SQLServer               Oracle     MySQL         PostgreSQL
+boolean             Yes/No                  Bit                     Byte       N/A           Boolean
+integer             Number(integer)         Int                     Number     Int/Integer   Int/Integer                                                                
+float               Number(single)          Float Real              Number     Float         Numeric                                                    
+currency            Currency                Money                   N/A        N/A           Money
+string (fixed)      N/A                     Char                    Char       Char          Char
+string (variable)   Text(<256)/Memo(65k+)   Varchar                 Varchar    Varchar       Varchar                                    
+binary object       OLE/Object/Memo/        Binary(fixed up to 8K)  Long       Blob          Binary
+                                            Varbinary (<8K)         Raw        Text          Varbinary
+                                            Image (<2GB)            
 
 用于各种数据库的数据类型和范围。
 
@@ -831,17 +837,17 @@ Microsoft Access
 Text            用于文本或文本与数字的组合。最多 255 个字符。    
 Memo            Memo用于更大数量的文本。最多存储 65,536 个字符。注释：无法对 memo 字段进行排序。不过它们是可搜索的。    
 Byte            允许 0 到 255 的数字。1 字节
-Integer            允许介于 -32,768 与 32,767 之间的全部数字。2 字节
+Integer         允许介于 -32,768 与 32,767 之间的全部数字。2 字节
 Long            允许介于 -2,147,483,648 与 2,147,483,647 之间的全部数字。4 字节
-Single            单精度浮点。处理大多数小数。4 字节
-Double            双精度浮点。处理大多数小数。8 字节
+Single          单精度浮点。处理大多数小数。4 字节
+Double          双精度浮点。处理大多数小数。8 字节
 Currency        用于货币。支持 15 位的元,外加 4 位小数。提示：您可以选择使用哪个国家的货币。8 字节
-AutoNumber        AutoNumber 字段自动为每条记录分配数字,通常从 1 开始。4 字节
-Date/Time        用于日期和时间    8 字节
-Yes/No            逻辑字段,可以显示为 Yes/No、True/False 或 On/Off。在代码中,使用常量 True 和 False (等价于 1 和 0)。注释：Yes/No 字段中不允许 Null 值.1 比特
-Ole Object        可以存储图片、音频、视频或其他 BLOBs(Binary Large OBjects)。=最多 1GB
-Hyperlink        包含指向其他文件的链接,包括网页。    
-Lookup Wizard    允许您创建一个可从下拉列表中进行选择的选项列表。=4 字节
+AutoNumber      AutoNumber 字段自动为每条记录分配数字,通常从 1 开始。4 字节
+Date/Time       用于日期和时间    8 字节
+Yes/No          逻辑字段,可以显示为 Yes/No、True/False 或 On/Off。在代码中,使用常量 True 和 False (等价于 1 和 0)。注释：Yes/No 字段中不允许 Null 值.1 比特
+Ole Object      可以存储图片、音频、视频或其他 BLOBs(Binary Large OBjects)。=最多 1GB
+Hyperlink       包含指向其他文件的链接,包括网页。    
+Lookup Wizard   允许您创建一个可从下拉列表中进行选择的选项列表。=4 字节
 
 MySQL 数据类型
 在 MySQL 中,有三种主要的类型：Text(文本)、Number(数字)和 Date/Time(日期/时间)类型。
@@ -849,13 +855,13 @@ MySQL 数据类型
 Text 类型：
 
 数据类型          描述
-CHAR(size)          保存固定长度的字符串(可包含字母、数字以及特殊字符)。在括号中指定字符串的长度。最多 255 个字符。
-VARCHAR(size)      保存可变长度的字符串(可包含字母、数字以及特殊字符)。在括号中指定字符串的最大长度。最多 255 个字符。注释：如果值的长度大于 255,则被转换为 TEXT 类型。
+CHAR(size)        保存固定长度的字符串(可包含字母、数字以及特殊字符)。在括号中指定字符串的长度。最多 255 个字符。
+VARCHAR(size)     保存可变长度的字符串(可包含字母、数字以及特殊字符)。在括号中指定字符串的最大长度。最多 255 个字符。注释：如果值的长度大于 255,则被转换为 TEXT 类型。
 TINYTEXT          存放最大长度为 255 个字符的字符串。
 TEXT              存放最大长度为 65,535 个字符的字符串。
-BLOB               用于 BLOBs(Binary Large OBjects)。存放最多 65,535 字节的数据。
-MEDIUMTEXT          存放最大长度为 16,777,215 个字符的字符串。
-MEDIUMBLOB          用于 BLOBs(Binary Large OBjects)。存放最多 16,777,215 字节的数据。
+BLOB              用于 BLOBs(Binary Large OBjects)。存放最多 65,535 字节的数据。
+MEDIUMTEXT        存放最大长度为 16,777,215 个字符的字符串。
+MEDIUMBLOB        用于 BLOBs(Binary Large OBjects)。存放最多 16,777,215 字节的数据。
 LONGTEXT          存放最大长度为 4,294,967,295 个字符的字符串。
 LONGBLOB          用于 BLOBs (Binary Large OBjects)。存放最多 4,294,967,295 字节的数据。
 ENUM(x,y,z,etc.)  允许您输入可能值的列表。可以在 ENUM 列表中列出最大 65535 个值。如果列表中不存在插入的值,则插入空值。这些值是按照您输入的顺序排序的。
@@ -865,14 +871,14 @@ SET    与 ENUM 类似,不同的是,SET 最多只能包含 64 个列表项且 SE
 Number 类型：
 
 数据类型         描述
-TINYINT(size)     带符号-128到127 ,无符号0到255。
-SMALLINT(size)     带符号范围-32768到32767,无符号0到65535, size 默认为 6。
-MEDIUMINT(size)     带符号范围-8388608到8388607,无符号的范围是0到16777215。 size 默认为9
-INT(size)         带符号范围-2147483648到2147483647,无符号的范围是0到4294967295。 size 默认为 11
+TINYINT(size)    带符号-128到127 ,无符号0到255。
+SMALLINT(size)   带符号范围-32768到32767,无符号0到65535, size 默认为 6。
+MEDIUMINT(size)  带符号范围-8388608到8388607,无符号的范围是0到16777215。 size 默认为9
+INT(size)        带符号范围-2147483648到2147483647,无符号的范围是0到4294967295。 size 默认为 11
 BIGINT(size)     带符号的范围是-9223372036854775808到9223372036854775807,无符号的范围是0到18446744073709551615。size 默认为 20
-FLOAT(size,d)     带有浮动小数点的小数字。在 size 参数中规定显示最大位数。在 d 参数中规定小数点右侧的最大位数。
-DOUBLE(size,d)     带有浮动小数点的大数字。在 size 参数中规显示定最大位数。在 d 参数中规定小数点右侧的最大位数。
-DECIMAL(size,d)     作为字符串存储的 DOUBLE 类型,允许固定的小数点。在 size 参数中规定显示最大位数。在 d 参数中规定小数点右侧的最大位数。
+FLOAT(size,d)    带有浮动小数点的小数字。在 size 参数中规定显示最大位数。在 d 参数中规定小数点右侧的最大位数。
+DOUBLE(size,d)   带有浮动小数点的大数字。在 size 参数中规显示定最大位数。在 d 参数中规定小数点右侧的最大位数。
+DECIMAL(size,d)  作为字符串存储的 DOUBLE 类型,允许固定的小数点。在 size 参数中规定显示最大位数。在 d 参数中规定小数点右侧的最大位数。
 
 注意：以上的 size 代表的并不是存储在数据库中的具体的长度,如 int(4) 并不是只能存储4个长度的数字。
 int(M) 跟 int 数据类型是相同的。
@@ -880,14 +886,14 @@ int(M) 跟 int 数据类型是相同的。
 Date 类型：
 
 数据类型     描述
-DATE()         日期。格式：YYYY-MM-DD。
+DATE()       日期。格式：YYYY-MM-DD。
              支持的范围是从 '1000-01-01' 到 '9999-12-31'
-DATETIME()     日期和时间的组合。格式：YYYY-MM-DD HH:MM:SS。
+DATETIME()   日期和时间的组合。格式：YYYY-MM-DD HH:MM:SS。
              支持的范围是从 '1000-01-01 00:00:00' 到 '9999-12-31 23:59:59'
-TIMESTAMP()     时间戳。TIMESTAMP 值使用 Unix 纪元('1970-01-01 00:00:00' UTC) 至今的秒数来存储。格式：YYYY-MM-DD HH:MM:SS
+TIMESTAMP()  时间戳。TIMESTAMP 值使用 Unix 纪元('1970-01-01 00:00:00' UTC) 至今的秒数来存储。格式：YYYY-MM-DD HH:MM:SS
              支持的范围是从 '1970-01-01 00:00:01' UTC 到 '2038-01-09 03:14:07' UTC
-TIME()         时间。格式：HH:MM:SS。支持的范围是从 '-838:59:59' 到 '838:59:59'
-YEAR()         2 位或 4 位格式的年。
+TIME()       时间。格式：HH:MM:SS。支持的范围是从 '-838:59:59' 到 '838:59:59'
+YEAR()       2 位或 4 位格式的年。
              4 位格式所允许的值：1901 到 2155。2 位格式所允许的值：70 到 69,表示从 1970 到 2069。
 
 即使DATETIME 和 TIMESTAMP 返回相同的格式,它们的工作方式很不同。在 INSERT 或 UPDATE 查询中,
@@ -897,32 +903,32 @@ TIMESTAMP 自动把自身设置为当前的日期和时间。TIMESTAMP 也接受
 SQL Server
 String
 数据类型         描述/存储
-char(n)             固定长度的字符串。最多 8,000 个字符。Defined width
-varchar(n)         可变长度的字符串。最多 8,000 个字符。2 bytes + number of chars
+char(n)          固定长度的字符串。最多 8,000 个字符。Defined width
+varchar(n)       可变长度的字符串。最多 8,000 个字符。2 bytes + number of chars
 varchar(max)     可变长度的字符串。最多 1,073,741,824 个字符。2 bytes + number of chars
 text             可变长度的字符串。最多 2GB 文本数据。4 bytes + number of chars
-nchar             固定长度的 Unicode 字符串。最多 4,000 个字符。    Defined width x 2
+nchar            固定长度的 Unicode 字符串。最多 4,000 个字符。    Defined width x 2
 nvarchar         可变长度的 Unicode 字符串。最多 4,000 个字符。    
-nvarchar(max)     可变长度的 Unicode 字符串。最多 536,870,912 个字符。    
-ntext             可变长度的 Unicode 字符串。最多 2GB 文本数据。    
-bit                 允许 0、1 或 NULL    
-binary(n)         固定长度的二进制字符串。最多 8,000 字节。    
-varbinary         可变长度的二进制字符串。最多 8,000 字节。    
-varbinary(max)     可变长度的二进制字符串。最多 2GB。    
-image             可变长度的二进制字符串。最多 2GB。
+nvarchar(max)    可变长度的 Unicode 字符串。最多 536,870,912 个字符。    
+ntext            可变长度的 Unicode 字符串。最多 2GB 文本数据。    
+bit              允许 0、1 或 NULL    
+binary(n)        固定长度的二进制字符串。最多 8,000 字节。    
+varbinary        可变长度的二进制字符串。最多 8,000 字节。    
+varbinary(max)   可变长度的二进制字符串。最多 2GB。    
+image            可变长度的二进制字符串。最多 2GB。
     
 Number
 数据类型        描述/存储
-tinyint            允许从 0 到 255 的所有数字。1 字节
+tinyint         允许从 0 到 255 的所有数字。1 字节
 smallint        允许介于 -32,768 与 32,767 的所有数字。    2 字节
-int                允许介于 -2,147,483,648 与 2,147,483,647 的所有数字。4 字节
-bigint            允许介于 -9,223,372,036,854,775,808 与 9,223,372,036,854,775,807 之间的所有数字。8 字节
+int             允许介于 -2,147,483,648 与 2,147,483,647 的所有数字。4 字节
+bigint          允许介于 -9,223,372,036,854,775,808 与 9,223,372,036,854,775,807 之间的所有数字。8 字节
 decimal(p,s)    固定精度和比例的数字。允许从 -10^38 +1 到 10^38 -1 之间的数字。5-17 字节
                 p 参数指示可以存储的最大位数(小数点左侧和右侧)。
                 s 参数指示小数点右侧存储的最大位数。s 必须是 0 到 p 之间的值。默认是 0。
 numeric(p,s)    固定精度和比例的数字。允许从 -10^38 +1 到 10^38 -1 之间的数字。p,s限制如上。5-17 字节
-smallmoney        介于 -214,748.3648 与 214,748.3647 之间的货币数据。    4 字节
-money            介于 -922,337,203,685,477.5808 与 922,337,203,685,477.5807 之间的货币数据。    8 字节
+smallmoney      介于 -214,748.3648 与 214,748.3647 之间的货币数据。    4 字节
+money           介于 -922,337,203,685,477.5808 与 922,337,203,685,477.5807 之间的货币数据。    8 字节
 float(n)        从 -1.79E + 308 到 1.79E + 308 的浮动精度数字数据。4 或 8 字节
                 n 参数指示该字段保存 4 字节还是 8 字节。float(24) 保存 4 字节,而 float(53) 保存 8 字节。n 的默认值是 53。
 real            从 -3.40E + 38 到 3.40E + 38 的浮动精度数字数据。4 字节
@@ -930,21 +936,21 @@ real            从 -3.40E + 38 到 3.40E + 38 的浮动精度数字数据。4 �
 Date 类型：
 数据类型         描述/存储
 datetime         从 1753 年 1 月 1 日 到 9999 年 12 月 31 日,精度为 3.33 毫秒。    8 字节
-datetime2         从 1753 年 1 月 1 日 到 9999 年 12 月 31 日,精度为 100 纳秒。    6-8 字节
-smalldatetime     从 1900 年 1 月 1 日 到 2079 年 6 月 6 日,精度为 1 分钟。    4 字节
+datetime2        从 1753 年 1 月 1 日 到 9999 年 12 月 31 日,精度为 100 纳秒。    6-8 字节
+smalldatetime    从 1900 年 1 月 1 日 到 2079 年 6 月 6 日,精度为 1 分钟。    4 字节
 date             仅存储日期。从 0001 年 1 月 1 日 到 9999 年 12 月 31 日。    3 bytes
 time             仅存储时间。精度为 100 纳秒。    3-5 字节
-datetimeoffset     与 datetime2 相同,外加时区偏移。    8-10 字节
-timestamp         存储唯一的数字,每当创建或修改某行时,该数字会更新。timestamp 值基于内部时钟,
+datetimeoffset   与 datetime2 相同,外加时区偏移。    8-10 字节
+timestamp        存储唯一的数字,每当创建或修改某行时,该数字会更新。timestamp 值基于内部时钟,
                  不对应真实时间。每个表只能有一个 timestamp 变量。     
 
 其他数据类型：
 数据类型            描述
-sql_variant            存储最多 8,000 字节不同数据类型的数据,除了 text、ntext 以及 timestamp。
+sql_variant         存储最多 8,000 字节不同数据类型的数据,除了 text、ntext 以及 timestamp。
 uniqueidentifier    存储全局唯一标识符 (GUID)。
-xml                    存储 XML 格式化数据。最多 2GB。
-cursor                存储对用于数据库操作的指针的引用。
-table                存储结果集,供稍后处理。
+xml                 存储 XML 格式化数据。最多 2GB。
+cursor              存储对用于数据库操作的指针的引用。
+table               存储结果集,供稍后处理。
 
 
 函数
