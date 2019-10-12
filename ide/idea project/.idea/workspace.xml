@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../docker.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../docker.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/idea project.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="55" column="23" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
+            <state relative-caret-position="445">
+              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,9 +47,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="634" />
-    <option name="y" value="46" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="29" />
+    <option name="y" value="22" />
     <option name="width" value="1346" />
     <option name="height" value="728" />
   </component>
@@ -150,16 +140,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1570774082248</updated>
-      <workItem from="1570774085686" duration="5942000" />
+      <workItem from="1570774085686" duration="6764000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5942000" />
+    <option name="totallyTimeSpent" value="6764000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="669" y="21" width="1346" height="728" extended-state="0" />
-    <editor active="true" />
+    <frame x="29" y="22" width="1346" height="728" extended-state="1" />
     <layout>
       <window_info id="Designer" />
       <window_info id="Image Layers" />
@@ -178,7 +167,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32996634" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32996634" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -214,8 +203,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="55" column="23" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
+        <state relative-caret-position="445">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

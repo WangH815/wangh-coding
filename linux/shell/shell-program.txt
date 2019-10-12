@@ -13,7 +13,7 @@ Shell是C语言编写,既是命令语言又是程序设计语言;通过Shell提�
 Bourne Shell(/usr/bin/sh或/bin/sh)
 Bourne Again Shell(/bin/bash)      #适用范围最广,绝大多数Linux发行版默认Shell
 C Shell(/usr/bin/csh)
-K Shell(/usr/bin/ksh)
+K Shell(/usr/bin/ksh)              #Unix系统默认Shell
 Shell for Root(/sbin/sh)
 zsh                                #完全兼容bash
 dsh
