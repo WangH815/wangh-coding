@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MyTest {
@@ -47,12 +49,71 @@ public class MyTest {
         System.out.println(Integer.MAX_VALUE);
         System.out.println((float) Integer.MAX_VALUE);
         System.out.println(((2 << 30) - 1));
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("q：退出");
-        do {
-            c = (char) br.read();
-            System.out.println(c);
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        System.out.println("q：退出");
+//        do {
+//            c = (char) br.read();
+//            System.out.println(c);
+//
+//        } while (c != 'q');
 
-        } while (c != 'q');
+        String line = "aacbdsdfaaerrpp";     //待测试文本
+        String reg = "rr";                   //正则表达式
+        Pattern pat = Pattern.compile(reg);  //创建Pattern(模式组)对象;正则表达式编译对象
+        Matcher mat = pat.matcher(line);     //创建Matcher(捕获组)对象;正则处理后对象
+        if (mat.find()) {
+            System.out.println(mat.group());
+        }
+
+        String REGEX = "\\bcat\\b";
+        String INPUT = "cat cat cat cattie cat";
+        Pattern pp = Pattern.compile(REGEX);
+        Matcher mm = pp.matcher(INPUT);
+        int count = 0;
+        while(mm.find()){
+            count++;
+            System.out.println("count:"+count);
+            System.out.print(mm.start()+"\t");
+            System.out.println(mm.end());
+        }
+
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        String str1;
+//        do{
+//            str1 = br.readLine();
+//            System.out.println(str);
+//        }while(!str.equals("end"));
+
+        OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("1.txt"),"UTF-8");
+        osw.append("sdfasdf安慰");
+        osw.close();
+
+//        Scanner sc = new Scanner(System.in);
+//        if (sc.hasNext()){
+//            String str2 = sc.next();
+//        }
+
+        CC c1 = new CC();
+        c1.f1();
+    }
+
+}
+
+
+class AA{
+    void f1(){
+        System.out.println("AA");
+    }
+}
+
+class BB extends AA{
+    void f1(){
+        System.out.println("BB");
+    }
+}
+
+class CC extends AA{
+    void f1(){
+        System.out.println("CC");
     }
 }
