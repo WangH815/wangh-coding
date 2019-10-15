@@ -6,8 +6,7 @@ import java.io.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,10 +69,10 @@ public class MyTest {
         Pattern pp = Pattern.compile(REGEX);
         Matcher mm = pp.matcher(INPUT);
         int count = 0;
-        while(mm.find()){
+        while (mm.find()) {
             count++;
-            System.out.println("count:"+count);
-            System.out.print(mm.start()+"\t");
+            System.out.println("count:" + count);
+            System.out.print(mm.start() + "\t");
             System.out.println(mm.end());
         }
 
@@ -84,7 +83,7 @@ public class MyTest {
 //            System.out.println(str);
 //        }while(!str.equals("end"));
 
-        OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("1.txt"),"UTF-8");
+        OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("1.txt"), "UTF-8");
         osw.append("sdfasdf安慰");
         osw.close();
 
@@ -93,27 +92,53 @@ public class MyTest {
 //            String str2 = sc.next();
 //        }
 
-        CC c1 = new CC();
-        c1.f1();
+        List<String> list = new ArrayList<String>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
+        list.add("e");
+
+        for (String x : list) {
+            System.out.println(x);
+        }
+
+        Iterator<String> ite = list.iterator();
+        while (ite.hasNext()) {
+            System.out.println(ite.next());
+        }
+
+        String[] strArray = new String[list.size()];
+        list.toArray(strArray);
+        for (String str11 : strArray) {
+            System.out.println(str11);
+        }
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put("1", "v1");
+        map.put("2", "v2");
+        map.put("3", "v3");
+        map.put("4", "v4");
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + "=" + entry.getValue());
+        }
+
+        for (String asdfa:map.values()){
+            System.out.println(asdfa);
+        }
+
+        myPrint(new Integer[]{1,2,3});
+        myPrint(new String[]{"a","b","c"});
+        myPrint(new Double[]{1d,2d,3d});
+
     }
 
-}
-
-
-class AA{
-    void f1(){
-        System.out.println("AA");
-    }
-}
-
-class BB extends AA{
-    void f1(){
-        System.out.println("BB");
-    }
-}
-
-class CC extends AA{
-    void f1(){
-        System.out.println("CC");
+    static <E> void myPrint(E[] inputArray){
+        for(E element:inputArray){
+            System.out.printf("%s\t",element);
+        }
+        System.out.println();
     }
 }
