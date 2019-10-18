@@ -18,7 +18,7 @@
         <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="368">
-              <caret line="138" column="34" lean-forward="true" selection-start-line="138" selection-start-column="34" selection-end-line="138" selection-end-column="34" />
+              <caret line="138" column="34" selection-start-line="138" selection-start-column="34" selection-end-line="138" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -43,9 +43,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="56" />
-    <option name="y" value="64" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="27" />
+    <option name="y" value="33" />
     <option name="width" value="1346" />
     <option name="height" value="742" />
   </component>
@@ -134,14 +134,15 @@
       <workItem from="1571039338961" duration="9324000" />
       <workItem from="1571166611596" duration="15000" />
       <workItem from="1571211533807" duration="839000" />
+      <workItem from="1571298854285" duration="591000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17539000" />
+    <option name="totallyTimeSpent" value="18130000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="56" y="64" width="1346" height="742" extended-state="1" />
+    <frame x="27" y="33" width="1346" height="742" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.21617419" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -190,7 +191,7 @@
     <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
-          <caret line="138" column="34" lean-forward="true" selection-start-line="138" selection-start-column="34" selection-end-line="138" selection-end-column="34" />
+          <caret line="138" column="34" selection-start-line="138" selection-start-column="34" selection-end-line="138" selection-end-column="34" />
         </state>
       </provider>
     </entry>
