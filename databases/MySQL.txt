@@ -8,6 +8,12 @@ https://www.yiibai.com/mysql/transaction.html      --易百教程mysql
 https://dev.mysql.com/doc/refman/5.7/en/           --MySQL 5.7 官方文档
 
 
+注释:
+tb/tb1     --简写表名
+db/db1     --简写数据库名
+col/col1   --简写字段名
+
+
 SQL语言分类
 1.DDL (Data Definition Language 数据定义语言)
 create   --创建对象(数据库/表/视图等)
@@ -24,16 +30,33 @@ grant    --权限分配
 revoke   --权限回收
 
 
+select执行顺序
+1.from/join    --查询单个查询对象(表或视图)/组合对象(多表联查)
+2.where        --过滤条件
+3.group by     --分组字段
+4.having       --结合group by使用;用于过滤聚合条件
+5.select       --显示字段/函数/计算表达式
+6.order by     --排序
+7.limit        --截取数据记录
+
+
 数据库连接及管理(Linux平台)
-mysql -uroot -p     --以root用户登录本地数据库;-uroot等价于-u root
+mysql -uroot -p     --以root用户登录本地数据库;-uroot等价于-u root,其他类似
 mysql -uroot@ip -p  --以root用户登录远程数据库
 
+
 show databases;            --显示数据库列表
-use db;                    --选择db数据库,之后操作只针对该数据库
 show tables;               --显示当前数据库下数据表列表
 show column from tb;       --显示tb表字段信息(Field/Type/Null/Key/Default/Extra)
 show index from tb;        --显示索引信息
 show table status from tb; --显示表状态
+show character set;        --显示支持的字符集
+
+use db;                    --选择db数据库,之后操作只针对该数据库;等价于 use database db
+
+
+
+
 
 
 
