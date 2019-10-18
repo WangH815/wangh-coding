@@ -1,0 +1,35 @@
+
+win10使用UEFI+GPT方案安装系统
+
+准备:
+1.大于等于8G的U盘
+2.官方原版镜像(可从 i tell you 网站下载)
+3.系统盘为GPT分区格式
+
+
+情况一:镜像中 /sources/install.wim(或install.esd) 文件大小小于4G
+  方案:直接打开镜像将所有文件写入U盘(FAT32格式)即可使用
+
+
+情况二:镜像中 /sources/install.wim(或install.esd) 文件大小大于4G
+方案:
+a)用Rufus制作启动盘
+步骤:
+“分区方案和目标系统类型”选择“用于UEFI计算机的GPT分区方案”，“文件系统”选择“NTFS”，然后选择镜像，点开始就行。
+
+b)分割镜像
+步骤：
+1.解压ISO镜像到随便哪个本地硬盘的哪个位置
+2.把解压出来的sources文件夹里的install.wim移到C盘根目录
+3.以管理员身份打开CMD（win10系统可以用PS），输入以下命令
+Dism /Split-Image /ImageFile:C:\install.wim /SWMFile:C:\install.swm /FileSize:2500
+等待操作完成（这里的2500可以随便改，只要比4096小就行）
+4.把生成的两个后缀名为swm的文件移到sources文件夹里，删除原来的install.wim文件
+5.把替换后的解压得到的全部文件移到FAT32格式的U盘根目录即可
+
+c)用imageX导出镜像
+install.wim里面包含了多个版本，可以只把你需要的版本导出，然后替换回去就行
+这个方法有局限性，如果导出的镜像还是大于4G就没办法了
+
+d)wim转成ESD
+将wim转换成esd，然后替换回去就行;可使用DISM++软件
