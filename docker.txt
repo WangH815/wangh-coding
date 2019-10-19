@@ -17,7 +17,7 @@ docker inspect CONTAINER_NAME[:VERSION]/ID   #查看本地镜像详细信息,可
 #使用教程 
 环境：Ubuntu 18.04
 
-1.安装和卸载docker       #可暂时将阿里镜像源改为官方源
+1.安装和卸载docker       #可暂时将阿里镜像源改为官方源;修改参考Ubuntu使用手册
 apt install docker.io    #安装docker
 apt remove docker.io     #卸载
 docker -v/--version      #查看docker版本
@@ -100,7 +100,7 @@ docker run
 -d                            #后台运行,守护式容器方式
 -i                            #表示运行容器
 -t                            #表示容器启动后会进入其命令行,加入 -it,创建并登录进去,即分配一个伪终端
---restart always              #设置跟随docker进程自启动
+--restart always              #设置跟随docker进程自启动;也可通过 docker update --restart always xx 修改
 
 交互式容器
 docker run -it --name=mycentos7 centos:7 /bin/bash  
@@ -108,7 +108,7 @@ exit                                                      #命令可退出当前
 
 守护式容器
 docker run -di --name=mycentos7 centos:7                  #创建容器
-docker exec -it CONTAINER_NAME/ID /bin/bash               #进入/登录容器
+docker exec -it CONTAINER_NAME/ID /bin/bash               #进入/登录容器shell环境
 docker exec -it CONTAINER_NAME/ID ping CONTAINER_NAME/ID  #一个容器ping另外一个容器
 exit 退出容器后容器仍然在运行
 
@@ -132,16 +132,41 @@ docker run -di -v 宿主机目录:容器目录
 获取容器或镜像元数据(详细信息)
 docker inspect CONTAINER_NAME/IMAGE_NAME
 
-Mysql5.7部署
-1.下载镜像
+
+Mysql 5.7
+1.拉取镜像
 docker pull mysql:5.7
 2.创建守护容器
-docker run -di --name docker_mysql5.7 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root mysql:5.7
--p 代表端口映射,格式为 宿主机映射端口:容器运行端口
--e 代表添加环境变量, MYSQL_ROOT_PASSWORD是root用户的登录密码
+docker run -di --name docker_mysql57 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root mysql:5.7
+# -p 代表端口映射,格式为 宿主机映射端口:容器运行端口
+# -e 代表添加环境变量, MYSQL_ROOT_PASSWORD是root用户的登录密码
 3.登录容器
-docker exec -it docker_mysql5.7 /bin/bash #登录容器
-mysql -uroot -p                           #登录mysql
+方式一:
+docker exec -it docker_mysql57 /bin/bash       #登录容器shell环境
+mysql -uroot -p                                #登录mysql
+方式二:
+docker exec -it docker_mysql57 mysql -uroot -p #直接登录容器mysql
 
-#注:docker run xx --restart always 可指定容器开机自启动;也可在后续修改 docker update --restart always xx
+
+
+Redis 5
+1.拉取镜像
+docker pull redis:5
+2.创建容器
+mkdir -p ~/redis/data   #创建本地目录
+#创建容器
+docker run \
+--name docker_redis5 \
+-p 6379:6379 \
+-v ~/redis/data:/data \
+-di redis:5 redis-server --appendonly yes
+3.登录容器
+方式一:
+docker exec -it docker_redis5 /bin/bash   #登录容器shell环境
+redis-cli                                 #登录redis命令行
+方式二:
+docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
+
+
+
 

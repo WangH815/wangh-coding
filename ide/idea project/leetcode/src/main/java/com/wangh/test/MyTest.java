@@ -133,6 +133,9 @@ public class MyTest {
         myPrint(new String[]{"a","b","c"});
         myPrint(new Double[]{1d,2d,3d});
 
+
+
+
     }
 
     static <E> void myPrint(E[] inputArray){
