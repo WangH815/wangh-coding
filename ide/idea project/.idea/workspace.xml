@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../docker.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../docker.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
-              <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
+              <caret line="147" selection-start-line="147" selection-end-line="147" />
             </state>
           </provider>
         </entry>
@@ -46,9 +45,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="602" />
-    <option name="y" value="34" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="188" />
+    <option name="y" value="41" />
     <option name="width" value="1346" />
     <option name="height" value="742" />
   </component>
@@ -57,32 +56,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="idea project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="idea project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="idea project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="wangh" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -139,14 +113,15 @@
       <workItem from="1571211533807" duration="839000" />
       <workItem from="1571298854285" duration="591000" />
       <workItem from="1571483422611" duration="672000" />
+      <workItem from="1571545893766" duration="81000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18802000" />
+    <option name="totallyTimeSpent" value="18883000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="602" y="34" width="1346" height="742" extended-state="1" />
+    <frame x="188" y="41" width="1346" height="742" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.21617419" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -195,7 +170,7 @@
     <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
-          <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
+          <caret line="147" selection-start-line="147" selection-end-line="147" />
         </state>
       </provider>
     </entry>
