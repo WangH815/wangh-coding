@@ -7,10 +7,12 @@ Docker支持将软件编译成一个镜像（image）,在这个镜像里做好�
 
 
 #常见操作
+docker --help                                #docker命令帮助
+docker xx --help                             #docker某个命令帮助
 docker ps                                    #查看正在运行的容器
 docker images                                #查看本地镜像
 docker image ls                              #同上
-docker pull CONTAINER_NAME[:VERSION]         #从镜像站拉取镜像,默认拉取最新稳定版；可指定版本
+docker pull CONTAINER_NAME[:VERSION]         #从镜像站拉取镜像,默认拉取最新稳定版;可指定版本
 docker inspect CONTAINER_NAME[:VERSION]/ID   #查看本地镜像详细信息,可通过容器名或ID
 
 
@@ -39,20 +41,14 @@ service docker restart
 #设置为网易镜像源
 {
 
-"registry-mirrors": ["http: #hub-mirror.c.163.com"]  
+"registry-mirrors": ["http://hub-mirror.c.163.com"]  
 
 }
+service docker restart               #重启生效配置
 其他常用镜像源
 https://registry.docker-cn.com       #Docker官方中国区镜像源
 https://docker.mirrors.ustc.edu.cn   #中科大镜像源
 
-
-常用命令
-#命令特点
-1.docker开头
-
-
-docker --help    #docker命令帮助
 
 镜像操作
 #列出本地镜像,默认位于 /var/lib/docker 目录下
@@ -137,7 +133,13 @@ Mysql 5.7
 1.拉取镜像
 docker pull mysql:5.7
 2.创建守护容器
-docker run -di --name docker_mysql57 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root mysql:5.7
+docker run -di \
+--name docker_mysql57 \
+-p 3306:3306 \
+-e MYSQL_ROOT_PASSWORD=root \
+-v ~/mysql57/data:/data \
+--restart always \
+mysql:5.7
 # -p 代表端口映射,格式为 宿主机映射端口:容器运行端口
 # -e 代表添加环境变量, MYSQL_ROOT_PASSWORD是root用户的登录密码
 3.登录容器
@@ -146,7 +148,6 @@ docker exec -it docker_mysql57 /bin/bash       #登录容器shell环境
 mysql -uroot -p                                #登录mysql
 方式二:
 docker exec -it docker_mysql57 mysql -uroot -p #直接登录容器mysql
-
 
 
 Redis 5
@@ -166,6 +167,14 @@ docker exec -it docker_redis5 /bin/bash   #登录容器shell环境
 redis-cli                                 #登录redis命令行
 方式二:
 docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
+
+
+
+CentOS7 安装使用docker
+1.安装
+yum -y install docker
+2.创建docker用户组(如有需要,参考ubuntu操作)
+3.增加普通用户到docker用户组(同上)
 
 
 

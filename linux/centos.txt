@@ -8,7 +8,7 @@ yum install            #全部安装
 yum install package1   #安装指定的安装包package1
 yum groupinsall group1 #安装程序组group1
 #更新和升级
-yum update             #全部更新软件，包括系统
+yum update             #全部更新软件,包括系统
 yum update package1    #更新指定程序包package1
 yum check-update       #检查可更新的程序
 yum upgrade package1   #升级指定程序包package1
@@ -29,7 +29,7 @@ yum deplist package1   #查看程序package1依赖情况
 #rpm/红帽包管理器
 rpm -i[v/h] package.rpm #安装[显示文件信息/进度]软件包
 rpm -U[v/h] package.rpm #更新软件包
-rpm -e package          #卸载软件包，不需要rpm结尾
+rpm -e package          #卸载软件包,不需要rpm结尾
 rpm -qa|grep package    #查找已安装软件包
 rpm -qf '绝对路径'      #查看指定文件属于哪个软件包
 rpm -q[l/i] package     #查看软件包[安装路径/已安装软件包信息]
@@ -41,11 +41,11 @@ yum install psmisc -y   #centos7安装pstree工具;psmisc为系统进程管理�
 #修改yum/epel为阿里源
 rpm:Redhat Package Manager
 yum:Yellow dog Updater, Modified。基于rpm的RHEL(含衍生版)的Shell前端软件包管理器。由RedHat官方提供。
-epel:Extra Packages for Enterprise Linux 。由 Fedora 社区打造，相当于第三方rpm库，软件版本较新。
+epel:Extra Packages for Enterprise Linux 。由 Fedora 社区打造,相当于第三方rpm库,软件版本较新。
 1.备份
 mkdir /etc/yum.repos.d.yyyymmdd
 mv /etc/yum.repos.d/* /etc/yum.repos.d.yyyymmdd
-2.下载阿里Base.repo和epel，wget无法使用可用 curl -o
+2.下载阿里Base.repo和epel,wget无法使用可用 curl -o
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 wget -O /etc/yum.repos.d/epel-7.repo https://mirrors.aliyun.com/repo/epel-7.repo
 3.生成cache
@@ -54,8 +54,8 @@ yum makecache
 
 #主机名相关
 static hostname    #静态或内核主机名。系统启动时从 /etc/hostname 初始化的主机名
-transient hostname #瞬态或临时主机名。系统临时分配，如：通过DHCP或mDNS服务器分配
-pretty hostname    #灵活或别名主机名。给终端用户展示的用户名，可包含特殊或空白字符
+transient hostname #瞬态或临时主机名。系统临时分配,如：通过DHCP或mDNS服务器分配
+pretty hostname    #灵活或别名主机名。给终端用户展示的用户名,可包含特殊或空白字符
 
 #主机信息查看
 hostnamectl                             #查看主机信息
@@ -63,12 +63,12 @@ hostnamectl --static/transient/pretty   #查看指定类型主机名
 hostnanme                               #查看transient主机名
 cat /etc/hostname                       #查看static主机名
 cat /etc/redhat-relese                  #查看redhat发行信息
-uname -a                                #查看系统详细信息，主机名为transient
+uname -a                                #查看系统详细信息,主机名为transient
                                         
 #主机信息修改                           
-hostname 主机名                         #修改transient主机名，重启后失效
-hostnamectl set-hostname 主机名         #永久修改所有主机名，大写字母会自动转小写，重启后生效
-                                        # /etc/hostname文件会被修改，建议同步修改 /etc/hosts
+hostname 主机名                         #修改transient主机名,重启后失效
+hostnamectl set-hostname 主机名         #永久修改所有主机名,大写字母会自动转小写,重启后生效
+                                        # /etc/hostname文件会被修改,建议同步修改 /etc/hosts
 vi /etc/hostname                        #同上
 hostnamectl set-hostname ""             #修改所有主机名为空
 hostnamectl set-hostname "" --static/transient/pretty    #修改指定类型主机名
@@ -83,23 +83,23 @@ rm -f /etc/udev/rules.d/70-persistent-net.rules
 
 #静态IP设置   #root用户操作
 
-##6.9  
+##6.9
 1.修改网卡配置文件 /etc/sysconfig/network-scripts/ifcfg-eth0
-  增加或修改以下内容，具体配置参考vmware虚拟网络配置
+  增加或修改以下内容,具体配置参考vmware虚拟网络配置
   设置多个IP参见 https://blog.csdn.net/javastart/article/details/79868187
-BOOTPROTO=static         #静态IP，可以选择dhcp
-BROADCAST=192.168.99.255 #广播地址，非必需项
-NETWORK=192.168.99.0     #网段，非必需项
+BOOTPROTO=static         #静态IP,可以选择dhcp
+BROADCAST=192.168.99.255 #广播地址,非必需项
+NETWORK=192.168.99.0     #网段,非必需项
 IPADDR=192.168.99.110    #IP地址
 NETMASK=255.255.255.0    #子网掩码
 GATEWAY=192.168.99.2     #网关
-DNS1=192.168.99.2        #DNS，这里设置与网关一致；多个可设置DNS1/DNS2等
+DNS1=192.168.99.2        #DNS,这里设置与网关一致；多个可设置DNS1/DNS2等
 2.重启网络服务
 service network restart
 
 ##7.6(1810)
-网络配置文件 /etc/sysconfig/network-scripts/ifcfg-ens33 
-配置值用双引号，如：IPADDR="192.168.99.110"
+网络配置文件 /etc/sysconfig/network-scripts/ifcfg-ens33
+配置值用双引号,如：IPADDR="192.168.99.110"
 重启网络推荐使用 systemctl restart network
 
 

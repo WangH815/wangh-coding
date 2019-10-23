@@ -108,6 +108,10 @@ public class MyTest {
             System.out.println(ite.next());
         }
 
+        System.out.println("==============================");
+        list.iterator().forEachRemaining(ele -> System.out.println(ele));
+        System.out.println("==============================");
+
         String[] strArray = new String[list.size()];
         list.toArray(strArray);
         for (String str11 : strArray) {
@@ -125,23 +129,34 @@ public class MyTest {
             System.out.println(entry.getKey() + "=" + entry.getValue());
         }
 
-        for (String asdfa:map.values()){
+        for (String asdfa : map.values()) {
             System.out.println(asdfa);
         }
 
-        myPrint(new Integer[]{1,2,3});
-        myPrint(new String[]{"a","b","c"});
-        myPrint(new Double[]{1d,2d,3d});
+        myPrint(new Integer[]{1, 2, 3});
+        myPrint(new String[]{"a", "b", "c"});
+        myPrint(new Double[]{1d, 2d, 3d});
 
-
+        Set<String> hashSet = new HashSet();
+        hashSet.add("a");
+        hashSet.add("b");
+        hashSet.add("c");
+        Iterator<String> iHashSet = hashSet.iterator();
+        while(iHashSet.hasNext()){
+            System.out.println(iHashSet.next());
+        }
 
 
     }
 
-    static <E> void myPrint(E[] inputArray){
-        for(E element:inputArray){
-            System.out.printf("%s\t",element);
+    static <E> void myPrint(E[] inputArray) {
+        for (E element : inputArray) {
+            System.out.printf("%s\t", element);
         }
         System.out.println();
+    }
+
+    interface myInterface {
+
     }
 }
