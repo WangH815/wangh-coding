@@ -6,6 +6,12 @@ Docker支持将软件编译成一个镜像（image）,在这个镜像里做好�
 目前各大主流计算平台都支持Docker容器技术。
 
 
+#基本概念
+image      #镜像;用于创建容器的模板,类似于Java中的Class
+container  #容器;独立运行的一个或一组应用
+registry   #仓库;存放镜像的仓库
+
+
 #常见操作
 docker --help                                #docker命令帮助
 docker xx --help                             #docker某个命令帮助
@@ -14,6 +20,28 @@ docker images                                #查看本地镜像
 docker image ls                              #同上
 docker pull CONTAINER_NAME[:VERSION]         #从镜像站拉取镜像,默认拉取最新稳定版;可指定版本
 docker inspect CONTAINER_NAME[:VERSION]/ID   #查看本地镜像详细信息,可通过容器名或ID
+
+
+#docker时区不一致处理
+方案一:
+##创建容器时使用-v选项
+docker run ... \
+-v /etc/timezone:/etc/timezone \
+-v /etc/localtime:/etc/localtime \
+...
+-d container_name
+
+方案二:
+##容器已创建
+docker cp \
+/etc/timezone container_name:/etc/timezone \  #容器名可以使用容器id代替
+/etc/localtime container_name:/etc/localtime
+###批量操作
+for name in `docker ps -q`;do \
+docker cp \
+/etc/timezone ${name}:/etc/timezone \
+/etc/localtime ${name}:/etc/localtime \
+done
 
 
 #使用教程 
@@ -46,6 +74,7 @@ service docker restart
 }
 service docker restart               #重启生效配置
 其他常用镜像源
+https://hub.docker.com               #官方默认镜像源;镜像标签可直接访问此网站查询
 https://registry.docker-cn.com       #Docker官方中国区镜像源
 https://docker.mirrors.ustc.edu.cn   #中科大镜像源
 
@@ -64,7 +93,7 @@ docker search CONTAINER_NAME          #搜索镜像源可用镜像
 docker pull CONTAINER_NAME            #从镜像源下载指定镜像
 
 docker pull CONTAINER_NAME:VERSION    #同上;指定版本
-docker rmi IMAGE_NAME/ID}             #删除本地指定镜像
+docker rmi IMAGE_NAME/ID              #删除本地指定镜像
 docker rmi $(docker images -q)        #删除本地所有镜像
 
 容器操作   #可认为是镜像的实例
@@ -79,7 +108,7 @@ docker rm $(docker ps -f "status=exited" -q)  #删除所有退出的容器
 docker rm $(docker stop $(docker ps -a -q))   #停止并删除所有容器
 docker stats -a --no-stream                   #显示所有容器的统计信息(包括没有运行的) ,只显示一次
 docker stats --no-stream | sort -k8 -h        #统计容器信息并以使用流量作为倒序
-docker system df                              #显示硬盘占用
+docker system df                              #显示实际硬盘占用
 docker system events                          #显示容器的实时事件
 docker system info                            #显示系统信息
 docker system prune                           #清理文件  
@@ -169,6 +198,17 @@ redis-cli                                 #登录redis命令行
 docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
 
 
+niginx
+1.拉取镜像
+docker pull nginx:stable      #stable表示稳定版,其他支持版本可从官方镜像库查询
+2.创建容器
+mkdir -p ~/nginx/data         #创建本地目录
+#创建容器
+docker run \
+--name nginx_1.16 \
+-p 80:80 \
+-v ~/nginx/data:/data \
+-di nginx:stable
 
 CentOS7 安装使用docker
 1.安装
