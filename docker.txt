@@ -77,6 +77,7 @@ service docker restart               #重启生效配置
 https://hub.docker.com               #官方默认镜像源;镜像标签可直接访问此网站查询
 https://registry.docker-cn.com       #Docker官方中国区镜像源
 https://docker.mirrors.ustc.edu.cn   #中科大镜像源
+https://reg-mirror.qiniu.com         #七牛云
 
 
 镜像操作
