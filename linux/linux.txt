@@ -296,7 +296,11 @@ mv file1 file2 dir      #移动多个文件到指定文件夹(dir);要求dir必�
 mv file dir1 dir2       #移动文件或文件夹到指定目录(dir2);要求dir2必须存在
 mv dir1 dir2            #移动或重命名,要求dir1必须存在;dir2存在表示移动否则表示重命名
 cp file1 file2          #copy;复制file1为file2;要求file1必须存在,file存在时会提示覆盖
-cp file dir             #复制并移动file到dir;要求file和dir存在;dir不存在时同上
+cp -p file1 file2       #保持属性(权限时间戳等)复制(硬链接文件会复制为新文件),否则使用预设值;其他同上,文件复制同理
+cp -i file1 file2       #同名文件覆盖询问
+cp -s file1 file2       #软连接复制;等价于 ln -s
+cp file dir             #复制并移动file到dir;要求file和dir存在
+cp -R[/r] dir dir1      #文件夹复制,其他与文件复制相同;
 touch file              #摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
 touch a[0-9]            #创建a0-a9(共10个文件);[]中表示所有可能
 touch -t                #设定文件时间戳,如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
@@ -473,7 +477,8 @@ chmod [-R] [who] [+/-/=][mode] file/dir  #change file mode bits;文件(夹)属�
     who    #可选a/u/g/o,表示所有用户/所属者/所属组/其他用户;ugo可同时使用,如:chmod ug+x file
     +/-/=  #分别表示增加/去除/设定
     mode   #可选r/w/x/s,表示读/写/执行/特殊权限
-chmod a+x file          #所有用户增加执 从  行权限;
+chmod u+x file          #所属者增加执行权限
+chmod a+x file          #所有用户增加执行权限;a可省略,等价于chmod +x file
 chmod a+x,go-wx file    #多种模式逗号隔开,逐条执行;等价于chmod u+x,go-wx file
 chmod a=r file          #设定所有用户对file只有读权限;等价于chmod 444 file
 chmod 755 file          #数字分别表示u/g/o的权限;r/w/x分别表示4/2/1,各自权限加起来

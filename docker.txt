@@ -69,7 +69,7 @@ service docker restart
 #设置为网易镜像源
 {
 
-"registry-mirrors": ["http://hub-mirror.c.163.com"]  
+"registry-mirrors": ["http://hub-mirror.c.163.com"]
 
 }
 service docker restart               #重启生效配置
@@ -92,9 +92,8 @@ SIZE         #镜像大小
 
 docker search CONTAINER_NAME          #搜索镜像源可用镜像
 docker pull CONTAINER_NAME            #从镜像源下载指定镜像
-
 docker pull CONTAINER_NAME:VERSION    #同上;指定版本
-docker rmi IMAGE_NAME/ID              #删除本地指定镜像
+docker rmi IMAGE_NAME/ID              #删除本地指定镜像;rmi表示remove images
 docker rmi $(docker images -q)        #删除本地所有镜像
 
 容器操作   #可认为是镜像的实例
@@ -121,12 +120,12 @@ docker logs CONTAINER_NAME/ID                 #显示运行容器的日志
 docker run
 #参数
 --name CONTAINER_NAME         #设置容器名称
--p host_port:container_port   #映射主机和容器内的端口
--e ${env name}=${env value}   #添加环境变量
--v host_path:container_path   #将主机目录挂载(映射)到容器内
--d                            #后台运行,守护式容器方式
--i                            #表示运行容器
--t                            #表示容器启动后会进入其命令行,加入 -it,创建并登录进去,即分配一个伪终端
+-p host_port:container_port   #映射主机和容器内的端口;port
+-e ${env name}=${env value}   #添加环境变量;environment
+-v host_path:container_path   #将主机目录挂载(映射)到容器内;--volumes(卷)
+-d                            #后台运行容器并打印其ID
+-i                            #执行交互式命令;interactive(交互式)
+-t                            #表示容器启动后会进入其命令行,加入 -it,创建并登录进去,即分配一个伪终端;tty
 --restart always              #设置跟随docker进程自启动;也可通过 docker update --restart always xx 修改
 
 交互式容器
@@ -217,7 +216,9 @@ CentOS7 安装使用docker
 yum -y install docker
 2.创建docker用户组(如有需要,参考ubuntu操作)
 3.增加普通用户到docker用户组(同上)
-
+4.设置docker服务自启动
+systemctl is-enabled docker  #判断docker是否自启动
+systemctl enable docker      #设置自启动
 
 
 
