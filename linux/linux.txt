@@ -502,6 +502,7 @@ du -h/b/k/m          #以易读/Byte/KB(默认)/MB递归显示当前文件夹下
 du -h/b/k/m file/dir #指定显示特定文件或文件夹,其余同上;文件或文件夹可跟多个   
 du -sh               #以易读方式显示当前文件夹占用总空间
 du -sh *             #以易读方式显示当前文件夹每个文件或文件夹(汇总)占用空间
+du -sh path/* | sort -rh | head -10  #指定路径下文件(夹)大小前十
 ps -ef | grep java   #snaps of prosess;搜索含java的进程快照,其他类似;标准语法
 ps [-]aux |grep java #同上一条类似;BSD发行版语法
 free [-h/k/m]        #以易读/KB(默认)/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
