@@ -142,10 +142,16 @@ public class MyTest {
         hashSet.add("b");
         hashSet.add("c");
         Iterator<String> iHashSet = hashSet.iterator();
-        while(iHashSet.hasNext()){
+        while (iHashSet.hasNext()) {
             System.out.println(iHashSet.next());
         }
 
+        Runnable r = () -> {
+            System.out.println("123");
+        };
+
+        Thread t = new Thread(r);
+        t.start();
 
     }
 
@@ -158,5 +164,11 @@ public class MyTest {
 
     interface myInterface {
 
+    }
+}
+
+class MyThread implements Runnable {
+    public void run() {
+        System.out.println("MyThread");
     }
 }

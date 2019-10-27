@@ -96,6 +96,20 @@ docker pull CONTAINER_NAME:VERSION    #同上;指定版本
 docker rmi IMAGE_NAME/ID              #删除本地指定镜像;rmi表示remove images
 docker rmi $(docker images -q)        #删除本地所有镜像
 
+#镜像备份与恢复
+docker save -o xx.tar IMAGE_NAME   #基于镜像的备份(导出),不含容器信息
+docker load -i xx.tar              #载入
+##备份所有镜像
+for option in `docker images|awk 'NR > 1 {print $1"-"$2".tar#"$1":"$2}'`
+do
+  docker save -o `echo $option | tr '#' ' '`
+done
+
+#容器的导出与导入
+docker export IMAGE_NAME > xx.tar  #基于容器的备份(保存),会保留所有运行环境(包括底层镜像)
+docker import xx.tar               #导入
+
+
 容器操作   #可认为是镜像的实例
 docker ps                                     #查看正在运行的容器       
 docker ps -a                                  #查看所用容器,包括启动过的历史容器
@@ -199,7 +213,7 @@ redis-cli                                 #登录redis命令行
 docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
 
 
-niginx
+nginx
 1.拉取镜像
 docker pull nginx:stable      #stable表示稳定版,其他支持版本可从官方镜像库查询
 2.创建容器
