@@ -378,6 +378,7 @@ sort -nrk 1 data.txt
 sort -bd data
 ###wc
 wc -c/m/w/l file            #按照字节/字符/单词(Tab或空格分隔,多个分隔符算一个)/行数 统计文本或标准输出
+wc -l *|sort -rh|head -10   #当前目录中行数前十的文件
 echo -e '1\t2  34 56'|wc -w #输出4
 ###uniq
 sort unsort.txt | uniq      #排序并去除重复行
@@ -385,7 +386,7 @@ sort unsort.txt | uniq -c   #统计各行在文件中出现的次数
 sort unsort.txt | uniq -d   #找出重复行
 ###sed   #stream editor(流编辑器)
 #动作说明
-    a :新增,a 的后面可以接字串,而这些字串会在新的一行出现(目前的下一行)
+    a :新增,a 的后面可以接字串,而这些字串会在新的一行出现(目前的下一行) 
     c :取代,c 的后面可以接字串,这些字串可以取代 n1,n2 之间的行
     d :删除
     i :插入,i 的后面可以接字串,而这些字串会在新的一行出现(目前的上一行);
@@ -503,6 +504,7 @@ du -h/b/k/m file/dir #指定显示特定文件或文件夹,其余同上;文件�
 du -sh               #以易读方式显示当前文件夹占用总空间
 du -sh *             #以易读方式显示当前文件夹每个文件或文件夹(汇总)占用空间
 du -sh path/* | sort -rh | head -10  #指定路径下文件(夹)大小前十
+du -sh --max-depth=1 #指定子文件夹深度(默认为0)
 ps -ef | grep java   #snaps of prosess;搜索含java的进程快照,其他类似;标准语法
 ps [-]aux |grep java #同上一条类似;BSD发行版语法
 free [-h/k/m]        #以易读/KB(默认)/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
