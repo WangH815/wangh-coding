@@ -23,42 +23,118 @@ alter    --修改对象属性
 insert   --插入数据
 delete   --删除数据
 update   --更新数据
-3.DQL (Data Query Language 数据查询语言)
+3.DQL (Data Query Language 数据查询语言)  --可与上一条合并
 select   --查询数据
 4.DCL (Data Control Language 数据控制语句)
 grant    --权限分配
 revoke   --权限回收
 
 
-select执行顺序
-1.from/join    --查询单个查询对象(表或视图)/组合对象(多表联查)
-2.where        --过滤条件
-3.group by     --分组字段
-4.having       --结合group by使用;用于过滤聚合条件
-5.select       --显示字段/函数/计算表达式
-6.order by     --排序
-7.limit        --截取数据记录
+select语句
+--语法顺序
+ 1.select [distinct]
+ 2.from
+ 3.join
+ 4.on
+ 5.where
+ 6.group by
+ 7.having
+ 8.union [all]
+ 9.order by
+10.limit
+
+--执行顺序
+ 1.from         --查询单个查询对象(表或视图)
+ 2.on           --内/外连接条件
+ 3.join         --内/外连接表
+ 4.where        --过滤条件
+ 5.group by     --分组字段
+ 6.having       --结合group by使用;用于过滤聚合条件
+ 7.select       --显示字段/函数/计算表达式
+ 8.distinct     --取唯一值
+ 9.union [all]  --多个select语句连接
+10.order by     --排序
+11.limit        --截取数据记录
+
+
+数据类型       --UNSIGNED可用以整数跟浮点型表示无符号
+MySQL数据类型 字节 值范围
+--整型
+tinyint       1    -128-127
+smallint      2    -32768-32767
+mediumint     3    -8388608-8388607
+int           4    -2147483648-2147483647
+bigint        8    -9.22E18-9.22E18
+
+--浮点型
+float(m, d)   4    总位数为m,小数位为d
+double(m, d)  8    同上
+decimal(m, d)      --存储为字符串类型数字,所占空间由字符集决定;精度同上
+
+--字符型
+CHAR
+VARCHAR
+TINYBLOB
+TINYTEXT
+BLOB
+TEXT
+MEDIUMBLOB
+MEDIUMTEXT
+LOGNGBLOB
+LONGTEXT
+VARBINARY(M)
+BINARY(M)
+
+--时间类型
+date      3   日期      --2014-09-18
+time      3   时间      --08:42:30
+datetime  8   日期时间  --2014-09-18 08:42:30
+timestamp 4   时间戳
+year      1   年份  
+
+--复合类型
+set  集合类型   --set(“member”, “member2″, … “member64″)
+enum 枚举类型   --enum(“member1″, “member2″, … “member65535″)
+
+
+字符集  --默认为 Latin1(ISO-8859-1,单字节编码)
+gbk_chinese_ci 简体中文, 不区分大小写
+utf8mb4   --MySQL中对应的utf-8版本
+
+
+存储引擎
+MyISAM  --常用;读取效率很高的引擎
+InnoDB  --常用;写入，支持事处等都支持
+Archive --不常用;归档引擎,压缩比高达1:10,用于数据归档
+NDB     --不常用;主要在MySQL 集群服务器中使用,不做介绍
 
 
 数据库连接及管理(Linux平台)
-mysql -uroot -p     --以root用户登录本地数据库;-uroot等价于-u root,其他类似
-mysql -uroot@ip -p  --以root用户登录远程数据库
+mysql -uroot -p              --以root用户登录本地数据库;-uroot等价于-u root,其他类似
+mysql -uroot@ip -p           --以root用户登录远程数据库;或使用-h ip/主机名
+mysqld --skip-grant-tables   --跳过权限登录mysql
+update mysql.user set password=password('root');  --修改用户密码
 
-
-show databases;            --显示数据库列表
-show tables;               --显示当前数据库下数据表列表
+show语句    --数据库信息显示(包括库/表/字段/索引/相关设置等)
+show databases [like 'pattern'];  --显示数据库列表;like用于模糊匹配,下同
+show tables [like 'pattern'];     --显示当前数据库下数据表列表
+show tables from tb;              --显示指定数据库下数据表列表
+show create database db;   --显示建库语句
+show create table tb;      --显示建表语句
 show column from tb;       --显示tb表字段信息(Field/Type/Null/Key/Default/Extra)
 show index from tb;        --显示索引信息
 show table status from tb; --显示表状态
 show character set;        --显示支持的字符集
+show processlist;          --显示数据库连接情况
+show variables;            --显示所有的变量
 
-use db;                    --选择db数据库,之后操作只针对该数据库;等价于 use database db
+use db;            --选择db数据库,之后操作只针对该数据库;等价于 use database db
 
+desc tb;           --显示表字段信息
 
-
-
-
-
-
+select database(); --显示当前使用数据库
+select version();  --显示数据库版本
+select now();      --显示当前时间
+select user();     --显示当前用户
 
 
