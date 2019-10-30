@@ -93,18 +93,25 @@ timestamp 4   时间戳
 year      1   年份  
 
 --复合类型
-set  集合类型   --set(“member”, “member2″, … “member64″)
-enum 枚举类型   --enum(“member1″, “member2″, … “member65535″)
+set  集合类型   --set("member", "member2", … "member64")
+enum 枚举类型   --enum("member1", "member2", … "member65535")
 
 
-字符集  --默认为 Latin1(ISO-8859-1,单字节编码)
-gbk_chinese_ci 简体中文, 不区分大小写
-utf8mb4   --MySQL中对应的utf-8版本
+字符集    --默认为 Latin1(ISO-8859-1,单字节编码)
+utf8mb4   --MySQL中对应的utf-8版本;MySQL中的utf8属于历史遗留问题
 
 
 存储引擎
 MyISAM  --常用;读取效率很高的引擎
+--不支持事务,表锁(表级锁,加锁会锁住整个表),支持全文索引,操作速度快;常用于读取多的业务
+--myisam存储引擎表由myd和myi组成;.myd用来存放数据文件,.myi用来存放索引文件
+--对于myisam存储引擎表,mysql数据库只缓存其索引文件,数据文件的缓存由操作系统本身来完成
+
 InnoDB  --常用;写入，支持事处等都支持
+--支持事务,主要面向在线事务处理(OLTP)方面的应用
+--行锁设计,支持外键,即默认情况下读取操作不加锁
+--InnoDB是为处理巨大数据量时的最大性能设计
+
 Archive --不常用;归档引擎,压缩比高达1:10,用于数据归档
 NDB     --不常用;主要在MySQL 集群服务器中使用,不做介绍
 
@@ -116,9 +123,9 @@ mysqld --skip-grant-tables   --跳过权限登录mysql
 update mysql.user set password=password('root');  --修改用户密码
 
 show语句    --数据库信息显示(包括库/表/字段/索引/相关设置等)
-show databases [like 'pattern'];  --显示数据库列表;like用于模糊匹配,下同
-show tables [like 'pattern'];     --显示当前数据库下数据表列表
-show tables from tb;              --显示指定数据库下数据表列表
+show databases [like 'pattern'];      --显示数据库列表;like用于模糊匹配,下同
+show tables;               --显示当前数据库下数据表列表
+show tables from tb;       --显示指定数据库下数据表列表
 show create database db;   --显示建库语句
 show create table tb;      --显示建表语句
 show column from tb;       --显示tb表字段信息(Field/Type/Null/Key/Default/Extra)
@@ -132,9 +139,45 @@ use db;            --选择db数据库,之后操作只针对该数据库;等价�
 
 desc tb;           --显示表字段信息
 
+
+select语句
 select database(); --显示当前使用数据库
 select version();  --显示数据库版本
 select now();      --显示当前时间
 select user();     --显示当前用户
+
+
+insert语句
+insert into tb(col1,...,coln) values(value1,...,valuen); --指定字段插入
+insert into tb values(value1,...,valuen);                --按照表字段顺序插入
+insert into tb values(value1,...,valuen),
+                     (value1,...,valuen),
+					 (value1,...,valuen);                --按照表字段顺序插入等多条数据
+
+
+update语句
+update tb set col1=value1,col2=value2 where conditions;
+
+
+delete语句
+delete from tb where conditions;
+
+
+DCL
+
+grant语句
+grant select,insert on tb[pattern] to 'user'@'ip' identified by 'passwd';
+
+revoke语句
+revoke select,insert on tb[pattern] to 'user'@'ip' identified by 'passwd';
+
+符号        说明
+grant all   在grant后接all说明给予所有权限
+revoke all  在revoke后接all说明删除所有权限
+权限 on .   所明给予所有库所有表的操作权限
+'user'@'ip' ip若为%,任意来源的主机均可以使用这个用户来访问
+
+
+
 
 
