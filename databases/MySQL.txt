@@ -141,10 +141,13 @@ desc tb;           --显示表字段信息
 
 
 select语句
-select database(); --显示当前使用数据库
-select version();  --显示数据库版本
-select now();      --显示当前时间
-select user();     --显示当前用户
+select database();    --显示当前使用数据库
+select version();     --显示数据库版本
+select now();         --显示当前日期时间
+select current_date;  --显示当前日期
+select user();        --显示当前用户
+
+select col1 [as alias1],col2 from tb [as alias2] where conditions;  --查询指定字段
 
 
 insert语句
@@ -156,28 +159,32 @@ insert into tb values(value1,...,valuen),
 
 
 update语句
-update tb set col1=value1,col2=value2 where conditions;
+update tb set col1=value1,col2=value2 where conditions;  --更新数据
 
 
 delete语句
-delete from tb where conditions;
+delete from tb where conditions;  --删除数据
 
 
 DCL
 
 grant语句
-grant select,insert on tb[pattern] to 'user'@'ip' identified by 'passwd';
+grant select,insert on tb[pattern] to 'user'@'ip' identified by 'passwd';  --用户授权
 
 revoke语句
-revoke select,insert on tb[pattern] to 'user'@'ip' identified by 'passwd';
+revoke select,insert on tb[pattern] to 'user'@'ip' identified by 'passwd'; --撤回用户权限
 
-符号        说明
-grant all   在grant后接all说明给予所有权限
-revoke all  在revoke后接all说明删除所有权限
-权限 on .   所明给予所有库所有表的操作权限
-'user'@'ip' ip若为%,任意来源的主机均可以使用这个用户来访问
+grant/revoke all   --所有权限
+权限 on .          --.表示所有库所有表
+'user'@'ip'        --ip为%时表示任意主机的user
 
 
+空值判断
+is [not] null    --where条件中判断字段是否为空值
 
 
+模式匹配   --where条件中匹配字符型字段
+like 'pattern'
+%   --任意数量字符
+_   --
 
