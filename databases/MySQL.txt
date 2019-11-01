@@ -184,7 +184,33 @@ is [not] null    --where条件中判断字段是否为空值
 
 
 模式匹配   --where条件中匹配字符型字段
-like 'pattern'
+
+[not] like 'pattern'  --基本匹配
 %   --任意数量字符
-_   --
+_   --单个字符
+
+[NOT] rlike           --扩展(正则)匹配
+.      --单个字符
+[abc]  --括号中任意字符
+[a-c]  --支持范围;同上;a-z,0-9等也是支持的
+^      --开头
+$      --结尾
+{n}    --重复{}前n个模式匹配
+
+
+常用函数
+count(*)          --统计数据条数;
+min(col)/max(col) --最值;常用于子查询
+avg(col)          --平均值
+sum(col)          --求和
+
+
+执行sql脚本
+--shell命令行执行
+mysql -h host -u user -p < xx.sql    --需要输入密码
+
+--mysql命令行执行
+source xx.sql
+\. xx.sql          --同上
+
 
