@@ -149,6 +149,23 @@ select user();        --显示当前用户
 
 select col1 [as alias1],col2 from tb [as alias2] where conditions;  --查询指定字段
 
+流程控制
+case/if
+
+case语句
+--形式1
+case case_value
+when when_value then statement_list
+[when when_value then statement_list] ...
+[else statement_list]
+end case
+--形式2
+case
+when search_condition then statement_list
+[when search_condition then statement_list] ...
+[else statement_list]
+end case
+
 
 insert语句
 insert into tb(col1,...,coln) values(value1,...,valuen); --指定字段插入
