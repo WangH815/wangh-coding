@@ -12,7 +12,7 @@ https://docs.python.org/zh-cn/3.7/                     #官方文档(3.7)
 1.由字符(一般为字母、数字和下划线)构成,第一个字符不能是数字；长度不限制
 2.区分大小写
 3.python2仅仅支持ASCII字符
-4.Python3支持Unicode字符,具体见unicodedata模块中的Unicode 字符数据库版本
+4.Python3支持Unicode字符,具体见unicodedata模块中的Unicode字符数据库版本
 5.不能使用保留字,可通过标准库的keyword模块获取保留字
   import keyword
   keyword.kwlist
