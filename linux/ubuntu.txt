@@ -229,6 +229,16 @@ tzselect                                                 #根据提示选择北�
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  #设置软连接(root操作)
 
 
+#修改主机名
+##18.04
+1.修改/etc/cloud/cloud.cfg
+preserve_hostname:true          #修改项
+2.修改/etc/hostname
+设置主机名
+3.重启机器
+reboot
+
+
 #挂载磁盘       
 ##其他更复杂的挂载与之相似
 1.创建新磁盘
