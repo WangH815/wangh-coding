@@ -99,13 +99,20 @@ docker rmi $(docker images -q)        #删除本地所有镜像
 #镜像备份与恢复
 docker save -o xx.tar IMAGE_NAME   #基于镜像的备份(导出),不含容器信息
 docker load -i xx.tar              #载入
-##备份所有镜像
-for option in `docker images|awk 'NR > 1 {print $1"-"$2".tar#"$1":"$2}'`
+##批量备份镜像
+mkdir docker-images && cd docker-images
+for option in `docker images | awk 'NR > 1 {print "docker-"$1"-"$2".tar#"$1":"$2}'`
 do
   docker save -o `echo $option | tr '#' ' '`
 done
+##批量恢复镜像(在镜像解压目录中操作)
+cd docker-images
+for option in `ls | grep ".tar"`
+do
+  docker load -i $option
+done
 
-#容器的导出与导入
+#容器的导出与导入(如需批量操作与上面类似)
 docker export IMAGE_NAME > xx.tar  #基于容器的备份(保存),会保留所有运行环境(包括底层镜像)
 docker import xx.tar               #导入
 
