@@ -67,8 +67,8 @@ int           4    -2147483648-2147483647
 bigint        8    -9.22E18-9.22E18
 
 --浮点型
-float(m, d)   4    总位数为m,小数位为d
-double(m, d)  8    同上
+float(m, d)   4    --总位数为m,小数位为d
+double(m, d)  8    --同上
 decimal(m, d)      --存储为字符串类型数字,所占空间由字符集决定;精度同上
 
 --字符型
@@ -227,7 +227,7 @@ insert into tb(col1,...,coln) values(value1,...,valuen); --指定字段插入
 insert into tb values(value1,...,valuen);                --按照表字段顺序插入
 insert into tb values(value1,...,valuen),
                      (value1,...,valuen),
-					 (value1,...,valuen);                --按照表字段顺序插入等多条数据
+                     (value1,...,valuen);                --按照表字段顺序插入等多条数据
 
 
 update语句
@@ -286,9 +286,9 @@ mysql -h host -u user -p <<!    --其他分隔符也可以;常见的还有 EOF
 ...                             --sql语句
 !                               --英文感叹号,必须顶格且之后无任何字符
 
---mysql命令行执行
-source xx.sql
-\. xx.sql          --同上
+--mysql命令行执行脚本
+\. xx.sql          --推荐此方式
+source xx.sql      --同上
 
 
 存储过程
@@ -300,3 +300,57 @@ set inoutparam = z;
 select inputparam;
 select concat('zyxw', inputparam);
 end
+
+
+数据的备份与导入(使用sql脚本或命令)
+
+insert导入
+insert into tb[(col1,...,coln)]
+values(value1,...,valuen),
+      (value1,...,valuen),
+      (value1,...,valuen);  --按照表字段顺序插入等多条数据
+
+insert into tb[(col1,...,coln)] values(value1,...,valuen);  --多条insert
+insert into tb[(col1,...,coln)] values(value1,...,valuen);
+insert into tb[(col1,...,coln)] values(value1,...,valuen);
+
+insert into tb[(col1,...,coln)]  --带有select的导入语句
+select ...;
+
+文本文件中导入
+
+
+
+mysql命令行帮助  --括号中为命令的快捷方式
+?               (\?)   --同help
+clear           (\c)   --清除当前输入语句(命令)
+connect         (\r)   --重连mysql服务器;可使用db和host参数
+delimiter       (\d)   --设置语句分隔符;默认为分号
+edit            (\e)   --调用编辑器编辑语句,默认使用vi
+ego             (\G)   --发送语句给服务器(语句后可不使用分号);使用垂直方式显示结果
+exit            (\q)   --退出命令行
+go              (\g)   --发送语句给服务器
+help            (\h)   --命令行帮助
+nopager         (\n)   --Disable pager, print to stdout.
+notee           (\t)   --不输出到输出文件
+pager           (\P)   --Set PAGER [to_pager]. Print the query results via PAGER.
+print           (\p)   --Print current command.
+prompt          (\R)   --Change your mysql prompt.
+quit            (\q)   --退出命令行
+rehash          (\#)   --Rebuild completion hash.
+source          (\.)   --执行sql脚本;参数为脚本名;eg: \. xx.sql
+status          (\s)   --显示服务器状态
+system          (\!)   --执行宿主机命令;常用于查看文件(夹)/路径等命令,eg: \! ls
+tee             (\T)   --设置标准输出文件;设置后所有的输出都会被追加到此文件;eg: \T
+use             (\u)   --切换数据库
+charset         (\C)   --切换字符集;作用范围仅限于当前连接,退出后失效
+warnings        (\W)   --显示每个语句警告
+nowarning       (\w)   --不显示每个语句警告
+resetconnection (\x)   --清理当前会话内容
+
+
+
+
+
+
+
