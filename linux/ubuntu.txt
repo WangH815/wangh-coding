@@ -95,10 +95,10 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
   apt install mysql-server  #apt安装软件mysql
 1.取消只能本机访问的限制
   a.修改/etc/mysql/mysql.conf.d/mysqld.cnf 中 bind-address为0.0.0.0或注销
-  b.执行update mysql.user set host='%' where user='root';  #mysql -uroot登录数据库
+  b.执行update mysql.user set host='%' where user='root';             #mysql -uroot登录数据库
   c.执行grant all PRIVILEGES on *.* to root@'%' identified by 'root'; #授权并设置密码
 2.刷新
-  flush privileges;  #mysql命令行中执行
+  flush privileges;                                                   #mysql命令行中执行
 3.重启Mysql服务
  service mysql restart
 注：如还不能正常访问可以考虑防火墙或者其他网络问题
