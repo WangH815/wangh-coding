@@ -163,29 +163,28 @@ concat(col1,';',col2)                                               --字段(或
 
 join                --用于把来自两个或多个表的行结合起来,基于表之间的共同或类似字段。
 
-inner join          --内连接;如果表中有至少一个匹配,则返回行
+[inner] join        --内连接;如果表中有至少一个匹配,则返回行
 left [outer] join   --左外链接;即使右表中没有匹配,也从左表返回所有的行
 right [outer] join  --右外连接;即使左表中没有匹配,也从右表返回所有的行
-full [outer] join   --只要其中一个表中存在匹配,则返回行;左右外连接的并集
 
 select col
 from tb tb1 
-[inner] join tb2
+join tb2
 on tb1.col = tb2.col;    --连接条件使用 on 关键词
 
 select col
 from tb1, tb2
 where tb1.col = tb2.col; --内连接的另一种形式
 
-left/right/full join
+left/right join
 select col
 from tb1
-left [outer] join tb2
+left join tb2
 on tb1.col=tb2.col;
 
 UNION/UNION ALL      --合并多个查询结果
 SELECT col FROM tb1  --选取列有相似的数据类型
-UNION                --会去重;union all不回去重
+UNION                --会去重;union all不去重
 SELECT col FROM tb2;
 UNION
 SELECT col FROM tb3;
