@@ -161,11 +161,11 @@ select col1 [as alias1],col2 from tb [as alias2] where conditions;  --查询指�
 select * from tb where col=(select max(col) from tb);               --简单子查询;查找col值最大的记录
 concat(col1,';',col2)                                               --字段(或表达式)或字符串连接
 
-join                --用于把来自两个或多个表的行结合起来,基于表之间的共同或类似字段。
+join            --用于把来自两个或多个表的行结合起来,基于表之间的共同或类似字段。
 
-[inner] join        --内连接;如果表中有至少一个匹配,则返回行
-left [outer] join   --左外链接;即使右表中没有匹配,也从左表返回所有的行
-right [outer] join  --右外连接;即使左表中没有匹配,也从右表返回所有的行
+[inner] join    --内连接;如果表中有至少一个匹配,则返回行;MySQL不支持full join(全连接)
+left join       --左外链接;即使右表中没有匹配,也从左表返回所有的行
+right join      --右外连接;即使左表中没有匹配,也从右表返回所有的行
 
 select col
 from tb tb1 
