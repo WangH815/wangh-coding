@@ -165,7 +165,7 @@ git remote add [shortname] [url]  #添加远程库
 a)注册github账号,地址：https://github.com
 b)在本地生成SSH Key               #本地git仓库和gitHub仓库是通过SSH加密的
 ssh-keygen -t rsa -C "Email"      #Email为gitHub注册的邮箱,生成过程会要求确认路径和输入密码
-生成的公钥位置 ~/.ssh/id_rsa.pub
+默认生成的公钥位置 ~/.ssh/id_rsa.pub
 c)在远程仓库配置公钥
 在github官网登陆后,在Accout-->Setting-->New SSH key中添加
 d)验证
