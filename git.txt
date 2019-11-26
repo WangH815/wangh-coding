@@ -4,11 +4,11 @@ git笔记
 git config --global user.name "username"             #设置本地用户名
 git config --global user.email example@example.com   #设置github注册时的邮箱
 git config --global core.quotepath false             #正常显示中文文件名;默认使用8进制字符编码表示中文
-git init [dir]                                       #初始化本地仓库(默认为当前文件夹)，会生成.git文件夹
-git clone git@github.com:XX/XX.git                   #使用ssh方式克隆仓库到本地(推荐)，需配置ssh key
+git init [dir]                                       #初始化本地仓库(默认为当前文件夹),会生成.git文件夹
+git clone git@github.com:XX/XX.git                   #使用ssh方式克隆仓库到本地(推荐),需配置ssh key
 git clone https://github.com/XX/XX.git               #使用HTTPS克隆仓库到本地
 git status [-s]            #显示本地仓库文件详细[简略]状态
-git pull                   #同步远程仓库到本地，修改本地仓库工作开始前的第一步(重要)
+git pull                   #同步远程仓库到本地,修改本地仓库工作开始前的第一步(重要)
 git add ./*/file           #添加所有/指定文件到暂存区;空文件夹不会添加
 git commit -m '提交说明'   #提交到本地数据库
 git push                   #同步本地仓库到远程
@@ -39,20 +39,20 @@ https://git-scm.com/book/zh/v2                                                  
 5.有能力高效管理类似 Linux 内核(截止2018年底最新内核代码量在2500万行左右)一样的超大规模项目(速度和数据量)
 
 ##与集中式版本控制工具(SVN)相比
-1.git是分布式的，SVN不是：
-   这是git和其它非分布式的版本控制系统，例如SVN，CVS等，最核心的区别。
-2.git把内容按元数据方式存储，而SVN是按文件：
+1.git是分布式的,SVN不是：
+   这是git和其它非分布式的版本控制系统,例如SVN,CVS等,最核心的区别。
+2.git把内容按元数据方式存储,而SVN是按文件：
    所有的资源控制系统都是把文件的元信息隐藏在一个类似.svn,.cvs等的文件夹里。
 3.git分支和SVN的分支不同：
-   分支在SVN中一点不特别，就是版本库中的另外的一个目录。
-4.git没有一个全局的版本号，而SVN有：
+   分支在SVN中一点不特别,就是版本库中的另外的一个目录。
+4.git没有一个全局的版本号,而SVN有：
    目前为止这是跟SVN相比git缺少的最大的一个特征。
 5.git的内容完整性要优于SVN：
-   git的内容存储使用的是SHA-1哈希算法。这能确保代码内容的完整性，
+   git的内容存储使用的是SHA-1哈希算法。这能确保代码内容的完整性,
    确保在遇到磁盘故障和网络问题时降低对版本库的破坏。
 
 ##基本概念
-版本控制工具(系统)：记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。
+版本控制工具(系统)：记录一个或若干文件内容变化,以便将来查阅特定版本修订情况的系统。
 
 ##发展历程
 本地化-->集中式-->分布式
@@ -61,42 +61,42 @@ https://git-scm.com/book/zh/v2                                                  
 RCS
 
 集中式
-Centralized Version Control Systems，简称 CVCS
+Centralized Version Control Systems,简称 CVCS
 如：CVS、Subversion(SVN) 以及 Perforce 等
 主要特点：
-有一个单一的集中管理的服务器，保存所有文件的修订版本，
-而协同工作的人们都通过客户端连到这台服务器，取出最新的文件或者提交更新。
+有一个单一的集中管理的服务器,保存所有文件的修订版本,
+而协同工作的人们都通过客户端连到这台服务器,取出最新的文件或者提交更新。
 
 分布式
-Distributed Version Control System，简称 DVCS
+Distributed Version Control System,简称 DVCS
 如：git、Mercurial、Bazaar 以及 Darcs 等
 主要特点：
-客户端并不只提取最新版本的文件快照，而是把代码仓库完整地镜像下来。 
-这么一来，任何一处协同工作用的服务器发生故障，事后都可以用任何一个镜像出来的本地仓库恢复。
+客户端并不只提取最新版本的文件快照,而是把代码仓库完整地镜像下来。 
+这么一来,任何一处协同工作用的服务器发生故障,事后都可以用任何一个镜像出来的本地仓库恢复。
 
 数据的完整性
-git 用以计算校验和的机制叫做 SHA-1 散列(hash，哈希)，用于保证数据的完整性
+git 用以计算校验和的机制叫做 SHA-1 散列(hash,哈希),用于保证数据的完整性
 
 
 #工作流程
 ##一般工作流程如下：
 1.克隆 git 资源作为工作目录
 2.在克隆的资源上添加或修改文件
-3.如果其他人修改了，你可以更新资源
+3.如果其他人修改了,你可以更新资源
 4.在提交前查看修改
 5.提交修改
-6.在修改完成后，如果发现错误，可以撤回提交并再次修改并提交
+6.在修改完成后,如果发现错误,可以撤回提交并再次修改并提交
 
 ##文件的三种状态
 1.已提交(committed) #表示数据已经安全的保存在本地数据库中。 
-2.已修改(modified)  #表示修改了文件，但还没保存到数据库中。 
-3.已暂存(staged)    #表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。
+2.已修改(modified)  #表示修改了文件,但还没保存到数据库中。 
+3.已暂存(staged)    #表示对一个已修改文件的当前版本做了标记,使之包含在下次提交的快照中。
 
 ##三个工作区
 1.工作区：就是你在电脑里能看到的目录。
-2.暂存区：英文叫stage, 或index。一般存放在 ".git目录下" 下的index文件（.git/index）中，
+2.暂存区：英文叫stage, 或index。一般存放在 ".git目录下" 下的index文件（.git/index）中,
           所以我们把暂存区有时也叫作索引（index）。
-3.版本库：工作区有一个隐藏目录.git，这个不算工作区，而是git的版本库，也叫仓库。
+3.版本库：工作区有一个隐藏目录.git,这个不算工作区,而是git的版本库,也叫仓库。
 
 
 #使用简介
@@ -107,16 +107,17 @@ sudo apt-get install git  #基于 Debian 的发行版
 2.配置用户名和Email/config
 git config --global user.name "username"
 git config --global user.email example@example.com
-git config --global core.editor emacs     #可选，修改git默认编辑器为emacs，默认为Vim
-git config --global merge.tool vimdiff    #可选，修改差异分析工具为vimdiff
+git config --global core.editor emacs     #可选,修改git默认编辑器为emacs,默认为Vim
+git config --global merge.tool vimdiff    #可选,修改差异分析工具为vimdiff
+git config --global core.quotepath false  #可选,正常显示中文文件(夹)路径
 git config --list                         #显示配置信息
 
 3.创建仓库/repository
-git init [dir]               #在指定目录初始化仓库，当不写目录时默认在当前目录初始化仓库
-git clone [repo_url] [dir]   #克隆特定版本的仓库到指定目录，repo_url为仓库地址
+git init [dir]               #在指定目录初始化仓库,当不写目录时默认在当前目录初始化仓库
+git clone [repo_url] [dir]   #克隆特定版本的仓库到指定目录,repo_url为仓库地址
 
 4.基本操作命令
-git add filename/file_list  #将一个或多个文件快照添加到缓存区，一般会多次用到
+git add filename/file_list  #将一个或多个文件快照添加到缓存区,一般会多次用到
 git status                  #查看项目状态
 git diff                    #尚未缓存的改动
 git diff --cached           #查看已缓存的改动
@@ -126,14 +127,14 @@ git commit                  #将缓存区内容添加到仓库中。
 git commit -m [message]     #提交修改说明
 git reset HEAD              #用于取消已缓存的内容。
 git rm <file>               #删除工作区目录中的未缓存内容
-git rm -f <file>            #如果删除之前修改过并且已经放到暂存区域的话，则必须要用强制删除选项 -f
-git rm --cached <file>      #git add的逆操作，不会删除工作区文件
+git rm -f <file>            #如果删除之前修改过并且已经放到暂存区域的话,则必须要用强制删除选项 -f
+git rm --cached <file>      #git add的逆操作,不会删除工作区文件
 git mv                      #用于移动或重命名一个文件、目录、软连接。
 
 5.分支管理/branch
 分支模型是的git从版本控制家族中脱颖而出的主要原因
 git branch                  #列出所有分支
-git branch branchname       #创建分支，多个分支不需要多个目录
+git branch branchname       #创建分支,多个分支不需要多个目录
 git merge branchname        #合并分支
 git checkout branchname     #切换分支
 git checkout -b branchname  #命令来创建新分支并立即切换到该分支下
@@ -141,8 +142,8 @@ git checkout -d branchname  #删除分支
 
 6.提交历史的查看/log
 git log                         #查看提交历史
-git log --oneline -n            #简洁形式显示前多少条改动，-n可以不加
-git log --graph                 #开启拓扑选项，查看分支合并情况
+git log --oneline -n            #简洁形式显示前多少条改动,-n可以不加
+git log --graph                 #开启拓扑选项,查看分支合并情况
 git log --reverse               #逆向显示
 git log --author=Linus          #按作者查看日志
 git log --before={3.weeks.ago}  #三周前
@@ -153,20 +154,20 @@ git log --no-merges             #不显示合并日志
 7.标签/tag
 通过标签可以让git记住那个重要阶段提交的快照
 git tag                 #查看所有标签
-git tag -a v1.0         #添加带注解的标签v1.0，-a选项可以记录标签的时间作者等信息，可以不加但推荐使用
-git tag -a v0.9 85fc7e7 #追加标签，85fc7e7为最后一个文件提交的site，可通过git log查询
+git tag -a v1.0         #添加带注解的标签v1.0,-a选项可以记录标签的时间作者等信息,可以不加但推荐使用
+git tag -a v0.9 85fc7e7 #追加标签,85fc7e7为最后一个文件提交的site,可通过git log查询
 
 8.远程仓库/github
 基于git的代码托管平台
 git remote add [shortname] [url]  #添加远程库
 
 远程仓库配置步骤
-a)注册github账号，地址：https:#github.com
+a)注册github账号,地址：https://github.com
 b)在本地生成SSH Key               #本地git仓库和gitHub仓库是通过SSH加密的
-ssh-keygen -t rsa -C "Email"      #Email为gitHub注册的邮箱，生成过程会要求确认路径和输入密码
+ssh-keygen -t rsa -C "Email"      #Email为gitHub注册的邮箱,生成过程会要求确认路径和输入密码
 生成的公钥位置 ~/.ssh/id_rsa.pub
 c)在远程仓库配置公钥
-在github官网登陆后，在Accout-->Setting-->New SSH key中添加
+在github官网登陆后,在Accout-->Setting-->New SSH key中添加
 d)验证
 本地执行
 ssh -T git@github.com  #会提示成功
@@ -174,14 +175,14 @@ ssh -T git@github.com  #会提示成功
 常用命令
 git remote                       #查看当前配置的远程仓库
 git remote -v                    #显示别名的实际链接地址
-git fetch repo_name              #从远程仓库下载新分支与数据，repo_name为别名
+git fetch repo_name              #从远程仓库下载新分支与数据,repo_name为别名
 git merge repo_name/branch_name  #从远程仓库的某分支提取数据并尝试合并到当前分支
 git push repo_name branch_name   #推送新分支到某个远程仓库
 git remote rm repo_name          #删除远程仓库
 git remote add repo_name url     #添加远程库
                                  #例如：git remote add mygit git@github:wangh/mygit-test.git
-注：github由于服务器在国外，存在网速和连接不稳定方面的问题
-    可使用Cloud Studio平台(腾讯的)或码云(https:#gitee.com/)替换，步骤与Girhub类似
+注：github由于服务器在国外,存在网速和连接不稳定方面的问题
+    可使用Cloud Studio平台(腾讯的)或码云(https:#gitee.com/)替换,步骤与Girhub类似
 
 9.git服务器搭建
 以CentOS为例
@@ -210,16 +211,16 @@ chown -R git:git xx.git
 git clone git@ip:/dir/xx.git  #ip为服务器ip
 
 特殊文件的处理
-由于系统、项目和编译等产生的一些文件，或不想同步某些文件可使用以下方法处理
+由于系统、项目和编译等产生的一些文件,或不想同步某些文件可使用以下方法处理
 1.在工作区根目录(git init初始化的目录)建立 .gitignore 文件
-2.编辑此文件，格式如下：
+2.编辑此文件,格式如下：
 # Windows:   ##开头的为注释
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 
 # Python:
-*.py[cod]     #*通配任意字符，[]中通配括号中任意一个字符
+*.py[cod]     #*通配任意字符,[]中通配括号中任意一个字符
 *.so
 *.egg
 *.egg-info

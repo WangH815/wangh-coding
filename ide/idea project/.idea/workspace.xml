@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../databases/MySQL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../databases/MySQL.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,7 +19,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2188">
+            <state relative-caret-position="524">
               <caret line="173" column="1" selection-start-line="173" selection-start-column="1" selection-end-line="173" selection-end-column="1" />
               <folding>
                 <element signature="e#4826#4827#0" expanded="true" />
@@ -123,14 +123,15 @@
       <workItem from="1572000686046" duration="4713000" />
       <workItem from="1572364336246" duration="89000" />
       <workItem from="1572939620981" duration="142000" />
+      <workItem from="1574429493820" duration="787000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29943000" />
+    <option name="totallyTimeSpent" value="30730000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="96" y="29" width="1346" height="742" extended-state="0" />
+    <frame x="96" y="29" width="1346" height="742" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.21617419" />
@@ -186,7 +187,7 @@
     <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/lang/Thread.java" />
     <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2188">
+        <state relative-caret-position="524">
           <caret line="173" column="1" selection-start-line="173" selection-start-column="1" selection-end-line="173" selection-end-column="1" />
           <folding>
             <element signature="e#4826#4827#0" expanded="true" />
