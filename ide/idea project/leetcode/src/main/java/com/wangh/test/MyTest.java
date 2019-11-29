@@ -83,7 +83,8 @@ public class MyTest {
 //            System.out.println(str);
 //        }while(!str.equals("end"));
 
-        OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("1.txt"), "UTF-8");
+        OutputStreamWriter osw = new OutputStreamWriter(
+                new FileOutputStream("1.txt"), "UTF-8");
         osw.append("sdfasdf安慰");
         osw.close();
 
