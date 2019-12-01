@@ -7,9 +7,9 @@ Docker支持将软件编译成一个镜像（image）,在这个镜像里做好�
 
 
 #基本概念
-image      #镜像;用于创建容器的模板,类似于Java中的Class
-container  #容器;独立运行的一个或一组应用
-registry   #仓库;存放镜像的仓库
+image       #镜像;用于创建容器的模板,类似于Java中的Class
+container   #容器;独立运行的一个或一组应用,类似于对象(实例)
+registry    #仓库;存放镜像的仓库
 
 
 #常见操作
@@ -121,7 +121,7 @@ docker import xx.tar               #导入
 docker ps                                     #查看正在运行的容器       
 docker ps -a                                  #查看所用容器,包括启动过的历史容器
 docker ps -a -q                               #显示所有容器ID
-docker ps -|                                  #查看最后一次运行的容器
+docker ps -l                                  #查看最后一次运行的容器
 docker ps -f status=exited                    #查看停止的容器
 docker rm CONTAINER_NAME/ID                   #删除已停止容器
 docker rm $(docker ps -a -q)                  #删除所有容器,前提是所有容器都是停止的
