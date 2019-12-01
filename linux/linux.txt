@@ -540,6 +540,9 @@ cat /etc/issue             #查看发行版
 cat /etc/lsb-release       #查看Ubuntu版本
 cat /proc/cpuinfo          #显示每个CPU核心信息
 cat /proc/meminfo          #显示内存信息
+service xx start           #启动xx服务;stop/restart同理;实际运行/etc/init.d/目录下的服务命令脚本,可使用/etc/init.d/xx start替代
+systemctl start xx         #效果同上;属于systemd(初始化系统,负责系统启动和应用守护进程的管理)的一部分,比service能管理的广
+journalctl                 #系统(内核和应用)日志管理,systemd的一部分
 
 
 ##打包压缩

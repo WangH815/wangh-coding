@@ -53,17 +53,17 @@ apt remove docker.io     #卸载
 docker -v/--version      #查看docker版本
 
 2.启动和关闭docker服务
-service docker start      #启动
+service docker start      #启动;systemctl start docker.service命令也可以,下同
 service docker stop       #停止
 service docker restart    #重启
 docker info               #查看docker概要信息
 
-3.增加其他用户使用docker的权限
+3.增加其他用户使用docker的权限 #不需要可以不添加
 cat /etc/group | grep docker   #查看docker组是否存在
 groupadd docker                #增加docker;root操作
 usermod -aG docker username    #将用户用户添加到docker用户组中;root操作
 
-4.镜像源
+4.镜像源                       #用于镜像加速
 vi /etc/docker/daemon.json     #没有则创建此文件,重启docker后生效
 service docker restart
 #设置为网易镜像源
@@ -90,7 +90,7 @@ IMAGE ID     #镜像ID
 CREATED      #镜像的创建日期（不是获取该镜像的日期）
 SIZE         #镜像大小
 
-docker search CONTAINER_NAME          #搜索镜像源可用镜像
+docker search CONTAINER_NAME          #搜索镜像源可用镜像;推荐直接访问 https://hub.docker.com/ 搜索
 docker pull CONTAINER_NAME            #从镜像源下载指定镜像
 docker pull CONTAINER_NAME:VERSION    #同上;指定版本
 docker rmi IMAGE_NAME/ID              #删除本地指定镜像;rmi表示remove images
@@ -141,7 +141,7 @@ docker logs CONTAINER_NAME/ID                 #显示运行容器的日志
 docker run
 #参数
 --name CONTAINER_NAME         #设置容器名称
--p host_port:container_port   #映射主机和容器内的端口;port
+-p host_port:container_port   #映射主机和容器内的端口;port;使用-P可随机映射主机高端口
 -e ${env name}=${env value}   #添加环境变量;environment
 -v host_path:container_path   #将主机目录挂载(映射)到容器内;--volumes(卷)
 -d                            #后台运行容器并打印其ID
@@ -215,7 +215,7 @@ docker run \
 3.登录容器
 方式一:
 docker exec -it docker_redis5 /bin/bash   #登录容器shell环境
-redis-cli                                 #登录redis命令行
+redis-cli                                 #进入redis命令行
 方式二:
 docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
 
@@ -231,6 +231,25 @@ docker run \
 -p 80:80 \
 -v ~/nginx/data:/data \
 -di nginx:stable
+
+
+定制镜像
+Dockerfile    #构建镜像的文本文件,包含构建镜像所需的指令和说明
+
+基于centos:7.7.1908构建特定版本的redis镜像   #ubuntu18.04下操作
+1.拉取基本镜像
+docker pull centos:7.7.1908
+2.新建Dockerfile文件                         #建议在空目录下创建
+Dockerfile文件内容如下:
+FROM centos:7.7.1908
+RUN yum install -y wget \
+    && wget -O redis.tar.gz "http://download.redis.io/releases/redis-5.0.3.tar.gz" \
+    && tar -xvf redis.tar.gz
+3.在Dockerfile文件所在目录构建镜像
+docker build -t redis5:test .                #.表示指定Dockerfile文件目录
+4.查看构建的镜像
+docker images
+
 
 CentOS7 安装使用docker
 1.安装
