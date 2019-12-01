@@ -85,7 +85,7 @@ public class MyTest {
 
         OutputStreamWriter osw = new OutputStreamWriter(
                 new FileOutputStream("1.txt"), "UTF-8");
-        osw.append("sdfasdf安慰");
+        osw.append("sdfasdf安慰\nsdfgs\nsdfgs");
         osw.close();
 
 //        Scanner sc = new Scanner(System.in);

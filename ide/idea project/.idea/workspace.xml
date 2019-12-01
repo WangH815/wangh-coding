@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../python/.idea/python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/python.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/workspace.xml" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,32 +14,8 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
-              <folding>
-                <element signature="e#4826#4827#0" expanded="true" />
-                <element signature="e#4872#4873#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java" />
-      </list>
-    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -55,50 +25,12 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="13" />
-    <option name="width" value="1346" />
-    <option name="height" value="742" />
-  </component>
+  <component name="ProjectId" id="1UNSyLZYJDYeIYMxP3s1yn7BfCl" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="idea project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="idea project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="idea project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="wangh" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="idea project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="wangh" type="462c0819:PsiDirectoryNode" />
-              <item name="p0001_0100" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -106,18 +38,6 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="MyTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -138,6 +58,18 @@
         <item itemvalue="Application.MyTest" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -166,91 +98,35 @@
       <workItem from="1574843512875" duration="2027000" />
       <workItem from="1575017996147" duration="167000" />
       <workItem from="1575018977269" duration="431000" />
+      <workItem from="1575194836934" duration="206000" />
+      <workItem from="1575195815607" duration="799000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33364000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="13" width="1346" height="742" extended-state="0" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22239502" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Web" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.31907895" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32843137" />
-      <window_info anchor="bottom" id="Java Enterprise" order="11" />
-      <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Theme Preview" order="8" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="editorHistoryManager">
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/util/Date.java" />
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/io/PrintStream.java" />
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/io/InputStream.java" />
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/io/FileInputStream.java" />
-    <entry file="file://$PROJECT_DIR$/1.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/util/List.java" />
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/util/function/Consumer.java" />
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/util/Iterator.java" />
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/util/Objects.java" />
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/lang/Runnable.java" />
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/lang/Object.java" />
-    <entry file="jar://F:/Java/jdk/jdk1.8.0_211/src.zip!/java/lang/Thread.java" />
-    <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0002_AddTwoNumbers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0046_Permutations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="99" column="51" lean-forward="true" selection-start-line="99" selection-start-column="51" selection-end-line="99" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/MyTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
-          <folding>
-            <element signature="e#4826#4827#0" expanded="true" />
-            <element signature="e#4872#4873#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  <component name="WindowStateProjectService">
+    <state width="1340" height="256" key="GridCell.Tab.0.bottom" timestamp="1575201182155">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1340" height="256" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1575201182155" />
+    <state width="1340" height="256" key="GridCell.Tab.0.center" timestamp="1575201182155">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1340" height="256" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1575201182155" />
+    <state width="1340" height="256" key="GridCell.Tab.0.left" timestamp="1575201182155">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1340" height="256" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1575201182155" />
+    <state width="1340" height="256" key="GridCell.Tab.0.right" timestamp="1575201182155">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1340" height="256" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1575201182155" />
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1575195815911">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1575195815911" />
   </component>
   <component name="masterDetails">
     <states>
