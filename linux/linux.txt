@@ -544,7 +544,6 @@ service xx start           #启动xx服务;stop/restart同理;实际运行/etc/i
 systemctl start xx         #效果同上;属于systemd(初始化系统,负责系统启动和应用守护进程的管理)的一部分,比service能管理的广
 journalctl                 #系统(内核和应用)日志管理,systemd的一部分
 
-
 ##打包压缩
 tar [-]cvf file.tar dir  #打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程,可不加
 tar xvf file.tar         #解包;x表示extract(提取),f表示指定文件;打包中c表示create
@@ -671,6 +670,10 @@ history | grep cmd    #搜索特定命令执行历史
 !$/!^                 #上一条命令的最后/第一个参数
 !:2                   #上一条命令的第二个参数;更多用法参考 man bash中HISTORY EXPANSION(历史命令展开)
 ctrl + r              #可搜索之前执行过的命令;用于较长命令较为实用
+ctrl + l              #清屏;等价于clear
+ctrl + c              #中断命令
+ctrl + insert         #复制
+shift + insert        #粘贴
 seq                   #生成整数序列;以换行符为分隔符(一个序列一行)
 seq 3                 #返回1,2,3;设定序列最大值;默认最小值为1
 seq 0 3               #返回0,1,2,3;设定最小值和最大值
