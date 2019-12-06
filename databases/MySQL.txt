@@ -322,6 +322,10 @@ load data local infile '/path/xx.txt' into table tb;                            
 load data local infile '/path/xx.txt' into table tb lines terminated by '\r\n'; --windows平台编辑过的文本的数据导入方式
 
 
+mysql压测命令
+mysqlslap -uroot -p --concurrency=100 --number-of-queries=10000 --auto-generate-sql
+
+
 mysql命令行帮助  --括号中为命令的快捷方式
 ?               (\?)   --同help
 clear           (\c)   --清除当前输入语句(命令)
