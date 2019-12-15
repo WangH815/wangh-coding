@@ -3,7 +3,7 @@ win10使用UEFI+GPT方案安装系统
 
 准备:
 1.大于等于8G的U盘
-2.官方原版镜像(可从 i tell you 网站下载)
+2.官方原版镜像(可从 https://msdn.itellyou.cn/ 网站下载)
 3.系统盘为GPT分区格式
 
 
@@ -31,5 +31,12 @@ c)用imageX导出镜像
 install.wim里面包含了多个版本，可以只把你需要的版本导出，然后替换回去就行
 这个方法有局限性，如果导出的镜像还是大于4G就没办法了
 
-d)wim转成ESD
-将wim转换成esd，然后替换回去就行;可使用DISM++软件
+d)wim转成ESD(推荐使用)
+将wim转换成esd(转换比较慢)，然后替换回去就行;可使用DISM++软件
+
+
+官方方案(使用U盘制作)
+地址:
+https://www.microsoft.com/zh-cn/software-download/windows10/
+
+
