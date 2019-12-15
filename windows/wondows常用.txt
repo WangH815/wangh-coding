@@ -1,0 +1,11 @@
+
+wondows常用
+
+
+路径
+
+win10主题:
+C:\Users\WangH\AppData\Local\Microsoft\Windows\Themes
+
+hosts:
+C:\Windows\System32\drivers\etc
