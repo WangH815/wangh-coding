@@ -31,12 +31,6 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1346" />
-    <option name="height" value="743" />
-  </component>
   <component name="ProjectId" id="1UNSyLZYJDYeIYMxP3s1yn7BfCl" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -58,20 +52,7 @@
       <recent name="com.wangh.test" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test191222">
-    <configuration name="Test191211" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.test.Test191211" />
-      <module name="main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.wangh.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.Test191223">
     <configuration name="Test191217" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.wangh.test.Test191217" />
       <module name="main" />
@@ -124,13 +105,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test191223" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangh.test.Test191223" />
+      <module name="main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wangh.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Test191223" />
         <item itemvalue="Application.Test191222" />
         <item itemvalue="Application.Test191221" />
         <item itemvalue="Application.Test191220" />
         <item itemvalue="Application.Test191217" />
-        <item itemvalue="Application.Test191211" />
       </list>
     </recent_temporary>
   </component>
@@ -184,6 +178,11 @@
       <workItem from="1576899453117" duration="13495000" />
       <workItem from="1577025083975" duration="939000" />
       <workItem from="1577026104852" duration="2165000" />
+      <workItem from="1577083891053" duration="61000" />
+      <workItem from="1577085953993" duration="1322000" />
+      <workItem from="1577087457868" duration="28000" />
+      <workItem from="1577087574809" duration="25000" />
+      <workItem from="1577088906705" duration="2845000" />
     </task>
     <servers />
   </component>
@@ -195,25 +194,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="552" y="198" key="#Inspections/0.0.1920.1080@0.0.1920.1080" timestamp="1577025200052" />
-    <state width="1340" height="255" key="GridCell.Tab.0.bottom" timestamp="1577028270519">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1286" height="176" key="GridCell.Tab.0.bottom" timestamp="1577091855002">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
+    <state width="1286" height="176" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1577091855002" />
     <state width="1340" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1577028270519" />
-    <state width="1340" height="255" key="GridCell.Tab.0.center" timestamp="1577028270519">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1286" height="176" key="GridCell.Tab.0.center" timestamp="1577091855001">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
+    <state width="1286" height="176" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1577091855001" />
     <state width="1340" height="255" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1577028270519" />
-    <state width="1340" height="255" key="GridCell.Tab.0.left" timestamp="1577028270519">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1286" height="176" key="GridCell.Tab.0.left" timestamp="1577091855001">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
+    <state width="1286" height="176" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1577091855001" />
     <state width="1340" height="255" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1577028270519" />
-    <state width="1340" height="255" key="GridCell.Tab.0.right" timestamp="1577028270519">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1286" height="176" key="GridCell.Tab.0.right" timestamp="1577091855001">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
+    <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1577091855001" />
     <state width="1340" height="255" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1577028270519" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1577026453696">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="455" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1577088911485">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
+    <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1577088911485" />
     <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1577026453696" />
     <state x="690" y="304" key="extract.method.dialog" timestamp="1577026047459">
       <screen x="0" y="0" width="1920" height="1080" />
