@@ -12,7 +12,17 @@ public class Test191223 {
         FileOutputStream fos = new FileOutputStream(f);
         OutputStreamWriter osw = new OutputStreamWriter(fos,"utf-8");
         osw.append("asdfasd山东分公司\nsdgvfd山东分公司的");
-        osw.flush();
+        osw.close();
+
+
     }
 
 }
+
+class Parent implements InterfaceExample{
+    public void asd(){}
+}
+
+class Son extends Parent{}    //继承
+
+

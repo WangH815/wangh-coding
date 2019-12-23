@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello.txt" beforeDir="false" afterPath="$PROJECT_DIR$/hello.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191223.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191223.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test191223.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test191223.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +19,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -45,14 +49,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.wangh.test" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test191223">
+  <component name="RunManager" selected="Application.Test191222">
     <configuration name="Test191217" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.wangh.test.Test191217" />
       <module name="main" />
@@ -120,8 +124,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test191223" />
         <item itemvalue="Application.Test191222" />
+        <item itemvalue="Application.Test191223" />
         <item itemvalue="Application.Test191221" />
         <item itemvalue="Application.Test191220" />
         <item itemvalue="Application.Test191217" />
@@ -183,6 +187,7 @@
       <workItem from="1577087457868" duration="28000" />
       <workItem from="1577087574809" duration="25000" />
       <workItem from="1577088906705" duration="2845000" />
+      <workItem from="1577113271169" duration="2795000" />
     </task>
     <servers />
   </component>
@@ -194,31 +199,35 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="552" y="198" key="#Inspections/0.0.1920.1080@0.0.1920.1080" timestamp="1577025200052" />
-    <state width="1286" height="176" key="GridCell.Tab.0.bottom" timestamp="1577091855002">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state width="1340" height="255" key="GridCell.Tab.0.bottom" timestamp="1577117392267">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1286" height="176" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1577091855002" />
-    <state width="1340" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1577028270519" />
-    <state width="1286" height="176" key="GridCell.Tab.0.center" timestamp="1577091855001">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state width="1340" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1577117392267" />
+    <state width="1340" height="255" key="GridCell.Tab.0.center" timestamp="1577117392267">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1286" height="176" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1577091855001" />
-    <state width="1340" height="255" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1577028270519" />
-    <state width="1286" height="176" key="GridCell.Tab.0.left" timestamp="1577091855001">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state width="1340" height="255" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1577117392267" />
+    <state width="1340" height="255" key="GridCell.Tab.0.left" timestamp="1577117392267">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1286" height="176" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1577091855001" />
-    <state width="1340" height="255" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1577028270519" />
-    <state width="1286" height="176" key="GridCell.Tab.0.right" timestamp="1577091855001">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state width="1340" height="255" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1577117392267" />
+    <state width="1340" height="255" key="GridCell.Tab.0.right" timestamp="1577117392267">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1577091855001" />
-    <state width="1340" height="255" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1577028270519" />
-    <state x="455" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1577088911485">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state width="1340" height="255" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1577117392267" />
+    <state x="461" y="182" key="SettingsEditor" timestamp="1577113560235">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="461" y="182" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1577113560235" />
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1577113360198">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1577088911485" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1577026453696" />
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1577113360198" />
     <state x="690" y="304" key="extract.method.dialog" timestamp="1577026047459">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
