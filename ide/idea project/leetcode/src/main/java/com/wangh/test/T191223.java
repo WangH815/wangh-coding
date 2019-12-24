@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public class Test191223 {
+public class T191223 {
 
     public static void main(String[] args) throws IOException {
         File f = new File("test191223.txt");

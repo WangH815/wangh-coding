@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191223.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191223.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test191223.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test191223.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191204.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/T191204.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191211.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/T191211.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191217.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/T191217.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191218.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/T191218.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191220.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/T191220.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191221.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/T191221.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191222.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/T191222.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/Test191223.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/test/T191223.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,10 +59,13 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.wangh.test" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\git\wangh-coding\ide\idea project\leetcode\src\main\java\com\wangh\test" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Test191222">
-    <configuration name="Test191217" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.test.Test191217" />
+  <component name="RunManager">
+    <configuration name="T191217" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangh.test.T191217" />
       <module name="main" />
       <extension name="coverage">
         <pattern>
@@ -70,8 +77,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test191220" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.test.Test191220" />
+    <configuration name="T191220" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangh.test.T191220" />
       <module name="main" />
       <extension name="coverage">
         <pattern>
@@ -83,8 +90,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test191221" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.test.Test191221" />
+    <configuration name="T191221" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangh.test.T191221" />
       <module name="main" />
       <extension name="coverage">
         <pattern>
@@ -96,8 +103,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test191222" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.test.Test191222" />
+    <configuration name="T191222" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangh.test.T191222" />
       <module name="main" />
       <extension name="coverage">
         <pattern>
@@ -109,8 +116,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test191223" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.test.Test191223" />
+    <configuration name="T191223" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangh.test.T191223" />
       <module name="main" />
       <extension name="coverage">
         <pattern>
@@ -124,11 +131,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test191222" />
-        <item itemvalue="Application.Test191223" />
-        <item itemvalue="Application.Test191221" />
-        <item itemvalue="Application.Test191220" />
-        <item itemvalue="Application.Test191217" />
+        <item itemvalue="Application.T191222" />
+        <item itemvalue="Application.T191223" />
+        <item itemvalue="Application.T191221" />
+        <item itemvalue="Application.T191220" />
+        <item itemvalue="Application.T191217" />
       </list>
     </recent_temporary>
   </component>
@@ -188,6 +195,7 @@
       <workItem from="1577087574809" duration="25000" />
       <workItem from="1577088906705" duration="2845000" />
       <workItem from="1577113271169" duration="2795000" />
+      <workItem from="1577197968709" duration="175000" />
     </task>
     <servers />
   </component>
@@ -199,6 +207,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="552" y="198" key="#Inspections/0.0.1920.1080@0.0.1920.1080" timestamp="1577025200052" />
+    <state x="800" y="436" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1577198086100">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="800" y="436" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1080@0.0.1920.1080" timestamp="1577198086100" />
     <state width="1340" height="255" key="GridCell.Tab.0.bottom" timestamp="1577117392267">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -223,11 +235,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1577113560235" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1577113360198">
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1577197969375">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1577088911485" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1577113360198" />
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1577197969375" />
     <state x="690" y="304" key="extract.method.dialog" timestamp="1577026047459">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

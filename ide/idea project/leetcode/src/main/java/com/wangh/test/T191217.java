@@ -1,6 +1,6 @@
 package com.wangh.test;
 
-public class Test191217 {
+public class T191217 {
     private String name;
     private int age;
     private String designation;
@@ -48,7 +48,7 @@ public class Test191217 {
 
 
     public static void main(String[] args) {
-        Test191217 ts = new Test191217();
+        T191217 ts = new T191217();
         ts.setName("wh");
         ts.setAge(25);
         ts.setDesignation("worker");

@@ -1,8 +1,8 @@
 package com.wangh.test;
 
-import java.io.*;
+        import java.io.*;
 
-public class Test191222 {
+public class T191222 {
 
     public static void main(String[] args) throws IOException {
         File ff = new File("hello.txt");

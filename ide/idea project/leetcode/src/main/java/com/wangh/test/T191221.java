@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Test191221 {
+public class T191221 {
 
 
     public static void main(String[] args) throws IOException {
