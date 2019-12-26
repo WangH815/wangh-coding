@@ -1,6 +1,6 @@
 package com.wangh.test;
 
-public class Test191204 {
+public class T191204 {
     public static void main(String[] args) {
 //        System.out.println("hello java!");
         FJ fj = new FJ();

@@ -1,6 +1,6 @@
 package com.wangh.test;
 
-        import java.io.*;
+import java.io.*;
 
 public class T191222 {
 
