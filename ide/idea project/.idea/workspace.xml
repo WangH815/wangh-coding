@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/main/META-INF/main.kotlin_module" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,6 +191,7 @@
       <workItem from="1577372615276" duration="170000" />
       <workItem from="1577372808470" duration="245000" />
       <workItem from="1577433882632" duration="2843000" />
+      <workItem from="1577502466467" duration="285000" />
     </task>
     <servers />
   </component>
@@ -232,11 +231,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1577113560235" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1577372891428">
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1577502466961">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1577088911485" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1577372891428" />
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1577502466961" />
     <state x="690" y="304" key="extract.method.dialog" timestamp="1577026047459">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
