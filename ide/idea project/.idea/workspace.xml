@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,15 +54,15 @@
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\git\wangh-coding\ide\idea project\leetcode\src\main\java\com\wangh\test\201912" />
       <recent name="F:\git\wangh-coding\ide\idea project\leetcode\src\main\java\com\wangh\test" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.wangh.t202001" />
       <recent name="com.wangh.test" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\git\wangh-coding\ide\idea project\leetcode\src\main\java\com\wangh\test\201912" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\git\wangh-coding\ide\idea project\leetcode\src\main\java\com\wangh\test" />
     </key>
   </component>
@@ -266,10 +265,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1578154799005" />
-    <state x="455" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1578280081877">
+    <state x="455" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1578281256695">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1578280081877" />
+    <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1578281256695" />
     <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1578157799159" />
     <state x="690" y="304" key="extract.method.dialog" timestamp="1577026047459">
       <screen x="0" y="0" width="1920" height="1080" />
