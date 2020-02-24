@@ -211,7 +211,7 @@ var.update(x)  #向集合增加序列(list/tuple/dict)中的元素
 var.remove(x)  #删除指定元素;不存在会报错
 var.discard(x) #删除指定元素;不存在不报错 
 var.pop()      #随机删除一个元素
-var1 - var2    #返回在var1中且不在var2中元素的集合
+var1 - var2    #返回在var1中且不在var2中元素的集合 
 var1 | var2    #合并集合
 var1 & var2    #返回相同元素的集合
 var1 ^ var2    #返回两集合不同元素的集合
@@ -275,8 +275,8 @@ a [算术运算符] = b  <=> a = a [算术运算符] b  #例如 a += b 等价于
 #多变量赋值
 a = b = c = 1            #多变量赋相同值,实际指向同一(内存)位置
 a, b, c = 1, 2, "runoob" #多变量赋不同值
-del var,var2   #删除变量
-var = None          #变量重置(未定义)
+del var,var2             #删除变量
+var = None               #变量重置(未定义)
 
 ##(二进制)位运算
 ###int(整型)数据存储方式
