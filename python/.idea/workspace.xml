@@ -3,11 +3,40 @@
   <component name="ChangeListManager">
     <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/python3.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="mysql57-docker" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="mysql57-ubuntu1804" type="feb32156:DbDataSourceImpl" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ExecutionTargetDialog">
+    <checked>
+      <node key="5e628d68-d059-4b23-8ce3-f60cdfc108c1" />
+    </checked>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -36,6 +65,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/test/t202001" />
@@ -50,29 +80,7 @@
       <recent name="F:\git\wangh-coding\python\test\t2019" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.25">
-    <configuration name="00" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="python" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/t202001" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/t202001/00.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.27">
     <configuration name="05" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -139,6 +147,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="27" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/t202002" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/t202002/27.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="hello" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -163,11 +193,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.27" />
         <item itemvalue="Python.25" />
         <item itemvalue="Python.24" />
         <item itemvalue="Python.hello" />
         <item itemvalue="Python.05" />
-        <item itemvalue="Python.00" />
       </list>
     </recent_temporary>
   </component>
@@ -196,6 +226,11 @@
       <workItem from="1581931845998" duration="178000" />
       <workItem from="1582522441482" duration="13773000" />
       <workItem from="1582612682781" duration="7897000" />
+      <workItem from="1582784426546" duration="1777000" />
+      <workItem from="1582787741730" duration="5000" />
+      <workItem from="1582787848458" duration="120000" />
+      <workItem from="1582788108028" duration="169000" />
+      <workItem from="1582788290617" duration="7730000" />
     </task>
     <servers />
   </component>
@@ -230,30 +265,43 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="914" height="291" key="GridCell.Tab.0.bottom" timestamp="1582649196426">
+    <state x="1032" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582803571705">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1582649196426" />
-    <state width="914" height="291" key="GridCell.Tab.0.center" timestamp="1582649196426">
+    <state x="1032" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1582803571705" />
+    <state x="1221" y="230" key="ExecutionTargetDialog" timestamp="1582790794608">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="291" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1582649196426" />
-    <state width="914" height="291" key="GridCell.Tab.0.left" timestamp="1582649196426">
+    <state x="1221" y="230" key="ExecutionTargetDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1582790794608" />
+    <state width="914" height="288" key="GridCell.Tab.0.bottom" timestamp="1582807277949">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="291" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1582649196426" />
-    <state width="914" height="291" key="GridCell.Tab.0.right" timestamp="1582649196426">
+    <state width="914" height="288" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1582807277949" />
+    <state width="914" height="288" key="GridCell.Tab.0.center" timestamp="1582807277949">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="291" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1582649196426" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1582612683020">
+    <state width="914" height="288" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1582807277949" />
+    <state width="914" height="288" key="GridCell.Tab.0.left" timestamp="1582807277949">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1582612683020" />
+    <state width="914" height="288" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1582807277949" />
+    <state width="914" height="288" key="GridCell.Tab.0.right" timestamp="1582807277949">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="914" height="288" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1582807277949" />
+    <state width="220" height="477" key="HiddenNamespacesPopup" timestamp="1582790730814">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1582790730814" />
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1582788290896">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1582788290896" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/python$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1575018378084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tool" />
     <SUITE FILE_PATH="coverage/python$191220.coverage" NAME="191220 Coverage Results" MODIFIED="1576827348559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/python$27.coverage" NAME="27 Coverage Results" MODIFIED="1582803626077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202002" />
     <SUITE FILE_PATH="coverage/python$25.coverage" NAME="25 Coverage Results" MODIFIED="1582639293984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202002" />
     <SUITE FILE_PATH="coverage/python$hello.coverage" NAME="hello Coverage Results" MODIFIED="1582536494096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/100/Day01" />
     <SUITE FILE_PATH="coverage/python$24.coverage" NAME="24 Coverage Results" MODIFIED="1582552943067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202002" />
