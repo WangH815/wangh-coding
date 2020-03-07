@@ -1,5 +1,9 @@
 Ubuntu 18.04
 
+#启用root用户
+sudo passwd root      #ubuntu默认无法用root登陆
+
+
 #批量增加用户
 http://www.runoob.com/linux/linux-user-manage.html
 
