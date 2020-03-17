@@ -4,7 +4,7 @@ from time import time, sleep
 
 
 def download_task(file_name):
-    print('{}开始下载'.format(file_name))
+    print('开始下载{}'.format(file_name))
     t = randint(5, 10)
     sleep(t)
     print('下载耗时{}s'.format(t))
