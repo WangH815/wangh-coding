@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/t202003/16_threads2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/t202003/16_threads2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,73 +80,7 @@
       <recent name="F:\git\wangh-coding\python\tool" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.17_threads4">
-    <configuration name="16_threads2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="python" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/t202003" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/t202003/16_threads2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="17_threads" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="python" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/t202003" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/t202003/17_threads.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="17_threads2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="python" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/t202003" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/t202003/17_threads2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.18_threads3">
     <configuration name="17_threads3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -192,13 +125,79 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="18_threads" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/t202003" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/t202003/18_threads.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="18_threads2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/t202003" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/t202003/18_threads2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="18_threads3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/t202003" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/t202003/18_threads3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.18_threads3" />
+        <item itemvalue="Python.18_threads2" />
+        <item itemvalue="Python.18_threads" />
         <item itemvalue="Python.17_threads4" />
         <item itemvalue="Python.17_threads3" />
-        <item itemvalue="Python.17_threads2" />
-        <item itemvalue="Python.17_threads" />
-        <item itemvalue="Python.16_threads2" />
       </list>
     </recent_temporary>
   </component>
@@ -251,6 +250,8 @@
       <workItem from="1584104422449" duration="3998000" />
       <workItem from="1584322529176" duration="7427000" />
       <workItem from="1584409732934" duration="9560000" />
+      <workItem from="1584497039522" duration="3706000" />
+      <workItem from="1584520184826" duration="5574000" />
     </task>
     <servers />
   </component>
@@ -293,30 +294,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1221" y="230" key="ExecutionTargetDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1582790794608" />
-    <state width="914" height="219" key="GridCell.Tab.0.bottom" timestamp="1584461682742">
+    <state width="914" height="216" key="GridCell.Tab.0.bottom" timestamp="1584549243623">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="219" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584461682742" />
-    <state width="914" height="219" key="GridCell.Tab.0.center" timestamp="1584461682742">
+    <state width="914" height="216" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584549243623" />
+    <state width="914" height="216" key="GridCell.Tab.0.center" timestamp="1584549243623">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="219" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584461682742" />
-    <state width="914" height="219" key="GridCell.Tab.0.left" timestamp="1584461682742">
+    <state width="914" height="216" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584549243623" />
+    <state width="914" height="216" key="GridCell.Tab.0.left" timestamp="1584549243622">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="219" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584461682742" />
-    <state width="914" height="219" key="GridCell.Tab.0.right" timestamp="1584461682742">
+    <state width="914" height="216" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584549243622" />
+    <state width="914" height="216" key="GridCell.Tab.0.right" timestamp="1584549243623">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="219" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584461682742" />
+    <state width="914" height="216" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584549243623" />
     <state width="220" height="477" key="HiddenNamespacesPopup" timestamp="1582790730814">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1582790730814" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1584409733127">
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1584520184930">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584409733127" />
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584520184930" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/python$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1575018378084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tool" />
@@ -333,11 +334,13 @@
     <SUITE FILE_PATH="coverage/python$191220.coverage" NAME="191220 Coverage Results" MODIFIED="1576827348559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/python$12.coverage" NAME="12 Coverage Results" MODIFIED="1584003994936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$08.coverage" NAME="08 Coverage Results" MODIFIED="1583669000693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
+    <SUITE FILE_PATH="coverage/python$18_threads2.coverage" NAME="18_threads2 Coverage Results" MODIFIED="1584520188770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$13_pygame2.coverage" NAME="13_pygame2 Coverage Results" MODIFIED="1584084452136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$04.coverage" NAME="04 Coverage Results" MODIFIED="1583321884575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$16_threads2.coverage" NAME="16_threads2 Coverage Results" MODIFIED="1584378307530" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$07.coverage" NAME="07 Coverage Results" MODIFIED="1583595572157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$17_threads4.coverage" NAME="17_threads4 Coverage Results" MODIFIED="1584460739485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
+    <SUITE FILE_PATH="coverage/python$18_threads3.coverage" NAME="18_threads3 Coverage Results" MODIFIED="1584523246198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$27.coverage" NAME="27 Coverage Results" MODIFIED="1582803626077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202002" />
     <SUITE FILE_PATH="coverage/python$10.coverage" NAME="10 Coverage Results" MODIFIED="1583808490785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$13_re_qq.coverage" NAME="13_re_qq Coverage Results" MODIFIED="1584089689403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
@@ -346,6 +349,7 @@
     <SUITE FILE_PATH="coverage/python$16_thread.coverage" NAME="16_thread Coverage Results" MODIFIED="1584378088626" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$25.coverage" NAME="25 Coverage Results" MODIFIED="1582639293984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202002" />
     <SUITE FILE_PATH="coverage/python$13_pygame.coverage" NAME="13_pygame Coverage Results" MODIFIED="1584083785578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
+    <SUITE FILE_PATH="coverage/python$18_threads.coverage" NAME="18_threads Coverage Results" MODIFIED="1584515794048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$13.coverage" NAME="13 Coverage Results" MODIFIED="1584035708850" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$hello.coverage" NAME="hello Coverage Results" MODIFIED="1582536494096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/100/Day01" />
   </component>
