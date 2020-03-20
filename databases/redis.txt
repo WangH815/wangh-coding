@@ -1,0 +1,105 @@
+Redis
+
+
+#简介
+由ANSI C编写的Key-Value数据库,特点是性能极好(内存型数据库,目前是单线程)
+
+
+#环境准备
+OS:  Ubuntu 1804
+Ver: Redis 5
+1.拉取镜像
+docker pull redis:5
+2.创建容器
+mkdir -p ~/redis/data   #创建本地目录
+#创建容器
+docker run \
+--name docker_redis5 \
+-p 6379:6379 \
+-v ~/redis/data:/data \
+-di redis:5 redis-server --appendonly yes
+3.登录容器
+方式一:
+docker exec -it docker_redis5 /bin/bash   #登录容器shell环境
+redis-cli                                 #进入redis命令行
+方式二:
+docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
+
+
+#配置
+redis.conf          #配置文件,一般在安装目录
+
+##获取配置
+config get *        #获取全部配置,奇数项为配置key,下一项为value
+config get cfg_key  #获取单项配置,支持通配搜索
+
+##设置配置
+config set cfg_key cfg_value   #设置或更新配置值
+
+
+#基本数据类型
+String            #字符串
+Hash              #散列/哈希
+List              #列表
+Set               #集合
+ZSet/Sorted Set   #有序集合
+
+
+#常用命令
+redis-cli                              #连接本地redis,进入命令行
+redis-cli -h host -p port -a password  #连接指定主机redis
+
+##String
+set key value       #设置key-value
+get/del key         #获取/删除
+rename key new_key  #修改key名称
+exists key          #检测key是否存在
+expire key seconds  #设置过期时间(秒);还支持其他格式的时间
+persist key         #移除过期时间
+pttl/ttl key        #返回过期时间,以ms/s计
+type key            #返回key对应value的类型
+
+##Hash
+hmset key field1 "xx" [field2 "xx"]  #设置hash;field等为域值(属性)
+hget/hdel key field1 [field2]        #获取/删除指定域值
+hgetall key                          #获取所有域值
+hexists key                          #检查是否存在
+
+##List
+lpush key value1 [value2]  #向列表头部插值
+lpushx key value           #向已存在列表头部插值
+lpop key                   #移除并返回列表的第一个元素
+llen key                   #返回列表长度
+
+##Set
+sadd key member1 [member2] #向集合添加成员
+spop key                   #随机移除并返回一个成员
+srem key member1 [member2] #移除指定成员
+smembers key               #返回所有成员
+scard key                  #返回成员数
+sismember key member       #检测成员是否存在
+
+##ZSet/Sorted Set
+zadd key score1 member1 [score2 member2]  #添加成员;通过分数(score)排序
+zrem key member1 [member2]                #移除成员
+zcard key                                 #获取成员数
+zrank key member                          #返回成员索引值(不是score);索引值从0开始
+
+##其他命令
+https://redis.io/commands                         #官网
+https://github.com/antirez/redis-doc              #github地址
+https://www.runoob.com/redis/redis-commands.html  #菜鸟教程
+
+
+#发布订阅(pub/sub)
+channel   #通道,客户端获取消息的途径
+client    #客户端;通过通道获取数据
+
+##相关命令
+subscribe channel_name        #创建通道
+publish channel_name message  #向通道发布消息
+
+
+
+
+

@@ -7,12 +7,6 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://192.168.88.99:3306</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="mysql57-docker" uuid="aa405b94-cb37-497d-b383-95453ee0cf7a">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://192.168.88.99:3307</jdbc-url>
-    </data-source>
     <data-source source="LOCAL" name="mysql8-docker" uuid="9344fe63-e11e-4c67-af63-454b8445956f">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
