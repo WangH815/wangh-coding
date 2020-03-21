@@ -21,7 +21,7 @@ docker run \
 3.登录容器
 方式一:
 docker exec -it docker_redis5 /bin/bash   #登录容器shell环境
-redis-cli                                 #进入redis命令行
+redis-cli                                 #redis容器中的shell执行
 方式二:
 docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
 
@@ -47,7 +47,19 @@ ZSet/Sorted Set   #有序集合
 
 #常用命令
 redis-cli                              #连接本地redis,进入命令行
+redis-cli --raw                        #使用客户端字符集显示(可解决中文显示问题)
 redis-cli -h host -p port -a password  #连接指定主机redis
+
+
+#数据结构
+
+##应用场景
+类型    简介                   特性                                               场景
+String  二进制安全             任意数据,包含序列化对象,单个键最大512M             -
+Hash    与Map类似              适合对象的存储                                     存储、读取、修改用户属性
+List    链表(双向链表)         增删快,提供了操作某一段元素的API                   消息排序及消息队列
+Set     哈希表实现,元素不重复  增删改查的复杂度都是O(1);适合集合的交并差集等操作  共同好友、独立IP及通过域值推荐
+ZSet    通过增加Score实现有序  有序集合                                           排行榜及带权重的消息队列
 
 ##String
 set key value       #设置key-value
@@ -60,16 +72,17 @@ pttl/ttl key        #返回过期时间,以ms/s计
 type key            #返回key对应value的类型
 
 ##Hash
-hmset key field1 "xx" [field2 "xx"]  #设置hash;field等为域值(属性)
-hget/hdel key field1 [field2]        #获取/删除指定域值
-hgetall key                          #获取所有域值
-hexists key                          #检查是否存在
+hset key field1 "xx" [field2 "xx"]  #设置hash;field等为域值;hmset也可以
+hget/hdel key field1 [field2]       #获取/删除指定域值;hmget也可以
+hgetall key                         #获取所有域值
+hexists key                         #检查是否存在
 
 ##List
 lpush key value1 [value2]  #向列表头部插值
 lpushx key value           #向已存在列表头部插值
 lpop key                   #移除并返回列表的第一个元素
 llen key                   #返回列表长度
+lrange key start end       #返回指定索引范围列表
 
 ##Set
 sadd key member1 [member2] #向集合添加成员
@@ -97,9 +110,70 @@ client    #客户端;通过通道获取数据
 
 ##相关命令
 subscribe channel_name        #创建通道
-publish channel_name message  #向通道发布消息
+publish channel_name message  #向通道发布消息;订阅此通道的客户端会受到此消息
 
 
+#事务
+##redis中的事务不是原子性的;类似于命令打包批量执行,所有命令都会执行(失败除外),中间命令失败,之后命令也会执行
+multi      #事务开始
+set a aaa  #事务操作
+...
+set z zzz
+exec       #触发事务;会执行事务里所有命令
 
 
+#脚本
+##通过Lua解释器执行redis脚本
+
+##基本语法
+EVAL script numkeys key [key ...] arg [arg ...]
+
+
+#连接
+config get requirepass       #获取密码;默认为空
+config set requirepass "xx"  #设置密码
+auth passwd                  #通过密码验证是否连接到redis服务
+ping                         #检查服务是否在运行;正常反馈PONG
+select index                 #切换到指定数据库;redis默认为0-15;与MySQL中的use类似
+config get databases         #获取数据库数量;默认数据库index为0
+
+
+#服务器信息
+info [section]  #获取redis服务器统计信息;默认查询全部,常见的有Section有Server/Clients/Memory/Cpu/Stats等
+client list     #获取客户端列表
+client kill [ip:port] [ID client-id]  #关闭指定客户端连接
+
+dbsize          #返回当前数据库key的数量
+flushdb         #删除当前数据库所有key
+flushall        #删除数据库所有key
+
+
+#数据备份与恢复
+save            #同步保存数据到硬盘;在redis安装目录创建dump.rdb文件,路径可使用config get dir获取
+bgsave          #后台执行sava
+
+
+#性能测试
+redis-benchmark [option] [option value]  #在Shell中执行
+
+##可选参数
+选项      描述                                        默认值
+-h        指定服务器主机名                            127.0.0.1
+-p        指定服务器端口                              6379
+-s        指定服务器 socket
+-c        指定并发连接数                              50
+-n        指定请求数                                  10000
+-d        以字节的形式指定 SET/GET 值的数据大小       2
+-k        1=keep alive 0=reconnect                    1
+-r        SET/GET/INCR 使用随机 key, SADD 使用随机值
+-P        通过管道传输 <numreq> 请求                  1
+-q        强制退出 redis。仅显示 query/sec 值
+--csv     以 CSV 格式输出
+-l        生成循环，永久执行测试
+-t        仅运行以逗号分隔的测试命令列表
+-I        Idle 模式。仅打开 N 个 idle 连接并等待
+
+##实例
+redis-benchmark -n 10000 -q                                     #同时执行10000个请求来检测性能
+redis-benchmark -h 127.0.0.1 -p 6379 -t set,lpush -n 10000 -q   #测试部分命令
 
