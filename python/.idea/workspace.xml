@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../databases/redis.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../databases/redis.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/t202003/20_mysql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/test/t202003/20_DDL.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/t202003/20_DQL.sql" beforeDir="false" afterPath="$PROJECT_DIR$/test/t202003/21_DQL.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,6 +274,7 @@
       <workItem from="1584587324512" duration="4803000" />
       <workItem from="1584670987543" duration="4715000" />
       <workItem from="1584800342365" duration="2727000" />
+      <workItem from="1584803560366" duration="1455000" />
     </task>
     <servers />
   </component>
@@ -342,10 +341,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1582790730814" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1584800363552">
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1584803564843">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584800363552" />
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584803564843" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/python$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1575018378084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tool" />
