@@ -2,7 +2,8 @@ Redis
 
 
 #简介
-由ANSI C编写的Key-Value数据库,特点是性能极好(内存型数据库,目前是单线程)
+Remote Dictionary Server(远程字典服务)。
+由ANSI C编写的Key-Value数据库,属于NoSQL的一种,特点是性能极好(内存型数据库,目前是单线程)
 
 
 #环境准备
@@ -62,8 +63,20 @@ Set     哈希表实现,元素不重复  增删改查的复杂度都是O(1);适�
 ZSet    通过增加Score实现有序  有序集合                                           排行榜及带权重的消息队列
 
 ##String
+set key value [ex seconds] [px milliseconds] [nx|xx]
+###选项说明
+ex            #设置过期时间,单位为s;等价于setex key seconds value
+px            #同上,单位为ms;等价于psetex key milliseconds value
+nx            #key不存在则执行;等价于setnx
+xx            #key存在则执行
+
+mset key value [key value]   #为多个key设置值;操作是原子性的,若key存在会覆盖
+msetnx key value [key value] #key不存在则执行;其余同mset
+mget key [key ...]           #获取多个key的值
+
 set key value       #设置key-value
 get/del key         #获取/删除
+strlen key          #返回字符串长度
 rename key new_key  #修改key名称
 exists key          #检测key是否存在
 expire key seconds  #设置过期时间(秒);还支持其他格式的时间
@@ -72,31 +85,51 @@ pttl/ttl key        #返回过期时间,以ms/s计
 type key            #返回key对应value的类型
 
 ##Hash
-hset key field1 "xx" [field2 "xx"]  #设置hash;field等为域值;hmset也可以
-hget/hdel key field1 [field2]       #获取/删除指定域值;hmget也可以
-hgetall key                         #获取所有域值
-hexists key                         #检查是否存在
+hset hash field value [field value] #设置hash;等价于hmset
+hsetnx                              #hash不存在则执行;其余同上
+hget/hdel hash field [field]        #获取/删除指定域值;hmget也可以
+hgetall hash                        #获取所有域值
+hexists hash/hash field             #检查hash或hash域是否存在
+hlen hash                           #返回hash域的数量
+hstrlen hash field                  #返回指定域值的长度
 
 ##List
-lpush key value1 [value2]  #向列表头部插值
-lpushx key value           #向已存在列表头部插值
+rpush key value [value]    #向列表尾部插值
+lpush key value [value]    #向列表头部插值
+lpushx key value           #向已存在列表头部插值;rpushx类似
 lpop key                   #移除并返回列表的第一个元素
+rpop key                   #移除并返回列表的最后一个元素
 llen key                   #返回列表长度
 lrange key start end       #返回指定索引范围列表
+lindex key index           #返回指定索引位置的元素;索引可正可负
+lset key index value       #向指定索引位置插值
+ltrim key start end        #截取列表指定位置元素,其他元素删除;截取范围[start,end]
+
+lrem key count value       #移除指定数量的元素;count为整数
+###参数说明
+count > 0   #从表头向表尾删除count个与value相同的元素
+count < 0   #搜索方向相反;其余同上
+count = 0   #移除所有与value的元素
+
+linsert key before|after pivot value  #指定位置前后插值;pivot为参考点
 
 ##Set
-sadd key member1 [member2] #向集合添加成员
+sadd key member [member]   #向集合添加成员
 spop key                   #随机移除并返回一个成员
-srem key member1 [member2] #移除指定成员
+srem key member [member]   #移除指定成员
 smembers key               #返回所有成员
 scard key                  #返回成员数
 sismember key member       #检测成员是否存在
 
 ##ZSet/Sorted Set
-zadd key score1 member1 [score2 member2]  #添加成员;通过分数(score)排序
-zrem key member1 [member2]                #移除成员
-zcard key                                 #获取成员数
-zrank key member                          #返回成员索引值(不是score);索引值从0开始
+zadd key score member [score member]   #添加成员;通过分数(score)排序
+zrem key member [member]               #移除成员
+zcard key                              #获取成员数
+zcount key min max                     #返回指定权重间的成员数量
+zrange key start end [withscores]      #返回指定权重间的成员;withscores表示返回分数
+zrevrange key start end [withscores]   #按分数倒序;其他同上
+zrank/zrevrank key member              #返回成员正向/反向索引值(不是score);索引值从0开始
+zscore key member                      #返回指定成员的权重(score)
 
 ##其他命令
 https://redis.io/commands                         #官网
@@ -139,13 +172,23 @@ config get databases         #获取数据库数量;默认数据库index为0
 
 
 #服务器信息
-info [section]  #获取redis服务器统计信息;默认查询全部,常见的有Section有Server/Clients/Memory/Cpu/Stats等
-client list     #获取客户端列表
+info [section]       #获取redis服务器统计信息;默认查询全部,常见的有Section有Server/Clients/Memory/Cpu/Stats等
+client list          #获取客户端列表
 client kill [ip:port] [ID client-id]  #关闭指定客户端连接
 
-dbsize          #返回当前数据库key的数量
-flushdb         #删除当前数据库所有key
-flushall        #删除数据库所有key
+exists key           #判断key是否存在
+type key             #判断key的类型
+rename key newkey    #修改key名
+renamenx key newkey  #key存在则执行
+move key db          #移动key到指定数据库中
+del key [key]        #删除一个或多个key
+randomkey            #随机返回一个key;不会删除key
+keys pattern         #返回指定模式的key
+dbsize               #返回当前数据库key的数量
+flushdb              #删除当前数据库所有key
+flushall             #删除数据库所有key
+select index         #切换到指定数据库;按索引
+swap index1 index2   #交换两个数据库数据
 
 
 #数据备份与恢复
