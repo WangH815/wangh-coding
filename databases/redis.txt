@@ -2,7 +2,7 @@ Redis
 
 
 #简介
-Remote Dictionary Server(远程字典服务)。
+Remote Dictionary Server(远程字典服务)
 由ANSI C编写的Key-Value数据库,属于NoSQL的一种,特点是性能极好(内存型数据库,目前是单线程)
 
 
@@ -28,14 +28,14 @@ docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
 
 
 #配置
-redis.conf          #配置文件,一般在安装目录
+redis.conf            #配置文件,一般在安装目录
 
 ##获取配置
-config get *        #获取全部配置,奇数项为配置key,下一项为value
-config get cfg_key  #获取单项配置,支持通配搜索
+config get *          #获取全部配置,奇数项为配置key,下一项为value
+config get parameter  #获取单项配置,支持通配搜索
 
 ##设置配置
-config set cfg_key cfg_value   #设置或更新配置值
+config set parameter value   #设置或更新配置值
 
 
 #基本数据类型
@@ -142,8 +142,11 @@ channel   #通道,客户端获取消息的途径
 client    #客户端;通过通道获取数据
 
 ##相关命令
-subscribe channel_name        #创建通道
-publish channel_name message  #向通道发布消息;订阅此通道的客户端会受到此消息
+subscribe channel        #订阅通道;支持多个通道
+psubscribe pattern       #订阅通道模式;支持多个通道
+unsubscribe channel      #退订通道
+punsubscribe pattern     #退订通道模式
+publish channel message  #向通道发布消息;订阅此通道的客户端会受到此消息
 
 
 #事务
