@@ -35,7 +35,8 @@ config get *          #获取全部配置,奇数项为配置key,下一项为valu
 config get parameter  #获取单项配置,支持通配搜索
 
 ##设置配置
-config set parameter value   #设置或更新配置值
+config set parameter value      #临时设置或更新配置值;
+config rewrite parameter value  #永久设置,会写入配置文件中
 
 
 #基本数据类型
@@ -157,12 +158,20 @@ set a aaa  #事务操作
 set z zzz
 exec       #触发事务;会执行事务里所有命令
 
+discard    #用于取消事务
+watch key  #监控key,value改变时事务不会被执行
+unwatch    #取消监控
+
 
 #脚本
 ##通过Lua解释器执行redis脚本
 
 ##基本语法
 EVAL script numkeys key [key ...] arg [arg ...]
+
+
+#流水线/通道(pipeline)
+cat commands.txt | redis-cli --pipe  #主要用于批量导入数据或其他命令
 
 
 #连接
@@ -222,4 +231,5 @@ redis-benchmark [option] [option value]  #在Shell中执行
 ##实例
 redis-benchmark -n 10000 -q                                     #同时执行10000个请求来检测性能
 redis-benchmark -h 127.0.0.1 -p 6379 -t set,lpush -n 10000 -q   #测试部分命令
+
 
