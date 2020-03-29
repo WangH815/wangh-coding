@@ -2,8 +2,8 @@ MongoDB
 
 
 #简介
-1.基于分布式文件存储的NoSQL数据库，由C++编写。为 WEB 应用提供可扩展的高性能数据存储解决方案。
-2.介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。
+1.基于分布式文件存储的NoSQL数据库,由C++编写。为 WEB 应用提供可扩展的高性能数据存储解决方案
+2.介于关系数据库和非关系数据库之间的产品,是非关系数据库当中功能最丰富,最像关系数据库的
 
 
 #特性
@@ -18,8 +18,8 @@ MongoDB
 
 
 #适用场景
-网站数据                  //适合实时的插入，更新与查询
-缓存                      //性能很高，适合作为信息基础设施的缓存层
+网站数据                  //适合实时的插入,更新与查询
+缓存                      //性能很高,适合作为信息基础设施的缓存层
 大尺寸、低价值的数据
 高伸缩性的场景            //大规模服务器组成的数据库
 用于对象及JSON数据的存储  //对应MongoDB的BSON
@@ -35,7 +35,7 @@ sourceforge.net           //开源网站资源管理
 
 ##不适合的场景
 高度事务性的系统          //银行、会计和交易等系统
-传统的商业智能应用        //针对特定问题需要高度优化的查询，最好是数据仓库
+传统的商业智能应用        //针对特定问题需要高度优化的查询,最好是数据仓库
 需要SQL的问题
 
 
@@ -46,9 +46,87 @@ OS: Ubuntu 1804
 ##步骤
 //拉取MongoDB4的docker镜像
 docker pull mongo:4
-//创建容器(有问题,待解决)
+
+//创建容器(root用户操作)
 docker run -itd \
---name mongo \
--p 27017:27017 \     
+--name docker_mongo4 \
+-p 27017:27017 \
 mongo:4 --auth
+
+//登录容器
+docker exec -it docker_mongo4 /bin/bash  #登录容器shell环境
+docker exec -it docker_mongo4 mongo      #登录容器mongo命令行
+
+
+#数据存储方式
+MongoDB将数据存储为一个文档,数据结构为键值对组成,与json类似
+key-value中value可以是其他文档、数组及文档数组。如:
+{
+  name: "wangh"
+  age: 25
+  status: "A"
+  groups: ["a","b","c"]
+}
+
+
+#基本概念
+MongoDB服务器由一个或多个数据库组成
+
+##RDBMS与MongoDB关系
+SQL术语/概念  MongoDB术语/概念    解释/说明
+database      database            数据库
+table         collection          数据库表/集合
+row           document            数据记录行/文档
+column        field               数据属性/字段(域)
+index         index               索引
+table joins   Embedded Documents  表连接,MongoDB3.2提供了Join操作
+primary key   primary key         主键,MongoDB默认将_id字段设为自增
+
+###_id字段组成
+由12个字节的十六进制数组成(4+3+2+3),分别表示
+1)当前时间戳;2)机器ID;3)MongoDB的服务进程id;4)简单的增量值
+
+
+#数据类型
+String              //最常用的数据类型,必须是有效的UTF-8格式
+Integer             //整数,32/64位(取决于服务器)
+Boolean             //布尔值 (true/ false) 
+Double              //浮点
+Min/Max keys        //用来对BSON元素的最值比较
+Arrays              //数组或列表或多个值存储到一个键
+Timestamp           //时间戳
+Object              //用于嵌入式的文件
+Null                //空值
+Symbol              //保留给特定符号类型的语言使用
+Date                //当前日期或时间的UNIX时间格式
+Object ID           //文档的ID
+Binary data         //二进制数据
+Code                //文档中的JavaScript代码
+Regular expression  //正则表达式
+
+
+#常用命令
+mongo                 //连接mongod实例;shell命令行执行
+db.help()             //mongo命令行列表帮助
+db.stats()            //统计信息
+show dbs              //显示所有数据库
+db                    //显示当前数据库
+show collections      //显示当前数据库下所有集合
+use db_name           //创建或切换到指定数据库
+//创建用户
+db.createUser( {user: "root",pwd: "root",roles: [ { role: "root", db: "test" } ]});
+db.blog.insert({})      //向指定集合(blog)插入数据;{}中具体格式见数据存储方式
+db.blog.save({})        //保存文档;文档不存在时同上,存在时覆盖原文档,而insert无法执行
+db.blog.find()          //查找blog中所有文档;最多返回二十个文档
+db.blog.find().pretty() //查找并格式化显示
+db.blog.findOne()       //返回一个文档
+//删除指定集合中的文档
+db.blog.remove({_id:ObjectId("550247c18976c0e0b467e800")})
+db.blog.count()            //统计集合中文档数
+db.createCollection(name)  //创建一个集合;可以不创建,插入数据集合不存在会自动创建
+db.dropDatabase()          //删除数据库
+db.blog.drop()             //删除集合blog
+db.blog.update()           //更新文档
+db.blog.createIndex({})    //在指定字段建立索引
+db.blog.getIndexs({})      //查找索引
 
