@@ -4,6 +4,7 @@ create database hrs default charset utf8mb4;
 use hrs;
 
 drop table if exists tb_emp;
+
 drop table if exists tb_dept;
 
 create table tb_dept

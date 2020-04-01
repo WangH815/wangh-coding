@@ -1,0 +1,12 @@
+运维开发要求
+
+1.Linux/shell
+
+2.Python或Go
+
+3.运维平台（k8s、Istio、Zabbix）
+
+4.中间件（Jenkins、Jumpserver、salt）
+Ansible: 自动执行资源的配置管理和应用程序部署
+
+5.配置管理数据库( Configuration Management Database,CMDB)

@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../python/.idea/python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/python.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../python/test/t202003/20_mysql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/test/t202003/20_mysql.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,10 +230,6 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="198" key="#Inspections" timestamp="1577025200052">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="552" y="198" key="#Inspections/0.0.1920.1080@0.0.1920.1080" timestamp="1577025200052" />
     <state x="704" y="375" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1581929283059">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -268,19 +264,16 @@
     </state>
     <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1578388685195" />
     <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1578157507661" />
-    <state x="461" y="182" key="SettingsEditor" timestamp="1581931377377">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="328" y="52" key="SettingsEditor" timestamp="1585710645275">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
+    <state x="328" y="52" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1585710645275" />
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1581931377377" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1581931322694">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="455" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1585709902394">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1578382406368" />
+    <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1585709902394" />
     <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1581931322694" />
-    <state x="690" y="304" key="extract.method.dialog" timestamp="1577026047459">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="690" y="304" key="extract.method.dialog/0.0.1920.1080@0.0.1920.1080" timestamp="1577026047459" />
   </component>
   <component name="masterDetails">
     <states>
