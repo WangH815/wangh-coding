@@ -1,0 +1,39 @@
+Ansible
+
+
+#简介
+自动化运维工具，基于Python开发，集合了众多运维工具的优点，
+实现了批量系统配置、批量程序部署、批量运行命令等功能
+
+
+#原理
+1.Ansible是自动化运维框架,通过不同模块实现不同功能
+2.默认通过ssh管理远程机，使用sftp通信，远程机无需安装其他软件
+3.管理机需要Python环境
+
+
+#配置文件
+##Inventory(清单)        //可以存在多个,也可是动态的
+/etc/ansible/hosts       //文件路径，定义管理机与托管机之间的关系
+
+##Ansible配置文件        //定义Ansible框架的属性
+###读取顺序
+1)ANSIBLE_CONFIG (一个环境变量)
+2)ansible.cfg (位于当前目录中)
+3).ansible.cfg (位于家目录中)
+4)/etc/ansible/ansible.cfg
+
+
+#Ad-Hoc
+通过/usr/bin/ansible命令完成较简单的命令
+
+
+#Playbooks
+1.适合于复杂应用的部署
+2.可用于声明配置
+3.可以编排有序的执行过程
+4.来回有序的执行特别指定的步骤
+5.可以同步或异步的发起任务
+6.playbooks由多个play(tasks,任务)组成
+7.语法格式是yaml
+
