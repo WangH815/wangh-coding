@@ -777,5 +777,4 @@ ZZ                 #同上
 :r file            #将file内容追加到光标所在行下一行
 :n,m w file        #将第n,m行之间的内容另存为到file中
 :!cmd              #暂时离开vi执行cmd
-
-
+:%s/str1/str2/g    #将所有的str1替换为str2
