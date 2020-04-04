@@ -2,19 +2,49 @@ Ansible
 
 
 #简介
-自动化运维工具，基于Python开发，集合了众多运维工具的优点，
+自动化运维工具,基于Python开发,集合了众多运维工具的优点,
 实现了批量系统配置、批量程序部署、批量运行命令等功能
 
 
-#原理
-1.Ansible是自动化运维框架,通过不同模块实现不同功能
-2.默认通过ssh管理远程机，使用sftp通信，远程机无需安装其他软件
-3.管理机需要Python环境
+#特点
+1.部署简单,只需在主控端部署Ansible环境,被控端无需做任何操作
+2.默认使用SSH协议对设备进行管理
+3.有大量常规运维操作模块,可实现日常绝大部分操作
+4.配置简单、功能强大、扩展性强
+5.支持API及自定义模块,可通过Python轻松扩展
+6.通过Playbooks来定制强大的配置、状态管理
+7.轻量级,无需在客户端安装agent,更新时,只需在操作机上进行一次更新即可
+8.提供一个功能强大、操作性强的Web管理界面和REST API接口——AWX平台
+
+
+#主要作用
+1.配置管理
+2.服务即时开通
+3.应用部署
+4.流程编排
+5.监控告警
+6.日志记录
+
+
+#功能特性
+1.应用代码自动化部署
+2.系统管理配置自动化
+3.支持持续交付自动化
+4.支持云计算,大数据平台环境
+5.轻量级,无序在客户端安装agent,更新时只需在控制机上进行更行即可
+6.批量任务执行可以写成脚本,不用分发到远程就可以执行
+7.支持非root用户管理操作,支持sudo
+8.使用python编写,维护更简单
+
+
+#安装ansible      //只需要在管理机上安装,以ubuntu 1804为例
+apt install python3 python3-pip      //安装python3及pip3
+pip3 install ansible                 //安装ansible;如速度较慢可切换pip源
 
 
 #配置文件
 ##Inventory(清单)        //可以存在多个,也可是动态的
-/etc/ansible/hosts       //文件路径，定义管理机与托管机之间的关系
+/etc/ansible/hosts       //文件路径,定义管理机与托管机之间的关系
 
 ##Ansible配置文件        //定义Ansible框架的属性
 ###读取顺序
@@ -23,17 +53,84 @@ Ansible
 3).ansible.cfg (位于家目录中)
 4)/etc/ansible/ansible.cfg
 
+###常见配置项
+inventory = /etc/ansible/hosts   //资源清单inventory文件的路径
+library = /usr/share/ansible     //指向存放Ansible模块的目录,多个目录用冒号:隔开
+forks = 5                        //并发连接数,默认为5
+sudo_user = root                 //设置默认执行命令的用户
+remote_port = 22                 //指定连接被管节点的管理端口,默认为22端口,建议修改,能够更加安全
+host_key_checking = False        //设置是否检查SSH主机的密钥,值为True/False。关闭后第一次连接不会提示配置实例
+timeout = 60                     //设置SSH连接的超时时间,单位为秒
+log_path = /var/log/ansible.log  //指定一个存储ansible日志的文件（默认不记录日志）
 
-#Ad-Hoc
-通过/usr/bin/ansible命令完成较简单的命令
 
 
-#Playbooks
-1.适合于复杂应用的部署
-2.可用于声明配置
-3.可以编排有序的执行过程
-4.来回有序的执行特别指定的步骤
-5.可以同步或异步的发起任务
-6.playbooks由多个play(tasks,任务)组成
-7.语法格式是yaml
+#任务执行模式
+1.ad-hoc模式(点对点模式)
+2.playbook模式(剧本模式)
 
+
+#ad-hoc模式(点对点模式)
+　　使用单个模块,支持批量执行单条命令。ad-hoc 命令是一种可以快速输入的命令,
+而且不需要保存起来的命令。就相当于bash中的一句话shell
+
+##常用命令    //官方推荐使用具体模块而不是使用shell模块执行shell命令
+ansible node -m ping                                     //测试主机连通性;node节点在/etc/ansible/hosts配置;-m选项表示model(模块)
+ansible node -m command -a 'uname -a'                    //在远程机上执行命令并返回;依靠command模块(默认模块)
+ansible node -m command -a 'chdir=/ ls'                  //切换远程机目录为/再执行ls
+ansible node -m shell -a 'pwd;cd /;ls -ltr'              //通过shell模块在远程机执行shell命令
+ansible node -m copy -a 'src=path/file dest=path'        //通过copy模块向远程机发送文件
+ansible node -m file -a 'path=/data/app state=directory' //使用file创建目录;file还可以创建删除文件
+ansible node -m script -a '/tmp/df.sh'                   //执行脚本
+
+
+#playbook模式(剧本模式)
+　　是Ansible主要管理方式,也是Ansible功能强大的关键所在。playbook通过多个task集合
+完成一类功能,如Web服务的安装部署、数据库服务器的批量备份等。
+可以简单地把playbook理解为通过组合多条ad-hoc操作的配置文件。
+
+##核心元素
+1.Tasks        //任务,由模板定义的操作列表
+2.Variables    //变量
+3.Templates    //模板,即使用模板语法的文件
+4.Handlers     //处理器 ,当某条件满足时,触发执行的操作
+5.Roles        //角色
+
+##hosts和user
+---
+- hosts: abc               //主机组,多个组冒号隔开
+    remote_user: root      //远程主机执行的用户名
+    become: yes            //登录远程机后切换用户选项
+    become_user: mysql     //切换的用户
+
+##Tasks list和action
+1.playbook由yaml格式构建
+2.playbook由多个play构成,play由多个task构成,task由多个action构成   //待确认
+
+###常用命令
+ansible-playbook XX.yml [-option]     //只要出错就会回滚
+
+####options
+-k(–ask-pass)            //用于交互输入ssh密码
+-K(-ask-become-pass)     //用于交互输入sudo密码
+-u                       //指定用户
+--syntax-check           //检查yaml文件的语法是否正确
+--list-task              //检查tasks任务
+--list-hosts             //检查生效的主机
+--start-at-task='xx'     //指定从某个task开始运行
+
+##playbook示例
+---
+- hosts: 192.168.200.129                   //指定主机
+    remote_user: root                      //指定在被管理的主机上执行任务的用户
+    tasks:                                 //任务列表
+    - name: disable selinux                //任务名
+      command: '/sbin/setenforce 0'        //调用command模块 执行关闭防火墙命令
+    - name: start httpd                    //任务名
+      service: name=httpd state=started    //调用service模块,开启httpd服务
+	  ignore_errors: True                  //忽略错误选项;有需要时可加上
+
+# ansible-playbook a.yml --syntax-check     //检查yaml文件的语法是否正确
+# ansible-playbook a.yml
+
+    

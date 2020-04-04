@@ -591,7 +591,6 @@ ss -l[p]          #显示所有的网络端口;-p显示进程
 at                         #指定一个时间执行一个任务,只能执行一次
 crontab [-u user] file     #周期性的执行任务(脚本或其他命令等);file为任务文件,规则见Example
 crontab [-u user] [-e|l|r] #参数分别是显示/编辑/删除(所有)某个用户自动任务;默认处理登录用户的自动任务
-
     # Example of job definition:
     # .---------------- 分钟(minute) (0 - 59)
     # |  .------------- 小时 hour (0 - 23)
@@ -703,8 +702,34 @@ lsof | grep /root/selenium/Spider/MySql.Data.dll   #查看访问此文件相关�
 cat /proc/23778/fd/86 > /root/selenium/Spider/MySql.Data.dll
 
 
+#ssh/sftp免密登录
+
+##检查项
+1)本机与远程机网络是否互通
+2)本机与远程机是否都已安装ssh服务
+3)远程机ssh相关配置文件 /etc/ssh/sshd_config ;如有限制请修改
+
+##步骤
+1.创建当前用户的公钥-私钥对
+ssh-keygen [-t rsa] [-f ~/.ssh/id_rsa] [-C "备注"]
+##options
+-t     #密钥类型,可以选择 dsa | ecdsa | ed25519 | rsa;
+-f     #密钥目录位置, 默认为~/.ssh/;默认密钥文件名以id_rsa开头,多台机器需设置设置不同
+-C     #指定此密钥的备注信息,建议配置多个免密登录时使用,用于区分不同机器
+
+2.发送公钥给目标机器   #也可使用scp操作
+ssh-copy-id [-i ~/.ssh/id_rsa.pub] [-p 22] username@ip  ##写入远程机~/.ssh/authorized_key文件中,要求输入远程机密码
+##options
+-i     #指定要发送的公钥;生成公钥未指定可不加
+-p     #指定目标机器端口;默认为22
+ip     #可使用标准ip或主机名(/etc/hosts中有配置)
+
+3.登录远程机
+ssh/sftp username@ip      #无需密码;登录是单向的,需要互免可反向操作
+
+
 #vi/vim 常见操作
-#三种模式
+#三种模式  
 1.命令模式(cmd mode)       #用于光标移动、复制粘贴、搜索替换等
 2.输入模式(Insert mode)    #用于基本输入
 3.底线模式(Last line mode) #用于搜索替换
