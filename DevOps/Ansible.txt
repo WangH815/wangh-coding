@@ -104,7 +104,7 @@ ansible node -m script -a '/tmp/df.sh'                   //执行脚本
     become_user: mysql     //切换的用户
 
 ##Tasks list和action
-1.playbook由yaml格式构建
+1.playbook由yaml格式构建;#为注释符
 2.playbook由多个play构成,play由多个task构成,task由多个action构成   //待确认
 
 ###常用命令
