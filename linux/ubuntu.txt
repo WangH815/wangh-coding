@@ -46,6 +46,7 @@ ip addr flush ens33 && systemctl restart networking
 1.修改配置
 18.04版本采用netplan方式管理网络，配置文件使用yaml格式（配置项冒号后至少有一个空格）
 /etc/netplan/50-cloud-init.yaml
+###显示格式
 network:
 	version: 2                              #非必填项
 	renderer: networkd                      #非必填项
@@ -57,6 +58,16 @@ network:
 				addresses: [192.168.99.2]   #设置DNS，多个DNS逗号隔开
 		ens34:                              #如有多块网卡可设置此项，名称ip a可查
 			dhcp4: true                     #设置自动获取IPv4地址
+###复制格式;yaml格式会自动格式化
+network:
+version: 2
+renderer: networkd
+ethernets:
+ens33:
+addresses: [192.168.99.190/24]
+gateway4: 192.168.99.2
+nameservers:
+addresses: [192.168.99.2]
 2.生效配置
 netplan apply
 

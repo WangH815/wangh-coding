@@ -98,7 +98,7 @@ DNS1=192.168.99.2        #DNS,这里设置与网关一致；多个可设置DNS1/
 2.重启网络服务
 service network restart
 
-##7.6(1810)
+##7.6/7.7/stream
 网络配置文件 /etc/sysconfig/network-scripts/ifcfg-ens33
 配置值用双引号,如：IPADDR="192.168.99.110"
 重启网络推荐使用 systemctl restart network
