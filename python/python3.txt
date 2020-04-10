@@ -10,7 +10,7 @@ https://docs.python.org/zh-cn/3.7/                     #官方文档(3.7)
 https://blog.csdn.net/sinat_21591675/article/details/82770360   #参考链接;源地址可能需要改为https开头
 
 ##示例
-pip install pandas                                              #使用默认源
+pip install pandas                                              #使用默认源;也可以是pip3
 pip install -i https://mirrors.aliyun.com/pypi/simple pandas    #临时使用阿里源;永久更改见参考链接
 python -m pip install -i https://mirrors.aliyun.com/pypi/simple --upgrade pip  #更新pip
 
