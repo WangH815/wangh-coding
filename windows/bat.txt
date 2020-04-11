@@ -1,0 +1,31 @@
+
+
+简要bat
+
+
+#说明
+#表示标题
+//表示注释
+windows环境不区分大小写
+
+
+#电脑微信多开
+##start的第二个参数为微信执行(安装)程序路径;需要多开几个开几个
+start "" "F:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
+start "" "F:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
+
+
+#cmd搜索指定名称文件
+win + r    //输入cmd
+cd 指定路径 
+for /r %var in (*.vmx) do echo %var >> vm.txt  // /r表示递归查找;匹配所有vmx结尾的文件;将结果追加到vm.txt文件中
+
+
+#一键启动指定vm虚拟机
+f:                                                               //必须先切换至指定分区
+cd "F:\Program Files (x86)\VMware\VMware Workstation\"           //进入vm安装目录;如不进入则执行vmrun是需要完整路径
+
+vmrun -T ws start "F:\VM\ubuntu 1804\ubuntu 1804.vmx"            //启动虚拟机;虚拟机列表可通过上面cmd搜索
+vmrun -T ws start "F:\VM\centos 7.7_1908_0\centos 7.7.1908.vmx"
+
+::PAUSE
