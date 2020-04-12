@@ -1,31 +1,40 @@
 
 
-简要bat
+简要bat(批处理)
 
 
 #说明
-#表示标题
-//表示注释
-windows环境不区分大小写
+1.#表示标题
+2.//表示注释
+3.windows环境不区分大小写
+4.批处理程序以.bat或.cmd结尾
+5.语法规则较混乱,编程能力比C语言弱
 
 
-#电脑微信多开
+#电脑微信多开    //qq同理
 ##start的第二个参数为微信执行(安装)程序路径;需要多开几个开几个
 start "" "F:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
 start "" "F:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
 
 
-#cmd搜索指定名称文件
+#cmd搜索指定名称文件(cmd中操作)
 win + r    //输入cmd
 cd 指定路径 
-for /r %var in (*.vmx) do echo %var >> vm.txt  // /r表示递归查找;匹配所有vmx结尾的文件;将结果追加到vm.txt文件中
+for /r %x in (*.vmx) do echo %x >> vm.txt  // /r表示递归查找;匹配所有vmx结尾的文件;将结果追加到vm.txt文件中
+for /r %x in (*.xsh) do echo %x >> xsh.txt
 
 
-#一键启动指定vm虚拟机
+#启动指定vm虚拟机
 f:                                                               //必须先切换至指定分区
 cd "F:\Program Files (x86)\VMware\VMware Workstation\"           //进入vm安装目录;如不进入则执行vmrun是需要完整路径
 
 vmrun -T ws start "F:\VM\ubuntu 1804\ubuntu 1804.vmx"            //启动虚拟机;虚拟机列表可通过上面cmd搜索
 vmrun -T ws start "F:\VM\centos 7.7_1908_0\centos 7.7.1908.vmx"
 
-::PAUSE
+
+#启动指定xshell
+f:
+cd "F:\Program Files (x86)\NetSarang\Sessions\Xshell\Sessions"
+start "" "centos 7.7_1908_0.xsh"
+start "" "ubuntu 1804.xsh"
+
