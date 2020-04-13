@@ -3,28 +3,36 @@ CentOS 7
 #软件安装
 https://www.cnblogs.com/gmlkl/p/9354254.html
 yum [options] [command] [package ...]  #yum命令形式
-#安装
+
+##安装
 yum install            #全部安装
-yum install package1   #安装指定的安装包package1
+yum install pkg        #安装指定的安装包pkg
 yum groupinsall group1 #安装程序组group1
-#更新和升级
+
+##更新和升级
 yum update             #全部更新软件,包括系统
-yum update package1    #更新指定程序包package1
+yum update pkg         #更新指定程序包pkg
 yum check-update       #检查可更新的程序
-yum upgrade package1   #升级指定程序包package1
+yum upgrade pkg        #升级指定程序包pkg
 yum groupupdate group1 #升级程序组group1
-#查找和显示
-yum search package1    #搜索软件包
-yum info package1      #显示安装包信息package1
+
+##查找和显示
+yum search pkg         #搜索软件包
+yum info pkg           #显示安装包信息pkg     
 yum info installed     #显示所有已安装软件包信息
 yum list               #显示所有已经安装和可以安装的程序包
-yum list package1      #显示指定程序包安装情况package1
-yum list yum\*         #显示所有以yum开头的软件包
+yum list updates       #显示所有可用更新
+yum list installed     #显示所有已经安装的程序包
+yum list installed pkg #显示指定已经安装的程序包;pkg支持扩展
+yum list pkg           #显示指定程序包安装情况pkg
 yum groupinfo group1   #显示程序组group1信息yum search string 根据关键字string查找安装包
-#删除程序
-yum remove package1    #删除程序包package1
+
+##删除程序
+yum remove pkg         #删除程序包pkg;不会删除配置和数据文件
+yum earse pkg          #同上,但会删除所有相关文件 
 yum groupremove group1 #删除程序组group1
-yum deplist package1   #查看程序package1依赖情况
+yum deplist pkg        #查看程序pkg依赖情况
+
 
 #rpm/红帽包管理器
 rpm -i[v/h] package.rpm #安装[显示文件信息/进度]软件包
@@ -34,11 +42,15 @@ rpm -qa|grep package    #查找已安装软件包
 rpm -qf '绝对路径'      #查看指定文件属于哪个软件包
 rpm -q[l/i] package     #查看软件包[安装路径/已安装软件包信息]
 
+
+#源码安装参考linux.txt
+
+
 #常用软件安装
 yum install psmisc -y   #centos7安装pstree工具;psmisc为系统进程管理工具,包含pstree、killall和fuser三个命令
 
 
-#修改yum/epel为阿里源
+#修改yum/epel为阿里源(软件仓库,其他的还有网易、清华、中科大等)
 rpm:Redhat Package Manager
 yum:Yellow dog Updater, Modified。基于rpm的RHEL(含衍生版)的Shell前端软件包管理器。由RedHat官方提供。
 epel:Extra Packages for Enterprise Linux 。由 Fedora 社区打造,相当于第三方rpm库,软件版本较新。
