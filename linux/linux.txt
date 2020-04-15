@@ -662,10 +662,10 @@ sudo -u user cmd      #以指定用户身份执行命令
 sudo -l               #显示当前用户可用sudo命令权限
 history               #显示命令历史,一般是1000条
 history n             #显示最近执行的n条命令
-history | grep cmd    #搜索特定命令执行历史
+history | grep cmd    #搜索特定命令执行历史;常用
 !!                    #执行上一条命令;等价于 !-1
 !-n                   #执行历史记录倒数的第n条命令
-!n                    #执行历史记录的第n条命令
+!n                    #执行历史记录的第n条命令;一般配合history | grep cmd使用
 !$/!^                 #上一条命令的最后/第一个参数
 !:2                   #上一条命令的第二个参数;更多用法参考 man bash中HISTORY EXPANSION(历史命令展开)
 ctrl + r              #可搜索之前执行过的命令;用于较长命令较为实用
