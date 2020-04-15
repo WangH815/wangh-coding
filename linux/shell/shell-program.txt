@@ -239,7 +239,7 @@ EOF
 
 关系运算(数字)
 相等     [ $a == $b ]     #等价于 -eq ;注意空格,无空格会解析成字符串拼接;[ $a = $b ]也可以
-不相等   [ $a != $b ]     #
+不相等   [ $a != $b ]
 相等     [ $a -eq $b ]    #equal简写
 不相等   [ $a -ne $b ]    #not equal
 大于     [ $a -gt $b ]    #greater than
@@ -317,8 +317,6 @@ printf转义序列
 \\       #一个字面上的反斜杠字符
 \ddd     #表示1到3位数八进制值的字符。仅在格式字符串中有效
 \0ddd    #表示1到3位的八进制值字符
-
-
 
 
 test命令    #等价于 []
@@ -575,6 +573,8 @@ set -- $(getopt -q ab:cd "$@")               #用于格式化选项及参数;./x
 
 ###getopts    #比getopt更高级
 getopts optstring var      #optstring为选项表达式
+
+####示例
 while getopts :ab:c opt    #表达式第一个:表示去除错误信息;选项如需参数则增加:即可
 do
     case "$opt" in      
@@ -646,7 +646,7 @@ context
 delimiter
 
 ##脚本中重定向
-echo "error context" >&2  #临时重定向,;./xx.sh运行时按照标准输出;./xx.sh 2>file会按照错误输出到file中(脚本中指定了exec除外)
+echo "error context" >&2  #临时重定向;./xx.sh运行时按照标准输出;./xx.sh 2>file会按照错误输出到file中(脚本中指定了exec除外)
 exec 1>file               #永久重定向;脚本中使用(一般是开头)会将所有标准输出到file中,而不是控制台
 exec 2>file               #错误输出重定向;与上类似
 exec 0<file               #输入重定向;与上类似
@@ -701,7 +701,7 @@ atrm  n  #删除作业号为n的计划
 crontab  #周期执行计划;具体使用参见Linux.txt
 
 
-#函数    #可认为是子脚本,在脚本中跟正常shell一样使用
+#函数    #可认为是子脚本,在脚本中跟正常shell一样使用;先定义后使用
 
 ##格式
 function funcname {
@@ -720,7 +720,7 @@ funcname () {
 ##函数使用
 1.脚本中与正常shell使用类似;只需要函数名(有参数的带参数)即可
 2.终端中可使用 source ./xx.sh或 . ./xx.sh 生效函数库,然后终端可以像shell命令一样使用其中的函数及变量  #xx.sh为函数库
-3.脚本中可使用上一条提到的方式引入函数库使用
+3.脚本中可使用上一条提到的方式引入函数库使用;使用前引入
 
 
 #文本处理
@@ -787,7 +787,6 @@ sed options script inputfile > outfile          #命令格式;逐行处理
 sed options script < inputfile > outfile        #同上
 cat inputfile | sed options script - > outfile  #同上
 
-
 ###参考文档
 https://www.runoob.com/linux/linux-comm-sed.html    #菜鸟教程            
 https://www.gnu.org/software/sed/manual/sed.html    #官方文档
@@ -809,12 +808,12 @@ https://www.gnu.org/software/sed/manual/sed.html    #官方文档
   G   #将保持空间附加到模式空间
   x   #交换模式空间和保持空间的内容
 
-###地址定界     #用选定处理行,具体使用见下面示例
-1.无     #选定每一行
+###地址定界  #用选定处理行,具体使用见下面示例
+1.无         #选定每一行
 2.单行
-  n     #正整数 n ,选定第 n 行
-  $     #选定最后一行
-  /RE/  #选定正则表达式RE匹配的每一行 
+  n          #正整数 n ,选定第 n 行
+  $          #选定最后一行
+  /RE/       #选定正则表达式RE匹配的每一行 
 3.范围行
     m,n      #m,n为正整数,m < n 时选定第[m,n]行;m >= n 时表示选定第 m 行
     m,+n     #等价于选定第[m,m+n]行

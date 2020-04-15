@@ -1,6 +1,6 @@
 CentOS 7
 
-#软件安装
+#软件包管理
 https://www.cnblogs.com/gmlkl/p/9354254.html
 yum [options] [command] [package ...]  #yum命令形式
 
