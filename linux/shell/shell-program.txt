@@ -785,7 +785,7 @@ sort file | uniq -d   #找出重复行
 ##sed
 sed options script inputfile > outfile          #命令格式;逐行处理
 sed options script < inputfile > outfile        #同上
-cat inputfile | sed options script - > outfile  #同上
+cat inputfile | sed options script > outfile    #同上
 
 ###参考文档
 https://www.runoob.com/linux/linux-comm-sed.html    #菜鸟教程            
@@ -829,6 +829,7 @@ https://www.gnu.org/software/sed/manual/sed.html    #官方文档
 
 ###替换
 sed 's/old/new/' file             #将每行第一个old替换为new,匹配不到old则不处理;falgs可选;未被处理的行也会被输出
+sed 's/old/new/n' file            #替换每行出现的第n个old
 sed 's/old/new/g' file            #替换每行出现的所有old
 sed 'ns/old/new/' file            #指定处理文本的第n行;其他同上
 sed 'm,ns/old/new/' file          #指定处理文本的第m到n行;其他同上
@@ -1035,6 +1036,8 @@ awk -f funclibs ...   #通过-f引用外部自定义函数库funclibs后即可�
 ##正则表达式类型
 POSIX基础正则表达式（basic regular expression，BRE）引擎      #sed使用BRE处理
 POSIX扩展正则表达式（extended regular expression，ERE）引擎   #gawk使用ERE处理
+注:POSIX:Portable Operating System Interface(可移植操作系统接口),用于保证程序可移植性的标准
+
 
 ###BRE
 1.纯文本     #匹配含有纯文本的内容

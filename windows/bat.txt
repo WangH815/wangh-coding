@@ -25,11 +25,20 @@ for /r %x in (*.xsh) do echo %x >> xsh.txt
 
 
 #启动指定vm虚拟机
-f:                                                               //必须先切换至指定分区
-cd "F:\Program Files (x86)\VMware\VMware Workstation\"           //进入vm安装目录;如不进入则执行vmrun是需要完整路径
+f:                                                         //必须先切换至指定分区
+cd "F:\Program Files (x86)\VMware\VMware Workstation\"     //进入vm安装目录;如不进入则执行vmrun是需要完整路径或增加环境变量
+vmrun -T ws start "F:\VM\ubuntu 1804\ubuntu 1804.vmx"      //启动虚拟机;虚拟机列表可通过上面cmd搜索
 
-vmrun -T ws start "F:\VM\ubuntu 1804\ubuntu 1804.vmx"            //启动虚拟机;虚拟机列表可通过上面cmd搜索
-vmrun -T ws start "F:\VM\centos 7.7_1908_0\centos 7.7.1908.vmx"
+#vmrun常用命令
+##启动虚拟机  
+##（-T 是区分宿主机的类型，ws|server|server1|fusion|esx|vc|player，比较常用的是ws、esx和player）
+vmrun -T ws start "path\xx.vmx" [gui|nogui]   //启动虚拟机;默认gui,nogui表示后台启动;linux路径请使用"/"
+vmrun -T ws stop "path\xx.vmx" [hard|soft]    //关闭虚拟机;默认为强制关闭(hard),下同
+vmrun -T ws reset "path\xx.vmx" [hard|soft]   //重启虚拟机
+vmrun -T ws suspend "path\xx.vmx" [hard|soft] //挂起虚拟机,会释放内存资源;恢复使用vmrun satrt
+vmrun -T ws pause "path\xx.vmx" [hard|soft]   //暂停虚拟机,不会释放内存资源
+vmrun -T ws unpause "path\xx.vmx" [hard|soft] //恢复暂停的虚拟机
+vmrun -T ws list                              //列出正在运行的虚拟机
 
 
 #启动指定xshell

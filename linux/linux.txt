@@ -259,7 +259,7 @@ groupadd groupname      #增加用户组
 usermod -aG gname uname #user modify;将用户增加到用户组(多个用户组可用逗号隔开)
 su username             #switch user;简单切换用户,不加载环境变量;不跟用户名默认切换到root
 su - username           #切换登录用户,加载环境变量;不跟用户名默认切换到root
-su -l/--logon username  #同上
+su -l/--logon username  #同上;简写为su -
 sudo passwd root        #switch user do(execute);ubuntu启用root用户
 passwd [-u] [username]  #root用户修改指定用户密码,-u可不加;不跟用户名默认修改当前用户密码
 id [username]           #显示指定用户uid、gid和groups等信息,不跟用户名显示当前用户相关信息
@@ -303,6 +303,7 @@ cp file dir             #复制并移动file到dir;要求file和dir存在
 cp -R[/r] dir dir1      #文件夹复制,其他与文件复制相同;
 touch file              #摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
 touch a[0-9]            #创建a0-a9(共10个文件);[]中表示所有可能
+touch a{0..9}           #同上
 touch -t                #设定文件时间戳,如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
 vi file                 #文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
 cat file                #concatenate;显示文件内容
