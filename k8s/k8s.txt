@@ -1,21 +1,21 @@
 Kubernetes(k8s)
 
-简介
+#简介
 提供了面向应用的容器集群和管理系统
 
 
-基本概念
+#基本概念
 pod:k8s中创建和部署的最小单位
 
 
 
-环境准备
+#环境准备
 1.vmware15安装ubuntu server 18.04    #更新到最新版
 2.修改主机名,配置静态网络
 3.克隆master(主机)和node(两个节点)
 
 
-初始化系统(master和node都需要执行)
+#初始化系统(master和node都需要执行)
 apt update
 apt install -y apt-transport-https
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg |apt-key add -
@@ -25,7 +25,7 @@ EOF
 
 apt-get update
 
-安装docker
+#安装docker
 apt install -y docker.io
 apt install -y kubelet kubeadm kubectl kubernetes-cni
 systemctl enable docker && systemctl start docker

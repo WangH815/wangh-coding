@@ -47,16 +47,16 @@ done
 #使用教程 
 环境：Ubuntu 18.04
 
-1.安装和卸载docker       #可暂时将阿里镜像源改为官方源;修改参考Ubuntu使用手册
-apt install docker.io    #安装docker
-apt remove docker.io     #卸载
-docker -v/--version      #查看docker版本
+1.安装和卸载docker             #可暂时将阿里镜像源改为官方源;修改参考Ubuntu使用手册
+apt install docker.io          #安装docker
+apt remove docker.io           #卸载
+docker -v/--version            #查看docker版本
 
 2.启动和关闭docker服务
-service docker start      #启动;systemctl start docker.service命令也可以,下同
-service docker stop       #停止
-service docker restart    #重启
-docker info               #查看docker概要信息
+service docker start           #启动;systemctl start docker命令也可以,下同
+service docker stop            #停止
+service docker restart         #重启
+docker info                    #查看docker概要信息
 
 3.增加其他用户使用docker的权限 #不需要可以不添加
 cat /etc/group | grep docker   #查看docker组是否存在
@@ -136,6 +136,8 @@ docker system info                            #显示系统信息
 docker system prune                           #清理文件  
 docker top CONTAINER_NAME/ID                  #显示容器本身的top信息,类似于Linux top,更简洁
 docker logs CONTAINER_NAME/ID                 #显示运行容器的日志
+docker update options CONTAINER_NAME/ID       #更新容器配置,如自启动等
+
 
 创建启动容器
 docker run
@@ -161,10 +163,10 @@ exit 退出容器后容器仍然在运行
 
 启停容器
 docker stop CONTAINER_NAME/ID
-docker stop $(docker ps -a -q)      #停止所有容器
+docker stop $(docker ps -aq)       #停止所有容器;$(docker ps -a -q)可使用`docker ps -aq`
 docker start CONTAINER_NAME/ID
 docker restart CONTAINER_NAME/ID
-docker restart $(docker ps -q)      #重启所有正在运行的容器
+docker restart $(docker ps -q)     #重启所有正在运行的容器
 
 文件拷贝
 docker cp FILE/DIR CONTAINER_NAME:PATH   #拷贝到容器
