@@ -101,3 +101,4 @@ yum remove nginx      //卸载
 --without-http_uwsgi_module           \
 --without-http_fastcgi_module         \
 
+
