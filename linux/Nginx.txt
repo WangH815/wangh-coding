@@ -1,0 +1,103 @@
+Nginx编译安装
+
+
+#简介
+Nginx是一款轻量级的Web服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，
+在BSD-like 协议下发行。其特点是占有内存少，并发能力强，事实上nginx的并发能力
+在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、
+网易、腾讯、淘宝等。
+
+
+#基本概念
+1.正向代理
+主要作用于用户通过代理服务器访问用户不能直接访问的外部资源;用户及代理服务器一般是位于局域网内
+2.反向代理
+主要是外部用户访问局域网内资源需要通过反向代理服务器代理
+
+
+#环境
+版本: 1.13.7
+Linux:centos7.7_1908
+
+
+#安装前检查
+##确保已安装一下软件
+yum list installed pkg                //检查软件包是否安装
+
+yum install -y pcre-devel             //用于支持重定向,如不需要可不安装
+yum -y install gcc make gcc-c++ wget  //centos7一般都有,也可检查一下yum list installed gcc
+yum -y install openssl openssl-devel  //用于支持https;如不需要可不安装
+
+1.下载Nginx包      //可自己选择其它版本
+wget http://nginx.org/download/nginx-1.13.7.tar.gz
+
+2.安装前准备
+tar zxvf nginx-1.13.7.tar.gz   //解压
+cd nginx-1.13.7
+./configure                    //安装前配置(依赖)检查;也可以按照自定义配置,参见文末
+
+3.编译安装
+make
+make install
+
+4.测试
+cd /usr/local/nginx/sbin/      //nginx命令路径
+./nginx -t                     //测试配置并退出;其他命令参考 ./nginx -h
+
+5.设置为全局命令(当前用户)
+vi ~/.bash_profile                           //修改bash配置文件
+
+PATH=$PATH:$HOME/bin:/usr/local/nginx/sbin/  //修改以下对应内容;在之前PATH后增加 :/usr/local/nginx/sbin/ 即可
+export PATH
+
+source ~/.bash_profile    //生效配置;source可使用 . 替代
+
+##自启动相关
+1.方式一:构建服务
+vi /lib/systemd/system/nginx.service   #相关配置可参考手册
+
+2.方式二:增加自启动脚本
+vi /etc/rc.d/rc.local        //默认无执行权限,注意添加;增加以下内容
+/usr/local/nginx/sbin/nginx
+
+
+##卸载
+rm -rf /usr/local/nginx   //删除文件;其他修改过的配置文件删除Nginx部分即可
+
+
+#常用命令
+nginx                            //启动
+nginx -s reload                  //重启
+nginx -s stop                    //关闭
+nginx -s quit                    //平滑关闭nginx
+nginx -V                         //查看安装状态
+ps -ef |grep -v grep|grep nginx  //查看nginx进程;可判断是否启动
+
+#yum方式安装          //会自动安装依赖
+yum install -y nginx  //安装
+yum remove nginx      //卸载
+
+
+#配置
+/usr/local/nginx/conf/nginx.conf   //centos7系统下目录;也可以配置时指定,其他系统默认位置可能不一样
+
+
+#configure特定配置
+./configure \
+--prefix=/etc/nginx                   \
+--sbin-path=/usr/sbin/nginx           \
+--conf-path=/etc/nginx/nginx.conf     \
+--pid-path=/var/run/nginx.pid         \
+--lock-path=/var/run/nginx.lock       \
+--error-log-path=/var/log/nginx/error.log \
+--http-log-path=/var/log/nginx/access.log \
+--with-http_gzip_static_module        \
+--with-http_stub_status_module        \
+--with-http_ssl_module                \
+--with-pcre                           \
+--with-file-aio                       \
+--with-http_realip_module             \
+--without-http_scgi_module            \
+--without-http_uwsgi_module           \
+--without-http_fastcgi_module         \
+

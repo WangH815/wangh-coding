@@ -116,4 +116,13 @@ service network restart
 重启网络推荐使用 systemctl restart network
 
 
+#防火墙      //centos7防火墙firewalld;使用firewall-cmd工具操作
+firewall-cmd --zone=public --add-port=80/tcp --permanent  //增加开放80端口,永久生效
+systemctl restart firewalld    //重启服务生效;firewall-cmd --reload也可以重启服务
+firewall-cmd --list-ports      //列出开启端口
+
+
+
+
+
 
