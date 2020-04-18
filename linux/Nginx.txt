@@ -15,8 +15,12 @@ Nginx是一款轻量级的Web服务器/反向代理服务器及电子邮件（IM
 主要是外部用户访问局域网内资源需要通过反向代理服务器代理
 
 
+
+========================CentOS 7 安装Nginx=======================
+
+
 #环境
-版本: 1.13.7
+版本: 1.14.1          //具体安装版本可以根据参考官网选择对应的稳定版本
 Linux:centos7.7_1908
 
 
@@ -29,40 +33,49 @@ yum -y install gcc make gcc-c++ wget  //centos7一般都有,也可检查一下yu
 yum -y install openssl openssl-devel  //用于支持https;如不需要可不安装
 
 1.下载Nginx包      //可自己选择其它版本
-wget http://nginx.org/download/nginx-1.13.7.tar.gz
+wget http://nginx.org/download/nginx-1.14.1.tar.gz
+wget http://nginx.org/download/nginx-xx.tar.gz       //版本号一般是1.xx.x; xx为偶数一般是稳定版
 
 2.安装前准备
-tar zxvf nginx-1.13.7.tar.gz   //解压
-cd nginx-1.13.7
+tar zxvf nginx-1.14.1.tar.gz   //解压
+cd nginx-1.14.1
 ./configure                    //安装前配置(依赖)检查;也可以按照自定义配置,参见文末
 
-3.编译安装
-make
+3.编译安装                     //nginx-1.14.1目录下操作
+make                           
 make install
 
-4.测试
-cd /usr/local/nginx/sbin/      //nginx命令路径
-./nginx -t                     //测试配置并退出;其他命令参考 ./nginx -h
+4.设置为全局命令(当前用户)
+echo 'PATH=$PATH:/usr/local/nginx/sbin/
+export PATH' >> ~/.bash_profile 
 
-5.设置为全局命令(当前用户)
-vi ~/.bash_profile                           //修改bash配置文件
+source ~/.bash_profile                       //生效配置;source可使用 . 替代
 
-PATH=$PATH:$HOME/bin:/usr/local/nginx/sbin/  //修改以下对应内容;在之前PATH后增加 :/usr/local/nginx/sbin/ 即可
-export PATH
+5.开放80端口
+firewall-cmd --list-ports                                    //查看开放端口
+firewall-cmd --permanent --zone=public --add-port=80/tcp     //增加规则;permanent表示永久生效;zone表示作用域
+firewall-cmd --reload                                        //重启防火墙生效
 
-source ~/.bash_profile    //生效配置;source可使用 . 替代
+firewall-cmd --permanent --zone=public --remove-port=80/tcp  //移除规则;重启生效
 
-##自启动相关
+6.测试
+nginx -t                         //测试配置并退出(nginx服务未启动也可以);其他命令参考 ./nginx -h
+ps -ef |grep -v grep|grep nginx  //查看nginx进程;可判断是否启动
+http://ip/index.html             //nginx启动且防火墙配置好;其他主机浏览器访问
+curl http://ip[/index.html]      //直接返回index.html文件内容;index.html可不加
+
+
+#自启动相关
 1.方式一:构建服务
-vi /lib/systemd/system/nginx.service   #相关配置可参考手册
+vi /lib/systemd/system/nginx.service         //相关配置可参考手册
 
-2.方式二:增加自启动脚本
-vi /etc/rc.d/rc.local        //默认无执行权限,注意添加;增加以下内容
-/usr/local/nginx/sbin/nginx
+2.方式二:增加自启动脚本(自定义开机程序)
+chmod +x /etc/rc.d/rc.local                  //增加执行权限;默认无执行权限
+echo '/usr/local/nginx/sbin/nginx' >> /etc/rc.d/rc.local
 
 
-##卸载
-rm -rf /usr/local/nginx   //删除文件;其他修改过的配置文件删除Nginx部分即可
+#卸载
+rm -rf /usr/local/nginx                      //删除文件;其他修改过的配置文件删除Nginx部分即可
 
 
 #常用命令
@@ -71,7 +84,7 @@ nginx -s reload                  //重启
 nginx -s stop                    //关闭
 nginx -s quit                    //平滑关闭nginx
 nginx -V                         //查看安装状态
-ps -ef |grep -v grep|grep nginx  //查看nginx进程;可判断是否启动
+
 
 #yum方式安装          //会自动安装依赖
 yum install -y nginx  //安装
@@ -101,4 +114,43 @@ yum remove nginx      //卸载
 --without-http_uwsgi_module           \
 --without-http_fastcgi_module         \
 
+
+
+========================ubuntu 1804 安装Nginx=======================
+
+#依赖包安装    //可使用 apt list pkg1 [pkg2 ...] 检查;如需其他包同理
+apt install libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev libperl-dev
+
+#安装
+前三步同centos环境下
+
+4.设置为全局命令(当前用户)
+echo 'PATH=$PATH:/usr/local/nginx/sbin/
+export PATH' >> ~/.bashrc
+
+source ~/.bashrc  //生效配置;source可使用 . 替代
+
+5.防火墙(待补充)
+ufw               //ubuntu firewall
+
+6.测试同centos环境下一致
+
+
+#自启动
+chmod +x /lib/systemd/system/rc-local.service                                   //增加执行权限;默认无执行权限
+echo '
+[Install]
+WantedBy=multi-user.target
+Alias=rc-local.service' >> /lib/systemd/system/rc-local.service
+
+ln -s /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service //软连接到系统启动服务中
+echo '#!/bin/bash
+
+/usr/local/nginx/sbin/nginx' >> /etc/rc.local                                   //增加执行命令;需要完整路径
+chmod +x /etc/rc.local                                                          //增加执行权限
+
+
+#apt安装
+apt install nginx     //安装最新稳定版nginx;自动安装依赖;文件相关路径可能跟编译安装路径不一致
+apt remove nginx      //移除nginx;编译安装的卸载同centos部分
 

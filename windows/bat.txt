@@ -45,5 +45,6 @@ vmrun -T ws list                                //列出正在运行的虚拟机
 f:
 cd "F:\Program Files (x86)\NetSarang\Sessions\Xshell\Sessions"
 start "" "centos 7.7_1908_0.xsh"    //启动新窗口运行命令
+timeout \T 2                        //等待两秒;主要解决xshell中开启终端顺序问题,如不需要可不加此命令
 start "" "ubuntu 1804.xsh"
 
