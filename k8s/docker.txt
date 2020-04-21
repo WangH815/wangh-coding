@@ -55,9 +55,9 @@ apt remove docker.io           #卸载
 docker -v/--version            #查看docker版本
 
 2.启动和关闭docker服务
-service docker start           #启动;systemctl start docker命令也可以,下同
-service docker stop            #停止
-service docker restart         #重启
+systemctl start docker         #启动;service docker start 命令也可以,下同
+systemctl stop docker          #停止
+systemctl restart docker       #重启
 docker info                    #查看docker概要信息
 
 3.增加其他用户使用docker的权限 #不需要可以不添加
@@ -245,6 +245,54 @@ Dockerfile    #构建镜像的文本文件,包含构建镜像所需的指令和�
 2.维护者信息
 3.镜像操作指令
 4.容器启动时执行指令
+
+#参数详解
+##FROM                  //Dockerfile的第一行指令
+FROM <image>[:tag]      //指定镜像;tag一般为版本号
+
+##MAINTAINER
+MAINTAINER <name>       //指定维护者信息
+
+##RUN                   //每条run指令会构建新的镜像
+RUN <command>                           //shell中执行
+RUN ["executable", "param1", "param2"]  //通过exec执行
+
+##CMD                                   //指定启动容器时执行的命令;每个Dockerfile只能有一个
+CMD ["executable","param1","param2"]    //通过exec执行;推荐方式
+CMD command param1 param2               //在 /bin/sh 中执行，提供给需要交互的应用
+CMD ["param1","param2"]                 //提供给 ENTRYPOINT 的默认参数
+
+##EXPOSE
+EXPOSE <port> [<port>...]  //指定容器开放(外部可访问)的端口;启动时使用-P指定主机转发端口
+
+##ENV
+ENV <key> <value>   //指定环境变量;指定后可使用
+
+##ADD
+ADD <src> <dest>    //增加指定内容到容器中;内容可以是url、tar(会自动解压)
+
+##COPY
+COPY <src> <dest>   //复制主机内容到容器中
+
+##ENTRYPOINT        //指定启动容器时执行的命令;不会被docker run提供的参数覆盖;每个Dockerfile只能有一个
+ENTRYPOINT ["executable", "param1", "param2"]  //通过exec执行
+ENTRYPOINT command param1 param2               //通过shell执行
+
+##VOLUME
+VOLUME ["/data"]    //创建挂载点用于主机或其他容器挂载;用于存放共享数据
+
+##USER
+USER daemon         //指定运行容器的用户(名称/UID)
+
+##WORKDIR           //为RUN、CMD、ENTRYPOINT构建工作目录
+WORKDIR /path/to/workdir
+
+##ONBUILD           //配置当所创建的镜像作为其它新创建镜像的基础镜像时，所执行的操作指令
+ONBUILD [INSTRUCTION]
+
+
+#构建镜像
+
 
 
 基于centos:7.7.1908构建特定版本的redis镜像   #ubuntu18.04下操作
