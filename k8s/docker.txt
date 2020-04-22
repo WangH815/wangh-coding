@@ -6,6 +6,14 @@ Docker支持将软件编译成一个镜像（image）,在这个镜像里做好�
 目前各大主流计算平台都支持Docker容器技术。
 
 
+#技术基础
+1.使用go语言开发
+2.基于Linux内核(不同发行版只是在内核版本增加不同的软件包)开发   #非Linux版本不讨论
+3.主要使用内核模块:
+  Namespace:用于容器的隔离
+  Cgroups:用于容器的资源控制,只要是内存及cpu等资源的控制
+
+
 #基本概念
 image       #镜像;用于创建容器的模板,类似于Java中的Class
 container   #容器;独立运行的一个或一组应用,类似于对象(实例)
@@ -93,7 +101,7 @@ https://docker.mirrors.ustc.edu.cn   #中科大镜像源
 https://reg-mirror.qiniu.com         #七牛云
 
 
-镜像操作
+#镜像操作
 #列出本地镜像,默认位于 /var/lib/docker 目录下
 docker images 
 REPOSITORY   TAG   IMAGE ID   CREATED   SIZE  
@@ -114,23 +122,30 @@ docker save -o xx.tar IMAGE_NAME   #基于镜像的备份(导出),不含容器�
 docker load -i xx.tar              #载入
 ##批量备份镜像
 mkdir docker-images && cd docker-images
-for option in `docker images | awk 'NR > 1 {print "docker-"$1"-"$2".tar#"$1":"$2}'`
+for x in `docker images | awk 'NR > 1 {print "docker-"$1"-"$2".tar#"$1":"$2}'`
 do
-  docker save -o `echo $option | tr '#' ' '`
+  docker save -o `echo $x | tr '#' ' '`
 done
 ##批量恢复镜像(在镜像解压目录中操作)
 cd docker-images
-for option in `ls | grep ".tar"`
+for x in `ls | grep ".tar"`
 do
-  docker load -i $option
+  docker load -i $x
 done
 
 #容器的导出与导入(如需批量操作与上面类似)
-docker export IMAGE_NAME > xx.tar  #基于容器的备份(保存),会保留所有运行环境(包括底层镜像)
-docker import xx.tar               #导入
+docker export CONTAINER_NAME > xx.tar  #基于容器的备份(保存),会保留所有运行环境(包括底层镜像)
+docker import xx.tar                   #导入
+
+for x in `docker ps -q --no-trunc`
+do
+  name=`docker inspect $x | grep -i \"name\" | grep \/ | awk -F '["/]' '{print $5}'`
+  #name=`docker inspect -f "{{.Name}}" $x | awk -F '/' '{print $2}'`
+  docker export ${name} > ${name}.tar
+done
 
 
-容器操作   #可认为是镜像的实例
+#容器操作   #可认为是镜像的实例
 docker ps                                     #查看正在运行的容器       
 docker ps -a                                  #查看所用容器,包括启动过的历史容器
 docker ps -a -q                               #显示所有容器ID
@@ -149,11 +164,13 @@ docker system info                            #显示系统信息
 docker system prune                           #清理文件  
 docker top CONTAINER_NAME/ID                  #显示容器本身的top信息,类似于Linux top,但更简洁
 docker logs CONTAINER_NAME/ID                 #显示运行容器的日志
-docker update options CONTAINER_NAME/ID       #更新容器配置,如自启动等;option在容器名称后也可以
+docker update options CONTAINER_NAME/ID       #更新容器配置(cpu、memory、io等资源),如自启动等;option在容器名称后也可以
 docker port CONTAINER_NAME/ID                 #显示容器端口映射列表
+docker diff CONTAINER_NAME/ID                 #显示容器的文件变化列表(A-Add, D-Delete, C-Change)
+docker events                                 #显示容器实时事件;可以过滤或按时间显示
 
 
-创建启动容器
+#创建启动容器
 docker run
 #参数
 --name CONTAINER_NAME         #设置容器名称
@@ -165,38 +182,40 @@ docker run
 -t                            #表示容器启动后会进入其命令行,加入 -it,创建并登录进去,即分配一个伪终端;tty
 --restart always              #设置跟随docker进程自启动;也可通过 docker update --restart always xx 修改
 
-交互式容器
+##交互式容器
 docker run -it --name=mycentos7 centos:7 /bin/bash  
 exit                                                      #命令可退出当前容器,退出后容器停止;-d参数退出后不停止
 
-守护式容器
+##守护式容器
 docker run -di --name=mycentos7 centos:7                  #创建容器
 docker exec -it CONTAINER_NAME/ID /bin/bash               #进入/登录容器shell环境
 docker exec -it CONTAINER_NAME/ID ping CONTAINER_NAME/ID  #一个容器ping另外一个容器
 exit 退出容器后容器仍然在运行
 
-启停容器
+##启停容器
 docker stop CONTAINER_NAME/ID
-docker stop $(docker ps -aq)       #停止所有容器;$(docker ps -a -q)可使用`docker ps -aq`
+docker stop $(docker ps -aq)             #停止所有容器;$(docker ps -a -q)可使用`docker ps -aq`
 docker start CONTAINER_NAME/ID
 docker restart CONTAINER_NAME/ID
-docker restart $(docker ps -q)     #重启所有正在运行的容器
+docker restart $(docker ps -q)           #重启所有正在运行的容器
 
-文件拷贝
+##文件拷贝
 docker cp FILE/DIR CONTAINER_NAME:PATH   #拷贝到容器
 docker cp CONTAINER_NAME:FILE/PATH PATH  #反向
 docker save IMAGE_NAME > FILE_NAME.tar   #将镜像保存成文件
 docker load < FILE_NAME.tar              #从文件加载镜像
 
-目录挂载
+##目录挂载
 在创建容器的时候,将宿主机的目录和容器内的目录进行映射,这样我们就可以通过修改宿主机某个目录的文件从而影响容器。格式为：
 docker run -di -v 宿主机目录:容器目录
 
-获取容器或镜像元数据(详细信息)
+##获取容器或镜像元数据(详细信息)
 docker inspect CONTAINER_NAME/IMAGE_NAME
 
 
-Mysql 5.7
+#容器创建实例
+
+##Mysql 5.7
 1.拉取镜像
 docker pull mysql:5.7
 2.创建守护容器
@@ -217,7 +236,7 @@ mysql -uroot -p                                #登录mysql
 docker exec -it docker_mysql57 mysql -uroot -p #直接登录容器mysql
 
 
-Redis 5
+##Redis 5
 1.拉取镜像
 docker pull redis:5
 2.创建容器
@@ -236,11 +255,11 @@ redis-cli                                 #进入redis命令行
 docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
 
 
-nginx
+##nginx
 1.拉取镜像
-docker pull nginx:stable      #stable表示稳定版,其他支持版本可从官方镜像库查询
+docker pull nginx:1.16      #stable表示稳定版,其他支持版本可从官方镜像库查询
 2.创建容器
-mkdir -p ~/nginx/data         #创建本地目录
+mkdir -p ~/nginx/data       #创建本地目录
 #创建容器
 docker run \
 --name nginx_1.16 \
@@ -259,53 +278,51 @@ Dockerfile    #构建镜像的文本文件,包含构建镜像所需的指令和�
 4.容器启动时执行指令
 
 #参数详解
-##FROM                  //Dockerfile的第一行指令
-FROM <image>[:tag]      //指定镜像;tag一般为版本号
+##FROM                  #Dockerfile的第一行指令
+FROM <image>[:tag]      #指定镜像;tag一般为版本号
 
 ##MAINTAINER
-MAINTAINER <name>       //指定维护者信息
+MAINTAINER <name>       #指定维护者信息
 
-##RUN                   //每条run指令会构建新的镜像
-RUN <command>                           //shell中执行
-RUN ["executable", "param1", "param2"]  //通过exec执行
+##RUN                   #每条run指令会构建新的镜像
+RUN <command>                           #shell中执行
+RUN ["executable", "param1", "param2"]  #通过exec执行
 
-##CMD                                   //指定启动容器时执行的命令;每个Dockerfile只能有一个
-CMD ["executable","param1","param2"]    //通过exec执行;推荐方式
-CMD command param1 param2               //在 /bin/sh 中执行，提供给需要交互的应用
-CMD ["param1","param2"]                 //提供给 ENTRYPOINT 的默认参数
+##CMD                                   #指定启动容器时执行的命令;每个Dockerfile只能有一个
+CMD ["executable","param1","param2"]    #通过exec执行;推荐方式
+CMD command param1 param2               #在 /bin/sh 中执行，提供给需要交互的应用
+CMD ["param1","param2"]                 #提供给 ENTRYPOINT 的默认参数
 
 ##EXPOSE
-EXPOSE <port> [<port>...]  //指定容器开放(外部可访问)的端口;启动时使用-P指定主机转发端口
+EXPOSE <port> [<port>...]  #指定容器开放(外部可访问)的端口;启动时使用-P指定主机转发端口
 
 ##ENV
-ENV <key> <value>   //指定环境变量;指定后可使用
+ENV <key> <value>   #指定环境变量;指定后可使用
 
 ##ADD
-ADD <src> <dest>    //增加指定内容到容器中;内容可以是url、tar(会自动解压)
+ADD <src> <dest>    #增加指定内容到容器中;内容可以是url、tar(会自动解压)
 
 ##COPY
-COPY <src> <dest>   //复制主机内容到容器中
+COPY <src> <dest>   #复制主机内容到容器中
 
-##ENTRYPOINT        //指定启动容器时执行的命令;不会被docker run提供的参数覆盖;每个Dockerfile只能有一个
-ENTRYPOINT ["executable", "param1", "param2"]  //通过exec执行
-ENTRYPOINT command param1 param2               //通过shell执行
+##ENTRYPOINT        #指定启动容器时执行的命令;不会被docker run提供的参数覆盖;每个Dockerfile只能有一个
+ENTRYPOINT ["executable", "param1", "param2"]  #通过exec执行
+ENTRYPOINT command param1 param2               #通过shell执行
 
 ##VOLUME
-VOLUME ["/data"]    //创建挂载点用于主机或其他容器挂载;用于存放共享数据
+VOLUME ["/data"]    #创建挂载点用于主机或其他容器挂载;用于存放共享数据
 
 ##USER
-USER daemon         //指定运行容器的用户(名称/UID)
+USER daemon         #指定运行容器的用户(名称/UID)
 
-##WORKDIR           //为RUN、CMD、ENTRYPOINT构建工作目录
+##WORKDIR           #为RUN、CMD、ENTRYPOINT构建工作目录
 WORKDIR /path/to/workdir
 
-##ONBUILD           //配置当所创建的镜像作为其它新创建镜像的基础镜像时，所执行的操作指令
+##ONBUILD           #配置当所创建的镜像作为其它新创建镜像的基础镜像时，所执行的操作指令
 ONBUILD [INSTRUCTION]
 
 
 #构建镜像
-
-
 
 基于centos:7.7.1908构建特定版本的redis镜像   #ubuntu18.04下操作
 1.拉取基本镜像
@@ -314,7 +331,7 @@ docker pull centos:7.7.1908
 Dockerfile文件内容如下:
 FROM centos:7.7.1908
 RUN yum install -y wget \
-    && wget -O redis.tar.gz "http://download.redis.io/releases/redis-5.0.3.tar.gz" \
+    && wget -O redis.tar.gz "http:#download.redis.io/releases/redis-5.0.3.tar.gz" \
     && tar -xvf redis.tar.gz
 3.在Dockerfile文件所在目录构建镜像
 docker build -t redis5:test .                #.表示指定Dockerfile文件目录

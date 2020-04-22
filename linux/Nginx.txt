@@ -131,7 +131,7 @@ export PATH' >> ~/.bashrc
 source ~/.bashrc  //生效配置;source可使用 . 替代
 
 5.防火墙(待补充)
-ufw               //ubuntu firewall
+ufw               //uncomplicated firewall(简单防火墙)
 
 6.测试同centos环境下一致
 
