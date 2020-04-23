@@ -68,30 +68,54 @@ done
 #使用教程 
 环境：Ubuntu 18.04
 
-1.安装和卸载docker             #可暂时将阿里镜像源改为官方源;修改参考Ubuntu使用手册
-apt install docker.io          #安装docker
-apt remove docker.io           #卸载
-docker -v/--version            #查看docker版本
+1.安装和卸载docker
+##卸载旧版本
+apt-get remove docker \
+               docker-engine \
+               docker.io
 
-2.启动和关闭docker服务
-systemctl start docker         #启动;service docker start 命令也可以,下同
-systemctl stop docker          #停止
-systemctl restart docker       #重启
-docker info                    #查看docker概要信息
+##更新软件列表;使用https传输确保软件包不被篡改
+apt-get update
+apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+## 增加软件源的GPG密钥,确保合法性;以下是中科大软件源,其他同理
+##官方GPG https://download.docker.com/linux/ubuntu/gpg
+curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+
+##添加中科大apt源;加快下载速度
+##官方地址 https://download.docker.com/linux/ubuntu
+add-apt-repository \
+    "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+
+##更新软件列表及安装docker-ce(社区版)
+apt-get update
+apt-get install docker-ce
+
+##设置开机自启动
+systemctl enable docker        #systemctl is-enable docker可查看是否自启动
+systemctl start docker
+
+2.启停docker服务
+systemctl start/stop/restart docker
 
 3.增加其他用户使用docker的权限 #不需要可以不添加
 cat /etc/group | grep docker   #查看docker组是否存在
 groupadd docker                #增加docker;root操作
 usermod -aG docker username    #将用户用户添加到docker用户组中;root操作
 
-4.镜像源                       #用于镜像加速
-vi /etc/docker/daemon.json     #没有则创建此文件,重启docker后生效
-#设置为网易镜像源
-{
+4.镜像加速                     #网易镜像加速
+echo '{
+  "registry-mirrors": [
+    "https://hub-mirror.c.163.com"
+  ]
+}' > /etc/docker/daemon.json
 
-"registry-mirrors": ["http://hub-mirror.c.163.com"]
-
-}
 systemctl restart docker             #重启生效配置
 
 ##其他常用镜像源
@@ -99,6 +123,9 @@ https://hub.docker.com               #官方默认镜像源;镜像标签可直�
 https://registry.docker-cn.com       #Docker官方中国区镜像源
 https://docker.mirrors.ustc.edu.cn   #中科大镜像源
 https://reg-mirror.qiniu.com         #七牛云
+
+5.测试docker是否正确安装
+docker run hello-world
 
 
 #镜像操作
@@ -128,20 +155,27 @@ do
 done
 ##批量恢复镜像(在镜像解压目录中操作)
 cd docker-images
-for x in `ls | grep ".tar"`
+for x in `ls | grep .tar$`
 do
   docker load -i $x
 done
 
-#容器的导出与导入(如需批量操作与上面类似)
-docker export CONTAINER_NAME > xx.tar  #基于容器的备份(保存),会保留所有运行环境(包括底层镜像)
-docker import xx.tar                   #导入
+#容器的导出与导入
+docker export CONTAINER_NAME -o xx.tar  #基于容器的备份(保存),保存为镜像
+docker import xx.tar                    #导入;导入形式为镜像
 
+mkdir docker-containers && cd docker-containers
 for x in `docker ps -q --no-trunc`
 do
-  name=`docker inspect $x | grep -i \"name\" | grep \/ | awk -F '["/]' '{print $5}'`
-  #name=`docker inspect -f "{{.Name}}" $x | awk -F '/' '{print $2}'`
-  docker export ${name} > ${name}.tar
+  name=`docker inspect -f "{{.Name}}" $x | awk -F '/' '{print $2}'`
+  #name=`docker inspect $x | grep -i \"name\" | grep \/ | awk -F '["/]' '{print $5}'`
+  docker export ${name} -o ${name}.tar
+done
+
+cd docker-containers
+for x in `ls | grep .tar$`
+do
+  docker import $x
 done
 
 
@@ -183,7 +217,7 @@ docker run
 --restart always              #设置跟随docker进程自启动;也可通过 docker update --restart always xx 修改
 
 ##交互式容器
-docker run -it --name=mycentos7 centos:7 /bin/bash  
+docker run -it --name mycentos7 centos:7 /bin/bash  
 exit                                                      #命令可退出当前容器,退出后容器停止;-d参数退出后不停止
 
 ##守护式容器
@@ -340,14 +374,34 @@ docker images
 
 
 CentOS7 安装使用docker
-1.安装
-yum -y install docker
-2.创建docker用户组(如有需要,参考ubuntu操作)
-3.增加普通用户到docker用户组(同上)
-4.设置docker服务自启动
-systemctl is-enabled docker  #判断docker是否自启动
-systemctl enable docker      #设置自启动
+1.移除旧版本
+yum remove docker \
+           docker-client \
+           docker-client-latest \
+           docker-common \
+           docker-latest \
+           docker-latest-logrotate \
+           docker-logrotate \
+           docker-selinux \
+           docker-engine-selinux \
+           docker-engine
 
+2.安装依赖
+yum install -y yum-utils \
+               device-mapper-persistent-data \
+               lvm2
+
+3.配置docker软件源
+yum-config-manager \
+    --add-repo \
+    https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo
+sed -i 's/download.docker.com/mirrors.ustc.edu.cn\/docker-ce/g' /etc/yum.repos.d/docker-ce.repo
+
+4.安装
+yum makecache fast
+yum install docker-ce
+
+5.其他如增加用户组、启停、镜像加速、自启动及测试等参考ubuntu 1804
 
 
 ======================================
