@@ -137,7 +137,7 @@ LVM     #Logical Volume Manager(逻辑卷管理器);用于管理逻辑卷(LV),�
 #其他特殊文件
 /proc               #process(进程)相关的虚拟文件系统;可查看和修改内核运行状况
   /proc/1           #PID=1的进程相关信息文件夹;系统初始化进程(init/systemd)号为1,其他进程类似
-  /proc/loadavg     #前三列分别保存最近1分钟，5分钟，及15分钟的平均负载。
+  /proc/loadavg     #前三列分别保存最近1分钟，5分钟，及15分钟的平均负载
   /proc/meminfo     #当前内存使用信息
   /proc/diskstats   #磁盘I/O统计信息列表
   /proc/net/dev     #网络流入流出统计信息
@@ -146,7 +146,7 @@ LVM     #Logical Volume Manager(逻辑卷管理器);用于管理逻辑卷(LV),�
   /proc/cmdline     #启动时传递至内核的启动参数,通常由grub进行传递
   /proc/mounts      #系统当前挂在的文件系统
   /proc/uptime      #系统运行时间
-  /poc/version      #当前运行的内核版本号等信息
+  /proc/version     #当前运行的内核版本号等信息
   /proc/devices     #可用设备的列表
   /proc/modules     #已加载的模块
 
@@ -155,7 +155,7 @@ LVM     #Logical Volume Manager(逻辑卷管理器);用于管理逻辑卷(LV),�
 1 . xx.sh      #一般用于生效用户配置而不需要重新登录shell;xx.sh有读权限即可
 2 source xx.sh #同上;常见用于执行 profile 配置,脚本本身在当前进程中执行
 3 sh xx.sh     #读权限即可,脚本本身会在子进程中执行
-4 ./xx.sh      #需执行权限,脚本本身会在子进程中执行;如不指定当前路径,会优先根据PATH查找相应命令
+4 ./xx.sh      #需执行权限,脚本本身会在子进程中执行;如不指定当前路径(./),会优先根据PATH查找相应命令
 
 
 #shell命令类型
