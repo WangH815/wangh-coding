@@ -20,7 +20,7 @@ Nginx是一款轻量级的Web服务器/反向代理服务器及电子邮件（IM
 
 
 #环境
-版本: 1.14.1          //具体安装版本可以根据参考官网选择对应的稳定版本
+版本: 1.14.1          //生产环境建议选择最新稳定版,具体参考官网
 Linux:centos7.7_1908
 
 
@@ -28,13 +28,12 @@ Linux:centos7.7_1908
 ##确保已安装一下软件
 yum list installed pkg                //检查软件包是否安装
 
-yum install -y pcre-devel             //用于支持重定向,如不需要可不安装
+yum -y install pcre-devel             //用于支持重定向,如不需要可不安装
 yum -y install gcc make gcc-c++ wget  //centos7一般都有,也可检查一下yum list installed gcc
 yum -y install openssl openssl-devel  //用于支持https;如不需要可不安装
 
 1.下载Nginx包      //可自己选择其它版本
 wget http://nginx.org/download/nginx-1.14.1.tar.gz
-wget http://nginx.org/download/nginx-xx.tar.gz       //版本号一般是1.xx.x; xx为偶数一般是稳定版
 
 2.安装前准备
 tar zxvf nginx-1.14.1.tar.gz   //解压
@@ -42,12 +41,13 @@ cd nginx-1.14.1
 ./configure                    //安装前配置(依赖)检查;也可以按照自定义配置,参见文末
 
 3.编译安装                     //nginx-1.14.1目录下操作
-make                           
-make install
+make && make install
 
 4.设置为全局命令(当前用户)
-echo 'PATH=$PATH:/usr/local/nginx/sbin/
-export PATH' >> ~/.bash_profile 
+echo '
+PATH=$PATH:/usr/local/nginx/sbin/
+export PATH
+' >> ~/.bash_profile 
 
 source ~/.bash_profile                       //生效配置;source可使用 . 替代
 
@@ -71,7 +71,9 @@ vi /lib/systemd/system/nginx.service         //相关配置可参考手册
 
 2.方式二:增加自启动脚本(自定义开机程序)
 chmod +x /etc/rc.d/rc.local                  //增加执行权限;默认无执行权限
-echo '/usr/local/nginx/sbin/nginx' >> /etc/rc.d/rc.local
+echo '
+/usr/local/nginx/sbin/nginx
+' >> /etc/rc.d/rc.local
 
 
 #卸载
