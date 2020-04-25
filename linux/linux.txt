@@ -692,7 +692,10 @@ date "+%Y-%m-%d %H:%M:%S" -d "-1 month +1 day -1 year"
 date -d "-1 month +1 day -1 year" "+%Y-%m-%d %H:%M:%S"
 cmd | tee file    #输出内容的同时写入文件 
 cmd | tee -a file #追加模式
-
+Ctrl + Z          #暂停当前任务(命令)
+jobs              #查看并显示当前会话的后台任务(编号、状态、命令);编号为后台任务的顺序,不是pid
+bg [n]            #将编号为n的任务放到后台继续执行;任务号可使用jobs查看;默认编号为1
+fg [n]            #前台执行编号为n的命令
 
 #问题处理
 1.文件误删恢复
