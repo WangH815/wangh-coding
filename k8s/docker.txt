@@ -49,19 +49,19 @@ docker inspect CONTAINER_NAME[:VERSION]/ID   #查看本地镜像详细信息;也
 ##创建容器时使用-v选项
 docker run ... \
 -v /etc/timezone:/etc/timezone \
--v /etc/localtime:/etc/localtime \
+-v /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime \
 ...
 -d container_name
 
 方案二:
 ##容器已创建
-docker cp \
-/etc/timezone container_name:/etc/timezone \  #容器名可以使用容器id代替
-/etc/localtime container_name:/etc/localtime
+docker cp /etc/timezone container_name:/etc/timezone   #容器名可以使用容器id代替
+docker cp /usr/share/zoneinfo/Asia/Shanghai container_name:/etc/localtime
 ###批量操作
 for name in `docker ps -q`
 do
-  docker cp /etc/timezone ${name}:/etc/timezone /etc/localtime ${name}:/etc/localtime
+  docker cp /etc/timezone ${name}:/etc/
+  docker cp /usr/share/zoneinfo/Asia/Shanghai ${name}:/etc/
 done
 
 
@@ -300,6 +300,31 @@ docker run \
 -p 80:80 \
 -v ~/nginx/data:/data \
 -di nginx:stable
+
+
+##jenkins
+1.拉取镜像
+docker pull jenkinsci/blueocean   #默认为最新稳定版
+2.创建容器
+docker run \
+--name docker_jenkins \
+-u root \
+-p 8080:8080 \
+-p 50000:50000 \
+-v jenkins-data:/var/jenkins_home \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-di jenkinsci/blueocean
+3.修改update源                    #容器中修改
+docker exec -it docker_jenkins bash
+sed -i "s/https:\/\/updates.jenkins.io/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins\/updates/g" /var/jenkins_home/hudson.model.UpdateCenter.xml
+docker restart docker_jenkins     #重启后生效
+4.修改插件源                      #上一步完成才会生成updates目录
+docker exec -it docker_jenkins bash
+sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins/g' /var/jenkins_home/updates/default.json
+sed -i 's/http:\/\/www.google.com/https:\/\/www.baidu.com/g' /var/jenkins_home/updates/default.json
+5.访问jenkins                     #使用浏览器
+http://192.168.99.98/8080
+
 
 
 定制镜像
