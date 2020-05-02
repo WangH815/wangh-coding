@@ -10,10 +10,10 @@ Linux命令行与shell脚本编程大全 第3版
 Shell是C语言编写,既是命令语言又是程序设计语言;通过Shell提供的界面访问操作系统内核
 
 ##常见Shell
-Bourne Shell(/usr/bin/sh或/bin/sh)
-Bourne Again Shell(/bin/bash)      #适用范围最广,绝大多数Linux发行版默认Shell
+Bourne Shell(/usr/bin/sh或/bin/sh) #bash的前身;bash的子集(但调用方式有差异)
+Bourne Again Shell(/bin/bash)      #bash;适用范围最广,绝大多数Linux发行版默认Shell
 C Shell(/usr/bin/csh)
-K Shell(/usr/bin/ksh)              #Unix系统默认Shell
+K Shell(/usr/bin/ksh)              #Unix系统默认Shell;Korn shell
 Shell for Root(/sbin/sh)
 zsh                                #完全兼容bash
 dsh
@@ -24,13 +24,13 @@ chsh -s /bin/zsh  #设置用户默认Shell或者修改 /etc/passwd 文件中对�
 
 
 #Shell脚本
-#!/bin/bash       #脚本第一行,指明运行脚本的Shell
+#!/bin/bash       #脚本第一行,指明运行脚本的Shell;#!出现在其他行为注释
 
 ##脚本运行方式
 1 . ./xx.sh       #一般用于生效用户配置而不需要重新登录shell,xx.sh有读权限即可
-2 source ./xx.sh  #同上。常见用于执行 profile 配置,脚本本身在当前进程中执行
-3 sh ./xx.sh      #读权限即可,脚本本身会在子进程中执行
-4 ./xx.sh         #需要执行权限,脚本本身会在子进程中执行
+2 source ./xx.sh  #同上;常见用于执行 profile 配置,脚本本身在当前进程中执行
+3 sh ./xx.sh      #读权限即可,脚本本身会在子进程中执行;linux系统中sh为bash的软连接;一般等价于bash xx.sh
+4 ./xx.sh         #需要执行权限,脚本本身会在子进程中执行;一般会在脚本中指定执行Shell版本
 
 ##后台执行
 sh xx.sh &        #后台执行;在脚本中使用可实现多任务处理
@@ -143,6 +143,11 @@ echo ${var:?default}         #var的值为非空则输出var的值,否则输出d
 var="abcdef"
 ${var:pos}                   #截取从数组下标为pos(不含pos,下同)之后的子串
 ${var:pos:len}               #截取pos之后长度为len的子串
+${var:2}                     #返回cdef
+${var:2:2}                   #返回cd
+${var:0-3}                   #返回def;pos为-2,但是不能直接写-2
+${var:0-3:2}                 #返回de
+
 
 ${var/Pattern/Replacement}   #使用Replacement来替换var中第一次匹配Pattern的字符串
 ${var//Pattern/Replacement}  #全部替换
@@ -169,6 +174,7 @@ ${var%.*}      #返回/dir1/dir2/dir3/my.file;去除文件后缀比较方便
 ${var%%str*}   #截取第一个str前的字符串
 ${var%%/*}     #返回""(空值)
 ${var%%.*}     #返回/dir1/dir2/dir3/my
+
   
 ##变量拼接
 ${a}${b}
@@ -386,6 +392,7 @@ if var=$(date)          #同上
 if conditions;then cmds;fi                #cmds为多命令使用分号隔开;其他类似
 if (conditions) then (cmds) fi            #cmds为多命令使用分号隔开;括号内命令(或条件)在子shell中执行;其他类似
 if conditions;then cmds;else cmds;fi
+if conditions;then :;else cmds;fi         #then :为占位符;一般用于不成立的conditions不好写时使用
 if (conditions) then (cmds) else (cmds) fi
 if conditions;then cmds;elif cmds;else cmds;fi
 
@@ -488,6 +495,7 @@ done
 
 while conditions;do cmds;done      #单行写的形式
 while :;do cmds;done               #无限循环形式
+while true;do cmds;done            #同上
 while [];[];[];do cmds;done        #多测试条件形式;某个测试条件不满足则退出循环
 while [] && [] && [];do cmds;done  #同上
 while [] || [] || [];do cmds;done  #或条件
@@ -1095,6 +1103,26 @@ for var in $(echo $PATH|sed 's/:/ /g');do echo $var;done  #打印所有$PATH路�
 for var in `echo $PATH|sed 's/:/ /g'`;do echo $var;done   #同上
 count=$(ls /usr/bin | wc -l)    #统计$PATH中/usr/bin目录下文件(命令)数量
 count=`ls /usr/bin | wc -l`     #同上
+
+
+
+#技巧
+/{,usr/}bin/*cpp       #解析后为 /bin/*cpp 或 /usr/bin/*cpp
+: > xx.dat             #不改变文件权限重建文件;不存在则被创建
+> xx.dat               #同上
+cat /dev/null > xx.dat #同上
+
+
+##文件读取
+File=/path/file
+{
+read line1
+read line2
+} < $File
+
+
+
+
 
 
 
