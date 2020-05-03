@@ -1,103 +1,119 @@
-Nginxç¼–è¯‘å®‰è£…
+Nginx±àÒë°²×°
 
 
-#ç®€ä»‹
-Nginxæ˜¯ä¸€æ¬¾è½»é‡çº§çš„WebæœåŠ¡å™¨/åå‘ä»£ç†æœåŠ¡å™¨åŠç”µå­é‚®ä»¶ï¼ˆIMAP/POP3ï¼‰ä»£ç†æœåŠ¡å™¨ï¼Œ
-åœ¨BSD-like åè®®ä¸‹å‘è¡Œã€‚å…¶ç‰¹ç‚¹æ˜¯å æœ‰å†…å­˜å°‘ï¼Œå¹¶å‘èƒ½åŠ›å¼ºï¼Œäº‹å®žä¸Šnginxçš„å¹¶å‘èƒ½åŠ›
-åœ¨åŒç±»åž‹çš„ç½‘é¡µæœåŠ¡å™¨ä¸­è¡¨çŽ°è¾ƒå¥½ï¼Œä¸­å›½å¤§é™†ä½¿ç”¨nginxç½‘ç«™ç”¨æˆ·æœ‰ï¼šç™¾åº¦ã€äº¬ä¸œã€æ–°æµªã€
-ç½‘æ˜“ã€è…¾è®¯ã€æ·˜å®ç­‰ã€‚
+#¼ò½é
+NginxÊÇÒ»¿îÇáÁ¿¼¶µÄWeb·þÎñÆ÷/·´Ïò´úÀí·þÎñÆ÷¼°µç×ÓÓÊ¼þ£¨IMAP/POP3£©´úÀí·þÎñÆ÷£¬
+ÔÚBSD-like Ð­ÒéÏÂ·¢ÐÐ¡£ÆäÌØµãÊÇÕ¼ÓÐÄÚ´æÉÙ£¬²¢·¢ÄÜÁ¦Ç¿£¬ÊÂÊµÉÏnginxµÄ²¢·¢ÄÜÁ¦
+ÔÚÍ¬ÀàÐÍµÄÍøÒ³·þÎñÆ÷ÖÐ±íÏÖ½ÏºÃ£¬ÖÐ¹ú´óÂ½Ê¹ÓÃnginxÍøÕ¾ÓÃ»§ÓÐ£º°Ù¶È¡¢¾©¶«¡¢ÐÂÀË¡¢
+ÍøÒ×¡¢ÌÚÑ¶¡¢ÌÔ±¦µÈ¡£
 
 
-#åŸºæœ¬æ¦‚å¿µ
-1.æ­£å‘ä»£ç†
-ä¸»è¦ä½œç”¨äºŽç”¨æˆ·é€šè¿‡ä»£ç†æœåŠ¡å™¨è®¿é—®ç”¨æˆ·ä¸èƒ½ç›´æŽ¥è®¿é—®çš„å¤–éƒ¨èµ„æº;ç”¨æˆ·åŠä»£ç†æœåŠ¡å™¨ä¸€èˆ¬æ˜¯ä½äºŽå±€åŸŸç½‘å†…
-2.åå‘ä»£ç†
-ä¸»è¦æ˜¯å¤–éƒ¨ç”¨æˆ·è®¿é—®å±€åŸŸç½‘å†…èµ„æºéœ€è¦é€šè¿‡åå‘ä»£ç†æœåŠ¡å™¨ä»£ç†
+#»ù±¾¸ÅÄî
+1.ÕýÏò´úÀí
+Ö÷Òª×÷ÓÃÓÚÓÃ»§Í¨¹ý´úÀí·þÎñÆ÷·ÃÎÊÓÃ»§²»ÄÜÖ±½Ó·ÃÎÊµÄÍâ²¿×ÊÔ´;ÓÃ»§¼°´úÀí·þÎñÆ÷Ò»°ãÊÇÎ»ÓÚ¾ÖÓòÍøÄÚ
+2.·´Ïò´úÀí
+Ö÷ÒªÊÇÍâ²¿ÓÃ»§·ÃÎÊ¾ÖÓòÍøÄÚ×ÊÔ´ÐèÒªÍ¨¹ý·´Ïò´úÀí·þÎñÆ÷´úÀí
 
 
 
-========================CentOS 7 å®‰è£…Nginx=======================
+========================CentOS 7 °²×°Nginx=======================
 
 
-#çŽ¯å¢ƒ
-ç‰ˆæœ¬: 1.14.1          //ç”Ÿäº§çŽ¯å¢ƒå»ºè®®é€‰æ‹©æœ€æ–°ç¨³å®šç‰ˆ,å…·ä½“å‚è€ƒå®˜ç½‘
+#»·¾³
+°æ±¾: 1.14.1          #Éú²ú»·¾³½¨ÒéÑ¡Ôñ×îÐÂÎÈ¶¨°æ,¾ßÌå²Î¿¼¹ÙÍø
 Linux:centos7.7_1908
 
 
-#å®‰è£…å‰æ£€æŸ¥
-##ç¡®ä¿å·²å®‰è£…ä¸€ä¸‹è½¯ä»¶
-yum list installed pkg                //æ£€æŸ¥è½¯ä»¶åŒ…æ˜¯å¦å®‰è£…
+#°²×°Ç°¼ì²é
+##È·±£ÒÑ°²×°Ò»ÏÂÈí¼þ
+yum list installed pkg                #¼ì²éÈí¼þ°üÊÇ·ñ°²×°
 
-yum -y install pcre-devel             //ç”¨äºŽæ”¯æŒé‡å®šå‘,å¦‚ä¸éœ€è¦å¯ä¸å®‰è£…
-yum -y install gcc make gcc-c++ wget  //centos7ä¸€èˆ¬éƒ½æœ‰,ä¹Ÿå¯æ£€æŸ¥ä¸€ä¸‹yum list installed gcc
-yum -y install openssl openssl-devel  //ç”¨äºŽæ”¯æŒhttps;å¦‚ä¸éœ€è¦å¯ä¸å®‰è£…
+yum -y install pcre-devel             #ÓÃÓÚÖ§³ÖÖØ¶¨Ïò,Èç²»ÐèÒª¿É²»°²×°
+yum -y install gcc make gcc-c++ wget  #centos7Ò»°ã¶¼ÓÐ,Ò²¿É¼ì²éÒ»ÏÂyum list installed gcc
+yum -y install openssl openssl-devel  #ÓÃÓÚÖ§³Öhttps;Èç²»ÐèÒª¿É²»°²×°
 
-1.ä¸‹è½½NginxåŒ…      //å¯è‡ªå·±é€‰æ‹©å…¶å®ƒç‰ˆæœ¬
+1.ÏÂÔØNginx°ü      #¿É×Ô¼ºÑ¡ÔñÆäËü°æ±¾
 wget http://nginx.org/download/nginx-1.14.1.tar.gz
 
-2.å®‰è£…å‰å‡†å¤‡
-tar zxvf nginx-1.14.1.tar.gz   //è§£åŽ‹
+2.°²×°Ç°×¼±¸
+tar zxvf nginx-1.14.1.tar.gz   #½âÑ¹
 cd nginx-1.14.1
-./configure                    //å®‰è£…å‰é…ç½®(ä¾èµ–)æ£€æŸ¥;ä¹Ÿå¯ä»¥æŒ‰ç…§è‡ªå®šä¹‰é…ç½®,å‚è§æ–‡æœ«
+./configure                    #°²×°Ç°ÅäÖÃ(ÒÀÀµ)¼ì²é;Ò²¿ÉÒÔ°´ÕÕ×Ô¶¨ÒåÅäÖÃ,²Î¼ûÎÄÄ©
 
-3.ç¼–è¯‘å®‰è£…                     //nginx-1.14.1ç›®å½•ä¸‹æ“ä½œ
+3.±àÒë°²×°                     #nginx-1.14.1Ä¿Â¼ÏÂ²Ù×÷
 make && make install
 
-4.è®¾ç½®ä¸ºå…¨å±€å‘½ä»¤(å½“å‰ç”¨æˆ·,å¦‚éœ€å…¨å±€ç”¨æˆ·å¯å†™å…¥ /etc/profile)
+4.ÉèÖÃÎªÈ«¾ÖÃüÁî(µ±Ç°ÓÃ»§,ÈçÐèÈ«¾ÖÓÃ»§¿ÉÐ´Èë /etc/profile)
 echo '
 PATH=$PATH:/usr/local/nginx/sbin/
 export PATH
 ' >> ~/.bash_profile
 
-source ~/.bash_profile                       //ç”Ÿæ•ˆé…ç½®;sourceå¯ä½¿ç”¨ . æ›¿ä»£
+source ~/.bash_profile                                       #ÉúÐ§ÅäÖÃ;source¿ÉÊ¹ÓÃ . Ìæ´ú
 
-5.å¼€æ”¾80ç«¯å£
-firewall-cmd --list-ports                                    //æŸ¥çœ‹å¼€æ”¾ç«¯å£
-firewall-cmd --permanent --zone=public --add-port=80/tcp     //å¢žåŠ è§„åˆ™;permanentè¡¨ç¤ºæ°¸ä¹…ç”Ÿæ•ˆ;zoneè¡¨ç¤ºä½œç”¨åŸŸ
-firewall-cmd --reload                                        //é‡å¯é˜²ç«å¢™ç”Ÿæ•ˆ
+5.¿ª·Å80¶Ë¿Ú
+firewall-cmd --list-ports                                    #²é¿´¿ª·Å¶Ë¿Ú
+firewall-cmd --permanent --zone=public --add-port=80/tcp     #Ôö¼Ó¹æÔò;permanent±íÊ¾ÓÀ¾ÃÉúÐ§;zone±íÊ¾×÷ÓÃÓò
+firewall-cmd --reload                                        #ÖØÆô·À»ðÇ½ÉúÐ§
 
-firewall-cmd --permanent --zone=public --remove-port=80/tcp  //ç§»é™¤è§„åˆ™;é‡å¯ç”Ÿæ•ˆ
+firewall-cmd --permanent --zone=public --remove-port=80/tcp  #ÒÆ³ý¹æÔò;ÖØÆôÉúÐ§
 
-6.æµ‹è¯•
-nginx -t                         //æµ‹è¯•é…ç½®å¹¶é€€å‡º(nginxæœåŠ¡æœªå¯åŠ¨ä¹Ÿå¯ä»¥);å…¶ä»–å‘½ä»¤å‚è€ƒ ./nginx -h
-ps -ef |grep -v grep|grep nginx  //æŸ¥çœ‹nginxè¿›ç¨‹;å¯åˆ¤æ–­æ˜¯å¦å¯åŠ¨
-http://ip/index.html             //nginxå¯åŠ¨ä¸”é˜²ç«å¢™é…ç½®å¥½;å…¶ä»–ä¸»æœºæµè§ˆå™¨è®¿é—®
-curl http://ip[/index.html]      //ç›´æŽ¥è¿”å›žindex.htmlæ–‡ä»¶å†…å®¹;index.htmlå¯ä¸åŠ 
+6.²âÊÔ
+nginx -t                         #²âÊÔÅäÖÃ²¢ÍË³ö(nginx·þÎñÎ´Æô¶¯Ò²¿ÉÒÔ);ÆäËûÃüÁî²Î¿¼ ./nginx -h
+ps -ef |grep -v grep|grep nginx  #²é¿´nginx½ø³Ì;¿ÉÅÐ¶ÏÊÇ·ñÆô¶¯
+http://ip/index.html             #nginxÆô¶¯ÇÒ·À»ðÇ½ÅäÖÃºÃ;ÆäËûÖ÷»úä¯ÀÀÆ÷·ÃÎÊ
+curl http://ip[/index.html]      #Ö±½Ó·µ»Øindex.htmlÎÄ¼þÄÚÈÝ;index.html¿É²»¼Ó
 
 
-#è‡ªå¯åŠ¨ç›¸å…³
-1.æ–¹å¼ä¸€:æž„å»ºæœåŠ¡
-vi /lib/systemd/system/nginx.service         //ç›¸å…³é…ç½®å¯å‚è€ƒæ‰‹å†Œ
+#×ÔÆô¶¯Ïà¹Ø
+1.·½Ê½Ò»:¹¹½¨·þÎñ
+vi /lib/systemd/system/nginx.service         #Ïà¹ØÅäÖÃ¿É²Î¿¼ÊÖ²á
 
-2.æ–¹å¼äºŒ:å¢žåŠ è‡ªå¯åŠ¨è„šæœ¬(è‡ªå®šä¹‰å¼€æœºç¨‹åº)
-chmod +x /etc/rc.d/rc.local                  //å¢žåŠ æ‰§è¡Œæƒé™;é»˜è®¤æ— æ‰§è¡Œæƒé™
+2.·½Ê½¶þ:Ôö¼Ó×ÔÆô¶¯½Å±¾(×Ô¶¨Òå¿ª»ú³ÌÐò)
+chmod +x /etc/rc.d/rc.local                  #Ôö¼ÓÖ´ÐÐÈ¨ÏÞ;Ä¬ÈÏÎÞÖ´ÐÐÈ¨ÏÞ
 echo '
 /usr/local/nginx/sbin/nginx
 ' >> /etc/rc.d/rc.local
 
 
-#å¸è½½
-rm -rf /usr/local/nginx                      //åˆ é™¤æ–‡ä»¶;å…¶ä»–ä¿®æ”¹è¿‡çš„é…ç½®æ–‡ä»¶åˆ é™¤Nginxéƒ¨åˆ†å³å¯
+#Ð¶ÔØ
+rm -rf /usr/local/nginx                      #É¾³ýÎÄ¼þ;ÆäËûÐÞ¸Ä¹ýµÄÅäÖÃÎÄ¼þÉ¾³ýNginx²¿·Ö¼´¿É
 
 
-#å¸¸ç”¨å‘½ä»¤
-nginx                            //å¯åŠ¨
-nginx -s reload                  //é‡å¯
-nginx -s stop                    //å…³é—­
-nginx -s quit                    //å¹³æ»‘å…³é—­nginx
-nginx -V                         //æŸ¥çœ‹å®‰è£…çŠ¶æ€
+#³£ÓÃÃüÁî
+nginx                            #Æô¶¯
+nginx -s reload                  #ÖØÆô
+nginx -s stop                    #¹Ø±Õ
+nginx -s quit                    #Æ½»¬¹Ø±Õnginx
+nginx -V                         #²é¿´°²×°×´Ì¬
 
 
-#yumæ–¹å¼å®‰è£…          //ä¼šè‡ªåŠ¨å®‰è£…ä¾èµ–
-yum install -y nginx  //å®‰è£…
-yum remove nginx      //å¸è½½
+#yum·½Ê½°²×°                     #»á×Ô¶¯°²×°ÒÀÀµ
+1.Ôö¼ÓNginx¹Ù·½²Ö¿âÔ´            #ÈçÔö¼ÓÁË°¢ÀïÔÆ¾µÏñÔ´Ò²¿É²»Ìí¼Ó
+echo '[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/mainline/OS/OSRELEASE/$basearch/
+gpgcheck=0
+enabled=1
+' > /etc/yum.repos.d/nginx.repo
+
+2.°²×°¼°ÉèÖÃ×ÔÆô¶¯
+yum -y install nginx
+systemctl enable nginx
+
+3.¿ª·Å80¶Ë¿Ú
+²Î¼ûÇ°ÃæµÚ5Ïî
 
 
-#é…ç½®
-/usr/local/nginx/conf/nginx.conf   //centos7ç³»ç»Ÿä¸‹ç›®å½•;ä¹Ÿå¯ä»¥é…ç½®æ—¶æŒ‡å®š,å…¶ä»–ç³»ç»Ÿé»˜è®¤ä½ç½®å¯èƒ½ä¸ä¸€æ ·
+#yum·½Ê½Ð¶ÔØ
+yum remove nginx
 
 
-#configureç‰¹å®šé…ç½®
+#ÅäÖÃ
+/usr/local/nginx/conf/nginx.conf   #centos7ÏµÍ³ÏÂÄ¿Â¼;Ò²¿ÉÒÔÅäÖÃÊ±Ö¸¶¨,ÆäËûÏµÍ³Ä¬ÈÏÎ»ÖÃ¿ÉÄÜ²»Ò»Ñù
+
+
+#configureÌØ¶¨ÅäÖÃ
 ./configure \
 --prefix=/etc/nginx                   \
 --sbin-path=/usr/sbin/nginx           \
@@ -118,41 +134,71 @@ yum remove nginx      //å¸è½½
 
 
 
-========================ubuntu 1804 å®‰è£…Nginx=======================
+========================ubuntu 1804 °²×°Nginx=======================
 
-#ä¾èµ–åŒ…å®‰è£…    //å¯ä½¿ç”¨ apt list pkg1 [pkg2 ...] æ£€æŸ¥;å¦‚éœ€å…¶ä»–åŒ…åŒç†
+#ÒÀÀµ°ü°²×°    #¿ÉÊ¹ÓÃ apt list pkg1 [pkg2 ...] ¼ì²é;ÈçÐèÆäËû°üÍ¬Àí
 apt install libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev libperl-dev
 
-#å®‰è£…
-å‰ä¸‰æ­¥åŒcentosçŽ¯å¢ƒä¸‹
+#°²×°
+Ç°Èý²½Í¬centos»·¾³ÏÂ
 
-4.è®¾ç½®ä¸ºå…¨å±€å‘½ä»¤(å½“å‰ç”¨æˆ·)
+4.ÉèÖÃÎªÈ«¾ÖÃüÁî(µ±Ç°ÓÃ»§)
 echo 'PATH=$PATH:/usr/local/nginx/sbin/
 export PATH' >> ~/.bashrc
 
-source ~/.bashrc  //ç”Ÿæ•ˆé…ç½®;sourceå¯ä½¿ç”¨ . æ›¿ä»£
+source ~/.bashrc  #ÉúÐ§ÅäÖÃ;source¿ÉÊ¹ÓÃ . Ìæ´ú
 
-5.é˜²ç«å¢™(å¾…è¡¥å……)
-ufw               //uncomplicated firewall(ç®€å•é˜²ç«å¢™)
+5.·À»ðÇ½(´ý²¹³ä)
+ufw               #uncomplicated firewall(¼òµ¥·À»ðÇ½)
 
-6.æµ‹è¯•åŒcentosçŽ¯å¢ƒä¸‹ä¸€è‡´
+6.²âÊÔÍ¬centos»·¾³ÏÂÒ»ÖÂ
 
 
-#è‡ªå¯åŠ¨
-chmod +x /lib/systemd/system/rc-local.service                                   //å¢žåŠ æ‰§è¡Œæƒé™;é»˜è®¤æ— æ‰§è¡Œæƒé™
+#×ÔÆô¶¯
+chmod +x /lib/systemd/system/rc-local.service                                   #Ôö¼ÓÖ´ÐÐÈ¨ÏÞ;Ä¬ÈÏÎÞÖ´ÐÐÈ¨ÏÞ
 echo '
 [Install]
 WantedBy=multi-user.target
 Alias=rc-local.service' >> /lib/systemd/system/rc-local.service
 
-ln -s /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service //è½¯è¿žæŽ¥åˆ°ç³»ç»Ÿå¯åŠ¨æœåŠ¡ä¸­
+ln -s /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service #ÈíÁ¬½Óµ½ÏµÍ³Æô¶¯·þÎñÖÐ
 echo '#!/bin/bash
 
-/usr/local/nginx/sbin/nginx' >> /etc/rc.local                                   //å¢žåŠ æ‰§è¡Œå‘½ä»¤;éœ€è¦å®Œæ•´è·¯å¾„
-chmod +x /etc/rc.local                                                          //å¢žåŠ æ‰§è¡Œæƒé™
+/usr/local/nginx/sbin/nginx' >> /etc/rc.local                                   #Ôö¼ÓÖ´ÐÐÃüÁî;ÐèÒªÍêÕûÂ·¾¶
+chmod +x /etc/rc.local                                                          #Ôö¼ÓÖ´ÐÐÈ¨ÏÞ
 
 
-#aptå®‰è£…
-apt install nginx     //å®‰è£…æœ€æ–°ç¨³å®šç‰ˆnginx;è‡ªåŠ¨å®‰è£…ä¾èµ–;æ–‡ä»¶ç›¸å…³è·¯å¾„å¯èƒ½è·Ÿç¼–è¯‘å®‰è£…è·¯å¾„ä¸ä¸€è‡´
-apt remove nginx      //ç§»é™¤nginx;ç¼–è¯‘å®‰è£…çš„å¸è½½åŒcentoséƒ¨åˆ†
+#apt°²×°
+apt install nginx     #°²×°×îÐÂÎÈ¶¨°ænginx;×Ô¶¯°²×°ÒÀÀµ;ÎÄ¼þÏà¹ØÂ·¾¶¿ÉÄÜ¸ú±àÒë°²×°Â·¾¶²»Ò»ÖÂ
+apt remove nginx      #ÒÆ³ýnginx;±àÒë°²×°µÄÐ¶ÔØÍ¬centos²¿·Ö
+
+
+
+==============================ÔËÎ¬Ïà¹Ø=============================
+#¹Ø¼üÄ¿Â¼»òÎÄ¼þ
+##apt/yum°²×°·½Ê½
+/etc/nginx/                    #nginx¸ùÄ¿Â¼
+/etc/nginx/nginx.conf          #nginxÄ¬ÈÏÅäÖÃÎÄ¼þ
+/etc/nginx/conf.d/             #nginxµÄhttpÅäÖÃÎÄ¼þ¼Ð
+/var/log/nginx/                #nginxÈÕÖ¾Ä¿Â¼;Ò»°ã°üº¬access.log(·ÃÎÊÈÕÖ¾)ºÍerror.log(´íÎóÈÕÖ¾)
+
+##ÅäÖÃÎÄ¼þÄ¬ÈÏ°²×°
+/usr/local/nginx               #¸ùÄ¿Â¼
+/usr/local/nginx/conf          #ÅäÖÃÎÄ¼þÄ¿Â¼
+/usr/local/nginx/nginx.conf    #ÅäÖÃÎÄ¼þ
+/usr/local/nginx/logs          #ÈÕÖ¾Ä¿Â¼
+
+
+#ÖØÒªÃüÁî
+nginx                               #Æô¶¯nginx
+nginx -h                            #°ïÖú
+nginx -v                            #ÏÔÊ¾nginx°æ±¾
+nginx -V                            #ÏÔÊ¾°æ±¾¡¢ÅäÖÃ¡¢Ä£¿éµÈÐÅÏ¢
+nginx -t                            #¼ì²âÅäÖÃÎÄ¼þÓï·¨ºÍÅäÖÃÊÇ·ñ³É¹¦;¿ÉÒÔÏÔÊ¾ÅäÖÃÎÄ¼þÂ·¾¶
+nginx -T                            #¼ì²âÅäÖÃ²¢ÏÔÊ¾ÒÑÉúÐ§ÅäÖÃÐÅÏ¢
+nginx -s [stop|quit|reload|reopen]  #ÏònginxÖ÷½ø³Ì·¢ËÍÐÅºÅ;·Ö±ðÊÇÖÕÖ¹/ÏìÓ¦´¦ÀíÖÐµÄÇëÇóÔÙÍ£Ö¹/ÖØÔØÅäÖÃ/ÖØÐÂÉú³ÉÈÕÖ¾
+
+
+#ÅäÖÃÎÄ¼þËµÃ÷(nginx.conf)
+
 

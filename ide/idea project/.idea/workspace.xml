@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202001/T03_1.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202001/T03_1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../python/.idea/python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/python.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -242,6 +245,7 @@
       <workItem from="1585795525009" duration="191000" />
       <workItem from="1585837671104" duration="56000" />
       <workItem from="1585837751319" duration="70000" />
+      <workItem from="1588491146958" duration="325000" />
     </task>
     <servers />
   </component>
@@ -252,47 +256,21 @@
     <state x="704" y="375" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1581929283059">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="501" y="267" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1366.768@0.0.1366.768" timestamp="1578279573056" />
     <state x="704" y="375" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1581929283059" />
-    <state x="800" y="436" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1577198086100">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="800" y="436" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1080@0.0.1920.1080" timestamp="1577198086100" />
     <state x="651" y="177" key="FileChooserDialogImpl" timestamp="1581929278941">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="463" y="126" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1577947768907" />
     <state x="651" y="177" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1581929278941" />
-    <state width="1286" height="176" key="GridCell.Tab.0.bottom" timestamp="1578388685195">
-      <screen x="0" y="0" width="1366" height="768" />
-    </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1578388685195" />
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1578157507661" />
-    <state width="1286" height="176" key="GridCell.Tab.0.center" timestamp="1578388685195">
-      <screen x="0" y="0" width="1366" height="768" />
-    </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1578388685195" />
-    <state width="1340" height="266" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1578157507661" />
-    <state width="1286" height="176" key="GridCell.Tab.0.left" timestamp="1578388685195">
-      <screen x="0" y="0" width="1366" height="768" />
-    </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1578388685195" />
-    <state width="1340" height="266" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1578157507661" />
-    <state width="1286" height="176" key="GridCell.Tab.0.right" timestamp="1578388685195">
-      <screen x="0" y="0" width="1366" height="768" />
-    </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1578388685195" />
-    <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1578157507661" />
     <state x="461" y="182" key="SettingsEditor" timestamp="1585837818493">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="18" y="13" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1585795699688" />
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1585837818493" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1585837783827">
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1588491147246">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1585795524962" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1585837783827" />
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588491147246" />
   </component>
   <component name="masterDetails">
     <states>
