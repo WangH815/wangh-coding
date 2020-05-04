@@ -1,4 +1,4 @@
-Nginx编译安装
+Nginx
 
 
 #简介
@@ -200,5 +200,18 @@ nginx -s [stop|quit|reload|reopen]  #向nginx主进程发送信号;分别是终止/响应处理中
 
 
 #配置文件说明(nginx.conf)
+1.由若干配置项组成
+2.配置项由单项(每行由;结束)和{}部分组成
+3.通过include cfg_file引入其他配置文件
 
+##示例
+cfg_name1 value;
+
+cfg_name2 {
+    cfg_name3 value;
+	cfg_name4 {
+	    cfg_name5 value;
+	}
+
+}
 

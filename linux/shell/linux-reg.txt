@@ -74,4 +74,45 @@
 33 IP地址：((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))    (由@飞龙三少 提供,感谢共享)
 
 
+#检测 xxx-xxx-xxxx或(xxx) xxx-xxxx的电话格式，x表示为数字
+egrep '^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$' file.txt
+
+
+#固定字段转置
+方式一:
+awk '{
+    for(filed=1;filed<=NF;filed++)
+      list[NR,filed]=$filed
+    }
+    END {
+	  for(filed=1;filed<=NF;filed++) {
+        for(row=1;row<=NR;row++) {
+	  	printf list[row,filed]
+	  	if (row != NR) {
+	  	  printf " "
+	  	}
+	    }
+	    print ""
+	  }
+    }'
+
+方式二:
+awk '{
+    for (i=1;i<=NF;i++){
+      if (NR==1){ res[i]=$i }
+      else{ res[i]=res[i]" "$i }
+    }
+    }
+	END{
+      for(j=1;j<=NF;j++){ print res[j] }
+    }'
+
+
+#统计词频
+tr ' ' '\n' < xx.txt | sort | uniq -c | sort -r | awk '$2!=""{print $2,$1}'
+
+
+#显示第10行
+sed -n '10p' file.txt
+awk 'NR==10' file.txt
 
