@@ -109,7 +109,7 @@ awk '{
 
 
 #统计词频
-tr ' ' '\n' < xx.txt | sort | uniq -c | sort -r | awk '$2!=""{print $2,$1}'
+tr -s ' ' '\n' < xx.txt | sort | uniq -c | sort -r | awk '{print $2,$1}'
 
 
 #显示第10行

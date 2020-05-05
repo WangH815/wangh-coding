@@ -73,13 +73,12 @@ done
 
 1.安装和卸载docker
 ##卸载旧版本
-apt-get remove docker \
-               docker-engine \
-               docker.io
+apt remove docker \
+           docker-engine \
+           docker.io
 
 ##更新软件列表;使用https传输确保软件包不被篡改
-apt-get update
-apt-get install \
+apt update && apt install \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -97,11 +96,11 @@ add-apt-repository \
     stable"
 
 ##更新软件列表及安装docker-ce(社区版)
-apt-get update
-apt-get install docker-ce
+apt update && apt install docker-ce
 
 ##设置开机自启动
-systemctl enable docker        #systemctl is-enabled docker可查看是否自启动
+systemctl is-enabled docker    #查看是否自启动
+systemctl enable docker
 systemctl start docker
 
 2.启停docker服务
@@ -117,7 +116,8 @@ echo '{
   "registry-mirrors": [
     "https://hub-mirror.c.163.com"
   ]
-}' > /etc/docker/daemon.json
+}
+' > /etc/docker/daemon.json
 
 systemctl restart docker             #重启生效配置
 
@@ -128,7 +128,7 @@ https://docker.mirrors.ustc.edu.cn   #中科大镜像源
 https://reg-mirror.qiniu.com         #七牛云
 
 5.测试docker是否正确安装
-docker run hello-world
+docker run hello-world               #正常的话会显示Hello from Docker!及相关的信息
 
 
 #镜像操作

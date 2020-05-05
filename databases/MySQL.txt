@@ -283,6 +283,7 @@ count(*)          --统计数据条数
 min(col)/max(col) --最值;常用于子查询
 avg(col)          --平均值
 sum(col)          --求和
+isnull(expr)
 
 
 执行sql脚本
