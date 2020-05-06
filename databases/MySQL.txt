@@ -109,16 +109,19 @@ character_set_database
 
 字符集默认设置    --只影响新表;重启服务后生效;mysql8默认为utfmb4可不用修改
 https://blog.csdn.net/kikajack/article/details/84668924  --参考文档
-/etc/my.cnf或/etc/mysql/my.cnf
+find / -name my.cnf                                      --可查询到my.cnf的路径;修改前建议备份
+
+echo '
 [client]
 default-character-set = utf8mb4
 
 [mysqld]
 character-set-server = utf8mb4
-collation-server = utf8mb4_unicode_ci    --用于字符排序
+collation-server = utf8mb4_unicode_ci    --用于字符排序;mysql8可改为utf8mb4_0900_ai_ci
 
 [mysql]
 default-character-set = utf8mb4
+' >> /etc/mysql/my.cnf                   --这里以docker版mysql5.7为例
 
 查询结果
 mysql> SHOW VARIABLES LIKE 'char%'; SHOW VARIABLES LIKE 'collation%';
