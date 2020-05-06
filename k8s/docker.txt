@@ -44,10 +44,12 @@ docker inspect CONTAINER_NAME[:VERSION]/ID   #查看本地镜像详细信息;也
 仓库服务相关    login pull push search
 
 
-#docker时区不一致处理
+#docker时区不一致处理      #以东八区 Asia/Shanghai 为例,其他时区同理
+
 方案一:
 ##创建容器时使用-v选项
-ls -ltr /etc/timezone || ( echo 'Asia/Shanghai' > /etc/timezone ) #/etc/timezone文件不存在时创建;centos7默认此文件不存在
+###/etc/timezone文件不存在时创建;centos7默认此文件不存在
+ls -ltr /etc/timezone || ( echo 'Asia/Shanghai' > /etc/timezone )
 
 docker run ... \
 -v /etc/timezone:/etc/timezone \

@@ -99,6 +99,58 @@ enum 枚举类型           --enum("member1", "member2", … "member65535")
 
 字符集                  --默认为 Latin1(ISO-8859-1,单字节编码)
 utf8mb4                 --MySQL中对应的utf-8版本;MySQL中的utf8属于历史遗留问题
+以下是核心的五个系统变量
+character_set_client
+character_set_connection
+character_set_results
+character_set_server
+character_set_database
+
+
+字符集默认设置    --只影响新表;重启服务后生效;mysql8默认为utfmb4可不用修改
+https://blog.csdn.net/kikajack/article/details/84668924  --参考文档
+/etc/my.cnf或/etc/mysql/my.cnf
+[client]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci    --用于字符排序
+
+[mysql]
+default-character-set = utf8mb4
+
+查询结果
+mysql> SHOW VARIABLES LIKE 'char%'; SHOW VARIABLES LIKE 'collation%';
++--------------------------+----------------------------+
+| Variable_name            | Value                      |
++--------------------------+----------------------------+
+| character_set_client     | utf8mb4                    |
+| character_set_connection | utf8mb4                    |
+| character_set_database   | utf8mb4                    |
+| character_set_filesystem | binary                     |
+| character_set_results    | utf8mb4                    |
+| character_set_server     | utf8mb4                    |
+| character_set_system     | utf8                       |  --存储系统元数据的字符集;总是utf-8,无需修改
+| character_sets_dir       | /usr/share/mysql/charsets/ |
++--------------------------+----------------------------+
+8 rows in set (0.00 sec)
+
++----------------------+--------------------+
+| Variable_name        | Value              |
++----------------------+--------------------+
+| collation_connection | utf8mb4_general_ci |
+| collation_database   | utf8mb4_unicode_ci |
+| collation_server     | utf8mb4_unicode_ci |
++----------------------+--------------------+
+3 rows in set (0.00 sec)
+
+现有库表字符集查询
+show create database 库名;
+
+现有库表修改
+ALTER DATABASE databasename CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE tablename CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 
 存储引擎
@@ -119,8 +171,16 @@ NDB     --不常用;主要在MySQL 集群服务器中使用,不做介绍
 数据库连接及管理(Linux平台)
 mysql [db] -uroot -p         --以root用户登录本地数据库;-uroot等价于-u root,其他类似;-D可指定默认数据库
 mysql [db] -uroot@ip -p      --以root用户登录远程数据库;或使用-h ip/主机名
-mysqld --skip-grant-tables   --跳过权限登录mysql[待验证]
-update mysql.user set password=password('root');  --修改用户密码
+mysqladmin -u root password "new_password";                --修改用户密码;shell下执行
+alter user 'root'@'localhost' identified by 'mynewpass4!'; --同上;mysql命令行执行
+
+创建新用户
+create user test@localhost identified by '123456';   --创建test用户并设定密码
+drop user username@localhsot;                        --删除用户
+update mysql.user set host = '%' where user = 'test' --取消用户访问限制
+grant all privileges on *.* to test@localhost;       --可根据需要设置用户权限
+revoke all priviliges on *.* from test@localhost;    --删除用户权限
+flush privileges;                                    --重载权限
 
 其他登录方式                 --使用mysql直接登陆
 vi ~/.my.cnf                 --此文件为mysql客户端配置文件;服务端配置文件一般是 /etc/my.cnf
@@ -169,6 +229,7 @@ select * from tb
 order col1,,col2
 limit m, n;          --limit n offset m的简写
 
+
 join                 --用于把来自两个或多个表的行结合起来,基于表之间的共同或类似字段。
 
 [inner] join         --内连接;如果表中有至少一个匹配,则返回行;MySQL不支持full join(全连接)
@@ -189,6 +250,7 @@ select col
 from tb1
 left join tb2
 on tb1.col=tb2.col;
+
 
 UNION/UNION ALL           --合并多个查询结果
 SELECT col FROM tb1       --选取列有相似的数据类型
