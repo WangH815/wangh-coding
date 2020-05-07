@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="docker_mysql57" uuid="5e628d68-d059-4b23-8ce3-f60cdfc108c1">
+    <data-source source="LOCAL" name="mysql57" uuid="5e628d68-d059-4b23-8ce3-f60cdfc108c1">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://192.168.99.120:3306</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="docker_mysql8" uuid="9344fe63-e11e-4c67-af63-454b8445956f">
+    <data-source source="LOCAL" name="mysql8" uuid="9344fe63-e11e-4c67-af63-454b8445956f">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

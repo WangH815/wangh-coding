@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="" />
+    <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,12 +23,7 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="docker_mysql57" type="feb32156:DbDataSourceImpl" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="ExecutionTargetDialog">
@@ -273,6 +273,7 @@
       <workItem from="1588822609251" duration="493000" />
       <workItem from="1588823144959" duration="553000" />
       <workItem from="1588833764639" duration="1408000" />
+      <workItem from="1588849273393" duration="2395000" />
     </task>
     <servers />
   </component>
@@ -311,16 +312,16 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1032" y="201" key="#SQL_Dialects/0.0.1920.1080@0.0.1920.1080" timestamp="1584682026651" />
-    <state x="221" y="35" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588823697475">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="336" y="193" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588856958184">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="221" y="35" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1588823697475" />
-    <state x="599" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1585838001437" />
-    <state x="869" y="133" key="ExecutionTargetDialog" timestamp="1588835085988">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="336" y="193" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588856958184" />
+    <state x="1221" y="230" key="ExecutionTargetDialog" timestamp="1588857190945">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="869" y="133" key="ExecutionTargetDialog/0.0.1366.768@0.0.1366.768" timestamp="1588835085988" />
-    <state x="1221" y="230" key="ExecutionTargetDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584803026553" />
+    <state x="1221" y="230" key="ExecutionTargetDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588857190945" />
     <state x="34" y="110" key="FileChooserDialogImpl" timestamp="1588822969529">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -345,21 +346,21 @@
     </state>
     <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1585795508008" />
     <state width="914" height="215" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584802793432" />
-    <state width="220" height="340" key="HiddenNamespacesPopup" timestamp="1588823250127">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state width="220" height="477" key="HiddenNamespacesPopup" timestamp="1588854666566">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="220" height="340" key="HiddenNamespacesPopup/0.0.1366.768@0.0.1366.768" timestamp="1588823250127" />
-    <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1582790730814" />
-    <state x="184" y="26" key="SettingsEditor" timestamp="1588823016558">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1588854666566" />
+    <state x="259" y="37" key="SettingsEditor" timestamp="1588849285823">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1588823016558" />
-    <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1588491099291" />
-    <state x="455" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1588833764876">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1588849285823" />
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1588849273949">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1588833764876" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588694133103" />
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588849273949" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/python$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1575018378084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tool" />
