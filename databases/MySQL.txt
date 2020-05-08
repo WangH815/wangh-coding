@@ -412,6 +412,10 @@ SELECT 1 = NULL, 1 <> NULL, 1 < NULL, 1 > NULL;              --全部返回NULL
 SELECT 0 IS NULL, 0 IS NOT NULL, '' IS NULL, '' IS NOT NULL; --返回0,1,0,1
 
 
+索引
+https://www.cnblogs.com/hoewang/p/10257190.html  --参考文档
+
+
 mysql命令行帮助  --括号中为命令的快捷方式
 ?               (\?)   --同help
 clear           (\c)   --清除当前输入语句(命令)
