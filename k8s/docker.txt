@@ -312,12 +312,13 @@ docker run \
 
 ##tomcat
 1.拉取镜像
-docker pull tomcat:9
+docker pull tomcat:9     #其他版本为6/7/8.0/8(同8.5)/9
 2.创建容器
 docker run \
 --name tomcat9 \
 -p 8080:8080 \
 -v tomcat-9:/usr/local/tomcat/webapps/test \
+--restart always \
 -d tomcat:9
 3.登录容器同其他
 4.复制应用目录              #登陆容器后操作
@@ -327,8 +328,6 @@ sed -i '/username="tomcat"/s/<must-be-changed>/root/' \
 /usr/local/tomcat/conf/tomcat-users.xml
 sed -i '/0:1/s/0:1/0:1|\\d+\\.\\d+\\.\\d+\\.\\d+/' \
 /usr/local/tomcat/webapps/manager/META-INF/context.xml
-
-
 
 
 ##jenkins

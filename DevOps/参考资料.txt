@@ -152,6 +152,17 @@ TCP:time wait bucket table overflow可能的原因？
 
 
 35、小明发现服务器往外异常发包，那么他可以用排查的命令有？
+sar -n DEV 2 10
+
+开始之前，先要清除 eth0所有队列规则
+tc qdisc del dev eth0 root 2> /dev/null > /dev/null
+定义最顶层(根)队列规则，并指定 default 类别编号
+tc qdisc add dev eth0 root handle 1: htb default 20
+tc class add dev eth0 parent 1: classid 1:20 htb rate 2000kbit
+
+查看TC的状态
+tc -s -d qdisc show dev eth0
+tc -s -d class show dev eth0
 
 
 36、ECS实例经常受到外部扫描探测。为了提升安全性，维护人员需要配置
