@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../DevOps/参考资料.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../DevOps/参考资料.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../databases/MySQL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../databases/MySQL.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../k8s/docker.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../k8s/docker.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ide/idea project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ide/idea project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/spring-basic.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../java/spring-basic.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +70,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../venv" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -277,6 +274,7 @@
       <workItem from="1588833764639" duration="1408000" />
       <workItem from="1588849273393" duration="2999000" />
       <workItem from="1589013532414" duration="1168000" />
+      <workItem from="1589042147710" duration="167000" />
     </task>
     <servers />
   </component>
@@ -320,6 +318,10 @@
     </state>
     <state x="221" y="35" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1588823697475" />
     <state x="336" y="193" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588856958184" />
+    <state x="728" y="385" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1589042308674">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="728" y="385" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1589042308674" />
     <state x="1221" y="230" key="ExecutionTargetDialog" timestamp="1588857190945">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -354,16 +356,16 @@
     </state>
     <state width="220" height="340" key="HiddenNamespacesPopup/0.0.1366.768@0.0.1366.768" timestamp="1588823250127" />
     <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1588854666566" />
-    <state x="184" y="26" key="SettingsEditor" timestamp="1589014762578">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="259" y="37" key="SettingsEditor" timestamp="1589042170298">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589014762578" />
-    <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1588849285823" />
-    <state x="455" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1589013532735">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1589042170298" />
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1589042147936">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1589013532735" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588849273949" />
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1589042147936" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/python$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1575018378084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tool" />
