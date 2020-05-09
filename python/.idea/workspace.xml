@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/../DevOps/参考资料.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../DevOps/参考资料.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../databases/MySQL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../databases/MySQL.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../k8s/docker.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../k8s/docker.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -274,7 +276,7 @@
       <workItem from="1588823144959" duration="553000" />
       <workItem from="1588833764639" duration="1408000" />
       <workItem from="1588849273393" duration="2999000" />
-      <workItem from="1589013532414" duration="975000" />
+      <workItem from="1589013532414" duration="1168000" />
     </task>
     <servers />
   </component>
@@ -327,25 +329,25 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="34" y="110" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1588822969529" />
-    <state width="1286" height="176" key="GridCell.Tab.0.bottom" timestamp="1585795508008">
+    <state width="1286" height="176" key="GridCell.Tab.0.bottom" timestamp="1589014957635">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1585795508008" />
+    <state width="1286" height="176" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1589014957635" />
     <state width="914" height="215" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584802793432" />
-    <state width="1286" height="176" key="GridCell.Tab.0.center" timestamp="1585795508008">
+    <state width="1286" height="176" key="GridCell.Tab.0.center" timestamp="1589014957635">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1585795508008" />
+    <state width="1286" height="176" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1589014957635" />
     <state width="914" height="215" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584802793432" />
-    <state width="1286" height="176" key="GridCell.Tab.0.left" timestamp="1585795508008">
+    <state width="1286" height="176" key="GridCell.Tab.0.left" timestamp="1589014957632">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1585795508008" />
+    <state width="1286" height="176" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1589014957632" />
     <state width="914" height="215" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584802793432" />
-    <state width="1286" height="176" key="GridCell.Tab.0.right" timestamp="1585795508008">
+    <state width="1286" height="176" key="GridCell.Tab.0.right" timestamp="1589014957635">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1585795508008" />
+    <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1589014957635" />
     <state width="914" height="215" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584802793432" />
     <state width="220" height="477" key="HiddenNamespacesPopup" timestamp="1588854666566">
       <screen x="0" y="0" width="1920" height="1080" />
