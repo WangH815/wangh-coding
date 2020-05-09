@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="" />
+    <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../DevOps/参考资料.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../DevOps/参考资料.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../databases/MySQL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../databases/MySQL.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../k8s/docker.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../k8s/docker.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,7 +83,7 @@
       <recent name="F:\git\wangh-coding\python\test\t2019" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.18_threads3">
+  <component name="RunManager" selected="Python.18_threads2">
     <configuration name="17_threads3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -191,8 +196,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.18_threads3" />
         <item itemvalue="Python.18_threads2" />
+        <item itemvalue="Python.18_threads3" />
         <item itemvalue="Python.18_threads" />
         <item itemvalue="Python.17_threads4" />
         <item itemvalue="Python.17_threads3" />
@@ -269,6 +274,7 @@
       <workItem from="1588823144959" duration="553000" />
       <workItem from="1588833764639" duration="1408000" />
       <workItem from="1588849273393" duration="2999000" />
+      <workItem from="1589013532414" duration="975000" />
     </task>
     <servers />
   </component>
@@ -346,15 +352,15 @@
     </state>
     <state width="220" height="340" key="HiddenNamespacesPopup/0.0.1366.768@0.0.1366.768" timestamp="1588823250127" />
     <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1588854666566" />
-    <state x="259" y="37" key="SettingsEditor" timestamp="1588849285823">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="184" y="26" key="SettingsEditor" timestamp="1589014762578">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1588823016558" />
+    <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589014762578" />
     <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1588849285823" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1588849273949">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="455" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1589013532735">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1588833764876" />
+    <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1589013532735" />
     <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588849273949" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
@@ -372,7 +378,7 @@
     <SUITE FILE_PATH="coverage/python$191220.coverage" NAME="191220 Coverage Results" MODIFIED="1576827348559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/python$12.coverage" NAME="12 Coverage Results" MODIFIED="1584003994936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$08.coverage" NAME="08 Coverage Results" MODIFIED="1583669000693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
-    <SUITE FILE_PATH="coverage/python$18_threads2.coverage" NAME="18_threads2 Coverage Results" MODIFIED="1584520188770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
+    <SUITE FILE_PATH="coverage/python$18_threads2.coverage" NAME="18_threads2 Coverage Results" MODIFIED="1589014777307" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$13_pygame2.coverage" NAME="13_pygame2 Coverage Results" MODIFIED="1584084452136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$04.coverage" NAME="04 Coverage Results" MODIFIED="1583321884575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$16_threads2.coverage" NAME="16_threads2 Coverage Results" MODIFIED="1584378307530" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />

@@ -60,7 +60,7 @@ select语句
 数据类型
 MySQL数据类型 字节 值范围
 --整型
-tinyint       1    -128-127                --unsigned tinyint范围[0,256];其他数字类型(整型和浮点)同理
+tinyint       1    -128-127
 smallint      2    -32768-32767
 mediumint     3    -8388608-8388607
 int           4    -2147483648-2147483647

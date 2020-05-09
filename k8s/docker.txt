@@ -323,11 +323,6 @@ docker run \
 3.登录容器同其他
 4.复制应用目录              #登陆容器后操作
 cp -r /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
-5.修改tomcat用户密码
-sed -i '/username="tomcat"/s/<must-be-changed>/root/' \
-/usr/local/tomcat/conf/tomcat-users.xml
-sed -i '/0:1/s/0:1/0:1|\\d+\\.\\d+\\.\\d+\\.\\d+/' \
-/usr/local/tomcat/webapps/manager/META-INF/context.xml
 
 
 ##jenkins
@@ -343,7 +338,7 @@ docker run \
 -v /var/run/docker.sock:/var/run/docker.sock \
 --restart always \
 -di jenkinsci/blueocean
-3.修改update源                    #容器中修改;修改后
+3.修改update源                    #容器中修改
 docker exec -it docker_jenkins \
 sed -i "s/https:\/\/updates.jenkins.io/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins\/updates/g" \
 /var/jenkins_home/hudson.model.UpdateCenter.xml

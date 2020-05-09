@@ -1,0 +1,61 @@
+Tomcat
+
+
+#简介
+1.Tomcat是中小型的轻量级web应用服务器
+2.使用java语言开发,主要用于动态页面的解析(jsp[特殊的Servlet])
+3.Apache和Nginx主要提供静态页面解析
+
+
+#安装
+1.环境
+centos 7.7.1908
+jdk 1.8
+2.安装
+方式一:                      #压缩包安装;不推荐使用yum/apt等包管理工具安装
+a)下载
+http://tomcat.apache.org/    #官网地址,下载所需稳定版(.tar.gz结尾)即可;可选稳定版包括 7/8.0/8.5/9
+也可通过curl或wget下载       #需知道具体版本的url
+b)解压到指定目录
+tar -zxf xx.tar.gz -C /usr/local/      #/usr/local/一般为软件安装目录;也可改为指定目录
+mv /usr/local/xx /usr/local/tomcat     #默认是带有版本号的,如有需要可以改名
+c)启动
+cd /usr/local/tomcat/bin               #tomcat命令目录
+./start.sh                             #启动tomcat
+./shutdown.sh                          #关闭tomcat
+d)设置开机启动
+echo '
+sh /usr/local/tomcat/bin/start.sh
+' >> /etc/rc.local                     #/etc/rc.local/rc.local的软连接
+chmod +x /etc/rc.local                 #增加执行权限;默认无
+
+方式二:                                #docker方式
+a)安装docker
+b)拉取tomcat镜像
+docker pull tomcat:9
+c)创建容器
+docker run \
+--name tomcat9 \
+-p 8080:8080 \
+-v tomcat-9:/usr/local/tomcat/webapps/test \
+--restart always \
+-d tomcat:9
+d)docker exec -it tomcat9 bash
+e)复制应用目录              #登陆容器后操作;默认webapps无内容
+cp -r /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+
+
+
+
+
+#核心文件及文件夹
+
+
+
+5.修改tomcat用户密码
+sed -i '/username="tomcat"/s/<must-be-changed>/root/' \
+/usr/local/tomcat/conf/tomcat-users.xml
+sed -i '/0:1/s/0:1/0:1|\\d+\\.\\d+\\.\\d+\\.\\d+/' \
+/usr/local/tomcat/webapps/manager/META-INF/context.xml
+
+
