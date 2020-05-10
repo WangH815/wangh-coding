@@ -1,0 +1,35 @@
+Spring Boot
+
+
+简介
+Spring Boot为Java开发人员提供了一个很好的平台，可以开发一个可以运行的独立和
+生产级Spring应用程序。可以开始使用最少的配置，而无需进行整个Spring配置设置
+
+
+设计目标
+1.避免在Spring中进行复杂的XML配置
+2.以更简单的方式开发生产就绪的Spring应用程序
+3.减少开发时间并独立运行应用程序
+4.提供一种更简单的应用程序入门方式
+
+
+微服务(Micro Service)
+一种允许开发人员独立开发和部署服务的体系结构。每个运行的服务都有自己的流程，
+这实现了轻量级模型以支持业务应用程序
+
+优势
+1.易于部署
+2.简单的可扩展性
+3.与容器兼容
+4.最低配置
+5.生产时间较短
+
+
+构建Spring Boot应用程序
+方式1:通过IDE(idea)构建     //推荐
+步骤:File -> New -> Project -> Spring Initializr -> Next -> 选择所需的 Project Metadata
+
+方式2:通过官网初始化        //选择所需的 Project Metadata,然后点击GENERATE
+官网地址: https://start.spring.io/
+
+
