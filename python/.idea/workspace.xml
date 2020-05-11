@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../ide/idea project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ide/idea project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/Java Basic.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../java/Java Basic.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../windows/bat.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../windows/bat.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +71,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../venv" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.completion" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -276,6 +278,10 @@
       <workItem from="1589042147710" duration="167000" />
       <workItem from="1589130970320" duration="28000" />
       <workItem from="1589131017368" duration="1303000" />
+      <workItem from="1589161041103" duration="144000" />
+      <workItem from="1589161236758" duration="171000" />
+      <workItem from="1589177712926" duration="21000" />
+      <workItem from="1589187538920" duration="3000" />
     </task>
     <servers />
   </component>
@@ -357,15 +363,15 @@
     </state>
     <state width="220" height="340" key="HiddenNamespacesPopup/0.0.1366.768@0.0.1366.768" timestamp="1588823250127" />
     <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1588854666566" />
-    <state x="259" y="37" key="SettingsEditor" timestamp="1589137582590">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="184" y="26" key="SettingsEditor" timestamp="1589177731962">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589014762578" />
+    <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589177731962" />
     <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1589137582590" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1589131035646">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="455" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1589187539242">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1589013532735" />
+    <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1589187539242" />
     <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1589131035646" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">

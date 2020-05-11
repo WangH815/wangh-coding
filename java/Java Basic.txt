@@ -1,6 +1,4 @@
-
-
-
+Java Basic
 
 
 标识符     //Java组成部分名字;如类名、实例名、变量名及方法名等
@@ -47,7 +45,7 @@ class FreshJuice{
 主要概念:多态、继承、封装、抽象、类、对象、实例、方法、重载
 
 构造方法
-方法名与类名一致,用于初始化实例对象,没有显式编译器默认提供一个隐式构造方法。
+方法名与类名一致,用于初始化实例对象,没有显式编译器默认提供一个隐式构造方法
 
 源文件声明规则
 一个源文件(.java)只能有一个public类,可以有多个非public类
@@ -61,20 +59,20 @@ package语句有的话必须位于首行,import有的话必须位于package和�
 类
 
 有效的java main方法签名,必须是public
-public static void main(String[] args)  //常规形式,推荐使用
+public static void main(String[] args)      //常规形式,推荐使用
 public static void main(String []args)  
 public static void main(String args[])  
 public static void main(String... args)  
-static public void main(String[] args)  //修饰词之间顺序可以调换
+static public void main(String[] args)      //修饰词之间顺序可以调换
 public static final void main(String[] args)  
 final public static void main(String[] args)  
 final strictfp public static void main(String[] args)
 
 class A{  
 public static void main(String... args){  
-	System.out.println("hello java4"); 
-	}  
-};     //这里分号一般不加;带有{}的语句块后可不加分号
+    System.out.println("hello java4"); 
+    }  
+};                 //这里分号一般不加;带有{}的语句块后可不加分号
 
 对象的初始化       //不是创建
 1)通过引用变量初始化对象
@@ -104,46 +102,46 @@ new Calculation().fact(5);          //通过匿名对象调用方法
 构造函数必须没有显式返回类型        //构造函数返回当前类的一个实例
 
 static
-java中的static关键字主要用于内存管理。
+java中的static关键字主要用于内存管理
 主要用于修饰类变量,静态方法,静态代码块和静态内部类
-static关键字属于类,而不是类的实例(对象)。
-静态变量的优点:它能使程序存储器高效(即它节省内存)。
+static关键字属于类,而不是类的实例(对象)
+静态变量的优点:它能使程序存储器高效(即它节省内存)
 
 主要修饰:
 1.变量(也称为类变量)
 2.方法(也称为类方法)
-3.代码块
+3.代码块              //静态加载
 4.嵌套类
 
 
 静态代码块作用:
-1.用于初始化静态数据成员。
-2.它在类加载时在main方法之前执行。
+1.用于初始化静态数据成员
+2.它在类加载时在main方法之前执行
 
 
-this 用法如下:
+this 用法如下:       //核心在于this表示当前类本身
 
-1.this 关键字可用来引用当前类的实例变量。
-2.this 关键字可用于调用当前类方法(隐式)。
-3.this()可以用来调用当前类的构造函数。
-4.this 关键字可作为调用方法中的参数传递。
-5.this 关键字可作为参数在构造函数调用中传递。
-6.this 关键字可用于从方法返回当前类的实例。
+1.this 关键字可用来引用当前类的实例变量
+2.this 关键字可用于调用当前类方法(隐式)
+3.this()可以用来调用当前类的构造函数
+4.this 关键字可作为调用方法中的参数传递
+5.this 关键字可作为参数在构造函数调用中传递
+6.this 关键字可用于从方法返回当前类的实例
 
 
-super 用法如下:
+super 用法如下:     //核心在于表示父类
 
-1.super可以用来引用直接父类的实例变量。
-2.super可以用来调用直接父类方法。
-3.super()可以用于调用直接父类构造函数。
+1.super可以用来引用直接父类的实例变量
+2.super可以用来调用直接父类方法
+3.super()可以用于调用直接父类构造函数
 
 
 聚合
 
-如果一个类有一个类的实体引用(类中的类),则它称为聚合。 聚合表示HAS-A关系。
+如果一个类有一个类的实体引用(类中的类),则它称为聚合。 聚合表示HAS-A关系
 
-当没有is-a关系时,通过聚合也能最好地实现代码重用。
-只有在所涉及的对象的整个生命周期内维持关系为is-a时,才应使用继承; 否则,聚合是最好的选择。
+当没有is-a关系时,通过聚合也能最好地实现代码重用
+只有在所涉及的对象的整个生命周期内维持关系为is-a时,才应使用继承; 否则,聚合是最好的选择
 
 
 方法重载
@@ -152,8 +150,8 @@ super 用法如下:
 
 重载 main()方法
 
-可通过方法重载在类中有任意数量的main方法。
-但是JVM调用main()方法,它只接收字符串数组作为参数。
+可通过方法重载在类中有任意数量的main方法
+但是JVM调用main()方法,它只接收字符串数组作为参数
 
 class Test{  
     public static void main(String[] args){System.out.println("main with String[]");}  
@@ -164,9 +162,9 @@ class Test{
 输出:main with String[]
 
 数据类型提升
-byte可以被提升为short,int,long,float或double。 
-short数据类型可以提升为int,long,float或double。 
-char数据类型可以提升为int,long,float或double等等。
+byte可以被提升为short,int,long,float或double
+short数据类型可以提升为int,long,float或double
+char数据类型可以提升为int,long,float或double等等
 
 class A {
     A() {
@@ -177,18 +175,18 @@ class A {
 
 实例初始化顺序
 
-加载顺序
+加载顺序  //同等级(不是父子类间的)的静态变量按先后顺序加载
 无继承:静态成员变量(包含静态代码块),类保存的时候及就会加载
 有继承:静态相关先父类后子类,然后调用父类构造器,再子类。构造器中加载成员变量
 
 
 public class SubClass extends SuperClass {
-	SubClass() {
+    SubClass() {
         super();
         System.out.println("子类无参构造器被调用了");
     }
 
-	SubClass(int a) {
+    SubClass(int a) {
         super();
         System.out.println("子类含参构造器被调用了 " + a);
     }
@@ -202,22 +200,22 @@ public class SubClass extends SuperClass {
     }
 
     public static void main(String args[]) {
-    	SubClass s1 = new SubClass();
+        SubClass s1 = new SubClass();
         System.out.println("====================================");
         SubClass s2 = new SubClass();
     }
 }
 
 class SuperClass {
-	SuperClass() {
+    SuperClass() {
         System.out.println("父类无参构造器被调用了");
     }
-	
-	static{
+    
+    static{
         System.out.println("父类静态代码块初始化");
     }
-	
-	{
+    
+    {
         System.out.println("父类非静态代码块初始化");
     }
 }
@@ -235,10 +233,10 @@ class SuperClass {
 子类非静态代码块初始化
 子类含参构造器被调用了 10
 
-在声明时未初始化的final变量称为空白final变量。
+在声明时未初始化的final变量称为空白final变量
 
 如果要在创建一个对象时初始化变量,并且变量在初始化后就不会被改变,
-它只能在构造函数中初始化(如果是静态的,只能在静态代码块中初始化)。
+它只能在构造函数中初始化(如果是静态的,只能在静态代码块中初始化)
 
 
 绑定
@@ -249,11 +247,11 @@ class SuperClass {
 动态绑定(也称为后期绑定)
 
 静态绑定
-当编译时(由编译器)确定对象的类型时,它被称为静态绑定。
-如果在类中有任何private,final或static方法,则有静态绑定。
+当编译时(由编译器)确定对象的类型时,它被称为静态绑定
+如果在类中有任何private,final或static方法,则为静态绑定
 
 动态绑定
-当在运行时确定对象的类型时,它被称为动态绑定。
+当在运行时确定对象的类型时,它被称为动态绑定
 
 
 abstract
@@ -261,13 +259,13 @@ abstract
 实现抽象的方法
 在java中有两种实现抽象的方法,它们分别是:
 
-抽象类(部分)
-接口 (完全)
+抽象类(部分)   //可理解为含实现的规范
+接口 (完全)    //可理解为一种规范
 
 
 从Java 8开始,我们可以在接口中有方法体,也叫接口增强
 普通方法/扩展方法
-需要使用default修饰此方法,可重载Object中的方法,不能重写。可直接在实现类中使用。
+需要使用default修饰此方法,可重载Object中的方法,不能重写。可直接在实现类中使用
 interface Drawable {
     void draw();
 
@@ -290,9 +288,9 @@ interface Drawable {
 
 没有成员的接口(仅定义一个空的接口)称为标记或标记接口。 
 例如:可序列化,可克隆,远程等。它们用于向JVM提供一些基本信息,
-以便JVM可以执行一些有用的操作。
+以便JVM可以执行一些有用的操作
 
-public interface Serializable{  
+public interface Serializable{     //最典型的标记接口
 }
 
 嵌套接口
@@ -309,7 +307,7 @@ Java按值调用和引用调用方法,前者值不变,后者会改变
 
 
 strictfp 关键字  //strict float point (精确浮点)
-确保您将在每个平台上获得相同的结果,可用于方法,类和接口,不能应用于抽象方法,变量或构造函数。
+确保您将在每个平台上获得相同的结果,可用于方法,类和接口,不能应用于抽象方法,变量或构造函数
 
 
 
@@ -320,19 +318,44 @@ strictfp 关键字  //strict float point (精确浮点)
 2)引用数据类型
 
 内置数据类型/对应的包装类(抽象类Number的子类)
-数据类型  包装类    数据大小(bit/byte)
-byte      Byte        8bit/1byte
-short     Short      16bit/2byte
-int       Integer    32bit/4byte
-long      Long       64bit/8byte
-float     Float      32bit/4byte
-double    Double     64bit/8byte
-boolean   Boolean     true/false     //默认 false
-char      Char       16bit/2byte     //取值范围\u0000 - \uffff <==>[0, 65535]
+数据类型  包装类    数据大小(bit/byte)  数值范围 
+byte      Byte       　 8 / 1           [-2^7, 2^7 - 1]/[-128, 127]
+short     Short      　16 / 2           [-2^15, 2^15 - 1]/[-32,768, 32,767]
+int       Integer    　32 / 4           [-2^31, 2^31 - 1]/[-2,147,483,648, 2,147,483,647]
+long      Long       　64 / 8           [-2^63, 2^63 - 1]
+float     Float      　32 / 4
+double    Double     　64 / 8
+boolean   Boolean     true/false
+char      Character　16bit/2byte        //取值范围'\u0000' - '\uffff' <==>[0, 65535]
 //void    Void       无法直接操作,可认为没有
+注:整型默认值为0;浮点默认为0.0;布尔默认为false;字符默认值为'\u0000'(转为数值型为0)
+
+
+数据类型           包装类
+byte b = 12        new Byte((byte) 12)/new Byte("12")
+char c = 'c'       new Character((char) 12)/new Character('c')/new Character('\u1234')
+float f = 1.1f     new Float(1.1f)
+double d = 1.1d    new Double(1.1d)
+long l = 12L       new Long(12L)
+
+整数(int)进制表示
+0b1111    //二进制;负数-0b开头,其他进制同理
+077       //八进制
+99        //十进制
+0xff      //十六进制
+
+进制转换
+Integer.toBinaryString(int i) //其他进制转二进制字符串表示;转其他进制同理
+//s表示其他进制的字符串表示,只包含进制范围内的字符;radix表示需要被转换的进制;可解析32位二进制字符
+Integer.parseUnsignedInt(String s, int radix)  //
+Integer.parseUnsignedInt("7fffffff", 16)       //最大的int;字母不区分大小写
+Integer.parseUnsignedInt("ffffffff", 16)       //返回-1;其他进制同理
+
+Integer.parseInt(String s, int radix)          //s可包括+/-(+可省略);做多解析31位二进制字符
+
 
 引用数据类型
-对象、数组都是引用类型
+对象、数组都是引用类型  
 
 常量
 程序运行时不能被修改
@@ -371,10 +394,14 @@ synchronized,volatile 主要用于线程编程
 运算符
 1)算术运算符
 2)关系运算符
-3)位运算符
-<<           //左移运算符,num << 1,相当于num乘以2
->>           //右移运算符,num >> 1,相当于num除以2
->>>          //无符号右移,忽略符号位,空位都以0补齐
+3)位运算符   //以int型整数为例(long同理);以整数的补码二进制表示进行位移;位移最多31位,其他等价于 x%32
+<<           //左移运算符,num << 1;移动后不影响符号位时相当于num乘以2
+>>           //右移运算符,num >> 1;移动后不影响最后一位时相当于num除以2,其他其情况会发生截取
+>>>          //无符号右移,忽略符号位(符号位也位移),空位都以0补齐
+实例:
+Integer.toBinaryString((2 << 31) - 1))  //返回最大int;0x0001(补码)左移31位变为-0x0000(补码),减去1变为0x7fff(最大int)
+Integer.toBinaryString(-1 >>> 1)        //返回最大int;-0x7fff(补码)右移1位符号位补0,变为0x7fff
+
 4)逻辑运算符
 5)赋值运算符
 6)其他运算符
@@ -393,15 +420,15 @@ for(initialization;condition;incr/decr){
     //code to be executed  
 }
 2. for-each循环
-for-each循环用于在java中遍历数组或集合。
-它比简单的for循环更容易使用,因为不需要递增值和使用下标符号。
+for-each循环用于在java中遍历数组或集合
+它比简单的for循环更容易使用,因为不需要递增值和使用下标符号
 for(Type var:array){  
    //code to be executed  
 }
 3. Java标记For循环  
-我们可以让每个for循环的名称。 为此,在for循环之前使用标签。
-它是有用的,如果在嵌套for循环中,可以使用break/continue指定循环。
-通常,break和continue关键字断开/继续最内循环。
+我们可以让每个for循环的名称。 为此,在for循环之前使用标签
+它是有用的,如果在嵌套for循环中,可以使用break/continue指定循环
+通常,break和continue关键字断开/继续最内循环
 语法:
 labelname:  
 for(initialization;condition;incr/decr){  
@@ -436,9 +463,9 @@ for(;;){
 
 break
 用于断开循环或switch语句。它在指定条件下中断程序的当前流程。 
-在内循环的情况下,它仅中断内循环,外循环仍然可继续执行。
+在内循环的情况下,它仅中断内循环,外循环仍然可继续执行
 continue
-语句用于继续循环。 它继续程序的当前流程,并在指定条件下跳过剩余的代码。
+语句用于继续循环。 它继续程序的当前流程,并在指定条件下跳过剩余的代码
 
 分支结构
 if...else
@@ -459,7 +486,7 @@ switch(expression){
 包装类和内置数据类型的相互转换,由编译器完成
 以int为例:        //char、short和long类似
 [-128,127]        //JVM缓存范围,char为[0,127],缓存内同值自动装箱创建的包装类为同一对象
-                  //float和double不支持缓存,其他返回采用New的形式。
+                  //float和double不支持缓存,其他返回采用New的形式
 Integer iT = 99;  //装箱,实际执行的是 Integer iT = Integer.valueOf(99)
 int i = iT;       //拆箱,实际执行的是 int i = iT.intValue()
 
@@ -540,15 +567,15 @@ Calendar的一个实现类,实现了公立日历
 java.util.regex包主要包括Pattern、Matcher和PatternSyntaxException这三个类
 
 Pattern类
-其对象为正则表达式的编译表示。该类没有公共构造方法。
-通过调用其公共静态方法compile()创建实例化对象,返回Pattern对象。
+其对象为正则表达式的编译表示。该类没有公共构造方法
+通过调用其公共静态方法compile()创建实例化对象,返回Pattern对象
 
 Matcher类
-其对象是解析及操作字符串的引擎。
-需通过调用其公共静态方法matcher()创建实例化对象,返回Matcher对象。
+其对象是解析及操作字符串的引擎
+需通过调用其公共静态方法matcher()创建实例化对象,返回Matcher对象
 
 PatternSyntaxException
-此类是一个非强制异常类,表示正则表达式模式中的语法错误。
+此类是一个非强制异常类,表示正则表达式模式中的语法错误
 
 
 方法
@@ -558,8 +585,8 @@ out为标准输出对象
 println()为一个方法
 
 命名
-一般采用驼峰命名,首字母小写,见名知意。
-下划线一般出现在Junit中测试方法用于分割名称的逻辑组件,下划线前后采用驼峰命名。
+一般采用驼峰命名,首字母小写,见名知意
+下划线一般出现在Junit中测试方法用于分割名称的逻辑组件,下划线前后采用驼峰命名
 
 可变参数的方法
 typeName... parameterName
@@ -568,7 +595,7 @@ main()的两种形式
 main(String[] args) <==> main(String... args)
 
 finalize()方法
-一般用于主动清除回收对象,作用于系统垃圾回收之前。
+一般用于主动清除回收对象,作用于系统垃圾回收之前
 声明格式
 protected void finalize(){
     //终结代码
@@ -576,10 +603,10 @@ protected void finalize(){
 
 
 Stream、File和IO
-java.io包几乎包含了 所有操作输入、输出需要的类。
-java.io包中的流支持多种格式,比如:基本类型、对象以及本地化字符集等。
-一个流表示一个数据的序列。输入流表示从一个源读取数据,输出流表示向一个目标写数据。
-广泛应用于文件传输和网络编程。
+java.io包几乎包含了 所有操作输入、输出需要的类
+java.io包中的流支持多种格式,比如:基本类型、对象以及本地化字符集等
+一个流表示一个数据的序列。输入流表示从一个源读取数据,输出流表示向一个目标写数据
+广泛应用于文件传输和网络编程
 
 控制台输入
 import java.io.*
@@ -598,7 +625,7 @@ public class BRRead{
 }
 
 控制台输出
-绝大部分情况由print()和println()方法完成,在PrintStream类中定义,System.out是该类对象的一个引用。
+绝大部分情况由print()和println()方法完成,在PrintStream类中定义,System.out是该类对象的一个引用
 PrintStream继承了OutputStream类,实现了write(),最简单的格式如下:
 void write(int byteval); //将byteval的第八位字节写到流中
 
@@ -647,7 +674,7 @@ public class fileStreamTest{
 public class fileStreamTest2{
     public static void main(String[] args){
         File f = new File("test.txt");
-        FileOutputStream fos = new FileOutputStream(f);                //创建字节输出(写入)流对象,文件不存在会自动创建。输出表示从内存中输出。
+        FileOutputStream fos = new FileOutputStream(f);                //创建字节输出(写入)流对象,文件不存在会自动创建。输出表示从内存中输出
         OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); //创建字符输出流,指定编码格式
         osw.append("中文输入");                                        //调用append()方法,写入缓冲区
         osw.append("\r\n");                                            //换行
@@ -718,7 +745,7 @@ Enter作为结束符,能获取带有空格的字符串
 主要为以下三类
 1.检查型异常:用户错误或问题引起的,程序员无法预见,编译时不能简单被忽略
 2.运行时异常:程序员可能避免的异常,编译时可被忽略
-3.错误:错误不是异常,一般指程序脱离控制。在代码通常被忽略,编译时无法被检查到。
+3.错误:错误不是异常,一般指程序脱离控制。在代码通常被忽略,编译时无法被检查到
 
 Exception类的层次
 所有异常类都是java.lang.Exception类的子类
@@ -771,7 +798,7 @@ static 方法不能被重写,可以再次声明
 构造方法不能被重写
 
 重载(Overload)
-重载是在同一个类中,方法名相同,参数列表不同。返回值类型可以不同。
+重载是在同一个类中,方法名相同,参数列表不同。返回值类型可以不同
 
 重载规则
 重载方法名必须相同
@@ -807,7 +834,7 @@ static 方法不能被重写,可以再次声明
 //例子如下
 Parent p = new Child();
 当通过对象p调用某方法时,先检查父类中是否有此方法,
-如没有编译报错,有的话调用子类同名方法。
+如没有编译报错,有的话调用子类同名方法
 这种调用方式也叫做虚拟方法调用
 
 
@@ -939,7 +966,7 @@ Map接口
 该类没有同步方法,如果多个线程同时访问一个List,则必须自己实现访问同步
 解决方法就是在创建List时候构造一个同步的List。例如:
 LinkedList LinkedListName = Collections.synchronizedList(new LinkedList(...));
-LinkedList 查找效率低。
+LinkedList 查找效率低
 5.ArrayList
 该类也是实现了List的接口,实现了可变大小的数组,随机访问和遍历元素时
 提供更好的性能。该类也是非同步的,在多线程的情况下不要使用
@@ -984,7 +1011,7 @@ Properties 继承于 Hashtable,表示一个持久的属性集,属性列表中每
 一个Bitset类创建一种特殊类型的数组来保存位值。BitSet中数组大小会随需要增加
 
 集合算法
-集合框架定义了几种算法,可用于集合和映射。这些算法被定义为集合类的静态方法。
+集合框架定义了几种算法,可用于集合和映射。这些算法被定义为集合类的静态方法
 还有三个静态变量:EMPTY_SET、EMPTY_LIST、EMPTY_MAP
 
 迭代器/Iterator
@@ -1076,7 +1103,7 @@ TCP:传输控制协议,解决了两个应用程序之间的可靠通信。常用
 UDP:用户数据报协议,无连接式广播协议,用于两个应用程序之间,但不是可靠的
 
 Socket编程/套接字编程
-套接字使用TCP提供了两台计算机之间的通信机制。
+套接字使用TCP提供了两台计算机之间的通信机制
 java.net.Socket类和ServerSocket类表示客户端和服务端之间的套接字
 以下是连接步骤:
 1.服务端实例化一个ServerSocket对象
@@ -1138,19 +1165,19 @@ java9于2017.09.22发布,最主要的新特性是已经实现的模块化系统
 新特性
  1.模块系统。模块是一个包的容器,引入了模块系统(Jigsaw)
  2.REPL(JShell)。交互式编程环境
- 3.HTTP/2客户端。HTTP/2标准是HTTP协议的最新版本,新的HTTPClientAPI支持WebSocket和HTTP2流以及服务器推送特性。
- 4.改进的Javadoc。Javadoc支持在API文档中的进行搜索,Javadoc的输出符合兼容HTML5标准。
- 5.多版本兼容JAR包。能让你创建仅在特定版本的Java环境中运行库程序时选择使用的class版本。
- 6.集合工厂方法。List,Set和Map接口中,新的静态工厂方法可以创建这些集合的不可变实例。
- 7.私有接口方法。在接口中使用private私有方法。我们可以使用private访问修饰符在接口中编写私有方法。
- 8.进程API。用于控制和管理操作系统进程。
- 9.改进的Stream API。添加了一些便利的方法,使流处理更容易,并使用收集器编写复杂的查询。
-10.改进try-with-resources。该语句中使用final变量,而无需在语句中声明一个新变量。
-11.改进的弃用注解@Deprecated。用于标记 Java API 状态,被标记的 API 将会被移除或已经破坏。
-12.改进钻石操作符(Diamond Operator)。匿名类可以使用钻石操作符(Diamond Operator)。
-13.改进Optional类。java.util.Optional 添加了很多新的有用方法,Optional 可以直接转为 stream。
-14.多分辨率图像API。定义多分辨率图像API,开发者可以很容易的操作和展示不同分辨率的图像了。
-15.改进的CompletableFuture API。次类的异步机制可以在 ProcessHandle.onExit 方法退出时执行操作。
+ 3.HTTP/2客户端。HTTP/2标准是HTTP协议的最新版本,新的HTTPClientAPI支持WebSocket和HTTP2流以及服务器推送特性
+ 4.改进的Javadoc。Javadoc支持在API文档中的进行搜索,Javadoc的输出符合兼容HTML5标准
+ 5.多版本兼容JAR包。能让你创建仅在特定版本的Java环境中运行库程序时选择使用的class版本
+ 6.集合工厂方法。List,Set和Map接口中,新的静态工厂方法可以创建这些集合的不可变实例
+ 7.私有接口方法。在接口中使用private私有方法。我们可以使用private访问修饰符在接口中编写私有方法
+ 8.进程API。用于控制和管理操作系统进程
+ 9.改进的Stream API。添加了一些便利的方法,使流处理更容易,并使用收集器编写复杂的查询
+10.改进try-with-resources。该语句中使用final变量,而无需在语句中声明一个新变量
+11.改进的弃用注解@Deprecated。用于标记 Java API 状态,被标记的 API 将会被移除或已经破坏
+12.改进钻石操作符(Diamond Operator)。匿名类可以使用钻石操作符(Diamond Operator)
+13.改进Optional类。java.util.Optional 添加了很多新的有用方法,Optional 可以直接转为 stream
+14.多分辨率图像API。定义多分辨率图像API,开发者可以很容易的操作和展示不同分辨率的图像了
+15.改进的CompletableFuture API。次类的异步机制可以在 ProcessHandle.onExit 方法退出时执行操作
 16.轻量级的JSON API。内置了一个轻量级的JSON API
 17.响应式流（Reactive Streams) API。引入了新的响应式流 API 来支持 Java 9 中的响应式编程
 
@@ -1431,7 +1458,7 @@ public static boolean deleteDir(File dir) {
     if (dir.isDirectory()) {
         String[] children = dir.list();
         for (int i = 0; i < children.length; i++) {
-			//dir为相对路径或者绝对路径,children[i]为dir目录下的子目录或者文件
+            //dir为相对路径或者绝对路径,children[i]为dir目录下的子目录或者文件
             boolean success = deleteDir(new File(dir, children[i]));
             if (!success) {
                 return false;
@@ -2113,7 +2140,7 @@ try{
 }
 String str = address.getHostName();     //返回主机名
 String str1 = address.getHostAddress(); //返回主机地址
-System.exit(0);                         //正常退出,关闭JVM。方法为0为正常关闭；其他参数为非正常关闭。
+System.exit(0);                         //正常退出,关闭JVM。方法为0为正常关闭；其他参数为非正常关闭
 
 11.2 检测本机端口是否被占用
 import java.io.*;
@@ -2152,7 +2179,7 @@ public static void main(String[] args) throws Exception{
     //定义连接
     URL url = new URL("http://www.runoob/wp-content/thems/runoob/assets/img/newlogo.png");
     URLConnection conn = url.openConnection(); //打开连接
-    int size = conn.getContentLength();        //返回资源大小,以byte计。若size<0,表示无法获取文件大小。
+    int size = conn.getContentLength();        //返回资源大小,以byte计。若size<0,表示无法获取文件大小
     conn.getInputStream().close();             //关闭连接
 }
 
@@ -2369,7 +2396,7 @@ public class SimplePriorities extends Thread{
     /*
     volatile(轻快的),能部分实现synchronized功能,
     编译后代码量少,资源开销也更少;
-    并提供对其他线程的可见性。
+    并提供对其他线程的可见性
     使用场景:
     1）对变量的写操作不依赖于当前值
 　　2）该变量没有包含在具有其他变量的不变式中
