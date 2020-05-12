@@ -641,7 +641,7 @@ IO流包括字符流和字节流
 
 读写文件最重要的两个字节流是FileInputStream和FileOutputStream
 
-FileInputStream  //用于从文件中读取数据
+FileInputStream   //用于从文件中读取数据
 InputStream f1 = new FileInputStream("C:/hello.java");              //实例化1,文件字节输入流
 InputStream f2 = new FileInputStream(new File("C:/hello.java"));    //实例化2,文件字节输入流
 
@@ -813,7 +813,7 @@ static 方法不能被重写,可以再次声明
 重载体现的是同一个类中方法功能的扩展,例如:原方法只能实现两个整数的和,通过重载可以实现两个浮点数或一个整数和一个浮点数的和或多个整数的和
 
 
-多态
+多态                          //集合框架中使用较多
 
 优点或作用
 1.消除类型直接的耦合性
@@ -878,8 +878,8 @@ Parent p = new Child();
 接口特性
 接口声明前不加 abstract 关键词
 其每方法都是是隐式抽象的,并被隐式的指定为 public abstract,声明时一般不加 abstract
-其变量会被隐式的指定为 public static final,
-其方法是不能在接口中实现的,只能由实现接口的类来实现接口中的方法
+其变量会被隐式的指定为 public static final
+其方法是不能在接口中实现的,只能由实现接口的类来实现接口中的方法     //java8+可以存在默认方法的实现
 使用 implements 关键词在class声明后面实现该接口,若实现多个接口,需逗号隔开
 
 
@@ -910,13 +910,13 @@ package/import 分别用于创建和导入包
 
 数据结构
 Java工具包提供了强大的数据结构,主要包括以下几种接口和类:
-枚举/Enumeration //此接口本身不属于数据结构,定义了一种从数据结构中取回连续元素的方式
-位集合/BitSet    //实现了一组可以单独设置和清除的位或标志,处理一组布尔值比较方便
-向量/Vector      //类似于传统数组,但长度可以动态变化
-栈/Stack         //对象垂直分布的栈,先进后出,后进先出
-字典/Dictionary  //定义了键映射到值得数据结构的抽象类,通过键访问值
-哈希表/Hashtable //此类提供了一种在用户定义键结构的基础上组织数据的手段
-属性/Properties  //继承于Hashtable.Properties
+  枚举/Enumeration   //此接口本身不属于数据结构,定义了一种从数据结构中取回连续元素的方式
+位集合/BitSet        //实现了一组可以单独设置和清除的位或标志,处理一组布尔值比较方便
+  向量/Vector        //类似于传统数组,但长度可以动态变化
+    栈/Stack         //对象垂直分布的栈,先进后出,后进先出
+  字典/Dictionary    //定义了键映射到值得数据结构的抽象类,通过键访问值
+哈希表/Hashtable     //此类提供了一种在用户定义键结构的基础上组织数据的手段
+  属性/Properties    //继承于Hashtable.Properties
 以上的类或接口是传统遗留的,之后版本主要为集合框架(Collection)
 
 
@@ -924,7 +924,7 @@ Java工具包提供了强大的数据结构,主要包括以下几种接口和类
 
 特性
 1.高性能。基本集合(动态数组,链表,树,哈希表)的实现也必须是高效的
-2.允许不同类型的集合,以类似的方式工作,具有高度的互操作性
+2.允许不同类型的集合,以类似的方式工作,具有高度的互操作性     
 3.对一个集合的扩展和适应是简单的
 
 集合框架主要包括两种类型的容器接口:Collection和Map
@@ -997,9 +997,9 @@ HashMap 是一个散列表,它存储的内容是键值对(key-value)映射
 
 java.util中定义的类
 1.Vector 
-该类和ArrayList非常相似,但是该类是同步的,可以用在多线程的情况,
+该类和ArrayList非常相似,但是该类是线程安全的,可以用在多线程的情况,
 该类允许设置默认的增长长度,默认扩容方式为原来的2倍
-2.Stack 
+2.Stack
 栈是Vector的一个子类,它实现了一个标准的后进先出的栈
 3.Dictionary  
 Dictionary 类是一个抽象类,用来存储键/值对,作用和Map类相似
@@ -1047,7 +1047,7 @@ public static < T extends Comparable<T> > T maximum(T x, T y, T z){
     return max;
 }
 
-泛型类 
+泛型类
 类名后添加泛型参数声明部分
 public class Box< T >{
     private T t;
@@ -1059,7 +1059,7 @@ public class Box< T >{
     }
     
     public static void main(String[] args){
-        Box<integer> iBox = new Box<Integer>(); 
+        Box<Integer> iBox = new Box<Integer>(); 
         Box<String> sBox = new Box<String>();
         iBox.add(new Integer(10));
         sBox.add(new String("runoob"));
