@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../ide/idea project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ide/idea project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../java/Java Basic.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../java/Java Basic.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../windows/bat.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../windows/bat.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +68,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../venv" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.completion" />
   </component>
   <component name="RecentsManager">
@@ -282,6 +280,11 @@
       <workItem from="1589161236758" duration="171000" />
       <workItem from="1589177712926" duration="21000" />
       <workItem from="1589187538920" duration="3000" />
+      <workItem from="1589387594250" duration="7000" />
+      <workItem from="1589387607888" duration="15000" />
+      <workItem from="1589387628779" duration="672000" />
+      <workItem from="1589439255566" duration="42000" />
+      <workItem from="1589452036545" duration="15000" />
     </task>
     <servers />
   </component>
@@ -325,19 +328,20 @@
     </state>
     <state x="221" y="35" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1588823697475" />
     <state x="336" y="193" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588856958184" />
-    <state x="728" y="385" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1589042308674">
+    <state x="728" y="385" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1589439292485">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="728" y="385" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1589042308674" />
+    <state x="728" y="385" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1589439292485" />
     <state x="1221" y="230" key="ExecutionTargetDialog" timestamp="1588857190945">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="869" y="133" key="ExecutionTargetDialog/0.0.1366.768@0.0.1366.768" timestamp="1588835085988" />
     <state x="1221" y="230" key="ExecutionTargetDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588857190945" />
-    <state x="34" y="110" key="FileChooserDialogImpl" timestamp="1588822969529">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="48" y="155" key="FileChooserDialogImpl" timestamp="1589439283704">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="34" y="110" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1588822969529" />
+    <state x="48" y="155" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1589439283704" />
     <state width="1286" height="176" key="GridCell.Tab.0.bottom" timestamp="1589014957635">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -368,11 +372,12 @@
     </state>
     <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589177731962" />
     <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1589137582590" />
-    <state x="455" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1589187539242">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="640" y="350" key="com.intellij.ide.util.TipDialog" timestamp="1589452040000">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1589187539242" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1589131035646" />
+    <state x="640" y="350" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589452040000" />
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1589439255987" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/python$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1575018378084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tool" />
