@@ -1,7 +1,7 @@
 Java Basic
 
 
-标识符     //Java组成部分名字;如类名、实例名、变量名及方法名等
+标识符     // Java组成部分名字;如类名、实例名、变量名及方法名等
 1.以字母、美元符或下划线开始
 2.首字符之后可以字母、美元符、下划线或数字
 3.关键字不能作为标识符
@@ -12,15 +12,15 @@ Java Basic
 7.源文件与类名相同
 
 注释
-1.//             //单行注释
-2./* */          //多行注释
-3./**            //文档注释
+1.//              // 单行注释
+2./* */          // 多行注释
+3./**            // 文档注释
      */
 
 变量
-1.局部变量      //一般是在方法或语句块中,无访问修饰词,只在该方法和语句块中可见,存储在栈上
-2.类变量        //静态变量,必须声明为static,大多数情况声明为常量,存储在静态存储区
-3.成员变量      //类变量,无static修饰
+1.局部变量      // 一般是在方法或语句块中,无访问修饰词,只在该方法和语句块中可见,存储在栈上
+2.类变量        // 静态变量,必须声明为static,大多数情况声明为常量,存储在静态存储区
+3.成员变量      // 类变量,无static修饰
 
 
 枚举
@@ -36,7 +36,7 @@ class FreshJuice{
 /*多行注释
  *
  */
-//单行注释
+// 单行注释
 /*单行注释*/
 
 
@@ -59,11 +59,11 @@ package语句有的话必须位于首行,import有的话必须位于package和�
 类
 
 有效的java main方法签名,必须是public
-public static void main(String[] args)      //常规形式,推荐使用
+public static void main(String[] args)      // 常规形式,推荐使用
 public static void main(String []args)  
 public static void main(String args[])  
 public static void main(String... args)  
-static public void main(String[] args)      //修饰词之间顺序可以调换
+static public void main(String[] args)      // 修饰词之间顺序可以调换
 public static final void main(String[] args)  
 final public static void main(String[] args)  
 final strictfp public static void main(String[] args)
@@ -72,9 +72,9 @@ class A{
 public static void main(String... args){  
     System.out.println("hello java4"); 
     }  
-};                 //这里分号一般不加;带有{}的语句块后可不加分号
+};                 // 这里分号一般不加;带有{}的语句块后可不加分号
 
-对象的初始化       //不是创建
+对象的初始化       // 不是创建
 1)通过引用变量初始化对象
 2)通过方法初始化对象
 3)通过构造函数初始化对象
@@ -91,15 +91,15 @@ public static void main(String... args){
 匿名对象
 匿名只是表示没有名。没有引用的对象(也就是不使用实例变量)称为匿名对象。它只能在创建对象时使用。如果只需要使用一个对象,匿名对象是一个很好的方法。 例如:
 
-new Calculation();                  //匿名对象
-Calculation c = new Calculation();  // 使用实例变量,所以不是匿名对象
-new Calculation().fact(5);          //通过匿名对象调用方法
+new Calculation();                  // 匿名对象
+Calculation c = new Calculation();  //  使用实例变量,所以不是匿名对象
+new Calculation().fact(5);          // 通过匿名对象调用方法
 
 
 构造函数/构造器 
 规则:
 构造函数名称必须与其类名称相同
-构造函数必须没有显式返回类型        //构造函数返回当前类的一个实例
+构造函数必须没有显式返回类型        // 构造函数返回当前类的一个实例
 
 static
 java中的static关键字主要用于内存管理
@@ -110,7 +110,7 @@ static关键字属于类,而不是类的实例(对象)
 主要修饰:
 1.变量(也称为类变量)
 2.方法(也称为类方法)
-3.代码块              //静态加载
+3.代码块              // 静态加载
 4.嵌套类
 
 
@@ -119,7 +119,7 @@ static关键字属于类,而不是类的实例(对象)
 2.它在类加载时在main方法之前执行
 
 
-this 用法如下:       //核心在于this表示当前类本身
+this 用法如下:       // 核心在于this表示当前类本身
 
 1.this 关键字可用来引用当前类的实例变量
 2.this 关键字可用于调用当前类方法(隐式)
@@ -129,7 +129,7 @@ this 用法如下:       //核心在于this表示当前类本身
 6.this 关键字可用于从方法返回当前类的实例
 
 
-super 用法如下:     //核心在于表示父类
+super 用法如下:     // 核心在于表示父类
 
 1.super可以用来引用直接父类的实例变量
 2.super可以用来调用直接父类方法
@@ -175,7 +175,7 @@ class A {
 
 实例初始化顺序
 
-加载顺序  //同等级(不是父子类间的)的静态变量按先后顺序加载
+加载顺序  // 同等级(不是父子类间的)的静态变量按先后顺序加载
 无继承:静态成员变量(包含静态代码块),类保存的时候及就会加载
 有继承:静态相关先父类后子类,然后调用父类构造器,再子类。构造器中加载成员变量
 
@@ -259,8 +259,8 @@ abstract
 实现抽象的方法
 在java中有两种实现抽象的方法,它们分别是:
 
-抽象类(部分)   //可理解为含实现的规范
-接口 (完全)    //可理解为一种规范
+抽象类(部分)   // 可理解为含实现的规范
+接口 (完全)    // 可理解为一种规范
 
 
 从Java 8开始,我们可以在接口中有方法体,也叫接口增强
@@ -290,7 +290,7 @@ interface Drawable {
 例如:可序列化,可克隆,远程等。它们用于向JVM提供一些基本信息,
 以便JVM可以执行一些有用的操作
 
-public interface Serializable{     //最典型的标记接口
+public interface Serializable{     // 最典型的标记接口
 }
 
 嵌套接口
@@ -306,7 +306,7 @@ interface printable {
 Java按值调用和引用调用方法,前者值不变,后者会改变
 
 
-strictfp 关键字  //strict float point (精确浮点)
+strictfp 关键字  // strict float point (精确浮点)
 确保您将在每个平台上获得相同的结果,可用于方法,类和接口,不能应用于抽象方法,变量或构造函数
 
 
@@ -326,8 +326,8 @@ long      Long       　64 / 8           [-2^63, 2^63 - 1]
 float     Float      　32 / 4
 double    Double     　64 / 8
 boolean   Boolean     true/false
-char      Character　16bit/2byte        //取值范围'\u0000' - '\uffff' <==>[0, 65535]
-//void    Void       无法直接操作,可认为没有
+char      Character　16bit/2byte        // 取值范围'\u0000' - '\uffff' <==>[0, 65535]
+// void    Void       无法直接操作,可认为没有
 注:整型默认值为0;浮点默认为0.0;布尔默认为false;字符默认值为'\u0000'(转为数值型为0)
 
 
@@ -339,19 +339,19 @@ double d = 1.1d    new Double(1.1d)
 long l = 12L       new Long(12L)
 
 整数(int)进制表示
-0b1111    //二进制;负数-0b开头,其他进制同理
-077       //八进制
-99        //十进制
-0xff      //十六进制
+0b1111    // 二进制;负数-0b开头,其他进制同理
+077       // 八进制
+99        // 十进制
+0xff      // 十六进制
 
 进制转换
-Integer.toBinaryString(int i) //其他进制转二进制字符串表示;转其他进制同理
-//s表示其他进制的字符串表示,只包含进制范围内的字符;radix表示需要被转换的进制;可解析32位二进制字符
-Integer.parseUnsignedInt(String s, int radix)  //
-Integer.parseUnsignedInt("7fffffff", 16)       //最大的int;字母不区分大小写
-Integer.parseUnsignedInt("ffffffff", 16)       //返回-1;其他进制同理
+Integer.toBinaryString(int i) // 其他进制转二进制字符串表示;转其他进制同理
+// s表示其他进制的字符串表示,只包含进制范围内的字符;radix表示需要被转换的进制;可解析32位二进制字符
+Integer.parseUnsignedInt(String s, int radix)  // 
+Integer.parseUnsignedInt("7fffffff", 16)       // 最大的int;字母不区分大小写
+Integer.parseUnsignedInt("ffffffff", 16)       // 返回-1;其他进制同理
 
-Integer.parseInt(String s, int radix)          //s可包括+/-(+可省略);做多解析31位二进制字符
+Integer.parseInt(String s, int radix)          // s可包括+/-(+可省略);做多解析31位二进制字符
 
 
 引用数据类型
@@ -394,19 +394,19 @@ synchronized,volatile 主要用于线程编程
 运算符
 1)算术运算符
 2)关系运算符
-3)位运算符   //以int型整数为例(long同理);以整数的补码二进制表示进行位移;位移最多31位,其他等价于 x%32
-<<           //左移运算符,num << 1;移动后不影响符号位时相当于num乘以2
->>           //右移运算符,num >> 1;移动后不影响最后一位时相当于num除以2,其他其情况会发生截取
->>>          //无符号右移,忽略符号位(符号位也位移),空位都以0补齐
+3)位运算符   // 以int型整数为例(long同理);以整数的补码二进制表示进行位移;位移最多31位,其他等价于 x%32
+<<           // 左移运算符,num << 1;移动后不影响符号位时相当于num乘以2
+>>           // 右移运算符,num >> 1;移动后不影响最后一位时相当于num除以2,其他其情况会发生截取
+>>>          // 无符号右移,忽略符号位(符号位也位移),空位都以0补齐
 实例:
-Integer.toBinaryString((2 << 31) - 1))  //返回最大int;0x0001(补码)左移31位变为-0x0000(补码),减去1变为0x7fff(最大int)
-Integer.toBinaryString(-1 >>> 1)        //返回最大int;-0x7fff(补码)右移1位符号位补0,变为0x7fff
+Integer.toBinaryString((2 << 31) - 1))  // 返回最大int;0x0001(补码)左移31位变为-0x0000(补码),减去1变为0x7fff(最大int)
+Integer.toBinaryString(-1 >>> 1)        // 返回最大int;-0x7fff(补码)右移1位符号位补0,变为0x7fff
 
 4)逻辑运算符
 5)赋值运算符
 6)其他运算符
-? :          //条件运算符,也叫三元运算符  
-instanceof   //检查对象是否为一个特定类型（类类型或接口类型）
+? :          // 条件运算符,也叫三元运算符  
+instanceof   // 检查对象是否为一个特定类型（类类型或接口类型）
 
 
 循环结构
@@ -417,13 +417,13 @@ do...while
 for
 1. 简单For循环
 for(initialization;condition;incr/decr){  
-    //code to be executed  
+    // code to be executed  
 }
 2. for-each循环
 for-each循环用于在java中遍历数组或集合
 它比简单的for循环更容易使用,因为不需要递增值和使用下标符号
 for(Type var:array){  
-   //code to be executed  
+   // code to be executed  
 }
 3. Java标记For循环  
 我们可以让每个for循环的名称。 为此,在for循环之前使用标签
@@ -432,14 +432,14 @@ for(Type var:array){
 语法:
 labelname:  
 for(initialization;condition;incr/decr){  
-    //code to be executed  
+    // code to be executed  
 }
 实例:
 public class LabeledForExample  {
     public static void main(String[] args) {
         step1: for (int i = 1; i <= 3; i++) {
             step2: for (int j = 1; j <= 3; j++) {
-                if (i == 2 && j == 2) {  //
+                if (i == 2 && j == 2) {  // 
                     break step2;
                 }
                 System.out.println(i + " " + j);
@@ -457,7 +457,7 @@ public class LabeledForExample  {
 3 3
 4. 无限循环
 for(;;){             
-    //code to be executed  
+    // code to be executed  
 }
 
 
@@ -471,24 +471,24 @@ continue
 if...else
 
 switch(expression){
-    case value1:    //value支持byte/short/int/char/String(Java 7+)
+    case value1:    // value支持byte/short/int/char/String(Java 7+)
         statements
-        break;     //用于跳出循环    
+        break;     // 用于跳出循环    
     case value2:
         statements
         break;
-    default:       //用于其它情况处理
+    default:       // 用于其它情况处理
         statements
 }
 
 
 自动拆箱装箱
 包装类和内置数据类型的相互转换,由编译器完成
-以int为例:        //char、short和long类似
-[-128,127]        //JVM缓存范围,char为[0,127],缓存内同值自动装箱创建的包装类为同一对象
-                  //float和double不支持缓存,其他返回采用New的形式
-Integer iT = 99;  //装箱,实际执行的是 Integer iT = Integer.valueOf(99)
-int i = iT;       //拆箱,实际执行的是 int i = iT.intValue()
+以int为例:        // char、short和long类似
+[-128,127]        // JVM缓存范围,char为[0,127],缓存内同值自动装箱创建的包装类为同一对象
+                  // float和double不支持缓存,其他返回采用New的形式
+Integer iT = 99;  // 装箱,实际执行的是 Integer iT = Integer.valueOf(99)
+int i = iT;       // 拆箱,实际执行的是 int i = iT.intValue()
 
 Math类
 包含所有用于执行基本数学运算的属性和方法,所有方法均为static形式
@@ -523,8 +523,8 @@ String(StringBuilder builder)
 String(char[] value, boolean share)
 
 格式化输出字符串
-System.out.printf(); //格式化输出,返回PrintStream对象
-String.format();     //格式化输出,返回String类型
+System.out.printf(); // 格式化输出,返回PrintStream对象
+String.format();     // 格式化输出,返回String类型
 
 
 StringBuffer和StringBuilder
@@ -545,14 +545,14 @@ Data()和Date(long millisec)两个构造方法初始化Date对象
 SimpleDateFormat类用于格式化日期
 
 休眠
-Thread.sleep(1000);                  //阻塞当前线程,单位ms
+Thread.sleep(1000);                  // 阻塞当前线程,单位ms
 
 测量时间
-long t = System.currentTimeMills();  //获取当前时间与1970.1.1 00:00:00差值,单位ms
+long t = System.currentTimeMills();  // 获取当前时间与1970.1.1 00:00:00差值,单位ms
 
 Calendar抽象类
 比Date功能强大得多,实现方式也更复杂
-Calendar c = Calendar.getInstance(); //初始化,获取当前日期
+Calendar c = Calendar.getInstance(); // 初始化,获取当前日期
 
 GregorianCalendar类
 Calendar的一个实现类,实现了公立日历
@@ -598,7 +598,7 @@ finalize()方法
 一般用于主动清除回收对象,作用于系统垃圾回收之前
 声明格式
 protected void finalize(){
-    //终结代码
+    // 终结代码
 }
 
 
@@ -612,22 +612,22 @@ java.io包中的流支持多种格式,比如:基本类型、对象以及本地�
 import java.io.*
 public class BRRead{
     public static void main(String[] args){
-        char c; //如需要的读取的是字符串,此句改为 String str;
-        //使用System.in创建BufferedReader(字符输入流)
+        char c; // 如需要的读取的是字符串,此句改为 String str;
+        // 使用System.in创建BufferedReader(字符输入流)
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Systen.out.println("输入字符,按'q'退出。");
         do{
-            //不断从控制台读取字符,直到用户输入'q'
-            c = (char) br.read();  //如需读取的是字符串,此句改为 str = br.readLine();
+            // 不断从控制台读取字符,直到用户输入'q'
+            c = (char) br.read();  // 如需读取的是字符串,此句改为 str = br.readLine();
             System.out.println(c);
-        }while(c != 'q');          //如判断某字符串结束,条件改为 !str.equals("end")
+        }while(c != 'q');          // 如判断某字符串结束,条件改为 !str.equals("end")
     }
 }
 
 控制台输出
 绝大部分情况由print()和println()方法完成,在PrintStream类中定义,System.out是该类对象的一个引用
 PrintStream继承了OutputStream类,实现了write(),最简单的格式如下:
-void write(int byteval); //将byteval的第八位字节写到流中
+void write(int byteval); // 将byteval的第八位字节写到流中
 
 write()实例
 int b = 'A';
@@ -636,33 +636,33 @@ System.out.write('\n');
 
 读写文件
 IO流包括字符流和字节流
-字符流包括Reader和Writer //一个或多个字节表示一个字符,由指定的字符编码决定
+字符流包括Reader和Writer // 一个或多个字节表示一个字符,由指定的字符编码决定
 字节流包括InputStream和OutputStream
 
 读写文件最重要的两个字节流是FileInputStream和FileOutputStream
 
-FileInputStream   //用于从文件中读取数据
-InputStream f1 = new FileInputStream("C:/hello.java");              //实例化1,文件字节输入流
-InputStream f2 = new FileInputStream(new File("C:/hello.java"));    //实例化2,文件字节输入流
+FileInputStream   // 用于从文件中读取数据
+InputStream f1 = new FileInputStream("C:/hello.java");              // 实例化1,文件字节输入流
+InputStream f2 = new FileInputStream(new File("C:/hello.java"));    // 实例化2,文件字节输入流
 
-FileOutputStream  //用于向文件中写入数据
-OutputStream f1 = new FileOutputStream("C:/hello.java");            //实例化1,文件字节输出流
-OutputStream f2 = new FileOutputStream(new File("C:/hello.java"));  //实例化2,文件字节输出流
+FileOutputStream  // 用于向文件中写入数据
+OutputStream f1 = new FileOutputStream("C:/hello.java");            // 实例化1,文件字节输出流
+OutputStream f2 = new FileOutputStream(new File("C:/hello.java"));  // 实例化2,文件字节输出流
 
-//二进制(字节)写入文件并输出到控制台
+// 二进制(字节)写入文件并输出到控制台
 import java.io.*
 
 public class fileStreamTest{
     public static void main(String[] args){
         try{
             byte[] bWrite = {11,45,77,876,786,3,8,9};
-            OutputStream os = new FileOutputStream("test.txt"); //创建字节输出流对象
+            OutputStream os = new FileOutputStream("test.txt"); // 创建字节输出流对象
             for(int i = 0; i < bWrite.length; i++)
-                os.write(bWrite[i]);                            //按二进制字节流写入到文件中
-            os.close();                                         //关闭输出流
-            InputStream is = new FileInputStream("test.txt");   //创建输入流
+                os.write(bWrite[i]);                            // 按二进制字节流写入到文件中
+            os.close();                                         // 关闭输出流
+            InputStream is = new FileInputStream("test.txt");   // 创建输入流
             for(int i = 0; i < is.available(); i++)
-                System.out.print((char)is.read() + " ");        //调用输入流的read()方法读取 
+                System.out.print((char)is.read() + " ");        // 调用输入流的read()方法读取 
             is.close();
         }catch(IOException e){
             System.out.print("Exception");
@@ -670,25 +670,25 @@ public class fileStreamTest{
     }
 }
 
-//指定编码格式写入文件
+// 指定编码格式写入文件
 public class fileStreamTest2{
     public static void main(String[] args){
         File f = new File("test.txt");
-        FileOutputStream fos = new FileOutputStream(f);                //创建字节输出(写入)流对象,文件不存在会自动创建。输出表示从内存中输出
-        OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); //创建字符输出流,指定编码格式
-        osw.append("中文输入");                                        //调用append()方法,写入缓冲区
-        osw.append("\r\n");                                            //换行
+        FileOutputStream fos = new FileOutputStream(f);                // 创建字节输出(写入)流对象,文件不存在会自动创建。输出表示从内存中输出
+        OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); // 创建字符输出流,指定编码格式
+        osw.append("中文输入");                                        // 调用append()方法,写入缓冲区
+        osw.append("\r\n");                                            // 换行
         osw.append("English");                 
-        osw.close();                                                   //关闭写入流并把缓冲区内容写入到文件中;也可以主动调用flush方法刷新缓冲区,写入文件
-        fos.close();                                                   //关闭输出流,释放系统资源
-        FileInputStream fis = new FileInputStream(f);                  //创建字节输出流对象
-        InputStreamReader isr = new InputStreamReader(fis, "UTF-8");   //创建字符输入(读取)流对象,指定编码格式
+        osw.close();                                                   // 关闭写入流并把缓冲区内容写入到文件中;也可以主动调用flush方法刷新缓冲区,写入文件
+        fos.close();                                                   // 关闭输出流,释放系统资源
+        FileInputStream fis = new FileInputStream(f);                  // 创建字节输出流对象
+        InputStreamReader isr = new InputStreamReader(fis, "UTF-8");   // 创建字符输入(读取)流对象,指定编码格式
         StringBuffer sb = new StringBuffer();
         while(isr.ready())
-            sb.append((char) isr.read());                              //将字符输出流中字符追加到StringBuffer对象中
+            sb.append((char) isr.read());                              // 将字符输出流中字符追加到StringBuffer对象中
         System.out.println(sb.toString());
-        isr.close();                                                   //关闭读取流
-        fis.close();                                                   //关闭输入流,释放系统资源
+        isr.close();                                                   // 关闭读取流
+        fis.close();                                                   // 关闭输入流,释放系统资源
     }
 }
 
@@ -696,42 +696,42 @@ public class fileStreamTest2{
 主要需要知道三个类,分别是File、FileReader和FileWriter
 
 File类
-File f = new File("/tmp/user/java/bin"); //创建文件对象
-f.mkdir();                               //创建bin文件夹,若/tmp/user/java文件夹不存在时,不会创建bin并返回false
-f.mkdirs();                              //创建文件夹,包含所有父文件夹,类似于Linux里的 mkdir -p
-f.isDirectory();                         //判断f是否为目录
-String[] str = f.list();                 //返回文件夹中所有的子文件和子目录
-delete(f);                               //删除文件或空文件夹
+File f = new File("/tmp/user/java/bin"); // 创建文件对象
+f.mkdir();                               // 创建bin文件夹,若/tmp/user/java文件夹不存在时,不会创建bin并返回false
+f.mkdirs();                              // 创建文件夹,包含所有父文件夹,类似于Linux里的 mkdir -p
+f.isDirectory();                         // 判断f是否为目录
+String[] str = f.list();                 // 返回文件夹中所有的子文件和子目录
+delete(f);                               // 删除文件或空文件夹
 
 删除指定目录中所有的子文件和子目录
 import java.io.File;
 
 public class DeleteFileDemo{
     public static void main(String[] args){
-        File f = new File("/tmp/java"); //创建文件对象
-        deleteFolder(f);                //递归删除java目录下所有的文件和文件夹
+        File f = new File("/tmp/java"); // 创建文件对象
+        deleteFolder(f);                // 递归删除java目录下所有的文件和文件夹
     }
     public static void deleteFolder(File f){
-        File[] fs = f.listFiles();      //创建文件数组,获取指定目录下的文件和文件夹对象
+        File[] fs = f.listFiles();      // 创建文件数组,获取指定目录下的文件和文件夹对象
         if(fs != null){
-            for(File f : fs){           //foreach循环
-                if(f.isDirectory)       //判断是否为文件夹
-                    deleteFolder(f);    //递归删除
+            for(File f : fs){           // foreach循环
+                if(f.isDirectory)       // 判断是否为文件夹
+                    deleteFolder(f);    // 递归删除
                 else
-                    f.delete();         //删除文件或空文件夹
+                    f.delete();         // 删除文件或空文件夹
             }
         }
-        f.delete();                     //删除指定目录或文件
+        f.delete();                     // 删除指定目录或文件
     }
 }
 
 
 Scanner类
 用于获取用户输入
-Scanner s = new Scanner(Sysytem.in); //获取键盘输入
+Scanner s = new Scanner(Sysytem.in); // 获取键盘输入
 next()和nextLine()方法获取输入字符串
 hasNext()和hasNextLine()判断是否还有输入数据
-hasNextInt(); //判断输入是否为Int类型数据；其他基本类型类似
+hasNextInt(); // 判断输入是否为Int类型数据；其他基本类型类似
 
 next()和nextLine()的区别
 next()
@@ -759,12 +759,12 @@ Error一般指运行时环境发生的错误,例如:JVM内存溢出、通信时�
 1.代码复用
 2.便于创建等级层次的类
 
-class A extends B {        //A继承B
-    //codes
+class A extends B {        // A继承B
+    // codes
 }
 
-class C implements D, E {  //C实现接口D和E
-    //codes
+class C implements D, E {  // C实现接口D和E
+    // codes
 }
 
 继承的特性
@@ -813,7 +813,7 @@ static 方法不能被重写,可以再次声明
 重载体现的是同一个类中方法功能的扩展,例如:原方法只能实现两个整数的和,通过重载可以实现两个浮点数或一个整数和一个浮点数的和或多个整数的和
 
 
-多态                          //集合框架中使用较多
+多态                          // 集合框架中使用较多
 
 优点或作用
 1.消除类型直接的耦合性
@@ -831,7 +831,7 @@ static 方法不能被重写,可以再次声明
 多态存在的三个必要条件
 继承;重写;父类引用指向子类对象
 
-//例子如下
+// 例子如下
 Parent p = new Child();
 当通过对象p调用某方法时,先检查父类中是否有此方法,
 如没有编译报错,有的话调用子类同名方法
@@ -879,14 +879,14 @@ Parent p = new Child();
 接口声明前不加 abstract 关键词
 其每方法都是是隐式抽象的,并被隐式的指定为 public abstract,声明时一般不加 abstract
 其变量会被隐式的指定为 public static final
-其方法是不能在接口中实现的,只能由实现接口的类来实现接口中的方法     //java8+可以存在默认方法的实现
+其方法是不能在接口中实现的,只能由实现接口的类来实现接口中的方法     // java8+可以存在默认方法的实现
 使用 implements 关键词在class声明后面实现该接口,若实现多个接口,需逗号隔开
 
 
 接口的声明
 [可见度修饰词] interface 接口名称 [extends 接口A,接口B,...]{
-    //声明变量
-    //抽象方法
+    // 声明变量
+    // 抽象方法
 }
 
 标记接口
@@ -910,13 +910,13 @@ package/import 分别用于创建和导入包
 
 数据结构
 Java工具包提供了强大的数据结构,主要包括以下几种接口和类:
-  枚举/Enumeration   //此接口本身不属于数据结构,定义了一种从数据结构中取回连续元素的方式
-位集合/BitSet        //实现了一组可以单独设置和清除的位或标志,处理一组布尔值比较方便
-  向量/Vector        //类似于传统数组,但长度可以动态变化
-    栈/Stack         //对象垂直分布的栈,先进后出,后进先出
-  字典/Dictionary    //定义了键映射到值得数据结构的抽象类,通过键访问值
-哈希表/Hashtable     //此类提供了一种在用户定义键结构的基础上组织数据的手段
-  属性/Properties    //继承于Hashtable.Properties
+  枚举/Enumeration   // 此接口本身不属于数据结构,定义了一种从数据结构中取回连续元素的方式
+位集合/BitSet        // 实现了一组可以单独设置和清除的位或标志,处理一组布尔值比较方便
+  向量/Vector        // 类似于传统数组,但长度可以动态变化
+    栈/Stack         // 对象垂直分布的栈,先进后出,后进先出
+  字典/Dictionary    // 定义了键映射到值得数据结构的抽象类,通过键访问值
+哈希表/Hashtable     // 此类提供了一种在用户定义键结构的基础上组织数据的手段
+  属性/Properties    // 继承于Hashtable.Properties
 以上的类或接口是传统遗留的,之后版本主要为集合框架(Collection)
 
 
@@ -1027,16 +1027,16 @@ ListIterator继承了Iterator,允许双向遍历List和修改元素
 
 
 泛型/generics
-jdk 5 中引入的的一个新特性,提供编译时类型安全监测机制  //运行时没有限制
+jdk 5 中引入的的一个新特性,提供编译时类型安全监测机制  // 运行时没有限制
 本质是参数化类型,即所操作的数据类型被指定一个参数
 
 泛型方法
 泛型方法在调用时可以接受不同类型的参数
 定义规则如下:
-1.声明在返回类型之前。 //如:public static < E > void printArray( E[] inputArray ){}
+1.声明在返回类型之前。 // 如:public static < E > void printArray( E[] inputArray ){}
 2.泛型参数只能是引用类型
 
-有界参数类型的泛型方法 //用于限定参数类型的范围
+有界参数类型的泛型方法 // 用于限定参数类型的范围
 如下比较三个可比较的对象的最大值
 public static < T extends Comparable<T> > T maximum(T x, T y, T z){
     T max = x;
@@ -1068,23 +1068,23 @@ public class Box< T >{
 
 类型通配符
 例如:List<?>
-//main()方法中实例化三个对象
+// main()方法中实例化三个对象
 List<String> s = new ArrayList<String>();
 List<Integer> i = new ArrayList<Integer>();
 List<Number> n = new ArrayList<Number>();
-//类方法统配调用
-//方法1
+// 类方法统配调用
+// 方法1
 public static void getData(List<?> data){
-    //直接获取三个对象的值,无需调用三次
+    // 直接获取三个对象的值,无需调用三次
     System.out.println(data.get(0));
 }
-//方法2,设定通配上限。非Number类及其子类的对象参数会被过滤掉
+// 方法2,设定通配上限。非Number类及其子类的对象参数会被过滤掉
 public static void getUperNumber(List<? extends Number> data){
-    //直接获取三个对象的值,无需调用三次,实际不会获取对象 s 的值
+    // 直接获取三个对象的值,无需调用三次,实际不会获取对象 s 的值
     System.out.println(data.get(0));
 }
-通配符上限形如 List<? extends T> //匹配T类型及其子类
-通配符下限形如 List<? super T>   //匹配T类型及其父类
+通配符上限形如 List<? extends T> // 匹配T类型及其子类
+通配符下限形如 List<? super T>   // 匹配T类型及其父类
 
 
 序列化
@@ -1117,14 +1117,14 @@ java.net.Socket类和ServerSocket类表示客户端和服务端之间的套接�
 一个进程可以有多个线程,每个线程执行不同的任务
 
 线程的生命周期
-新建状态   //使用new关键词和Thread或其子类建立一个线程对象,直到执行start()方法之前
-就绪状态   //执行start()方法,线程处于就绪队列中,并等待JVM线程调度器调用
-运行状态   //获取系统资源,执行run()方法
-阻塞状态   //一个线程执行了sleep()、suspend(挂起)等方法,失去所占用的资源
-  等待阻塞 //执行了wait()方法
-  同步阻塞 //获取synchronized同步锁失败(同步锁被其他线程占用)
-  其他阻塞 //执行sleep()或join()后
-死亡状态   //线程完成任务或其他终止条件发生时
+新建状态   // 使用new关键词和Thread或其子类建立一个线程对象,直到执行start()方法之前
+就绪状态   // 执行start()方法,线程处于就绪队列中,并等待JVM线程调度器调用
+运行状态   // 获取系统资源,执行run()方法
+阻塞状态   // 一个线程执行了sleep()、suspend(挂起)等方法,失去所占用的资源
+  等待阻塞 // 执行了wait()方法
+  同步阻塞 // 获取synchronized同步锁失败(同步锁被其他线程占用)
+  其他阻塞 // 执行sleep()或join()后
+死亡状态   // 线程完成任务或其他终止条件发生时
 
 线程优先级
 方便操作系统调用,确定执行顺序
@@ -1188,277 +1188,277 @@ java9于2017.09.22发布,最主要的新特性是已经实现的模块化系统
 
 
 
-long startTime = System.currentTimeMillis();  //获取当前时间与1970.01.01 00:00:00的差值;以ms计
+long startTime = System.currentTimeMillis();  // 获取当前时间与1970.01.01 00:00:00的差值;以ms计
 long endTime = System.currentTimeMillis();
 
 
-String/字符串     //使用最多的类
+String/字符串     // 使用最多的类
 
-boolean res = str.contains(CharSequence s);     //CharSequence为可读写字符序列(字符串),判断是否包含s
-int index = str.indexOf(String s);              //获取值第一次出现对应的索引
-int index = str.lastIndexOf(String s);          //获取值最后一次出现对应的索引
-int res = str.compareTo(String s);              //返回两个字符串第一个Unicode差值
-int res = str.compareToIgnoreCase(String s);    //忽略大小写,同上
-str == String s;                                //比较两个字符串引用是否都相等;是否指向同一对象
-str.equals(String s);                           //比较两个字符串内容是否都相等
-String s1 = String s2 + String s3 + String s4;  //字符串拼接
-String str = str1.concat(String s);             //字符串拼接
-StringBuffer sb = new StringBuffer();           //线程安全的可变数组
-sb.append(String s);                            //字符串追加
-String str = String.substring(int startIndex, int endIndex)  //截取范围为[i,j)的字符串
-String str = String.substring(int startIndex)                //从startIndex处开始截取
+boolean res = str.contains(CharSequence s);     // CharSequence为可读写字符序列(字符串),判断是否包含s
+int index = str.indexOf(String s);              // 获取值第一次出现对应的索引
+int index = str.lastIndexOf(String s);          // 获取值最后一次出现对应的索引
+int res = str.compareTo(String s);              // 返回两个字符串第一个Unicode差值
+int res = str.compareToIgnoreCase(String s);    // 忽略大小写,同上
+str == String s;                                // 比较两个字符串引用是否都相等;是否指向同一对象
+str.equals(String s);                           // 比较两个字符串内容是否都相等
+String s1 = String s2 + String s3 + String s4;  // 字符串拼接
+String str = str1.concat(String s);             // 字符串拼接
+StringBuffer sb = new StringBuffer();           // 线程安全的可变数组
+sb.append(String s);                            // 字符串追加
+String str = String.substring(int startIndex, int endIndex)  // 截取范围为[i,j)的字符串
+String str = String.substring(int startIndex)                // 从startIndex处开始截取
 
-String reverse = new StringBuffer(str).reverse().toString(); //字符串转置
+String reverse = new StringBuffer(str).reverse().toString(); // 字符串转置
 
-//实际调用java.io.PrintStream.format(String format, Object... args)的方法,返回打印流
+// 实际调用java.io.PrintStream.format(String format, Object... args)的方法,返回打印流
 PrintStream ps = System.out.format(String format, Object... args);
 
-System.out.print(String s);                                 //打印字符串,不换行;实际调用java.io.PrintStream.print(String s)
-System.out.println(String s);                               //打印字符串,换行
-System.out.format();                                        //格式化打印
-String str = String.format(String format, Object... args);  //格式化字符串
-String str1 = str.intern();                                 //将str放入常量池,并返回str的引用赋给str1
+System.out.print(String s);                                 // 打印字符串,不换行;实际调用java.io.PrintStream.print(String s)
+System.out.println(String s);                               // 打印字符串,换行
+System.out.format();                                        // 格式化打印
+String str = String.format(String format, Object... args);  // 格式化字符串
+String str1 = str.intern();                                 // 将str放入常量池,并返回str的引用赋给str1
 
-//ignoreCase:值为true是表示忽略大小写
-boolean isMath = str.regionMatches([boolean ignoreCase, ]int toffset, String otherStr, int ooffset, int len); //忽略大小写
+// ignoreCase:值为true是表示忽略大小写
+boolean isMath = str.regionMatches([boolean ignoreCase, ]int toffset, String otherStr, int ooffset, int len); // 忽略大小写
 
-String s = str.replace(char oldChar, char newChar);    //替换所有字符
-String s = str.replaceFirst(String str1, String str2); //替换第一个出现的子字符串
-String s = str.replaceAll(String str1, String str2);   //替换所有出现的子字符串
+String s = str.replace(char oldChar, char newChar);    // 替换所有字符
+String s = str.replaceFirst(String str1, String str2); // 替换第一个出现的子字符串
+String s = str.replaceAll(String str1, String str2);   // 替换所有出现的子字符串
 
-//先将String转为StringBuffer,然后转置,再转为String
+// 先将String转为StringBuffer,然后转置,再转为String
 String reverse = new StringBuffer(str).reverse().toString();
 
-char[] cs = str.toCharArray();                //将字符串转为字符数组
-String[] strs = str.split(String delimeter);  //按分隔符将字符串转为字符串数组;特殊字符需要转义
-String su = str.toLowerCase();                //转为小写
-String su = str.toUpperCase();                //转为大写
+char[] cs = str.toCharArray();                // 将字符串转为字符数组
+String[] strs = str.split(String delimeter);  // 按分隔符将字符串转为字符串数组;特殊字符需要转义
+String su = str.toLowerCase();                // 转为小写
+String su = str.toUpperCase();                // 转为大写
 
-//返回字符串中指定位置对应的Unicode值,index表示第几位
+// 返回字符串中指定位置对应的Unicode值,index表示第几位
 int Unicode = str.codePointBefore(int index);
 
-//StringTokenizer类
-StringTokenizer st = new StringTokenizer(String str);                   //通过空格分割
-StringTokenizer st = new StringTokenizer(String str, String delimeter); //通过delimeter分割
+// StringTokenizer类
+StringTokenizer st = new StringTokenizer(String str);                   // 通过空格分割
+StringTokenizer st = new StringTokenizer(String str, String delimeter); // 通过delimeter分割
 while(st.hasMoreElements()){
     System.out.println(st.nextElement());
 }
 
-str1 = str.intern();    //将str放入常量池(jdk1.7/1.8 常量池在堆空间),并返回str引用;应用于大量使用相同字符串场景
+str1 = str.intern();    // 将str放入常量池(jdk1.7/1.8 常量池在堆空间),并返回str引用;应用于大量使用相同字符串场景
 
 
 Array/数组
 
-https://blog.csdn.net/hguisu/article/details/7776068   //常用排序算法及实现
-Arrays.sort(array);                                    //调用Array.sort()方法排序,从大到小
-int index = Arrays.binarySearch(array, array.Element); //Arrays.binarySearch()方法返回索引
+https:// blog.csdn.net/hguisu/article/details/7776068   // 常用排序算法及实现
+Arrays.sort(array);                                    // 调用Array.sort()方法排序,从大到小
+int index = Arrays.binarySearch(array, array.Element); // Arrays.binarySearch()方法返回索引
 
-int[] array = new int[6];                              //数组声明,元素默认为null,基本类型为基本类型的默认值
-int[] array = new int[] {1,5,2,6,15};                  //初始化
-int[] array = {1,5,7,0,3,7,8};                         //数组声明并初始化
-int i = array[index]                                   //按索引访问数组
+int[] array = new int[6];                              // 数组声明,元素默认为null,基本类型为基本类型的默认值
+int[] array = new int[] {1,5,2,6,15};                  // 初始化
+int[] array = {1,5,7,0,3,7,8};                         // 数组声明并初始化
+int i = array[index]                                   // 按索引访问数组
 
-//数组填充
-Arrays.sort(array);                                    //排序,从大到小
-Arrays.fill(array, value);                             //填充数组每个元素,会覆盖原有数据
-Arrays.fill(array, int startIndex,int endIndex, value);//按照索引填充
+// 数组填充
+Arrays.sort(array);                                    // 排序,从大到小
+Arrays.fill(array, value);                             // 填充数组每个元素,会覆盖原有数据
+Arrays.fill(array, int startIndex,int endIndex, value);// 按照索引填充
 
-boolean b = Arrays.asList(array).contains(1);          //元素查找
-int min = (int) Collections.min(Arrays.asList(array)); //求最小值
-int max = (int) Collections.max(Arrays.asList(array)); //求最大值
-String str = Arrays.toString(array);                   //一维转为单个字符串,输出:[1, 5, 7, 0, 3, 7, 8]
-String str = Arrays.deepToString(array);               //二维或以上转为单个字符串
-boolean isEqual = Arrays.equals(array1, array2);       //比较两个数组对应元素是否都相等
-array1 == array2;                                      //比较两个数组引用是否都相等
+boolean b = Arrays.asList(array).contains(1);          // 元素查找
+int min = (int) Collections.min(Arrays.asList(array)); // 求最小值
+int max = (int) Collections.max(Arrays.asList(array)); // 求最大值
+String str = Arrays.toString(array);                   // 一维转为单个字符串,输出:[1, 5, 7, 0, 3, 7, 8]
+String str = Arrays.deepToString(array);               // 二维或以上转为单个字符串
+boolean isEqual = Arrays.equals(array1, array2);       // 比较两个数组对应元素是否都相等
+array1 == array2;                                      // 比较两个数组引用是否都相等
 
-//二维数组
-String[][] data = new String[column][row];             //二维数组;cloumn(列)必须指定
-int index = data.length;                               //数组列数,类似于数据库表中字段数
-int index = data[0].length;                            //数组行数
+// 二维数组
+String[][] data = new String[column][row];             // 二维数组;cloumn(列)必须指定
+int index = data.length;                               // 数组列数,类似于数据库表中字段数
+int index = data[0].length;                            // 数组行数
 
-//数组元素替换
+// 数组元素替换
 System.arraycopy(Object src, int srcPos, Object dest, int destPos, int length);
 
-ArrayList<String> arrayList = new ArrayList<String>();  //集合字符串数组
-arrayList.add(string_1);                                //通过add()方法添加字符串数组
-Collections.reverse(arrayList);                         //通过Collections.reverse()方法反转数组
+ArrayList<String> arrayList = new ArrayList<String>();  // 集合字符串数组
+arrayList.add(string_1);                                // 通过add()方法添加字符串数组
+Collections.reverse(arrayList);                         // 通过Collections.reverse()方法反转数组
 
-//数组合并
+// 数组合并
 List list = new ArrayList(Arrays.asList(String[] a));
 list.addAll(Arrays.asList(String[] b));
 String[] c = Arrays.toString(list.toArray())
 
-//删除元素
+// 删除元素
 ArrayList<String> arr = new ArrayList<String>();
-arr.clear();           //清空元素
-arr.add(index,value);  //按索引增加或修改元素
-arr.remove(index);     //按索引删除元素
-arr.remove(value);     //按照值删除;value为引用
+arr.clear();           // 清空元素
+arr.add(index,value);  // 按索引增加或修改元素
+arr.remove(index);     // 按索引删除元素
+arr.remove(value);     // 按照值删除;value为引用
 
-//数组集合运算
+// 数组集合运算
 ArrayList arr = new ArrayList();
-arr.removeAll(arr1);   //删除arr中arr1存在的元素
-arr.retainAll(arr1);   //保留arr和arr1交集元素
+arr.removeAll(arr1);   // 删除arr中arr1存在的元素
+arr.retainAll(arr1);   // 保留arr和arr1交集元素
 
-//数据包含关系
+// 数据包含关系
 ArrayList<String> arr = new ArrayList<String>();
-boolean isContains = arr.contains(arr1);        //arr1是否是arr的子集
-boolean isContains = arr.contains(String str);  //arr是否包含str字符串
+boolean isContains = arr.contains(arr1);        // arr1是否是arr的子集
+boolean isContains = arr.contains(String str);  // arr是否包含str字符串
 
 
 
 Collection/集合框架
 
-List<String> list = new ArrayList<String>();         //声明集合
-List<String> list = Arrays.asList(array);            //数组转为List
-List<String> list = Arrays.asList(str1.split(str2)); //将字符串按指定分隔符转化为集合
-list.add("A");                                       //Set和List添加元素方式,Map使用put()方法
-list.isEmpty();                                      //判断集合是否为空
-list.remove(value);                                  //删除元素
-list.poll();                                         //删除第一个元素
-list.set(index, element);                            //按索引赋值
-(LinkedList)list.addFirst(value);                    //集合头部增加元素
-(LinkedList)list.addLast(value);                     //集合尾部增加元素
-(LinkedList)list.getFirst();                         //获取第一个元素
-(LinkedList)list.getLast();                          //获取最后一个元素
-(LinkedList)list.indexOf(value);                     //获取值第一次出现对应的索引
-(LinkedList)list.lastIndexOf(value);                 //获取值最后一次出现对应的索引
-(LinkedList)list.subList(index1, index2).clear();    //删除索引为[index1, index2)的元素
-int size = list.size();                              //集合长度
-Collections.min(List);                               //求最小值
-Collections.max(List);                               //求最大值
-Collections.shuffle(list);                           //打乱元素
-Collections.swap(List, index1, index1);              //交换索引对应元素
-Collections.indexOfSubList(list, sublist));          //集合子集查找,返回第一次出现的索引
-Collections.lastIndexOfSubList(list, sublist);       //类似上
-Collections.unmodifiableList(list);                  //返回一个不可修改的集合(包括Map)
-Collections.replaceAll(list, "33", "888");           //将集合中所有的33替换为888
-Collections.reverse(list);                           //集合反转
-Collections.rotate(list, distance);                  //集合向右滚动
+List<String> list = new ArrayList<String>();         // 声明集合
+List<String> list = Arrays.asList(array);            // 数组转为List
+List<String> list = Arrays.asList(str1.split(str2)); // 将字符串按指定分隔符转化为集合
+list.add("A");                                       // Set和List添加元素方式,Map使用put()方法
+list.isEmpty();                                      // 判断集合是否为空
+list.remove(value);                                  // 删除元素
+list.poll();                                         // 删除第一个元素
+list.set(index, element);                            // 按索引赋值
+(LinkedList)list.addFirst(value);                    // 集合头部增加元素
+(LinkedList)list.addLast(value);                     // 集合尾部增加元素
+(LinkedList)list.getFirst();                         // 获取第一个元素
+(LinkedList)list.getLast();                          // 获取最后一个元素
+(LinkedList)list.indexOf(value);                     // 获取值第一次出现对应的索引
+(LinkedList)list.lastIndexOf(value);                 // 获取值最后一次出现对应的索引
+(LinkedList)list.subList(index1, index2).clear();    // 删除索引为[index1, index2)的元素
+int size = list.size();                              // 集合长度
+Collections.min(List);                               // 求最小值
+Collections.max(List);                               // 求最大值
+Collections.shuffle(list);                           // 打乱元素
+Collections.swap(List, index1, index1);              // 交换索引对应元素
+Collections.indexOfSubList(list, sublist));          // 集合子集查找,返回第一次出现的索引
+Collections.lastIndexOfSubList(list, sublist);       // 类似上
+Collections.unmodifiableList(list);                  // 返回一个不可修改的集合(包括Map)
+Collections.replaceAll(list, "33", "888");           // 将集合中所有的33替换为888
+Collections.reverse(list);                           // 集合反转
+Collections.rotate(list, distance);                  // 集合向右滚动
 
-Iterator it = list.iterator();  //获取迭代器对象
-while (it.hasNext()) {          //集合迭代器迭代
+Iterator it = list.iterator();  // 获取迭代器对象
+while (it.hasNext()) {          // 集合迭代器迭代
     System.out.print(it.next());
 }
 
-//Enumeration迭代HashTable
+// Enumeration迭代HashTable
 Hashtable ht = new Hashtable();
-Enumeration e = ht.elements();  //获取值的枚举对象,键可用ht.keys()
+Enumeration e = ht.elements();  // 获取值的枚举对象,键可用ht.keys()
 while (e.hasMoreElements()) {
     System.out.println(e.nextElement());
 }
 
-//HashMap获取迭代器对象
+// HashMap获取迭代器对象
 HashMap< String, String> hMap = new HashMap< String, String>();
-hMap.put(key, value);          //按key赋值或修改
-Collection cl = hMap.values(); //返回Map值的集合
-Collection c2 = hMap.keySet(); //返回Map值的集合,一般是Set
-hMap.get(key);                 //按键获取值
-hMap.firstKey();               //获取第一个键
-hMap.lastKey();                //获取最后一个键
-hMap.remove(key);              //按键删除键值对(元素)
-Iterator itr = cl.iterator();  //获取value的迭代器
+hMap.put(key, value);          // 按key赋值或修改
+Collection cl = hMap.values(); // 返回Map值的集合
+Collection c2 = hMap.keySet(); // 返回Map值的集合,一般是Set
+hMap.get(key);                 // 按键获取值
+hMap.firstKey();               // 获取第一个键
+hMap.lastKey();                // 获取最后一个键
+hMap.remove(key);              // 按键删除键值对(元素)
+Iterator itr = cl.iterator();  // 获取value的迭代器
 
 
 Date/时间日期格式化
 
-Date类     //简单时间日期类型
-Date d1 = new Date();                       //获取当前时间
-Date d2 = c1.getTime();                     //获取时间
-Date d3 = Calendar.getInstance().getTime(); //获取时间
-String str = d1.toString();                 //获取时间字符串,输出:Wed Aug 29 00:17:18 CST 2018
+Date类     // 简单时间日期类型
+Date d1 = new Date();                       // 获取当前时间
+Date d2 = c1.getTime();                     // 获取时间
+Date d3 = Calendar.getInstance().getTime(); // 获取时间
+String str = d1.toString();                 // 获取时间字符串,输出:Wed Aug 29 00:17:18 CST 2018
 
-//设置时间格式
+// 设置时间格式
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a"); //a表示上下午
-String DateToStr = sdf.format(d1);                                    //格式化时间
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a"); // a表示上下午
+String DateToStr = sdf.format(d1);                                    // 格式化时间
 
-Calendar类   //时间日期的复杂实现
-Calendar cal = Calendar.getInstance();  //通过getInstance()实例化Calendar(抽象类),默认是当前时间
-cal.setTime(d1);                        //设置时间
-cal.add(Calendar.HOUR, 7);              //当前时间增加7小时,第二个参数可以是整数,负数表示相减;下面类似
+Calendar类   // 时间日期的复杂实现
+Calendar cal = Calendar.getInstance();  // 通过getInstance()实例化Calendar(抽象类),默认是当前时间
+cal.setTime(d1);                        // 设置时间
+cal.add(Calendar.HOUR, 7);              // 当前时间增加7小时,第二个参数可以是整数,负数表示相减;下面类似
 cal.add(Calendar.MONTH, 1);
 cal.add(Calendar.YEAR, 3);
-cal.roll(Calendar.HOUR, 1);             //当前时间增加一小时,除小时其他不变,按进制变化,负数表示相减
-int min = cal.get(Calendar.MINUTE);     //获取c1的分钟数;其他类似
-int day = cal.get(Calendar.DATE);       //当月多少号,下同
+cal.roll(Calendar.HOUR, 1);             // 当前时间增加一小时,除小时其他不变,按进制变化,负数表示相减
+int min = cal.get(Calendar.MINUTE);     // 获取c1的分钟数;其他类似
+int day = cal.get(Calendar.DATE);       // 当月多少号,下同
 int month = cal.get(Calendar.MONTH) + 1;  
 int year = cal.get(Calendar.YEAR);
 int dow = cal.get(Calendar.DAY_OF_WEEK);
 int dom = cal.get(Calendar.DAY_OF_MONTH);
 int doy = cal.get(Calendar.DAY_OF_YEAR);
-cal.get(Calendar.HOUR_OF_DAY);           //获取c1的小时数,类似的还是年月日、当月第几周和当年第几周等
-String time = cal.getTime();             //格式例如Fri Mar 27 21:44:15 CST 2015
+cal.get(Calendar.HOUR_OF_DAY);           // 获取c1的小时数,类似的还是年月日、当月第几周和当年第几周等
+String time = cal.getTime();             // 格式例如Fri Mar 27 21:44:15 CST 2015
 
-//创建字符串格式化类的实例,String.format()也是调用此类中的fmt.format()
+// 创建字符串格式化类的实例,String.format()也是调用此类中的fmt.format()
 Formatter fmt = new Formatter();
-fmt.format("%tc", cal); //格式化时间
+fmt.format("%tc", cal); // 格式化时间
 fmt.format("%tl:%tM", cal, cal);
 fmt.format("%tB %tb %tm", cal, cal, cal);
 
-//格式化日期
+// 格式化日期
 DateFormat[] df = new DateFormat[6];
-df[0] = DateFormat.getInstance();                      //18-8-29 上午12:36
-df[1] = DateFormat.getDateInstance();                  //2018-8-29
-df[2] = DateFormat.getDateInstance(DateFormat.MEDIUM); //2018-8-29
-df[3] = DateFormat.getDateInstance(DateFormat.FULL);   //2018年8月29日 星期三
-df[4] = DateFormat.getDateInstance(DateFormat.LONG);   //2018年8月29日
-df[5] = DateFormat.getDateInstance(DateFormat.SHORT);  //18-8-29
+df[0] = DateFormat.getInstance();                      // 18-8-29 上午12:36
+df[1] = DateFormat.getDateInstance();                  // 2018-8-29
+df[2] = DateFormat.getDateInstance(DateFormat.MEDIUM); // 2018-8-29
+df[3] = DateFormat.getDateInstance(DateFormat.FULL);   // 2018年8月29日 星期三
+df[4] = DateFormat.getDateInstance(DateFormat.LONG);   // 2018年8月29日
+df[5] = DateFormat.getDateInstance(DateFormat.SHORT);  // 18-8-29
 String str = df[i].format(new Date);
 
 SimpleDateFormat[] sdf = new SimpleDateFormat[6];
-sdf[0] = new SimpleDateFormat("yyyy/MM/dd");                        //2018/08/29
-sdf[1] = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");                //29-8-2018 12:42:01
-sdf[2] = new SimpleDateFormat("dd MMMM yyyy zzzz", Locale.ENGLISH); //29 August 2018 China Standard Time
-sdf[3] = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");         //星期三, 29 八月 2018 00:42:01 CST
-sdf[4] = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH);         //指定地点时间:2018-08-29
-sdf[5] = new SimpleDateFormat("EEE", Locale.US);                    //Wed
+sdf[0] = new SimpleDateFormat("yyyy/MM/dd");                        // 2018/08/29
+sdf[1] = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");                // 29-8-2018 12:42:01
+sdf[2] = new SimpleDateFormat("dd MMMM yyyy zzzz", Locale.ENGLISH); // 29 August 2018 China Standard Time
+sdf[3] = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");         // 星期三, 29 八月 2018 00:42:01 CST
+sdf[4] = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH);         // 指定地点时间:2018-08-29
+sdf[5] = new SimpleDateFormat("EEE", Locale.US);                    // Wed
 String str = sdf[i].format(new Date());                             
 
-String[] shortMonths = new DateFormatSymbols().getShortMonths();    //获取月份
-String[] weekdays = new DateFormatSymbols().getWeekdays();          //获取工作日
+String[] shortMonths = new DateFormatSymbols().getShortMonths();    // 获取月份
+String[] weekdays = new DateFormatSymbols().getWeekdays();          // 获取工作日
 
-//时间戳转换成时间
-Long timeStamp = System.currentTimeMillis();                     //获取当前时间戳
+// 时间戳转换成时间
+Long timeStamp = System.currentTimeMillis();                     // 获取当前时间戳
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-Date date = new Date(Long.parseLong(String.valueof(timeStamp))); //转化时间对象
-String sd = sdf(date);                                           //格式化时间为字符串
+Date date = new Date(Long.parseLong(String.valueof(timeStamp))); // 转化时间对象
+String sd = sdf(date);                                           // 格式化时间为字符串
 
 
 文件与目录
 
-String dir = "C:\\dir1\\dir12\\dir13";         //设置目录(或文件),windows环境写法,其他环境参考官方API
-String dir = "/dir1/dir12/dir13";              //Unix/Linux写法
-File f = new File(dir);                        // 创建文件(或目录)对象
-File f = File.createTempFile(String fileName); //创建临时文件
-File f = File.createTempFile(String prefix, String suffix, File directory); //同上
-boolean res = f.createNewFile();  //创建文件
-boolean res = f.mkdir();          //创建目录,上级目录不存在不会创建
-boolean res = f.mkdirs();         //递归创建目录,类似于linux的mkdir -p
-boolean res = f.isDirectory();    //判断是否为目录
-boolean res = f.delete();         //删除文件或者空文件夹
-boolean res = f.isHidden();       //判断文件或文件夹是否隐藏
-boolean res = f.exists();         //判断文件或文件夹是否存在
-String str = f.getName();         //获取文件名或文件夹名
-String str = f.getPath();         //获取文件或文件夹的路径
-String str = f.getAbsolutePath(); //获取文件或者文件夹的绝对路径
-String str = f.getParent();       //获取上级目录
-long lm = f.lastModified();       //获取文件最后修改时间
-Date d = new Date(lm);            //格式化最后修改时间
+String dir = "C:\\dir1\\dir12\\dir13";         // 设置目录(或文件),windows环境写法,其他环境参考官方API
+String dir = "/dir1/dir12/dir13";              // Unix/Linux写法
+File f = new File(dir);                        //  创建文件(或目录)对象
+File f = File.createTempFile(String fileName); // 创建临时文件
+File f = File.createTempFile(String prefix, String suffix, File directory); // 同上
+boolean res = f.createNewFile();  // 创建文件
+boolean res = f.mkdir();          // 创建目录,上级目录不存在不会创建
+boolean res = f.mkdirs();         // 递归创建目录,类似于linux的mkdir -p
+boolean res = f.isDirectory();    // 判断是否为目录
+boolean res = f.delete();         // 删除文件或者空文件夹
+boolean res = f.isHidden();       // 判断文件或文件夹是否隐藏
+boolean res = f.exists();         // 判断文件或文件夹是否存在
+String str = f.getName();         // 获取文件名或文件夹名
+String str = f.getPath();         // 获取文件或文件夹的路径
+String str = f.getAbsolutePath(); // 获取文件或者文件夹的绝对路径
+String str = f.getParent();       // 获取上级目录
+long lm = f.lastModified();       // 获取文件最后修改时间
+Date d = new Date(lm);            // 格式化最后修改时间
 
-//需要导入commons.io包,返回非空文件夹大小,以bytes(字节)计
+// 需要导入commons.io包,返回非空文件夹大小,以bytes(字节)计
 long size = FileUtils.sizeOfDirectory(f);
 
-String[] dirLists = f.list();     //f是目录时,获取目录下所有文件(包括目录)字符串数组,不是递归
-File[] fs = f.listFiles();        //返回文件对象数组
-File[] roots = File.listRoots();  //返回可访问文件系统根目录文件对象数组
+String[] dirLists = f.list();     // f是目录时,获取目录下所有文件(包括目录)字符串数组,不是递归
+File[] fs = f.listFiles();        // 返回文件对象数组
+File[] roots = File.listRoots();  // 返回可访问文件系统根目录文件对象数组
 
-//递归删除目录下所有文件及文件夹
+// 递归删除目录下所有文件及文件夹
 public static boolean deleteDir(File dir) {
     if (dir.isDirectory()) {
         String[] children = dir.list();
         for (int i = 0; i < children.length; i++) {
-            //dir为相对路径或者绝对路径,children[i]为dir目录下的子目录或者文件
+            // dir为相对路径或者绝对路径,children[i]为dir目录下的子目录或者文件
             boolean success = deleteDir(new File(dir, children[i]));
             if (!success) {
                 return false;
@@ -1469,9 +1469,9 @@ public static boolean deleteDir(File dir) {
     return dir.delete();
 }
 
-//获取指定目录下所有的子目录对象
+// 获取指定目录下所有的子目录对象
 File dir = new File(AbsolutePath); 
-FileFilter ff = new FileFilter() {   //文件过滤器
+FileFilter ff = new FileFilter() {   // 文件过滤器
     public boolean accept(File file) {
         return file.isDirectory();
     }
@@ -1482,31 +1482,31 @@ File[] fs = dir.listFiles(ff);
 IO(输入输出)
 
 分类(以下列名称结尾)
-1)Reader         //字符输入(读取)流,磁盘文件-->内存,将磁盘文件中的数据读取输入到内存
-2)Writer         //字符输出(写入)流,内存-->磁盘文件,将内存中数据写入到磁盘文件中
-3)InputStream    //字节输入(读取)流,磁盘文件-->内存
-4)OutputStream   //字节输出(写入)流,内存-->磁盘文件
+1)Reader         // 字符输入(读取)流,磁盘文件-->内存,将磁盘文件中的数据读取输入到内存
+2)Writer         // 字符输出(写入)流,内存-->磁盘文件,将内存中数据写入到磁盘文件中
+3)InputStream    // 字节输入(读取)流,磁盘文件-->内存
+4)OutputStream   // 字节输出(写入)流,内存-->磁盘文件
 
-//文件写入(字符流)
-FileWriter fw = new FileWriter(String fileName);                 //创建文件输出流,用于向文件中写入数据,文件不存在会创建
-FileWriter fw = new FileWriter(String fileName, boolean append); //append的值决定是否追加,一般是已存在文件
-BufferedWriter bw = new BufferedWriter(fw);                      //创建缓冲输出流
-bw.write(String str);                                            //将字符串写入到文件
-bw.close();                                                      //关闭流
+// 文件写入(字符流)
+FileWriter fw = new FileWriter(String fileName);                 // 创建文件输出流,用于向文件中写入数据,文件不存在会创建
+FileWriter fw = new FileWriter(String fileName, boolean append); // append的值决定是否追加,一般是已存在文件
+BufferedWriter bw = new BufferedWriter(fw);                      // 创建缓冲输出流
+bw.write(String str);                                            // 将字符串写入到文件
+bw.close();                                                      // 关闭流
 
-//文件读取(字符流)
-FileReader fr = new FileReader(String fileName); //创建文件输入流,用于从文件中读取数据
-BufferedReader br = new BufferedReader(fr);      //创建缓冲输入流
+// 文件读取(字符流)
+FileReader fr = new FileReader(String fileName); // 创建文件输入流,用于从文件中读取数据
+BufferedReader br = new BufferedReader(fr);      // 创建缓冲输入流
 String str;
-while ((str = br.readLine()) != null) {          //判断是否读取到最后一行
-    System.out.println(str);                     //实际调用java.io.PrintStream.println(String s)
+while ((str = br.readLine()) != null) {          // 判断是否读取到最后一行
+    System.out.println(str);                     // 实际调用java.io.PrintStream.println(String s)
 }
-br.close();                                      //关闭流
+br.close();                                      // 关闭流
 
-//文件复制(字节流)
-InputStream is = new FileInputStream(new File(srcfile));     //创建文件输入流
-OutputStream os = new FileOutputStream(new File(destnfile)); //创建文件输出流
-byte[] buf = new byte[1024];                                 //创建字节数组,用于缓冲
+// 文件复制(字节流)
+InputStream is = new FileInputStream(new File(srcfile));     // 创建文件输入流
+OutputStream os = new FileOutputStream(new File(destnfile)); // 创建文件输出流
+byte[] buf = new byte[1024];                                 // 创建字节数组,用于缓冲
 int len;
 while ((len = is.read(buf)) > 0) {
     os.write(buf, 0, len);
@@ -1530,7 +1530,7 @@ out.close();
 5.1 Overloading 重载/方法重写
 主要用于继承,子类重载父类方法
 方法名相同,返回类型不同或参数个数或参数类型或参数顺序等一个或多个差异
-myFunction();                  //原方法
+myFunction();                  // 原方法
 myFunction(int i);
 int myFunction(int i, int j);
 
@@ -1581,14 +1581,14 @@ long factorial(int n){
 重写父类方法,不同的实现方式,返回类型、方法名、参数签名完全一致
 
 5.7 instanceof 二元操作符,用于判断对象实例
-boolean i = a instanceof B; //判断a是否是B类的实例
+boolean i = a instanceof B; // 判断a是否是B类的实例
 
 5.8 循环标签break和continue
-break    //跳出循环体
-continue //跳出本次循环,进行下次循环
+break    // 跳出循环体
+continue // 跳出本次循环,进行下次循环
 
 5.9 枚举类和switch语句
-enum Car {lamborghini,tata,audi,fiat,honda}; //定义枚举类
+enum Car {lamborghini,tata,audi,fiat,honda}; // 定义枚举类
 
 Car c = Car.tata;
 switch(c){
@@ -1616,36 +1616,36 @@ enum Car{
         return price;
     }
 }
-//foreach循环输出
+// foreach循环输出
 for(Car x : Car.values()){
     System.out.println(x + " 需要 " + x.getPrice() + " 千美元。");
 }
 
 5.11 循环语句
 
-for(初始化;布尔表达式;更新语句){   //常规for循环
-    //代码语句
+for(初始化;布尔表达式;更新语句){   // 常规for循环
+    // 代码语句
 }
 
-for(元素类型 变量名:遍历对象){    //加强for循环--foreach
-    //语句
+for(元素类型 变量名:遍历对象){    // 加强for循环--foreach
+    // 语句
 }
 
 5.12 可变参数
-//可变参数求和
-int mySum(int... intArrays){  //本质为参数数组
+// 可变参数求和
+int mySum(int... intArrays){  // 本质为参数数组
     int sum = 0;
     for(int i = 0; i < intArrays.length; i++){
         sum += intArrays[i];
     }
     return sum;
 }
-//引用
+// 引用
 sum = mySum(new in[]{1,43,89,8,45})
 
 
 文件操作
-//需引入io库
+// 需引入io库
 import java.io.*;
 6.1 文件写入
 try{
@@ -1662,7 +1662,7 @@ try{
     while((String str = in.readLine()) != null){
         System.out.println(str);
     }
-    System.out.println(str);  //此时,str已经是null
+    System.out.println(str);  // 此时,str已经是null
 }catch(IOException e)
 
 6.3 文件删除
@@ -1674,7 +1674,7 @@ try{
         System.out.println("文件删除失败！");
     }
 }catch(IOException e){
-    e.printStackTrace(); //捕获堆栈信息
+    e.printStackTrace(); // 捕获堆栈信息
 }
 
 6.4 文件内容复制
@@ -1707,50 +1707,50 @@ try{
 }
 
 6.6 临时文件的创建
-a)File.createTempFile(String prefix, String suffix) //参数分别为前缀、后缀
+a)File.createTempFile(String prefix, String suffix) // 参数分别为前缀、后缀
 public static void main(String[] args) throws Exception{
-    File temp = File.createTempFile("tmp", ".txt") //创建tmp.txt临时文件
-    String path = temp.getAbsolutePath();          //获取文件绝对路径
-    temp.deleteOnExit();                           //执行后删除临时文件
+    File temp = File.createTempFile("tmp", ".txt") // 创建tmp.txt临时文件
+    String path = temp.getAbsolutePath();          // 获取文件绝对路径
+    temp.deleteOnExit();                           // 执行后删除临时文件
     BufferedWriter out = new BufferedWriter(new FileWriter(temp));
-    out.write("aString\n");                        //向临时文件中写入数据
+    out.write("aString\n");                        // 向临时文件中写入数据
     out.close();
 }
 b)File.createTempFile(String prefix, String suffix, File directory)
 File f = null;
 try{
-    f = File.createTempFile("tmp", ".txt", new File("C:/")); //创建临时文件
-    f1 = File.createTempFile("tmp", null, new File("D:/"));  //创建不带后缀的临时文件
-    f.deleteOnExit();      //执行后删除文件
-    f1.deleteOnExit();     //执行后删除文件    
+    f = File.createTempFile("tmp", ".txt", new File("C:/")); // 创建临时文件
+    f1 = File.createTempFile("tmp", null, new File("D:/"));  // 创建不带后缀的临时文件
+    f.deleteOnExit();      // 执行后删除文件
+    f1.deleteOnExit();     // 执行后删除文件    
 }catch(Exception e){
-    e.printStackTrace();   //如有错误输出内容
+    e.printStackTrace();   // 如有错误输出内容
 }
 
 6.7 文件修改日期
-File f = new File("C:/my.txt");                             //创建文件
-f.lastModified();                                           //修改最后修改时间
-Date fTime = new Date(f.lastModified());                    //获取修改时间
-System.out.println(f.toString());                           //将修改时间转换成String类型并输出
-boolean b = f.setLastModified(System.currentTimeMillis());  //修改最后修改时间,返回值为布尔类型
-fTime = new Date(f.lastModified());                         //获取修改时间
-System.out.println(f.toString());                           //输出时间
+File f = new File("C:/my.txt");                             // 创建文件
+f.lastModified();                                           // 修改最后修改时间
+Date fTime = new Date(f.lastModified());                    // 获取修改时间
+System.out.println(f.toString());                           // 将修改时间转换成String类型并输出
+boolean b = f.setLastModified(System.currentTimeMillis());  // 修改最后修改时间,返回值为布尔类型
+fTime = new Date(f.lastModified());                         // 获取修改时间
+System.out.println(f.toString());                           // 输出时间
 
 6.8 获取文件大小
-File f = new File(filename); //创建文件对象
-boolean b1 = f.exists();     //判断文件是否存在
-boolean b2 = f.isFile();     //判断是否为文件
-long size = f.length();      //获取文件大小,以byte计
+File f = new File(filename); // 创建文件对象
+boolean b1 = f.exists();     // 判断文件是否存在
+boolean b2 = f.isFile();     // 判断是否为文件
+long size = f.length();      // 获取文件大小,以byte计
 
 6.9 文件重命名
 File f_old = new File(filename1);
 file f_new = new File(filename2);
-boolean b = f_old.renameTo(f_new); //重命名成功返回true
+boolean b = f_old.renameTo(f_new); // 重命名成功返回true
 
 6.10 设置文件只读
 File f = new File(filename);
-boolean b1 = f.setReadOnly(); //设置只读
-boolean b2 = f.canWrite();    //判断是否可写
+boolean b1 = f.setReadOnly(); // 设置只读
+boolean b2 = f.canWrite();    // 判断是否可写
 
 6.11 指定目录创建文件
 File dir = new File(path);
@@ -1758,8 +1758,8 @@ File file = File.createTempFile("文件名", "后缀名", dir);
 
 6.12 创建文件
 try{
-    File f = new File("C:/myfile.txt"); //创建新文件
-    boolean b = f.createNewFile();      //判断新文件是否创建
+    File f = new File("C:/myfile.txt"); // 创建新文件
+    boolean b = f.createNewFile();      // 判断新文件是否创建
 }catch(IOException e){
     e.printStackTrace();
 }
@@ -1767,7 +1767,7 @@ try{
 6.13 判断文件是否在同一目录下
 File f1 = new File("C:/File/123.txt");
 File f2 = new File("C:/java/234.txt");
-if(f1.compareTo(f2) == 0)  //判断文件路径是否一致
+if(f1.compareTo(f2) == 0)  // 判断文件路径是否一致
     System.out.println("文件路径一致");
 else
     System.out.println("文件路径不一致");
@@ -1775,19 +1775,19 @@ else
 
 目录操作
 7.1 创建目录
-String dir = "D:\\a\\b\\c\\d\\e"; //定义目录
-File f = new File(dir);           //创建文件对象
-boolean b = f.mkdir();            //返回创建结果
+String dir = "D:\\a\\b\\c\\d\\e"; // 定义目录
+File f = new File(dir);           // 创建文件对象
+boolean b = f.mkdir();            // 返回创建结果
 
 7.2 删除目录
 public static void main(String[] args) thorows Exceptiom{
-    deleteDir(new File("./test")); //删除test
+    deleteDir(new File("./test")); // 删除test
 }
 
 public static boolean deleteDir(File dir){
-    if(dir.isDirectory()){                        //判断是否为目录
-        String[] children = dir.list();           //返回目录下所有文件及目录
-        for(int i = 0;i < children.length; i++){  //递归删除
+    if(dir.isDirectory()){                        // 判断是否为目录
+        String[] children = dir.list();           // 返回目录下所有文件及目录
+        for(int i = 0;i < children.length; i++){  // 递归删除
             boolean success = deleteDir(new File(dir, children[i]));
             if(!success){
                 return false;
@@ -1805,15 +1805,15 @@ public static boolean deleteDir(File dir){
 
 7.3 判断目录是否为空
 File file = new File("./testdir");
-file.isDirectory();  //判断是否为目录
-file.list().length;  //返回目录下目录和文件总数
+file.isDirectory();  // 判断是否为目录
+file.list().length;  // 返回目录下目录和文件总数
 
 7.4 判断目录是否隐藏
 File file = new File("C:/test.txt");
 boolean b = file.isHidden();
 
 7.5 获取目录大小
-long size = FileUtils.sizeOfDirctory(new Fiile("C:/test")); //以byte计
+long size = FileUtils.sizeOfDirctory(new Fiile("C:/test")); // 以byte计
 
 7.6 获取文件上级目录
 File file = new File("C:/file/test.txt");
@@ -1854,7 +1854,7 @@ if(files.length == 0){
 
 7.9 遍历指定目录下所有文件及目录
 File f = new File("C:");
-String[] children = f.list(); //返回指定目录下的所有文件及目录列表的数组
+String[] children = f.list(); // 返回指定目录下的所有文件及目录列表的数组
 
 7.10 遍历系统根目录
 File[] roots = File.listRootd();
@@ -1867,7 +1867,7 @@ String curDir = System.getProperty("user.dir");
 
 7.12 遍历目录
 public static void mian(String[] args) throws Exception{
-    File dir = new File("c:/myDir"); //指定遍历的目录
+    File dir = new File("c:/myDir"); // 指定遍历的目录
     visitAllDirAndFiles(dir);
 }
 public static void visitAllDirAndFiles(File f){
@@ -1886,40 +1886,40 @@ try{
     throw new Exception("My Exception");
 }catch(Exception e){
     System.err.println("Caught Exception");
-    System.err.println(e.getMessage()); //获取异常错误消息字符串,不返回错误类型
+    System.err.println(e.getMessage()); // 获取异常错误消息字符串,不返回错误类型
     System.err.println(e.getLocalizedMessage());
-    e.printStackTrace();                //打印错误位置及原因
+    e.printStackTrace();                // 打印错误位置及原因
 }
 
 8.2 多catch
 try{
     throw new Type();
 }catch(Type1 t1){
-    //异常代码1
+    // 异常代码1
 }catch(Type2 t2){
-    //异常代码2
+    // 异常代码2
 }catch(Type3){
-    //异常代码3
+    // 异常代码3
 }finally{
-    //一般为资源关闭相关代码
+    // 一般为资源关闭相关代码
 }
 
 8.3 多线程异常处理
-class MyThread extends Thread{        //继承Thread类,并重写run()方法
+class MyThread extends Thread{        // 继承Thread类,并重写run()方法
     public void run(){
-        throw new RuntimeException(); //跑出运行时异常
+        throw new RuntimeException(); // 跑出运行时异常
     }
 }
 class Main{
     public static void main(String[] args){
         MyThread t = new MyThread();
-        t.start();              //开始进程
+        t.start();              // 开始进程
         try{
-            Thread.sleep(1000); //休眠1000ms
-        }catch(Exception e){    //捕获异常,并输出详情
+            Thread.sleep(1000); // 休眠1000ms
+        }catch(Exception e){    // 捕获异常,并输出详情
             System.out.println("Caught it " + e);
         }
-        System.out.println("Exiting main"); //输出退出信息
+        System.out.println("Exiting main"); // 输出退出信息
     }
 }
 
@@ -1928,10 +1928,10 @@ public static void main(String[] args) throws Exception{
     try{
         int result = 20/0;
         System.out.println("表达式结果为" + result);
-    }catch(ArithmeticException ex){            //捕获算数异常
+    }catch(ArithmeticException ex){            // 捕获算数异常
         System.out.println("算数异常" + ex)
         try{
-            throw new NumberFormatException(); //手动/强制抛出数字格式异常
+            throw new NumberFormatException(); // 手动/强制抛出数字格式异常
         }catch(NumberFormatException e){
             System.out.println("强制抛出异常:" + e)
         }
@@ -1939,14 +1939,14 @@ public static void main(String[] args) throws Exception{
 }
 
 8.5 自定义异常
-class MyException extends Exception{         //创建自定义异常,继承于Exception类
+class MyException extends Exception{         // 创建自定义异常,继承于Exception类
     MyException(String str){
         super(str);
     }
 }
 class Input{
     void method() throws MyException{
-        throw new Myexception("My Exception");  //抛出自定义异常
+        throw new Myexception("My Exception");  // 抛出自定义异常
     }
 }
 class Test{
@@ -1962,73 +1962,73 @@ class Test{
 
 数据结构
 9.1 链表(LinkedList)
-LinkedList<String> myList = new LinkedList<String>(); //实例化LinkedList
-myList.add("1");                                      //添加元素,默认从链表尾部添加
-myList.addFirst("0");                                 //在链表开头添加元素
-myList.addLast("2");                                  //在链表结尾添加元素
-System.out.println(myList);                           //输出 [0,1,2]
-myList.getFirst();                                    //获取链表的栈顶元素
-myList.removeFirst();                                 //移除栈顶元素
-myList.subList(2,4).clear();                          //删除指定位置元素,按照索引下标删除。[2,4)
-myList.indexOf("1");                                  //返回指定元素第一次出现的位置
-myList.last.IndexOf("1");                             //返回指定元素最后一次出现的位置
-myList.set(2, "3");                                   //修改指定位置元素的值
+LinkedList<String> myList = new LinkedList<String>(); // 实例化LinkedList
+myList.add("1");                                      // 添加元素,默认从链表尾部添加
+myList.addFirst("0");                                 // 在链表开头添加元素
+myList.addLast("2");                                  // 在链表结尾添加元素
+System.out.println(myList);                           // 输出 [0,1,2]
+myList.getFirst();                                    // 获取链表的栈顶元素
+myList.removeFirst();                                 // 移除栈顶元素
+myList.subList(2,4).clear();                          // 删除指定位置元素,按照索引下标删除。[2,4)
+myList.indexOf("1");                                  // 返回指定元素第一次出现的位置
+myList.last.IndexOf("1");                             // 返回指定元素最后一次出现的位置
+myList.set(2, "3");                                   // 修改指定位置元素的值
 
 9.2 向量(Vector)
 Vector v = new Vector();
 v.add("A");
 v.add("B");
 v.add("C");
-Collections.sort(v);                          //排序
-int index = Collections.binarySearch(v, "A"); //查找指定位置索引
-Object obj = Collections.max(v);              //返回元素最大值
-Collections.swap(v, 0, 2);                    //旋转指定元素,包括索引位置
+Collections.sort(v);                          // 排序
+int index = Collections.binarySearch(v, "A"); // 查找指定位置索引
+Object obj = Collections.max(v);              // 返回元素最大值
+Collections.swap(v, 0, 2);                    // 旋转指定元素,包括索引位置
 
-9.3 队列(Quenue)   //一种特殊线性表,只允许表前端进行删除,后端进行插入
-Quenue<String> q = new LinkedList<String>();  //实例化队列,LinkList类实现了Quenue接口
-q.offer("a");                                 //添加元素。不使用add()添加,remove()删除,这两种方法在失败后会抛出异常,不推荐使用
+9.3 队列(Quenue)   // 一种特殊线性表,只允许表前端进行删除,后端进行插入
+Quenue<String> q = new LinkedList<String>();  // 实例化队列,LinkList类实现了Quenue接口
+q.offer("a");                                 // 添加元素。不使用add()添加,remove()删除,这两种方法在失败后会抛出异常,不推荐使用
 q.offer("b");
 q.offer("c");
-q.poll();                                     //返回第一个元素并删除该元素,删除a
-q.element();                                  //返回第一个元素
-q.peek();                                     //返回第一个元素
+q.poll();                                     // 返回第一个元素并删除该元素,删除a
+q.element();                                  // 返回第一个元素
+q.peek();                                     // 返回第一个元素
 
 集合
 10.1 数组转集合
 String[] str = new String[5];
 for(int i =0; i < 5; i++){
-    str[i] = String.valueOf(i);         //数组赋值
+    str[i] = String.valueOf(i);         // 数组赋值
 }
-List<String> list = Arrays.asList(str); //数组转集合
+List<String> list = Arrays.asList(str); // 数组转集合
 
 10.2 集合和元素比较
-String[] coins = {"Penney","nickel","dime","Quarter","dollar"}; //创建字符串数组
-Set<String> set = new TreeSet<String>();                        //TreeSet类实现了Set接口
+String[] coins = {"Penney","nickel","dime","Quarter","dollar"}; // 创建字符串数组
+Set<String> set = new TreeSet<String>();                        // TreeSet类实现了Set接口
 for(int i = 0; i < coins.length; i++){
-    set.add(coins[i]);                                          //数组转化成集合
+    set.add(coins[i]);                                          // 数组转化成集合
 }
-Object obj = Collections.min(set);                              //返回最小元素
-Collections.min(set, String.CASE_INSENSITIVE_ORDER);            //忽略大小写返回最小值
+Object obj = Collections.min(set);                              // 返回最小元素
+Collections.min(set, String.CASE_INSENSITIVE_ORDER);            // 忽略大小写返回最小值
 
 10.3 HashMap遍历
 HashMap<String, String> hm = new HashMap<String, String>();
-hm.put("1", "1st");             //添加元素
+hm.put("1", "1st");             // 添加元素
 hm.put("2", "2nd");
 hm.put("3", "3rd");
-boolean b = col.isEmpty();      //判断集合是否为空
-int size = col.size();          //返回集合长度
-Collection col = hm.values();   //获取HashMap元素集合
-//迭代遍历
-Iterator itr = col.iterator();  //创建集合迭代器
+boolean b = col.isEmpty();      // 判断集合是否为空
+int size = col.size();          // 返回集合长度
+Collection col = hm.values();   // 获取HashMap元素集合
+// 迭代遍历
+Iterator itr = col.iterator();  // 创建集合迭代器
 while(itr.hasNext()){
     System.out.println(itr.next());
 }
-//传统for循环遍历
+// 传统for循环遍历
 for(int i = 0; i < size; i++){
     String value = col.get(i);
     System.out.println(value);
 }
-//foreach循环遍历
+// foreach循环遍历
 for(String value; col){
     System.out.println(value);
 }
@@ -2038,7 +2038,7 @@ List<Integer> list = new ArrayList<Intrger>();
 for(int i = 0; i < 10; i++){
     list.add(new Integer(i));
 }
-Collections.shuffle(list); //打乱集合元素
+Collections.shuffle(list); // 打乱集合元素
 
 10.5 集合反转
 Collections.reverse(List);
@@ -2047,45 +2047,45 @@ Collections.reverse(List);
 public static void main(String[] args) throws Exception{
     List stuff = Array.asList(new String[]{"a", "b", "c"});
     List list = new ArrayList(stuff);
-    list = Collections.unmodifiableList(list); //设置只读
+    list = Collections.unmodifiableList(list); // 设置只读
     try{
         list.set(0, "new value");
     }catch(UnsupportedOperationException e){
-        //捕获的异常代码
+        // 捕获的异常代码
     }
     Set set = new HashSet(stuff);
-    set = Collections.unmodifiableList(set); //设置只读
+    set = Collections.unmodifiableList(set); // 设置只读
     Map map = new HashMap();
-    map = Collection.unmodifiableList(map);  //设置只读
+    map = Collection.unmodifiableList(map);  // 设置只读
 }
 
 10.7 集合输出
 TreeMap tMap = new TreeMap();
-tMap.put(1, "Sunday");   //插入数据
+tMap.put(1, "Sunday");   // 插入数据
 tMap.put(2, "Monday");
 tMap.put(3, "Tuesday");
 tMap.put(4, "Wedesday");
 tMap.put(5, "Thursday");
 tMap.put(6, "Friday");
 tMap.put(7, "Saturday");
-tMap.keySet();           //返回 key
-tMap.values();           //返回 values
-tMap.get(key);           //返回指定键的值
+tMap.keySet();           // 返回 key
+tMap.values();           // 返回 values
+tMap.get(key);           // 返回指定键的值
 tMap.firstKey();
 tMap.lastKey();
-tMap.remove(key);        //移除指定键对应的键值对
+tMap.remove(key);        // 移除指定键对应的键值对
 
 10.8 循环移动元素
 String str = "A B C B";
-List list = Array.asList(str.split(" ")); //按照指定分隔符将字符串转化成集合
-Collections.rotate(list, 2);              //指定移动截止索引位置,输出结果[C, D, A, B]
+List list = Array.asList(str.split(" ")); // 按照指定分隔符将字符串转化成集合
+Collections.rotate(list, 2);              // 指定移动截止索引位置,输出结果[C, D, A, B]
 
 10.9 遍历HashTable的键值
 HashTable ht new HashTable();
 ht.put("1", "one");
 ht.put("2", "two");
 Enumeration e = ht.keys(); 接收键
-//Enumeration e = ht.values(); //接收值
+// Enumeration e = ht.values(); // 接收值
 while(e.hashMoreElements()){
     System.out.println(e.nextElement());
 }
@@ -2106,7 +2106,7 @@ treeSet.add("v");
 linkedHashSet.add("v");
 hashMap.put("k", "v");
 treeMap.put("k", "v");
-//迭代器输出方法
+// 迭代器输出方法
 void displayAll(Collection col){
     Iterator itr = col.iterator();
     while(itr.hasNext()){
@@ -2116,16 +2116,16 @@ void displayAll(Collection col){
 
 10.11 集合元素替换
 String str = "A B C D";
-List list = Array.asList(str.split(" ")); //按照指定分隔符将字符串转化成集合
-Collections.replaceAll(list, "A", "a");   //将A替换成a
+List list = Array.asList(str.split(" ")); // 按照指定分隔符将字符串转化成集合
+Collections.replaceAll(list, "A", "a");   // 将A替换成a
 
 10.12 List截取
 String str = "A B C D";
-List list = Array.asList(str.split(" "));                       //按照指定分隔符将字符串转化成集合
+List list = Array.asList(str.split(" "));                       // 按照指定分隔符将字符串转化成集合
 String subStr = "B C";
 List subList = Array.asList(str.split(" ")); 
-int firstIndex = Collections.indexOfSubList(list, subList);     //返回之列在列表中第一次出现的索引
-int lastIndex = Collections.last.IndexOfSubList(list, subList); //返回之列在列表中最后一次出现的索引
+int firstIndex = Collections.indexOfSubList(list, subList);     // 返回之列在列表中第一次出现的索引
+int lastIndex = Collections.last.IndexOfSubList(list, subList); // 返回之列在列表中最后一次出现的索引
 
 
 网络实例
@@ -2138,9 +2138,9 @@ try{
 }catch(UnknowHostException e){
     System.exit(2);
 }
-String str = address.getHostName();     //返回主机名
-String str1 = address.getHostAddress(); //返回主机地址
-System.exit(0);                         //正常退出,关闭JVM。方法为0为正常关闭；其他参数为非正常关闭
+String str = address.getHostName();     // 返回主机名
+String str1 = address.getHostAddress(); // 返回主机地址
+System.exit(0);                         // 正常退出,关闭JVM。方法为0为正常关闭；其他参数为非正常关闭
 
 11.2 检测本机端口是否被占用
 import java.io.*;
@@ -2168,39 +2168,39 @@ public static void main(String[] args){
 11.3 获取本机IP地址及主机名
 public static void main(String[] args) throws Exception{
     InetAddress addr = InetAddress.getLocalHost();
-    String str = addr.getHostAddress(); //返回主机地址
-    String str1 = addr.getHostName();   //返回主机名
+    String str = addr.getHostAddress(); // 返回主机地址
+    String str1 = addr.getHostName();   // 返回主机名
 }
 
 11.4 获取远程文件大小
 import java.net.URL;
 import java.netURLConnection;
 public static void main(String[] args) throws Exception{
-    //定义连接
-    URL url = new URL("http://www.runoob/wp-content/thems/runoob/assets/img/newlogo.png");
-    URLConnection conn = url.openConnection(); //打开连接
-    int size = conn.getContentLength();        //返回资源大小,以byte计。若size<0,表示无法获取文件大小
-    conn.getInputStream().close();             //关闭连接
+    // 定义连接
+    URL url = new URL("http:// www.runoob/wp-content/thems/runoob/assets/img/newlogo.png");
+    URLConnection conn = url.openConnection(); // 打开连接
+    int size = conn.getContentLength();        // 返回资源大小,以byte计。若size<0,表示无法获取文件大小
+    conn.getInputStream().close();             // 关闭连接
 }
 
 11.5 Socket实现多线程服务器程序
-public class MultiThreadServer implements Runnable{ //实现Runnable接口
+public class MultiThreadServer implements Runnable{ // 实现Runnable接口
     Socket csocket;
     MultiThreadServer(Socket csocket){
         this.csocket = csocket;
     }
     
     public static void main(String[] args) throws Exception{
-        ServerSocket ss = new ServerSocket(1234);         //创建服务器
+        ServerSocket ss = new ServerSocket(1234);         // 创建服务器
         System.out.println("Listening");
         while(true){
-            Socket s = ss.accept();                       //连接服务器
+            Socket s = ss.accept();                       // 连接服务器
             System.out.println("Connected");
-            new Thread(new MultiThreadServer(s).start()); //创建多线程连接
+            new Thread(new MultiThreadServer(s).start()); // 创建多线程连接
         }
     }
     
-    public void run(){   //重写run()方法
+    public void run(){   // 重写run()方法
         try{
             PrintStream ps = new PrintStream(csocket.getOutputStream());
             for(int i = 100; i >= 0; i--){
@@ -2215,14 +2215,14 @@ public class MultiThreadServer implements Runnable{ //实现Runnable接口
 }
 
 11.6 查看主机指定文件最后修改时间
-URL url = new URL("http://127.0.0.1/java.bmp");
-URLConnection uc = url.openConnection(); //打开连接
-uc.setUseCaches(flase);                  //设置请求不能使用缓存
-long t = uc.getLastModified();           //返回时间戳
+URL url = new URL("http:// 127.0.0.1/java.bmp");
+URLConnection uc = url.openConnection(); // 打开连接
+uc.setUseCaches(flase);                  // 设置请求不能使用缓存
+long t = uc.getLastModified();           // 返回时间戳
 
 11.7 使用Scoket连接到指定主机
 try{
-    Scoket s = new Scoket("IPAddress", port); //创建Scoket连接,并指定端口
+    Scoket s = new Scoket("IPAddress", port); // 创建Scoket连接,并指定端口
     InetAddress addr = s.getInetAddrress();
     s.close();
 }catch(IOException e){
@@ -2231,9 +2231,9 @@ try{
 }
 
 11.8 网页抓取
-//抓取网页源码,存放当前目录的Data.html文件中
+// 抓取网页源码,存放当前目录的Data.html文件中
 public static void main(String[] args) throws Exception{
-    URL url = new URL("http://www.runoob.com");
+    URL url = new URL("http:// www.runoob.com");
     BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
     BufferedWriter writer = new BufferedWriter(new FileWriter("Data.html"));
     while((String line = reader.reader.readerline()) != null){
@@ -2246,16 +2246,16 @@ public static void main(String[] args) throws Exception{
 }
 
 11.9 获取URL响应头的日期信息
-URL url = new URL("http://www.runoob.com");
+URL url = new URL("http:// www.runoob.com");
 HttpURLConnection httpCon = (HttpConnection)url.openConnection();
-long date = httpCon.get.Date(); //返回响应时间,无响应返回0.
+long date = httpCon.get.Date(); // 返回响应时间,无响应返回0.
 Date d = new Date(date); 
 
 11.10 获取URL响应头信息
 public static void main(String[] args) throws IOException{
-    URL url = new URL("http://www.runooob.comm");
-    URLConnection conn = url.openConnection(); //打开连接
-    Map headers = conn.getHeaderFields();      //Map接收响应信息
+    URL url = new URL("http:// www.runooob.comm");
+    URLConnection conn = url.openConnection(); // 打开连接
+    Map headers = conn.getHeaderFields();      // Map接收响应信息
     Set<String> keys = headers.keySet();
     for(String key : keys){
         String val = conn.getHeaderField(key);
@@ -2265,14 +2265,14 @@ public static void main(String[] args) throws IOException{
 }
 
 11.11 解析URL
-URL url = new URL("http://ip/?.html");
-url.toString();       //返回URL
-url.getProtocol();    //返回协议
-url.getFile();        //返回文件名
-url.getHost();        //返回主机名
-url.getPath();        //返回文件路径
-url.getPort();        //返回端口号
-url.getDefaultPort(); //返回默认端口号
+URL url = new URL("http:// ip/?.html");
+url.toString();       // 返回URL
+url.getProtocol();    // 返回协议
+url.getFile();        // 返回文件名
+url.getHost();        // 返回主机名
+url.getPath();        // 返回文件路径
+url.getPort();        // 返回端口号
+url.getDefaultPort(); // 返回默认端口号
 
 11.12 ServerSocket和Socket通信实例
 服务端
@@ -2284,7 +2284,7 @@ public class Server{
             Socket s = ss.accept();
             System.out.println("客户端:" + s.getInetAddress().getLocalHost() + " 已连接到服务器")；
             BufferedReader br = new BufferedReader(new InputSreamReader(s.getInputStream()));
-            //读取客户端发来的消息
+            // 读取客户端发来的消息
             String mess br.readline();
             System.out.println("客户端:" + mess);
             BufferedWriter bw = new BufferedWriter(new OutputStream(s.getOutputStream()));
@@ -2298,7 +2298,7 @@ public class Server{
 客户端
 try{
     Socket s = new Socket("127.0.0.1", 8888);
-    //构建IO
+    // 构建IO
     InputStream is = s.getInputStream();
     OutputStream os = s.getOutputStream();
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
@@ -2312,21 +2312,21 @@ try{
 
 线程
 12.1 查看线程是否存活
-public class TwoThreadAlive extends Thread{  //继承Thread类
-    public void run(){                       //重写run()方法
+public class TwoThreadAlive extends Thread{  // 继承Thread类
+    public void run(){                       // 重写run()方法
         for(int i = 0; i < 10; i++){
             printMsg();
         }
     }
     public void printMsg(){
-        String str = Thread.currentThread().getName();  //获取当前运行线程名
+        String str = Thread.currentThread().getName();  // 获取当前运行线程名
         System.out.println("ThreadName: " + str);
     }
     public static void main(String[] args){
-        TwoThreadAlive tt = new TwoThreadAlive();                          //实例化线程对象
-        tt.setName("MyThread");                                            //设置线程名
-        System.out.println("before start(),tt.isAlive()=" + tt.isAlive()); //判断线程是否存活
-        tt.start();                                                        //启动线程
+        TwoThreadAlive tt = new TwoThreadAlive();                          // 实例化线程对象
+        tt.setName("MyThread");                                            // 设置线程名
+        System.out.println("before start(),tt.isAlive()=" + tt.isAlive()); // 判断线程是否存活
+        tt.start();                                                        // 启动线程
         System.out.println("after start(),tt.isAlive()=" + tt.isAlive());
         for(int i = 0; i < 10; i++){
             tt.printMsg();
@@ -2341,20 +2341,20 @@ class MyThread extends Thread{
     boolean ready = false;
     MyThread(){}
     public viod run(){
-        String tName = Thread.currentThread().getName(); //获取当前进程名
+        String tName = Thread.currentThread().getName(); // 获取当前进程名
         System.out.println(tName + "starting...");
         while(waiting)
             System.out.println("waiting is " + waiting);
         System.out.println("waiting...");
         startWait();
         try{
-            Thread.sleep(1000);                      //休眠1s
-        }catch(Exception e){                         //捕获异常返回进程被打断
+            Thread.sleep(1000);                      // 休眠1s
+        }catch(Exception e){                         // 捕获异常返回进程被打断
             System.out.println(tName + " interrupted.");
         }
-        System.out.println(tName + " terminating."); //输出进程结束
+        System.out.println(tName + " terminating."); // 输出进程结束
     }
-    synchronized void startWait(){                   //加锁
+    synchronized void startWait(){                   // 加锁
         try{
             while(!ready)
                 wait();
@@ -2370,10 +2370,10 @@ class MyThread extends Thread{
 public class Main{
     public static void main(String[] args) throws Exception{
         MyThread mt = new MyThread();
-        mt.setName("MyThread #1"); //设置进程名
-        showThreadStatus(mt);      //显示进程状态
-        mt.start();                //启动进程
-        Thread.sleep(50);          //休眠50ms
+        mt.setName("MyThread #1"); // 设置进程名
+        showThreadStatus(mt);      // 显示进程状态
+        mt.start();                // 启动进程
+        Thread.sleep(50);          // 休眠50ms
         showThreadStatus(mt);
         mt.waiting = false;
         Thread.sleep(50);
@@ -2403,7 +2403,7 @@ public class SimplePriorities extends Thread{
     */
     private volatile double d = 0;
     public SimplePriorities(int priority){
-        setPriority(priority); //设置线程优先级
+        setPriority(priority); // 设置线程优先级
         start();
     }
     public String toString(){
@@ -2432,7 +2432,7 @@ public class SimplePriorities extends Thread{
 2.资源不可抢夺
 3.请求和保持
 4.循环等待
-//死锁测试
+// 死锁测试
 public class LockTest{
     public static String str1 = "str1";
     public static String str2 = "str2";
@@ -2450,10 +2450,10 @@ class LockA implements Runnable{
             while(true){
                 synchronized (LockTest.str1){
                     System.out.println(new Date().toString() + " locakA锁住str1");
-                    Thread.sleep(3 * 1000);      //等待给B能锁住的机会
+                    Thread.sleep(3 * 1000);      // 等待给B能锁住的机会
                     synchronized (LockTest.str2){
                         System.out.prinln(new Date().toString() + " LockA锁住str2")；
-                        Thread.sleep(60 * 1000); //为了测试,不释放资源
+                        Thread.sleep(60 * 1000); // 为了测试,不释放资源
                     } 
                 }
             }
@@ -2469,10 +2469,10 @@ class LockB implements Runnable{
             while(true){
                 synchronized (LockTest.str2){
                     System.out.println(new Date().toString() + " LockB锁住str2")；
-                    Thread.sleep(3 * 1000);      //等待给A能锁住的机会
+                    Thread.sleep(3 * 1000);      // 等待给A能锁住的机会
                     synchronized (LockTest.str1){
                         System.out.println(new Date().toString() + " LockB锁住str1");
-                        Thread.sleep(60 * 1000); //为了测试,不释放资源
+                        Thread.sleep(60 * 1000); // 为了测试,不释放资源
                     }
                 }
             }
@@ -2481,7 +2481,7 @@ class LockB implements Runnable{
         }
     }
 }
-//解锁测试
+// 解锁测试
 import java.util.*;
 public class UnlockTest{
     public static String str1 = "str1";
@@ -2511,7 +2511,7 @@ class LockAa implements Runnable{
                 }else{
                     System.out.println(new Date().toString() + " LockA锁str1失败");
                 }
-                UnlockTest.a1.release(); //释放资源
+                UnlockTest.a1.release(); // 释放资源
                 UnlockTest.a2.release();
                 Thread.sleep(1000);
             }
@@ -2536,7 +2536,7 @@ class LockBb implements Runnable{
                 }else{
                     System.out.println(new Date().toString() + " LockA锁str1失败");
                 }
-                UnlockTest.a1.release(); //释放资源
+                UnlockTest.a1.release(); // 释放资源
                 UnlockTest.a2.release();
                 Thread.sleep(10 * 1000);
             }
@@ -2649,7 +2649,7 @@ public class ThreadInterrupt extends Thread{
 }
 
 12.8 生产者/消费者问题
-//处理资源共享、占用等问题
+// 处理资源共享、占用等问题
 public class ProducerConsumerTest{
     public static void main(String[] args){
         CubbyHole c = new CubbyHole();
