@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../ide/idea project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ide/idea project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -286,6 +289,8 @@
       <workItem from="1589452036545" duration="15000" />
       <workItem from="1589475017609" duration="625000" />
       <workItem from="1589475768186" duration="92000" />
+      <workItem from="1589519244611" duration="167000" />
+      <workItem from="1589520081765" duration="59000" />
     </task>
     <servers />
   </component>
@@ -338,10 +343,10 @@
     </state>
     <state x="869" y="133" key="ExecutionTargetDialog/0.0.1366.768@0.0.1366.768" timestamp="1588835085988" />
     <state x="1221" y="230" key="ExecutionTargetDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588857190945" />
-    <state x="48" y="155" key="FileChooserDialogImpl" timestamp="1589475452515">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="34" y="110" key="FileChooserDialogImpl" timestamp="1589519378375">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="34" y="110" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1588822969529" />
+    <state x="34" y="110" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1589519378375" />
     <state x="48" y="155" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1589475452515" />
     <state width="1286" height="176" key="GridCell.Tab.0.bottom" timestamp="1589014957635">
       <screen x="0" y="0" width="1366" height="768" />
@@ -368,15 +373,15 @@
     </state>
     <state width="220" height="340" key="HiddenNamespacesPopup/0.0.1366.768@0.0.1366.768" timestamp="1588823250127" />
     <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1588854666566" />
-    <state x="259" y="37" key="SettingsEditor" timestamp="1589475799114">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="184" y="26" key="SettingsEditor" timestamp="1589519389565">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589177731962" />
+    <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589519389565" />
     <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1589475799114" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1589475768375">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="455" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1589520082301">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1589187539242" />
+    <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1589520082301" />
     <state x="640" y="350" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589452040000" />
     <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1589475768375" />
   </component>
