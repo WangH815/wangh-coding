@@ -1490,7 +1490,7 @@ IO(输入输出)
 // 文件写入(字符流)
 FileWriter fw = new FileWriter(String fileName);                 // 创建文件输出流,用于向文件中写入数据,文件不存在会创建
 FileWriter fw = new FileWriter(String fileName, boolean append); // append的值决定是否追加,一般是已存在文件
-BufferedWriter bw = new BufferedWriter(fw);                      // 创建缓冲输出流
+BufferedWriter bw = new BufferedWriter(fw);                      // 创建缓冲输出流;避免频繁IO
 bw.write(String str);                                            // 将字符串写入到文件
 bw.close();                                                      // 关闭流
 
@@ -1649,16 +1649,14 @@ sum = mySum(new in[]{1,43,89,8,45})
 import java.io.*;
 6.1 文件写入
 try{
-    BufferedWriter out = new BufferedWriter(
-        new FileWriter("runoob.txt"));
+    BufferedWriter out = new BufferedWriter(new FileWriter("runoob.txt"));
     out.write("菜鸟教程")；
     out.close();
 }catch(IOException e)
 
 6.2 文件读取
 try{
-    BufferedReader in = new BufferedReader(
-        new FileReader("test.log"));
+    BufferedReader in = new BufferedReader(new FileReader("test.log"));
     while((String str = in.readLine()) != null){
         System.out.println(str);
     }
