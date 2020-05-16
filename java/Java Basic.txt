@@ -1742,7 +1742,7 @@ long size = f.length();      // 获取文件大小,以byte计
 
 6.9 文件重命名
 File f_old = new File(filename1);
-file f_new = new File(filename2);
+File f_new = new File(filename2);
 boolean b = f_old.renameTo(f_new); // 重命名成功返回true
 
 6.10 设置文件只读
@@ -1821,10 +1821,10 @@ String strParenDir = file.getParent();
 public static void main(String[] args) throws IOException{
     showDir(1, new File("c:\\test"));
 }
-static viod showDir(int indent, File file) throws IOException{
+static void showDir(int indent, File file) throws IOException{
     for(int i = 0; i < indent; i++)
-        Systen.out.print('-');
-    System.out.println(file.getNmae());
+        System.out.print('-');
+    System.out.println(file.getName());
     if(file.isDirectory()){
         File[] files = file.listFiles();
         for(int i = 0; i < files.length; i++)
