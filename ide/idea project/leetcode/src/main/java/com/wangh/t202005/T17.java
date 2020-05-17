@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class T17 {
     public static void main(String[] args) throws IOException {
@@ -65,8 +66,15 @@ public class T17 {
         i = 11;
         System.out.println(j);
 
-        
+        Queue<String> qq = new LinkedList();
+        qq.add(null);
+        qq.add(null);
+        qq.add("asdf");
+        qq.add("1234");
 
+        for(String str:qq){
+            System.out.println(str);
+        }
     }
 
 
