@@ -1,6 +1,11 @@
 package com.wangh.t202005;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 public class T17 {
     public static void main(String[] args) throws IOException {
@@ -32,12 +37,41 @@ public class T17 {
         mt.start();
         try {
             Thread.sleep(1000);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
+
+        try {
+            new Input().method();
+        } catch (MyException e) {
+            System.out.println(e.getMessage());
+        }
+
+        List<String> myList = new LinkedList();
+        myList.add("1");
+        myList.add("a");
+        myList.add("b");
+        myList.add("2");
+        myList.add("0");
+        System.out.println(myList);
+
+        System.out.println(mt.getName());
+
+        final String str11 = "1234";
+        System.out.println(str11.substring(2));
+
+        int i = 1;
+        int j = i;
+        i = 11;
+        System.out.println(j);
+
+        
+
     }
 
+
     static void showDir(int indent, File file) throws IOException {
+        final int ii;
         for (int i = 0; i < indent; i++)
             System.out.print('-');
         System.out.println(file.getName());
@@ -49,9 +83,32 @@ public class T17 {
     }
 }
 
+/**
+ * 创建线程类
+ */
 class MyThread extends Thread {
+    /**
+     * 重写run()方法
+     */
     @Override
     public void run() {
         throw new RuntimeException();
     }
 }
+
+
+/**
+ * 自定义异常测试
+ */
+class MyException extends Exception {
+    MyException(String str) {
+        super(str);
+    }
+}
+
+class Input {
+    void method() throws MyException {
+        throw new MyException("My Exception");
+    }
+}
+

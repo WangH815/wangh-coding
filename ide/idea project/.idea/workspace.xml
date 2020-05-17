@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202005/T17.java" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202005/T17.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,6 +286,8 @@
       <workItem from="1589599480652" duration="6538000" />
       <workItem from="1589615845029" duration="16218000" />
       <workItem from="1589645158145" duration="4166000" />
+      <workItem from="1589688914781" duration="1304000" />
+      <workItem from="1589702814967" duration="8176000" />
     </task>
     <servers />
   </component>
@@ -314,26 +317,26 @@
     </state>
     <state x="695" y="99" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1589520021558" />
     <state x="977" y="139" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1589615816673" />
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom" timestamp="1589649365016">
+    <state width="914" height="266" key="GridCell.Tab.0.bottom" timestamp="1589727032811">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1323" height="230" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1589520069422" />
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1589649365016" />
-    <state width="1340" height="266" key="GridCell.Tab.0.center" timestamp="1589649365016">
+    <state width="914" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1589727032811" />
+    <state width="914" height="266" key="GridCell.Tab.0.center" timestamp="1589727032811">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1323" height="230" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1589520069422" />
-    <state width="1340" height="266" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1589649365016" />
-    <state width="1340" height="266" key="GridCell.Tab.0.left" timestamp="1589649365016">
+    <state width="914" height="266" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1589727032811" />
+    <state width="914" height="266" key="GridCell.Tab.0.left" timestamp="1589727032811">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1323" height="230" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1589520069422" />
-    <state width="1340" height="266" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1589649365016" />
-    <state width="1340" height="266" key="GridCell.Tab.0.right" timestamp="1589649365016">
+    <state width="914" height="266" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1589727032811" />
+    <state width="914" height="266" key="GridCell.Tab.0.right" timestamp="1589727032811">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1323" height="230" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1589520069422" />
-    <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1589649365016" />
+    <state width="914" height="266" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1589727032811" />
     <state width="1340" height="328" key="GridCell.Tab.1.bottom" timestamp="1589565373665">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -359,12 +362,12 @@
     </state>
     <state x="18" y="13" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589520121515" />
     <state x="107" y="129" width="998" height="708" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1589478947523" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1589645159826">
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1589702838471">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1589520098522" />
     <state x="640" y="351" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589463835249" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1589645159826" />
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1589702838471" />
     <state x="91" y="97" key="new project wizard" timestamp="1589078174193">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

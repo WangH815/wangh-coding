@@ -1934,7 +1934,7 @@ public static void main(String[] args) throws Exception{
             System.out.println("强制抛出异常:" + e)
         }
     }
-}
+} 
 
 8.5 自定义异常
 class MyException extends Exception{         // 创建自定义异常,继承于Exception类
@@ -2151,11 +2151,11 @@ public static void main(String[] args){
     }
     for(int i = 0;i < 1024; i++){
         try{
-            System.out,println("查看 " + i)
+            System.out.println("查看 " + i)
             s = new Socket(host, i);
-            System.out.println("端口" + i +"已被使用！")
-        }catch(UnknowHostException e){
-            System.out.println("Exception occured " + e)
+            System.out.println("端口" + i +"已被使用！");
+        }catch(UnknownHostException e){
+            System.out.println("Exception occured " + e);
             break;
         }catch(IOException e){
             
@@ -2488,7 +2488,7 @@ public class UnlockTest{
     public static final Semaphore a2 = new Semaphore(1);
     public static void main(String[] args){
         LockAa la = new LockAa();
-        new Thread(la).start();
+        new Thread(la).start(); 
         LockBb lb = new LockBb();
         new Thread(lb).start();
     }
