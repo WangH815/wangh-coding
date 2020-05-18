@@ -54,7 +54,7 @@ public class T17 {
         myList.add("b");
         myList.add("2");
         myList.add("0");
-        System.out.println(myList);
+        myList.forEach(System.out::println);
 
         System.out.println(mt.getName());
 
@@ -72,9 +72,7 @@ public class T17 {
         qq.add("asdf");
         qq.add("1234");
 
-        for(String str:qq){
-            System.out.println(str);
-        }
+        qq.forEach(System.out::println);
     }
 
 
