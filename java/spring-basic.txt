@@ -1,5 +1,9 @@
 Spring基础
 
+
+参考
+https://www.runoob.com/w3cnote/basic-knowledge-summary-of-spring.html
+
 Spring简介
 此框架由Rod Johnson开发,2004年发布第一版
 优点:
@@ -11,13 +15,12 @@ Spring简介
 5.Spring的高度开放性,并不强制应用完全依赖于Spring,开发者可自由选用Spring框架的部分或全部
 
 
-JavaBean是特殊的Java类,遵守JavaBean API规范
-特征:
-1.提供一个默认的无参构造函数
-2.需要被序列化并且实现了Serializable接口
-3.可能有一系列可读写属性
-4.可能有一系列的"getter"或"setter"方法
+JavaBean是特殊的Java类,遵守JavaBean API规范:
+1.有无参的构造函数    // 方便框架构建bean
+2.成员属性私有化
+3.封装的属性如果需要被外所操作，必须编写public类型的setter、getter方法
 
+核心:封装/重用/可读
 
 核心机制
 管理Bean
