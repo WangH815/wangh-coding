@@ -119,7 +119,7 @@ public class GoddessDao {
         String sql = "INSERT INTO imooc_goddess(user_name, sex, age, birthday, email, mobile," 
 		           + "create_user, create_date, update_user, update_date, isdel)"
                    + "values("+"?,?,?,?,?,?,?,CURRENT_DATE(),?,CURRENT_DATE(),?)";
-        PreparedStatement ptmt = conn.prepareStatement(sql);  //预编译SQL，减少sql执行
+        PreparedStatement ptmt = conn.prepareStatement(sql);  //预编译SQL，降低执行时间
 
         //传参
         ptmt.setString(1, g.getUser_name());
