@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ide/idea project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ide/idea project/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -299,6 +297,7 @@
       <workItem from="1590021884377" duration="13000" />
       <workItem from="1590022064937" duration="43000" />
       <workItem from="1590030751818" duration="237000" />
+      <workItem from="1590031772990" duration="89000" />
     </task>
     <servers />
   </component>
@@ -381,17 +380,17 @@
     </state>
     <state width="220" height="340" key="HiddenNamespacesPopup/0.0.1366.768@0.0.1366.768" timestamp="1588823250127" />
     <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1588854666566" />
-    <state x="184" y="26" key="SettingsEditor" timestamp="1590030987062">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="259" y="37" key="SettingsEditor" timestamp="1590031859287">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1590030987062" />
-    <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1590022081440" />
-    <state x="455" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1590030757648">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1590031859287" />
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1590031774766">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1590030757648" />
     <state x="640" y="350" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589452040000" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590022065378" />
+    <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590031774766" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/python$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1575018378084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tool" />
