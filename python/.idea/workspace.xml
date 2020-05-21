@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="" />
+    <list default="true" id="bd0ac36a-c076-4367-b1f6-4f7df644e244" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,7 +82,7 @@
       <recent name="F:\git\wangh-coding\python\test\t2019" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.18_threads2">
+  <component name="RunManager" selected="Python.18_threads3">
     <configuration name="17_threads3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -191,8 +195,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.18_threads2" />
         <item itemvalue="Python.18_threads3" />
+        <item itemvalue="Python.18_threads2" />
         <item itemvalue="Python.18_threads" />
         <item itemvalue="Python.17_threads4" />
         <item itemvalue="Python.17_threads3" />
@@ -298,6 +302,7 @@
       <workItem from="1590022064937" duration="43000" />
       <workItem from="1590030751818" duration="237000" />
       <workItem from="1590031772990" duration="89000" />
+      <workItem from="1590032010034" duration="276000" />
     </task>
     <servers />
   </component>
@@ -332,6 +337,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="275" y="51" key="#Inspections" timestamp="1590032023364">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="275" y="51" key="#Inspections/0.0.1366.768@0.0.1366.768" timestamp="1590032023364" />
     <state x="1032" y="201" key="#SQL_Dialects" timestamp="1584682026651">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -355,40 +364,40 @@
     </state>
     <state x="34" y="110" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1589519378375" />
     <state x="48" y="155" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1589475452515" />
-    <state width="1286" height="176" key="GridCell.Tab.0.bottom" timestamp="1589014957635">
+    <state width="1306" height="189" key="GridCell.Tab.0.bottom" timestamp="1590032289563">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1589014957635" />
+    <state width="1306" height="189" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1590032289563" />
     <state width="914" height="215" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584802793432" />
-    <state width="1286" height="176" key="GridCell.Tab.0.center" timestamp="1589014957635">
+    <state width="1306" height="189" key="GridCell.Tab.0.center" timestamp="1590032289563">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1589014957635" />
+    <state width="1306" height="189" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1590032289563" />
     <state width="914" height="215" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584802793432" />
-    <state width="1286" height="176" key="GridCell.Tab.0.left" timestamp="1589014957632">
+    <state width="1306" height="189" key="GridCell.Tab.0.left" timestamp="1590032289563">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1589014957632" />
+    <state width="1306" height="189" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1590032289563" />
     <state width="914" height="215" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584802793432" />
-    <state width="1286" height="176" key="GridCell.Tab.0.right" timestamp="1589014957635">
+    <state width="1306" height="189" key="GridCell.Tab.0.right" timestamp="1590032289563">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1589014957635" />
+    <state width="1306" height="189" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1590032289563" />
     <state width="914" height="215" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584802793432" />
     <state width="220" height="477" key="HiddenNamespacesPopup" timestamp="1588854666566">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="220" height="340" key="HiddenNamespacesPopup/0.0.1366.768@0.0.1366.768" timestamp="1588823250127" />
     <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1080@0.0.1920.1080" timestamp="1588854666566" />
-    <state x="259" y="37" key="SettingsEditor" timestamp="1590031859287">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="184" y="26" key="SettingsEditor" timestamp="1590032126257">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1590030987062" />
+    <state x="184" y="26" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1590032126257" />
     <state x="259" y="37" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1590031859287" />
-    <state x="640" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1590031774766">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="455" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1590032011176">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1590030757648" />
+    <state x="455" y="258" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1590032011176" />
     <state x="640" y="350" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589452040000" />
     <state x="640" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590031774766" />
   </component>
@@ -413,7 +422,7 @@
     <SUITE FILE_PATH="coverage/python$16_threads2.coverage" NAME="16_threads2 Coverage Results" MODIFIED="1584378307530" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$07.coverage" NAME="07 Coverage Results" MODIFIED="1583595572157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$17_threads4.coverage" NAME="17_threads4 Coverage Results" MODIFIED="1584460739485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
-    <SUITE FILE_PATH="coverage/python$18_threads3.coverage" NAME="18_threads3 Coverage Results" MODIFIED="1585795214790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
+    <SUITE FILE_PATH="coverage/python$18_threads3.coverage" NAME="18_threads3 Coverage Results" MODIFIED="1590032182636" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$27.coverage" NAME="27 Coverage Results" MODIFIED="1582803626077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202002" />
     <SUITE FILE_PATH="coverage/python$10.coverage" NAME="10 Coverage Results" MODIFIED="1583808490785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
     <SUITE FILE_PATH="coverage/python$13_re_qq.coverage" NAME="13_re_qq Coverage Results" MODIFIED="1584089689403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/t202003" />
