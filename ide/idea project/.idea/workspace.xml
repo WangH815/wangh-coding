@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java/java-jsp.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java/jdbc-examples.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/jdbc-examples.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../python/.idea/python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/python.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +76,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="F:/idea/springdemo" />
+    <property name="last_opened_file_path" value="F:/idea/my-java-demo-master/spring-boot-dubbo-demo" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -314,6 +310,7 @@
       <workItem from="1590081563977" duration="7762000" />
       <workItem from="1590110805829" duration="1804000" />
       <workItem from="1590165485373" duration="2000" />
+      <workItem from="1590244742654" duration="1519000" />
     </task>
     <servers />
   </component>
@@ -338,11 +335,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="935" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1589906831263" />
-    <state x="446" y="143" key="FileChooserDialogImpl" timestamp="1590021743319">
+    <state x="446" y="143" key="FileChooserDialogImpl" timestamp="1590244767445">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="695" y="99" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1589520021558" />
-    <state x="446" y="143" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1590021743319" />
+    <state x="446" y="143" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1590244767445" />
     <state width="698" height="359" key="GridCell.Tab.0.bottom" timestamp="1590092394591">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -392,12 +389,12 @@
     </state>
     <state x="18" y="13" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589520121515" />
     <state x="646" y="171" width="998" height="708" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1589880005654" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1590110822712">
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1590244742959">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1590031015686" />
     <state x="640" y="351" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589463835249" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590110822712" />
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590244742959" />
     <state x="487" y="194" key="new project wizard" timestamp="1590056675157">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

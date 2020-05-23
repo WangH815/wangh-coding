@@ -1,0 +1,22 @@
+1 获取GitHub官方CDN(内容分发)地址
+
+https://www.ipaddress.com/                //可以查询你所在网络访问对应ip最快的解析地址
+
+查询以下三个链接的DNS解析地址             //其他国外网站也可使用此方法
+
+github.com
+assets-cdn.github.com
+github.global.ssl.fastly.net
+
+2.修改hosts文件
+C:\Windows\System32\drivers\etc\hosts
+
+xx.xx.xx.xx  github.com                  //存在多个写多个
+xx.xx.xx.xx  assets-cdn.github.com
+xx.xx.xx.xx  github.global.ssl.fastly.net
+
+3.刷新系统DNS缓存
+Windows+X 打开系统命令行（管理员身份）或powershell
+
+ipconfig /flushdns
+
