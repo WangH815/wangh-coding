@@ -76,7 +76,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="F:/idea/my-java-demo-master/spring-boot-dubbo-demo" />
+    <property name="last_opened_file_path" value="F:/idea/springboot" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -311,6 +311,9 @@
       <workItem from="1590110805829" duration="1804000" />
       <workItem from="1590165485373" duration="2000" />
       <workItem from="1590244742654" duration="1519000" />
+      <workItem from="1590300006863" duration="671000" />
+      <workItem from="1590304577569" duration="1268000" />
+      <workItem from="1590311392721" duration="596000" />
     </task>
     <servers />
   </component>
@@ -335,11 +338,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="935" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1589906831263" />
-    <state x="446" y="143" key="FileChooserDialogImpl" timestamp="1590244767445">
+    <state x="446" y="143" key="FileChooserDialogImpl" timestamp="1590304596812">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="695" y="99" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1589520021558" />
-    <state x="446" y="143" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1590244767445" />
+    <state x="446" y="143" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1590304596812" />
     <state width="698" height="359" key="GridCell.Tab.0.bottom" timestamp="1590092394591">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -389,12 +392,12 @@
     </state>
     <state x="18" y="13" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589520121515" />
     <state x="646" y="171" width="998" height="708" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1589880005654" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1590244742959">
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1590311394091">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1590031015686" />
     <state x="640" y="351" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589463835249" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590244742959" />
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590311394091" />
     <state x="487" y="194" key="new project wizard" timestamp="1590056675157">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
