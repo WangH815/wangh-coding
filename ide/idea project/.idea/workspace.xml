@@ -2,8 +2,199 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63de549-619f-45c4-8c4c-8bf54f766895" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/InterfaceExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/MyTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191204.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191211.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191217.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191218.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191220.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191221.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191222.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191223.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191224.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191226.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191226_1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191227.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191229.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t201912/T191231.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202005/T11.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202005/T12.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202005/T15.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202005/T16.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202005/T17.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202005/T18.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202005/T19.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202005/T22.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202005/T25SortTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0001_TwoSum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0002_AddTwoNumbers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0003_LengthOfSubstring.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0004_MidSortedArrays.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0005_LongestPalindromeString.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0006_Convert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0007_Reverse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0008_StringToInt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0009_IsPalindromeInt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0010_IsMatch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0011_MaxArea.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0012_IntToRoman.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0013_RomanToInt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0014_LongestCommonPrefix.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0015_ThreeSum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0016_ThreeSumClosest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0017_LetterCombinations.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0018_FourSum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0019_RemoveNthFromEnd.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0020_IsVaild.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0021_MergeTwoLists.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0022_GenerateParenthesis.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0023_MergeKLists.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0024_SwapPairs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0025_ReverseKGroup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0026_RemoveDuplicates.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0027_RemoveElement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0028_IndexOfString.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0029_Divide.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0030_LengthOfLongestSubstring.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0031_NextPermutation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0032_LongestValidParentheses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0033_SearchRotatedSortedArray.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0034_FindFirstandLastPositionofElementinSortedArray.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0035_SearchInsertPosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0036_ValidSudoku.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0037_SolveSudoku.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0038_CountAndSay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0039_CombinationSum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0040_CombinationSumII.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0041_FirstMissingPositive.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0042_TrappingRainWater.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0043_MultiplyStrings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0044_WildcardMatching.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0045_JumpGameII.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/leetcode/p0001_0100/L_0046_Permutations.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/sort/ArraySort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2]" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../excel-functions.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/WangH.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dir/2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/.idea/dictionaries/WangH.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0001_TwoSum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0002_AddTwoNumbers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0003_LengthOfSubstring.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0004_MidSortedArrays.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0005_LongestPalindromeString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0006_Convert.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0007_Reverse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0008_StringToInt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0009_IsPalindromeInt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0010_IsMatch.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0011_MaxArea.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0012_IntToRoman.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0013_RomanToInt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0014_LongestCommonPrefix.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0015_ThreeSum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0016_ThreeSumClosest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0017_LetterCombinations.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0018_FourSum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0019_RemoveNthFromEnd.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0020_IsVaild.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0021_MergeTwoLists.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0022_GenerateParenthesis.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0023_MergeKLists.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0024_SwapPairs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0025_ReverseKGroup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0026_RemoveDuplicates.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0027_RemoveElement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0028_IndexOfString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0029_Divide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0030_LengthOfLongestSubstring.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0031_NextPermutation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0032_LongestValidParentheses.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0033_SearchRotatedSortedArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0034_FindFirstandLastPositionofElementinSortedArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0035_SearchInsertPosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0036_ValidSudoku.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0037_SolveSudoku.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0038_CountAndSay.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0039_CombinationSum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0040_CombinationSumII.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0041_FirstMissingPositive.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0042_TrappingRainWater.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0043_MultiplyStrings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0044_WildcardMatching.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0045_JumpGameII.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/leetcode/p0001_0100/L_0046_Permutations.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/InterfaceExample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/MyTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191204.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191211.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191217.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191218.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191220.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191221.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191222.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191223.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191224.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191226.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191226_1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191227.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191229.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t201912/T191231.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202001/T00.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202001/T00.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202001/T02.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202001/T02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202001/T03.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/code/example/src/main/java/com/wangh/code/daily/t202001/T03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202001/T03_1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202001/T06.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202001/T07.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202005/T11.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202005/T12.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202005/T15.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202005/T16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202005/T17.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202005/T18.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202005/T19.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/java/com/wangh/t202005/T22.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/src/main/webapp/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/META-INF/lintcode.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/com/wangh/lintcode/p0001_0100/L_0031_NextPermutation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/com/wangh/lintcode/p0001_0100/L_0032_LongestValidParentheses.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/com/wangh/lintcode/p0001_0100/L_0033_SearchRotatedSortedArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/com/wangh/lintcode/p0001_0100/L_0034_FindFirstandLastPositionofElementinSortedArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/com/wangh/lintcode/p0001_0100/L_0035_SearchInsertPosition.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/com/wangh/lintcode/p0001_0100/L_0036_ValidSudoku.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/com/wangh/lintcode/p0001_0100/L_0037_SolveSudoku.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/com/wangh/lintcode/p0001_0100/L_0038_CountAndSay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/com/wangh/lintcode/p0001_0100/L_0039_CombinationSum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/target/classes/com/wangh/lintcode/p0001_0100/L_0040_CombinationSumII.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/META-INF/main.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/t0517.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test191223.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../leetcode/java/L-0001-TwoSum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../leetcode/lintcode.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../leetcode/python/0001.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../运维开发" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +267,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="F:/idea/springboot" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../java/code/example" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -95,26 +286,13 @@
       <recent name="F:\git\wangh-coding\ide\idea project\leetcode\src\main\java\com\wangh\test" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.T22">
-    <configuration name="T17" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.t202005.T17" />
+  <component name="RunManager" selected="Application.T25SortTest">
+    <configuration name="ArraySort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangh.algorithm.sort.ArraySort" />
       <module name="main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wangh.t202005.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="T18" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.t202005.T18" />
-      <module name="main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.wangh.t202005.*" />
+          <option name="PATTERN" value="com.wangh.algorithm.sort.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -123,11 +301,11 @@
       </method>
     </configuration>
     <configuration name="T19" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.t202005.T19" />
+      <option name="MAIN_CLASS_NAME" value="com.wangh.code.daily.t202005.T19" />
       <module name="main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wangh.t202005.*" />
+          <option name="PATTERN" value="com.wangh.code.daily.t202005.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -136,11 +314,24 @@
       </method>
     </configuration>
     <configuration name="T22" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wangh.t202005.T22" />
+      <option name="MAIN_CLASS_NAME" value="com.wangh.code.daily.t202005.T22" />
       <module name="main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wangh.t202005.*" />
+          <option name="PATTERN" value="com.wangh.code.daily.t202005.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="T25SortTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangh.code.daily.t202005.T25SortTest" />
+      <module name="main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wangh.code.daily.t202005.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -153,7 +344,7 @@
       <module name="main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wangh.t202005.*" />
+          <option name="PATTERN" value="com.wangh.code.daily.t202005.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -163,11 +354,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.T25SortTest" />
+        <item itemvalue="Application.ArraySort" />
         <item itemvalue="Application.T22" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.T19" />
-        <item itemvalue="Application.T18" />
-        <item itemvalue="Application.T17" />
       </list>
     </recent_temporary>
   </component>
@@ -314,6 +505,9 @@
       <workItem from="1590300006863" duration="671000" />
       <workItem from="1590304577569" duration="1268000" />
       <workItem from="1590311392721" duration="596000" />
+      <workItem from="1590394429728" duration="14144000" />
+      <workItem from="1590418391065" duration="3783000" />
+      <workItem from="1590423442538" duration="16000" />
     </task>
     <servers />
   </component>
@@ -334,35 +528,39 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="704" y="375" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590021755615" />
-    <state x="935" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1589906831263">
+    <state x="935" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1590396998066">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="935" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1589906831263" />
-    <state x="446" y="143" key="FileChooserDialogImpl" timestamp="1590304596812">
+    <state x="935" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1590396998066" />
+    <state x="1028" y="465" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1590422064469">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1028" y="465" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590422064469" />
+    <state x="606" y="63" key="FileChooserDialogImpl" timestamp="1590423456240">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="695" y="99" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1589520021558" />
-    <state x="446" y="143" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1590304596812" />
-    <state width="698" height="359" key="GridCell.Tab.0.bottom" timestamp="1590092394591">
+    <state x="606" y="63" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1590423456240" />
+    <state width="1877" height="207" key="GridCell.Tab.0.bottom" timestamp="1590418125298">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="914" height="101" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1590031060678" />
-    <state width="698" height="359" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1590092394591" />
-    <state width="698" height="359" key="GridCell.Tab.0.center" timestamp="1590092394591">
+    <state width="1877" height="207" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1590418125298" />
+    <state width="1877" height="207" key="GridCell.Tab.0.center" timestamp="1590418125298">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="914" height="101" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1590031060678" />
-    <state width="698" height="359" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1590092394591" />
-    <state width="698" height="359" key="GridCell.Tab.0.left" timestamp="1590092394591">
+    <state width="1877" height="207" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1590418125298" />
+    <state width="1877" height="207" key="GridCell.Tab.0.left" timestamp="1590418125298">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="914" height="101" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1590031060678" />
-    <state width="698" height="359" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1590092394591" />
-    <state width="698" height="359" key="GridCell.Tab.0.right" timestamp="1590092394591">
+    <state width="1877" height="207" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1590418125298" />
+    <state width="1877" height="207" key="GridCell.Tab.0.right" timestamp="1590418125298">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="914" height="101" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1590031060678" />
-    <state width="698" height="359" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1590092394591" />
+    <state width="1877" height="207" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1590418125298" />
     <state width="914" height="359" key="GridCell.Tab.1.bottom" timestamp="1589789513495">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -392,16 +590,16 @@
     </state>
     <state x="18" y="13" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1589520121515" />
     <state x="646" y="171" width="998" height="708" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1589880005654" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1590311394091">
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1590423444203">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="455" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1590031015686" />
     <state x="640" y="351" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589463835249" />
-    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590311394091" />
-    <state x="487" y="194" key="new project wizard" timestamp="1590056675157">
+    <state x="640" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1590423444203" />
+    <state x="176" y="142" key="new project wizard" timestamp="1590421279814">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="487" y="194" key="new project wizard/0.0.1920.1080@0.0.1920.1080" timestamp="1590056675157" />
+    <state x="176" y="142" key="new project wizard/0.0.1920.1080@0.0.1920.1080" timestamp="1590421279814" />
     <state x="793" y="240" width="672" height="678" key="search.everywhere.popup" timestamp="1589648962381">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

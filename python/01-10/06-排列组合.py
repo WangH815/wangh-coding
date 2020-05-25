@@ -1,7 +1,7 @@
 M = int(input('请输入M：'))
 N = int(input('请输入N：'))
 
-if M < 1 or N <1 or M <= N:
+if M < 1 or N < 1 or M <= N:
     print('输入非法...')
 
 fn = fm = fmn = 1

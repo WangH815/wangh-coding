@@ -4,6 +4,7 @@ def factorial(num):
         result *= i
     return result
 
+
 m = int(input('请输入一个正整数：'))
 
 if m > 0:

@@ -1,6 +1,6 @@
 from random import randint
 
-face = randint(1,5)
+face = randint(1, 5)
 
 if face == 1:
     result = '唱歌'
