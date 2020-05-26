@@ -21,9 +21,9 @@ https://blog.csdn.net/HHcoco/article/details/53117525
 顶级接口 Collection(单元素集合) 和 Map(键值对集合)
 
 Collection  //该接口存储不唯一、无序的对象，无法直接继承此接口，只能继承或实现其子接口
-1.List   //有序、不唯一。常用实现类有 ArrayList 和 LinkedList，分别为数组和链表实现
-2.Set    //无序、唯一。常用实现类有 HashSet 和 TreeSet
-3.Queue  //不常用
+1.List      //有序、不唯一。常用实现类有 ArrayList 和 LinkedList，分别为数组和链表实现
+2.Set       //无序、唯一。常用实现类有 HashSet 和 TreeSet
+3.Queue     //不常用
 
 List 和 Set 区别
 List和数组类似，可动态增长，查找效率高，插入和删除效率低(会引起其他数据位置变化)

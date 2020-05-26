@@ -1,4 +1,4 @@
-package com.wangh.code.sort;
+package com.wangh.code.algorithm.sort;
 
 public final class ArraySort {
 
