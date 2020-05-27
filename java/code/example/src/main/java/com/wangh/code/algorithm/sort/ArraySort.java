@@ -5,16 +5,119 @@ public final class ArraySort {
     private ArraySort() {
     }
 
-
-    // 冒泡排序
-    public static void bubbleSort(int[] arrayInt) {
-        int length = arrayInt.length;
+    /**
+     * 冒泡排序
+     *
+     * @param intArray
+     * @idea 数组相邻两数对比，将最值移动到一侧
+     */
+    public static void bubbleSort(int[] intArray) {
+        if (intArray == null || intArray.length == 0) {
+            return;
+        }
+        int length = intArray.length;
+        boolean flag = true;  // 用于判断数组是否有序
         for (int i = 0; i < length - 1; i++) {
-            for (int j = length - 1; j > i; j--) {
-                if (arrayInt[j - 1] > arrayInt[j]) {
-                    int temp = arrayInt[j - 1];
-                    arrayInt[j - 1] = arrayInt[j];
-                    arrayInt[j] = temp;
+            for (int j = 0; j < length - i - 1; j++) {
+                if (intArray[j] > intArray[j + 1]) {
+                    swap(intArray, j, j + 1);
+                    flag = false;
+                }
+            }
+            // 当前循环未发生交换说明剩余元素有序，则跳出循环
+            if (flag) {
+                break;
+            }
+        }
+    }
+
+
+    /**
+     * 选择排序
+     *
+     * @param intArray
+     * @idea 将游标位置与未排序中最值选择交换
+     */
+    public static void selectSort(int[] intArray) {
+        if (intArray == null || intArray.length == 0) {
+            return;
+        }
+        int length = intArray.length;
+        int min;         // 最小值
+        int minIndex;
+        for (int i = 0; i < length - 1; i++) {
+            min = intArray[i];
+            minIndex = i;
+            // 查找未排序中最小值及其索引
+            for (int j = i + 1; j < length; j++) {
+                if (intArray[j] < min) {
+                    min = intArray[j];  // min必须保持最小值
+                    minIndex = j;
+                }
+            }
+            // 游标位置元素不是最小值则交换
+            if (minIndex != i) {
+                intArray[minIndex] = intArray[i];
+                intArray[i] = min;
+            }
+        }
+    }
+
+
+    /**
+     * 插入排序
+     *
+     * @param intArray
+     * @idea 将未排序的第一个元素插入有序序列中
+     * 思路一：待插入元素与有序序列逐个比较，获取插入位置索引，右移索引右侧数据，然后插入元素
+     * 思路二：待插入元素与有序序列左侧元素比较，待插入元素小的话则交换相邻元素
+     */
+    public static void insertSort(int[] intArray) {
+        if (intArray == null || intArray.length == 0) {
+            return;
+        }
+        int length = intArray.length;
+
+        for (int i = 1; i < length; i++) {  // intArray[0]为第一个有序序列
+            int temp = intArray[i];   // 待插入数据
+            int index = i;            // 有序序列中游标
+            while (index > 0 && temp < intArray[index - 1]) {
+                intArray[index] = intArray[index - 1];  // 元素右移
+                index--;                                // 游标左移
+            }
+            intArray[index] = temp;   // 插入数据;可以加if(index != i);不加多一次赋值，加的话多一次判断
+        }
+    }
+
+// 基于思路二实现，相对于思路一比较容易实现
+//    public static void insertSort(int[] intArray) {
+//        int length = intArray.length;
+//        int temp;
+//        for (int i = 1; i < length; i++) {
+//            for (int j = i; j > 0; j--) {
+//                if (intArray[j] < intArray[j - 1]) {  //
+//                    swap(intArray, j, j - 1);
+//                }
+//            }
+//        }
+//    }
+
+
+    // 希尔排序
+    public static void shellSort(int[] intArray) {
+        int length = intArray.length;
+        for (int gap = length / 2; gap > 0; gap /= 2) {
+            for (int i = 0; i < gap; i++) {
+                for (int j = i + gap; j < length; j += gap) {
+                    if (intArray[j] < intArray[j - gap]) {
+                        int temp = intArray[j];
+                        int k = j;
+                        while (k >= gap && intArray[k - gap] > temp) {
+                            intArray[k] = intArray[k - gap];
+                            k -= gap;
+                        }
+                        intArray[k] = temp;
+                    }
                 }
             }
         }
@@ -32,9 +135,7 @@ public final class ArraySort {
             if (arrayInt[father] >= arrayInt[child]) {
                 break;
             } else {
-                int tmp = arrayInt[father];
-                arrayInt[father] = arrayInt[child];
-                arrayInt[child] = tmp;
+                swap(arrayInt, father, child);
             }
             father = child;
             child = 2 * father + 1;
@@ -48,24 +149,8 @@ public final class ArraySort {
             maxHeapDown(intArray, i, length - 1);
         }
         for (i = length - 1; i > 0; i--) {
-            int temp = intArray[0];
-            intArray[0] = intArray[i];
-            intArray[i] = temp;
+            swap(intArray, 0, i);
             maxHeapDown(intArray, 0, i - 1);
-        }
-    }
-
-
-    // 插入排序
-    public static void insertSort(int[] intArray) {
-        for (int i = 1; i < intArray.length; i++) {
-            for (int j = i; j > 0; j--) {
-                if (intArray[j] < intArray[j - 1]) {
-                    int temp = intArray[j - 1];
-                    intArray[j - 1] = intArray[j];
-                    intArray[j] = temp;
-                }
-            }
         }
     }
 
@@ -114,32 +199,41 @@ public final class ArraySort {
     }
 
 
-    // 快排
-    public static void quickSort(int[] intArray, int low, int high) {
-        if (low >= high) {
+    /**
+     * 快速排序
+     */
+    public static void quickSort(int[] intArray) {
+        if (intArray == null || intArray.length == 0) {
             return;
         }
-        int i = low;
-        int j = high;
-        int temp = intArray[i];
-        while (i < j) {
-            while (i < j && intArray[j] >= temp) {
-                j--;
-            }
-            if (i < j) {
-                intArray[i++] = intArray[j];
-            }
-            while (i < j && intArray[i] < temp) {
-                i++;
-            }
-            if (i < j) {
-                intArray[j--] = intArray[i];
-            }
-        }
-        intArray[i] = temp;
-        quickSort(intArray, low, i - 1);
-        quickSort(intArray, i + 1, high);
+
     }
+
+//    public static void quickSort(int[] intArray, int low, int high) {
+//        if (low >= high) {
+//            return;
+//        }
+//        int i = low;
+//        int j = high;
+//        int temp = intArray[i];
+//        while (i < j) {
+//            while (i < j && intArray[j] >= temp) {
+//                j--;
+//            }
+//            if (i < j) {
+//                intArray[i++] = intArray[j];
+//            }
+//            while (i < j && intArray[i] < temp) {
+//                i++;
+//            }
+//            if (i < j) {
+//                intArray[j--] = intArray[i];
+//            }
+//        }
+//        intArray[i] = temp;
+//        quickSort(intArray, low, i - 1);
+//        quickSort(intArray, i + 1, high);
+//    }
 
 
     // 基数排序(有错误待处理)
@@ -187,47 +281,13 @@ public final class ArraySort {
     }
 
 
-    // 选择排序
-    public static void selectSort(int[] intArray) {
-        int i;
-        int j;
-        int temp = 0;
-        int flag = 0;
-        for (i = 0; i < intArray.length; i++) {
-            temp = intArray[i];
-            flag = i;
-            for (j = i + 1; j < intArray.length; j++) {
-                if (intArray[j] < temp) {
-                    temp = intArray[j];
-                    flag = j;
-                }
-            }
-            if (flag != i) {
-                intArray[flag] = intArray[i];
-                intArray[i] = temp;
-            }
-        }
-    }
-
-
-    // 希尔排序
-    public static void shellSort(int[] intArray) {
-        int length = intArray.length;
-        for (int gap = length / 2; gap > 0; gap /= 2) {
-            for (int i = 0; i < gap; i++) {
-                for (int j = i + gap; j < length; j += gap) {
-                    if (intArray[j] < intArray[j - gap]) {
-                        int temp = intArray[j];
-                        int k = j;
-                        while (k >= gap && intArray[k - gap] > temp) {
-                            intArray[k] = intArray[k - gap];
-                            k -= gap;
-                        }
-                        intArray[k] = temp;
-                    }
-                }
-            }
-        }
+    /**
+     * 数组元素交换
+     */
+    private static void swap(int[] intArray, int i, int j) {
+        int temp = intArray[i];
+        intArray[i] = intArray[j];
+        intArray[j] = temp;
     }
 
 }

@@ -2,12 +2,15 @@ package com.wangh.code.daily.t202005;
 
 import java.util.Arrays;
 
+import static com.wangh.code.util.arrays.intArrayPrint;
+import static com.wangh.code.util.arrays.intArrayRandomGenerator;
+
 public class T25SortTest {
     public static void main(String[] args) {
-        int[] intArray = randomArrayGenerator(100000, -50000, 50000);
+        int[] intArray = intArrayRandomGenerator(100000, -50000, 50000);
 
         System.out.println("排序前：");
-        arrayPrint(intArray);
+        intArrayPrint(intArray);
 
         long timeStart = System.currentTimeMillis();
 
@@ -23,33 +26,10 @@ public class T25SortTest {
 
         long timeEnd = System.currentTimeMillis();
         System.out.println("排序后：");
-        arrayPrint(intArray);
+        intArrayPrint(intArray);
 
         System.out.println("排序耗时：" + (timeEnd - timeStart) + "ms");
 
     }
 
-
-    // 随机数组生成器
-    private static int[] randomArrayGenerator(int length, int start, int end) {
-        if (length < 1) {
-            return null;
-        }
-        int[] randomArray = new int[length];
-        for (int i = 0; i < length; i++) {
-            randomArray[i] = (int) (Math.random() * (end - start)) + start;
-        }
-        return randomArray;
-    }
-
-    // 打印数组
-    private static void arrayPrint(int[] intArray) {
-        if (intArray == null || intArray.length == 0) {
-            return;
-        }
-        for (int i : intArray) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
-    }
 }
