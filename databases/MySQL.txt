@@ -227,7 +227,7 @@ concat(col1,';',col2)                                               --字段(或
 
 select * from tb
 order col1,,col2
-limit n offset m;    --m:偏移量(从第m+1行显示),超过实际记录数返回空;n:截取的记录数,超过实际记录数不报错;n越大效率越低
+limit n offset m;    --m:偏移量(从第m+1行显示),超过实际记录数返回空;n:截取的记录数,超过实际记录数不报错;m越大效率越低
 
 select * from tb
 order col1,,col2
@@ -346,6 +346,10 @@ min(col)/max(col) --最值;常用于子查询
 avg(col)          --平均值
 sum(col)          --求和
 isnull(expr)
+trim(col)         --去除左右空格
+ltrim(col)        --去除左侧空格
+rtrim(col)        --去除右侧空格
+concat(col1,col2) --连接字符串
 
 
 日期相关

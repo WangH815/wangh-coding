@@ -12,9 +12,6 @@ public final class ArraySort {
      * @idea 数组相邻两数对比，将最值移动到一侧
      */
     public static void bubbleSort(int[] intArray) {
-        if (intArray == null || intArray.length == 0) {
-            return;
-        }
         int length = intArray.length;
         boolean flag = true;  // 用于判断数组是否有序
         for (int i = 0; i < length - 1; i++) {
@@ -36,12 +33,9 @@ public final class ArraySort {
      * 选择排序
      *
      * @param intArray
-     * @idea 将游标位置与未排序中最值选择交换
+     * @idea 将游标位置（已排序后一位）与未排序中最值选择交换
      */
     public static void selectSort(int[] intArray) {
-        if (intArray == null || intArray.length == 0) {
-            return;
-        }
         int length = intArray.length;
         int min;         // 最小值
         int minIndex;
@@ -73,9 +67,6 @@ public final class ArraySort {
      * 思路二：待插入元素与有序序列左侧元素比较，待插入元素小的话则交换相邻元素
      */
     public static void insertSort(int[] intArray) {
-        if (intArray == null || intArray.length == 0) {
-            return;
-        }
         int length = intArray.length;
 
         for (int i = 1; i < length; i++) {  // intArray[0]为第一个有序序列
@@ -201,13 +192,41 @@ public final class ArraySort {
 
     /**
      * 快速排序
+     *
+     * @param
+     * @idea 查找基准值需要排列的位置，左侧数据都不大于基准值，右侧数据都不小于基准值;然后再对左右侧数递归排序
      */
-    public static void quickSort(int[] intArray) {
-        if (intArray == null || intArray.length == 0) {
-            return;
+    public static void quickSort(int[] intArray, int left, int right) {
+        if (left > right) {
+            return;   // 递归返回条件
         }
+        int pivot = intArray[left];   // 基准值
+        int pivotIndex = left;        // 基准值索引
+        int index = right;
+        while (pivotIndex < index) {
+            // 不小于基准值，右索引左移
+            while (intArray[index] > pivot) {  // 这里pivotIndex < index条件可不加
+                index--;
+            }
+            if (pivotIndex < index) {
+                intArray[pivotIndex] = intArray[index];
+                pivotIndex++;
+            }
 
+            // 小于基准值，左索引右移
+            while (pivotIndex < index && intArray[pivotIndex] < pivot) {
+                pivotIndex++;
+            }
+            if (pivotIndex < index) {
+                intArray[index] = intArray[pivotIndex];
+                index--;
+            }
+        }
+        intArray[pivotIndex] = pivot;
+        quickSort(intArray, left, pivotIndex - 1);
+        quickSort(intArray, pivotIndex + 1, right);
     }
+
 
 //    public static void quickSort(int[] intArray, int low, int high) {
 //        if (low >= high) {
