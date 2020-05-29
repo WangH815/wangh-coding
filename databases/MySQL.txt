@@ -206,6 +206,9 @@ show table status from db;        --显示数据库/表的统计信息
 show character set;               --显示支持的字符集
 show processlist;                 --显示数据库连接情况
 show variables;                   --显示所有的变量
+show status;                      --显示服务器状态
+show grants;                      --显示当前用户权限
+show errors/warnings;             -- 显示服务器的错误/警告信息
 
 
 use db;               --选择db数据库,之后操作只针对该数据库;等价于 use database db
