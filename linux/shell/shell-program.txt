@@ -114,6 +114,7 @@ var='str'             #单引号(更严格),可以防止任何变量扩展
 var1=1;var2=2;var3=3  #同时赋值,分号隔开就可以
 var=`cmd`             #命令执行结果赋值给变量;所有Shell都支持
 var=$(cmd)            #同上;少部分Shell不支持
+var=(1 2 3)           #数组
 
 
 ##变量使用
@@ -710,10 +711,11 @@ crontab  #周期执行计划;具体使用参见Linux.txt
 #函数    #可认为是子脚本,在脚本中跟正常shell一样使用;先定义后使用
 
 ##格式
+###方式一
 function funcname {
     cmds
 }
-or
+###方式二
 funcname () {
     cmds
 }
@@ -1112,15 +1114,7 @@ cat /dev/null > xx.dat #同上
 
 
 ##文件读取
-File=/path/file
-{
-read line1
-read line2
-} < $File
-
-
-
-
+cat /path/file | while read line;do echo ${line};done
 
 
 

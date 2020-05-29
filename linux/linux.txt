@@ -115,7 +115,7 @@ df -T   #查看挂载点文件系统类型
 
 #MBR/GPT分区
 BIOS    #Basic Input/Output System(基本输入输出系统)
-        #可分为Legacy BIOS和EFI BIOS(也可称为UEFI),分别搭配MBR和GPT
+        #可分为Legacy BIOS和EFI BIOS(也可称为UEFI),分别搭配MBR和GPT分区表格式
         
 MBR     #Master Boot Record(主引导记录)
         #MBR分区表存储在硬盘的第一个扇区(64Bytes)
