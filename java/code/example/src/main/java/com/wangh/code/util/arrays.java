@@ -12,7 +12,7 @@ public final class arrays {
     }
 
     /**
-     * 随机整数数组生成器
+     * 随机int数组生成器
      *
      * @param length 数组长度
      * @param min    数组元素最小值
@@ -32,7 +32,7 @@ public final class arrays {
     }
 
     /**
-     * 随机整数数组生成器
+     * 随机float数组生成器
      *
      * @param length 数组长度
      * @param min    数组元素最小值
@@ -52,7 +52,7 @@ public final class arrays {
     }
 
     /**
-     * 打印整数数组
+     * 打印int数组
      *
      * @return 数组元素空格隔开
      */
@@ -67,7 +67,7 @@ public final class arrays {
     }
 
     /**
-     * 打印单精度数组
+     * 打印float数组
      *
      * @return 数组元素空格隔开
      */
@@ -80,4 +80,23 @@ public final class arrays {
         }
         System.out.println();
     }
+
+    /**
+     * int数组元素交换
+     */
+    public static void swap(int[] intArray, int i, int j) {
+        int temp = intArray[i];
+        intArray[i] = intArray[j];
+        intArray[j] = temp;
+    }
+
+    /**
+     * float数组元素交换
+     */
+    public static void swap(float[] intArray, int i, int j) {
+        float temp = intArray[i];
+        intArray[i] = intArray[j];
+        intArray[j] = temp;
+    }
+
 }

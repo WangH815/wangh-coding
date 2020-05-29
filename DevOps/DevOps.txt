@@ -1,13 +1,15 @@
-运维开发要求
-
-1.Linux/shell
-
-2.Python或Go
-
-3.运维平台（k8s、Istio、Zabbix）
-
-4.中间件（Jenkins、Jumpserver、salt）
-Ansible: 自动执行资源的配置管理和应用程序部署(Python)
-Jenkins: 
-
-5.配置管理数据库( Configuration Management Database,CMDB)
+运维开发技术点
+           系统：Linux（centos/redhat、ubuntu）/Shell、Windows Server
+         数据库：Oracle、MySQL、Redis、MongoDB、配置管理数据库( Configuration Management Database,CMDB)
+         服务器：Nginx、Tomcat(Java)、Apache
+           网络：tcp/ip、http、交换机，路由器，防火墙
+           语言：Python、Java
+ 自动化运维工具：Ansible(Python)、SaltStack、Puppet
+持续交付(CI/CD)：jenkins(java)/gitlab(git)
+   日志管理系统：ELK、EFK、Graylog、Splunk
+         中间件：Kafka
+       监控系统：zabbix、Prometheus
+         虚拟化：docker(go)/k8s
+     公有云运维：腾讯云、阿里云
+	 
+	 
