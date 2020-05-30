@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="cb8befc4-e661-43b2-8ab5-6398df00000c" name="CentOS 7.1908" url="http://192.168.99.120">
+        <fileTransfer host="192.168.99.120" port="22" rootFolder="/home/wangh" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions controlEncoding="utf-8" dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="8155bdb0-6d87-40ab-8c1b-5d4d4baec040" name="Ubuntu 1804" url="http://192.168.99.99">
+        <fileTransfer host="192.168.99.99" port="22" rootFolder="/home/wangh" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="0ac68947-3dc4-4f95-8ad0-f6989bd69e97" name="CentOS 6.10" url="http://192.168.99.100">
+        <fileTransfer host="192.168.99.100" port="22" rootFolder="/home/wangh" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

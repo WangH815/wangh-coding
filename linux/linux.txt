@@ -2,13 +2,13 @@ Linux基础使用
 
 
 Linux组成
-1.Linux内核        #管理计算机系统所有软硬件
+1.Linux内核        # 管理计算机系统所有软硬件
 2.GNU工具
 3.图形化桌面
 4.应用软件
 
 Linux内核功能
-1.系统内存管理     #包括物理内存、交换空间和虚拟内存
+1.系统内存管理     # 包括物理内存、交换空间和虚拟内存
 2.软件程序管理
 3.硬件设备管理
 4.文件系统管理
@@ -35,8 +35,8 @@ GNU工具
 虚拟文件系统是用户进程和各类文件系统之间的抽象接口层(api)
 
 文件系统简介
-ext(extended filesystem)     #扩展文件系统;Linux最初采用的文件系统;单文件不超过2GB
-#通过索引节点表中的节点访问,文件包括以下内容:
+ext(extended filesystem)     # 扩展文件系统;Linux最初采用的文件系统;单文件不超过2GB
+# 通过索引节点表中的节点访问,文件包括以下内容:
 1.文件名
 2.文件大小
 3.文件的属主
@@ -49,18 +49,18 @@ ext2
 2.单文件不超过2TB(后期版本增加到32TB)
 3.提高了访问效率和减低了碎片化
 
-journal     #日志
-#前两代文件系统都需要通过更新索引节点表处理文件,当系统崩溃或断电会损坏文件
-#基于安全考虑,开发人员开发了日志文件系统,先写日志再更新索引节点表,成功后再删除日志文件
-#日志系统模式
-1.数据模式  #索引节点和文件都会被写入日志;丢失数据风险低,但性能差;数据丢失风险最低
-2.有序模式  #只有索引节点数据会被写入日志,但只有数据成功写入后才删除;在性能和安全性之间取得了良好的折中
-3.回写模式  #只有索引节点数据会被写入日志,但不控制文件数据何时写入;丢失数据风险高,但仍比不用日志好
+journal     # 日志
+# 前两代文件系统都需要通过更新索引节点表处理文件,当系统崩溃或断电会损坏文件
+# 基于安全考虑,开发人员开发了日志文件系统,先写日志再更新索引节点表,成功后再删除日志文件
+# 日志系统模式
+1.数据模式  # 索引节点和文件都会被写入日志;丢失数据风险低,但性能差;数据丢失风险最低
+2.有序模式  # 只有索引节点数据会被写入日志,但只有数据成功写入后才删除;在性能和安全性之间取得了良好的折中
+3.回写模式  # 只有索引节点数据会被写入日志,但不控制文件数据何时写入;丢失数据风险高,但仍比不用日志好
 
 常见日志文件系统
-1.ReiserFS  #只支持回写模式,速度快;2001年Hans Reiser(人名)为Linux创建
-2.JFS       #Journaled File System,日志化文件系统;1990年IBM为IBM开发,第二版JFS2(一般称JFS)才被引入Linux;采用有序模式
-3.XFS       #1994年SGI(美国硅图公司)为IRIX Unix系统开发,2002年被引入Linux;采用回写模式
+1.ReiserFS  # 只支持回写模式,速度快;2001年Hans Reiser(人名)为Linux创建
+2.JFS       # Journaled File System,日志化文件系统;1990年IBM为IBM开发,第二版JFS2(一般称JFS)才被引入Linux;采用有序模式
+3.XFS       # 1994年SGI(美国硅图公司)为IRIX Unix系统开发,2002年被引入Linux;采用回写模式
 
 ext3
 1.2001年引入Linux内核
@@ -74,97 +74,97 @@ ext4
 3.引入块预分配技术
 4.理论最大单文件16T
 
-devtmpfs #设备临时文件系统
+devtmpfs # 设备临时文件系统
 1.用于设备文件节点的创建和管理;其他设备(如存储设备)会在/dev目录下显示,该目录使用devtmpfs
 
-tmpfs    #临时文件系统
+tmpfs    # 临时文件系统
 1.基于内存的文件系统,大小是动态的;如/dev/shm会使用tmpfs
 2.读写速度相对于磁盘快的多;重启数据不会保留
 
 
-#其他常见文件系统
-FAT32   #File Allocation Table(文件配置表)
+# 其他常见文件系统
+FAT32   # File Allocation Table(文件配置表)
 1.由FAT和FAT16发展而来,微软发明并拥有部分专利
 2.初期应用于MS-DOS系统(FAT),FAT32兼容win9x及之前的系统
 3.兼容性好但安全性差
 4.绝大部分闪存(U盘)使用此文件系统
 5.最大分区32G,最大单文件4G
 
-exFAT   #Extended File Allocation Table File System(扩展文件配置表),也可称为FAT64
+exFAT   # Extended File Allocation Table File System(扩展文件配置表),也可称为FAT64
 1.FAT32的升级版本
 2.最大单文件16EB
 
-NTFS    #New Technology File System(新技术文件系统)
+NTFS    # New Technology File System(新技术文件系统)
 1.Windows NT环境系统专用文件系统;包括 Windows 2000/xp/vista/7/8/8.1/10等
 2.支持数据加密、数据压缩以及权限管理,且磁盘利用率和性能比较高
 3.最大单文件单文件256T
 
-NFS       #Network File System(网络文件系统)
+NFS       # Network File System(网络文件系统)
 
-ISO 9660  #CD-ROM的文件系统
+ISO 9660  # CD-ROM的文件系统
 
 
 文件系统相关命令
-fdisk   #为存储设备创建分区,用来容纳文件系统;也可以创建LVM(logical volume manager,逻辑卷管理器)组织系统硬盘空间
-mkfs    #创建文件系统;可以使用参数指定文件系统类型,也可以使用 mkfs.ext2/mkfs.ext4/mkfs.xfs 等命令
-fsck    #检查文件系统
-mount   #挂载分区
-umount  #卸载分区;不会删除分区
-df -T   #查看挂载点文件系统类型
+fdisk   # 为存储设备创建分区,用来容纳文件系统;也可以创建LVM(logical volume manager,逻辑卷管理器)组织系统硬盘空间
+mkfs    # 创建文件系统;可以使用参数指定文件系统类型,也可以使用 mkfs.ext2/mkfs.ext4/mkfs.xfs 等命令
+fsck    # 检查文件系统
+mount   # 挂载分区
+umount  # 卸载分区;不会删除分区
+df -T   # 查看挂载点文件系统类型
 
 
-#MBR/GPT分区
-BIOS    #Basic Input/Output System(基本输入输出系统)
-        #可分为Legacy BIOS和EFI BIOS(也可称为UEFI),分别搭配MBR和GPT分区表格式
+# MBR/GPT分区
+BIOS    # Basic Input/Output System(基本输入输出系统)
+        # 可分为Legacy BIOS和EFI BIOS(也可称为UEFI),分别搭配MBR和GPT分区表格式
         
-MBR     #Master Boot Record(主引导记录)
-        #MBR分区表存储在硬盘的第一个扇区(64Bytes)
-        #MBR分区表只能记录4主分区或者3主分区和1扩展分区,扩展分区可以有多个逻辑分区
-        #单硬盘或单分区大小都不能超过2T
+MBR     # Master Boot Record(主引导记录)
+        # MBR分区表存储在硬盘的第一个扇区(64Bytes)
+        # MBR分区表只能记录4主分区或者3主分区和1扩展分区,扩展分区可以有多个逻辑分区
+        # 单硬盘或单分区大小都不能超过2T
         
-GPT     #GUID Partition Table(全局唯一识别分区表);主分区无4个限制,分区大小也可认为无限制
+GPT     # GUID Partition Table(全局唯一识别分区表);主分区无4个限制,分区大小也可认为无限制
 
 
-#Linux分区管理
-PV      #Physical Volume(物理卷);硬盘分区或整块硬盘可标记为一个PV
-VG      #Volume Group(卷组);一个或多个PV可加入一个VG
-LV      #Logical Volume(逻辑卷);将卷组按需要大小分为不同的分区,单个分区称为一个LV
-LVM     #Logical Volume Manager(逻辑卷管理器);用于管理逻辑卷(LV),可用于MBR或GPT
+# Linux分区管理
+PV      # Physical Volume(物理卷);硬盘分区或整块硬盘可标记为一个PV
+VG      # Volume Group(卷组);一个或多个PV可加入一个VG
+LV      # Logical Volume(逻辑卷);将卷组按需要大小分为不同的分区,单个分区称为一个LV
+LVM     # Logical Volume Manager(逻辑卷管理器);用于管理逻辑卷(LV),可用于MBR或GPT
 
 
-#linux文件系统根目录(/)结构
-/bin    #binaries;存放二进制可执行文件
-/sbin   #super user binaries;存放二进制可执行文件;一般只有管理员才有权限执行其中的命令
-/etc    #etcetera;存放系统配置文件
-/usr    #unix shared resources;用于存放共享的系统资源
-/home   #存放用户文件的根目录
-/root   #超级用户目录
-/dev    #devices;用于存放设备文件
-/lib    #library;存放跟文件系统中的程序运行所需要的共享库及内核模块
-/mnt    #mount;系统管理员安装临时文件系统的安装点
-/boot   #存放用于系统引导时使用的各种文件
-/tmp    #temporary;用于存放各种临时文件
-/var    #variable;用于存放运行时需要改变数据的文件
+# linux文件系统根目录(/)结构
+/bin    # binaries;存放二进制可执行文件
+/sbin   # super user binaries;存放二进制可执行文件;一般只有管理员才有权限执行其中的命令
+/etc    # etcetera;存放系统配置文件
+/usr    # unix shared resources;用于存放共享的系统资源
+/home   # 存放用户文件的根目录
+/root   # 超级用户目录
+/dev    # devices;用于存放设备文件
+/lib    # library;存放跟文件系统中的程序运行所需要的共享库及内核模块
+/mnt    # mount;系统管理员安装临时文件系统的安装点
+/boot   # 存放用于系统引导时使用的各种文件
+/tmp    # temporary;用于存放各种临时文件
+/var    # variable;用于存放运行时需要改变数据的文件
 
-#其他特殊文件
-/proc               #process(进程)相关的虚拟文件系统;可查看和修改内核运行状况
-  /proc/1           #PID=1的进程相关信息文件夹;系统初始化进程(init/systemd)号为1,其他进程类似
-  /proc/loadavg     #前三列分别保存最近1分钟,5分钟,及15分钟的平均负载
-  /proc/meminfo     #当前内存使用信息
-  /proc/diskstats   #磁盘I/O统计信息列表
-  /proc/net/dev     #网络流入流出统计信息
-  /proc/filesystems #支持的文件系统
-  /proc/cpuinfo     #CPU的详细信息
-  /proc/cmdline     #启动时传递至内核的启动参数,通常由grub进行传递
-  /proc/mounts      #系统当前挂在的文件系统
-  /proc/uptime      #系统运行时间
-  /proc/version     #当前运行的内核版本号等信息
-  /proc/devices     #可用设备的列表
-  /proc/modules     #已加载的模块
+# 其他特殊文件
+/proc               # process(进程)相关的虚拟文件系统;可查看和修改内核运行状况
+  /proc/1           # PID=1的进程相关信息文件夹;系统初始化进程(init/systemd)号为1,其他进程类似
+  /proc/loadavg     # 前三列分别保存最近1分钟,5分钟,及15分钟的平均负载
+  /proc/meminfo     # 当前内存使用信息
+  /proc/diskstats   # 磁盘I/O统计信息列表
+  /proc/net/dev     # 网络流入流出统计信息
+  /proc/filesystems # 支持的文件系统
+  /proc/cpuinfo     # CPU的详细信息
+  /proc/cmdline     # 启动时传递至内核的启动参数,通常由grub进行传递
+  /proc/mounts      # 系统当前挂在的文件系统
+  /proc/uptime      # 系统运行时间
+  /proc/version     # 当前运行的内核版本号等信息
+  /proc/devices     # 可用设备的列表
+  /proc/modules     # 已加载的模块
 
 
 I/O
-#以下是数据写入的流程
+# 以下是数据写入的流程
 1.用户进程使用write()系统调用写入文件
 2.内核更新映射到文件的 page cache
 3.内核线程 pdflush 负责把页缓存刷入到磁盘中
@@ -176,7 +176,7 @@ I/O
 
 网络
 Linux为TCP/IP网络操作提供套接字（Socket）接口;套接字为用户应用程序提供接口
-#网络数据传输过程(不同主机间应用程序数据传输)
+# 网络数据传输过程(不同主机间应用程序数据传输)
 1.应用程序首先创建或准备要传输的数据
 2.应用程序打开套接字并通过套接字接口写入数据到套接字缓冲(socket buffer)
 3.套接字缓冲用来处理传输数据，并使数据穿过该层，向下传递
@@ -193,45 +193,44 @@ Linux为TCP/IP网络操作提供套接字（Socket）接口;套接字为用户�
 3.网络接口指标
 4.块设备指标
 
-#Linux性能监控工具
-top                   #所有进程情况
-vmstat                #系统活动，硬件和系统信息
-uptime, w             #系统平均负载
-ps, pstree            #显示进程
-free                  #内存使用情况
-iostat                #cpu负载和磁盘活动
-sar                   #收集和报告系统状态
-mpstat                #多处理器使用情况
-numastat              #NUMA相关统计
-pmap                  #进程内存情况
-netstat               #网络统计
-iptraf                #实时网络统计
-tcpdump，ethereal     #详细网络流量分析
-nmon                  #收集和报告系统活动
-strace                #系统调用
-proc                  #文件系统各种内核统计信息
-KDE system guard      #实时的系统图形报告
-Gnome System Monitor  #实时的系统图形报告
+# Linux性能监控工具
+top                   # 所有进程情况
+vmstat                # 系统活动，硬件和系统信息
+uptime, w             # 系统平均负载
+ps, pstree            # 显示进程
+free                  # 内存使用情况
+iostat                # cpu负载和磁盘活动
+sar                   # 收集和报告系统状态
+mpstat                # 多处理器使用情况
+numastat              # NUMA相关统计
+pmap                  # 进程内存情况
+netstat               # 网络统计
+iptraf                # 实时网络统计
+tcpdump，ethereal     # 详细网络流量分析
+nmon                  # 收集和报告系统活动
+strace                # 系统调用
+proc                  # 文件系统各种内核统计信息
+KDE system guard      # 实时的系统图形报告
+Gnome System Monitor  # 实时的系统图形报告
 
-#压测工具
-lmbench               #微型系统功能评测工具
-iozone                #文件系统压测
-netperf               #网络性能测试
-
-
-
-#shell脚本的运行方式
-1 . xx.sh      #一般用于生效用户配置而不需要重新登录shell;xx.sh有读权限即可
-2 source xx.sh #同上;常见用于执行 profile 配置,脚本本身在当前进程中执行
-3 sh xx.sh     #读权限即可,脚本本身会在子进程中执行
-4 ./xx.sh      #需执行权限,脚本本身会在子进程中执行;如不指定当前路径(./),会优先根据PATH查找相应命令
+# 压测工具
+lmbench               # 微型系统功能评测工具
+iozone                # 文件系统压测
+netperf               # 网络性能测试
 
 
-#shell命令类型
+# shell脚本的运行方式
+1 . xx.sh      # 一般用于生效用户配置而不需要重新登录shell;xx.sh有读权限即可
+2 source xx.sh # 同上;常见用于执行 profile 配置,脚本本身在当前进程中执行
+3 sh xx.sh     # 读权限即可,脚本本身会在子进程中执行
+4 ./xx.sh      # 需执行权限,脚本本身会在子进程中执行;如不指定当前路径(./),会优先根据PATH查找相应命令
+
+
+# shell命令类型
 1.内置命令
   shell解释器包含的命令,只有内置命令能改变shell命令行环境变量;
   在当前进程(一般是bash,跟随shell版本)中执行
-  内置命令可使用 compgen -b | column 显示     #column格式化显示
+  内置命令可使用 compgen -b | column 显示     # column格式化显示;enable -a命令也可以
   man cmd 会显示无相关使用手册,一般可通过 help cmd 或 cmd --help 获取帮助
   内置命令可使用 type cmd 判断,内置命令会提示 cmd is a shell builtin
   常见内置命令 cd/help/pwd/export/set/alias/umask/kill/source/test等
@@ -242,678 +241,693 @@ netperf               #网络性能测试
   独立的shell可执行命令,在子进程中执行(Linux内核调用fork()函数实现),不会改变父进程的环境变量
 
 
-#shell环境变量
-1)设置永久环境变量:修改 /etc/profile         #具体参见此文件逻辑
-2)设置用户环境变量:修改 $HOME/.bash_profile  #同上;ubuntu文件为 $HOME/.profile
+# shell环境变量
+1)设置永久环境变量:修改 /etc/profile         # 具体参见此文件逻辑
+2)设置用户环境变量:修改 $HOME/.bash_profile  # 同上;ubuntu文件为 $HOME/.profile
 3)临时环境变量: export var="value"
 4)显示环境变量: env/set
 5)临时取消环境变量: unset var
 注:shell中使用的环境变量依次由1/2/3中的设置的构成;后面设置的同名环境变量会覆盖前面的
 
 
-#shell类型
-##查看指定用户默认shell
-grep username /etc/passwd | awk -F: '{print $7}'  #由/etc/passwd中冒号分割的第七个参数决定;一般为/bin/bash (B Shell)
-echo $SHELL      #查看当前用户运行的shell
-cat /etc/shells  #查看系统支持的所有shell类型
-bash             #进入当前shell的子shell;退出shell使用exit,退出最后一个shell会退出终端;可使用pstree -p/ps --forest查看父子shell关系
-cmd1;cmd2;cmd3;echo $BASH_SUBSHELL   #依次shell命令;在当前shell中执行;BASH_SUBSHELL返回值为0表示在当前shell执行
-(cmd1;cmd2;cmd3;echo $BASH_SUBSHELL) #依次shell命令;在当前shell的子shell中执行;BASH_SUBSHELL返回值为1
-echo $BASH_SUBSHELL                  #返回0
-echo $(echo $BASH_SUBSHELL)          #返回1
-echo `echo $BASH_SUBSHELL`           #返回1;同上
+# shell类型
+## 查看指定用户默认shell
+grep username /etc/passwd | awk -F: '{print $7}'  # 由/etc/passwd中冒号分割的第七个参数决定;一般为/bin/bash (B Shell)
+echo $SHELL      # 查看当前用户运行的shell
+cat /etc/shells  # 查看系统支持的所有shell类型
+bash             # 进入当前shell的子shell;退出shell使用exit,退出最后一个shell会退出终端;可使用pstree -p/ps --forest查看父子shell关系
+cmd1;cmd2;cmd3;echo $BASH_SUBSHELL   # 依次shell命令;在当前shell中执行;BASH_SUBSHELL返回值为0表示在当前shell执行
+(cmd1;cmd2;cmd3;echo $BASH_SUBSHELL) # 依次shell命令;在当前shell的子shell中执行;BASH_SUBSHELL返回值为1
+echo $BASH_SUBSHELL                  # 返回0
+echo $(echo $BASH_SUBSHELL)          # 返回1
+echo `echo $BASH_SUBSHELL`           # 返回1;同上,会先执行子shell命令(``或()内)
 
 
-#命令形式
-##常见形式
-cmd               #无选项及参数;例如:ls
-cmd arg           #无选项单参数;例如:ls /root
-cmd args          #无选项及参数;例如:mv file1 file2;命令参数的长度和数量是有限制的,一般是用户缓冲空间(内核分配)的大小决定
-cmd -option       #单选项无参;例如:ls -l
-cmd -option arg   #单选项单参;例如:ls -l /root
-cmd -option args  #单选项多参;例如:cp -r path1 path2
-cmd -options      #多选项无参;例如:ls -ltr
-cmd -option1 arg1 -option2 arg2  #选项参数对;例如:find -name a* -size 100
-##命令风格
-###以ps命令为例
-ps -a             #Unix风格的参数,前面加短杠;多数命令支持这种形式;多数参数命令都有对应意义
-ps aux            #BSD风格的参数,前面不加短杠;少部分命令支持这种形式,例如: tar cvf/-cvf
-ps --help         #GNU风格的长参数,前面加双短杠;部分短杠有对应的双短杠长参数(一般为参数全程)命令
-##多命令格式
-cmd1 | cmd2       #"|"为管道符,用于将第一个命令的输出作为第二个命令的参数;
-                  #cmd1输出中的空字符和换行会被替换为空格,cmd1输出过多时可能会导致cmd2参数超长
-cmd1 | xargs cmd2 #当cmd1不支持管道符时实现管道符的功能;xargs会保持cmd1的原始输出模式(包含空字符和换行)
-cmd1;cmd2         #顺序执行命令;cmd1出错也会执行cmd2
-cmd1 && cmd2      #cmd1执行成功才执行cmd2
-cmd1 || cmd2      #cmd1执行失败则执行cmd2
+# 命令形式
+## 常见形式
+cmd               # 无选项及参数;例如:ls
+cmd arg           # 无选项单参数;例如:ls /root
+cmd args          # 无选项及参数;例如:mv file1 file2;命令参数的长度和数量是有限制的,一般是用户缓冲空间(内核分配)的大小决定
+cmd -option       # 单选项无参;例如:ls -l
+cmd -option arg   # 单选项单参;例如:ls -l /root
+cmd -option args  # 单选项多参;例如:cp -r path1 path2
+cmd -options      # 多选项无参;例如:ls -ltr
+cmd -option1 arg1 -option2 arg2  # 选项参数对;例如:find -name a* -size 100
+## 命令风格
+### 以ps命令为例
+ps -a             # Unix风格的参数,前面加短杠;多数命令支持这种形式;多数参数命令都有对应意义
+ps aux            # BSD风格的参数,前面不加短杠;少部分命令支持这种形式,例如: tar cvf/-cvf
+ps --help         # GNU风格的长参数,前面加双短杠;部分短杠有对应的双短杠长参数(一般为参数全程)命令
+## 多命令格式
+cmd1 | cmd2       # "|"为管道符,用于将第一个命令的输出作为第二个命令的参数;
+                  # cmd1输出中的空字符和换行会被替换为空格,cmd1输出过多时可能会导致cmd2参数超长
+cmd1 | xargs cmd2 # 当cmd1不支持管道符时实现管道符的功能;xargs会保持cmd1的原始输出模式(包含空字符和换行)
+cmd1; cmd2        # 顺序执行命令;cmd1出错也会执行cmd2
+cmd1 && cmd2      # cmd1执行成功才执行cmd2
+cmd1 || cmd2      # cmd1执行失败则执行cmd2
 
 
-#常用基础命令
+# 命令hash缓存    # shell会缓存命令hash表，每个子Shell独立，第一次子Shell的hash为空;
+                  # 主要缓存命令路径,命令不存在于hash表中再去PATH中寻找,加快执行速度
+hash          # 返回当前shell的命令hash缓存;包含执行次数及命令
+hash -r       # 清空当前hash
+hash -d cmd   # 删除指定命令hash记录
+
+
+# 命令别名
+alias [-p]             # 列出当前shell可用别名
+alias 别名='value'     # 设置别名 
+unalias -a             # 取消所有别名
+unalias 别名1 [别名2]  # 取消指定别名
+
+
+# 常用基础命令
 1.主要来源 
-  https://www.yiibai.com/linux                       #易百教程
-  https://www.runoob.com/linux/linux-tutorial.html   #菜鸟教程 
-  Linux命令行与shell脚本编程大全 第3版
+  https://www.yiibai.com/linux                       # 易百教程
+  https://www.runoob.com/linux/linux-tutorial.html   # 菜鸟教程 
+  # <<Linux命令行与shell脚本编程大全>> 第3版
 2.在上一条的基础上精简,只保留常用部分;还有部分是平时工作中能用的命令及技巧
 3.命令注释会给出相对完整的名称(非官方);见名知意的命令不说明
 4.file表示文件名;dir表示文件夹名称;cmd(command简写)表示shell命令(脚本也算),cmds表示多条命令
 5.[]中内容表示可选项
 
-##命令帮助
-man cmd       #manual(手册);命令详细说明
-#区域号(左上命令编号) 说明
-  1                   #可执行程序或shell命令
-  2                   #系统调用
-  3                   #库调用
-  4                   #特殊文件
-  5                   #文件格式与约定
-  6                   #游戏
-  7                   #概览、约定及杂项
-  8                   #超级用户和系统管理员命令
-  9                   #内核例程
-info cmd              #类似于man;info格式命令帮助
-help cmd              #使用help命令获取简要帮助
-cmd --help            #同上,支持更广泛;部分命令也可使用cmd -h
-which cmd             #显示命令绝对路径
-type cmd              #判断命令类型;内置命令会提示 cmd is a shell builtin
+## 命令帮助
+man cmd       # manual(手册);命令详细说明;命令编写者未提供则没有
+# 区域号(左上命令编号) 说明
+  1                   # 可执行程序或shell命令[常见]
+  2                   # 系统调用
+  3                   # 库调用
+  4                   # 特殊文件
+  5                   # 文件格式与约定
+  6                   # 游戏
+  7                   # 概览、约定及杂项
+  8                   # 超级用户和系统管理员命令[常见]
+  9                   # 内核例程
+info cmd              # 类似于man;info格式命令帮助
+help cmd              # 使用help命令获取简要帮助
+cmd --help            # 同上,支持更广泛;部分命令也可使用cmd -h;属于命令功能
+which cmd             # 显示命令绝对路径
+type cmd              # 判断命令类型;内置命令会提示 cmd is a shell builtin
 					  
-##快速输入帮助        #以下使用ubuntu,其他发行版大同小异
-1.命令开头 + Tab      #会提示用户 PATH 下所有可匹配命令
-2.命令 + 空格 + Tab   #提示命令选项或参数(文件或文件夹)
+## 快速输入帮助       # 以下使用ubuntu,其他发行版大同小异;redhat可使用 um install -y bash-completion 安装命令补全
+1.命令开头 + Tab      # 会提示用户 PATH 下所有可匹配命令
+2.命令 + 空格 + Tab   # 提示命令选项或参数(文件或文件夹)
 
-##用户及权限
-adduser username        #增加用户,默认添加 /home/username 目录等
-useradd username        #增加用户,不添加用户家目录
-useradd -m username     #增加用户,添加用户家目录
-groupadd groupname      #增加用户组
-usermod -aG gname uname #user modify;将用户增加到用户组(多个用户组可用逗号隔开)
-su username             #switch user;简单切换用户,不加载环境变量;不跟用户名默认切换到root
-su - username           #切换登录用户,加载环境变量;不跟用户名默认切换到root
-su -l/--logon username  #同上;简写为su -
-sudo passwd root        #switch user do(execute);ubuntu启用root用户
-passwd [-u] [username]  #root用户修改指定用户密码,-u可不加;不跟用户名默认修改当前用户密码
-id [username]           #显示指定用户uid、gid和groups等信息,不跟用户名显示当前用户相关信息
-write user [ttyname]    #向其他用户发送给信息(message),ttyname可以使用w查询,Ctrl + c结束
-tty                     #teletypewriter(电传打印机);显示连接到标准输入终端名称(虚拟控制台名称)
-echo 'msg' >/dev/pts/n  #向终端n发送消息;与write类似
 
-##文件目录操作
-ls -ltr [dir]  #list;按时间倒序排列指定文件夹下列表;默认显示当前文件夹列表非隐藏文件
-ls -a          #显示所有文件列表,包含隐藏文件
-ll             #ubunt系统中由 alias 指定,实际执行ls -alF
-stat file/dir  #显示文件详细信息(大小、属组、访问/修改时间等);stat还可显示文件系统状态
-cd             #change directory;切换到用户家目录,由当前用户$HOME指定
-cd $HOME       #同上
-cd ~           #同上
-cd -           #切换到切换前目录
-cd path        #切换到指定路径目录;路径分为相对路径(相对于当前目录)和绝对路径(/开头)
-cd ..          #切换到上层目录
-cd ../..       #切换到上上层目录;Linux使用正斜线(/)表示路径分隔,windows使用反斜线(\)表示
-pwd            #print working directory;打印当前工作目录绝对路径
-mkdir [path/]dir        #make directory;创建文件夹,多文件夹可空格隔开;要求上层目录必须存在
-mkdir -p dir1/dir2      #同上,不要求上层目录存在;不存在会创建多级目录
-mkdir -p a/{b,c/{d,e}}  #创建复杂目录;/表示子目录,{}中逗号隔开的为平级目录
-mkdir -p {q,w}a{e,r}    #创建qae/qar/wae/war四个目录;{}中逗号必须存在,否则{}会解析为'{}'字符串;touch/rm支持类似操作
-mkdir -m 777 dir        #创建指定权限目录
-rmdir dir               #remove empty directory;删除空文件夹;多文件空格隔开
-rm file                 #remove;删除文件;多文件空格隔开
-rm *[0-9a-zA-Z]         #删除数字或字母结尾的文件
-rm -rf dir              #递归删除文件或文件夹(不要求非空);f表示强制删除不做提示;可跟多文件(夹)
-mv file1 file2          #move;file1重命名为file2,要求file1必须存在,file2已存在则覆盖
-mv file1 path/file2     #移动并重命名,其余同上
-mv file dir             #移动file到dir,要求file和dir必须存在;file存在而dir不存在时表示重命名
-mv file1 file2 dir      #移动多个文件到指定文件夹(dir);要求dir必须存在
-mv file dir1 dir2       #移动文件或文件夹到指定目录(dir2);要求dir2必须存在
-mv dir1 dir2            #移动或重命名,要求dir1必须存在;dir2存在表示移动否则表示重命名
-cp file1 file2          #copy;复制file1为file2;要求file1必须存在,file存在时会提示覆盖
-cp -p file1 file2       #保持属性(权限时间戳等)复制(硬链接文件会复制为新文件),否则使用预设值;其他同上,文件复制同理
-cp -i file1 file2       #同名文件覆盖询问
-cp -s file1 file2       #软连接复制;等价于 ln -s
-cp file dir             #复制并移动file到dir;要求file和dir存在
-cp -R[/r] dir dir1      #文件夹复制,其他与文件复制相同;
-touch file              #摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
-touch a[0-9]            #创建a0-a9(共10个文件);[]中表示所有可能
-touch a{0..9}           #同上
-touch -t                #设定文件时间戳,如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
-vi file                 #文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
-cat file                #concatenate;显示文件内容
-cat -A file             #同上,同时显示结束符($)和制表符(Tab,显示为^I);等价于-vET
-cat -n file             #带行号输出
-cat -b file             #非空行带行号输出;空行也会输出
-view file               #只读模式查看文件;其他操作见vi
-head file               #显示文件前10行
-head -n file            #显示文件前n行
-tail file               #显示文件后10行
-tail -n file            #显示文件后n行
-tail -f file            #循环读取某文件后10行,一般用于文件实时查看;redhat系列还支持tailf,效果类似
-tail -nf file           #循环读取某文件后n行
-more file               #分页查看文件,一次性加载,空格/b 翻页;大文件不建议使用
-less file               #分页查看文件,逐步加载,空格/b PgUp/PgDn 翻页
-file file               #显示文件或文件夹类型
-diff file1 file2        #文件差异对比
-ln file link            #创建file的硬连接(hard link)为link
-ln -s file link         #创建file的软连接(symbolic link,符号链接)为link;link不能创建前存在
-    ##软链接:
+## 用户及权限
+adduser username        # 增加用户,默认添加 /home/username 目录等
+useradd username        # 增加用户,不添加用户家目录
+useradd -m username     # 增加用户,添加用户家目录
+groupadd groupname      # 增加用户组
+usermod -aG gname uname # user modify;将用户增加到用户组(多个用户组可用逗号隔开)
+su username             # switch user;简单切换用户,不加载环境变量;不跟用户名默认切换到root
+su - username           # 切换登录用户,加载环境变量;不跟用户名默认切换到root
+su -l/--logon username  # 同上;简写为su -
+sudo passwd root        # switch user do(execute);ubuntu启用root用户
+passwd [-u] [username]  # root用户修改指定用户密码,-u可不加;不跟用户名默认修改当前用户密码
+id [username]           # 显示指定用户uid、gid和groups等信息,不跟用户名显示当前用户相关信息
+write user [ttyname]    # 向其他用户发送给信息(message),ttyname可以使用w查询,Ctrl + c结束
+tty                     # teletypewriter(电传打印机);显示连接到标准输入终端名称(虚拟控制台名称)
+echo 'msg' >/dev/pts/n  # 向终端n发送消息;与write类似
+
+## 文件目录操作
+ls -ltr [dir]  # list;按时间倒序排列指定文件夹下列表;默认显示当前文件夹列表非隐藏文件
+ls -a          # 显示所有文件列表,包含隐藏文件
+ll             # ubuntu系统中由 alias 指定,实际执行ls -alF
+stat file/dir  # 显示文件详细信息(大小、属组、访问/修改时间等);stat还可显示文件系统状态
+cd             # change directory;切换到用户家目录,由当前用户$HOME指定
+cd $HOME       # 同上
+cd ~           # 同上
+cd -           # 切换到切换前目录
+cd path        # 切换到指定路径目录;路径分为相对路径(相对于当前目录)和绝对路径(/开头)
+cd ..          # 切换到上层目录
+cd ../..       # 切换到上上层目录;Linux使用正斜线(/)表示路径分隔,windows使用反斜线(\)表示
+pwd            # print working directory;打印当前工作目录绝对路径
+mkdir [path/]dir        # make directory;创建文件夹,多文件夹可空格隔开;要求上层目录必须存在
+mkdir -p dir1/dir2      # 同上,不要求上层目录存在;不存在会创建多级目录
+mkdir -p a/{b,c/{d,e}}  # 创建复杂目录;/表示子目录,{}中逗号隔开的为平级目录
+mkdir -p {q,w}a{e,r}    # 创建qae/qar/wae/war四个目录;{}中逗号必须存在,否则{}会解析为'{}'字符串;touch/rm支持类似操作
+mkdir -m 777 dir        # 创建指定权限目录
+rmdir dir               # remove empty directory;删除空文件夹;多文件空格隔开
+rm file                 # remove;删除文件;多文件空格隔开
+rm *[0-9a-zA-Z]         # 删除数字或字母结尾的文件
+rm -rf dir              # 递归删除文件或文件夹(不要求非空);f表示强制删除不做提示;可跟多文件(夹)
+mv file1 file2          # move;file1重命名为file2,要求file1必须存在,file2已存在则覆盖
+mv file1 path/file2     # 移动并重命名,其余同上
+mv file dir             # 移动file到dir,要求file和dir必须存在;file存在而dir不存在时表示重命名
+mv file1 file2 dir      # 移动多个文件到指定文件夹(dir);要求dir必须存在
+mv file dir1 dir2       # 移动文件或文件夹到指定目录(dir2);要求dir2必须存在
+mv dir1 dir2            # 移动或重命名,要求dir1必须存在;dir2存在表示移动否则表示重命名
+cp file1 file2          # copy;复制file1为file2;要求file1必须存在,file存在时会提示覆盖
+cp -p file1 file2       # 保持属性(权限时间戳等)复制(硬链接文件会复制为新文件),否则使用预设值;其他同上,文件复制同理
+cp -i file1 file2       # 同名文件覆盖询问
+cp -s file1 file2       # 软连接复制;等价于 ln -s
+cp file dir             # 复制并移动file到dir;要求file和dir存在
+cp -R[/r] dir dir1      # 文件夹复制,其他与文件复制相同;
+touch file              # 摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
+touch a[0-9]            # 创建a0-a9(共10个文件);[]中表示所有可能
+touch a{0..9}           # 同上
+touch -t                # 设定文件时间戳,如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
+vi file                 # 文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
+cat file                # concatenate;显示文件内容
+cat -A file             # 同上,同时显示结束符($)和制表符(Tab,显示为^I);等价于-vET
+cat -n file             # 带行号输出
+cat -b file             # 非空行带行号输出;空行也会输出
+view file               # 只读模式查看文件;其他操作见vi
+head file               # 显示文件前10行
+head -n file            # 显示文件前n行;head -n num/head -nnum也可以(这里-n为选项,num为参数),tail也支持这种格式
+tail file               # 显示文件后10行
+tail -n file            # 显示文件后n行
+tail -f file            # 循环读取某文件后10行,一般用于文件实时查看;redhat系列还支持tailf,效果类似
+tail -nf file           # 循环读取某文件后n行
+more file               # 分页查看文件,一次性加载,空格/b 翻页;大文件不建议使用
+less file               # 分页查看文件,逐步加载,空格/b PgUp/PgDn 翻页
+file file               # 显示文件或文件夹类型
+diff file1 file2        # 文件差异对比
+ln file link            # 创建file的硬连接(hard link)为link
+ln -s file link         # 创建file的软连接(symbolic link,符号链接)为link;link不能创建前存在
+    ## 软链接
      1.以绝对路径的形式存在;类似于Windows操作系统中的快捷方式
      2.可以跨文件系统,硬链接不可以
      3.可以对一个不存在的文件名进行链接
      4.可以对目录进行链接
-    ##硬链接:
-     1.以文件副本的形式存在,相同的inode节点,与原文件是等价的,但不占用实际空间
+    ## 硬链接
+     1.以文件副本的形式存在,相同的inode节点,与原文件是等价的,但不占用实际空间;类似于增加一个文件指针
      2.不允许给目录创建硬链接
      3.硬链接只有在同一个文件系统中才能创建
      4.通过指索引节点（inode）来进行链接;删除其中一个文件时文件本身不会被删除
-###grep
-grep abc file              #查找文件中包含abc的行
-grep ^a file               #a开头
-grep a$ file               #a结尾
-grep -n ^$ file            #匹配空行并显示行号
-grep ^[a-z] file           #小写字母开头,[]表示其中任意字符
-grep -E 正则表达 file      #正则方式查找;等价于egrep
-grep -nE [0-9]\{4\} file   #匹配出现4次(需开启正则)数字的区域,并显示行号
-grep -nE [0-9]\{2,4\} file #匹配出现2到4次(需开启正则)数字的区域,并显示行号
-grep -i str file           #忽略大小写
-grep -n str file           #显示行号
-grep -A/B/C n str file     #显示匹配行及其之后(after)/之前(before)/前后(center)的n行
-grep -nA m str file        #显示行号且显示匹配行之后的m行内容
-grep -n -A m str file      #同上
-###cut
-cut -b/c N/N-/N-M/-M file  #按照字节(bytes)/字符(characters)截取文本(标准输出);截取列范围分别是 =N、>=N、N<=x<=M和<=M
-cut -f N/N-/N-M/-M file    #按照Tab(制表符)截取文本(标准输出);-f表示field(域),多个域可用逗号隔开,单行域返回结果会去重
-cut -d ',' -f N file       #-d(delimiter)指定分隔符,与-f一起使用
-echo '1234567'|cut -c 2    #结果为2;可写为 cut -c2,空格可省略
-echo '1234567'|cut -c2-5   #结果为2;可写为 cut -c2,空格可省略
-echo -e "123\t456"|cut -f2 #结果为456
-###paste
-paste file1 file2 ...      #列模式拼接,默认为Tab链接
-paste file1 file2 -d ","   #指定分隔符拼接
-###tr
-echo 12345 | tr '0-9' '9876543210'  #按规则替换字符;结果为87654
-cat file | tr '\t' ' '              #制表符替换为空格
-cat file | tr -d '0-9'              #删除所有数字
-cat file | tr -d -c '0-9\n'         #删除非数字数据,默认不换行,加上 \n
-cat file | tr -s ' '                #去除重复空格
-###split
-split -n file str  #将文件每n行切割为多个str开头(默认为x)的小文件,不改变原文件
-split -l n file    #同上
-split -b n fiel    #按字节切割
-split -C n fiel    #同上,尽量保证每行的完整性   
-###sort
-sort      #排序,默认按照字典顺序
-    -n    #按数字进行排序
-    -d    #按字典序进行排序,仅考虑空字符、字母和数字排序
-    -r    #降序排序
-    -k N  #指定按第N列排序
-	-h    #以易读方式排序(eg:K/M/G)
-    -b    #忽略像空格之类的前导空白字符
+### grep
+grep abc file              # 查找文件中包含abc的行[常用]
+grep ^a file               # a开头
+grep a$ file               # a结尾
+grep -n ^$ file            # 匹配空行并显示行号
+grep ^[a-z] file           # 小写字母开头,[]表示其中任意字符
+grep -E 正则表达 file      # 正则方式查找;等价于egrep
+grep -nE [0-9]\{4\} file   # 匹配出现4次(需开启正则)数字的区域,并显示行号
+grep -nE [0-9]\{2,4\} file # 匹配出现2到4次(需开启正则)数字的区域,并显示行号
+grep -i str file           # 忽略大小写[常用]
+grep -n str file           # 显示行号
+grep -A/B/C n str file     # 显示匹配行及其之后(after)/之前(before)/前后(center)的n行
+grep -nA m str file        # 显示行号且显示匹配行之后的m行内容
+grep -n -A m str file      # 同上
+### cut
+cut -b/c N/N-/N-M/-M file  # 逐行按照字节(bytes)/字符(characters)截取文本(标准输出);截取列范围分别是 =N、>=N、N<=x<=M和<=M(N/M不表示索引)
+cut -f N/N-/N-M/-M file    # 按照Tab(制表符)截取文本(标准输出);-f表示field(域),多个域可用逗号隔开,单行域返回结果会去重
+cut -d ',' -f N file       # -d(delimiter)指定分隔符,与-f一起使用
+echo '1234567'|cut -c 2    # 结果为2;可写为 cut -c2,空格可省略
+echo '1234567'|cut -c 2-5  # 结果为2345;可写为 cut -c2-5,空格可省略
+echo -e "123\t456"|cut -f2 # 结果为456
+### paste
+paste file1 file2 ...      # 列模式拼接,默认为Tab链接
+paste file1 file2 -d ","   # 指定分隔符拼接
+### tr
+echo 12345 | tr '0-9' '9876543210'  # 按规则替换字符;结果为87654
+cat file | tr '\t' ' '              # 制表符替换为空格
+cat file | tr -d '0-9'              # 删除所有数字
+cat file | tr -d -c '0-9\n'         # 删除非数字数据,默认不换行,加上 \n
+cat file | tr -s ' '                # 去除重复空格
+### split
+split -n file str  # 将文件每n行切割为多个str开头(默认为x)的小文件,不改变原文件
+split -l n file    # 同上
+split -b n fiel    # 按字节切割
+split -C n fiel    # 同上,尽量保证每行的完整性   
+### sort
+sort      # 排序,默认按照字典顺序
+    -n    # 按数字进行排序
+    -d    # 按字典序进行排序,仅考虑空字符、字母和数字排序
+    -r    # 降序排序
+    -k N  # 指定按第N列排序
+	-h    # 以易读方式排序(eg:K/M/G)
+    -b    # 忽略像空格之类的前导空白字符
 sort -nrk 1 data.txt
 sort -bd data
-###wc
-wc -c/m/w/l file            #按照字节/字符/单词(Tab或空格分隔,多个分隔符算一个)/行数 统计文本或标准输出
-wc -l *|sort -rh|head -10   #当前目录中行数前十的文件
-echo -e '1\t2  34 56'|wc -w #输出4
-###uniq
-sort unsort.txt | uniq      #排序并去除重复行
-sort unsort.txt | uniq -c   #统计各行在文件中出现的次数
-sort unsort.txt | uniq -d   #找出重复行
-###sed   #stream editor(流编辑器)
-#动作说明
+### wc
+wc -c/m/w/l file            # 按照字节/字符/单词(Tab或空格分隔,多个分隔符算一个)/行数 统计文本或标准输出
+wc -l *|sort -rh|head -10   # 当前目录中行数前十的文件
+echo -e '1\t2  34 56'|wc -w # 输出4
+### uniq
+sort unsort.txt | uniq      # 排序并去除重复行
+sort unsort.txt | uniq -c   # 统计各行在文件中出现的次数
+sort unsort.txt | uniq -d   # 找出重复行
+### sed   # stream editor(流编辑器)
+# 动作说明
     a :新增,a 的后面可以接字串,而这些字串会在新的一行出现(目前的下一行) 
     c :取代,c 的后面可以接字串,这些字串可以取代 n1,n2 之间的行
     d :删除
     i :插入,i 的后面可以接字串,而这些字串会在新的一行出现(目前的上一行);
     p :打印,亦即将某个选择的数据印出;通常 p 会与参数 sed -n 一起运行
     s :取代,可以直接进行取代的工作;通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g
-sed 's/text/replace_text/' file      #替换每一行的第一处匹配的text,''可换为"",区别在于""会对表达式求值
-sed 's/text/replace_text/g' file     #全局替换
-sed -i 's/text/repalce_text/g' file  #全局替换并替换原文件
-sed '/^$/d' file                     #替换空行,会修改原文件
-sed 's/ //g' file                    #替换所有空格
-###awk   #数据流处理工具,逐行处理;上述文本处理命令都可用awk实现
-###常见用法参见 https://www.runoob.com/linux/linux-comm-awk.html
-awk '[BEGIN{statements}] {statements2} [END{statements}]'  #statements2是处理语句核心,BEGIN和END可不出现
-    #特殊变量
-    NR     #数据流行号
-    NF     #数据流字段数
-    $0     #数据流本身
-    $n     #处理后第n个字段,n > 0
-awk '{print $1,$4}' log.txt   #输出文本中第1,4列,默认以空格或Tab作为分隔符
-awk -F, '{print $4}' log.txt  #输出文本以逗号为分隔符的第4列; -F, <=> -F , <=> -F ',' <=> -F ","
-awk 'BEGIN{FS=","} ...'       #同上
-awk -F '[ ,.;]'               #指定多个分隔符
-awk -f cal.awk log.txt        #使用指定awk脚本处理文本
-awk '$1>2 && $2=="Are" {print $1}' log.txt   #指定过滤条件
+sed 's/text/replace_text/' file      # 替换每一行的第一处匹配的text,''可换为"",区别在于""会对表达式求值
+sed 's/text/replace_text/g' file     # 全局替换
+sed -i 's/text/repalce_text/g' file  # 全局替换并替换原文件
+sed '/^$/d' file                     # 替换空行,会修改原文件
+sed 's/ //g' file                    # 替换所有空格
+### awk   # 数据流处理工具,逐行处理;上述文本处理命令都可用awk实现
+### 常见用法参见 https://www.runoob.com/linux/linux-comm-awk.html
+awk '[BEGIN{statements}] {statements2} [END{statements}]'  # statements2是处理语句核心,BEGIN和END可不出现
+    # 特殊变量
+    NR     # 数据流行号
+    NF     # 数据流字段数
+    $0     # 数据流本身
+    $n     # 处理后第n个字段,n > 0
+awk '{print $1,$4}' log.txt   # 输出文本中第1,4列,默认以空格或Tab作为分隔符
+awk -F, '{print $4}' log.txt  # 输出文本以逗号为分隔符的第4列; -F, <=> -F , <=> -F ',' <=> -F ","
+awk 'BEGIN{FS=","} ...'       # 同上
+awk -F '[ ,.;]'               # 指定多个分隔符
+awk -f cal.awk log.txt        # 使用指定awk脚本处理文本
+awk '$1>2 && $2=="Are" {print $1}' log.txt   # 指定过滤条件
 
-#文件查找
-which cmd               #查找命令位置;返回用户PATH变量中第一个匹配位置
-whereis cmd             #查找命令(程序)的二进制、man说明和源码文件的绝对路径
-whereis -b/m/s cmd      #查找命令(程序)的二进制/man说明/源码文件的绝对路径
-locate cmd              #查找cmd相关文件
-locate /etc/sh          #查找/etc目录下sh开头的文件
+# 文件查找
+which cmd               # 查找命令位置;返回用户PATH变量中第一个匹配位置
+whereis cmd             # 查找命令(程序)的二进制、man说明和源码文件的绝对路径
+whereis -b/m/s cmd      # 查找命令(程序)的二进制/man说明/源码文件的绝对路径
+locate cmd              # 查找cmd相关文件
+locate /etc/sh          # 查找/etc目录下sh开头的文件
 find [path] [option value] [option2 value2] ... [operation]
-    ##参数说明
-    [path]         #默认为当前路径
-    [option value] #匹配选项及值,部分选项不需要value,绝大部分成对出现,取结果交集;
-                   #如:-type d 表示查找所有文件夹,选项前加上!表示不匹配
-                   #选择性强的放前面可提高查询效率,例如 -depth/mindepth/maxdepth               
-    [operation]    #对于查找结果的操作,常用操作如下:
-                   #-print: 将匹配结果输出到标准输出,一般可不加;shell脚本中建议加上
-                   #-print0:同上,但不换行;
-                   #-exec:  用于下一步的命令执行;形式为 "cmd {} \;" 
-                   #         如:find . -type f -exec rm -rf {} \; 表示删除所有文件;{}表示每条查找结果
-                   #         find . -type f|xargs rm -rf 可实现同-exec功能
-                   #-ok:    同上,不同在于会让用户确认是否执行每个命令
-                   #-delete: 删除文件或文件夹
-                   #         如:find . -type f -delete 删除所有文件
-    ##常用option(选项)
-    -name file            #名称;最常用的选项
-    -iname file           #忽略大小写
-    -type b/d/c/p/l/f     #文件类型;块设备、目录、字符设备、管道、符号链接、普通文件
-    -size [-/+]n[cwbkMG]  #大小为[小于/大于]n[字节/字/块(一般为512bit)/KB/MB/GB]的文件
-    -depth                #使查找在进入子目录前先行查找完本目录
-    -mindepth n           #指定目录的第n级目录开始查找
-    -maxdepth n           #最多查询到指定目录的第n级目录
-    -perm 755             #权限
-    -empty                #空文件或文件夹
-    -mtime [-/+]n         #n天[内(包含n)/外]修改的;无-/+时表示第n天(当天为0);下同
-    -atime [-/+]n         #访问时间
-    -ctime [-/+]n         #创建时间
-    -amin [-/+]n          #n分钟
-    -user username        #所属者
-    -group groupname      #按组来查找
-    -nogroup              #即文件的属组在/etc/groups中不存在
-    -nouser               #查无有效属主的文件,即文件的属主在/etc/passwd中不存 
-    -nogroup              #查无有效属组的文件,即文件的属组在/etc/groups中不存在
-    -nouser               #查无有效属主的文件,即文件的属主在/etc/passwd中不存
-    -newer f1 !f2         #查更改时间比f1新但比f2旧的文件
-    -fstype               #查位于某一类型文件系统中的文件,这些文件系统类型通常可 在/etc/fstab中找到
-    -mount                #查文件时不跨越文件系统mount点
-    -follow               #如果遇到符号链接文件,就跟踪链接所指的文件
-    -cpio                 #查位于某一类型文件系统中的文件,这些文件系统类型通常可 在/etc/fstab中找到
-    -prune path           #忽略某个目录
-find . -name   "*.txt" -print                  #.txt结尾的文件,双引号可不加
-find . ! -name "*.txt" -print                  #查找所有非 .txt 结尾文件
-find . -name "[a-z][0–9].txt" -print           #查以小写字母和数字开头的txt文件     
-find . -name "*.txt" -o -name "*.pdf"  -print  #查找txt或pdf文件,-o表示或
-find . -regex  ".*\(\.txt|\.pdf\)$" -print     #同上;-iregex:忽略大小写
-find . -name 'xa*'|grep -v xaa|xargs rm -rf    #删除当前目录下所有除了xaa的xa*文件
-find . -perm 755 -exec ls -ltr {} \;           #显示所有权限是755的文件(夹)
-find . -size +512k                             #大于512k的文件
-find . -type f -print | xargs rm -f            #逐条所有文件,不存在rm参数过长问题
-###捕获命令输出;主要适用于第一个cmd不是标准输出的后续处理
+    ## 参数说明
+    [path]         # 默认为当前路径
+    [option value] # 匹配选项及值,部分选项不需要value,绝大部分成对出现,取结果交集;
+                   # 如:-type d 表示查找所有文件夹,选项前加上!表示不匹配
+                   # 选择性强的放前面可提高查询效率,例如 -depth/mindepth/maxdepth               
+    [operation]    # 对于查找结果的操作,常用操作如下:
+                   # -print: 将匹配结果输出到标准输出,一般可不加;shell脚本中建议加上
+                   # -print0:同上,但不换行;
+                   # -exec:  用于下一步的命令执行;形式为 "cmd {} \;" 
+                   #          如:find . -type f -exec rm -rf {} \; 表示删除所有文件;{}表示每条查找结果
+                   #          find . -type f|xargs rm -rf 可实现同-exec功能
+                   # -ok:    同上,不同在于会让用户确认是否执行每个命令
+                   # -delete: 删除文件或文件夹
+                   #          如:find . -type f -delete 删除所有文件
+    ## 常用option(选项)
+    -name file            # 名称;最常用的选项
+    -iname file           # 忽略大小写
+    -type b/d/c/p/l/f     # 文件类型;块设备、目录、字符设备、管道、符号链接、普通文件
+    -size [-/+]n[cwbkMG]  # 大小为[小于/大于]n[字节/字/块(一般为512bit)/KB/MB/GB]的文件
+    -depth                # 使查找在进入子目录前先行查找完本目录
+    -mindepth n           # 指定目录的第n级目录开始查找;建议作为第一个选项,下同
+    -maxdepth n           # 最多查询到指定目录的第n级目录
+    -perm 755             # 权限
+    -empty                # 空文件或文件夹
+    -mtime [-/+]n         # n天[内(包含n)/外]修改的;无-/+时表示第n天(当天为0);下同
+    -atime [-/+]n         # 访问时间
+    -ctime [-/+]n         # 创建时间
+    -amin [-/+]n          # n分钟
+    -user username        # 所属者
+    -group groupname      # 按组来查找
+    -nogroup              # 即文件的属组在/etc/groups中不存在
+    -nouser               # 查无有效属主的文件,即文件的属主在/etc/passwd中不存在
+    -nogroup              # 查无有效属组的文件,即文件的属组在/etc/groups中不存在
+    -nouser               # 查无有效属主的文件,即文件的属主在/etc/passwd中不存在
+    -newer f1 !f2         # 查更改时间比f1新但比f2旧的文件
+    -fstype               # 查位于某一类型文件系统中的文件,这些文件系统类型通常可 在/etc/fstab中找到
+    -mount                # 查文件时不跨越文件系统mount点
+    -follow               # 如果遇到符号链接文件,就跟踪链接所指的文件
+    -cpio                 # 查位于某一类型文件系统中的文件,这些文件系统类型通常可 在/etc/fstab中找到
+    -prune path           # 忽略某个目录
+find . -name   "*.txt" -print                  # .txt结尾的文件,双引号可不加
+find . ! -name "*.txt" -print                  # 查找所有非 .txt 结尾文件
+find . -name "[a-z][0–9].txt" -print           # 查以小写字母和数字开头的txt文件     
+find . -name "*.txt" -o -name "*.pdf"  -print  # 查找txt或pdf文件,-o表示或
+find . -regex  ".*\(\.txt|\.pdf\)$" -print     # 同上;-iregex:忽略大小写
+find . -name 'xa*'|grep -v xaa|xargs rm -rf    # 删除当前目录下所有除了xaa的xa*文件
+find . -perm 755 -exec ls -ltr {} \;           # 显示所有权限是755的文件(夹)
+find . -size +512k                             # 大于512k的文件
+find . -type f -print | xargs rm -f            # 逐条所有文件,不存在rm参数过长问题
+### 捕获命令输出;主要适用于第一个cmd不是标准输出的后续处理
 cmd [options] | xargs [options] [cmd [options]] 
 
-##文件权限
-chmod [-R] [who] [+/-/=][mode] file/dir  #change file mode bits;文件(夹)属主和root可使用
-    #参数说明
-    -R     #作用于文件夹及子文件(夹)
-    who    #可选a/u/g/o,表示所有用户/所属者/所属组/其他用户;ugo可同时使用,如:chmod ug+x file
-    +/-/=  #分别表示增加/去除/设定
-    mode   #可选r/w/x/s,表示读/写/执行/特殊权限
-chmod u+x file          #所属者增加执行权限
-chmod a+x file          #所有用户增加执行权限;a可省略,等价于chmod +x file
-chmod a+x,go-wx file    #多种模式逗号隔开,逐条执行;等价于chmod u+x,go-wx file
-chmod a=r file          #设定所有用户对file只有读权限;等价于chmod 444 file
-chmod 755 file          #数字分别表示u/g/o的权限;r/w/x分别表示4/2/1,各自权限加起来
-chgrp group file        #change group ownership;设定文件(夹)所属组;组名需在/etc/group;文件(夹)所属者和root可使用
-chgrp gid file          #同上,gid表示group的组ID
-chgrp -R group dir      #设定文件夹及其子文件(夹)所属组;-R选项不加只作用于此文件夹
-chown user:group file   #change group ownership;设定文件(夹)的属组;文件(夹)属主和root可使用
-chown -R user:group dir #递归设置属主和属组
-chown user: file        #适用于属主和属组名称一致的;等价于chown user:user file
-chown user file         #设定文件属主
-chown :group file       #设定文件属组
+## 文件权限
+chmod [-R] [who] [+/-/=][mode] file/dir  # change file mode bits;文件(夹)属主和root可使用
+    # 参数说明
+    -R     # 作用于文件夹及子文件(夹)
+    who    # 可选a/u/g/o,表示所有用户/所属者/所属组/其他用户;ugo可同时使用,如:chmod ug+x file
+    +/-/=  # 分别表示增加/去除/设定
+    mode   # 可选r/w/x/s,表示读/写/执行/特殊权限
+chmod u+x file          # 所属者增加执行权限
+chmod a+x file          # 所有用户增加执行权限;a可省略,等价于chmod +x file
+chmod a+x,go-wx file    # 多种模式逗号隔开,逐条执行;等价于chmod u+x,go-wx file
+chmod a=r file          # 设定所有用户对file只有读权限;等价于chmod 444 file
+chmod 755 file          # 数字分别表示u/g/o的权限;r/w/x分别表示4/2/1,各自权限加起来
+chgrp group file        # change group ownership;设定文件(夹)所属组;组名需在/etc/group;文件(夹)所属者和root可使用
+chgrp gid file          # 同上,gid表示group的组ID
+chgrp -R group dir      # 设定文件夹及其子文件(夹)所属组;-R选项不加只作用于此文件夹
+chown user:group file   # change group ownership;设定文件(夹)的属组;文件(夹)属主和root可使用
+chown -R user:group dir # 递归设置属主和属组
+chown user: file        # 适用于属主和属组名称一致的;等价于chown user:user file
+chown user file         # 设定文件属主
+chown :group file       # 设定文件属组
 
-##系统资源
-df                         #disk file system;查看文件系统使用情况
-df -i                      #以inode(文件索引节点)显示
-df -h/k/m                  #以易读/KB(默认)/MB显示
-df -l                      #只显示本地文件系统
-df -T                      #显示文件系统类型
-du                         #disk usage;文件(夹)空间占用;默认递归显示当前文件夹下文件(夹)占用空间
-du -h/b/k/m                #以易读/Byte/KB(默认)/MB递归显示当前文件夹下文件(夹)占用空间
-du -h/b/k/m file/dir       #指定显示特定文件或文件夹,其余同上;文件或文件夹可跟多个   
-du -sh                     #以易读方式显示当前文件夹占用总空间
-du -sh *                   #以易读方式显示当前文件夹每个文件或文件夹(汇总)占用空间
-du -sh path/* |sort -rh |head -10  #指定路径下文件(夹)大小前十
-du -sh --max-depth=1       #指定子文件夹深度(默认为0)
-ps -ef | grep java         #snaps of prosess;搜索含java的进程快照,其他类似;标准语法
-ps [-]aux |grep java       #同上一条类似;BSD发行版语法
-free [-h/k/m]              #以易读/KB(默认)/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
-top                        #实时查看系统资源使用情况(快照)
-    1                      #top基本视图下,打开/关闭每个逻辑核心状况
-    b                      #top基本视图下,打开/关闭高亮(black)显示当前运行的进程
-    x                      #top基本视图下,打开/关闭高亮显示排序列;默认按cpu使用率排序
-    shift + >/<            #top基本视图下,改变排序列视图
-top -c                     #cmd会显示完整命令
-top -p pid                 #查看指定进程(pid)的情况
-watch cmd                  #每2秒执行一次cmd;可用于监控网络,文件,用户登录情况等等
-watch -n m cmd             #每m秒执行一次cmd
-watch -n m -d cmd          #每m秒执行一次cmd,变化部分会高亮显示
-watch -n 1 -d netstat -ant #每1秒显示网络连接数情况
-vmstat                     #虚拟内存统计;可对操作系统的虚拟内存、进程、CPU活动进行监控
-lsof                       #查看当前系统打开文件(linux一切皆文件)的情况
-lsof /bin/bash             #查看正在使用/bin/bash的进程情况
-lsof /home                 #查看正在使用/home的情况
-lsof -u [^]username        #查看[除了]某个用户打开文件状况
-lsof -c bash               #查看命令bash开头的文件打开情况
-lsof -c a -c b             #查看命令a或b开头的文件打开情况
-lsof -p 1[,2,3]            #按照一个或多个进程号查看文件打开情况
-lsof -i [tcp/udp]          #查看所有网络[tcp/udp]连接情况
-lsof -i [tcp]:8080         #查看指定[TCP]端口使用情况
-lscpu                      #显示CPU信息;单颗处理显示一组
-lsmem                      #显示内存相关信息
-lspci                      #显示pci设备相关信息
-lshw                       #显示所有硬件信息
-uname -a                   #显示系统内核相关信息
-cat /etc/redhad-release    #查看红帽发行版相关信息
-cat /etc/issue             #查看发行版
-cat /etc/lsb-release       #查看Ubuntu版本
-cat /proc/cpuinfo          #显示每个CPU核心信息
-cat /proc/meminfo          #显示内存信息
-service xx start           #启动xx服务;stop/restart同理;实际运行/etc/init.d/目录下的服务命令脚本,可使用/etc/init.d/xx start替代
-systemctl start xx         #效果同上;属于systemd(初始化系统,负责系统启动和应用守护进程的管理)的一部分,比service能管理的广
-journalctl                 #系统(内核和应用)日志管理,systemd的一部分
+## 系统资源
+df                         # disk file system;查看文件系统使用情况
+df -i                      # 以inode(文件索引节点)显示
+df -h/k/m                  # 以易读/KB(默认)/MB显示
+df -l                      # 只显示本地文件系统
+df -T                      # 显示文件系统类型
+du                         # disk usage;文件(夹)空间占用;默认递归显示当前文件夹下文件(夹)占用空间
+du -h/b/k/m                # 以易读/Byte/KB(默认)/MB递归显示当前文件夹下文件(夹)占用空间
+du -h/b/k/m file/dir       # 指定显示特定文件或文件夹,其余同上;文件或文件夹可跟多个   
+du -sh                     # 以易读方式显示当前文件夹占用总空间
+du -sh *                   # 以易读方式显示当前文件夹每个文件或文件夹(汇总)占用空间
+du -sh path/* |sort -rh |head -10  # 指定路径下文件(夹)大小前十
+du -sh --max-depth=1       # 指定子文件夹深度(默认为0)
+ps -ef | grep java         # snaps of prosess;搜索含java的进程快照,其他类似;标准语法
+ps [-]aux |grep java       # 同上一条类似;BSD发行版语法
+free [-h/k/m]              # 以易读/KB(默认)/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
+top                        # 实时查看系统资源使用情况(快照)
+    1                      # top基本视图下,打开/关闭每个逻辑核心状况
+    b                      # top基本视图下,打开/关闭高亮(black)显示当前运行的进程
+    x                      # top基本视图下,打开/关闭高亮显示排序列;默认按cpu使用率排序
+    shift + >/<            # top基本视图下,改变排序列视图
+top -c                     # cmd会显示完整命令
+top -p pid                 # 查看指定进程(pid)的情况
+watch cmd                  # 每2秒执行一次cmd;可用于监控网络,文件,用户登录情况等等
+watch -n m cmd             # 每m秒执行一次cmd
+watch -n m -d cmd          # 每m秒执行一次cmd,变化部分会高亮显示
+watch -n 1 -d netstat -ant # 每1秒显示网络连接数情况
+vmstat                     # 虚拟内存统计;可对操作系统的虚拟内存、进程、CPU活动进行监控
+lsof                       # 查看当前系统打开文件(linux一切皆文件)的情况
+lsof /bin/bash             # 查看正在使用/bin/bash的进程情况
+lsof /home                 # 查看正在使用/home的情况
+lsof -u [^]username        # 查看[除了]某个用户打开文件状况
+lsof -c bash               # 查看命令bash开头的文件打开情况
+lsof -c a -c b             # 查看命令a或b开头的文件打开情况
+lsof -p 1[,2,3]            # 按照一个或多个进程号查看文件打开情况
+lsof -i [tcp/udp]          # 查看所有网络[tcp/udp]连接情况
+lsof -i [tcp]:8080         # 查看指定[TCP]端口使用情况
+lscpu                      # 显示CPU信息;单颗处理显示一组
+lsmem                      # 显示内存相关信息
+lspci                      # 显示pci设备相关信息
+lshw                       # 显示所有硬件信息
+uname -a                   # 显示系统内核相关信息
+cat /etc/redhad-release    # 查看红帽发行版相关信息
+cat /etc/issue             # 查看发行版
+cat /etc/lsb-release       # 查看Ubuntu版本
+cat /proc/cpuinfo          # 显示每个CPU核心信息
+cat /proc/meminfo          # 显示内存信息
+service xx start           # 启动xx服务;stop/restart同理;实际运行/etc/init.d/目录下的服务命令脚本,可使用/etc/init.d/xx start替代
+systemctl start xx         # 效果同上;属于systemd(初始化系统,负责系统启动和应用守护进程的管理)的一部分,比service能管理的广
+journalctl                 # 系统(内核和应用)日志管理,systemd的一部分
 
-##打包压缩
-tar [-]cvf file.tar dir  #打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程,可不加
-tar xvf file.tar         #解包;x表示extract(提取),f表示指定文件;打包中c表示create
-tar -tf file.tar         #查看包中文件
-tar zcvf file.tar.gz dir #打包并压缩,压缩包结尾可能是.tgz,dir为文件或文件夹列表(空格隔开)
-tar zxvf file.tar.gz     #解压并解包,压缩包结尾可能是.tgz
-gzip file1 file2         #压缩,压缩完成会删除每个原文件;压缩后文件名为file.gz
-gzip -rv dir             #递归压缩dir下所有文件及子文件夹的文件
-gzip -d file.gz          #解压,解压完成会删除.gz文件
-gzip -rd dir             #递归解压dir下所有压缩文件
-gzip -l file.gz          #查看每个压缩文件信息(文件名/压缩前后大小/压缩率);不解压
-gunzip file.gz           #解压,同上
-compress file            #压缩,比较古老的unix/linux命令;不常用,现在gzip应用更广泛
-compress -d file.Z       #解压
-uncompress file.Z        #同上
+## 打包压缩
+tar [-]cvf file.tar dir  # 打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程,可不加
+tar xvf file.tar         # 解包;x表示extract(提取),f表示指定文件;打包中c表示create
+tar -tf file.tar         # 查看包中文件
+tar zcvf file.tar.gz dir # 打包并压缩,压缩包结尾可能是.tgz,dir为文件或文件夹列表(空格隔开)
+tar zxvf file.tar.gz     # 解压并解包,压缩包结尾可能是.tgz
+gzip file1 file2         # 压缩,压缩完成会删除每个原文件;压缩后文件名为file.gz
+gzip -rv dir             # 递归压缩dir下所有文件及子文件夹的文件
+gzip -d file.gz          # 解压,解压完成会删除.gz文件
+gzip -rd dir             # 递归解压dir下所有压缩文件
+gzip -l file.gz          # 查看每个压缩文件信息(文件名/压缩前后大小/压缩率);不解压
+gunzip file.gz           # 解压,同上
+compress file            # 压缩,比较古老的unix/linux命令;不常用,现在gzip应用更广泛
+compress -d file.Z       # 解压
+uncompress file.Z        # 同上
 
-##网络相关
-ip a                     #查看网络设备(已激活)信息
-ifconfig                 #interface configure;查看网络设备(已激活)信息;部分发行版(CentOS7等)无此命令
-ifconfig ens33 up/down   #启动或关闭ens33(网络设备,一般是网卡)
-ifconfig eth0 add/del 33ffe:3240:800:1005::2/64 #为eth0(网卡)配置或删除IPv6地址
-ifconfig eth0 hw ether 00:AA:BB:CC:DD:EE        #设置(修改)eth0的Mac地址
-####临时设置IPv4地址;建议通过修改配置文件实现,通过ifconfig修改的配置重启就不存在
+## 网络相关
+ip a/addr/address        # 查看网络设备(已激活)信息
+ifconfig                 # interface configure;查看网络设备(已激活)信息;部分发行版(CentOS7等)无此命令
+ifconfig ens33 up/down   # 启动或关闭ens33(网络设备,一般是网卡)
+ifconfig eth0 add/del 33ffe:3240:800:1005::2/64 # 为eth0(网卡)配置或删除IPv6地址
+ifconfig eth0 hw ether 00:AA:BB:CC:DD:EE        # 设置(修改)eth0的Mac地址
+#### 临时设置IPv4地址;建议通过修改配置文件实现,通过ifconfig修改的配置重启就不存在
 ifconfig eth0 192.168.1.56 [netmask 255.255.255.0] [broadcast 192.168.1.255]
-ifconfig eth0 arp/-arp   #开启和关闭eth0的arp协议
-ifconfig eth0 mtu 1500   #设置最大传输单元
-route [-n]               #查看路由表;-n不解析名称,直接显示地址
-ping IP/hostname                     #测试与目标主机的连通性
-ping localhost/127.0.0.1/127.1/::1/  #测试本机回环地址;localhost需要在/etc/hosts中配置为回环地址   
-ping -c n -i m IP/hostname           #指定ping的次数为n,每隔m秒ping一次(默认一秒);默认不会停止
-ping -i 3 -s 1024 -t 255 192.168.0.5 #-s指定发送数据包大小;-t指定TTL(time to live,路由跳转次数),最大为255,由发送方指定,一般为2^n
-netstat           #检验本机各端口的网络连接情况
-netstat -a        #显示所有端口
-netstat -t/u/w/x  #显示tcp/udp/raw/unix当前连接情况;local address显示的是主机名和协议
-netstat -nt       #同上;-n表示local address显示的是ip和port(端口)
-netstat -apt      #显示tcp端口使用情况;-p表示显示使用程序名
-netstat -i        #显示网络接口(网卡)列表 
-netstat -l        #显示监听状态连接情况
-ss -t/u/w/x       #显示tcp/udp/raw/unix的socket统计信息
-ss -at[n]         #显示所有tcp的socket统计信息;-n表示local address显示的是ip和port(端口)
-ss -s             #显示汇总(摘要)信息
-ss -l[p]          #显示所有的网络端口;-p显示进程
+ifconfig eth0 arp/-arp   # 开启和关闭eth0的arp协议
+ifconfig eth0 mtu 1500   # 设置最大传输单元
+route [-n]               # 查看路由表;-n不解析名称,直接显示地址
+ping IP/hostname                     # 测试与目标主机的连通性
+ping localhost/127.0.0.1/127.1/::1/  # 测试本机回环地址;localhost需要在/etc/hosts中配置为回环地址   
+ping -c n -i m IP/hostname           # 指定ping的次数为n,每隔m秒ping一次(默认一秒);默认不会停止
+ping -i 3 -s 1024 -t 255 192.168.0.5 # -s指定发送数据包大小;-t指定TTL(time to live,路由跳转次数),最大为255,由发送方指定,一般为2^n
+netstat           # 检验本机各端口的网络连接情况
+netstat -a        # 显示所有端口
+netstat -t/u/w/x  # 显示tcp/udp/raw/unix当前连接情况;local address显示的是主机名和协议
+netstat -nt       # 同上;-n表示local address显示的是ip和port(端口)
+netstat -apt      # 显示tcp端口使用情况;-p表示显示使用程序名
+netstat -i        # 显示网络接口(网卡)列表 
+netstat -l        # 显示监听状态连接情况
+ss -t/u/w/x       # 显示tcp/udp/raw/unix的socket统计信息
+ss -at[n]         # 显示所有tcp的socket统计信息;-n表示local address显示的是ip和port(端口)
+ss -s             # 显示汇总(摘要)信息
+ss -l[p]          # 显示所有的网络端口;-p显示进程
 
-##计划任务后台
-at                         #指定一个时间执行一个任务,只能执行一次
-crontab [-u user] file     #周期性的执行任务(脚本或其他命令等);file为任务文件,规则见Example
-crontab [-u user] [-e|l|r] #参数分别是显示/编辑/删除(所有)某个用户自动任务;默认处理登录用户的自动任务
-    # Example of job definition:
-    # .---------------- 分钟(minute) (0 - 59)
-    # |  .------------- 小时 hour (0 - 23)
-    # |  |  .---------- 一个月中的第几天 day of month (1 - 31)
-    # |  |  |  .------- 月份 month (1 - 12) OR jan,feb,mar,apr ...
-    # |  |  |  |  .---- 周几 day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
-    # |  |  |  |  |
-    # *  *  *  *  * username  cmd 
-### Examples
-### , - / 可组合使用,范围见上面job定义
-* * * * * sh /home/wangh/run.sh      #每分钟执行一次脚本
-1,3,5 * * * * sh /home/wangh/run.sh  #每小时的第1,3,5分执行
-0-30 * * * * sh /home/wanh/run.sh    #每小时的前30分钟每分钟执行
-0-30/2 * * * * sh /home/wanh/run.sh  #每小时的前30分钟每2分钟执行
-nohub cmd    #挂起命令并输出日志到当前目录nohup.out文件中;关闭会话命令会继续执行;命令执行完前可使用Ctrl + c终止
-cmd &        #后台运行命令;用户退出命令退出(部分命令会启动守护进程的除外);标准输出会在当前会话中显示
-nohub cmd &  #后台运行并脱离会话执行;只能kill终止(cmd自动结束的除外)
+## 计划任务后台
+at                         # 指定一个时间执行一个任务,只能执行一次
+crontab [-u user] file     # 周期性的执行任务(脚本或其他命令等);file为任务文件,规则见Example
+crontab [-u user] [-e|l|r] # 参数分别是显示/编辑/删除(所有)某个用户自动任务;默认处理登录用户的自动任务
+    #  Example of job definition:
+    #  .---------------- 分钟(minute) (0 - 59)
+    #  |  .------------- 小时 hour (0 - 23)
+    #  |  |  .---------- 一个月中的第几天 day of month (1 - 31)
+    #  |  |  |  .------- 月份 month (1 - 12) OR jan,feb,mar,apr ...
+    #  |  |  |  |  .---- 周几 day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+    #  |  |  |  |  |
+    #  *  *  *  *  * username  cmd 
+###  Examples
+###  , - / 可组合使用,范围见上面job定义
+* * * * * sh /home/wangh/run.sh      # 每分钟执行一次脚本
+1,3,5 * * * * sh /home/wangh/run.sh  # 每小时的第1,3,5分执行
+0-30 * * * * sh /home/wanh/run.sh    # 每小时的前30分钟每分钟执行
+0-30/2 * * * * sh /home/wanh/run.sh  # 每小时的前30分钟每2分钟执行
+nohub cmd    # 挂起命令并输出日志到当前目录nohup.out文件中;关闭会话命令会继续执行;命令执行完前可使用Ctrl + c终止
+cmd &        # 后台运行命令;用户退出命令退出(部分命令会启动守护进程的除外);标准输出会在当前会话中显示
+nohub cmd &  # 后台运行并脱离会话执行;只能kill终止(cmd自动结束的除外)
 
-##开关机   #建议使用shutdown命令
-shutdown [-t n] -r/h   #指定n秒之后重启/关机;不指定-t,默认一分钟;shutdown -c取消当前命令
-shutdown -h now        #立即关机
-init n                 #切换运行级别;当前运行级别可使用runlevel查看
-    #runlevel
+## 开关机   # 建议使用shutdown命令
+shutdown [-t n] -r/h   # 指定n秒之后重启/关机;不指定-t,默认一分钟;shutdown -c取消当前命令
+shutdown -h now        # 立即关机
+init n                 # 切换运行级别;当前运行级别可使用runlevel查看
+    # runlevel
     0:停机或者关机(千万不能将initdefault设置为0)
     1:单用户模式,只root用户进行维护
     2:多用户模式,不能使用NFS(Net File System)
-    3:完全多用户模式(标准的运行级别)              #RedHat Server默认运行级别
+    3:完全多用户模式(标准的运行级别)              # RedHat Server默认运行级别
     4:安全模式
-    5:图形化(即图形界面)                          #Ubuntu Server默认运行级别
+    5:图形化(即图形界面)                          # Ubuntu Server默认运行级别
     6:重启(千万不要把initdefault设置为6)
-reboot     #重启
-poweroff   #关机
+reboot     # 重启
+poweroff   # 关机
 
-##文件下载和传输
-###命令差异见  https://blog.csdn.net/qujinhua19851006/article/details/8666254
-curl -O url              #下载文件;O大写,不用O只是打印内容不会下载
-curl -O newname url      #下载并重命名
-wget -o newname url      #同上
-wget url                 #下载文件
-ftp ip/hostname          #ftp到指定服务器,输入用户密码即可登录;file transfer program
-ftp username@ip/hostname #同上,指定用户名
-    #常用子命令
-    assii/binary/bi      #设置文件传输格式,非文本文件请使用bin
-    prompt               #关闭或打开交互模式;默认是打开的
-    lcd dir              #切换本地工作目录;dir缺省则切换到本地$HOME目录
-    cd dir               #切换远程工作目录
-    ls/dir               #列出远程目录及文件
-    pwd                  #打印远程工作目录
-    get/put file [file1] #上传/下载单文件,并重命名为file1;file1缺省时文件名保持一致
-    mget/mput files      #上传/下载多文件;支持通配符
-    ?                    #帮助;同help
-    !cmd                 #执行本地shell命令
-    bye/quit             #退出ftp
-sftp user@ip/hostname    #secure file transfer program;相比ftp安全但速度较慢
-    #常用子命令
+## 文件下载和传输
+### 命令差异见  https://blog.csdn.net/qujinhua19851006/article/details/8666254
+curl -O url              # 下载文件;O大写,不用O只是打印内容不会下载
+curl -O newname url      # 下载并重命名
+wget -o newname url      # 同上
+wget url                 # 下载文件
+ftp ip/hostname          # ftp到指定服务器,输入用户密码即可登录;file transfer program
+ftp username@ip/hostname # 同上,指定用户名
+    # 常用子命令
+    assii/binary/bi      # 设置文件传输格式,非文本文件请使用bin
+    prompt               # 关闭或打开交互模式;默认是打开的
+    lcd dir              # 切换本地工作目录;dir缺省则切换到本地$HOME目录
+    cd dir               # 切换远程工作目录
+    ls/dir               # 列出远程目录及文件
+    pwd                  # 打印远程工作目录
+    get/put file [file1] # 上传/下载单文件,并重命名为file1;file1缺省时文件名保持一致
+    mget/mput files      # 上传/下载多文件;支持通配符
+    ?                    # 帮助;同help
+    !cmd                 # 执行本地shell命令
+    bye/quit             # 退出ftp
+sftp user@ip/hostname    # secure file transfer program;相比ftp安全但速度较慢
+    # 常用子命令
     ls/lls/cd/lcd/pwd/lpwd/get/mget/put/mput
 lsftp
 rcp
 scp
 rsync
 
-##其他命令
-md5sum file           #返回文件的MD5值;用于确保文件传输前后的一致性
-sha256sum file        #返回文件的散列;作用同上,但安全性更高
-echo 'str'            #显示字符串作为标准输出;严格输出
-echo "str"            #显示字符串作为标准输出;可含变量
-echo -e 'str'         #支持转义输出
-echo -n 'str'         #输出后不换行
-sudo cmd              #以系统管理员(root)身份运行命令
-sudo -u user cmd      #以指定用户身份执行命令
-sudo -l               #显示当前用户可用sudo命令权限
-history               #显示命令历史,一般是1000条
-history n             #显示最近执行的n条命令
-history | grep cmd    #搜索特定命令执行历史;常用
-!!                    #执行上一条命令;等价于 !-1
-!-n                   #执行历史记录倒数的第n条命令
-!n                    #执行历史记录的第n条命令;一般配合history | grep cmd使用
-!$/!^                 #上一条命令的最后/第一个参数
-!:2                   #上一条命令的第二个参数;更多用法参考 man bash中HISTORY EXPANSION(历史命令展开)
-ctrl + r              #可搜索之前执行过的命令;用于较长命令较为实用
-ctrl + l              #清屏;等价于clear
-ctrl + c              #中断命令
-ctrl + insert         #复制
-shift + insert        #粘贴
-seq                   #生成整数序列;以换行符为分隔符(一个序列一行)
-seq 3                 #返回1,2,3;设定序列最大值;默认最小值为1
-seq 0 3               #返回0,1,2,3;设定最小值和最大值
-seq -1 2              #返回-1,0,1,2;最小值可以小于0
-seq 2 2 10            #返回2,4,6,8,10;中间数值为步长;两边为最小值和最大值
-seq 5 -1 1            #返回5,3,1;步长为负数表示递减;两边为最大值和最小值
-env                   #打印全局环境变量;同 printenv
-env var               #打印变量值;同 echo $var
-set                   #打印全局变量、用户自定义变量和局部变量(当前shell定义);当前环境的所有变量
-unset var             #删除环境变量
-echo $PATH            #用户执行外部命令搜索路径
-date "+%Y%m%d%H%M%S"       #打印年月日时分秒;格式为YYYYmmddHHMMSS;可用于日志文件名生成
-date '+%Y%m%d%H%M%S'       #同上; date_format='+%Y%m%d%H%M%S';date ${date_format} ;date后面跟格式化字符串
-date "+%Y-%m-%d %H:%M:%S"  #格式为YYYY-mm-dd HH:MM:SS
-#基于当前时间的计算并格式化
+## 其他命令
+md5sum file           # 返回文件的MD5值;用于确保文件传输前后的一致性
+sha256sum file        # 返回文件的散列;作用同上,但安全性更高
+echo 'str'            # 显示字符串作为标准输出;严格输出
+echo "str"            # 显示字符串作为标准输出;可含变量
+echo -e 'str'         # 支持转义输出
+echo -n 'str'         # 输出后不换行
+sudo cmd              # 以系统管理员(root)身份运行命令
+sudo -u user cmd      # 以指定用户身份执行命令
+sudo -l               # 显示当前用户可用sudo命令权限
+history               # 显示命令历史,一般是1000条
+history n             # 显示最近执行的n条命令
+history | grep cmd    # 搜索特定命令执行历史;常用
+!!                    # 执行上一条命令;等价于 !-1
+!-n                   # 执行历史记录倒数的第n条命令
+!n                    # 执行历史记录的第n条命令;一般配合history | grep cmd使用
+!$/!^                 # 上一条命令的最后/第一个参数
+!:2                   # 上一条命令的第二个参数;更多用法参考 man bash中HISTORY EXPANSION(历史命令展开)
+ctrl + r              # 可搜索之前执行过的命令;用于较长命令较为实用
+ctrl + l              # 清屏;等价于clear
+ctrl + c              # 中断命令
+ctrl + insert         # 复制
+shift + insert        # 粘贴
+seq                   # 生成整数序列;以换行符为分隔符(一个序列一行)
+seq 3                 # 返回1,2,3;设定序列最大值;默认最小值为1
+seq 0 3               # 返回0,1,2,3;设定最小值和最大值
+seq -1 2              # 返回-1,0,1,2;最小值可以小于0
+seq 2 2 10            # 返回2,4,6,8,10;中间数值为步长;两边为最小值和最大值
+seq 5 -1 1            # 返回5,3,1;步长为负数表示递减;两边为最大值和最小值
+env                   # 打印全局环境变量;同 printenv
+env var               # 打印变量值;同 echo $var
+set                   # 打印全局变量、用户自定义变量和局部变量(当前shell定义);当前环境的所有变量
+unset var             # 删除环境变量
+echo $PATH            # 用户执行外部命令搜索路径
+date "+%Y%m%d%H%M%S"       # 打印年月日时分秒;格式为YYYYmmddHHMMSS;可用于日志文件名生成
+date '+%Y%m%d%H%M%S'       # 同上; date_format='+%Y%m%d%H%M%S';date ${date_format} ;date后面跟格式化字符串
+date "+%Y-%m-%d %H:%M:%S"  # 格式为YYYY-mm-dd HH:MM:SS
+# 基于当前时间的计算并格式化
 date "+%Y-%m-%d %H:%M:%S" -d "-1 month +1 day -1 year"
 date -d "-1 month +1 day -1 year" "+%Y-%m-%d %H:%M:%S"
-cmd | tee file    #输出内容的同时写入文件 
-cmd | tee -a file #追加模式
-Ctrl + Z          #暂停当前任务(命令)
-jobs              #查看并显示当前会话的后台任务(编号、状态、命令);编号为后台任务的顺序,不是pid
-bg [n]            #将编号为n的任务放到后台继续执行;任务号可使用jobs查看;默认编号为1
-fg [n]            #前台执行编号为n的命令
+cmd | tee file    # 输出内容的同时写入文件 
+cmd | tee -a file # 追加模式
+Ctrl + Z          # 暂停当前任务(命令)
+jobs              # 查看并显示当前会话的后台任务(编号、状态、命令);编号为后台任务的顺序,不是pid
+bg [n]            # 将编号为n的任务放到后台继续执行;任务号可使用jobs查看;默认编号为1
+fg [n]            # 前台执行编号为n的命令
 
-#问题处理
+# 问题处理
 1.文件误删恢复
-rm -f /root/selenium/Spider/MySql.Data.dll         #删除文件
-ls -ltr /root/selenium/Spider/MySql.Data.dll       #提示无法访问改文件
-lsof | grep /root/selenium/Spider/MySql.Data.dll   #查看访问此文件相关的进程
-#找到相关进程利用重定向恢复文件,/proc/进程号/fd/文件描述符;每个进程在 /proc/ 文件夹下都有对应进程文件夹
+rm -f /root/selenium/Spider/MySql.Data.dll         # 删除文件
+ls -ltr /root/selenium/Spider/MySql.Data.dll       # 提示无法访问改文件
+lsof | grep /root/selenium/Spider/MySql.Data.dll   # 查看访问此文件相关的进程
+# 找到相关进程利用重定向恢复文件,/proc/进程号/fd/文件描述符;每个进程在 /proc/ 文件夹下都有对应进程文件夹
 cat /proc/23778/fd/86 > /root/selenium/Spider/MySql.Data.dll
 
 
-#ssh/sftp免密登录
+# ssh/sftp免密登录
 
-##检查项
+## 检查项
 1)本机与远程机网络是否互通
 2)本机与远程机是否都已安装ssh服务
 3)远程机ssh相关配置文件 /etc/ssh/sshd_config ;如有限制请修改
 
-##步骤
+## 步骤
 1.创建当前用户的公钥-私钥对
 ssh-keygen [-t rsa] [-f ~/.ssh/id_rsa] [-C "备注"]
-##options
--t     #密钥类型,可以选择 dsa | ecdsa | ed25519 | rsa;
--f     #密钥目录位置, 默认为~/.ssh/;默认密钥文件名以id_rsa开头,多台机器需设置设置不同
--C     #指定此密钥的备注信息,建议配置多个免密登录时使用,用于区分不同机器
+## options
+-t     # 密钥类型,可以选择 dsa | ecdsa | ed25519 | rsa;
+-f     # 密钥目录位置, 默认为~/.ssh/;默认密钥文件名以id_rsa开头,多台机器需设置设置不同
+-C     # 指定此密钥的备注信息,建议配置多个免密登录时使用,用于区分不同机器
 
-2.发送公钥给目标机器   #也可使用scp操作
-ssh-copy-id [-i ~/.ssh/id_rsa.pub] [-p 22] username@ip  ##写入远程机~/.ssh/authorized_key文件中,要求输入远程机密码
-##options
--i     #指定要发送的公钥;生成公钥未指定可不加
--p     #指定目标机器端口;默认为22
-ip     #可使用标准ip或主机名(/etc/hosts中有配置)
+2.发送公钥给目标机器   # 也可使用scp操作
+ssh-copy-id [-i ~/.ssh/id_rsa.pub] [-p 22] username@ip  ## 写入远程机~/.ssh/authorized_key文件中,要求输入远程机密码
+## options
+-i     # 指定要发送的公钥;生成公钥未指定可不加
+-p     # 指定目标机器端口;默认为22
+ip     # 可使用标准ip或主机名(/etc/hosts中有配置)
 
 3.登录远程机
-ssh/sftp username@ip      #无需密码;登录是单向的,需要互免可反向操作
+ssh/sftp username@ip      # 无需密码;登录是单向的,需要互免可反向操作
 
 
-#vi/vim 常见操作
-#三种模式  
-1.命令模式(cmd mode)       #用于光标移动、复制粘贴、搜索替换等
-2.输入模式(Insert mode)    #用于基本输入
-3.底线模式(Last line mode) #用于搜索替换
+# vi/vim 常见操作
+# 三种模式  
+1.命令模式(cmd mode)       # 用于光标移动、复制粘贴、搜索替换等
+2.输入模式(Insert mode)    # 用于基本输入
+3.底线模式(Last line mode) # 用于搜索替换
 
-#其他命令
-u           #undo;撤销上一个命令
-<Ctrl> + r  #重复上一个命令
-.           #小数点,功能同上
+# 其他命令
+u           # undo;撤销上一个命令
+<Ctrl> + r  # 重复上一个命令
+.           # 小数点,功能同上
 
-##命令模式
+## 命令模式
 vi/vim [file] 进入命令模式
 光标指定单个字符
 
-###光标移动和翻页
-←/h 、↓/j 、↑/k 、→/l  #上下左右移动光标;n→表示光标向右移动n个字符,不跨行;其余同理
-PgUp/PgDn              #上下翻页
-n<space>  #<space>表示空格;向后移动n个字符,可能会跨行
-^/0/Home  #移动光标到行首;Home为键盘功能键Home
-$/End     #移动光标到行尾;End为键盘功能键
-b/B       #移动光标到前一个单词,光标停留在单词第一个字符前;可重复使用
-e/E       #移动光标到后一个单词,光标停留在单词最后一个字符前;可重复使用
-G         #移动光标到最后一行行首
-nG        #移动光标到第n行行首
-n<Enter>  #光标向下移动n行
-gg        #移动光标到第一行行首,等价于1G
-ngg       #移动光标到第n行行首,同nG
-(/)       #向前/后移动一句
-{/}       #向前/后移动一段
+### 光标移动和翻页
+←/h 、↓/j 、↑/k 、→/l  # 上下左右移动光标;n→表示光标向右移动n个字符,不跨行;其余同理
+PgUp/PgDn              # 上下翻页
+n<space>  # <space>表示空格;向后移动n个字符,可能会跨行
+^/0/Home  # 移动光标到行首;Home为键盘功能键Home
+$/End     # 移动光标到行尾;End为键盘功能键
+b/B       # 移动光标到前一个单词,光标停留在单词第一个字符前;可重复使用
+e/E       # 移动光标到后一个单词,光标停留在单词最后一个字符前;可重复使用
+G         # 移动光标到最后一行行首
+nG        # 移动光标到第n行行首
+n<Enter>  # 光标向下移动n行
+gg        # 移动光标到第一行行首,等价于1G
+ngg       # 移动光标到第n行行首,同nG
+(/)       # 向前/后移动一句
+{/}       # 向前/后移动一段
 
-###删除
-x/X    #向后删除单个字符/向前删除单个字符(光标行)
-nx/nX  #向后删除n个字符/向前删除n个字符
-dd     #删除光标所在行
-ndd    #删除光标开始行(包含)以下n行
-d1G    #删除当前行到第一行
-dnG    #删除当前行(包含)到第n行
-dG     #删除光标行到最后一行
-d^     #删除光标位置至行首内容;多用nX代替
-d$     #删除光标位置到行尾内容,保留空行;多用nx或D代替
-D      #同上
-nD     #删除光标位置往下n行的内容;第一行为光标行
+### 删除
+x/X    # 向后删除单个字符/向前删除单个字符(光标行)
+nx/nX  # 向后删除n个字符/向前删除n个字符
+dd     # 删除光标所在行
+ndd    # 删除光标开始行(包含)以下n行
+d1G    # 删除当前行到第一行
+dnG    # 删除当前行(包含)到第n行
+dG     # 删除光标行到最后一行
+d^     # 删除光标位置至行首内容;多用nX代替
+d$     # 删除光标位置到行尾内容,保留空行;多用nx或D代替
+D      # 同上
+nD     # 删除光标位置往下n行的内容;第一行为光标行
 
-###复制和粘贴
-yy   #复制光标所在行
-nyy  #复制光标行(包含)以下n行
-y1G  #复制第一行到光标行
-ynG  #复制光标所在行到第n行之间的数据
-yG   #复制光标行到最后一行
-y0   #复制行首到光标所在位置数据
-y$   #复制光标位置到行尾数据
-p/P  #粘贴到光标所在行下一行/上一行
-J    #合并光标行与下一行,空格隔开    
+### 复制和粘贴
+yy   # 复制光标所在行
+nyy  # 复制光标行(包含)以下n行
+y1G  # 复制第一行到光标行
+ynG  # 复制光标所在行到第n行之间的数据
+yG   # 复制光标行到最后一行
+y0   # 复制行首到光标所在位置数据
+y$   # 复制光标位置到行尾数据
+p/P  # 粘贴到光标所在行下一行/上一行
+J    # 合并光标行与下一行,空格隔开    
 
-##输入模式
+## 输入模式
 以下为命令模式切换到输入模式
-i/I     #光标处输入/光标所在行第一个非空格(一般就是行首)处输入
-a/A     #光标处下一个字符处输入/光标所在行行尾处输入
-o/O     #光标行之后/之前插入一行
-r/R     #替换光标处字符一次/一直替换光标处字符,直到按下Esc
+i/I     # 光标处输入/光标所在行第一个非空格(一般就是行首)处输入
+a/A     # 光标处下一个字符处输入/光标所在行行尾处输入
+o/O     # 光标行之后/之前插入一行
+r/R     # 替换光标处字符一次/一直替换光标处字符,直到按下Esc
 
-Insert  #功能键Insert用于输入模式中切换追加还是替换模式
-ESC     #功能键ESC用于退出输入模式到命令模式
+Insert  # 功能键Insert用于输入模式中切换追加还是替换模式
+ESC     # 功能键ESC用于退出输入模式到命令模式
 
-##底线模式
-/str               #从当前行向下搜索字符str;n/N搜索下一个
-?/str              #与上搜索方向相反
-:n                 #光标移动到第n行
-:set nu            #设置行号
-:set nonu          #取消行号
-:set ignorecase    #忽略大小写查找
-:set noignorecase  #取消忽略
-:wq                #保存并退出;w,q可单独使用,!表示强制
-:x                 #同上
-ZZ                 #同上;英文键盘小写状态就是 Shift + zz
-:w file            #另存为file
-:r file            #将file内容追加到光标所在行下一行
-:n,m w file        #将第n,m行之间的内容另存为到file中
-:!cmd              #暂时离开vi执行cmd
-:s/str1/str2       #将当前的第一个str1替换为str2
-:s/str1/str2/g     #替换当前行所有
-:n,ms/str1/str2    #替换第n行到第m行每行出现的第一个str1
-:n,ms/str1/str2/g  #替换第n,m行所有
-:%s/str1/str2      #将全文的第一个str1替换为str2
-:%s/str1/str2/g    #将全文的str1替换为str2
+## 底线模式
+/str               # 从当前行向下搜索字符str;n/N搜索下一个
+?/str              # 与上搜索方向相反
+:n                 # 光标移动到第n行
+:set nu            # 设置行号
+:set nonu          # 取消行号
+:set ignorecase    # 忽略大小写查找
+:set noignorecase  # 取消忽略
+:wq                # 保存并退出;w,q可单独使用,!表示强制
+:x                 # 同上
+ZZ                 # 同上;英文键盘小写状态就是 Shift + zz
+:w file            # 另存为file
+:r file            # 将file内容追加到光标所在行下一行
+:n,m w file        # 将第n,m行之间的内容另存为到file中
+:!cmd              # 暂时离开vi执行cmd
+:s/str1/str2       # 将当前的第一个str1替换为str2
+:s/str1/str2/g     # 替换当前行所有
+:n,ms/str1/str2    # 替换第n行到第m行每行出现的第一个str1
+:n,ms/str1/str2/g  # 替换第n,m行所有
+:%s/str1/str2      # 将全文的第一个str1替换为str2
+:%s/str1/str2/g    # 将全文的str1替换为str2
 
 
-#源码安装软件
-1.获取源码包            #一般是xx.tar.gz
+# 源码安装软件
+1.获取源码包            # 一般是xx.tar.gz
 wget/curl 从网络上下载
 sftp/ftp等从其他机器获取
 
 2.解压源码包
-tar zxvf xx.tar.gz      #如果是tar包可使用tar xvf
+tar zxvf xx.tar.gz      # 如果是tar包可使用tar xvf
 
-3.配置                  #根据软件包中README或XXREADME文件检查安装环境(gcc和依赖库等)
+3.配置                  # 根据软件包中README或XXREADME文件检查安装环境(gcc和依赖库等)
 cd xx
 ./configure
 
-4.编译                  #根据makefile构建二进制可执行文件
+4.编译                  # 根据makefile构建二进制可执行文件
 make
 
 5.安装程序到其他linux常用目录
 make install
 
-##其他make命令
-make unistall   #卸载已经安装程序
-make clean      #清理由make命令产生的文件
-make distclean  #清理由./configure产生的文件
+## 其他make命令
+make unistall   # 卸载已经安装程序
+make clean      # 清理由make命令产生的文件
+make distclean  # 清理由./configure产生的文件
 
 
 
