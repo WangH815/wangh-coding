@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  简单Bean  -->
+    <!--  id表示实例化bean的名称;class表示指向的类  -->
+    <bean id="helloWorld" class="com.wangh.spring.common.HelloWorld">
+        <!--  按属性名称注值,下同 -->
+        <property name="name" value="wangh"/>
+    </bean>
+
+
+    <!--  默认自动装配bean  -->
+    <bean id="customerDefaultAutowire" class="com.wangh.spring.common.Customer">
+        <!--  属性指定属性名称,ref指向关联bean  -->
+        <property name="person" ref="person"/>
+    </bean>
+
+
+    <!--  byName自动装配bean  -->
+    <bean id="customerByNameAutowire" class="com.wangh.spring.common.Customer" autowire="byName"></bean>
+    <!--  这里的id值与上面bean的属性名称一致  -->
+    <bean id="person" class="com.wangh.spring.common.Person">
+        <property name="name" value="wangh"/>
+        <property name="age" value="25"/>
+    </bean>
+
+
+    <!--  byType自动装配bean  -->
+    <bean id="customerByTypeAutowire" class="com.wangh.spring.common.Customer" autowire="byType"></bean>
+    <!--  这里的id值与上面bean的属性名称一致  -->
+    <bean id="address" class="com.wangh.spring.common.Address">
+        <property name="myAddress" value="上海浦东"/>
+    </bean>
+
+
+    <!--  构造器自动装配bean  -->
+    <!--  该类要提供一个public无参构造方法  -->
+    <bean id="customerConstructorAutowire" class="com.wangh.spring.common.Customer" autowire="constructor"></bean>
+    <!--  这里的id值与上面bean的属性名称一致  -->
+    <bean id="language" class="com.wangh.spring.common.Language">
+        <property name="name" value="Chinese"/>
+    </bean>
+
+
+    <bean id="customerDAO" class="com.wangh.spring.jdbc.impl.JdbcCustomerDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+
+    <!--  jdbc数据源配置  -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.99.120:3306/jdbc"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+</beans>

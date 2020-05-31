@@ -46,7 +46,7 @@ Eclipse使用Spring
 在Eclipse等IDE工具中,在项目发布时用户需要把Spring的Jar包都放入/WEB-INF/lib目录下
 
 
-依赖注入(DI)/控制反转(IoC)       //对同一件事情的不同描述
+依赖注入(DI)/控制反转(IoC)       // 对同一件事情的不同描述
 Spring框架的核心功能有两个:
 1.Spring容器作为超级大工厂,负责创建、管理所有的Java对象,这些Java对象被称为Bean
 2.Spring容器使用"依赖注入"的来管理Bean之间的依赖关系。不仅可为Bean注入普通的属性值,还可注入其他Bean的引用
@@ -182,10 +182,10 @@ Spring的"零配置"支持
 
 搜索Bean类
 Spring提供如下几个Annotation来标注Spring Bean:
-1.@Component   //组件;标注一个普通的Spring Bean类
-2.@Controller  //控制器;标注一个控制器组件类
-3.@Service     //服务;标注一个业务逻辑组件类
-4.@Repository  //仓库;标注一个DAO组件类
+1.@Component   // 组件;标注一个普通的Spring Bean类
+2.@Controller  // 控制器;标注一个控制器组件类
+3.@Service     // 服务;标注一个业务逻辑组件类
+4.@Repository  // 仓库;标注一个DAO组件类
 
 在Spring配置文件中做如下配置,指定自动扫描的包:
 <context:component-scan base-package="edu.shu.spring.domain"/>
