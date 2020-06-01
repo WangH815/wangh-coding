@@ -2,8 +2,8 @@ package com.wangh.code.daily.t202005;
 
 import java.util.Arrays;
 
-import static com.wangh.code.util.arrays.intArrayPrint;
-import static com.wangh.code.util.arrays.intArrayRandomGenerator;
+import static com.wangh.code.util.Arrays.intArrayPrint;
+import static com.wangh.code.util.Arrays.intArrayRandomGenerator;
 
 public class T25SortTest {
     public static void main(String[] args) {
