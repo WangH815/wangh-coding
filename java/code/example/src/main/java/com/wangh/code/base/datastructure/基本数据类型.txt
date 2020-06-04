@@ -1,0 +1,44 @@
+内置数据类型/对应的包装类(抽象类Number的子类)
+
+数据类型   包装类     数据大小(bit/byte)  数值范围
+byte      Byte       　 8 / 1          [-2^7, 2^7 - 1]/[-128, 127]
+short     Short      　16 / 2          [-2^15, 2^15 - 1]/[-32,768, 32,767]
+int       Integer    　32 / 4          [-2^31, 2^31 - 1]/[-2,147,483,648, 2,147,483,647]
+long      Long       　64 / 8          [-2^63, 2^63 - 1]
+float     Float      　32 / 4
+double    Double     　64 / 8
+boolean   Boolean     true/false
+char      Character　16bit/2byte       // 取值范围'\u0000' - '\uffff' <==>[0, 65535]
+//void    Void       无法直接操作,可认为没有
+
+注:整型默认值为0;浮点默认为0.0;布尔默认为false;字符默认值为'\u0000'(转为数值型为0)
+
+
+数据类型           包装类
+byte b = 12       new Byte((byte) 12)/new Byte("12")
+char c = 'c'      new Character((char) 12)/new Character('c')/new Character('\u1234')
+float f = 1.1f    new Float(1.1f)
+double d = 1.1d   new Double(1.1d)
+long l = 12L      new Long(12L)
+
+整数(int)进制表示
+0b1111    // 二进制;负数-0b开头,其他进制同理
+077       // 八进制
+99        // 十进制
+0xff      // 十六进制
+
+进制转换
+Integer.toBinaryString(int i) // 其他进制转二进制字符串表示;转其他进制同理
+// s表示其他进制的字符串表示,只包含进制范围内的字符;radix表示需要被转换的进制;可解析32位二进制字符
+Integer.parseUnsignedInt(String s, int radix)
+Integer.parseUnsignedInt("7fffffff", 16)       // 最大的int;字母不区分大小写
+Integer.parseUnsignedInt("ffffffff", 16)       // 返回-1;其他进制同理
+
+Integer.parseInt(String s, int radix)          // s可包括+/-(+可省略);做多解析31位二进制字符
+
+
+自动类型转换
+低----->高
+byte/short/char --> int --> long --> float --> double
+boolean 类型不能转换
+

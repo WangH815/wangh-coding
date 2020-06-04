@@ -52,7 +52,7 @@ select语句
  6.having       --结合group by使用;用于过滤聚合条件
  7.select       --显示字段/函数/计算表达式
  8.distinct     --取唯一值
- 9.union [all]  --多个select语句连接
+ 9.union [all]  --多个select语句连接;union all会显示所有记录
 10.order by     --排序
 11.limit        --截取数据记录
 

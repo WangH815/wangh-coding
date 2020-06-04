@@ -17,7 +17,8 @@ mkdir -p ~/redis/data   #创建本地目录
 docker run \
 --name docker_redis5 \
 -p 6379:6379 \
--v ~/redis/data:/data \
+-v redis5-data:/data \
+--restart always \
 -di redis:5 redis-server --appendonly yes
 3.登录容器
 方式一:

@@ -103,16 +103,16 @@ del var1,var2,...  #删除对象引用
 var = None         #置为未定义
 id(var)            #变量内存地址
 
-##1)Number(数字)  #不可变
+##1)Number(数字)   #不可变
 
 ###bool
 var = True/False    #bool;Python2中没有布尔型
-bool()       #返回False
-bool('')     #返回False;其他字符串返回True
-bool(0)      #返回False;其余整数返回True
-bool(0.0)    #返回False;其余浮点数返回True
-bool(None)   #返回False
-bool(list()) #返回False;包括空列表/字典/元组等空对象
+bool()              #返回False
+bool('')            #返回False;其他字符串返回True
+bool(0)             #返回False;其余整数返回True
+bool(0.0)           #返回False;其余浮点数返回True
+bool(None)          #返回False
+bool(list())        #返回False;包括空列表/字典/元组等空对象
 
 ###int
 0b开头为二进制数

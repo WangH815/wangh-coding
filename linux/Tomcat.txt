@@ -1,35 +1,46 @@
 Tomcat
 
 
-#简介
+# 简介
 1.Tomcat是中小型的轻量级web应用服务器
 2.使用java语言开发,主要用于动态页面的解析(jsp[特殊的Servlet])
 3.Apache和Nginx主要提供静态页面解析
 
 
-#安装
+# 组成
+tomcat有三个主要部分组成
+1.servlet容器    # 处理servlet
+2.jsp容器        # 将jsp页面转换为servlet
+3.web容器        # 处理静态页面
+
+
+# 压测工具
+Apache JMeter  # 基于Java
+
+
+# 安装
 1.环境
 centos 7.7.1908
 jdk 1.8
 2.安装
-方式一:                      #压缩包安装;不推荐使用yum/apt等包管理工具安装
+方式一:                      # 压缩包安装;不推荐使用yum/apt等包管理工具安装
 a)下载
-http://tomcat.apache.org/    #官网地址,下载所需稳定版(.tar.gz结尾)即可;可选稳定版包括 7/8.0/8.5/9
-也可通过curl或wget下载       #需知道具体版本的url
+http://tomcat.apache.org/    # 官网地址,下载所需稳定版(.tar.gz结尾)即可;可选稳定版包括 7/8.0/8.5/9
+也可通过curl或wget下载       # 需知道具体版本的url
 b)解压到指定目录
-tar -zxf xx.tar.gz -C /usr/local/      #/usr/local/一般为软件安装目录;也可改为指定目录
-mv /usr/local/xx /usr/local/tomcat     #默认是带有版本号的,如有需要可以改名
+tar -zxf xx.tar.gz -C /usr/local/      # /usr/local/一般为软件安装目录;也可改为指定目录
+mv /usr/local/xx /usr/local/tomcat     # 默认是带有版本号的,如有需要可以改名
 c)启动
-cd /usr/local/tomcat/bin               #tomcat命令目录
-./start.sh                             #启动tomcat
-./shutdown.sh                          #关闭tomcat
+cd /usr/local/tomcat/bin               # tomcat命令目录
+./start.sh                             # 启动tomcat
+./shutdown.sh                          # 关闭tomcat
 d)设置开机启动
 echo '
 sh /usr/local/tomcat/bin/start.sh
-' >> /etc/rc.local                     #/etc/rc.local/rc.local的软连接
-chmod +x /etc/rc.local                 #增加执行权限;默认无
+' >> /etc/rc.local                     # /etc/rc.local/rc.local的软连接
+chmod +x /etc/rc.local                 # 增加执行权限;默认无
 
-方式二:                                #docker方式
+方式二:                                # docker方式
 a)安装docker
 b)拉取tomcat镜像
 docker pull tomcat:9
@@ -41,15 +52,8 @@ docker run \
 --restart always \
 -d tomcat:9
 d)docker exec -it tomcat9 bash
-e)复制应用目录              #登陆容器后操作;默认webapps无内容
+e)复制应用目录              # 登陆容器后操作;默认webapps无内容
 cp -r /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
-
-
-
-
-
-#核心文件及文件夹
-
 
 
 5.修改tomcat用户密码
@@ -57,5 +61,188 @@ sed -i '/username="tomcat"/s/<must-be-changed>/root/' \
 /usr/local/tomcat/conf/tomcat-users.xml
 sed -i '/0:1/s/0:1/0:1|\\d+\\.\\d+\\.\\d+\\.\\d+/' \
 /usr/local/tomcat/webapps/manager/META-INF/context.xml
+
+
+# 核心文件及文件夹
+bin                # 启停tomcat等相关命令文件夹
+conf               # 配置相关文件夹
+  server.xml       # 配置server相关的信息，比如tomcat启动的端口号，配置主机(Host)
+  web.xml          # 配置与web应用（web应用相当于一个web站点）
+  tomcat-user.xml  # 配置用户名密码和相关权限.
+lib                # 存放运行tomcat运行需要的jar包
+logs               # 日志文件夹
+webapps            # web应用文件夹
+work               # 用于存放jsp被访问后生成对应的server文件和.class文件
+
+## webapps应用目录规范
+webapps
+  app-name     # 应用名称
+    WEB-INF        # ROOT/WEB-INF中有默认文件，有需要可以拷贝到应用对应目录
+	  web.xml      # 应用web配置目录
+	  clssses      # class包目录
+	  lib          # 应用所需jar包目录
+	*.jsp
+	*.html
+
+
+## /conf/server.xml     # server服务器相关配置，不能动态加载,需重启才能生效;更多详细信息参考 https://www.cnblogs.com/kismetv/p/7228274.html
+<!-- port:监听关闭tomcat的端口 -->
+<Server port="8005" shutdown="SHUTDOWN">
+
+    <!-- 监听器：通常实现tomcat内部各组件间进行通信的 -->
+    <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+
+    <!-- 全局命名资源(方便引用) -->
+    <GlobalNamingResources>
+        <!-- pathname：即调用tomcat-user.xml配置文件进行用户认证-->
+        <Resource name="UserDatabase"
+		          auth="Container"
+                  type="org.apache.catalina.UserDatabase"
+                  description="User database that can be updated and saved"
+                  factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+                  pathname="conf/tomcat-users.xml" />     
+	</GlobalNamingResources>
+
+    <!-- 服务: 一个服务组件通常包含一个引擎和此引擎相关联的一个或多个链接服务器;可以设置多个服务 -->	
+    <Service name="Catalina">   
+		<!-- 设置连接器属性 -->
+		
+		<!-- 此连接器负责建立HTTP连接;客户端访问web应用默认使用此连接器 -->
+        <Connector port="8080"                 # 指定端口
+                   maxThreads="200"            # 最大线程数(并发数)
+				                               # 一般每个线程需要需要1M的JVM内存空间作为线程栈(具体要看java和tomcat版本)
+                                               # 操作系统本身的限制，Windows每个进程中线程不超过2000;Linux是1000
+                   maxProcessors="450"         # 监听端
+                   connectionTimeout="20000"   # 连接超时(ms)
+                   protocol="HTTP/1.1"         # 协议版本(负责建立http连接)
+                   redirectPort="8443"         # 转发端口
+				   />
+
+        <!-- 此连接器负责建立与其他HTTP服务器连接;与其他HTTP服务器集成时会用到 -->
+        <Connector port="8009"
+		           enableLookups ="false"
+				   protocol="AJP/1.3"
+				   redirectPort="8443"/>
+				         
+        <!-- 引擎: 表示指定service中的请求处理机，接收和处理来自Connector的请求 -->		
+		<!-- Catalina: tomcat的servlet引擎;一个引擎能配置多个连接器 -->
+        <Engine name="Catalina" defaultHost="localhost">
+
+            <!-- Realm 表示存放用户名，密码及role的数据库 -->
+            <!-- className 指定Realm使用的类名，此类必须实现org.apache.catalina.Realm接口 -->
+            <Realm className="org.apache.catalina.realm.LockOutRealm">
+                <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+            </Realm>
+
+            <!-- appBase: 应用程序根目录                                    -->
+            <!-- unpackWARs: true表示解包之后再运行                         -->
+            <!-- autoDeploy: true表示可自动检测应用文件的变化，自动部署发布 -->          
+			<Host appBase="webapps" autoDeploy="true" name="localhost" unpackWARs="true">
+                <!-- Context上下文配置;可以有多个上下文，每一个为独立的应用 -->               
+				<Context path="/"           # 虚拟路径,实际访问docBase路径;客户端访问 http://host/path
+				         docBase="docs"     # 应用根目录;大多为 war 文件(应用打包后的文件)存放目录
+				         reloadable="true"  # 如应用发生变化(配置或文件)可自动加载应用，无需重启tomcat
+						 />
+
+			    <!-- 访问日志设置;Logger标签跟Value有类似作用 -->
+                <Valve className="org.apache.catalina.valves.AccessLogValve"
+				       directory="logs"
+                       prefix="localhost_access_log" suffix=".txt"
+                       pattern="%h %l %u %t &quot;%r&quot; %s %b" /> 
+            </Host>
+        </Engine>
+    </Service>
+</Server>
+
+
+## web.xml                             # 配置监听器、过滤器、Servlet和会话等
+/conf/web.xml                          # tomcat server级别
+/conf/Catalina/${hostName}/web.xml     # host级别
+/${webAppName}/WEB-INF/web.xml         # 应用级别
+<web-app>
+    <!-- servlet配置 -->
+	<servlet>
+        <servlet-name>jsp</servlet-name>   # servlet名称
+        <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>  # servlet处理类
+        <init-param>                                                         # 初始化设置
+            <param-name>fork</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>xpoweredBy</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+	
+	<!-- servlet-mapping配置(servlet映射) -->
+	<servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+        <url-pattern>*.jsp</url-pattern>
+        <url-pattern>*.jspx</url-pattern>
+    </servlet-mapping>
+	
+	<!-- 会话配置 -->
+	<session-config>
+        <session-timeout>30</session-timeout>   # 会话过期时间(min)
+    </session-config>
+	
+	<!-- tomcat提供静态资源时会自动生成，基于文件扩展名的mine-mapping配置 -->
+	<mime-mapping>
+        <extension>123</extension>
+        <mime-type>application/vnd.lotus-1-2-3</mime-type>
+    </mime-mapping>
+	
+	<!-- 默认加载页面 -->
+	<welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+	
+	<!-- 设置错误页面 -->
+	<error-page>
+	    <error-code>400</error-code>
+	    <location>/filter/error.jsp</location>
+	</error-page>
+	<error-page>
+	    <error-code>404</error-code>
+	    <location>/filter/error.jsp</location>
+	</error-page>
+	<error-page>
+	    <error-code>500</error-code>
+	    <location>/filter/error.jsp</location>
+	</error-page>
+	
+</web-app>
+
+
+
+## context.xml                             # 应用上下文配置;
+### 作用范围
+/conf/context.xml                          # tomcat server级别
+/conf/Catalina/${hostName}/context.xml     # host级别
+/${webAppName}/META-INF/context.xml        # 应用级别
+<Context>
+    <!-- 设置资源检测,发生变化自动载入,无需重启 -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+	
+	<!-- oracle数据连接资源设置 -->
+	<Resource name="jdbc/opslocal" 
+              auth="Container"                                   # 认证方式
+              type="javax.sql.DataSource"
+              username="scott" 
+              password="admin" 
+              driverClassName="oracle.jdbc.driver.OracleDriver" 
+              url="jdbc:oracle:thin:@localhost:1521:orcl" 
+              maxActive="100000"                                 # 最大连接数
+              maxIdle="20"                                       # 连接池中最多可空闲的连接
+			  />
+    <Valve className="org.apache.catalina.valves.RemoteAddrValve"  # 远程访问限制
+           allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+</Context>
+
+
 
 
