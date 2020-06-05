@@ -2,36 +2,36 @@ MySQL使用
 
 
 参考文档
-https://www.runoob.com/sql/sql-tutorial.html       --菜鸟教程sql
-https://www.runoob.com/mysql/mysql-tutorial.html   --菜鸟教程mysql
-https://www.yiibai.com/mysql/transaction.html      --易百教程mysql
-https://dev.mysql.com/doc/refman/5.7/en/           --MySQL 5.7 官方文档
+https://www.runoob.com/sql/sql-tutorial.html       -- 菜鸟教程sql
+https://www.runoob.com/mysql/mysql-tutorial.html   -- 菜鸟教程mysql
+https://www.yiibai.com/mysql/transaction.html      -- 易百教程mysql
+https://dev.mysql.com/doc/refman/5.7/en/           -- MySQL 5.7 官方文档
 
 
 注释:
-tb/tb1     --简写表名
-db/db1     --简写数据库名
-col/col1   --简写字段名
+tb/tb1     -- 简写表名
+db/db1     -- 简写数据库名
+col/col1   -- 简写字段名
 
 
 SQL语言分类
 1.DDL (Data Definition Language 数据定义语言)
-create   --创建对象(数据库/表/视图等)
-drop     --删除对象或对象属性(索引/权限等)
-alter    --修改对象属性
+create   -- 创建对象(数据库/表/视图等)
+drop     -- 删除对象或对象属性(索引/权限等)
+alter    -- 修改对象属性
 2.DML (Data Manipulation Language 数据操控语言)
-insert   --插入数据
-delete   --删除数据
-update   --更新数据
-3.DQL (Data Query Language 数据查询语言)  --可与上一条合并
-select   --查询数据
+insert   -- 插入数据
+delete   -- 删除数据
+update   -- 更新数据
+3.DQL (Data Query Language 数据查询语言)  -- 可与上一条合并
+select   -- 查询数据
 4.DCL (Data Control Language 数据控制语句)
-grant    --权限分配
-revoke   --权限回收
+grant    -- 权限分配
+revoke   -- 权限回收
 
 
 select语句
---语法顺序
+-- 语法顺序
  1.select [distinct]
  2.from
  3.join
@@ -43,35 +43,35 @@ select语句
  9.order by
 10.limit
 
---执行顺序
- 1.from         --查询单个查询对象(表或视图)
- 2.on           --内/外连接条件
- 3.join         --内/外连接表
- 4.where        --过滤条件
- 5.group by     --分组字段
- 6.having       --结合group by使用;用于过滤聚合条件
- 7.select       --显示字段/函数/计算表达式
- 8.distinct     --取唯一值
- 9.union [all]  --多个select语句连接;union all会显示所有记录
-10.order by     --排序
-11.limit        --截取数据记录
+-- 执行顺序
+ 1.from         -- 查询单个查询对象(表或视图)
+ 2.on           -- 内/外连接条件
+ 3.join         -- 内/外连接表
+ 4.where        -- 过滤条件
+ 5.group by     -- 分组字段
+ 6.having       -- 结合group by使用;用于过滤聚合条件
+ 7.select       -- 显示字段/函数/计算表达式
+ 8.distinct     -- 取唯一值
+ 9.union [all]  -- 多个select语句连接;union all会显示所有记录
+10.order by     -- 排序
+11.limit        -- 截取数据记录
 
 
 数据类型
 MySQL数据类型 字节 值范围
---整型
+-- 整型
 tinyint       1    -128-127
 smallint      2    -32768-32767
 mediumint     3    -8388608-8388607
 int           4    -2147483648-2147483647
 bigint        8    -9.22E18-9.22E18
 
---浮点型
-float(m, d)   4    --总位数为m,小数位为d
-double(m, d)  8    --同上
-decimal(m, d)      --存储为字符串类型数字,所占空间由字符集决定;精度同上
+-- 浮点型
+float(m, d)   4    -- 总位数为m,小数位为d
+double(m, d)  8    -- 同上
+decimal(m, d)      -- 存储为字符串类型数字,所占空间由字符集决定;精度同上
 
---字符型
+-- 字符型
 CHAR
 VARCHAR
 TINYBLOB
@@ -85,20 +85,20 @@ LONGTEXT
 VARBINARY(M)
 BINARY(M)
 
---时间类型
-date      3   日期      --2014-09-18
-time      3   时间      --08:42:30
-datetime  8   日期时间  --2014-09-18 08:42:30
+-- 时间类型
+date      3   日期      -- 2014-09-18
+time      3   时间      -- 08:42:30
+datetime  8   日期时间  -- 2014-09-18 08:42:30
 timestamp 4   时间戳
 year      1   年份  
 
---复合类型
-set  集合类型           --set("member", "member2", … "member64")
-enum 枚举类型           --enum("member1", "member2", … "member65535")
+-- 复合类型
+set  集合类型           -- set("member", "member2", … "member64")
+enum 枚举类型           -- enum("member1", "member2", … "member65535")
 
 
-字符集                  --默认为 Latin1(ISO-8859-1,单字节编码)
-utf8mb4                 --MySQL中对应的utf-8版本;MySQL中的utf8属于历史遗留问题
+字符集                  -- 默认为 Latin1(ISO-8859-1,单字节编码)
+utf8mb4                 -- MySQL中对应的utf-8版本;MySQL中的utf8属于历史遗留问题
 以下是核心的五个系统变量
 character_set_client
 character_set_connection
@@ -107,9 +107,9 @@ character_set_server
 character_set_database
 
 
-字符集默认设置    --只影响新表;重启服务后生效;mysql8默认为utfmb4可不用修改
-https://blog.csdn.net/kikajack/article/details/84668924  --参考文档
-find / -name my.cnf                                      --可查询到my.cnf的路径;修改前建议备份
+字符集默认设置    -- 只影响新表;重启服务后生效;mysql8默认为utfmb4可不用修改
+https://blog.csdn.net/kikajack/article/details/84668924  -- 参考文档
+find / -name my.cnf                                      -- 可查询到my.cnf的路径;修改前建议备份
 
 echo '
 [client]
@@ -117,38 +117,38 @@ default-character-set = utf8mb4
 
 [mysqld]
 character-set-server = utf8mb4
-collation-server = utf8mb4_unicode_ci    --用于字符排序;mysql8可改为utf8mb4_0900_ai_ci
+collation-server = utf8mb4_unicode_ci    -- 用于字符排序;mysql8可改为utf8mb4_0900_ai_ci
 
 [mysql]
 default-character-set = utf8mb4
-' >> /etc/mysql/my.cnf                   --这里以docker版mysql5.7为例
+' >> /etc/mysql/my.cnf                   -- 这里以docker版mysql5.7为例
 
 查询结果
 mysql> SHOW VARIABLES LIKE 'char%'; SHOW VARIABLES LIKE 'collation%';
-+--------------------------+----------------------------+
++-- -- -- -- -- -- -- -- -- -- -- -- -- +-- -- -- -- -- -- -- -- -- -- -- -- -- -- +
 | Variable_name            | Value                      |
-+--------------------------+----------------------------+
++-- -- -- -- -- -- -- -- -- -- -- -- -- +-- -- -- -- -- -- -- -- -- -- -- -- -- -- +
 | character_set_client     | utf8mb4                    |
 | character_set_connection | utf8mb4                    |
 | character_set_database   | utf8mb4                    |
 | character_set_filesystem | binary                     |
 | character_set_results    | utf8mb4                    |
 | character_set_server     | utf8mb4                    |
-| character_set_system     | utf8                       |  --存储系统元数据的字符集;总是utf-8,无需修改
+| character_set_system     | utf8                       |  -- 存储系统元数据的字符集;总是utf-8,无需修改
 | character_sets_dir       | /usr/share/mysql/charsets/ |
-+--------------------------+----------------------------+
++-- -- -- -- -- -- -- -- -- -- -- -- -- +-- -- -- -- -- -- -- -- -- -- -- -- -- -- +
 8 rows in set (0.00 sec)
 
-+----------------------+--------------------+
++-- -- -- -- -- -- -- -- -- -- -- +-- -- -- -- -- -- -- -- -- -- +
 | Variable_name        | Value              |
-+----------------------+--------------------+
++-- -- -- -- -- -- -- -- -- -- -- +-- -- -- -- -- -- -- -- -- -- +
 | collation_connection | utf8mb4_general_ci |
 | collation_database   | utf8mb4_unicode_ci |
 | collation_server     | utf8mb4_unicode_ci |
-+----------------------+--------------------+
++-- -- -- -- -- -- -- -- -- -- -- +-- -- -- -- -- -- -- -- -- -- +
 3 rows in set (0.00 sec)
 
-库表创建语句查询       --包含字符集
+库表创建语句查询       -- 包含字符集
 show create database db;
 show create table tb;
 
@@ -158,99 +158,99 @@ ALTER TABLE tb CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 
 存储引擎
-MyISAM  --常用;读取效率很高的引擎
---不支持事务,表锁(表级锁,加锁会锁住整个表),支持全文索引,操作速度快;常用于读取多的业务
---myisam存储引擎表由myd和myi组成;.myd用来存放数据文件,.myi用来存放索引文件
---对于myisam存储引擎表,mysql数据库只缓存其索引文件,数据文件的缓存由操作系统本身来完成
+MyISAM  -- 常用;读取效率很高的引擎
+-- 不支持事务,表锁(表级锁,加锁会锁住整个表),支持全文索引,操作速度快;常用于读取多的业务
+-- myisam存储引擎表由myd和myi组成;.myd用来存放数据文件,.myi用来存放索引文件
+-- 对于myisam存储引擎表,mysql数据库只缓存其索引文件,数据文件的缓存由操作系统本身来完成
 
-InnoDB  --常用;写入，支持事处等都支持
---支持事务,主要面向在线事务处理(OLTP)方面的应用
---行锁设计,支持外键,即默认情况下读取操作不加锁
---InnoDB是为处理巨大数据量时的最大性能设计
+InnoDB  -- 常用;写入，支持事处等都支持
+-- 支持事务,主要面向在线事务处理(OLTP)方面的应用
+-- 行锁设计,支持外键,即默认情况下读取操作不加锁
+-- InnoDB是为处理巨大数据量时的最大性能设计
 
-Archive --不常用;归档引擎,压缩比高达1:10,用于数据归档
-NDB     --不常用;主要在MySQL 集群服务器中使用,不做介绍
+Archive -- 不常用;归档引擎,压缩比高达1:10,用于数据归档
+NDB     -- 不常用;主要在MySQL 集群服务器中使用,不做介绍
 
 
 数据库连接及管理(Linux平台)
-mysql [db] -uroot -p         --以root用户登录本地数据库;-uroot等价于-u root,其他类似;-D可指定默认数据库
-mysql [db] -uroot@ip -p      --以root用户登录远程数据库;或使用-h ip/主机名
-mysqladmin -u root password "new_password";                --修改用户密码;shell下执行
-alter user 'root'@'localhost' identified by 'mynewpass4!'; --同上;mysql命令行执行
+mysql [db] -uroot -p         -- 以root用户登录本地数据库;-uroot等价于-u root,其他类似;-D可指定默认数据库
+mysql [db] -uroot@ip -p      -- 以root用户登录远程数据库;或使用-h ip/主机名
+mysqladmin -u root password "new_password";                -- 修改用户密码;shell下执行
+alter user 'root'@'localhost' identified by 'mynewpass4!'; -- 同上;mysql命令行执行
 
 创建新用户
-create user test@localhost identified by '123456';   --创建test用户并设定密码
-drop user username@localhsot;                        --删除用户
-update mysql.user set host = '%' where user = 'test' --取消用户访问限制
-grant all privileges on *.* to test@localhost;       --可根据需要设置用户权限
-revoke all priviliges on *.* from test@localhost;    --删除用户权限
-flush privileges;                                    --重载权限
+create user test@localhost identified by '123456';   -- 创建test用户并设定密码
+drop user username@localhsot;                        -- 删除用户
+update mysql.user set host = '%' where user = 'test' -- 取消用户访问限制
+grant all privileges on *.* to test@localhost;       -- 可根据需要设置用户权限
+revoke all priviliges on *.* from test@localhost;    -- 删除用户权限
+flush privileges;                                    -- 重载权限
 
-其他登录方式                 --使用mysql直接登陆
-vi ~/.my.cnf                 --此文件为mysql客户端配置文件;服务端配置文件一般是 /etc/my.cnf
+其他登录方式                 -- 使用mysql直接登陆
+vi ~/.my.cnf                 -- 此文件为mysql客户端配置文件;服务端配置文件一般是 /etc/my.cnf
 [client]
-password=root                --一般是针对较长的随机密码
+password=root                -- 一般是针对较长的随机密码
 user=root
-chmod 400 ~/.my.cnf          --设置文件权限,确保其他用户不能查看此文件
+chmod 400 ~/.my.cnf          -- 设置文件权限,确保其他用户不能查看此文件
 
 
-show语句                          --数据库信息显示(包括库/表/字段/索引/相关设置等)
-show databases [like 'pattern'];  --显示数据库列表;like用于模糊匹配(from tb/db后也可使用),下同
-show tables;                      --显示当前数据库下数据表列表
-show tables from tb;              --显示指定数据库下数据表列表
-show create database db;          --显示建库语句
-show create table tb;             --显示建表语句
-show column from tb;              --显示tb表字段信息(Field/Type/Null/Key/Default/Extra)
-show index from tb;               --显示索引信息
-show table status from db;        --显示数据库/表的统计信息
-show character set;               --显示支持的字符集
-show processlist;                 --显示数据库连接情况
-show variables;                   --显示所有的变量
-show status;                      --显示服务器状态
-show grants;                      --显示当前用户权限
+show语句                          -- 数据库信息显示(包括库/表/字段/索引/相关设置等)
+show databases [like 'pattern'];  -- 显示数据库列表;like用于模糊匹配(from tb/db后也可使用),下同
+show tables;                      -- 显示当前数据库下数据表列表
+show tables from tb;              -- 显示指定数据库下数据表列表
+show create database db;          -- 显示建库语句
+show create table tb;             -- 显示建表语句
+show column from tb;              -- 显示tb表字段信息(Field/Type/Null/Key/Default/Extra)
+show index from tb;               -- 显示索引信息
+show table status from db;        -- 显示数据库/表的统计信息
+show character set;               -- 显示支持的字符集
+show processlist;                 -- 显示数据库连接情况
+show variables;                   -- 显示所有的变量
+show status;                      -- 显示服务器状态
+show grants;                      -- 显示当前用户权限
 show errors/warnings;             -- 显示服务器的错误/警告信息
 
 
-use db;               --选择db数据库,之后操作只针对该数据库;等价于 use database db
+use db;                 -- 选择db数据库,之后操作只针对该数据库;等价于 use database db
 
 
-desc tb;              --显示表字段信息
+desc tb;                -- 显示表字段信息
 
 
 select语句
-select database();    --显示当前使用数据库
-select version();     --显示数据库版本
-select now();         --显示当前日期时间
-select current_date;  --显示当前日期
-select user();        --显示当前用户
+select database();      -- 显示当前使用数据库
+select version();       -- 显示数据库版本
+select now();           -- 显示当前日期时间
+select current_date();  -- 显示当前日期
+select user();          -- 显示当前用户
 
-select col1 [as alias1],col2 from tb [as alias2] where conditions;  --查询指定字段
-select * from tb where col=(select max(col) from tb);               --简单子查询;查找col值最大的记录
-concat(col1,';',col2)                                               --字段(或表达式)或字符串连接
-
-select * from tb
-order col1,,col2
-limit n offset m;    --m:偏移量(从第m+1行显示),超过实际记录数返回空;n:截取的记录数,超过实际记录数不报错;m越大效率越低
+select col1 [as alias1],col2 from tb [as alias2] where conditions;  -- 查询指定字段
+select * from tb where col=(select max(col) from tb);               -- 简单子查询;查找col值最大的记录
+concat(col1,';',col2)                                               -- 字段(或表达式)或字符串连接
 
 select * from tb
 order col1,,col2
-limit m, n;          --limit n offset m的简写
+limit n offset m;    -- m:偏移量(从第m+1行显示),超过实际记录数返回空;n:截取的记录数,超过实际记录数不报错;m越大效率越低
+
+select * from tb
+order col1,,col2
+limit m, n;          -- limit n offset m的简写
 
 
-join                 --用于把来自两个或多个表的行结合起来,基于表之间的共同或类似字段。
+join                 -- 用于把来自两个或多个表的行结合起来,基于表之间的共同或类似字段。
 
-[inner] join         --内连接;如果表中有至少一个匹配,则返回行;MySQL不支持full join(全连接)
-left join            --左外链接;即使右表中没有匹配,也从左表返回所有的行
-right join           --右外连接;即使左表中没有匹配,也从右表返回所有的行
+[inner] join         -- 内连接;如果表中有至少一个匹配,则返回行;MySQL不支持full join(全连接)
+left join            -- 左外链接;即使右表中没有匹配,也从左表返回所有的行
+right join           -- 右外连接;即使左表中没有匹配,也从右表返回所有的行
 
 select col
 from tb tb1 
 join tb2
-on tb1.col = tb2.col;     --连接条件使用 on 关键词
+on tb1.col = tb2.col;     -- 连接条件使用 on 关键词
 
 select col
 from tb1, tb2
-where tb1.col = tb2.col;  --内连接的另一种形式
+where tb1.col = tb2.col;  -- 内连接的另一种形式
 
 left/right join
 select col
@@ -259,33 +259,33 @@ left join tb2
 on tb1.col=tb2.col;
 
 
-UNION/UNION ALL           --合并多个查询结果
-SELECT col FROM tb1       --选取列有相似的数据类型
-UNION                     --会去重;union all不去重
+UNION/UNION ALL           -- 合并多个查询结果
+SELECT col FROM tb1       -- 选取列有相似的数据类型
+UNION                     -- 会去重;union all不去重
 SELECT col FROM tb2;
 UNION
 SELECT col FROM tb3;
 
 
 create语句
-create database [if not exists] db default charset utf8bm4;  --创建数据库
+create database [if not exists] db default charset utf8bm4;  -- 创建数据库
 
 
 drop语句
-drop database db;         --删除数据库
+drop database db;         -- 删除数据库
 
 
 流程控制
 case/if
 
 case语句
---形式1
+-- 形式1
 case case_value
 when when_value then statement_list
 [when when_value then statement_list] ...
 [else statement_list]
 end case
---形式2
+-- 形式2
 case
 when search_condition then statement_list
 [when search_condition then statement_list] ...
@@ -294,83 +294,83 @@ end case
 
 if语句
 if search_condition then statement_list
-[elseif search_condition then statement_list] ...        --elseif中间无空格
+[elseif search_condition then statement_list] ...        -- elseif中间无空格
 [else statement_list]
-end if                                                   --与if成对出现
+end if                                                   -- 与if成对出现
 
 
 insert语句
-insert into tb(col1,...,coln) values(value1,...,valuen); --指定字段插入
-insert into tb values(value1,...,valuen);                --按照表字段顺序插入
+insert into tb(col1,...,coln) values(value1,...,valuen); -- 指定字段插入
+insert into tb values(value1,...,valuen);                -- 按照表字段顺序插入
 insert into tb values(value1,...,valuen),
                      (value1,...,valuen),
-                     (value1,...,valuen);                --按照表字段顺序插入等多条数据
+                     (value1,...,valuen);                -- 按照表字段顺序插入等多条数据
 
 
 update语句
-update tb set col1=value1,col2=value2 where conditions;  --更新数据
+update tb set col1=value1,col2=value2 where conditions;  -- 更新数据
 
 
 delete语句
-delete from tb where conditions;                         --删除数据
+delete from tb where conditions;                         -- 删除数据
 
 
 DCL
 
 grant语句
-grant select,insert on tb[pattern] to 'user'@'ip' identified by 'passwd';  --用户授权;用户不存在会被创建
+grant select,insert on tb[pattern] to 'user'@'ip' identified by 'passwd';  -- 用户授权;用户不存在会被创建
 
 revoke语句
-revoke select,insert on tb[pattern] to 'user'@'ip' identified by 'passwd'; --撤回用户权限
+revoke select,insert on tb[pattern] to 'user'@'ip' identified by 'passwd'; -- 撤回用户权限
 
-grant/revoke all   --所有权限
-权限 on .          --.表示所有库所有表;db.*表示db的所有表
-'user'@'ip'        --ip为%时表示任意主机的user
+grant/revoke all   -- 所有权限
+权限 on .          -- .表示所有库所有表;db.*表示db的所有表
+'user'@'ip'        -- ip为%时表示任意主机的user
 
 
-模式匹配              --where条件中匹配字符型字段
+模式匹配              -- where条件中匹配字符型字段
 
-[not] like 'pattern'  --基本正则匹配;扩展正则匹配使用REGEXP
-%                     --任意数量字符
-_                     --下划线;单个字符
+[not] like 'pattern'  -- 基本正则匹配;扩展正则匹配使用REGEXP
+%                     -- 任意数量字符
+_                     -- 下划线;单个字符
 
-[NOT] rlike   --扩展(正则)匹配
-.             --单个字符
-[abc]         --括号中任意字符
-[a-c]         --支持范围;同上;a-z,0-9等也是支持的
-^             --开头
-$             --结尾
-{n}           --重复{}前n个模式匹配
+[NOT] rlike   -- 扩展(正则)匹配
+.             -- 单个字符
+[abc]         -- 括号中任意字符
+[a-c]         -- 支持范围;同上;a-z,0-9等也是支持的
+^             -- 开头
+$             -- 结尾
+{n}           -- 重复{}前n个模式匹配
 
 
 常用函数
-count(*)          --统计数据条数
-min(col)/max(col) --最值;常用于子查询
-avg(col)          --平均值
-sum(col)          --求和
+count(*)          -- 统计数据条数
+min(col)/max(col) -- 最值;常用于子查询
+avg(col)          -- 平均值
+sum(col)          -- 求和
 isnull(expr)
-trim(col)         --去除左右空格
-ltrim(col)        --去除左侧空格
-rtrim(col)        --去除右侧空格
-concat(col1,col2) --连接字符串
+trim(col)         -- 去除左右空格
+ltrim(col)        -- 去除左侧空格
+rtrim(col)        -- 去除右侧空格
+concat(col1,col2) -- 连接字符串
 
 
 日期相关
-MONTH(birth)     --返回日期月份;DAY()/YEAR()同理
+MONTH(birth)     -- 返回日期月份;DAY()/YEAR()同理
 
 
 执行sql脚本
---shell命令行执行并输出到指定文件
-mysql -h host -u user -p < xx.sql > output.txt   --需要输入密码
+-- shell命令行执行并输出到指定文件
+mysql -h host -u user -p < xx.sql > output.txt   -- 需要输入密码
  
---另一种方式
-mysql -h host -u user -p <<!    --其他分隔符也可以;常见的还有 EOF
-...                             --sql语句
-!                               --英文感叹号,必须顶格且之后无任何字符
+-- 另一种方式
+mysql -h host -u user -p <<!    -- 其他分隔符也可以;常见的还有 EOF
+...                             -- sql语句
+!                               -- 英文感叹号,必须顶格且之后无任何字符
 
---mysql命令行执行脚本;shell脚本中调用mysql相关命令
-./xx.sql          --推荐此方式
-sh xx.sql         --同上
+-- mysql命令行执行脚本;shell脚本中调用mysql相关命令
+./xx.sql          -- 推荐此方式
+sh xx.sql         -- 同上
 
 
 存储过程
@@ -390,65 +390,65 @@ insert导入
 insert into tb[(col1,...,coln)]
 values(value1,...,valuen),
       (value1,...,valuen),
-      (value1,...,valuen);  --按照表字段顺序插入等多条数据
+      (value1,...,valuen);  -- 按照表字段顺序插入等多条数据
 
-insert into tb[(col1,...,coln)] values(value1,...,valuen);  --多条insert
+insert into tb[(col1,...,coln)] values(value1,...,valuen);  -- 多条insert
 insert into tb[(col1,...,coln)] values(value1,...,valuen);
 insert into tb[(col1,...,coln)] values(value1,...,valuen);
 
-insert into tb[(col1,...,coln)]  --带有select的导入语句
+insert into tb[(col1,...,coln)]  -- 带有select的导入语句
 select ...;
 
 文本文件中导入
---mysql命令行执行;字段以制表符(tab)作为分隔符(\N表示空值) 
---windows系统编辑过的文本的数据导入方式;Mac系统请使用 \r
+-- mysql命令行执行;字段以制表符(tab)作为分隔符(\N表示空值) 
+-- windows系统编辑过的文本的数据导入方式;Mac系统请使用 \r
 load data local infile '/path/xx.txt' into table tb;
 load data local infile '/path/xx.txt' into table tb lines terminated by '\r\n';
 
 
-mysql压测命令   --shell环境下使用
-mysqlslap -uroot -p --concurrency=100 --number-of-queries=10000 --auto-generate-sql
---说明
-concurrency         --并发数
-number-of-queries   --查询数量
+mysql压测命令   -- shell环境下使用
+mysqlslap -uroot -p -- concurrency=100 -- number-of-queries=10000 -- auto-generate-sql
+-- 说明
+concurrency         -- 并发数
+number-of-queries   -- 查询数量
 
 
 空值处理
-SELECT 1 IS NULL, 1 IS NOT NULL;                             --返回0,1;规则为成立为0,不成立则为1
-SELECT 1 = NULL, 1 <> NULL, 1 < NULL, 1 > NULL;              --全部返回NULL
-SELECT 0 IS NULL, 0 IS NOT NULL, '' IS NULL, '' IS NOT NULL; --返回0,1,0,1
+SELECT 1 IS NULL, 1 IS NOT NULL;                             -- 返回0,1;规则为成立为0,不成立则为1
+SELECT 1 = NULL, 1 <> NULL, 1 < NULL, 1 > NULL;              -- 全部返回NULL
+SELECT 0 IS NULL, 0 IS NOT NULL, '' IS NULL, '' IS NOT NULL; -- 返回0,1,0,1
 
 
 索引
-https://www.cnblogs.com/hoewang/p/10257190.html  --参考文档
+https://www.cnblogs.com/hoewang/p/10257190.html  -- 参考文档
 
 
-mysql命令行帮助  --括号中为命令的快捷方式
-?               (\?)   --同help
-clear           (\c)   --清除当前输入语句(命令)
-connect         (\r)   --重连mysql服务器;可使用db和host参数
-delimiter       (\d)   --设置语句分隔符;默认为分号
-edit            (\e)   --调用编辑器编辑语句,默认使用vi
-ego             (\G)   --发送语句给服务器(语句后可不使用分号);使用垂直方式显示结果
-exit            (\q)   --退出命令行
-go              (\g)   --发送语句给服务器
-help            (\h)   --命令行帮助
-nopager         (\n)   --Disable pager, print to stdout.
-notee           (\t)   --不输出到输出文件
-pager           (\P)   --Set PAGER [to_pager]. Print the query results via PAGER.
-print           (\p)   --Print current command.
-prompt          (\R)   --Change your mysql prompt.
-quit            (\q)   --退出命令行
-rehash          (\#)   --Rebuild completion hash.
-source          (\.)   --执行sql脚本;参数为脚本名;eg: \. xx.sql
-status          (\s)   --显示服务器状态
-system          (\!)   --执行宿主机命令;常用于查看文件(夹)/路径等命令,eg: \! ls
-tee             (\T)   --设置标准输出文件;设置后所有的输出都会被追加到此文件;eg: \T
-use             (\u)   --切换数据库
-charset         (\C)   --切换字符集;作用范围仅限于当前连接,退出后失效
-warnings        (\W)   --显示每个语句警告
-nowarning       (\w)   --不显示每个语句警告
-resetconnection (\x)   --清理当前会话内容
+mysql命令行帮助  -- 括号中为命令的快捷方式
+?               (\?)   -- 同help
+clear           (\c)   -- 清除当前输入语句(命令)
+connect         (\r)   -- 重连mysql服务器;可使用db和host参数
+delimiter       (\d)   -- 设置语句分隔符;默认为分号
+edit            (\e)   -- 调用编辑器编辑语句,默认使用vi
+ego             (\G)   -- 发送语句给服务器(语句后可不使用分号);使用垂直方式显示结果
+exit            (\q)   -- 退出命令行
+go              (\g)   -- 发送语句给服务器
+help            (\h)   -- 命令行帮助
+nopager         (\n)   -- Disable pager, print to stdout.
+notee           (\t)   -- 不输出到输出文件
+pager           (\P)   -- Set PAGER [to_pager]. Print the query results via PAGER.
+print           (\p)   -- Print current command.
+prompt          (\R)   -- Change your mysql prompt.
+quit            (\q)   -- 退出命令行
+rehash          (\#)   -- Rebuild completion hash.
+source          (\.)   -- 执行sql脚本;参数为脚本名;eg: \. xx.sql
+status          (\s)   -- 显示服务器状态
+system          (\!)   -- 执行宿主机命令;常用于查看文件(夹)/路径等命令,eg: \! ls
+tee             (\T)   -- 设置标准输出文件;设置后所有的输出都会被追加到此文件;eg: \T
+use             (\u)   -- 切换数据库
+charset         (\C)   -- 切换字符集;作用范围仅限于当前连接,退出后失效
+warnings        (\W)   -- 显示每个语句警告
+nowarning       (\w)   -- 不显示每个语句警告
+resetconnection (\x)   -- 清理当前会话内容
 
 
 

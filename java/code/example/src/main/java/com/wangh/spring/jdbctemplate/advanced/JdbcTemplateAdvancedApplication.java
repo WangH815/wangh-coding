@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Spring + JDBC 方式有大量冗余代码，不是很推荐
  */
-public class JdbcTemplateBaseApplication {
+public class JdbcTemplateAdvancedApplication {
     public static void main(String[] args) {
 
         ApplicationContext context =
