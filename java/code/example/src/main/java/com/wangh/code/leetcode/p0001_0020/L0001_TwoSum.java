@@ -2,6 +2,8 @@ package com.wangh.code.leetcode.p0001_0020;
 
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 给出一个无重复整数数组和一个目标和，输出数组中两数之和等于目标和的数组下标(一定有解)
@@ -35,5 +37,31 @@ public class L0001_TwoSum {
             }
         }
         return null;
+    }
+
+    public static int[] twoSum_2(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);
+        }
+        for (int i = 0; i < nums.length; i++) {
+            int sub = target - nums[i];
+            if (map.containsKey(sub) && map.get(sub) != i) {
+                return new int[]{i, map.get(sub)};
+            }
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    public static int[] twoSum_3(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int sub = target - nums[i];
+            if (map.containsKey(sub)) {
+                return new int[]{i, map.get(sub)};
+            }
+            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
     }
 }
