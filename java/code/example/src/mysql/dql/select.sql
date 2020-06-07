@@ -10,7 +10,7 @@
 -- {m/n}                   必须项;m或n
 -- [m/n]                   可选项;m或n
 -- expr/expr1              表达式
-
+-- conditions              条件表达式
 
 # 数据类型
 
@@ -90,6 +90,99 @@ enum('value1','value2',...)   -- 枚举类型,限制定义列的值只能出现�
 -- 11.limit        # 截取数据记录
 
 
+# 标准格式
+SELECT
+    [ALL | DISTINCT | DISTINCTROW ]
+    [HIGH_PRIORITY]
+    [STRAIGHT_JOIN]
+    [SQL_SMALL_RESULT] [SQL_BIG_RESULT] [SQL_BUFFER_RESULT]
+    [SQL_CACHE | SQL_NO_CACHE] [SQL_CALC_FOUND_ROWS]
+    select_expr [, select_expr] ...
+    [into_option]
+    [FROM table_references
+    [PARTITION partition_list]]
+    [WHERE where_condition]
+    [GROUP BY {col_name | expr | position}
+    [ASC | DESC], ... [WITH ROLLUP]]
+    [HAVING where_condition]
+    [ORDER BY {col_name | expr | position}
+    [ASC | DESC], ...]
+    [LIMIT {[offset,] row_count | row_count OFFSET offset}]
+    [PROCEDURE procedure_name(argument_list)]
+    [into_option]
+    [FOR UPDATE | LOCK IN SHARE MODE]
+into_option: {
+    INTO OUTFILE 'file_name'
+        [CHARACTER SET charset_name]
+        export_options
+    | INTO DUMPFILE 'file_name'
+    | INTO var_name [, var_name] ...
+    }
+
+
+# 示例
+select 1 + 1;     -- 数学计算
+select now();     -- 调用数据库函数
+select col1, col2 from tb;                -- 查询两个字段
+
+## as
+select col1 as alias, col2 from tb;      -- 字段和表都可以加别名;as可省略
+SELECT * FROM (SELECT 1, 2, 3) AS tb;     -- 子查询别名
+
+## where
+select col1, col2 from tb where col1 = 1 and col2 like '_a%';  -- 与条件
+select col1, col2 from tb where col1 = 1 or col2 like '_a%';   -- 或条件
+
+## limit
+select * from tb limit m, n;              -- 从结果集的第m+1开始取n条记录
+select * from tb limit m, n;              -- 从结果集的第m+1开始取n条记录
+select * from tb limit n;                 -- 取前n条记录;等价于limit 0, n
+
+## order by
+select col1, clo2 from tb
+order by col1 desc,col2 asc;              -- col1降序;col2升序,asc可省略
+
+## group by having conditions
+select col1,col2,sum(col3) as col from tb
+group by col1,col2
+having col > 100;
+
+## join
+### inner join                -- 内连接
+select tb1.col1, tb2.col2
+from tb1 [inner] join tb2
+on tb1.id = tb2.id;
+
+select tb1.col1, tb2.col2
+from tb1, tb2
+where tb1.id = tb2.id;        -- 同上
+
+select tb1.col1, tb2.col2
+from tb1 join tb2             -- join多表可使用 join(tb1, tb2, tb3)
+using (id);                   -- 同上,使用using(col1, col2, col3)用于多表同名字段
+
+select tb1.col1, tb2.col2
+from tb1 natural join tb2;    -- 自然连接;会自动关联两表所有同名字段
+
+## left [outer] join          -- 左外连接，简称左连接;其他join同理
+select tb1.col1, tb2.col2
+from tb1 left join tb2
+on tb1.id = tb2.id;
+
+## union [all]                 -- 多语句组合,要求每个select字段属性近似,显示以第一组别名为准;all表示保留重复值
+select col1, col2 from tb1
+union
+select col1, col2 from tb2
+union
+select col1, col2 from tb3;
+
+## 子查询    -- select子句作为一个结果集
+select * from tb1 where col1 in (select col2 from t2);
+select * from tb1 where col1 = (select max(col2) from t2);
+select * from t1 where (col1,col2) = (select col1, col2 from t2);
+
+
+
 # 查询函数             -- 部分支持不带小括号
 
 ## 数据库函数
@@ -97,26 +190,29 @@ select database();    -- 显示当前使用数据库
 select version();     -- 显示数据库版本
 select user();        -- 显示当前用户
 
+# 字符串连接函数
+select concat(col1,col2,col3);                -- 连接多个字段或字符串;不是字符串需先转换; 常用
+
 ## 时间日期函数
 ### 日期格式(date)      yyyy-MM-dd
 ### 时间格式(time)      hh:mm:ss/hh:mm         -- 秒小数点后最多可有十位精度,实际可使用6位
 ### 日期时间(datetime)  yyyy-MM-dd hh:mm:ss
 ### 时间戳(timestamp)   yyyy-MM-dd hh:mm:ss
 select now([n]);                    -- 查询当前日期时间(语句开始执行时间);返回datetime;n表示秒小数点后位数,取值范围为[0, 6]
-select current_timestamp([n]);      -- 同上;返回timestamp
+select current_timestamp([n]);      -- 同上;返回timestamp; 常用
 select sysdate([n]);                -- 当前函数执行时的时间,其他同上
-select current_date();              -- 查询当前日期;格式为: yyyy-MM-dd
+select current_date();              -- 查询当前日期;格式为: yyyy-MM-dd; 常用
 select current_time();              -- 查询当前时间;格式为: hh:mm:ss
 select unix_timestamp();            -- 查询unix时间戳,单位为s[int];当前时间与 1970-01-01 00:00:00 的差值;需要考虑时区
 select from_unixtime(0);            -- unix时间戳转为日期时间格式格式
 
 # 时间计算
-select date_add({date/datetime}, interval n {day/year/...});   -- 日期或日期时间增加;interval意思为间隔;返回格式与第一个参数保持一致
-select date_sub({date/datetime}, interval n {day/year/...});   -- 日期或日期时间减少
+select date_add({date/datetime}, interval n {day/year/...});   -- 日期或日期时间增加;interval意思为间隔;返回格式与第一个参数保持一致; 常用
+select date_sub({date/datetime}, interval n {day/year/...});   -- 日期或日期时间减少; 常用
 select datediff(date, date);        -- 日期差;左边日期减去右边日期,返回相差天数;参数只要可转化为 date 格式即可
 select time_to_sec(time);           -- 时间格式转为秒;参数可转化为 time 即可
 select sec_to_time(n);              -- 秒转为时间格式(hh:mm:ss);最大秒为 3020399
-select date_format(date, format);   -- 日期格式化
+select date_format(date, format);   -- 日期格式化; 常用
 select time_format(time, format);   -- 时间格式化
 select str_to_date(str, format);    -- 字符串转日期
 

@@ -224,16 +224,16 @@ select now();           -- 显示当前日期时间
 select current_date();  -- 显示当前日期
 select user();          -- 显示当前用户
 
-select col1 [as alias1],col2 from tb [as alias2] where conditions;  -- 查询指定字段
-select * from tb where col=(select max(col) from tb);               -- 简单子查询;查找col值最大的记录
-concat(col1,';',col2)                                               -- 字段(或表达式)或字符串连接
+select col1 [[as ]alias1],col2 from tb [as alias2] where conditions;  -- 查询指定字段
+select * from tb where col=(select max(col) from tb);                 -- 简单子查询;查找col值最大的记录
+concat(col1,';',col2)                                                 -- 字段(或表达式)或字符串连接
 
 select * from tb
 order col1,,col2
 limit n offset m;    -- m:偏移量(从第m+1行显示),超过实际记录数返回空;n:截取的记录数,超过实际记录数不报错;m越大效率越低
 
 select * from tb
-order col1,,col2
+order col1,col2
 limit m, n;          -- limit n offset m的简写
 
 
