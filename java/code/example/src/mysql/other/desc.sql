@@ -1,0 +1,1 @@
+desc tb;       -- 显示表字段信息;desc为describe简写;等价于 show columns from tb;

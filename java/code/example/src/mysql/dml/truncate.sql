@@ -1,0 +1,1 @@
+truncate tb;     -- 清空数据表;
