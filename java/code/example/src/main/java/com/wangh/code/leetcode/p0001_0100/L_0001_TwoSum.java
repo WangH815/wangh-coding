@@ -1,45 +1,29 @@
-package com.wangh.code.leetcode.p0001_0020;
+package com.wangh.code.leetcode.p0001_0100;
 
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 给出一个无重复整数数组和一个目标和，输出数组中两数之和等于目标和的数组下标(一定有解)
- *
- * @in nums = [2, 7, 11, 15], target = 9
- * @return [0, 1]
- */
-public class L0001_TwoSum {
+public class L_0001_TwoSum {
+
     public static void main(String[] args) {
-        int[] nums = {1, 6, 9, 2, 5};
-        int target = 14;
-        System.out.println(Arrays.toString(twoSum_1(nums, target)));
+        int[] nums = {2, 3, 7, 9};
     }
 
-    /**
-     * 直接两重循环
-     *
-     * @param nums
-     * @param target
-     * @return
-     */
     public static int[] twoSum_1(int[] nums, int target) {
-        int[] result = new int[2];
-        for (int i = 0; i < nums.length -1; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
+        int[] ans = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = (i + 1); j < nums.length; j++) {
                 if (nums[i] + nums[j] == target) {
-                    result[0] = i;
-                    result[1] = j;
-                    return result;
+                    ans[0] = i;
+                    ans[1] = j;
+                    return ans;
                 }
             }
         }
-        return null;
+        return ans;
     }
 
-    public static int[] twoSum_2(int[] nums, int target) {
+    public int[] twoSum2(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             map.put(nums[i], i);
@@ -53,7 +37,7 @@ public class L0001_TwoSum {
         throw new IllegalArgumentException("No two sum solution");
     }
 
-    public static int[] twoSum_3(int[] nums, int target) {
+    public int[] twoSum3(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             int sub = target - nums[i];
@@ -64,4 +48,5 @@ public class L0001_TwoSum {
         }
         throw new IllegalArgumentException("No two sum solution");
     }
+
 }

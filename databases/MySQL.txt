@@ -357,7 +357,7 @@ concat(col1,col2) -- 连接字符串
 
 
 日期相关
-MONTH(birth)     -- 返回日期月份;DAY()/YEAR()同理
+month(birth)     -- 返回日期月份;DAY()/YEAR()同理
 
 
 执行sql脚本

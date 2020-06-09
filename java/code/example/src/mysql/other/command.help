@@ -1,0 +1,27 @@
+mysql命令行帮助  -- 括号中为命令的快捷方式
+
+?               (\?)   -- 同help
+clear           (\c)   -- 清除当前输入语句(命令); 常用
+connect         (\r)   -- 重连mysql服务器;可使用db和host参数
+delimiter       (\d)   -- 设置语句分隔符;默认为分号
+edit            (\e)   -- 调用编辑器编辑语句,默认使用vi
+ego             (\G)   -- 发送语句给服务器(语句后可不使用分号);使用垂直方式显示结果
+exit            (\q)   -- 退出命令行
+go              (\g)   -- 发送语句给服务器
+help            (\h)   -- 命令行帮助
+nopager         (\n)   -- Disable pager, print to stdout.
+notee           (\t)   -- 不输出到输出文件
+pager           (\P)   -- Set PAGER [to_pager]. Print the query results via PAGER.
+print           (\p)   -- Print current command.
+prompt          (\R)   -- Change your mysql prompt.
+quit            (\q)   -- 退出命令行
+rehash          (\#)   -- Rebuild completion hash.
+source          (\.)   -- 执行sql脚本;参数为脚本名;eg: \. xx.sql
+status          (\s)   -- 显示服务器状态
+system          (\!)   -- 执行宿主机命令;常用于查看文件(夹)/路径等命令,eg: \! ls
+tee             (\T)   -- 设置标准输出文件;设置后所有的输出都会被追加到此文件;eg: \T
+use             (\u)   -- 切换数据库
+charset         (\C)   -- 切换字符集;作用范围仅限于当前连接,退出后失效
+warnings        (\W)   -- 显示每个语句警告
+nowarning       (\w)   -- 不显示每个语句警告
+resetconnection (\x)   -- 清理当前会话内容

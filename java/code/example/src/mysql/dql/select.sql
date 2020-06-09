@@ -123,15 +123,29 @@ into_option: {
 # 示例
 select 1 + 1;     -- 数学计算
 select now();     -- 调用数据库函数
-select col1, col2 from tb;                -- 查询两个字段
+select col1, col2 from tb;                      -- 查询两个字段
+select * into outfile 'path/data.txt' from tb;  -- 查询结果输出
 
 ## as
 select col1 as alias, col2 from tb;      -- 字段和表都可以加别名;as可省略
-SELECT * FROM (SELECT 1, 2, 3) AS tb;     -- 子查询别名
+select * from (select 1, 2, 3) as tb;    -- 子查询别名
 
 ## where
 select col1, col2 from tb where col1 = 1 and col2 like '_a%';  -- 与条件
 select col1, col2 from tb where col1 = 1 or col2 like '_a%';   -- 或条件
+
+## like/rlike
+[not] like 'pattern'  -- 基本正则匹配;扩展正则匹配使用regexp/rlike
+%                     -- 任意数量字符
+_                     -- 下划线;单个字符
+
+[NOT] rlike           -- 扩展(正则)匹配
+.                     -- 单个字符
+[abc]                 -- 括号中任意字符
+[a-c]                 -- 支持范围;同上;a-z,0-9等也是支持的
+^                     -- 开头
+$                     -- 结尾
+{n}                   -- 重复{}前n个模式匹配
 
 ## limit
 select * from tb limit m, n;              -- 从结果集的第m+1开始取n条记录
@@ -182,7 +196,6 @@ select * from tb1 where col1 = (select max(col2) from t2);
 select * from t1 where (col1,col2) = (select col1, col2 from t2);
 
 
-
 # 查询函数             -- 部分支持不带小括号
 
 ## 数据库函数
@@ -222,5 +235,14 @@ select(num, expr2, expr3);          -- 数值型num为0或0.0表示false,其他�
 select(num = true, expr2, expr3);   -- num为1或1.0时表示成立，其他不成立
 select(num = false, expr2, expr3);  -- 同select(num, expr2, expr3);
 
-# 空值处理
-## ifnull函数
+
+#
+count(*)          -- 统计数据条数
+min(col)/max(col) -- 最值;常用于子查询
+avg(col)          -- 平均值
+sum(col)          -- 求和
+isnull(expr)      -- 空值判断
+trim(col)         -- 去除左右空格
+ltrim(col)        -- 去除左侧空格
+rtrim(col)        -- 去除右侧空格
+concat(col1,col2) -- 连接字符串

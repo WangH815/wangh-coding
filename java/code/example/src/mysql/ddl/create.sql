@@ -3,7 +3,11 @@ create user wangh@'%' identified by 'wangh';        -- 创建无访问限制用�
 
 
 create database [if not exists] db;    -- 创建数据库
-create table [if not exists] tb;       -- 创建数据库
+create table [if not exists] tb(       -- 创建数据库
+    id int primary key,
+    name varchar(20),
+    age int
+);
 
 # 存储过程
 create procedure proc_name(in inputparam varchar(255), inout inoutparam int)
@@ -13,4 +17,4 @@ begin
     set inoutparam = z;
     select inputparam;
     select concat('zyxw', inputparam);
-end
+end;
