@@ -1,7 +1,4 @@
-package com.wangh.spring.common;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+package com.wangh.spring.basic;
 
 public class Customer {
     public Customer() {

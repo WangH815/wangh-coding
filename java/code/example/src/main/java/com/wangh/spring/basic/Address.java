@@ -1,4 +1,4 @@
-package com.wangh.spring.common;
+package com.wangh.spring.basic;
 
 public class Address {
     private String myAddress;

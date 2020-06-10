@@ -15,6 +15,6 @@ MVC模式导致应用程序的不同方面(输入逻辑，业务逻辑和UI逻�
 
 
 核心组件
-DispatcherServlet(前端控制器)     //处理所有的HTTP请求和响应
+DispatcherServlet(前端控制器)     //处理所有的HTTP请求和响应(继承HttpServlet)
 
 

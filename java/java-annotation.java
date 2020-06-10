@@ -81,3 +81,34 @@ getter 和 setter
  * 设置   ${bare_field_name} 
  * (${param})${field}
  */
+
+
+
+
+Spring
+
+Lombok 
+
+Lombok项目是一个Java库，它会自动插入编辑器和构建工具中，Lombok提供了一组有用的注释，用来消除Java类中的
+大量样板代码。仅五个字符(@Data)就可以替换数百行代码从而产生干净，简洁且易于维护的Java类。
+
+常用注解：
+@Setter                   // 注解在类或字段，注解在类时为所有字段生成setter方法，注解在字段上时只为该字段生成setter方法。
+@Getter                   // 使用方法同上，区别在于生成的是getter方法。
+@ToString                 // 注解在类，添加toString方法。
+@EqualsAndHashCode        // 注解在类，生成hashCode和equals方法。
+@NoArgsConstructor        // 注解在类，生成无参的构造方法。
+@RequiredArgsConstructor  // 注解在类，为类中需要特殊处理的字段生成构造方法，比如final和被@NonNull注解的字段。
+@AllArgsConstructor       // 注解在类，生成包含类中所有字段的构造方法。
+@Data                     // 注解在类，生成setter/getter、equals、canEqual、hashCode、toString方法，如为final属性，则不会为该属性生成setter方法。
+@Slf4j                    // 注解在类，生成log变量，严格意义来说是常量。
+
+
+Spring Web
+
+@RequestMapping("/")      // 将 HTTP 请求映射到 MVC 和 REST 控制器的处理方法上
+
+@Component                // 把普通pojo实例化到spring容器中，相当于配置文件中的
+@Controller               // 控制器
+@Service                  // 服务组件(注入dao)
+@Repository               // 数据访问层，即DAO组件

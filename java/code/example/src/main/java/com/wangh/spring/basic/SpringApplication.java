@@ -1,7 +1,7 @@
-package com.wangh.spring;
+package com.wangh.spring.basic;
 
-import com.wangh.spring.common.HelloWorld;
-import com.wangh.spring.common.Customer;
+import com.wangh.spring.basic.HelloWorld;
+import com.wangh.spring.basic.Customer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

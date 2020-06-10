@@ -25,6 +25,8 @@ public interface StudentDao {
     // 数据查询
     Student queryStudentById(Integer id);
 
-    // 返回所有数据列表
+    /**
+     *     返回所有数据列表
+     */
     List<Student> listStudents();
 }

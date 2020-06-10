@@ -1,4 +1,4 @@
-package com.wangh.spring.jdbc.impl;
+package com.wangh.spring.jdbc.dao.impl;
 
 import com.wangh.spring.jdbc.dao.CustomerDao;
 import com.wangh.spring.jdbc.model.Customer;

@@ -9,11 +9,11 @@ public class L_0046_Permutations {
     }
 
     public static List<List<Integer>> permute1(int[] nums) {
-        return permute_end1(nums, nums.length - 1);
+        return permuteEnd1(nums, nums.length - 1);
     }
 
     // end 表示当前新增的数字的位置
-    private static List<List<Integer>> permute_end1(int[] nums, int end) {
+    private static List<List<Integer>> permuteEnd1(int[] nums, int end) {
         // 只有一个数字的时候
         if (end == 0) {
             List<List<Integer>> all = new ArrayList<>();
@@ -23,7 +23,7 @@ public class L_0046_Permutations {
             return all;
         }
         //得到上次所有的结果
-        List<List<Integer>> all_end = permute_end1(nums, end - 1);
+        List<List<Integer>> all_end = permuteEnd1(nums, end - 1);
         int current_size = all_end.size();
         //遍历每一种情况
         for (int j = 0; j < current_size; j++) {
