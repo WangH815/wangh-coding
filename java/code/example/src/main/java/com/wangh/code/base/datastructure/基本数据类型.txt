@@ -29,12 +29,13 @@ long l = 12L      new Long(12L)
 
 进制转换
 Integer.toBinaryString(int i) // 其他进制转二进制字符串表示;转其他进制同理
+
 // s表示其他进制的字符串表示,只包含进制范围内的字符;radix表示需要被转换的进制;可解析32位二进制字符
 Integer.parseUnsignedInt(String s, int radix)
 Integer.parseUnsignedInt("7fffffff", 16)       // 最大的int;字母不区分大小写
 Integer.parseUnsignedInt("ffffffff", 16)       // 返回-1;其他进制同理
 
-Integer.parseInt(String s, int radix)          // s可包括+/-(+可省略);做多解析31位二进制字符
+Integer.parseInt(String s, int radix)          // s可包括+/-(+可省略);最多解析31位二进制字符
 
 
 自动类型转换
