@@ -5,7 +5,6 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -154,7 +153,7 @@ public class CreateTest {
 		}
 	}
 
-	@Test
+
 	public void testPerformance() throws Exception{
 		System.out.println("性能测试:");
 		// 测试DOM的性能:

@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * Spring + JDBC 方式有大量冗余代码，不是很推荐
  */
-public class SpringJdbcApplication {
+public class App {
     public static void main(String[] args) {
         System.out.println("================================");
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc/spring-jdbc.xml");

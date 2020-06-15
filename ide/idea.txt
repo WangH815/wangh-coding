@@ -3,10 +3,14 @@ Idea的常用操作
 # 快捷键
 Ctrl + Shift + F10      //执行代码
 Ctrl + Alt + L          //代码格式化
+Ctrl + Alt + U          //类的实现和继承结构
 Ctrl + D                //复制光标所在行到下一行
 Ctrl + /                //注释或反注释光标所在行或选中行
+Ctrl + F12              //显示类属性和方法
+
+Shift + F6              //重命名
+
 Alt + Insert            //新建文件
-Alt + F6                //重命名
 Alt + Enter             //导入包
 
 

@@ -1,9 +1,19 @@
 package com.wangh.code.base.reflect;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+
+/**
+ * reflect(反射)
+ * 包: java.lang.reflect
+ *
+ * 类或接口
+ * Class        // 核心类
+ * Field        // 变量相关
+ * Method       // 方法相关
+ * Constructor  // 构造器相关
+ */
 public class Demo {
     public static void main(String[] args)
             throws ClassNotFoundException, IllegalAccessException, InstantiationException,
