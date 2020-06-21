@@ -122,7 +122,7 @@ public class ServletDemo1 implements Servlet {
     public String getServletInfo() {...}           // 获取Servlet信息
 }
 
-2.继承GenericServlet  // 实现了Servlet接口(service()方法除外);较少用到
+2.继承GenericServlet  // 实现了Servlet, ServletConfig, Serializable接口的抽象类();较少用到
 
 public class ServletDemo2 extends GenericServlet {
     @Override
@@ -130,7 +130,7 @@ public class ServletDemo2 extends GenericServlet {
             throws ServletException, IOException {...}
 }
 
-3.继承HttpServlet    // 最常用
+3.继承HttpServlet    // 最常用;HttpServlet是继承了GenericServlet的抽象类
 public class ServletDemo3 extends HttpServlet {
 
     @Override
