@@ -288,7 +288,7 @@ docker run \
 -p 6379:6379 \
 -v redis5-data:/data \
 --restart always \
--di redis:5 redis-server --appendonly yes
+-d redis:5 redis-server --appendonly yes
 3.登录容器
 方式一:
 docker exec -it docker_redis5 /bin/bash   #登录容器shell环境

@@ -1,0 +1,118 @@
+环境
+系统: Centos 7 1908
+Docker version 1.13.1, build cccb291/1.13.1    # 具体安装见docker
+Redis:5
+
+
+
+1.创建主从服务器
+# master
+docker run \
+--name redis5-master \
+-p 6379:6379 \
+-v /var/lib/docker/volumes/redis5-master/data:/data \
+-v /var/lib/docker/volumes/redis5-master/redis.conf:/etc/redis/redis.conf \
+--restart always \
+-di redis:5 redis-server --appendonly yes
+
+# slave
+docker run \
+--name redis5-slave \
+-p 6380:6379 \
+-v /var/lib/docker/volumes/redis5-slave/data:/data \
+-v /var/lib/docker/volumes/redis5-slave/redis.conf:/etc/redis/redis.conf \
+-di redis:5 redis-server --appendonly yes
+
+
+# 时区修改
+## 容器已创建
+ls -ltr /etc/timezone || ( echo 'Asia/Shanghai' > /etc/timezone ) #/etc/timezone文件不存在时创建
+docker cp /etc/timezone container_name:/etc/timezone              #容器名可以使用容器id代替
+docker cp /usr/share/zoneinfo/Asia/Shanghai container_name:/etc/localtime
+## 批量操作
+for name in `docker ps -q`
+do
+  docker cp /etc/timezone ${name}:/etc/timezone
+  docker cp /usr/share/zoneinfo/Asia/Shanghai ${name}:/etc/localtime
+done
+
+2.配置文件修改
+# master
+echo '# master
+
+[client]
+default-character-set = utf8mb4        # 客户端字符集
+
+[mysqld]
+server_id=1                            # 服务器ID,必须唯一
+log-bin=master-bin                     # 指定通过binlog复制
+# binlog-ignore-db=mysql               # 指定不同步的数据库;可不设置
+
+character-set-server = utf8mb4         # 服务器存储字符集
+collation-server = utf8mb4_unicode_ci  # 服务器排序字符集
+
+[mysql]
+default-character-set = utf8mb4        # 默认字符集
+' > /data/mysql57-master/conf/my.cnf
+
+# slave
+echo '# slave
+
+[client]
+default-character-set = utf8mb4        # 客户端字符集
+
+[mysqld]
+server-id=2
+# log-bin=mysql-slave-bin              # 开启二进制日志功能，以备Slave作为其它Slave的Master时使用
+# relay_log=edu-mysql-relay-bin        # relay_log配置中继日志;单纯主从可不配置
+
+character-set-server = utf8mb4         # 服务器存储字符集
+collation-server = utf8mb4_unicode_ci  # 服务器排序字符集
+
+[mysql]
+default-character-set = utf8mb4        # 默认字符集
+' > /data/mysql57-slave/conf/my.cnf
+
+# 重启
+docker restart mysql57-master mysql57-slave   # 配置文件生效
+
+3.master中创建同步用户
+docker exec -it mysql57-master mysql -uroot -p                      # 登录master命令行
+
+grant replication slave on *.* to 'repl'@'%' identified by 'repl';  # 增加从节点用户及复制权限
+
+flush privileges;                                                   # 刷新权限,使之生效
+# 显示mater状态
+mysql> show master status;
++-------------------+----------+--------------+------------------+-------------------+
+| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++-------------------+----------+--------------+------------------+-------------------+
+| master-bin.000001 |      589 |              | mysql            |                   |
++-------------------+----------+--------------+------------------+-------------------+
+
+4.slave配置
+docker inspect --format='{{.NetworkSettings.IPAddress}}' mysql57-master # 查询mater的ip
+docker network inspect bridge | grep -A 5 mysql57-master                # 
+
+docker exec -it mysql57-slave mysql -uroot -p              # 登录slave命令行
+change master to
+master_host='172.17.0.9',
+master_user='repl',
+master_password='repl',
+master_log_file='master-bin.000001',master_log_pos=589;    # 设置复制源
+
+start slave;                                               # 开启主从复制;停止可使用stop slave
+
+show slave status \G;                                      # 查看是否成功,查询结果中以下两项为Yes表示成功了
+ Slave_IO_Running: Yes
+Slave_SQL_Running: Yes
+
+
+
+# 常见问题处理
+1.Slave_IO_Running，Slave_SQL_Running问题的解决方法
+参考：https://www.cnblogs.com/byfboke/articles/9120672.html
+
+
+
+

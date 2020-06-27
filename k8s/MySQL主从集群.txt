@@ -1,7 +1,7 @@
 环境
 系统: Centos 7 1908
 Docker version 1.13.1, build cccb291/1.13.1    # 具体安装见docker
-MySQL:5.7
+MySQL:5.7                                      # 镜像不存在可以参见docker
 
 
 
@@ -10,9 +10,9 @@ MySQL:5.7
 docker run \
 --name mysql57-master \
 --privileged=true \
--v /data/mysql57-master/data:/var/lib/mysql \
--v /data/mysql57-master/conf:/etc/mysql/conf.d \
--p 4306:3306 \
+-v /var/lib/docker/volumes/mysql57-master/data:/var/lib/mysql \
+-v /var/lib/docker/volumes/mysql57-master/conf:/etc/mysql/conf.d \
+-p 3306:3306 \
 -e MYSQL_ROOT_PASSWORD=root \
 -d mysql:5.7
 
@@ -20,13 +20,13 @@ docker run \
 docker run \
 --name mysql57-slave \
 --privileged=true \
--v /data/mysql57-slave/data:/var/lib/mysql \
--v /data/mysql57-slave/conf:/etc/mysql/conf.d \
--p 4307:3306 \
+-v /var/lib/docker/volumes/mysql57-slave/data:/var/lib/mysql \
+-v /var/lib/docker/volumes/mysql57-slave/conf:/etc/mysql/conf.d \
+-p 3307:3306 \
 -e MYSQL_ROOT_PASSWORD=root \
 -d mysql:5.7
 
-## --privileged 获取实际root权限
+## --privileged 获取实际root权限(是否需要待确定)
 ## 映射的两个文件方便配置
 
 # 时区修改
@@ -41,7 +41,7 @@ do
   docker cp /usr/share/zoneinfo/Asia/Shanghai ${name}:/etc/localtime
 done
 
-2.配置文件修改
+2.配置文件修改       # 设置了-v mysql57-slave/conf:/etc/mysql/conf.d 可在宿主机修改配置文件，否则需要登录容器操作
 # master
 echo '# master
 
@@ -58,7 +58,7 @@ collation-server = utf8mb4_unicode_ci  # 服务器排序字符集
 
 [mysql]
 default-character-set = utf8mb4        # 默认字符集
-' > /data/mysql57-master/conf/my.cnf
+' > /var/lib/docker/volumes/mysql57-master/conf/my.cnf   # 实际文件位置根据映射地址调整
 
 # slave
 echo '# slave
@@ -76,7 +76,7 @@ collation-server = utf8mb4_unicode_ci  # 服务器排序字符集
 
 [mysql]
 default-character-set = utf8mb4        # 默认字符集
-' > /data/mysql57-slave/conf/my.cnf
+' > /var/lib/docker/volumes/mysql57-slave/conf/my.cnf
 
 # 重启
 docker restart mysql57-master mysql57-slave   # 配置文件生效
@@ -87,6 +87,7 @@ docker exec -it mysql57-master mysql -uroot -p                      # 登录mast
 grant replication slave on *.* to 'repl'@'%' identified by 'repl';  # 增加从节点用户及复制权限
 
 flush privileges;                                                   # 刷新权限,使之生效
+
 # 显示mater状态
 mysql> show master status;
 +-------------------+----------+--------------+------------------+-------------------+
@@ -97,9 +98,9 @@ mysql> show master status;
 
 4.slave配置
 docker inspect --format='{{.NetworkSettings.IPAddress}}' mysql57-master # 查询mater的ip
-docker network inspect bridge | grep -A 5 mysql57-master                # 
+docker network inspect bridge | grep -A 5 mysql57-master                # 同上
 
-docker exec -it mysql57-slave mysql -uroot -p              # 登录slave命令行
+docker exec -it mysql57-slave mysql -uroot -p              # 登录slave容器命令行
 change master to
 master_host='172.17.0.9',
 master_user='repl',
