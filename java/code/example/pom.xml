@@ -20,7 +20,7 @@
 
     <dependencies>
 
-        <!-- Java工具集 -->
+        <!-- Java HuTool工具集 -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
