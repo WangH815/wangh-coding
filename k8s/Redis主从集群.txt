@@ -3,31 +3,51 @@
 Docker version 1.13.1, build cccb291/1.13.1    # 具体安装见docker
 Redis:5
 
+redis主从复制参考:
+https://www.cnblogs.com/Eugene-Jin/p/10742424.html
 
 
-1.创建主从服务器
+1.创建配置文件
+# 新建文件夹
+mkdir -p /var/lib/docker/volumes/redis5-master/data
+mkdir -p /var/lib/docker/volumes/redis5-slave/data
+
+# 修改配置
+拷贝默认配置文件至/var/lib/docker/volumes/redis5-master # 默认redis.conf可以从官网标准发行版中获取(注意版本)
+
+## 检查下列配置项
+daemonize no             # 用守护线程的方式启动;docker使用守护模式运行容器时这里设置为no即可
+bind 0.0.0.0             # 改为所有可访问;如有安全需求可设置指定IP
+requirepass passwd       # 给redis设置密码;有需要可以设置
+appendonly yes           # 持久化打开
+tcp-keepalive 5          # 防止出现远程主机强迫关闭了一个现有的连接的错误;有需要可以设置
+
+2.创建主从服务器
 # master
 docker run \
 --name redis5-master \
+--privileged=true \
 -p 6379:6379 \
 -v /var/lib/docker/volumes/redis5-master/data:/data \
 -v /var/lib/docker/volumes/redis5-master/redis.conf:/etc/redis/redis.conf \
---restart always \
--di redis:5 redis-server --appendonly yes
+-d redis:5 redis-server /etc/redis/redis.conf --appendonly yes
 
 # slave
 docker run \
 --name redis5-slave \
+--privileged=true \
 -p 6380:6379 \
 -v /var/lib/docker/volumes/redis5-slave/data:/data \
 -v /var/lib/docker/volumes/redis5-slave/redis.conf:/etc/redis/redis.conf \
--di redis:5 redis-server --appendonly yes
+-d redis:5 redis-server /etc/redis/redis.conf --appendonly yes
 
+## 以下参数解决redis访问权限问题
+--privileged=true   # 使容器的root用户拥有root权限
 
 # 时区修改
 ## 容器已创建
-ls -ltr /etc/timezone || ( echo 'Asia/Shanghai' > /etc/timezone ) #/etc/timezone文件不存在时创建
-docker cp /etc/timezone container_name:/etc/timezone              #容器名可以使用容器id代替
+ls -ltr /etc/timezone || ( echo 'Asia/Shanghai' > /etc/timezone ) # /etc/timezone文件不存在时创建
+docker cp /etc/timezone container_name:/etc/timezone              # 容器名可以使用容器id代替
 docker cp /usr/share/zoneinfo/Asia/Shanghai container_name:/etc/localtime
 ## 批量操作
 for name in `docker ps -q`
@@ -36,83 +56,51 @@ do
   docker cp /usr/share/zoneinfo/Asia/Shanghai ${name}:/etc/localtime
 done
 
-2.配置文件修改
-# master
-echo '# master
+3.主从配置
+# 方案一:从服务器更改工作模式
+docker inspect --format='{{.NetworkSettings.IPAddress}}' redis5-master     # 查询mater的ip
+docker inspect redis5-master | grep IPAddress                              # 与上类似
+docker network inspect bridge | grep -A5 redis5-master | grep IPv4Address  # 与上类似
 
-[client]
-default-character-set = utf8mb4        # 客户端字符集
+## slave
+docker exec -it redis5-slave redis-cli   # 进入从服务器命令行
+slaveof 172.17.0.6 6379                  # 设置为从服务器模式;ip及端口为主服务器;slaveof no one取消主从复制
 
-[mysqld]
-server_id=1                            # 服务器ID,必须唯一
-log-bin=master-bin                     # 指定通过binlog复制
-# binlog-ignore-db=mysql               # 指定不同步的数据库;可不设置
+info replication                         # 查看主从复制状态信息;redis-cli中查看
+## 以下是核心信息
+# Replication
+role:slave                               # 服务器工作角色
+master_host:172.17.0.6                   # 主服务IP
+master_port:6379                         # 主服务器端口
+master_link_status:up                    # 与主服务器的连接状态;未连接时状态为down
 
-character-set-server = utf8mb4         # 服务器存储字符集
-collation-server = utf8mb4_unicode_ci  # 服务器排序字符集
+docker logs redis5-slave                 # 查看docker容器日志;配置未成功会有相关报错
 
-[mysql]
-default-character-set = utf8mb4        # 默认字符集
-' > /data/mysql57-master/conf/my.cnf
+# 方案二:从服务器配置文件修改
+redis.conf中增加 slaveof 172.17.0.6 6379 # 注意主从启动顺序
 
-# slave
-echo '# slave
+# 方案三:启动容器时
+docker run ... redis-server --slaveof 172.17.0.6 6379
 
-[client]
-default-character-set = utf8mb4        # 客户端字符集
-
-[mysqld]
-server-id=2
-# log-bin=mysql-slave-bin              # 开启二进制日志功能，以备Slave作为其它Slave的Master时使用
-# relay_log=edu-mysql-relay-bin        # relay_log配置中继日志;单纯主从可不配置
-
-character-set-server = utf8mb4         # 服务器存储字符集
-collation-server = utf8mb4_unicode_ci  # 服务器排序字符集
-
-[mysql]
-default-character-set = utf8mb4        # 默认字符集
-' > /data/mysql57-slave/conf/my.cnf
-
-# 重启
-docker restart mysql57-master mysql57-slave   # 配置文件生效
-
-3.master中创建同步用户
-docker exec -it mysql57-master mysql -uroot -p                      # 登录master命令行
-
-grant replication slave on *.* to 'repl'@'%' identified by 'repl';  # 增加从节点用户及复制权限
-
-flush privileges;                                                   # 刷新权限,使之生效
-# 显示mater状态
-mysql> show master status;
-+-------------------+----------+--------------+------------------+-------------------+
-| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
-+-------------------+----------+--------------+------------------+-------------------+
-| master-bin.000001 |      589 |              | mysql            |                   |
-+-------------------+----------+--------------+------------------+-------------------+
-
-4.slave配置
-docker inspect --format='{{.NetworkSettings.IPAddress}}' mysql57-master # 查询mater的ip
-docker network inspect bridge | grep -A 5 mysql57-master                # 
-
-docker exec -it mysql57-slave mysql -uroot -p              # 登录slave命令行
-change master to
-master_host='172.17.0.9',
-master_user='repl',
-master_password='repl',
-master_log_file='master-bin.000001',master_log_pos=589;    # 设置复制源
-
-start slave;                                               # 开启主从复制;停止可使用stop slave
-
-show slave status \G;                                      # 查看是否成功,查询结果中以下两项为Yes表示成功了
- Slave_IO_Running: Yes
-Slave_SQL_Running: Yes
+4.配置方案
+一个主服务器(写)可以有多个从服务器(读);从服务器也可以有从服务器
 
 
+================================================================
 
-# 常见问题处理
-1.Slave_IO_Running，Slave_SQL_Running问题的解决方法
-参考：https://www.cnblogs.com/byfboke/articles/9120672.html
+高可用(HA)模式Sentinel(哨兵)模式
 
+可自动实现主从切换
 
+配置文件
+/etc/redis/sentinel.conf
+# 禁止保护模式
+protected-mode no
+# 配置监听的主服务器，这里sentinel monitor代表监控，mymaster代表服务器的名称，可以自定义，
+# 192.168.11.128代表监控的主服务器，6379代表端口，2代表只有两个或两个以上的哨兵认为主服务器不可用的时候，才会进行failover操作。
+sentinel monitor mymaster 192.168.11.128 6379 2
+# sentinel author-pass定义服务的密码，mymaster是服务名称，123456是Redis服务器密码
+# sentinel auth-pass <master-name> <password>
+sentinel auth-pass mymaster 123456
 
 

@@ -26,7 +26,7 @@ docker run \
 -e MYSQL_ROOT_PASSWORD=root \
 -d mysql:5.7
 
-## --privileged 获取实际root权限(是否需要待确定)
+## --privileged 获取实际root权限
 ## 映射的两个文件方便配置
 
 # 时区修改
