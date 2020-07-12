@@ -10,10 +10,10 @@ public class EmptyDirectory {
             String[] files = file.list();
             if (files.length > 0) {
                 System.out.println("The " + file.getPath() + " is not empty!");
-                for(String str : files){
+                for (String str : files) {
                     System.out.println("Exsits file: " + str);
                 }
-            }else{
+            } else {
                 System.out.println("The " + file.getPath() + " is empty!");
             }
 

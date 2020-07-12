@@ -2,7 +2,7 @@ package com.wangh.base.yiibai.exception;
 
 public class UseOfCatch {
     public static void main(String args[]) {
-        int array[] = { 10, 20, 30 };
+        int array[] = {10, 20, 30};
         int num1 = 15, num2 = 10;
         int result = 10;
         try {

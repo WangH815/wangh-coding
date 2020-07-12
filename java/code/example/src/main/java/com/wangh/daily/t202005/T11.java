@@ -25,7 +25,7 @@ public class T11 {
         System.out.println(-1 >>> 1);
         System.out.println(1 << 31);
         System.out.println(Integer.toBinaryString(-1));
-        System.out.println(Integer.toBinaryString(-1>>>1));
+        System.out.println(Integer.toBinaryString(-1 >>> 1));
 
     }
 }

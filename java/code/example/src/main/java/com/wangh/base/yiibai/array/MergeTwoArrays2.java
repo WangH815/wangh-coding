@@ -2,8 +2,8 @@ package com.wangh.base.yiibai.array;
 
 public class MergeTwoArrays2 {
     public static void main(String[] args) {
-        int[] a = { 1, 2, 3, 4 };
-        int[] b = { 55, 66, 77, 88, 99, 100 };
+        int[] a = {1, 2, 3, 4};
+        int[] b = {55, 66, 77, 88, 99, 100};
         int[] c = new int[a.length + b.length];
         int count = 0;
 

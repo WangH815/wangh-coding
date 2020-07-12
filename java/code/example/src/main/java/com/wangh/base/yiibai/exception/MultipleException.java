@@ -2,7 +2,7 @@ package com.wangh.base.yiibai.exception;
 
 public class MultipleException {
     public static void main(String args[]) {
-        int array[] = { 20, 20, 40 };
+        int array[] = {20, 20, 40};
         int num1 = 15, num2 = 0;
         int result = 0;
         try {

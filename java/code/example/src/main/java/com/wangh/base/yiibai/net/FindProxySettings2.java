@@ -13,7 +13,7 @@ public class FindProxySettings2 {
             System.setProperty("java.net.useSystemProxies", "true");
             List<Proxy> l = ProxySelector.getDefault().select(new URI("http://www.google.com/"));
 
-            for (Iterator<Proxy> iter = l.iterator(); iter.hasNext();) {
+            for (Iterator<Proxy> iter = l.iterator(); iter.hasNext(); ) {
                 Proxy proxy = iter.next();
                 System.out.println("proxy hostname : " + proxy.type());
                 InetSocketAddress addr = (InetSocketAddress) proxy.address();

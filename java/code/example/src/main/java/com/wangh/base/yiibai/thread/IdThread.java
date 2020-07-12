@@ -4,8 +4,8 @@ public class IdThread extends Object implements Runnable {
     private ThreadID var;
 
     public IdThread(ThreadID v) {
-          this.var = v;
-       }
+        this.var = v;
+    }
 
     public void run() {
         try {

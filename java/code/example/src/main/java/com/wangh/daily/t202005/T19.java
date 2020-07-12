@@ -1,7 +1,7 @@
 package com.wangh.daily.t202005;
 
 public class T19 {
-    T19(){
+    T19() {
         System.out.println("无参构造方法...");
     }
 
@@ -9,7 +9,7 @@ public class T19 {
         T19 t19 = new T19();
         myPrint("1234");
 
-        Student s =new Student();
+        Student s = new Student();
         System.out.println(s.getName());
     }
 
@@ -18,13 +18,13 @@ public class T19 {
         System.out.println("加载静态资源...");
     }
 
-    public static void myPrint(final String context){
+    public static void myPrint(final String context) {
         System.out.println(context);
     }
 }
 
 
-class Student{
+class Student {
     public int getId() {
         return id;
     }

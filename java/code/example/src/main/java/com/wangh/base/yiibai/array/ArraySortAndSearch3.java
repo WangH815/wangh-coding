@@ -16,7 +16,7 @@ public class ArraySortAndSearch3 {
     }
 
     public static void main(String[] args) {
-        int arr[] = { 2, 5, -2, 6, -3, 8, 0, -7, -9, 4 };
+        int arr[] = {2, 5, -2, 6, -3, 8, 0, -7, -9, 4};
         System.out.println("Array Before Bubble Sort");
 
         for (int i = 0; i < arr.length; i++) {

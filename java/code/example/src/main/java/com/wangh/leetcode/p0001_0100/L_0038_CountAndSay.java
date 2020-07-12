@@ -61,6 +61,7 @@ public class L_0038_CountAndSay {
         return res;
 
     }
+
     //得到字符 string[0] 的重复个数，例如 "111221" 返回 3
     private static int getRepeatNum2(String string) {
         int count = 1;

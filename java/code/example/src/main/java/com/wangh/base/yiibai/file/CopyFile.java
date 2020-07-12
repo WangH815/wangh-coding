@@ -12,7 +12,7 @@ public class CopyFile {
         out1.close();
         InputStream in = new FileInputStream(new File(srcfile));
         OutputStream out = new FileOutputStream(new File(destnfile));
-        byte[] buf = new byte[8*1024];
+        byte[] buf = new byte[8 * 1024];
         int len;
 
         while ((len = in.read(buf)) > 0) {

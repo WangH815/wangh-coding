@@ -6,7 +6,7 @@ public class T03 {
     int i = 121;
     String str = "sdfsd";
 
-    public static void main(String[] args) throws CloneNotSupportedException{
+    public static void main(String[] args) throws CloneNotSupportedException {
         HashSet hs = new HashSet();
         hs.add(new Object());
         hs.add(new T03());
@@ -14,7 +14,7 @@ public class T03 {
 
         for (Object o : hs) {
             System.out.println(o.hashCode());
-            if(o instanceof T03)
+            if (o instanceof T03)
                 System.out.println(((T03) o).str);
         }
         System.out.println(Integer.MIN_VALUE);
@@ -35,14 +35,14 @@ public class T03 {
     }
 }
 
-class CloneDemo implements Cloneable{
-//    int i;
+class CloneDemo implements Cloneable {
+    //    int i;
 //    String str;
 //    CloneDemo(int i,String str){
 //        this.i = i;
 //        this.str = str;
 //    }
-    public Object clone() throws CloneNotSupportedException{
+    public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
 }

@@ -2,7 +2,7 @@ package com.wangh.base.yiibai.array;
 
 public class ExtendingArray2 {
     public void extendArraySize() {
-        String[] names = new String[] { "Maxsu", "Minsu", "Sum" };
+        String[] names = new String[]{"Maxsu", "Minsu", "Sum"};
         String[] extended = new String[5];
         extended[3] = "Sukida";
         extended[4] = "Avg";

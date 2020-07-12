@@ -27,10 +27,10 @@ public class Demo {
         str.isEmpty();            // 判断字符串是否为空
         str.startsWith("aasd");   // 判断以某字符串开始
         str.endsWith("aasd");     // 判断以某字符串结尾
-        str.replace('a','A');       // 字符替换;全部替换
-        str.replace("a","A");      // 字符串(随机序列)替换;全部替换
-        str.replaceFirst("a","A");  // 正则替换
-        str.replaceAll("a","A");    // 正则替换
+        str.replace('a', 'A');       // 字符替换;全部替换
+        str.replace("a", "A");      // 字符串(随机序列)替换;全部替换
+        str.replaceFirst("a", "A");  // 正则替换
+        str.replaceAll("a", "A");    // 正则替换
         str.regionMatches(1, str1, 1, 9);                   // 从指定位置和长度比较字符串是否相同
         str.regionMatches(true, 1, str1, 1, 9);  // 同上,但忽略大小写
         String.valueOf(123);                          // 返回基本数据类型的字符串形式

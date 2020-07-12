@@ -52,7 +52,7 @@ public class JdbcCustomerDao implements CustomerDao {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1,customerID);
+            ps.setInt(1, customerID);
             ps.executeUpdate();
             ps.close();
 

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class ArraySortCompare {
     public static void main(String args[]) throws Exception {
-        int array[] = { 12, 15, -2, 16, -3, 28, 10, -7, -9, 24 };
+        int array[] = {12, 15, -2, 16, -3, 28, 10, -7, -9, 24};
         Arrays.sort(array);
         printArray("Sorted array", array);
 

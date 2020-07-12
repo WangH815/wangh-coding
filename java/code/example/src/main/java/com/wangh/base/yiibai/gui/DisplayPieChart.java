@@ -14,8 +14,8 @@ class Slice {
 }
 
 class MyComponent2 extends JComponent {
-    Slice[] slices = { new Slice(5, Color.black), new Slice(33, Color.green), new Slice(20, Color.yellow),
-            new Slice(15, Color.red) };
+    Slice[] slices = {new Slice(5, Color.black), new Slice(33, Color.green), new Slice(20, Color.yellow),
+            new Slice(15, Color.red)};
 
     MyComponent2() {
     }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class ArraySortAndInsert {
     public static void main(String args[]) throws Exception {
-        int array[] = { 2, 5, -2, 6, -3, 8, 0, -7, -9, 4 };
+        int array[] = {2, 5, -2, 6, -3, 8, 0, -7, -9, 4};
         Arrays.sort(array);
         printArray("Sorted array", array);
 

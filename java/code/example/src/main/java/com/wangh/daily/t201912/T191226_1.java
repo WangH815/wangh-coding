@@ -27,7 +27,7 @@ class RunnableDemo implements Runnable {
     }
 
     public void run() {
-        System.out.println( "Thread "+ thraedName + " Running...");
+        System.out.println("Thread " + thraedName + " Running...");
         try {
             for (int i = 0; i < 4; i++) {
                 System.out.println("Thread " + thraedName + " " + i);
@@ -36,19 +36,19 @@ class RunnableDemo implements Runnable {
         } catch (InterruptedException e) {
             System.out.println("Thread " + thraedName + " Interrupted...");
         }
-        System.out.println("Thread "+thraedName+" Exiting...");
+        System.out.println("Thread " + thraedName + " Exiting...");
     }
 
-    public void start(){
+    public void start() {
         System.out.println("Thread " + thraedName + " Starting...");
-        if(t == null){
-            t = new Thread(this,thraedName);
+        if (t == null) {
+            t = new Thread(this, thraedName);
             t.start();
         }
     }
 }
 
-class ThreadDemo extends Thread{
+class ThreadDemo extends Thread {
     private Thread t;
     private String thraedName;
 
@@ -58,7 +58,7 @@ class ThreadDemo extends Thread{
     }
 
     public void run() {
-        System.out.println( "Thread "+ thraedName + " Running...");
+        System.out.println("Thread " + thraedName + " Running...");
         try {
             for (int i = 0; i < 4; i++) {
                 System.out.println("Thread " + thraedName + " " + i);
@@ -67,13 +67,13 @@ class ThreadDemo extends Thread{
         } catch (InterruptedException e) {
             System.out.println("Thread " + thraedName + " Interrupted...");
         }
-        System.out.println("Thread "+thraedName+" Exiting...");
+        System.out.println("Thread " + thraedName + " Exiting...");
     }
 
-    public void start(){
+    public void start() {
         System.out.println("Thread " + thraedName + " Starting...");
-        if(t == null){
-            t = new Thread(this,thraedName);
+        if (t == null) {
+            t = new Thread(this, thraedName);
             t.start();
         }
     }

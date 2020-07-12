@@ -2,8 +2,8 @@ package com.wangh.leetcode.p0001_0100;
 
 public class L_0010_IsMatch {
     public static void main(String[] args) {
-        System.out.println(isMatch1("abcasdasass","ss"));
-        System.out.println(isMatch2("abcasdasass","ss"));
+        System.out.println(isMatch1("abcasdasass", "ss"));
+        System.out.println(isMatch2("abcasdasass", "ss"));
     }
 
     public static boolean isMatch1(String text, String pattern) {

@@ -68,13 +68,13 @@ public class T191221 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         char cc;
         do {
-            cc = (char)br.read();
+            cc = (char) br.read();
             System.out.print(cc);
-        }while(cc != 'q');
+        } while (cc != 'q');
 
         File ff = new File("hello.txt");
         OutputStream os = new FileOutputStream(ff);
-        byte[] bs = {'a','1','2','c'};
+        byte[] bs = {'a', '1', '2', 'c'};
         os.write(bs);
         os.close();
     }

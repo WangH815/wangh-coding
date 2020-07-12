@@ -1,93 +1,93 @@
 Shell编程
 
 
-#参考文档
+# 参考文档
 https://www.runoob.com/linux/linux-shell.html
 Linux命令行与shell脚本编程大全 第3版
 
 
-#简介
+# 简介
 Shell是C语言编写,既是命令语言又是程序设计语言;通过Shell提供的界面访问操作系统内核
 
-##常见Shell
-Bourne Shell(/usr/bin/sh或/bin/sh) #bash的前身;bash的子集(但调用方式有差异)
-Bourne Again Shell(/bin/bash)      #bash;适用范围最广,绝大多数Linux发行版默认Shell
+## 常见Shell
+Bourne Shell(/usr/bin/sh或/bin/sh) # bash的前身;bash的子集(但调用方式有差异)
+Bourne Again Shell(/bin/bash)      # bash;适用范围最广,绝大多数Linux发行版默认Shell
 C Shell(/usr/bin/csh)
-K Shell(/usr/bin/ksh)              #Unix系统默认Shell;Korn shell
+K Shell(/usr/bin/ksh)              # Unix系统默认Shell;Korn shell
 Shell for Root(/sbin/sh)
-zsh                                #完全兼容bash
+zsh                                # 完全兼容bash
 dsh
 
-cat /etc/shells   #查看系统可使用的Shell不同版本
-echo $SHELL       #查看当前使用的shell
-chsh -s /bin/zsh  #设置用户默认Shell或者修改 /etc/passwd 文件中对应Shell
+cat /etc/shells   # 查看系统可使用的Shell不同版本
+echo $SHELL       # 查看当前使用的shell
+chsh -s /bin/zsh  # 设置用户默认Shell或者修改 /etc/passwd 文件中对应Shell
 
 
-#Shell脚本
-#!/bin/bash       #脚本第一行,指明运行脚本的Shell;#!出现在其他行为注释
+# Shell脚本
+#!/bin/bash      # 脚本第一行,指明运行脚本的Shell;# !出现在其他行为注释
 
-##脚本运行方式
-1 . ./xx.sh       #一般用于生效用户配置而不需要重新登录shell,xx.sh有读权限即可
-2 source ./xx.sh  #同上;常见用于执行 profile 配置,脚本本身在当前进程中执行
-3 sh ./xx.sh      #读权限即可,脚本本身会在子进程中执行;linux系统中sh为bash的软连接;一般等价于bash xx.sh
-4 ./xx.sh         #需要执行权限,脚本本身会在子进程中执行;一般会在脚本中指定执行Shell版本
+## 脚本运行方式
+1 . ./xx.sh       # 一般用于生效用户配置而不需要重新登录shell,xx.sh有读权限即可
+2 source ./xx.sh  # 同上;常见用于执行 profile 配置,脚本本身在当前进程中执行
+3 sh ./xx.sh      # 读权限即可,脚本本身会在子进程中执行;linux系统中sh为bash的软连接;一般等价于bash xx.sh
+4 ./xx.sh         # 需要执行权限,脚本本身会在子进程中执行;一般会在脚本中指定执行Shell版本
 
-##后台执行
-sh xx.sh &        #后台执行;在脚本中使用可实现多任务处理
-nohup sh xx.sh &  #挂起后台执行,退出shell依然执行;执行日志会追加到nohup.out中
+## 后台执行
+sh xx.sh &        # 后台执行;在脚本中使用可实现多任务处理
+nohup sh xx.sh &  # 挂起后台执行,退出shell依然执行;执行日志会追加到nohup.out中
 
-##shell的类型
-###查看指定用户默认shell
-grep username /etc/passwd | awk -F: {print $7}     #由/etc/passwd中冒号分割的第七个参数决定;一般为/bin/bash (B Shell)
-echo $SHELL      #查看当前用户运行的shell
-cat /etc/shells  #查看系统支持的所有shell类型
-bash             #进入当前shell的子shell;退出shell使用exit,退出最后一个shell会退出终端;可使用pstree -p/ps --forest查看父子shell关系
-cmd1;cmd2;cmd3;echo $BASH_SUBSHELL   #依次shell命令;在当前shell中执行;BASH_SUBSHELL返回值为0表示在当前shell执行
-(cmd1;cmd2;cmd3;echo $BASH_SUBSHELL) #依次shell命令;在当前shell的子shell中执行;BASH_SUBSHELL返回值为1
-echo $BASH_SUBSHELL                  #返回0
-echo $(echo $BASH_SUBSHELL)          #返回1
-echo `echo $BASH_SUBSHELL`           #返回1;同上
+## shell的类型
+### 查看指定用户默认shell
+grep username /etc/passwd | awk -F: {print $7}     # 由/etc/passwd中冒号分割的第七个参数决定;一般为/bin/bash (B Shell)
+echo $SHELL      # 查看当前用户运行的shell
+cat /etc/shells  # 查看系统支持的所有shell类型
+bash             # 进入当前shell的子shell;退出shell使用exit,退出最后一个shell会退出终端;可使用pstree -p/ps --forest查看父子shell关系
+cmd1;cmd2;cmd3;echo $BASH_SUBSHELL   # 依次shell命令;在当前shell中执行;BASH_SUBSHELL返回值为0表示在当前shell执行
+(cmd1;cmd2;cmd3;echo $BASH_SUBSHELL) # 依次shell命令;在当前shell的子shell中执行;BASH_SUBSHELL返回值为1
+echo $BASH_SUBSHELL                  # 返回0
+echo $(echo $BASH_SUBSHELL)          # 返回1
+echo `echo $BASH_SUBSHELL`           # 返回1;同上
 
-##调试(待补充)
-bash -n xx.sh   #检查脚本是否有语法错误;以bash为例
-bash -x xx.sh   #调试脚本,会输出程序的每一步;带+表示调试器输出,不带则为脚本输出
-set -e          #在脚本中添加时表示从当前位置开始任何错误都将触发exit
-set +e          #与上相反,出现任何错误都不触发exit
+## 调试(待补充)
+bash -n xx.sh   # 检查脚本是否有语法错误;以bash为例
+bash -x xx.sh   # 调试脚本,会输出程序的每一步;带+表示调试器输出,不带则为脚本输出
+set -e          # 在脚本中添加时表示从当前位置开始任何错误都将触发exit
+set +e          # 与上相反,出现任何错误都不触发exit
 
-##脚本退出状态
-#一般使用 exit n 指定
-echo $?   #打印上一个命令或脚本的退出状态码
+## 脚本退出状态
+# 一般使用 exit n 指定
+echo $?   # 打印上一个命令或脚本的退出状态码
 状态码(n) 说明
-  0       #命令成功结束
-  1       #一般性未知错误
-  2       #不适合的shell命令
-  126     #命令不可执行
-  127     #没找到命令
-  128     #无效的退出参数
-  128+x   #与Linux信号x相关的严重错误
-  130     #通过Ctrl+C终止的命令
-  255     #正常范围之外的退出状态码;大于255则取余
+  0       # 命令成功结束
+  1       # 一般性未知错误
+  2       # 不适合的shell命令
+  126     # 命令不可执行
+  127     # 没找到命令
+  128     # 无效的退出参数
+  128+x   # 与Linux信号x相关的严重错误
+  130     # 通过Ctrl+C终止的命令
+  255     # 正常范围之外的退出状态码;大于255则取余
 
-##注释
-#                   #单行注释,例外:#!
-:<<EOF              #多行注释,EOF可由单引号或感叹号等替代;结束EOF单独占一行,前后不能有字符
+## 注释
+#                   # 单行注释,例外:#!
+:<<EOF              # 多行注释,EOF可由单引号或感叹号等替代;结束EOF单独占一行,前后不能有字符
 注释内容
 注释内容
 注释内容
 EOF
 
 
-#变量
+# 变量
 
-##变量类型
+## 变量类型
 1)本地变量:也叫全局变量,生效范围为当前shell进程;对当前shell之外的其它shell进程,包括当          
            前shell之外的其它shell进程,包括当前shell的子shell进程均无效
 2)环境变量:生效范围为当前shell进程及其子进程
 3)局部变量:也叫私有变量,生效范围为当前shell进程中某代码片段（通常指函数）
 4)位置变量:$1,$2,…来表示,用于让脚本在脚本代码中调用通过命令行传递给它的参数
-5)特殊变量:$?,$0,$*,$@,$#,$$
+5)特殊变量:$?,$0,$*,$@,$# ,$$
 
-###环境变量的设置
+### 环境变量的设置
 1)设置永久环境变量:修改 /etc/profile /etc/bashrc
 2)设置用户环境变量:修改 ~/.bash_profile ~/.bash_bashrc
 3)临时环境变量: export var="value"
@@ -95,7 +95,7 @@ EOF
 5)临时取消环境变量: unset var
 注:脚本中使用的环境变量依次由1/2/3及脚本中的设置的构成;后面设置的同名环境变量会覆盖前面的
 
-##命名规则
+## 命名规则
 1.字母、数字和下划线构成
 2.不以数字开头
 3.系统关键字不能作为变量名
@@ -104,136 +104,135 @@ EOF
 6.字母大小写敏感
 7.变量类型默认是字符型
 
-##变量声明赋值
-var=""                #变量置空;变量还存在
-var=''                #同上
-var=                  #=后不跟任何字符;同上
-var=123               #等号两边不能有空格,默认var[0]=123 (数组)
-var="str"             #双引号可防止通配符扩展但允许变量扩展
-var='str'             #单引号(更严格),可以防止任何变量扩展
-var1=1;var2=2;var3=3  #同时赋值,分号隔开就可以
-var=`cmd`             #命令执行结果赋值给变量;所有Shell都支持
-var=$(cmd)            #同上;少部分Shell不支持
-var=(1 2 3)           #数组
+## 变量声明赋值
+var=""                # 变量置空;变量还存在
+var=''                # 同上
+var=                  # =后不跟任何字符;同上
+var=123               # 等号两边不能有空格,默认var[0]=123 (数组)
+var="str"             # 双引号可防止通配符扩展但允许变量扩展
+var='str'             # 单引号(更严格),可以防止任何变量扩展
+var1=1;var2=2;var3=3  # 同时赋值,分号隔开就可以
+var=`cmd`             # 命令执行结果赋值给变量;所有Shell都支持
+var=$(cmd)            # 同上;少部分Shell不支持
+var=(1 2 3)           # 数组
 
 
-##变量使用
-env                          #查看当前shell所有环境变量
-set                          #查看当前shell所有变量
-echo $var                    #打印输出变量值
-echo ${var}                  #同上,另一种方式。能识别变量边界,例如$a/$ab/${a}b
-readonly var                 #设置变量只读;不可被删除
-declare -r var               #同上
-readonly -p                  #查看当前shell环境只读变量
-unset var                    #设置变量为未定义
-echo ${#var}                 #输出字符串长度(字符数)
-echo `expr index "$var" io`  #查找i或o第一次出现的位置(非数组下标)
+## 变量使用
+env                          # 查看当前shell所有环境变量
+set                          # 查看当前shell所有变量
+echo $var                    # 打印输出变量值
+echo ${var}                  # 同上,另一种方式。能识别变量边界,例如$a/$ab/${a}b
+readonly var                 # 设置变量只读;不可被删除
+declare -r var               # 同上
+readonly -p                  # 查看当前shell环境只读变量
+unset var                    # 设置变量为未定义
+echo ${# var}                 # 输出字符串长度(字符数)
+echo `expr index "$var" io`  # 查找i或o第一次出现的位置(非数组下标)
 
-echo ${var-default}          #var未声明时输出default(可为其他字符串),否则输出var的值
-echo ${var=default}          #同上并赋值;推荐使用
-echo ${var:-default}         #var为空或未声明时输出default,否则输出var的值;var=/var=""/var=''被认为是空,var=" "不是
-echo ${var:=default}         #同上并赋值
-echo ${var+default}          #var没有声明则为空,否则为default
-echo ${var:+default}         #var的值为非空则为default,否则为空
-echo ${var?default}          #var已声明则输出var的值,否则输出default
-echo ${var:?default}         #var的值为非空则输出var的值,否则输出default
+echo ${var-default}          # var未声明时输出default(可为其他字符串),否则输出var的值
+echo ${var=default}          # 同上并赋值;推荐使用
+echo ${var:-default}         # var为空或未声明时输出default,否则输出var的值;var=/var=""/var=''被认为是空,var=" "不是
+echo ${var:=default}         # 同上并赋值
+echo ${var+default}          # var没有声明则为空,否则为default
+echo ${var:+default}         # var的值为非空则为default,否则为空
+echo ${var?default}          # var已声明则输出var的值,否则输出default
+echo ${var:?default}         # var的值为非空则输出var的值,否则输出default
 
-##变量截取替换
+## 变量截取替换
 var="abcdef"
-${var:pos}                   #截取从数组下标为pos(不含pos,下同)之后的子串
-${var:pos:len}               #截取pos之后长度为len的子串
-${var:2}                     #返回cdef
-${var:2:2}                   #返回cd
-${var:0-3}                   #返回def;pos为-2,但是不能直接写-2
-${var:0-3:2}                 #返回de
+${var:pos}                   # 截取从数组下标为pos(不含pos,下同)之后的子串
+${var:pos:len}               # 截取pos之后长度为len的子串
+${var:2}                     # 返回cdef
+${var:2:2}                   # 返回cd
+${var:0-3}                   # 返回def;pos为-2,但是不能直接写-2
+${var:0-3:2}                 # 返回de
 
+${var/Pattern/Replacement}   # 使用Replacement来替换var中第一次匹配Pattern的字符串
+${var//Pattern/Replacement}  # 全部替换
 
-${var/Pattern/Replacement}   #使用Replacement来替换var中第一次匹配Pattern的字符串
-${var//Pattern/Replacement}  #全部替换
+${var/#Pattern/Replacement}  # 从var开头匹配,匹配到则替换
+${var/%Pattern/Replacement}  # 从var结尾匹配,匹配到则替换
 
-${var/#Pattern/Replacement}  #从var开头匹配,匹配到则替换
-${var/%Pattern/Replacement}  #从var结尾匹配,匹配到则替换
-
-${!str*}                     #匹配所有已声明变量名以varpre开头的所有变量名数组,以空格隔开
-${!str@}                     #同上;单字符串
+${!str*}                     # 匹配所有已声明变量名以str开头的所有变量名数组,以空格隔开
+${!str@}                     # 同上;单字符串
 
 var=/dir1/dir2/dir3/my.file.txt
-${var#*str}    #截取第一个str后的字符串;#表示之前($的ASCII码),取str # *中的*
-${var#*/}      #返回dir1/dir2/dir3/my.file.txt
-${var#*.}      #返回file.txt
+${var#*str}    # 截取第一个str后的字符串;# 表示之前($的ASCII码),取str #  *中的*
+${var#*/}      # 返回dir1/dir2/dir3/my.file.txt
+${var#*.}      # 返回file.txt
 
-${var##*str}   #截取最后一个str后的字符串
-${var##*/}     #返回my.file.txt;截取完整路径中的文件名比较方便
-${var##*.}     #返回txt;截取文件后缀比较方便
+${var##*str}   # 截取最后一个str后的字符串
+${var##*/}     # 返回my.file.txt;截取完整路径中的文件名比较方便
+${var##*.}     # 返回txt;截取文件后缀比较方便
  
-${var%str*}    #截取最后一个str前的字符串;%表示之后($的ASCII码),取* % str中的*
-${var%/*}      #返回/dir1/dir2/dir3;截取完整路径中文件所在目录
-${var%.*}      #返回/dir1/dir2/dir3/my.file;去除文件后缀比较方便
+${var%str*}    # 截取最后一个str前的字符串;%表示之后($的ASCII码),取* % str中的*
+${var%/*}      # 返回/dir1/dir2/dir3;截取完整路径中文件所在目录
+${var%.*}      # 返回/dir1/dir2/dir3/my.file;去除文件后缀比较方便
 
-${var%%str*}   #截取第一个str前的字符串
-${var%%/*}     #返回""(空值)
-${var%%.*}     #返回/dir1/dir2/dir3/my
+${var%%str*}   # 截取第一个str前的字符串
+${var%%/*}     # 返回""(空值)
+${var%%.*}     # 返回/dir1/dir2/dir3/my
 
   
-##变量拼接
+## 变量拼接
 ${a}${b}
 ${a}"str"${b}
 ${a}'str'${b}
 
-##数组变量                       #仅支持一维数组,不限定长度
-array_name=(arr1 arr2 arr3 ...)  #赋值,下同;元素间以空格隔开
+## 数组变量                       # 仅支持一维数组,不限定长度
+array_name=(arr1 arr2 arr3 ...)  # 赋值,下同;元素间以空格隔开
 array_name=(
 arr1
 arr2
 ...
 )
-array_name=(`cmds`)    #将命令结果赋值给数组;$(cmds)为单个字符串
-array_name=($(cmds))   #同上
-array_name[0]=value0   #单独赋值
-array_name[n]=valuen   #单独赋值,数组下标可以不连续
-${array_name[n]}       #打印输出某个数组元素
-${#array_name[@]}      #打印输出数组元素长度,未定义的不统计
-${#array_name[*]}      #同上
-${array_name[@]}       #打印输出数组所有元素(未定义的不打印),以多个字符串的形式,元素之间空格分隔
-${array_name[*]}       #以一个字符串的形式,其余同上
+array_name=(`cmds`)    # 将命令结果赋值给数组;$(cmds)为单个字符串
+array_name=($(cmds))   # 同上
+array_name[0]=value0   # 单独赋值
+array_name[n]=valuen   # 单独赋值,数组下标可以不连续
+${array_name[n]}       # 打印输出某个数组元素
+${#array_name[@]}      # 打印输出数组元素长度,未定义的不统计
+${#array_name[*]}      # 同上
+${array_name[@]}       # 打印输出数组所有元素(未定义的不打印),以多个字符串的形式,元素之间空格分隔
+${array_name[*]}       # 以一个字符串的形式,其余同上
 
 
-#基本运算符
+# 基本运算符
 
-##运算符类型
-1)算数运算符     #主要用于计算或赋值;其他运算符主要用于条件判断
+## 运算符类型
+1)算数运算符     # 主要用于计算或赋值;其他运算符主要用于条件判断
 2)关系运算符
-3)布尔运算符     #连接表达式
+3)布尔运算符     # 连接表达式
 4)字符串运算符
 5)文件测试运算符
 注:整数运算主要通过[]、awk(编程语言)、expr和(())实现;[]和expr(也可用于字符串处理)最常用;浮点运算使用bc
 
-#算数运算               #只能用于整数运算
-expr                    #evaluate expressions(表达式计算)
+# 算数运算              # 只能用于整数运算
+expr                    # evaluate expressions(表达式计算)
 a=10,b=20
-加法  expr $a + $b      #+左右无空格的会解析为"10+20",其余同理;a,b为数字型字符串也可以;var=$(expr $a + $b)/`expr $a + $b`
-      [$a + $b]         #同上;乘法不需要加转义;$[$a+$b]/$[a+b]也可以;a,b为数字型字符串部分bash版本支持;var=$[$a+$b]
-      [2*(100-3)]       #可使用括号;*等特殊字符无需转义
-      ((a+b))/(($a+$b)) #C语言风格计算,包括位运算及数值比较等。支持+-*/%&|^!;推荐使用前者,*等特殊字符无需转义;var=$((a+b))
+加法  expr $a + $b      # +左右无空格的会解析为"10+20",其余同理;a,b为数字型字符串也可以;var=$(expr $a + $b)/`expr $a + $b`
+      [$a + $b]         # 同上;乘法不需要加转义;$[$a+$b]/$[a+b]也可以;a,b为数字型字符串部分bash版本支持;var=$[$a+$b]
+      [2*(100-3)]       # 可使用括号;*等特殊字符无需转义
+      ((a+b))/(($a+$b)) # C语言风格计算,包括位运算及数值比较等。支持+-*/%&|^!;推荐使用前者,*等特殊字符无需转义;var=$((a+b))
 减法  expr $a - $b
-乘法  expr $a \* $b     #*需要转义
+乘法  expr $a \* $b     # *需要转义
 除法  expr $b / $a
 取余  expr $b % $a
 还可以使用如下方法
 exp="$var1 + $var2 \* $var3"
 expr $exp
 
-#浮点运算可使用 bc 命令
-var=`echo "scale=4; 3.44 / 5" | bc`   #scala变量指定小数位数(待补充);0.68会显示.68(原因待查)
-var=$(echo "scale=4; 3.44 / 5" | bc)  #同上;形式:echo "options; expression" | bc
-##复杂运算
+# 浮点运算可使用 bc 命令
+var=`echo "scale=4; 3.44 / 5" | bc`   # scala变量指定小数位数(待补充);0.68会显示.68(原因待查)
+var=$(echo "scale=4; 3.44 / 5" | bc)  # 同上;形式:echo "options; expression" | bc
+## 复杂运算
 var=$(bc << EOF
 options
 statements
 expressions
 EOF
 )
-##例如
+## 例如
 var5=$(bc << EOF
 scale = 4
 a1 = ($var1 * $var2)
@@ -243,155 +242,155 @@ EOF
 )
 
 关系运算(数字)
-相等     [ $a == $b ]     #等价于 -eq ;注意空格,无空格会解析成字符串拼接;[ $a = $b ]也可以
+相等     [ $a == $b ]     # 等价于 -eq ;注意空格,无空格会解析成字符串拼接;[ $a = $b ]也可以
 不相等   [ $a != $b ]
-相等     [ $a -eq $b ]    #equal简写
-不相等   [ $a -ne $b ]    #not equal
-大于     [ $a -gt $b ]    #greater than
-小于     [ $a -lt $b ]    #less than
-大于等于 [ $a -ge $b ]    #greater than or equal
-小于等于 [ $a -le $b ]    #less than or equal
-(($a==$b))/((a==b))       #也可用数字条件判断,类似的还有 > < >= <= !=
+相等     [ $a -eq $b ]    # equal简写
+不相等   [ $a -ne $b ]    # not equal
+大于     [ $a -gt $b ]    # greater than
+小于     [ $a -lt $b ]    # less than
+大于等于 [ $a -ge $b ]    # greater than or equal
+小于等于 [ $a -le $b ]    # less than or equal
+(($a==$b))/((a==b))       # 也可用数字条件判断,类似的还有 > < >= <= !=
 
 布尔运算
-[ ! expression ]                #非
-[ expression1 -a expression2 ]  #与
-[ expression1 -o expression2 ]  #或
+[ ! expression ]                # 非
+[ expression1 -a expression2 ]  # 与
+[ expression1 -o expression2 ]  # 或
 
 逻辑运算
-[[ expression1 && expression2 ]]  #and
-[[ expression1 || expression2 ]]  #or
+[[ expression1 && expression2 ]]  # and
+[[ expression1 || expression2 ]]  # or
 
 字符串运算
-[ $a = $b ]    #相等;[ $a == $b ]也可以
-[ $a != $b ]   #不相等     
-[ -z $a ]      #长度为0    
-[ -n "$a" ]    #长度不为0;常用与命令行参数测试,例如:if [ -n $1 ] 来判断是否传递第一个参数
-[ $a ]         #不为空     
+[ $a = $b ]    # 相等;[ $a == $b ]也可以
+[ $a != $b ]   # 不相等     
+[ -z $a ]      # 长度为0    
+[ -n "$a" ]    # 长度不为0;常用与命令行参数测试,例如:if [ -n $1 ] 来判断是否传递第一个参数
+[ $a ]         # 不为空     
 
 文件测试运算
-[ -b $file ]  #设备文件
-[ -c $file ]  #字符设备文件
-[ -d $file ]  #目录
-[ -f $file ]  #普通文件
-[ -g $file ]  #设置了 SGID 位
-[ -k $file ]  #设置了粘着位(Sticky Bit)
-[ -p $file ]  #管道文件
-[ -u $file ]  #设置了 SUID 位
-[ -r $file ]  #可读
-[ -w $file ]  #可写
-[ -x $file ]  #可执行
-[ -s $file ]  #不为空(文件大小大于0)
-[ -e $file ]  #存在
+[ -b $file ]  # 设备文件
+[ -c $file ]  # 字符设备文件
+[ -d $file ]  # 目录
+[ -f $file ]  # 普通文件
+[ -g $file ]  # 设置了 SGID 位
+[ -k $file ]  # 设置了粘着位(Sticky Bit)
+[ -p $file ]  # 管道文件
+[ -u $file ]  # 设置了 SUID 位
+[ -r $file ]  # 可读
+[ -w $file ]  # 可写
+[ -x $file ]  # 可执行
+[ -s $file ]  # 不为空(文件大小大于0)
+[ -e $file ]  # 存在
 
 标准输入输出
-read var            #输入        
-echo $var/${var}    #输出,输出后自动换行
-echo -e             #开启转义
-echo `cmd`          #输出命令结果
-printf  format-string  [arguments...]  #格式化输出,不自动换行
-printf "%-10s %-8s\n" 姓名 性别        #格式化字符串与C语言相同,移植性比echo好;-表示左对齐
-printf '%-10s %-8s\n' 姓名 性别        #同上
-printf '%-10s %-8s\n' $var1 $var2      #与上类似
-printf "%-10s %-8s\n",$1,$2            #awk内调用格式,以逗号隔开各参数;格式化字符串不支持单引号
+read var            # 输入        
+echo $var/${var}    # 输出,输出后自动换行
+echo -e             # 开启转义
+echo `cmd`          # 输出命令结果
+printf  format-string  [arguments...]  # 格式化输出,不自动换行
+printf "%-10s %-8s\n" 姓名 性别        # 格式化字符串与C语言相同,移植性比echo好;-表示左对齐
+printf '%-10s %-8s\n' 姓名 性别        # 同上
+printf '%-10s %-8s\n' $var1 $var2      # 与上类似
+printf "%-10s %-8s\n",$1,$2            # awk内调用格式,以逗号隔开各参数;格式化字符串不支持单引号
 
 格式化字符
-字符  格式化内容
-c     #ASCII字符
-d/i   #十进制整数;d常用
-e     #科学计数法显示
-f     #浮点数
-g     #较短格式科学计数法或浮点数
-o     #八进制
-s     #文本字符串;最常用
-x     #十六进制(字母小写)
-X     #同上(字母大写)
+字符   格式化内容
+c      # ASCII字符
+d/i    # 十进制整数;d常用
+e      # 科学计数法显示
+f      # 浮点数
+g      # 较短格式科学计数法或浮点数
+o      # 八进制
+s      # 文本字符串;最常用
+x      # 十六进制(字母小写)
+X      # 同上(字母大写)
 
 printf转义序列
-\a       #警告字符,通常为ASCII的BEL字符
-\b       #后退
-\c       #抑制(不显示)输出结果中任何结尾的换行字符
-         #(只在%b格式指示符控制下的参数字符串中有效),
-         #而且,任何留在参数里的字符、任何接下来的参数
-         #以及任何留在格式字符串中的字符,都被忽略
-\f       #换页(formfeed)
-\n       #换行
-\r       #回车(Carriage return)
-\t       #水平制表符
-\v       #垂直制表符
-\\       #一个字面上的反斜杠字符
-\ddd     #表示1到3位数八进制值的字符。仅在格式字符串中有效
-\0ddd    #表示1到3位的八进制值字符
+\a     # 警告字符,通常为ASCII的BEL字符
+\b     # 后退
+\c     # 抑制(不显示)输出结果中任何结尾的换行字符
+       # (只在%b格式指示符控制下的参数字符串中有效),
+       # 而且,任何留在参数里的字符、任何接下来的参数
+       # 以及任何留在格式字符串中的字符,都被忽略
+\f     # 换页(formfeed)
+\n     # 换行
+\r     # 回车(Carriage return)
+\t     # 水平制表符
+\v     # 垂直制表符
+\\     # 一个字面上的反斜杠字符
+\ddd   # 表示1到3位数八进制值的字符。仅在格式字符串中有效
+\0ddd  # 表示1到3位的八进制值字符
 
 
-test命令    #等价于 []
+test命令  # 等价于 []
 用于检查某个条件是否成立,它可以进行数值、字符串和文件三个方面的测试。
 1)数值测试
--eq       # =
--ne       # !=
--gt       # >
--ge       # >=
--lt       # <
--le       # <=
-格式:if test $var1 -eq $var2    #变量中含有数字之外的字符会报错;var=123/'123'/"123"是合法的
+-eq       #  =
+-ne       #  !=
+-gt       #  >
+-ge       #  >=
+-lt       #  <
+-le       #  <=
+格式:if test $var1 -eq $var2    # 变量中含有数字之外的字符会报错;var=123/'123'/"123"是合法的
 2)字符串测试
-=/==      #等于则为真
-!=        #不相等则为真
--z        #长度为零
--n        #长度不为零
+=/==      # 等于则为真
+!=        # 不相等则为真
+-z        # 长度为零
+-n        # 长度不为零
 格式:同1),[]中为字符串或字符串表达式
 3)文件测试
--e $file    #文件存在;exist
--r $file    #存在且可读;read
--w $file    #存在且可写;write
--x $file    #存在且可执行;execute
--s $file    #存在且至少有一个字符
--d $file    #存在且为目录;directory
--f $file    #存在且为普通文件;file
--c $file    #存在且为字符型特殊文件;char
--b $file    #存在且为块特殊文件;block
-格式:if test -e ./bash  #判断./bash文件是否存在;等价于 if [ -e ./bash ]
-##重要
+-e $file  # 文件存在;exist
+-r $file  # 存在且可读;read
+-w $file  # 存在且可写;write
+-x $file  # 存在且可执行;execute
+-s $file  # 存在且至少有一个字符
+-d $file  # 存在且为目录;directory
+-f $file  # 存在且为普通文件;file
+-c $file  # 存在且为字符型特殊文件;char
+-b $file  # 存在且为块特殊文件;block
+格式:if test -e ./bash  # 判断./bash文件是否存在;等价于 if [ -e ./bash ]
+## 重要
 上述命令推荐使用 "$var" 形式,而不是 $var ;若文件(夹)名称中含有空格或.等时使用 $var 会出错
 
 
-#结构化命令
+# 结构化命令
 
-##if 语句
+## if 语句
 1)if
-#1.conditions可以条件表达式或shell命令(返回值为0表示真)等可以正确执行的指令;其他流程语句条件也是一样
-#2.多数条件都是中括号,例如: if [ -f $file ];中括号内左右必须有空格
-#3.上一条可使用 if test -f $file 替换
-#4.多条件可使用&&(与)和||(或)连接
-#5.数学表达式条件可使用双括号,例如: if (( $var ** 2 > 90 ))/if (($var**2>90 ))
-#  大于号无需转;变量引用$也可以不加;还支持c语言中的自增自减/逻辑(与或非)/位运算等操作
-#6.双括号还可以用于赋值,且等号左右y有无空格都可以;(( val2 = $val1 ** 2 ))
-#7.双中括号还支持字符串的匹配,例如: if [[ $var == *as* ]]
+# 1.conditions可以条件表达式或shell命令(返回值为0表示真)等可以正确执行的指令;其他流程语句条件也是一样
+# 2.多数条件都是中括号,例如: if [ -f $file ];中括号内左右必须有空格
+# 3.上一条可使用 if test -f $file 替换
+# 4.多条件可使用&&(与)和||(或)连接
+# 5.数学表达式条件可使用双括号,例如: if (( $var ** 2 > 90 ))/if (($var**2>90 ))
+#   大于号无需转;变量引用$也可以不加;还支持c语言中的自增自减/逻辑(与或非)/位运算等操作
+# 6.双括号还可以用于赋值,且等号左右y有无空格都可以;(( val2 = $val1 ** 2 ))
+# 7.双中括号还支持字符串的匹配,例如: if [[ $var == *as* ]]
 if conditions
 then
     cmds 
 fi
-###常用示例
-if [ $var1 -eq $var2 ]  #判断变量(数值)是否相等;多条件参考布尔和逻辑运算
-if test $var1 -eq $var2 #同上
-if [ $var1 -eq $var2 ]  #判断变量(数值)是否相等
-if [ -f $file ]         #判断是否为文件
-if test -f $file        #同上
-if ls                   #执行shell命令(输出结果);命令返回码作为条件判断依据
-if (ls)                 #同上
-if [ ls ]               #同上;不会输出ls的结果
-if cd $var              #跳转目录作为条件
-if cd $var;pwd          #跳转目录后执行打印绝对路径作为条件
-if (cd $var;pwd)        #操作在子shell中执行
-if ./xx.sh              #执行自定义脚本再执行操作
-if var=`date`           #赋值语句也是可以的
-if var=$(date)          #同上
+### 常用示例
+if [ $var1 -eq $var2 ]  # 判断变量(数值)是否相等;多条件参考布尔和逻辑运算
+if test $var1 -eq $var2 # 同上
+if [ $var1 -eq $var2 ]  # 判断变量(数值)是否相等
+if [ -f $file ]         # 判断是否为文件
+if test -f $file        # 同上
+if ls                   # 执行shell命令(输出结果);命令返回码作为条件判断依据
+if (ls)                 # 同上
+if [ ls ]               # 同上;不会输出ls的结果
+if cd $var              # 跳转目录作为条件
+if cd $var;pwd          # 跳转目录后执行打印绝对路径作为条件
+if (cd $var;pwd)        # 操作在子shell中执行
+if ./xx.sh              # 执行自定义脚本再执行操作
+if var=`date`           # 赋值语句也是可以的
+if var=$(date)          # 同上
 
 2)单行格式
-if conditions;then cmds;fi                #cmds为多命令使用分号隔开;其他类似
-if (conditions) then (cmds) fi            #cmds为多命令使用分号隔开;括号内命令(或条件)在子shell中执行;其他类似
+if conditions;then cmds;fi                # cmds为多命令使用分号隔开;其他类似
+if (conditions) then (cmds) fi            # cmds为多命令使用分号隔开;括号内命令(或条件)在子shell中执行;其他类似
 if conditions;then cmds;else cmds;fi
-if conditions;then :;else cmds;fi         #then :为占位符;一般用于不成立的conditions不好写时使用
+if conditions;then :;else cmds;fi         # then :为占位符;一般用于不成立的conditions不好写时使用
 if (conditions) then (cmds) else (cmds) fi
 if conditions;then cmds;elif cmds;else cmds;fi
 
@@ -414,152 +413,152 @@ else
     cmds
 fi
 
-##case
+## case
 case $var in
-pattern1 | pattern2) cmds1;;  #无需break
+pattern1 | pattern2) cmds1;;  # 无需break
 pattern3) cmds2;;
 *) default cmds;;
 esac
 
-###示例
+### 示例
 echo -n "输入 1 到 5 之间的数字: "
 read aNum
 case $aNum in
-    1|2|3|4|5) echo "你输入的数字为 $aNum!"    #模式之间可用|分割
+    1|2|3|4|5) echo "你输入的数字为 $aNum!"    # 模式之间可用|分割
     ;;
-    *) echo "你输入的数字不是 1 到 5 之间的!"  # deflaut处理
+    *) echo "你输入的数字不是 1 到 5 之间的!"  #  deflaut处理
         continue
         echo "游戏结束"
     ;;
 esac
 
 
-#循环语句
-##for循环
+# 循环语句
+## for循环
 for var in list
 do
     cmds
 done
-#list形式
-#1.字符串(数字也算),例如:for var in 1 2 3;"1 2 3"被认为单字符串;分隔符(多个算一个)可以是空格/制表符/换行符
-#2.普通变量,例如:var="a b c";for var in $var
-#3.数组,例如:$var=(a b c);for var in ${var[*]}
-#4.shell命令结果,例如: for var in `ls`;`cmd`或$(cmd)的命令形式都可以
-#5.文件(夹)通配符,例如: for var in ./*;表示匹配当前路径所有可见文件(夹),相对路径类似
-##常用示例
+# list形式
+# 1.字符串(数字也算),例如:for var in 1 2 3;"1 2 3"被认为单字符串;分隔符(多个算一个)可以是空格/制表符/换行符
+# 2.普通变量,例如:var="a b c";for var in $var
+# 3.数组,例如:$var=(a b c);for var in ${var[*]}
+# 4.shell命令结果,例如: for var in `ls`;`cmd`或$(cmd)的命令形式都可以
+# 5.文件(夹)通配符,例如: for var in ./*;表示匹配当前路径所有可见文件(夹),相对路径类似
+## 常用示例
 var="a b c";for var in $var
 var=(a b c);for var in $var
 for var in 1 2 3
-for var in '1' '2' '3'   #同上
-for var in {1,2,3}       #同上
-for var in '1 2 3'       #单双引号会被认为是一个值
-for var in `cmds`        #命令结果按照空格/制表符/换行符分隔;多命令以分号隔开
-for var in $(cmds)       #同上
-for var in `seq 10`      #1-10数组
-for var in `seq -1 5`    #指定首尾值
-for var in `seq 1 2 10`  #指定首尾及step;实际为1到10的奇数
-for var in `seq 10 -2 2` #指定首尾及step;递减
-for var in {1..10}       #1,2,..,10;等价于for var in `seq 10`;本质为按照Ascii表顺序迭代
-for var in {01..10}      #01,02,..,10
-for var in {001..10}     #001,002,..,010
-for var in {1..10..2}    #1,3,..,9
-for var in {10..1}       #10,9,..,1
-for var in {10..1..2}    #10,8,..,2
-for var in {a..z}        #a,b,..,z;支持反向
-for var in {a..z..2}     #a,c,..,y
-for var in a{a..z}       #aa,ab,..,az;数字也可以
-for var in {1..3}{a..c}  #1a,1b,1c,2a,..,3c
-for var in `ls`          #匹配当前文件夹文件(非隐藏)
-for var in /home/*       #*匹配/home目录下文件(非隐藏);不会递归匹配
-for var in /home/[0-9]*  #带有通配形式的匹配
+for var in '1' '2' '3'   # 同上
+for var in {1,2,3}       # 同上
+for var in '1 2 3'       # 单双引号会被认为是一个值
+for var in `cmds`        # 命令结果按照空格/制表符/换行符分隔;多命令以分号隔开
+for var in $(cmds)       # 同上
+for var in `seq 10`      # 1-10数组
+for var in `seq -1 5`    # 指定首尾值
+for var in `seq 1 2 10`  # 指定首尾及step;实际为1到10的奇数
+for var in `seq 10 -2 2` # 指定首尾及step;递减
+for var in {1..10}       # 1,2,..,10;等价于for var in `seq 10`;本质为按照Ascii表顺序迭代
+for var in {01..10}      # 01,02,..,10
+for var in {001..10}     # 001,002,..,010
+for var in {1..10..2}    # 1,3,..,9
+for var in {10..1}       # 10,9,..,1
+for var in {10..1..2}    # 10,8,..,2
+for var in {a..z}        # a,b,..,z;支持反向
+for var in {a..z..2}     # a,c,..,y
+for var in a{a..z}       # aa,ab,..,az;数字也可以
+for var in {1..3}{a..c}  # 1a,1b,1c,2a,..,3c
+for var in `ls`          # 匹配当前文件夹文件(非隐藏)
+for var in /home/*       # *匹配/home目录下文件(非隐藏);不会递归匹配
+for var in /home/[0-9]*  # 带有通配形式的匹配
 
-##分隔符注释,bash shell中$IFS(Internal Field Separator,内部域分隔符)为空格/制表符/换行符
+## 分隔符注释,bash shell中$IFS(Internal Field Separator,内部域分隔符)为空格/制表符/换行符
 IFS_OLD=$IFS
-IFS=$'\n'  #修改为换行符;IFS=:表示修改为冒号;多分隔符可使用 IFS=$'\n':;"
+IFS=$'\n'  # 修改为换行符;IFS=:表示修改为冒号;多分隔符可使用 IFS=$'\n':;"
 <在代码中使用新的IFS值>
 IFS=$IFS_OLD
 
-###C语言风格的for循环
-for (( variable assignment ; condition ; iteration process ))  #do ... done循环体遵循bash shell语法
+### C语言风格的for循环
+for (( variable assignment ; condition ; iteration process ))  # do ... done循环体遵循bash shell语法
 例如:
-for (( a = 1; a < 10; a++ ))            #单变量形式
-for (( a=1, b=10; a <= 10; a++, b-- ))  #多变量形式
-for (( ; ; ))                           #可实现无限循环
+for (( a = 1; a < 10; a++ ))            # 单变量形式
+for (( a=1, b=10; a <= 10; a++, b-- ))  # 多变量形式
+for (( ; ; ))                           # 可实现无限循环
 
-##while循环          #先判断后执行循环体
+## while循环          # 先判断后执行循环体
 while conditions
 do
     cmds
 done
 
-while conditions;do cmds;done      #单行写的形式
-while :;do cmds;done               #无限循环形式
-while true;do cmds;done            #同上
-while [];[];[];do cmds;done        #多测试条件形式;某个测试条件不满足则退出循环
-while [] && [] && [];do cmds;done  #同上
-while [] || [] || [];do cmds;done  #或条件
-while cmds;do sleep 10;done        #可实现是定时间执行cmd;标准为cmd成功执行(返回码为0);cmd成功执行后开始计时
-while sleep 1;do date;sleep 1;done #每2s输出一次时间
+while conditions;do cmds;done      # 单行写的形式
+while :;do cmds;done               # 无限循环形式
+while true;do cmds;done            # 同上
+while [];[];[];do cmds;done        # 多测试条件形式;某个测试条件不满足则退出循环
+while [] && [] && [];do cmds;done  # 同上
+while [] || [] || [];do cmds;done  # 或条件
+while cmds;do sleep 10;done        # 可实现是定时间执行cmd;标准为cmd成功执行(返回码为0);cmd成功执行后开始计时
+while sleep 1;do date;sleep 1;done # 每2s输出一次时间
 
-##util循环           #先执行循环体再判断,其余与while相同
+## util循环           # 先执行循环体再判断,其余与while相同
 until conditions
 do
     cmds
 done
 
-##循环控制
-break      #退出循环;多层循环只会退出内层循环;break n 可退出指定层数循环,n为1时表示当前内层循环
-continue   #与C语言中continue一致
+## 循环控制
+break      # 退出循环;多层循环只会退出内层循环;break n 可退出指定层数循环,n为1时表示当前内层循环
+continue   # 与C语言中continue一致
 
 
-#处理用户输入
+# 处理用户输入
 
-##命令行参数
-###参数读取
-./xx.sh arg1 arg2 arg3 ...  #脚本有执行权限,arg开头的为参数
-$0        #执行脚本名称,可在脚本中调用
-$1/$2/$3  #参数,可在脚本中调用,当n>=10时,需要使用${n}来调用
-$#        #传递到脚本的参数个数
-$*        #以一个字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。
-$$        #脚本运行的当前进程ID号
-$!        #后台运行的最后一个进程的ID号
-$@        #与$*相同,但是使用时加引号,并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
-$-        #显示Shell使用的当前选项,与set命令功能相同
-$?        #显示最后命令的退出状态;0表示没有错误,其他任何值表明有错误
+## 命令行参数
+### 参数读取
+./xx.sh arg1 arg2 arg3 ...  # 脚本有执行权限,arg开头的为参数
+$0        # 执行脚本名称,可在脚本中调用
+$1/$2/$3  # 参数,可在脚本中调用,当n>=10时,需要使用${n}来调用
+$#        # 传递到脚本的参数个数
+$*        # 以一个字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。
+$$        # 脚本运行的当前进程ID号
+$!        # 后台运行的最后一个进程的ID号
+$@        # 与$*相同,但是使用时加引号,并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
+$-        # 显示Shell使用的当前选项,与set命令功能相同
+$?        # 显示最后命令的退出状态;0表示没有错误,其他任何值表明有错误
 
-###移动变量
+### 移动变量
 ./xx.sh 1 2 3 4
 
 #!/bin/bash
-echo "The original parameters: $*"        #输出 1 2 3 4
-shift 2                                   #移除前两个参数;不跟数字移动一位;移除数据无法恢复
-echo "Here's the new first parameter: $1" #输出 3
+echo "The original parameters: $*"        # 输出 1 2 3 4
+shift 2                                   # 移除前两个参数;不跟数字移动一位;移除数据无法恢复
+echo "Here's the new first parameter: $1" # 输出 3
 
-###模拟命令选项和参数的获取     #大部分选项是有对应含义的,可以参考相关文档;
+### 模拟命令选项和参数的获取     # 大部分选项是有对应含义的,可以参考相关文档;
 ./xx.sh -a -b -c -d -- 1 2
 
 #!/bin/bash
-while [ -n "$1" ]   #循环读取每一个选项
+while [ -n "$1" ]   # 循环读取每一个选项
 do
     case "$1" in
         -a) echo "Found the -a option" ;;
         -b) echo "Found the -b option" ;;
         -c) echo "Found the -c option" ;;
-#		-d) param="$2"                     #以下注释的三行为选项后带有参数的处理
-#           echo "Found the -b option, with parameter value $param"
-#           shift ;;
-        --) shift                          #一般认为--为选项结束标志;移除--并跳出循环
+# 		-d) param="$2"                     # 以下注释的三行为选项后带有参数的处理
+#            echo "Found the -b option, with parameter value $param"
+#            shift ;;
+        --) shift                          # 一般认为--为选项结束标志;移除--并跳出循环
 		    break ;;
-        *) echo "$1 is not an option"  ;;  #其他选项处理
+        *) echo "$1 is not an option"  ;;  # 其他选项处理
     esac
-    shift                                  #移除第一个选项;类似于出队列
+    shift                                  # 移除第一个选项;类似于出队列
 done
 
 count=1
-for param in $@                            #获取--后参数列表
+for param in $@                            # 获取--后参数列表
 do
-    echo "Parameter #$count: $param"       #打印每个参数
-    count=$[ $count + 1 ]                  #参数计数
+    echo "Parameter #$count: $param"       # 打印每个参数
+    count=$[ $count + 1 ]                  # 参数计数
 done
 
 输出 
@@ -571,42 +570,42 @@ Parameter #1: 1
 Parameter #2: 2
 Parameter #3: 3
 
-##选项参数解析
-###getopt
-getopt ab:cd -a -b test1 -cd test2 test3     #:表示-b选项需要一个参数;实际打印  -a -b test1 -c -d -- test2 test3
-getopt ab:cd -a -b test1 -cde test2 test3    #会先输出getopt: invalid option -- e,然后输出正确的解析结果
-getopt -q ab:cd -a -b test1 -cde test2 test3 #-q会屏蔽错误选项e
-set -- $(getopt -q ab:cd "$@")               #用于格式化选项及参数;./xx.sh -a -b test1 -cd test2 test3会按照上述去解析选项参数
+## 选项参数解析
+### getopt
+getopt ab:cd -a -b test1 -cd test2 test3     # :表示-b选项需要一个参数;实际打印  -a -b test1 -c -d -- test2 test3
+getopt ab:cd -a -b test1 -cde test2 test3    # 会先输出getopt: invalid option -- e,然后输出正确的解析结果
+getopt -q ab:cd -a -b test1 -cde test2 test3 # -q会屏蔽错误选项e
+set -- $(getopt -q ab:cd "$@")               # 用于格式化选项及参数;./xx.sh -a -b test1 -cd test2 test3会按照上述去解析选项参数
 
-###getopts    #比getopt更高级
-getopts optstring var      #optstring为选项表达式
+### getopts    # 比getopt更高级
+getopts optstring var      # optstring为选项表达式
 
-####示例
-while getopts :ab:c opt    #表达式第一个:表示去除错误信息;选项如需参数则增加:即可
+#### 示例
+while getopts :ab:c opt    # 表达式第一个:表示去除错误信息;选项如需参数则增加:即可
 do
     case "$opt" in      
         a) echo "Found the -a option" ;;
-        b) echo "Found the -b option, with value $OPTARG";;  #OPTARG变量用于获取参数后选项
+        b) echo "Found the -b option, with value $OPTARG";;  # OPTARG变量用于获取参数后选项
         c) echo "Found the -c option" ;;
         *) echo "Unknown option: $opt";;
     esac
 done
 
-##用户输入获取
-read            #获取用户输入赋值给 REPLY
-read var        #获取用户输入赋值给变量 var
-read -s passwd  #用于输入密码不显示在前台,变量中可以使用
+## 用户输入获取
+read            # 获取用户输入赋值给 REPLY
+read var        # 获取用户输入赋值给变量 var
+read -s passwd  # 用于输入密码不显示在前台,变量中可以使用
 
-###命令超时
-if read -t 5 -p "Please enter your name: " name  #设定超时(-t)和提醒(-p)
+### 命令超时
+if read -t 5 -p "Please enter your name: " name  # 设定超时(-t)和提醒(-p)
 then
     echo "Hello $name"
 else
-	echo "Sorry, too slow..."                    #超时后处理
+	echo "Sorry, too slow..."                    # 超时后处理
 fi
 
-###选择命令
-read -n1 -p "Do you want to continue [Y/N]? " answer  #-n1表示接受一个字符后赋值给变量而无需回车
+### 选择命令
+read -n1 -p "Do you want to continue [Y/N]? " answer  # -n1表示接受一个字符后赋值给变量而无需回车
 case $answer in
     Y | y) echo "fine, continue on…" ;;
     N | n) echo "OK, goodbye"
@@ -615,36 +614,36 @@ case $answer in
        exit;;
 esac
 
-###文件中读取
-cat test | while read line  #从标准输出中读取;逐行读取
+### 文件中读取
+cat test | while read line  # 从标准输出中读取;逐行读取
 
 
-#重定向
-##注:需要注意的是文件描述符,以下三个是shell保留的;每个进程最多同时有9个文件描述符 
- 0  #标准输入(STDIN)
- 1  #标准输出(STDOUT)
- 2  #标准错误输出(STDERR)
+# 重定向
+## 注:需要注意的是文件描述符,以下三个是shell保留的;每个进程最多同时有9个文件描述符 
+ 0  # 标准输入(STDIN)
+ 1  # 标准输出(STDOUT)
+ 2  # 标准错误输出(STDERR)
 
-#命令重定向
-cmd > file              #将输出重定向到 file
-cmd 1> file             #同上
-cmd >> file             #将输出以追加的方式重定向到 file
-cmd 1>> file            #同上
-cmd 2> file             #标准错误输出
-cmd 2>> file            #标准错误追加输出
-cmd < file              #将输入重定向到 file
-cmd 0< file             #同上
-cmd < infile > outfile  #infile作为命令参数输入,结果输出到outfile
-cmd > file 2>&1         #合并标准输出和错误输出到file;一般错误信息先输出
-cmd &> file             #同上
-cmd > /dev/null         #屏蔽标准输出(不含错误);/dev/null文件什么都不会被保留
-cmd > /dev/null 2>&1    #屏蔽所有输出
-cmd 1> file1 2> file2   #按文件标识符输出到不同文件      
-n> file                 #将文件描述符为 n 的文件重定向到 file
-n>> file                #将文件描述符为 n 的文件以追加的方式重定向到 file
-n>&m                    #将输出文件 m 和 n 合并
-n<&m                    #将输入文件 m 和 n 合并
-##内联重定向
+# 命令重定向
+cmd > file              # 将输出重定向到 file
+cmd 1> file             # 同上
+cmd >> file             # 将输出以追加的方式重定向到 file
+cmd 1>> file            # 同上
+cmd 2> file             # 标准错误输出
+cmd 2>> file            # 标准错误追加输出
+cmd < file              # 将输入重定向到 file
+cmd 0< file             # 同上
+cmd < infile > outfile  # infile作为命令参数输入,结果输出到outfile
+cmd > file 2>&1         # 合并标准输出和错误输出到file;一般错误信息先输出
+cmd &> file             # 同上
+cmd > /dev/null         # 屏蔽标准输出(不含错误);/dev/null文件什么都不会被保留
+cmd > /dev/null 2>&1    # 屏蔽所有输出
+cmd 1> file1 2> file2   # 按文件标识符输出到不同文件      
+n> file                 # 将文件描述符为 n 的文件重定向到 file
+n>> file                # 将文件描述符为 n 的文件以追加的方式重定向到 file
+n>&m                    # 将输出文件 m 和 n 合并
+n<&m                    # 将输入文件 m 和 n 合并
+## 内联重定向
 1.分隔符(delimiter)可以使EOF/!等任意合法字符
 2.结束分隔符顶格写,后面不能有任何字符(包含空格等)
 3.多用于ftp/sftp/sql执行等
@@ -652,349 +651,519 @@ cmd << delimiter
 context
 delimiter
 
-##脚本中重定向
-echo "error context" >&2  #临时重定向;./xx.sh运行时按照标准输出;./xx.sh 2>file会按照错误输出到file中(脚本中指定了exec除外)
-exec 1>file               #永久重定向;脚本中使用(一般是开头)会将所有标准输出到file中,而不是控制台
-exec 2>file               #错误输出重定向;与上类似
-exec 0<file               #输入重定向;与上类似
-exec 1>>file              #追加形式
-exec 1>&-                 #关闭脚本中文件描述符
+## 脚本中重定向
+echo "error context" >&2  # 临时重定向;./xx.sh运行时按照标准输出;./xx.sh 2>file会按照错误输出到file中(脚本中指定了exec除外)
+exec 1>file               # 永久重定向;脚本中使用(一般是开头)会将所有标准输出到file中,而不是控制台
+exec 2>file               # 错误输出重定向;与上类似
+exec 0<file               # 输入重定向;与上类似
+exec 1>>file              # 追加形式
+exec 1>&-                 # 关闭脚本中文件描述符
 
-##自定义重定向
-echo "my context" >&3  #自定义重定向,与>&2逻辑类似;自定义文件描述符可使用3-8
-exec 3>file            #文件描述符为3的输出到file中
-exec 3>>file           #文件描述符为3的输出到file中
-exec 3>&-              #关闭脚本中文件描述符
+## 自定义重定向
+echo "my context" >&3  # 自定义重定向,与>&2逻辑类似;自定义文件描述符可使用3-8
+exec 3>file            # 文件描述符为3的输出到file中
+exec 3>>file           # 文件描述符为3的输出到file中
+exec 3>&-              # 关闭脚本中文件描述符
 
-##重定向示例
+## 重定向示例
 ./xx.sh < insert.csv
 #!/bin/bash
-# read file and create INSERT statements for MySQL
+#  read file and create INSERT statements for MySQL
 
-outfile='members.sql'   #设定输出文件
-IFSOLD=$IFS             #备份分隔符
-IFS=','                 #设定逗号为分隔符
-while read lname fname address city state zip    #读取每一行数据,设置不同变量
+outfile='members.sql'   # 设定输出文件
+IFSOLD=$IFS             # 备份分隔符
+IFS=','                 # 设定逗号为分隔符
+while read lname fname address city state zip    # 读取每一行数据,设置不同变量
 do
   cat >> $outfile << EOF
   INSERT INTO members (lname,fname,address,city,state,zip) VALUES
   ('$lname', '$fname', '$address', '$city', '$state', '$zip');
 EOF
 done < $1   
-IFS=$IFSOLD  #还原默认分隔符
+IFS=$IFSOLD  # 还原默认分隔符
 
 
-#控制脚本
+# 控制脚本
 
-##信号生成与捕获
-Ctrl + c    #中断进程
-Ctrl + z    #暂停进程;会给暂停的每个进程一个作业号 n
-bg n        #将作业号为 n 的进程转入后台程序
-trap        #脚本中使用trap相关命令可捕获信号并处理
+## 信号生成与捕获
+Ctrl + c    # 中断进程
+Ctrl + z    # 暂停进程;会给暂停的每个进程一个作业号 n
+bg n        # 将作业号为 n 的进程转入后台程序
+trap        # 脚本中使用trap相关命令可捕获信号并处理
 
-##后台运行
-cmd &            #后台运行命令;终端退出后即停止执行(会创建守护进程的除外)
-./xx.sh &        #后台运行脚本;终端退出后即停止执行(会创建守护进程的除外)
-nohup ./xx.sh &  #后台运行且独立于终端;日志会输出到 nohup.out
-jobs -l          #查看后台运行的作业(命令或脚本),含PID
-kill PID         #停止进程
-kill -9 PID      #强制停止进程
-nice/renice      #调整进程运行优先级 
+## 后台运行
+cmd &            # 后台运行命令;终端退出后即停止执行(会创建守护进程的除外)
+./xx.sh &        # 后台运行脚本;终端退出后即停止执行(会创建守护进程的除外)
+nohup ./xx.sh &  # 后台运行且独立于终端;日志会输出到 nohup.out
+jobs -l          # 查看后台运行的作业(命令或脚本),含PID
+kill PID         # 停止进程
+kill -9 PID      # 强制停止进程
+nice/renice      # 调整进程运行优先级 
 
-##执行计划
-at       #用于设置执行计划;会分配作业号
-atq      #查看等待运行的执行计划
-atrm  n  #删除作业号为n的计划
-crontab  #周期执行计划;具体使用参见Linux.txt
+## 执行计划
+at       # 用于设置执行计划;会分配作业号
+atq      # 查看等待运行的执行计划
+atrm  n  # 删除作业号为n的计划
+crontab  # 周期执行计划;具体使用参见Linux.txt
 
 
-#函数    #可认为是子脚本,在脚本中跟正常shell一样使用;先定义后使用
+# 函数   # 可认为是子脚本,在脚本中跟正常shell一样使用;先定义后使用
 
-##格式
-###方式一
+## 格式
+### 方式一
 function funcname {
     cmds
 }
-###方式二
+### 方式二
 funcname () {
     cmds
 }
 
-##返回值
+## 返回值
 1.默认返回最后一条命令的返回码
 2.使用return n;n取值范围为0-255,超过取余
 3.使用输出语句,例如:echo/print等带有输出性质的语句
 
-##函数使用
+## 函数使用
 1.脚本中与正常shell使用类似;只需要函数名(有参数的带参数)即可
-2.终端中可使用 source ./xx.sh或 . ./xx.sh 生效函数库,然后终端可以像shell命令一样使用其中的函数及变量  #xx.sh为函数库
+2.终端中可使用 source ./xx.sh或 . ./xx.sh 生效函数库,然后终端可以像shell命令一样使用其中的函数及变量  # xx.sh为函数库
 3.脚本中可使用上一条提到的方式引入函数库使用;使用前引入
 
 
-#文本处理
+# 文本处理
 
-##说明
-RE   #表示正则表达式;多个使用RE1/RE2/...表示
+## 说明
+RE   # 表示正则表达式;多个使用RE1/RE2/...表示
 
-##主要命令
-cut     #逐行按指定分隔符截取数据
-paste   #列模式拼接,默认为Tab链接
-tr      #逐行转换字符
-split   #将大文件分割为小文件
-sort    #文本排序
-uniq    #去重
-sed     #stream editor(流编辑器);逐行对文本处理
-awk     #数据流处理工具,逐行处理;可实现更复杂的数据处理;多数发行版可以使用awk,实际指向gawk
+## 主要命令
+find     # 文件(夹)查找
+grep     # 文本内容匹配
+cut      # 逐行按指定分隔符截取数据
+paste    # 列模式拼接,默认为Tab链接
+tr       # 逐行转换字符
+split    # 将大文件分割为小文件
+sort     # 文本排序
+uniq     # 去重
+sed      # stream editor(流编辑器);逐行对文本处理
+awk      # 数据流处理工具,逐行处理;可实现更复杂的数据处理;多数发行版可以使用awk,实际指向gawk
 
-##cut
-cut -b/c N/N-/N-M/-M file  #按照字节(bytes)/字符(characters)截取文本(标准输出);截取列范围分别是 =N、>=N、N<=x<=M和<=M
-cut -f N/N-/N-M/-M file    #按照Tab(制表符)截取文本(标准输出);-f表示fields(域),多个域可用逗号隔开,单行域返回结果会去重
-cut -d ',' -f N file       #-d(delimiter)指定分隔符,与-f一起使用
-echo '1234567'|cut -c 2    #结果为2;可写为 cut -c2,空格可省略
-echo '1234567'|cut -c2-5   #结果为2;可写为 cut -c2,空格可省略
-echo -e "123\t456"|cut -f2 #结果为456
+## find  #文件(夹)查找
+find [path1 path2 ...] [option1 value1] [option2 value2] ... [operation]
+[path]         # 与Linux对路径的定义一致。.表示当前路径(path省略默认为当前路径),~表示用户根目录,/表示系统根目录
+[option value] # 匹配选项及值,部分选项不需要value,绝大部分成对出现,取结果交集。
+               # 如：-type d 表示查找所有文件夹,选项前加上!表示不匹配
+               # 选择性强的放前面可提高查询效率,例如 -depth/mindepth/maxdepth               
+[operation]    # 对于查找结果的操作,常用操作如下：
+               # -print： 将匹配结果输出到标准输出,一般可不加。shell脚本中建议加上。
+               # -print0：同上,但不换行。
+               # -exec：  用于下一步的命令执行。形式为 "command {} \;" 
+               #          如：find . -type f -exec rm -rf {} \; 表示删除所有文件。{}表示每条查找结果
+               # -ok：    同上,不同在于会让用户确认是否执行每个命令
+               #          find . -type f|xargs rm -rf  可实现同-exec功能
+               # -delete: 删除文件或文件夹
+               #          如：find . -type f -delete 删除所有文件
+### 常用option(选项)
+-name file           # 名称;最常用的选项
+-iname file          # 忽略大小写
+-perm 755            # 权限
+-user username       # 所属者
+-group groupname     # 按组来查找
+-empty               # 空文件或文件夹
+-mtime [-/+]n        # n天[内(包含n)/外]修改的;无-/+时表示第n天(当天为0);下同;m-modify
+-atime [-/+]n        # 访问时间;a-access
+-ctime [-/+]n        # 创建时间;c-create
+-amin [-/+]n         # n分钟
+-nouser              # 查无有效属主的文件,即文件的属主在/etc/passwd中不存 
+-nogroup             # 查无有效属组的文件,即文件的属组在/etc/groups中不存在
+-nouser              # 查无有效属主的文件,即文件的属主在/etc/passwd中不存
+-newer f1 !f2        # 查更改时间比f1新但比f2旧的文件
+-type b/d/c/p/l/f    # 文件类型。块设备、目录、字符设备、管道、符号链接、普通文件
+-size [-/+]n[cwbkMG] # 大小为[小于/大于]n字节/字/块(一般为512bit)/KB/MB/GB的文件
+-depth               # 使查找在进入子目录前先行查找完本目录
+-mindepth n          # 指定目录的第n级目录开始查找
+-maxdepth n          # 最多查询到指定目录的第n级目录
+-fstype              # 查位于某一类型文件系统中的文件,这些文件系统类型通常可 在/etc/fstab中找到
+-mount               # 查文件时不跨越文件系统mount点
+-follow              # 如果遇到符号链接文件,就跟踪链接所指的文件
+-cpio                # 查位于某一类型文件系统中的文件,这些文件系统类型通常可 在/etc/fstab中找到
 
-##paste
-paste file1 file2 ...      #列模式拼接,默认为Tab链接
-paste file1 file2 -d ","   #指定分隔符拼接
+find . -name   "*.txt" -print                      # .txt结尾的文件,双引号和-print选项可不加
+find . ! -name "*.txt" -print                      # 查找所有非 .txt 结尾文件
+find . -name "[a-z][a-z][0–9][0–9].txt" -print     # 查以两个小写字母和两个数字开头的txt文件     
+find . -name "*.txt" -o -name "*.pdf"  -print      # 查找txt或pdf文件,-o表示或
+find . -regex  ".*\(\.txt|\.pdf\)$" -print         # 同上。-iregex:忽略大小写
+find . -name 'xa*'|grep -v xaa|xargs rm -rf {} \;  # 删除当前目录下所有除了xaa的xa*文件
+find . -perm 755 -exec ls -ltr {} \;               # 显示所有权限是755的文件(夹)
+find . -size +512k                                 # 大于512k的文件
 
-##tr
-echo 12345 | tr '0-9' '9876543210'  #按规则替换字符;结果为87654
-cat file | tr '\t' ' '              #制表符替换为空格
-cat file | tr -d '0-9'              #删除所有数字
-cat file | tr -d -c '0-9\n'         #删除非数字数据,默认不换行,加上 \n
-cat file | tr -s ' '                #去除重复空格
 
-##split
-split -n file str  #将文件每n行切割为多个str开头(默认为x)的小文件,不改变原文件
-split -l n file    #同上
-split -b n file    #按字节切割
-split -C n file    #同上,尽量保证每行的完整性   
+## grep   ## 文本匹配
+grep [option] [match_patten] [文件]
 
-##sort
-sort      #排序,默认按照字典顺序
-    -n    #按数字进行排序
-    -d    #按字典序进行排序,仅考虑空字符、字母和数字排序
-    -r    #降序排序
-    -k N  #指定按第N列排序
-    -b    #忽略像空格之类的前导空白字符
+### option
+-E     # 开启扩展的正则
+-o     # 只输出匹配的文本行
+-v     # 只输出没有匹配的文本行
+-c     # 统计出现次数
+-n     # 打印匹配的行号
+-i     # 搜索时忽略大小写
+-l     # 只打印文件名
+-R     # 递归查找
+-w     # 只匹配单词
+-A  n  # 显示匹配到的字符串所在的行及其后n行
+-B  n  # 显示匹配到的字符串所在的行及其前n行
+-C  n  # 显示匹配到的字符串所在的行及其前后各n行
+
+基本正则表达式
+
+匹配字符：
+.                    # 任意一个字符
+[abc]                # 表示匹配中括号中任意一个字符
+[^123]               # 匹配一个字符,这个字符是除了1、2、3以外的所有字符
+[A-Za-z]             # 表示匹配任意一个字母,等价于 [[:alpha:]]
+[0-9]                # 等价于 [[:digit:]]
+[A-Za-z0-9]          # 等价于 [[:alnum:]]
+tab,space 等空白字符 # 等价于 [[:space:]]
+[A-Z]                # 等价于 [[:upper:]]
+[a-z]                # 等价于 [[:lower:]]
+标点符号             # 等价于 [[:punct:]]
+
+匹配次数：
+\{m,n\} # 匹配其前面出现的字符至少m次,至多n次。
+\?      # 匹配其前面出现的内容0次或1次,等价于\{0,1\}。
+*       # 匹配其前面出现的内容任意次,等价于\{0,\},所以 ".*" 表述任意字符任意次,即无论什么内容全部匹配。
+
+位置锚定：
+^       # 锚定行首
+$       # 锚定行尾。技巧："^$"用于匹配空白行。
+\b或\<  # 锚定单词的词首。如"\blike"不会匹配alike,但是会匹配liker
+\b或\>  # 锚定单词的词尾。如"\blike\b"不会匹配alike和liker,只会匹配like
+\B      # 与\b作用相反。
+
+grep match_patten path -R -n   # 在多级目录中对文本递归搜索
+
+
+## xargs  命令行参数转换
+xargs 能够将输入数据转化为特定命令的命令行参数;这样,可以配合很多命令来组合使用。比如grep,比如find;
+
+cat file.txt| xargs         # 将多行输出转化为单行输出
+cat single.txt | xargs -n 3 # 原文件每三行作为一行显示
+
+xargs参数
+-d 定义定界符 （默认为空格 多行的定界符为 \n）
+-n 指定输出为多行
+
+
+## cut  # 按field切分文本
+### 截取单位
+-b  # 以字节为单位
+-c  # 以字符为单位
+-f  # 以字段field(域)为单位;默认分隔符为Tab
+
+### 截取范围
+N   # 第N个
+N-  # 第N个字段到结尾 
+-M  # 第1个字段为M,等价于 1-M
+N-M # N到M个字段,[N,M]
+
+### 指定分隔符
+-f  # 指定分隔符(只支持单字符,需要字符串分隔符请使用awk -F),部分分隔符需要转义;例如 -f ,/-f,/-f','/-f"," 都是支持的
+
+eg:
+cut -f2,4 file               # 截取文件的第2列和第4列;
+cut -f3 --complement file    # 去文件除第3列的所有列
+cut -f2 -d";" file           # 指定分隔符
+cut -c1-5 file               # 打印第一到5个字符
+cut -c-2 file                # 打印前2个字符
+echo '1234567' | cut -c 2    # 结果为2;可写为 cut -c2,空格可省略
+echo '1234567' | cut -c2-5   # 结果为2345
+echo -e "123\t456" | cut -f2 # 结果为456
+
+## paste  # 按列拼接文本;默认为Tab链接
+paste file1 file2 ...        # 列模式拼接
+paste -d "," file1 file2     # 指定分隔符拼接
+
+## tr     # 字符转换;只能处理标准输入字符串
+tr [OPTION]... SET1 [SET2]   # 集合一般使用''包围或[:class:]
+### option
+-c/-C  SET1    # 使用SET1补集字符;tr -d -c '0-9'表示删除所有非数字(保留数字),简写形式tr -dc '0-9'
+-d             # 删除
+-s             # 去重(连续多个字符保留一个)
+
+### SET1/SET2  # 集合一般使用''包围或[:class:]
+'a'            # 单个字符集合
+'agd'          # 多个字符
+'0-9'          # 数字字符范围;1-5也支持
+[:digit:]      # 同上;字符类表示方式
+'a-z'          # 小写字符范围
+[:lower:]      # 同上;字符类表示方式
+' '            # 空格
+'\n'           # 换行符
+'\t'           # 制表符
+
+### 字符类(class)
+tr [:class:] [:class:]
+alnum          # 字母和数字
+alpha          # 字母
+blank          # 垂直空白字符
+digit          # 数字
+space          # 空白字符;包含水平和垂直空白字符
+lower          # 小写
+upper          # 大写
+cntrl          # 控制（非可打印）字符
+xdigit         # 16进制数字
+print          # 可打印字符,包含space
+
+echo 'abc' | tr [:lower:] [:upper:]  # 小写转大写
+echo 12345 | tr '0-9' '9876543210'   # 按规则替换字符;结果为87654
+cat file | tr '\t' ' '               # 制表符替换为空格
+cat file | tr -d '0-9'               # 删除所有数字
+cat file | tr -d -c '0-9\n'          # 删除非数字数据,默认不换行,加上 \n
+cat file | tr -s ' '                 # 去除重复空格
+cat file | tr -s ' '                 # 去除重复空格
+
+## split  # 切割文本,主要用于大文件转为小文件
+split -n file str  # 将文件每n行切割为多个str开头(默认为x)的小文件,不改变原文件
+split -l n file    # 同上
+split -b n file    # 按字节切割
+split -C n file    # 同上,尽量保证每行的完整性   
+
+## sort   # 行排序
+sort      # 排序,默认按照字典顺序
+  -n      # 按数字进行排序;n-number
+  -d      # 按字典序进行排序,仅考虑空字符、字母和数字排序;d-dict
+  -r      # 降序排序
+  -k N    # 指定按第N列排序
+  -b      # 忽略像空格之类的前导空白字符
 sort -nrk 1 data.txt
 sort -bd data
 
-##wc
-wc -c/m/w/l file            #按照字节/字符/单词(Tab或空格分隔,多个分隔符算一个)/行数 统计文本或标准输出
-echo -e '1\t2  34 56'|wc -w #输出4
+## uniq   # 去除或统计重复行
+sort file | uniq      # 排序并去除连续重复行
+sort file | uniq -c   # 统计各行在文件中连续出现的次数
+sort file | uniq -d   # 找出重复行
 
-##uniq
-sort file | uniq      #排序并去除重复行
-sort file | uniq -c   #统计各行在文件中出现的次数
-sort file | uniq -d   #找出重复行
+## wc     # 文本统计
+wc [-option] file
+wc file               # 统计行数、单词和字节数
+-c                    # 按字节统计(控制字符也会显示,例如换行符)
+-m                    # 按字符统计(控制字符也会显示,例如换行符)
+-w                    # 按单词统计(默认分隔符空白字符)
+-l                    # 按行数统计
+-L                    # 统计文件中最长一行的长度;仅推荐ascii字符行中使用，在utf-8字符集测试一个中文为2(既不是按字节也不是字符)
 
-##sed
-sed options script inputfile > outfile          #命令格式;逐行处理
-sed options script < inputfile > outfile        #同上
-cat inputfile | sed options script > outfile    #同上
+echo -e '1\t2  34 56' | wc -w # 输出4
 
-###参考文档
-https://www.runoob.com/linux/linux-comm-sed.html    #菜鸟教程            
-https://www.gnu.org/software/sed/manual/sed.html    #官方文档
+## sed     # 流式编辑器
+sed options script inputfile > outfile          # 命令格式;逐行处理
+sed options script < inputfile > outfile        # 同上
+cat inputfile | sed options script > outfile    # 同上
 
-###options
--e script   #在处理输入时,将script中指定的命令添加到已有的命令中
--f file     #在处理输入时,将file中指定的命令添加到已有的命令中
--n          #不产生命令输出,使用p命令(print)来完成输出
--r/E        #正则匹配部分采用ERE(扩展正则);默认为BRE(基本正则)
--i          #不带-i选项的输出结果写回原文件;-i作为第一个选项
+### 参考文档
+https://www.runoob.com/linux/linux-comm-sed.html    # 菜鸟教程            
+https://www.gnu.org/software/sed/manual/sed.html    # 官方文档
 
-##处理空间(待补充)
-1.模式空间(pattern space)    #活跃缓冲区,sed命令处理区域
-2.保持空间(hold space)       #用于临时存储一些行
-###保持空间命令
-  h   #将模式空间复制到保持空间
-  H   #将模式空间附加到保持空间
-  g   #将保持空间复制到模式空间
-  G   #将保持空间附加到模式空间
-  x   #交换模式空间和保持空间的内容
+### options
+-e script   # 在处理输入时,将script中指定的命令添加到已有的命令中
+-f file     # 在处理输入时,将file中指定的命令添加到已有的命令中
+-n          # 不产生命令输出,使用p命令(print)来完成输出
+-r/E        # 正则匹配部分采用ERE(扩展正则);默认为BRE(基本正则)
+-i          # 不带-i选项的输出结果写回原文件;-i作为第一个选项
 
-###地址定界  #用选定处理行,具体使用见下面示例
-1.无         #选定每一行
+## 处理空间(待补充)
+1.模式空间(pattern space)    # 活跃缓冲区,sed命令处理区域
+2.保持空间(hold space)       # 用于临时存储一些行
+### 保持空间命令
+  h   # 将模式空间复制到保持空间
+  H   # 将模式空间附加到保持空间
+  g   # 将保持空间复制到模式空间
+  G   # 将保持空间附加到模式空间
+  x   # 交换模式空间和保持空间的内容
+
+### 地址定界  # 用选定处理行,具体使用见下面示例
+1.无         # 选定每一行
 2.单行
-  n          #正整数 n ,选定第 n 行
-  $          #选定最后一行
-  /RE/       #选定正则表达式RE匹配的每一行 
+  n          # 正整数 n ,选定第 n 行
+  $          # 选定最后一行
+  /RE/       # 选定正则表达式RE匹配的每一行 
 3.范围行
-    m,n      #m,n为正整数,m < n 时选定第[m,n]行;m >= n 时表示选定第 m 行
-    m,+n     #等价于选定第[m,m+n]行
-    m~n      #选定的行是 m/m+n/m+2n/...
-    m,$      #选定[m,$],$表示最后一行
-    m,/RE/   #m作为开始行;m后RE第一次匹配到的行作为结束行(记为n),选定[m,n];RE无匹配到则等价于[m,$]
- /RE/,n      #RE无匹配则不处理;RE第一个匹配行作为开始行(记为m),n<=m时只处理第m行,n>m则处理选定[m,n]
-/RE1/,/RE2/  #RE1无匹配则不处理;
-             #RE1第一个匹配行作为开始行(记为m1),在第m1行后RE2第一个匹配行作为结束行(记为n1),选定[m1,n1]
-			 #在n1行后RE1第一个匹配行作为开始行(记为m2),在m2后RE2第一个匹配行作为结束行(记为n2),选定[m2,n2]
-			 #每个选定区域按上两行规则选取;最后一组RE2未匹配带结束行,则结束行为最后一行($)
+    m,n      # m,n为正整数,m < n 时选定第[m,n]行;m >= n 时表示选定第 m 行
+    m,+n     # 等价于选定第[m,m+n]行
+    m~n      # 选定的行是 m/m+n/m+2n/...
+    m,$      # 选定[m,$],$表示最后一行
+    m,/RE/   # m作为开始行;m后RE第一次匹配到的行作为结束行(记为n),选定[m,n];RE无匹配到则等价于[m,$]
+ /RE/,n      # RE无匹配则不处理;RE第一个匹配行作为开始行(记为m),n<=m时只处理第m行,n>m则处理选定[m,n]
+/RE1/,/RE2/  # RE1无匹配则不处理;
+             # RE1第一个匹配行作为开始行(记为m1),在第m1行后RE2第一个匹配行作为结束行(记为n1),选定[m1,n1]
+			 # 在n1行后RE1第一个匹配行作为开始行(记为m2),在m2后RE2第一个匹配行作为结束行(记为n2),选定[m2,n2]
+			 # 每个选定区域按上两行规则选取;最后一组RE2未匹配带结束行,则结束行为最后一行($)
 总结: 开始行必须有,否则范围无效
 
-###替换
-sed 's/old/new/' file             #将每行第一个old替换为new,匹配不到old则不处理;falgs可选;未被处理的行也会被输出
-sed 's/old/new/n' file            #替换每行出现的第n个old
-sed 's/old/new/g' file            #替换每行出现的所有old
-sed 'ns/old/new/' file            #指定处理文本的第n行;其他同上
-sed 'm,ns/old/new/' file          #指定处理文本的第m到n行;其他同上
-sed '/RE/s/old/new/' file         #使用正则表达式RE匹配处理哪些行
-sed '/RE1/,/RE2/s/old/new/' file  #RE1匹配开始处理行,RE2匹配结束行;每一个RE1/RE2构成一个处理单元;若只匹配到RE1则会处理到尾行
-sed '/RE/,ns/old/new/' file       #处理方式与上一条类似;结束行已指定
-sed '/RE/,$s/old/new/' file       #同上;$表示最后一行
-sed 'n,/RE/s/old/new/' file       #处理方式与上一条类似;开始行已指定
+### 替换
+sed 's/old/new/' file             # 将每行第一个old替换为new,匹配不到old则不处理;falgs可选;未被处理的行也会被输出
+sed 's/old/new/n' file            # 替换每行出现的第n个old
+sed 's/old/new/g' file            # 替换每行出现的所有old
+sed 'ns/old/new/' file            # 指定处理文本的第n行;其他同上
+sed 'm,ns/old/new/' file          # 指定处理文本的第m到n行;其他同上
+sed '/RE/s/old/new/' file         # 使用正则表达式RE匹配处理哪些行
+sed '/RE1/,/RE2/s/old/new/' file  # RE1匹配开始处理行,RE2匹配结束行;每一个RE1/RE2构成一个处理单元;若只匹配到RE1则会处理到尾行
+sed '/RE/,ns/old/new/' file       # 处理方式与上一条类似;结束行已指定
+sed '/RE/,$s/old/new/' file       # 同上;$表示最后一行
+sed 'n,/RE/s/old/new/' file       # 处理方式与上一条类似;开始行已指定
 
-sed 's/old/new/n' file            #n为数字;替换每行出现的第n个old
+sed 's/old/new/n' file            # n为数字;替换每行出现的第n个old
 
-sed 's/old/new/w newfile' file    #输出处理后内容到newfile文件(不存在则创建,存在则覆盖)
+sed 's/old/new/w newfile' file    # 输出处理后内容到newfile文件(不存在则创建,存在则覆盖)
 
-sed 's!old!new!' file             #使用 ! 替换 / ;在old和new中可使用含 / 的字符串
+sed 's!old!new!' file             # 使用 ! 替换 / ;在old和new中可使用含 / 的字符串
 
-sed 's/old/new/;m,n/old/new/' file        #多模式替换;每行依次处理每一个模式
-sed '{s/old/new/;m,n/old/new/}' file      #同上
-sed 'm,n{s/old1/new1/;s/old1/new1/}' file #处理行相同可以放到{}前
+sed 's/old/new/;m,n/old/new/' file        # 多模式替换;每行依次处理每一个模式
+sed '{s/old/new/;m,n/old/new/}' file      # 同上
+sed 'm,n{s/old1/new1/;s/old1/new1/}' file # 处理行相同可以放到{}前
 sed 'm,n{
 s/old1/new1/
 s/old1/new1/
-}' file                                   #同上,另一种写法
+}' file                                   # 同上,另一种写法
 
-sed 'd' file             #删除所有行;带有正则的行选择的操作参考替换模式,下同
-sed 'c str' file         #修改每行内容为str;str中带有换行\n
-sed 'i str' file         #在每行前插入内容为str的新行
-sed 'a str' file         #在每行后插入内容为str的新行
-sed 'r data.txt' file    #读取data.txt内容插入到每行之后(另起一行)
-sed 'y/abc/123/' file    #将每一行的1/2/3分别替换为a/b/c;每行所有内容都会被替换              
-sed -n 'l' file          #输出输入流转义内容,使用ASCII码表示(非ASCII码字八进制表示);控制字符也会显示
-sed -n 'p' file          #输出匹配文本;可结合其他命令输出修改内容
-sed -n '=' file          #输出匹配行行号;可结合其他命令输出处理行号
-sed -n 'w newfile' file  #将匹配文本写入新文件或覆盖文件;
+sed 'd' file             # 删除所有行;带有正则的行选择的操作参考替换模式,下同
+sed 'c str' file         # 修改每行内容为str;str中带有换行\n
+sed 'i str' file         # 在每行前插入内容为str的新行
+sed 'a str' file         # 在每行后插入内容为str的新行
+sed 'r data.txt' file    # 读取data.txt内容插入到每行之后(另起一行)
+sed 'y/abc/123/' file    # 将每一行的1/2/3分别替换为a/b/c;每行所有内容都会被替换              
+sed -n 'l' file          # 输出输入流转义内容,使用ASCII码表示(非ASCII码字八进制表示);控制字符也会显示
+sed -n 'p' file          # 输出匹配文本;可结合其他命令输出修改内容
+sed -n '=' file          # 输出匹配行行号;可结合其他命令输出处理行号
+sed -n 'w newfile' file  # 将匹配文本写入新文件或覆盖文件;
 
-sed -n 's/old/new/p' file       #只输出修改的内容;-n和p配合使用
-sed -n 'p;s/old/new/p' file     #打印匹配行修改前后内容
+sed -n 's/old/new/p' file       # 只输出修改的内容;-n和p配合使用
+sed -n 'p;s/old/new/p' file     # 打印匹配行修改前后内容
 
-sed 'n;d' file                  #删除偶数行;n表示移动到下一行处理
-sed '/RE/{n;d}' file            #删除每个RE匹配行的下一行
-sed '/RE/n;d' file              #保留RE匹配行;命令结果与 grep 'RE' file 相同
+sed 'n;d' file                  # 删除偶数行;n表示移动到下一行处理
+sed '/RE/{n;d}' file            # 删除每个RE匹配行的下一行
+sed '/RE/n;d' file              # 保留RE匹配行;命令结果与 grep 'RE' file 相同
 
-sed '/RE/{N;s/\n/str/}' file    #合并每个匹配行及下一行,使用str连接;实际打印还是两行,主要用于后续命令处理这两行
-sed '/RE/{N;d}' file            #删除每个匹配行及下一行;N表示将数据流与下一行合并处理,使用换行符连接;匹配行是最后一行不处理
-sed 'N;/RE/d' file              #每两行为一组,删除RE匹配的组;若总行数为奇数则无法处理最后一行
-sed 'N;/RE/D' file              #每两行为一组,删除RE匹配组的第一行
-sed '/RE1/{N;/RE2/D}' file      #通过RE1设定处理行
+sed '/RE/{N;s/\n/str/}' file    # 合并每个匹配行及下一行,使用str连接;实际打印还是两行,主要用于后续命令处理这两行
+sed '/RE/{N;d}' file            # 删除每个匹配行及下一行;N表示将数据流与下一行合并处理,使用换行符连接;匹配行是最后一行不处理
+sed 'N;/RE/d' file              # 每两行为一组,删除RE匹配的组;若总行数为奇数则无法处理最后一行
+sed 'N;/RE/D' file              # 每两行为一组,删除RE匹配组的第一行
+sed '/RE1/{N;/RE2/D}' file      # 通过RE1设定处理行
 
 
-##awk/gawk
+## awk/gawk
 1.一种编程语言,主要用于Linux/Unix环境处理文本、生成报表等
 2.一般处理方式也是逐行处理
 
-###参考文档
-https://www.runoob.com/linux/linux-comm-awk.html     #菜鸟教程
-http://www.gnu.org/software/gawk/manual/gawk.html    #官方文档
+### 参考文档
+https://www.runoob.com/linux/linux-comm-awk.html     # 菜鸟教程
+http://www.gnu.org/software/gawk/manual/gawk.html    # 官方文档
 
-###options
--F fs         #指定行中划分数据字段的字段分隔符
--f xx.awk     #从指定的文件中读取程序
--v var=value  #定义gawk程序中的一个变量及其默认值
--mf N         #指定要处理的数据文件中的最大字段数
--mr N         #指定数据文件中的最大数据行数
--W keyword    #指定gawk的兼容模式或警告等级
+### options
+-F fs         # 指定行中划分数据字段的字段分隔符
+-f xx.awk     # 从指定的文件中读取程序
+-v var=value  # 定义gawk程序中的一个变量及其默认值
+-mf N         # 指定要处理的数据文件中的最大字段数
+-mr N         # 指定数据文件中的最大数据行数
+-W keyword    # 指定gawk的兼容模式或警告等级
 
-###命令格式
-awk -f xx.awk file    #xx.awk文件表示awk程序,等价于单行命令中''中的命令
-awk options '[BEGIN{statements}]
+### 命令格式
+awk -f xx.awk file    # xx.awk文件表示awk程序,等价于单行命令中''中的命令
+awk [options] '[BEGIN{statements}]
 [/RE/]{statements2}
-[END{statements}]' file1 file2            #BEGIN和END语句可不加,中间语句为文本处理核心
+[END{statements}]' file1 file2 ...   # BEGIN和END语句可不加,中间语句为文本处理核心
 
-###常用内建变量                  #更多内建变量可查找相关文档
+### 常用内建变量                     # 更多内建变量可查找相关文档
 变 量        描 述
-FIELDWIDTHS  #域宽;由空格分隔的一列数字,定义了每个数据字段确切宽度;指定后FS会被忽略
-FS           #Field Separator;输入流域分隔符,默认为空格或制表符;多连续分隔符会被认定为一个,下同
-RS           #Records Separator;输入流记录分隔符,默认为换行符\n
-OFS          #Output Field Separator;输出流域分隔符,默认为空格
-ORS          #Output Records Separator;输出流行分隔符,默认为换行符\n
-NR           #Number of Records;已处理数据流记录数
-NF           #Number of Fields;输入流字段数;默认以FS指定
-FNR          #Field Number of Records;域数据流记录数;处理第二个文件后会被重置
-FILENAME     #处理的文件名
-$0           #输入流本身
-$n           #按FS分割后的第几个元素;n为正整数
+FIELDWIDTHS  # 域宽;由空格分隔的一列数字,定义了每个数据字段确切宽度;指定后FS会被忽略
+FS           # Field Separator;输入流域分隔符,默认为空格或制表符;多连续分隔符会被认定为一个,下同
+RS           # Records Separator;输入流记录分隔符,默认为换行符\n
+OFS          # Output Field Separator;输出流域分隔符,默认为空格
+ORS          # Output Records Separator;输出流行分隔符,默认为换行符\n
+NR           # Number of Records;已处理数据流记录数
+NF           # Number of Fields;输入流字段数;默认以FS指定
+FNR          # Field Number of Records;域数据流记录数;处理第二个文件后会被重置
+FILENAME     # 处理的文件名
+$0           # 输入流本身
+$n           # 按FS分割后的第几个元素;n为正整数
 
-###示例
-awk '{print $1,$2,$NF,$(NF-1)}' file               #打印开始两个元素和最后两个元素;输出流以空格(OFS)隔开
-awk '/RE/{print $1,$2,$NF,$(NF-1)}' file           #使用正则表达式筛选需要处理的行
-awk '$1 ~ /RE/{print $1,$2,$NF,$(NF-1)}' file      #RE表达式匹配指定的元素,这里是$1
-awk '$1 !~ /RE/{print $1,$2,$NF,$(NF-1)}' file     #上一条取反
-awk '$1 == 0{print $1,$2,$NF,$(NF-1)}' file        #指定元素判断;>/</>=/<=也支持;字符串可使用 $1 == "str"
-awk '$1 == 0{if ($2 < 1) print $NF}' file          #带有条件判断;还支持循环等,语法风格与C语言类似
-awk '{print $1 $2 $NF $(NF-1)}' file               #输出流元素间无分隔符
-awk 'BEGIN{FS=":";OFS=";"} {print $1,$2}' file     #指定FS和OFS
-awk -F: '{print $1,$2}' file                       #以option方式指定FS; -F :/-F ':'/-F ":"都可以
-awk -F"[:;]" '{print $1,$2}' file                  #指定多个分隔符;连续相同分隔符算一个
-awk 'BEGIN{FIELDWIDTHS="1 2"} {print $1,$2}' file  #按照字符数分割而不是FS;输出由OFS确定
-awk '{print ENVIRON["HOME"],$1}' file              #ENVIRON[]使用Shell环境变量;变量名前无需$
-awk 'BEGIN{} END{}'                                #单独使用BEGIN或END部分可不加file
+### 示例
+awk '{print $1,$2,$NF,$(NF-1)}' file               # 打印开始两个元素和最后两个元素;输出流以空格(OFS)隔开
+awk '/RE/{print $1,$2,$NF,$(NF-1)}' file           # 使用正则表达式筛选需要处理的行
+awk '$1 ~ /RE/{print $1,$2,$NF,$(NF-1)}' file      # RE表达式匹配指定的元素,这里是$1
+awk '$1 !~ /RE/{print $1,$2,$NF,$(NF-1)}' file     # 上一条取反
+awk '$1 == 0{print $1,$2,$NF,$(NF-1)}' file        # 指定元素判断;>/</>=/<=也支持;字符串可使用 $1 == "str"
+awk '$1 == 0{if ($2 < 1) print $NF}' file          # 带有条件判断;还支持循环等,语法风格与C语言类似
+awk '{print $1 $2 $NF $(NF-1)}' file               # 输出流元素间无分隔符
+awk 'BEGIN{FS=":";OFS=";"} {print $1,$2}' file     # 指定FS和OFS
+awk -F: '{print $1,$2}' file                       # 以option方式指定FS; -F :/-F ':'/-F ":"都可以
+awk -F"[:;]" '{print $1,$2}' file                  # 指定多个分隔符;连续相同分隔符算一个
+awk 'BEGIN{FIELDWIDTHS="1 2"} {print $1,$2}' file  # 按照字符数分割而不是FS;输出由OFS确定
+awk '{print ENVIRON["HOME"],$1}' file              # ENVIRON[]使用Shell环境变量;变量名前无需$
+awk 'BEGIN{}'                                      # BEGIN可单独使用
+awk 'NR < 5 {print}' file                          # 行号小于5
+awk 'NR==1,NR==4 {print}' file                     # 行号等于1和4的打印出来
 
-###awk数据格式化
+echo | awk '{for(i=0;i<10;i++){print i;}}'         # 等价于 seq 0 9
+awk 'NR<=10 {print}' file                          # 等价于 head file
+
+### awk数据格式化
 参考 标准输入输出
 
-###awk自定义变量
-var = 123          #一般在BENGIN{}中或-v var="str"定义,=前后空格可忽略;awk中使用无需$前缀
-var = 1 2 3        #同上;不在""内的空格会被忽略,解析为123
-var = "1 2 3"      #使用双引号保留空格,不支持单引号;推荐定义方式
+### awk自定义变量
+var = 123          # 一般在BENGIN{}中或-v var="str"定义,=前后空格可忽略;awk中使用无需$前缀
+var = 1 2 3        # 同上;不在""内的空格会被忽略,解析为123
+var = "1 2 3"      # 使用双引号保留空格,不支持单引号;推荐定义方式
 
-###awk数组
-var[index]         #数组定义方式;index一般是双引号的字符串;类似于map
-var[1]             #索引为数字
-delete var[index]  #删除数组元素
-for (test in var)  #数组遍历
+### awk数组
+var[index]         # 数组定义方式;index一般是双引号的字符串;类似于map
+var[1]             # 索引为数字
+delete var[index]  # 删除数组元素
+for (test in var)  # 数组遍历
 {
     print test
 }
 
-###awk内置函数
-####数学函数
-atan2(x, y)   #x/y的反正切,x和y以弧度为单位
-cos(x)        #x的余弦,x以弧度为单位
-exp(x)        #x的指数函数
-int(x)        #x的整数部分,取靠近零一侧的值
-log(x)        #x的自然对数
-rand( )       #比0大比1小的随机浮点值
-sin(x)        #x的正弦,x以弧度为单位
-sqrt(x)       #x的平方根
-srand(x)      #为计算随机数指定一个种子值
+### awk内置函数
+#### 数学函数
+atan2(x, y)   # x/y的反正切,x和y以弧度为单位
+cos(x)        # x的余弦,x以弧度为单位
+exp(x)        # x的指数函数
+int(x)        # x的整数部分,取靠近零一侧的值
+log(x)        # x的自然对数
+rand( )       # 比0大比1小的随机浮点值
+sin(x)        # x的正弦,x以弧度为单位
+sqrt(x)       # x的平方根
+srand(x)      # 为计算随机数指定一个种子值
 
-####位运算函数
-and(v1, v2)         #执行值v1和v2的按位与运算
-compl(val)          #执行val的补运算
-lshift(val, count)  #将值val左移count位
-or(v1, v2)          #执行值v1和v2的按位或运算
-rshift(val, count)  #将值val右移count位
-xor(v1, v2)         #执行值v1和v2的按位异或运算
+#### 位运算函数
+and(v1, v2)         # 执行值v1和v2的按位与运算
+compl(val)          # 执行val的补运算
+lshift(val, count)  # 将值val左移count位
+or(v1, v2)          # 执行值v1和v2的按位或运算
+rshift(val, count)  # 将值val右移count位
+xor(v1, v2)         # 执行值v1和v2的按位异或运算
 
-####字符串函数
-asort(s [,d])              #按数组元素值排序;索引值会被替换为连续数字;可指定新数组存储到数组d中
-asorti(s [,d])             #按数组索引值作为元素值排序;其他同上
-gensub(r, s, h [, t])      #查找$0或字符串t来匹配正则表达式r;如果h是一个以g或G开头的字符串,就用s替换掉匹配的文本;如果h是一个数字,它表示要替换掉第h处r匹配的地方
-gsub(r, s [,t])            #查找$0或字符串t来匹配正则表达式r;如果找到了,就全部替换成字符串s
-index(s, t)                #返回字符串t在字符串s中的索引值;未找到返回0
-length([s])                #返回字符串s的长度;未指定返回$0的长度
-match(s, r [,a])           #返回字符串s中正则表达式r出现位置的索引;如果指定了数组a,它会存储s中匹配正则表达式的那部分
-split(s, a [,r])           #将s用FS字符或正则表达式r(如果指定了的话)分开放到数组a中;返回字段的总数
-sprintf(format, variables) #用提供的format和variables返回一个类似于printf输出的字符串
-sub(r, s [,t])             #在变量$0或目标字符串t中查找正则表达式r的匹配;如果找到了,就用字符串s替换掉第一处匹配
-substr(s, i [,n])          #返回s中从索引值i开始的n个字符组成的子字符串;未提供n返回s剩下的部分
-tolower(s)                 #转小写
-toupper(s)                 #转大写
+#### 字符串函数
+asort(s [,d])              # 按数组元素值排序;索引值会被替换为连续数字;可指定新数组存储到数组d中
+asorti(s [,d])             # 按数组索引值作为元素值排序;其他同上
+gensub(r, s, h [, t])      # 查找$0或字符串t来匹配正则表达式r;如果h是一个以g或G开头的字符串,就用s替换掉匹配的文本;如果h是一个数字,它表示要替换掉第h处r匹配的地方
+gsub(r, s [,t])            # 查找$0或字符串t来匹配正则表达式r;如果找到了,就全部替换成字符串s
+index(s, t)                # 返回字符串t在字符串s中的索引值;未找到返回0
+length([s])                # 返回字符串s的长度;未指定返回$0的长度
+match(s, r [,a])           # 返回字符串s中正则表达式r出现位置的索引;如果指定了数组a,它会存储s中匹配正则表达式的那部分
+split(s, a [,r])           # 将s用FS字符或正则表达式r(如果指定了的话)分开放到数组a中;返回字段的总数
+sprintf(format, variables) # 用提供的format和variables返回一个类似于printf输出的字符串
+sub(r, s [,t])             # 在变量$0或目标字符串t中查找正则表达式r的匹配;如果找到了,就用字符串s替换掉第一处匹配
+substr(s, i [,n])          # 返回s中从索引值i开始的n个字符组成的子字符串;未提供n返回s剩下的部分
+tolower(s)                 # 转小写
+toupper(s)                 # 转大写
 
-####时间函数
-mktime(datespec)               #YYYY MM DD HH MM SS [DST]日期格式转换成时间戳值
-strftime(format [,timestamp])  #当前时间的时间戳或timestamp（时间戳）转化格式化日期（采用shell函数date()的格式）
-systime()                      #返回当前时间的时间戳
+#### 时间函数
+mktime(datespec)               # YYYY MM DD HH MM SS [DST]日期格式转换成时间戳值
+strftime(format [,timestamp])  # 当前时间的时间戳或timestamp（时间戳）转化格式化日期（采用shell函数date()的格式）
+systime()                      # 返回当前时间的时间戳
 
-####自定义函数
+#### 自定义函数
 方式一:BEGIN{}部分添加
 function name([args])
 {
@@ -1002,14 +1171,14 @@ statements
 }
 
 基本语法结构
-if (conditions) {statements}   #if单行形式;statements为多语句分号隔开,单条语句则{}可不加
+if (conditions) {statements}   # if单行形式;statements为多语句分号隔开,单条语句则{}可不加
  
-if (conditions)                #if多行
+if (conditions)                # if多行
 {
   statements
 }
 
-if (conditions)                #if-else
+if (conditions)                # if-else
 {
   statements
 }else
@@ -1017,103 +1186,103 @@ if (conditions)                #if-else
   statements
 }
 
-while (conditions)  #while循环
+while (conditions)  # while循环
 {
   statements
 }
 
-do                  #do-while循环
+do                  # do-while循环
 {
   statements
 }while(conditions)
 
-for( variable assignment; condition; iteration process)  #C语言风格for循环
+for( variable assignment; condition; iteration process)  # C语言风格for循环
 {
   statements
 }
 
 方式二:外部自定义文件,函数格式与方式一一致,可添加多个函数
-awk -f funclibs ...   #通过-f引用外部自定义函数库funclibs后即可通过函数名使用
+awk -f funclibs ...   # 通过-f引用外部自定义函数库funclibs后即可通过函数名使用
 
 
-#正则表达式(Linux)
+# 正则表达式(Linux)
 
-##作用
+## 作用
 通过正则表达式匹配过滤数据
 
-##正则表达式类型
-POSIX基础正则表达式（basic regular expression,BRE）引擎      #sed使用BRE处理
-POSIX扩展正则表达式（extended regular expression,ERE）引擎   #gawk使用ERE处理
+## 正则表达式类型
+POSIX基础正则表达式（basic regular expression,BRE）引擎      # sed使用BRE处理
+POSIX扩展正则表达式（extended regular expression,ERE）引擎   # gawk使用ERE处理
 注:POSIX:Portable Operating System Interface(可移植操作系统接口),用于保证程序可移植性的标准
 
 
-###BRE
-1.纯文本     #匹配含有纯文本的内容
-sed -n '/str/p' file  #打印文件中含有str的行
-sed -n '/  /p' file   #打印文件中含有两个空格的行
+### BRE
+1.纯文本     # 匹配含有纯文本的内容
+sed -n '/str/p' file  # 打印文件中含有str的行
+sed -n '/  /p' file   # 打印文件中含有两个空格的行
 
-2.特殊字符   #在正则表达式中有特殊含义;如需匹配特殊字符本身可在之前加上 \
-.    #表示任意一个字符
-*    #表示匹配任意次
-[]   #表示匹配[]中任意一个字符
-^    #表示匹配行首
-$    #表示匹配行尾
-{}   #表示区间表达式
-\    #表示转义
-+    #表示至少匹配一次
-?    #表示匹配或者不匹配
-|    #表示匹配模式连接符
-()   #表示字符串当做一个字符处理
+2.特殊字符   # 在正则表达式中有特殊含义;如需匹配特殊字符本身可在之前加上 \
+.    # 表示任意一个字符
+*    # 表示匹配任意次
+[]   # 表示匹配[]中任意一个字符
+^    # 表示匹配行首
+$    # 表示匹配行尾
+{}   # 表示区间表达式
+\    # 表示转义
++    # 表示至少匹配一次
+?    # 表示匹配或者不匹配
+|    # 表示匹配模式连接符
+()   # 表示字符串当做一个字符处理
 
-sed -n '/\\/p' file    #打印文件中含有\的行
-sed -n '/\$/p' file    #含有$的行;其他类似
-sed -n '/^str/p' file  #str开头;^和$称为锚字符,用于指定字符位置
-sed -n '/str$/p' file  #str结尾
-sed -n '/str^/p' file  #匹配"str^";不在行首的^被认为是字符本身,推荐使用str\^
-sed -n '/$str/p' file  #类似上一条
-sed -n '/^$/p' file    #匹配无内容空行(不计\n)
-sed -n '/^/p' file     #匹配任意行
-sed -n '/$/p' file     #同上
+sed -n '/\\/p' file    # 打印文件中含有\的行
+sed -n '/\$/p' file    # 含有$的行;其他类似
+sed -n '/^str/p' file  # str开头;^和$称为锚字符,用于指定字符位置
+sed -n '/str$/p' file  # str结尾
+sed -n '/str^/p' file  # 匹配"str^";不在行首的^被认为是字符本身,推荐使用str\^
+sed -n '/$str/p' file  # 类似上一条
+sed -n '/^$/p' file    # 匹配无内容空行(不计\n)
+sed -n '/^/p' file     # 匹配任意行
+sed -n '/$/p' file     # 同上
 
 3.其他模式
-sed -n '/.str/p' file      # . 表示至少匹配一个字符
-sed -n '/[ab]str/p' file   #[]为字符组,表示匹配字符组中任意一个字符
-sed -n '/[^ab]str/p' file  #str前至少有一个字符,但不是a或b
-sed -n '/[a-z]str/p' file  #[]连续数字或字母可首尾加短杠表示;[a-zA-Z0-9]表示任意字母数字,等价于[[:alnum:]]
+sed -n '/.str/p' file      #  . 表示至少匹配一个字符
+sed -n '/[ab]str/p' file   # []为字符组,表示匹配字符组中任意一个字符
+sed -n '/[^ab]str/p' file  # str前至少有一个字符,但不是a或b
+sed -n '/[a-z]str/p' file  # []连续数字或字母可首尾加短杠表示;[a-zA-Z0-9]表示任意字母数字,等价于[[:alnum:]]
 
-sed -n '/a*b/p' file       #a出现任意次(包括不出现)
-sed -n '/a[bc]*d/p' file   #ad之间出现任意个b或c或bc的任意组合;如: ad/abd/acd/abbd/accd/abcd/acbd/abbcd等
+sed -n '/a*b/p' file       # a出现任意次(包括不出现)
+sed -n '/a[bc]*d/p' file   # ad之间出现任意个b或c或bc的任意组合;如: ad/abd/acd/abbd/accd/abcd/acbd/abbcd等
 
-###ERE
-gawk '/ab?c/{print $0}' file      #?表示前面字符出现或不出现;本例可匹配ac和abc
-gawk '/a[bc]?d/{print $0}' file   #b或c出现或不出现;本例匹配ad/abd/acd
+### ERE
+gawk '/ab?c/{print $0}' file      # ?表示前面字符出现或不出现;本例可匹配ac和abc
+gawk '/a[bc]?d/{print $0}' file   # b或c出现或不出现;本例匹配ad/abd/acd
 
-gawk '/ab+c/{print $0}' file      #b至少出现一次
-gawk '/a[bc]+d/{print $0}' file   #b或c至少出现一次
+gawk '/ab+c/{print $0}' file      # b至少出现一次
+gawk '/a[bc]+d/{print $0}' file   # b或c至少出现一次
 
-gawk -r '/ab{2}c/{print $0}' file     #b出现2
-gawk -r '/ab{2,4}c/{print $0}' file   #b出现2-4次;-r开启区间表达式,{}表示出现次数区间
+gawk -r '/ab{2}c/{print $0}' file     # b出现2
+gawk -r '/ab{2,4}c/{print $0}' file   # b出现2-4次;-r开启区间表达式,{}表示出现次数区间
 
-gawk '/a(bc)?d/{print $0}' file       #()中字符串当做一个标准字符处理,其他模式同理;本例可匹配ad和abcd
-gawk '/(a|b)c(d|e)/{print $0}'        #|表示或;匹配含有 acd/ace/bcd/bce
-gawk '/ab|cd/{print $0}'              #匹配含有ab或cd
+gawk '/a(bc)?d/{print $0}' file       # ()中字符串当做一个标准字符处理,其他模式同理;本例可匹配ad和abcd
+gawk '/(a|b)c(d|e)/{print $0}'        # |表示或;匹配含有 acd/ace/bcd/bce
+gawk '/ab|cd/{print $0}'              # 匹配含有ab或cd
 
-##正则匹配示例
-for var in $(echo $PATH|sed 's/:/ /g');do echo $var;done  #打印所有$PATH路径
-for var in `echo $PATH|sed 's/:/ /g'`;do echo $var;done   #同上
-count=$(ls /usr/bin | wc -l)    #统计$PATH中/usr/bin目录下文件(命令)数量
-count=`ls /usr/bin | wc -l`     #同上
-
-
-
-#技巧
-/{,usr/}bin/*cpp       #解析后为 /bin/*cpp 或 /usr/bin/*cpp
-: > xx.dat             #不改变文件权限重建文件;不存在则被创建
-> xx.dat               #同上
-cat /dev/null > xx.dat #同上
+## 正则匹配示例
+for var in $(echo $PATH|sed 's/:/ /g');do echo $var;done  # 打印所有$PATH路径
+for var in `echo $PATH|sed 's/:/ /g'`;do echo $var;done   # 同上
+count=$(ls /usr/bin | wc -l)    # 统计$PATH中/usr/bin目录下文件(命令)数量
+count=`ls /usr/bin | wc -l`     # 同上
 
 
-##文件读取
+
+# 技巧
+/{,usr/}bin/*cpp       # 解析后为 /bin/*cpp 或 /usr/bin/*cpp
+: > xx.dat             # 不改变文件权限重建文件;不存在则被创建
+> xx.dat               # 同上
+cat /dev/null > xx.dat # 同上
+
+
+## 文件读取
 cat /path/file | while read line;do echo ${line};done
 
 

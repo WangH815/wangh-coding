@@ -6,16 +6,16 @@ import java.io.IOException;
 
 public class ReadFile {
     public static void main(String[] args) {
-            try {
-				BufferedReader in = new BufferedReader(new FileReader("c:/tmp/java/test.txt"));
-				String str;
+        try {
+            BufferedReader in = new BufferedReader(new FileReader("c:/tmp/java/test.txt"));
+            String str;
 
-				while ((str = in.readLine()) != null) {
-				    System.out.println(str);
-				}
-				System.out.println(str);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+            while ((str = in.readLine()) != null) {
+                System.out.println(str);
+            }
+            System.out.println(str);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

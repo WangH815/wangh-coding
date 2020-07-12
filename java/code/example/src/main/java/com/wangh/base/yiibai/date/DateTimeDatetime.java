@@ -19,6 +19,6 @@ public class DateTimeDatetime {
         simpDate = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         // simpDate = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         System.out.println(simpDate.format(d));
-        
+
     }
 }

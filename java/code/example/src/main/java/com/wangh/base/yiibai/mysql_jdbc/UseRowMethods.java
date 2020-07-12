@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class UseRowMethods {
     public static void main(String[] args) throws Exception {
-    	String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+        String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
         String DB_URL = "jdbc:mysql://localhost:3306/testdb?useSSL=false";
         String User = "root";
         String Passwd = "root";

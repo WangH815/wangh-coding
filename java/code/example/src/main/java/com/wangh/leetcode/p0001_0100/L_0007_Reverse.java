@@ -12,8 +12,8 @@ public class L_0007_Reverse {
             x /= 10;
             rev = rev * 10 + pop;
         }
-        if (rev > Integer.MAX_VALUE || rev < Integer.MIN_VALUE ) return 0;
-        return (int)rev;
+        if (rev > Integer.MAX_VALUE || rev < Integer.MIN_VALUE) return 0;
+        return (int) rev;
     }
 
 }

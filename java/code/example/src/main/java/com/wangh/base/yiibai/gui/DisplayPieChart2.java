@@ -14,8 +14,8 @@ class Part2 {
 }
 
 class MyComponent3 extends JComponent {
-    Part2[] slices = { new Part2(15, Color.yellow), new Part2(30, Color.white), new Part2(25, Color.blue),
-            new Part2(30, Color.red) };
+    Part2[] slices = {new Part2(15, Color.yellow), new Part2(30, Color.white), new Part2(25, Color.blue),
+            new Part2(30, Color.red)};
 
     MyComponent3() {
     }

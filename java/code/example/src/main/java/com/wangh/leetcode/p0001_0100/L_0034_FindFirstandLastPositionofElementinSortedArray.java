@@ -75,7 +75,7 @@ public class L_0034_FindFirstandLastPositionofElementinSortedArray {
     public static int[] searchRange3(int[] nums, int target) {
         int start = 0;
         int end = nums.length - 1;
-        int[] ans = { -1, -1 };
+        int[] ans = {-1, -1};
         if (nums.length == 0) {
             return ans;
         }

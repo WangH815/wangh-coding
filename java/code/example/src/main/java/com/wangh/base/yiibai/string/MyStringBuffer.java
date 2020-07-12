@@ -20,10 +20,10 @@ public class MyStringBuffer {
 
     private static void countTo_N_Improved() {
         for (int count = 2; count <= N; count = count + 2) {
-        	if (count < 10)
-        		 emit("  " + count);
-        	else
-        		emit(" " + count);
+            if (count < 10)
+                emit("  " + count);
+            else
+                emit(" " + count);
         }
     }
 }

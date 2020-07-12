@@ -11,7 +11,7 @@ class CanStop extends Thread {
         while (!stop && counter < 10000) {
             //System.out.println(counter++);
         }
-        if (stop){
+        if (stop) {
             System.out.println("Detected stop");
         }
     }

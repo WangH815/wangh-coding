@@ -10,37 +10,37 @@ public class MultiThreadServer2 {
     ServerSocket myServerSocket;
     boolean ServerOn = true;
 
-    public MultiThreadServer2() { 
-      try {
-         myServerSocket = new ServerSocket(12345);
-      } catch(IOException ioe) { 
-         System.out.println("Could not create server socket on port 12345. Quitting.");
-         System.exit(-1);
-      } 
+    public MultiThreadServer2() {
+        try {
+            myServerSocket = new ServerSocket(12345);
+        } catch (IOException ioe) {
+            System.out.println("Could not create server socket on port 12345. Quitting.");
+            System.exit(-1);
+        }
 
-      Calendar now = Calendar.getInstance();
-      SimpleDateFormat formatter = new SimpleDateFormat(
-         "yyyy/MM/dd \'at\' hh:mm:ss ");
-      System.out.println("It is now : " + formatter.format(now.getTime()));
+        Calendar now = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat(
+                "yyyy/MM/dd \'at\' hh:mm:ss ");
+        System.out.println("It is now : " + formatter.format(now.getTime()));
 
-      while(ServerOn) { 
-         try { 
-            Socket clientSocket = myServerSocket.accept();
-            ClientServiceThread cliThread = new ClientServiceThread(clientSocket);
-            cliThread.start(); 
-         } catch(IOException ioe) { 
-            System.out.println("Exception found on accept. Ignoring. Stack Trace :"); 
-            ioe.printStackTrace(); 
-         }  
-      } 
-      try { 
-         myServerSocket.close(); 
-         System.out.println("Server Stopped"); 
-      } catch(Exception ioe) { 
-         System.out.println("Error Found stopping server socket"); 
-         System.exit(-1); 
-      } 
-   }
+        while (ServerOn) {
+            try {
+                Socket clientSocket = myServerSocket.accept();
+                ClientServiceThread cliThread = new ClientServiceThread(clientSocket);
+                cliThread.start();
+            } catch (IOException ioe) {
+                System.out.println("Exception found on accept. Ignoring. Stack Trace :");
+                ioe.printStackTrace();
+            }
+        }
+        try {
+            myServerSocket.close();
+            System.out.println("Server Stopped");
+        } catch (Exception ioe) {
+            System.out.println("Error Found stopping server socket");
+            System.exit(-1);
+        }
+    }
 
     public static void main(String[] args) {
         new MultiThreadServer2();

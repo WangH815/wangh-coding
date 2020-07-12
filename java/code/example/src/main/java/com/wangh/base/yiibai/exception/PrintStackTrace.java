@@ -2,7 +2,7 @@ package com.wangh.base.yiibai.exception;
 
 public class PrintStackTrace {
     public static void main(String args[]) {
-        int array[] = { 20, 20, 40 };
+        int array[] = {20, 20, 40};
         int num1 = 15, num2 = 10;
         int result = 10;
         try {

@@ -13,7 +13,7 @@ public class DisplayRunningThread extends Thread {
         Thread[] lstThreads = new Thread[noThreads];
         currentGroup.enumerate(lstThreads);
 
-        for (int i = 0; i < noThreads; i++){
+        for (int i = 0; i < noThreads; i++) {
             System.out.println("Thread No:" + i + " = " + lstThreads[i].getName());
         }
     }

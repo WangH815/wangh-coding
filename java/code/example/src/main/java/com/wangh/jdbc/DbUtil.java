@@ -10,7 +10,7 @@ public class DbUtil {
     public static final String PASSWORD = "root";
     private static Connection conn = null;
 
-    static{
+    static {
         try {
             // 1.加载驱动程序
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -23,7 +23,7 @@ public class DbUtil {
         }
     }
 
-    public static Connection getConnection(){
+    public static Connection getConnection() {
         return conn;
     }
 }

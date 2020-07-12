@@ -24,12 +24,13 @@ public class T28 {
     }
 }
 
-class TestSort{
-    TestSort(){
+class TestSort {
+    TestSort() {
         test();
 //        System.out.println(this.toString());
     }
-    public void test(){
+
+    public void test() {
         int[] intArray = Arrays.intArrayRandomGenerator(100, -100, 100);
 //        long start = System.currentTimeMillis();
         quickSort(intArray, 0, intArray.length - 1);

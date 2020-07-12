@@ -7,7 +7,7 @@ public class Demo {
     public static void main(String[] args) throws IOException {
         // 创建;文件和目录都是File
         File file = new File("C:\\User\\WangH\\1.txt");  // windows平台写法;其他平台使用 /home/wangh/1.txt
-        File file1 = new File("/home","121.log");     // 要求上级目录必须存在
+        File file1 = new File("/home", "121.log");     // 要求上级目录必须存在
         File dir = new File("/home/wangh/test/");
 
         // 常用方法

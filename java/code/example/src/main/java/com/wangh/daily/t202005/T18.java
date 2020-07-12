@@ -29,7 +29,7 @@ public class T18 {
 
         list.forEach(System.out::println);         // 方法引用
         System.out.println("=============");
-        list.forEach((t)-> System.out.println(t)); // lambda表达式；等价于方法引用
+        list.forEach((t) -> System.out.println(t)); // lambda表达式；等价于方法引用
     }
 
 

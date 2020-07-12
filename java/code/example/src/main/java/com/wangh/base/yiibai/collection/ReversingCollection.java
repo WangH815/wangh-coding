@@ -7,7 +7,7 @@ import java.util.ListIterator;
 
 public class ReversingCollection {
     public static void main(String[] args) {
-        String[] coins = { "A", "B", "C", "D", "E" };
+        String[] coins = {"A", "B", "C", "D", "E"};
         List<String> l = new ArrayList<String>();
 
         for (int i = 0; i < coins.length; i++)

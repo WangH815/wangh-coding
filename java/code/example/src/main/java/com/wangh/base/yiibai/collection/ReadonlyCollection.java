@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ReadonlyCollection {
     public static void main(String[] argv) throws Exception {
-        List<String> stuff = Arrays.asList(new String[] { "a", "b" });
+        List<String> stuff = Arrays.asList(new String[]{"a", "b"});
         List<String> list = new ArrayList<String>(stuff);
         list = Collections.unmodifiableList(list);
         try {

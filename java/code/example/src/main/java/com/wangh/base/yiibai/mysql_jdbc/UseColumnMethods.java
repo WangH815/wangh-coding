@@ -5,7 +5,7 @@ import java.sql.*;
 public class UseColumnMethods {
     public static void main(String[] args) throws Exception {
 
-    	String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+        String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
         String DB_URL = "jdbc:mysql://localhost:3306/testdb?useSSL=false";
         String User = "root";
         String Passwd = "root";
@@ -30,7 +30,7 @@ public class UseColumnMethods {
             System.out.println("No of characters in 3rd column " + rsmd.getColumnDisplaySize(2));
         } catch (
 
-        SQLException e) {
+                SQLException e) {
             System.out.println("SQL exception occured" + e);
         }
 

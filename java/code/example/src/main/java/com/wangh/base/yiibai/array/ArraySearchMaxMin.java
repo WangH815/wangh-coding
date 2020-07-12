@@ -2,7 +2,7 @@ package com.wangh.base.yiibai.array;
 
 public class ArraySearchMaxMin {
     public static void main(String[] args) {
-        int numbers[] = new int[] { 28, 21, 17, 41, 34, 29, 15 };
+        int numbers[] = new int[]{28, 21, 17, 41, 34, 29, 15};
         int s = numbers[0];
         int l = numbers[0];
 

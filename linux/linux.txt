@@ -544,7 +544,7 @@ find [path] [option value] [option2 value2] ... [operation]
     -follow               # 如果遇到符号链接文件,就跟踪链接所指的文件
     -cpio                 # 查位于某一类型文件系统中的文件,这些文件系统类型通常可 在/etc/fstab中找到
     -prune path           # 忽略某个目录
-find . -name   "*.txt" -print                  # .txt结尾的文件,双引号可不加
+find . -name "*.txt" -print                    # .txt结尾的文件,双引号可不加;也可以使用单引号;有无单双引号有差异
 find . ! -name "*.txt" -print                  # 查找所有非 .txt 结尾文件
 find . -name "[a-z][0–9].txt" -print           # 查以小写字母和数字开头的txt文件     
 find . -name "*.txt" -o -name "*.pdf"  -print  # 查找txt或pdf文件,-o表示或

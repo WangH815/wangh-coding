@@ -11,6 +11,6 @@ public class RemovingWhitespaces {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(str);
         str = m.replaceAll(replace);
-        System.out.println("After Whitespaces trim: "+str);
+        System.out.println("After Whitespaces trim: " + str);
     }
 }

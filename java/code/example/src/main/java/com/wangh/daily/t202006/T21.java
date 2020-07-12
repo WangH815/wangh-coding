@@ -14,11 +14,11 @@ public class T21 {
 
         // csv写入
         File file = FileUtil.file("C:\\Users\\WangH\\Desktop\\test.csv");
-        CsvWriter writer = CsvUtil.getWriter(file, CharsetUtil.CHARSET_UTF_8,true);
+        CsvWriter writer = CsvUtil.getWriter(file, CharsetUtil.CHARSET_UTF_8, true);
         writer.write(
-                new String[] {"a1", "b1", "c1"},
-                new String[] {"a2", "b2", "c2"},
-                new String[] {"a3", "b3", "c3"}
+                new String[]{"a1", "b1", "c1"},
+                new String[]{"a2", "b2", "c2"},
+                new String[]{"a3", "b3", "c3"}
         );
 
         // csv文本读取

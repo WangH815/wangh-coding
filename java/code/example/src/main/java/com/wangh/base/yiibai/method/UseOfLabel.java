@@ -6,7 +6,8 @@ public class UseOfLabel {
         String substring = "substring";
         boolean found = false;
         int max = strSearch.length() - substring.length();
-        testlbl: for (int i = 0; i <= max; i++) {
+        testlbl:
+        for (int i = 0; i <= max; i++) {
             int length = substring.length();
             int j = i;
             int k = 0;

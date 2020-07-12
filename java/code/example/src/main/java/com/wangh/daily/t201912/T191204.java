@@ -4,7 +4,7 @@ public class T191204 {
     public static void main(String[] args) {
 //        System.out.println("hello java!");
         FJ fj = new FJ();
-        fj.size= FJ.FF.S;
+        fj.size = FJ.FF.S;
         System.out.println(fj.size);
 
     }
@@ -16,8 +16,8 @@ class FJ {
     FF size;
 }
 
-class Dog{
-    public Dog(String str){
+class Dog {
+    public Dog(String str) {
 
     }
 
@@ -31,7 +31,8 @@ class Dog{
 
     String str;
     int i;
-    void slepping(){
+
+    void slepping() {
 
     }
 }

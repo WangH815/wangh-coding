@@ -5,9 +5,9 @@ import java.util.List;
 
 public class ArrayFindObject {
     @SuppressWarnings("unlikely-arg-type")
-	public static void main(String[] args) {
-        List<String> objArray = new ArrayList<String>();
-        List<String> objArray2 = new ArrayList<String>();
+    public static void main(String[] args) {
+        List<String> objArray = new ArrayList();
+        List<String> objArray2 = new ArrayList();
         objArray2.add(0, "common1");
         objArray2.add(1, "common2");
         objArray2.add(2, "notcommon");

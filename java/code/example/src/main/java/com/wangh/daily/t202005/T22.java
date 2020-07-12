@@ -31,15 +31,15 @@ public class T22 {
         System.out.println(args);
         new T22().myPrint();
 
-        int[] is = {0,1};
-        int[] is2 =is;
+        int[] is = {0, 1};
+        int[] is2 = is;
         System.out.println(is2[1]);
 
         is[1] = 5;
         System.out.println(is2[1]);
 //        main(new String[]{});     // 会导致栈溢出
 
-        int ii =11;
+        int ii = 11;
         myInt(ii);
         System.out.println(ii);
     }
@@ -47,12 +47,12 @@ public class T22 {
     /**
      * 其他类中构建的实例无法访问
      */
-    private void myPrint(){
+    private void myPrint() {
         System.out.println("hello");
     }
 
-    static void myInt(int i){
+    static void myInt(int i) {
         i = 22;
     }
-    
+
 }

@@ -6,30 +6,33 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class MultiThreadServer implements Runnable {
-   Socket csocket;
-   MultiThreadServer(Socket csocket) {
-      this.csocket = csocket;
-   }
-   public static void main(String args[]) throws Exception { 
-      ServerSocket ssock = new ServerSocket(8806);
-      System.out.println("Server Start and Listening: ");
+    Socket csocket;
 
-      while (true) {
-         Socket sock = ssock.accept();
-         System.out.println("Connected");
-         new Thread(new MultiThreadServer(sock)).start();
-      }
-   }
-   public void run() {
-      try {
-         PrintStream pstream = new PrintStream(csocket.getOutputStream());
-         for (int i = 100; i >= 0; i--) {
-            pstream.println(i + " bottles of beer on the wall");
-         }
-         pstream.close();
-         csocket.close();
-      } catch (IOException e) {
-         System.out.println(e);
-      }
-   }
+    MultiThreadServer(Socket csocket) {
+        this.csocket = csocket;
+    }
+
+    public static void main(String args[]) throws Exception {
+        ServerSocket ssock = new ServerSocket(8806);
+        System.out.println("Server Start and Listening: ");
+
+        while (true) {
+            Socket sock = ssock.accept();
+            System.out.println("Connected");
+            new Thread(new MultiThreadServer(sock)).start();
+        }
+    }
+
+    public void run() {
+        try {
+            PrintStream pstream = new PrintStream(csocket.getOutputStream());
+            for (int i = 100; i >= 0; i--) {
+                pstream.println(i + " bottles of beer on the wall");
+            }
+            pstream.close();
+            csocket.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 }

@@ -26,10 +26,10 @@ class MyThread extends Thread {
     boolean stop = false;
 
     @SuppressWarnings("unused")
-	public void run() {
+    public void run() {
         int i = 0;
         while (stop) {
-            return ;
+            return;
         }
     }
 }

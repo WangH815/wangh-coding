@@ -13,7 +13,7 @@ public class DisplayDirectories {
             }
         };
         files = dir.listFiles(fileFilter);
-        System.out.println(files.length +" directories found.");
+        System.out.println(files.length + " directories found.");
 
         if (files.length == 0) {
             System.out.println("Either dir does not exist or is not a directory");

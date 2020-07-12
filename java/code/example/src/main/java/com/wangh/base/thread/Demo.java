@@ -19,7 +19,7 @@ public class Demo {
 /**
  * 方式一：继承Thread类，重写run方法
  */
-class Thread1 extends Thread{
+class Thread1 extends Thread {
     @Override
     /**
      * 自定义进程类逻辑部分
@@ -33,7 +33,7 @@ class Thread1 extends Thread{
 /**
  * 继承Runnable接口，实现run方法
  */
-class Thread2 implements Runnable{
+class Thread2 implements Runnable {
     @Override
     /**
      * 自定义进程类逻辑部分

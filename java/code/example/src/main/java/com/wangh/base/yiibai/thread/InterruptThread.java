@@ -28,7 +28,7 @@ public class InterruptThread extends Object implements Runnable {
         while (true) {
             for (int i = 0; i < 100000; i++) {
                 @SuppressWarnings("unused")
-				int j = i * 2;
+                int j = i * 2;
             }
             System.out.println("A isInterrupted()=" + Thread.currentThread().isInterrupted());
             if (Thread.interrupted()) {

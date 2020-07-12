@@ -17,23 +17,23 @@ public class Infix2Postfix {
         for (int j = 0; j < input.length(); j++) {
             char ch = input.charAt(j);
             switch (ch) {
-            case '+':
-            case '-':
-                gotOper(ch, 1);
-                break;
-            case '*':
-            case '/':
-                gotOper(ch, 2);
-                break;
-            case '(':
-                theStack.push(ch);
-                break;
-            case ')':
-                gotParen(ch);
-                break;
-            default:
-                output = output + ch;
-                break;
+                case '+':
+                case '-':
+                    gotOper(ch, 1);
+                    break;
+                case '*':
+                case '/':
+                    gotOper(ch, 2);
+                    break;
+                case '(':
+                    theStack.push(ch);
+                    break;
+                case ')':
+                    gotParen(ch);
+                    break;
+                default:
+                    output = output + ch;
+                    break;
             }
         }
         while (!theStack.isEmpty()) {

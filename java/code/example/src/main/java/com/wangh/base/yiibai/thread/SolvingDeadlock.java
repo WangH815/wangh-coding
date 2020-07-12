@@ -19,7 +19,7 @@ public class SolvingDeadlock extends ReentrantLock {
     }
 
     @SuppressWarnings("unused")
-	private static synchronized void unregisterLock(SolvingDeadlock ddl) {
+    private static synchronized void unregisterLock(SolvingDeadlock ddl) {
         if (deadlockLocksRegistry.contains(ddl))
             deadlockLocksRegistry.remove(ddl);
     }
@@ -73,20 +73,20 @@ public class SolvingDeadlock extends ReentrantLock {
     }
 
     public SolvingDeadlock() {
-      this(false, false);
-   }
+        this(false, false);
+    }
 
     public SolvingDeadlock(boolean fair) {
-      this(fair, false);
-   }
+        this(fair, false);
+    }
 
     private boolean debugging;
 
     public SolvingDeadlock(boolean fair, boolean debug) {
-      super(fair);
-      debugging = debug;
-      registerLock(this);
-   }
+        super(fair);
+        debugging = debug;
+        registerLock(this);
+    }
 
     public void lock() {
         if (isHeldByCurrentThread()) {
@@ -181,10 +181,10 @@ public class SolvingDeadlock extends ReentrantLock {
     private static Lock c = new SolvingDeadlock(false, true);
 
     @SuppressWarnings("unused")
-	private static Condition wa = a.newCondition();
+    private static Condition wa = a.newCondition();
     private static Condition wb = b.newCondition();
     @SuppressWarnings("unused")
-	private static Condition wc = c.newCondition();
+    private static Condition wc = c.newCondition();
 
     private static void delaySeconds(int seconds) {
         try {
@@ -299,17 +299,17 @@ public class SolvingDeadlock extends ReentrantLock {
         if (args.length > 0)
             test = Integer.parseInt(args[0]);
         switch (test) {
-        case 1:
-            testOne();
-            break;
-        case 2:
-            testTwo();
-            break;
-        case 3:
-            testThree();
-            break;
-        default:
-            System.err.println("usage: java DeadlockDetectingLock [ test# ]");
+            case 1:
+                testOne();
+                break;
+            case 2:
+                testTwo();
+                break;
+            case 3:
+                testThree();
+                break;
+            default:
+                System.err.println("usage: java DeadlockDetectingLock [ test# ]");
         }
         delaySeconds(60);
         System.out.println("--- End Program ---");

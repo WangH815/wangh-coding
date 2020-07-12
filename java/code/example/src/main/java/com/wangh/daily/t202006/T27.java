@@ -109,7 +109,7 @@ class ServiceFactory {
     static Service getService(String service) {
         if (service.equals("ServiceImpl1"))
             return new ServiceImpl1();
-        else if(service.equals("ServiceImpl2"))
+        else if (service.equals("ServiceImpl2"))
             return new ServiceImpl2();
         else
             return null;

@@ -12,7 +12,7 @@ public class UseVarargsWithMethod {
 
     public static void main(String args[]) {
         int sum = 0;
-        sum = sumvarargs(new int[] { 11, 22, 33 });
+        sum = sumvarargs(new int[]{11, 22, 33});
         System.out.println("The sum of the numbers is: " + sum);
     }
 }

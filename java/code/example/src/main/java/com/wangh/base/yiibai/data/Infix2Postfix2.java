@@ -21,14 +21,14 @@ class MyStack {
 
     int pre(char ch) {
         switch (ch) {
-        case '-':
-            return 1;
-        case '+':
-            return 1;
-        case '*':
-            return 2;
-        case '/':
-            return 2;
+            case '-':
+                return 1;
+            case '+':
+                return 1;
+            case '*':
+                return 2;
+            case '/':
+                return 2;
         }
         return 0;
     }

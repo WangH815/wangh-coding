@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 /**
  * reflect(反射)
  * 包: java.lang.reflect
- *
+ * <p>
  * 类或接口
  * Class        // 核心类
  * Field        // 变量相关
@@ -41,19 +41,20 @@ public class Demo {
 
         // 反射调用
         Method method = class1.getMethod("add", int.class, int.class);  // 无参方法则只需要方法名
-        method.invoke(class1.newInstance(),1, 2);
+        method.invoke(class1.newInstance(), 1, 2);
 
     }
 }
 
 class Foo {
-    Foo(){
+    Foo() {
 
     }
 
-    private Foo(String str, int i){
+    private Foo(String str, int i) {
 
     }
+
     public int i;
 
     public void myPrint() {
