@@ -287,6 +287,7 @@ EOF
 read var            # 输入        
 echo $var/${var}    # 输出,输出后自动换行
 echo -e             # 开启转义
+echo -n             # 不输出末尾的换行符
 echo `cmd`          # 输出命令结果
 printf  format-string  [arguments...]  # 格式化输出,不自动换行
 printf "%-10s %-8s\n" 姓名 性别        # 格式化字符串与C语言相同,移植性比echo好;-表示左对齐
@@ -479,7 +480,7 @@ IFS=$'\n'  # 修改为换行符;IFS=:表示修改为冒号;多分隔符可使用
 IFS=$IFS_OLD
 
 ### C语言风格的for循环
-for (( variable assignment ; condition ; iteration process ))  # do ... done循环体遵循bash shell语法
+for (( variable assignment ; conditions ; iteration process ))  # do ... done循环体遵循bash shell语法
 例如:
 for (( a = 1; a < 10; a++ ))            # 单变量形式
 for (( a=1, b=10; a <= 10; a++, b-- ))  # 多变量形式
@@ -846,12 +847,12 @@ grep match_patten path -R -n   # 在多级目录中对文本递归搜索
 ## xargs  命令行参数转换
 xargs 能够将输入数据转化为特定命令的命令行参数;这样,可以配合很多命令来组合使用。比如grep,比如find;
 
-cat file.txt| xargs         # 将多行输出转化为单行输出
-cat single.txt | xargs -n 3 # 原文件每三行作为一行显示
+cat file.txt | xargs         # 将多行输出转化为单行输出(保留最后一个换行符);类似于 cat file.txt | tr -d '\n' (删除所有换行符)
+cat single.txt | xargs -n 3  # 原文件每三行作为一行显示
 
-xargs参数
--d 定义定界符 （默认为空格 多行的定界符为 \n）
--n 指定输出为多行
+### option
+-d  # 定义定界符 （默认为空格 多行的定界符为 \n）
+-n  # 指定输出为多行
 
 
 ## cut  # 按field切分文本
@@ -879,9 +880,11 @@ echo '1234567' | cut -c 2    # 结果为2;可写为 cut -c2,空格可省略
 echo '1234567' | cut -c2-5   # 结果为2345
 echo -e "123\t456" | cut -f2 # 结果为456
 
+
 ## paste  # 按列拼接文本;默认为Tab链接
 paste file1 file2 ...        # 列模式拼接
 paste -d "," file1 file2     # 指定分隔符拼接
+
 
 ## tr     # 字符转换;只能处理标准输入字符串
 tr [OPTION]... SET1 [SET2]   # 集合一般使用''包围或[:class:]
@@ -922,11 +925,13 @@ cat file | tr -d -c '0-9\n'          # 删除非数字数据,默认不换行,加
 cat file | tr -s ' '                 # 去除重复空格
 cat file | tr -s ' '                 # 去除重复空格
 
+
 ## split  # 切割文本,主要用于大文件转为小文件
 split -n file str  # 将文件每n行切割为多个str开头(默认为x)的小文件,不改变原文件
 split -l n file    # 同上
 split -b n file    # 按字节切割
 split -C n file    # 同上,尽量保证每行的完整性   
+
 
 ## sort   # 行排序
 sort      # 排序,默认按照字典顺序
@@ -937,6 +942,7 @@ sort      # 排序,默认按照字典顺序
   -b      # 忽略像空格之类的前导空白字符
 sort -nrk 1 data.txt
 sort -bd data
+
 
 ## uniq   # 去除或统计重复行
 sort file | uniq      # 排序并去除连续重复行
@@ -953,6 +959,7 @@ wc file               # 统计行数、单词和字节数
 -L                    # 统计文件中最长一行的长度;仅推荐ascii字符行中使用，在utf-8字符集测试一个中文为2(既不是按字节也不是字符)
 
 echo -e '1\t2  34 56' | wc -w # 输出4
+
 
 ## sed     # 流式编辑器
 sed options script inputfile > outfile          # 命令格式;逐行处理
