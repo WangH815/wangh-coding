@@ -40,9 +40,9 @@ def main():
 
     print(print.__name__)
 
-    print(int('1010', base=2))   # 二进制字符串转十进制数
+    print(int('1010', base=2))  # 二进制字符串转十进制数
 
-    print(__name__)   # 打印当前函数名
+    print(__name__)  # 打印当前函数名
 
     import sys
     print(sys.path)

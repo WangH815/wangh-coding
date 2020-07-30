@@ -1289,8 +1289,9 @@ count=`ls /usr/bin | wc -l`     # 同上
 cat /dev/null > xx.dat # 同上
 
 
-## 文件读取
-cat /path/file | while read line;do echo ${line};done
+## 文件逐行读取
+cat /path/file | while read line;do echo ${line};done    # 自带循环,比较复杂逻辑建议使用awk
+
 
 
 
