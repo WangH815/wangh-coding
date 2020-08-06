@@ -20,10 +20,7 @@
 #       LICENSE: Apache 2.0
 #  ORGANIZATION: SaltStack (saltstack.com)
 #       CREATED: 10/15/2012 09:49:37 PM WEST
-#======================================================================================================================
-set -o nounset                              # Treat unset variables as an error
-
-# 版本信息及脚本名称
+#
 # 管理节点安装
 # curl -L https://bootstrap.saltstack.com -o install_salt.sh
 # sudo sh install_salt.sh -P -M -x python3
@@ -31,9 +28,12 @@ set -o nounset                              # Treat unset variables as an error
 # 子节点安装
 # curl -L https://bootstrap.saltstack.com -o install_salt.sh
 # sudo sh install_salt.sh -P -x python3
+#
+#======================================================================================================================
+set -o nounset                              # Treat unset variables as an error
 
-__ScriptVersion="2020.06.23"
-__ScriptName="bootstrap-salt.sh"
+__ScriptVersion="2020.06.23"      # 构建时间
+__ScriptName="bootstrap-salt.sh"  # 脚本名称(自动安装saltstack)
 
 __ScriptFullName="$0"
 __ScriptArgs="$*"
