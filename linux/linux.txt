@@ -340,10 +340,12 @@ useradd username        # 增加用户,不添加用户家目录
 useradd -m username     # 增加用户,添加用户家目录
 groupadd groupname      # 增加用户组
 usermod -aG gname uname # user modify;将用户增加到用户组(多个用户组可用逗号隔开)
+
 su username             # switch user;简单切换用户,不加载环境变量;不跟用户名默认切换到root
 su - username           # 切换登录用户,加载环境变量;不跟用户名默认切换到root
 su -l/--logon username  # 同上;简写为su -
 sudo passwd root        # switch user do(execute);ubuntu启用root用户
+
 passwd [-u] [username]  # root用户修改指定用户密码,-u可不加;不跟用户名默认修改当前用户密码
 id [username]           # 显示指定用户uid、gid和groups等信息,不跟用户名显示当前用户相关信息
 write user [ttyname]    # 向其他用户发送给信息(message),ttyname可以使用w查询,Ctrl + c结束
@@ -353,57 +355,83 @@ echo 'msg' >/dev/pts/n  # 向终端n发送消息;与write类似
 ## 文件目录操作
 ls -ltr [dir]  # list;按时间倒序排列指定文件夹下列表;默认显示当前文件夹列表非隐藏文件
 ls -a          # 显示所有文件列表,包含隐藏文件
+ls -A          # 显示除 . .. 的所有文件
+ls -d          # 当使用*等通配符时不进行迭代;与 -Rd/dR 会使R迭代失效
+ls -i          # 显示文件inode
 ll             # ubuntu系统中由 alias 指定,实际执行ls -alF
+
 stat file/dir  # 显示文件详细信息(大小、属组、访问/修改时间等);stat还可显示文件系统状态
-cd             # change directory;切换到用户家目录,由当前用户$HOME指定
+
+cd             # change directory;切换到当前用户家目录
 cd $HOME       # 同上
 cd ~           # 同上
+cd ~user       # 切换到指定用户家目录;一般都是/home/user
 cd -           # 切换到切换前目录
 cd path        # 切换到指定路径目录;路径分为相对路径(相对于当前目录)和绝对路径(/开头)
 cd ..          # 切换到上层目录
 cd ../..       # 切换到上上层目录;Linux使用正斜线(/)表示路径分隔,windows使用反斜线(\)表示
+
 pwd            # print working directory;打印当前工作目录绝对路径
+
 mkdir [path/]dir        # make directory;创建文件夹,多文件夹可空格隔开;要求上层目录必须存在
 mkdir -p dir1/dir2      # 同上,不要求上层目录存在;不存在会创建多级目录
 mkdir -p a/{b,c/{d,e}}  # 创建复杂目录;/表示子目录,{}中逗号隔开的为平级目录
 mkdir -p {q,w}a{e,r}    # 创建qae/qar/wae/war四个目录;{}中逗号必须存在,否则{}会解析为'{}'字符串;touch/rm支持类似操作
 mkdir -m 777 dir        # 创建指定权限目录
+
 rmdir dir               # remove empty directory;删除空文件夹;多文件空格隔开
+
 rm file                 # remove;删除文件;多文件空格隔开
 rm *[0-9a-zA-Z]         # 删除数字或字母结尾的文件
-rm -rf dir              # 递归删除文件或文件夹(不要求非空);f表示强制删除不做提示;可跟多文件(夹)
+rm -rf dir              # 递归删除文件或文件夹(不要求非空);f表示强制删除不做提示;可跟多文件(夹);不推荐使用
+rm -r/R dir             # 递归删除
+rm -i file              # 删除前确认 
+
 mv file1 file2          # move;file1重命名为file2,要求file1必须存在,file2已存在则覆盖
 mv file1 path/file2     # 移动并重命名,其余同上
 mv file dir             # 移动file到dir,要求file和dir必须存在;file存在而dir不存在时表示重命名
 mv file1 file2 dir      # 移动多个文件到指定文件夹(dir);要求dir必须存在
 mv file dir1 dir2       # 移动文件或文件夹到指定目录(dir2);要求dir2必须存在
 mv dir1 dir2            # 移动或重命名,要求dir1必须存在;dir2存在表示移动否则表示重命名
+mv -i file1 file2       # 覆盖前询问
+
 cp file1 file2          # copy;复制file1为file2;要求file1必须存在,file存在时会提示覆盖
 cp -p file1 file2       # 保持属性(权限时间戳等)复制(硬链接文件会复制为新文件),否则使用预设值;其他同上,文件复制同理
 cp -i file1 file2       # 同名文件覆盖询问
 cp -s file1 file2       # 软连接复制;等价于 ln -s
 cp file dir             # 复制并移动file到dir;要求file和dir存在
-cp -R[/r] dir dir1      # 文件夹复制,其他与文件复制相同;
+cp -r/R dir dir1        # 文件夹复制,其他与文件复制相同;
+
 touch file              # 摸一下文件;文件不存在则创建文件;文件存在时更新文件时间戳;多文件空格隔开
 touch a[0-9]            # 创建a0-a9(共10个文件);[]中表示所有可能
 touch a{0..9}           # 同上
 touch -t                # 设定文件时间戳,如 touch -t 201901010800.01 file;时间格式为[[CC]YY]MMDDhhmm[.SS]
+
 vi file                 # 文件不存在则创建并编辑;存在则编辑文件;相关操作见下文
+
 cat file                # concatenate;显示文件内容
 cat -A file             # 同上,同时显示结束符($)和制表符(Tab,显示为^I);等价于-vET
 cat -n file             # 带行号输出
 cat -b file             # 非空行带行号输出;空行也会输出
+
 view file               # 只读模式查看文件;其他操作见vi
-head file               # 显示文件前10行
+
+head file [file2]       # 显示文件前10行;支持多个文件
 head -n file            # 显示文件前n行;head -n num/head -nnum也可以(这里-n为选项,num为参数),tail也支持这种格式
+head -q file            # 不显示文件名
+
 tail file               # 显示文件后10行
 tail -n file            # 显示文件后n行
 tail -f file            # 循环读取某文件后10行,一般用于文件实时查看;redhat系列还支持tailf,效果类似
 tail -nf file           # 循环读取某文件后n行
+
 more file               # 分页查看文件,一次性加载,空格/b 翻页;大文件不建议使用
 less file               # 分页查看文件,逐步加载,空格/b PgUp/PgDn 翻页
+
 file file               # 显示文件或文件夹类型
+
 diff file1 file2        # 文件差异对比
+
 ln file link            # 创建file的硬连接(hard link)为link
 ln -s file link         # 创建file的软连接(symbolic link,符号链接)为link;link不能创建前存在
     ## 软链接
@@ -416,6 +444,7 @@ ln -s file link         # 创建file的软连接(symbolic link,符号链接)为l
      2.不允许给目录创建硬链接
      3.硬链接只有在同一个文件系统中才能创建
      4.通过指索引节点（inode）来进行链接;删除其中一个文件时文件本身不会被删除
+
 ### grep
 grep abc file              # 查找文件中包含abc的行[常用]
 grep ^a file               # a开头
@@ -430,6 +459,7 @@ grep -n str file           # 显示行号
 grep -A/B/C n str file     # 显示匹配行及其之后(after)/之前(before)/前后(center)的n行
 grep -nA m str file        # 显示行号且显示匹配行之后的m行内容
 grep -n -A m str file      # 同上
+
 ### cut
 cut -b/c N/N-/N-M/-M file  # 逐行按照字节(bytes)/字符(characters)截取文本(标准输出);截取列范围分别是 =N、>=N、N<=x<=M和<=M(N/M不表示索引)
 cut -f N/N-/N-M/-M file    # 按照Tab(制表符)截取文本(标准输出);-f表示field(域),多个域可用逗号隔开,单行域返回结果会去重
@@ -437,20 +467,24 @@ cut -d ',' -f N file       # -d(delimiter)指定分隔符,与-f一起使用
 echo '1234567'|cut -c 2    # 结果为2;可写为 cut -c2,空格可省略
 echo '1234567'|cut -c 2-5  # 结果为2345;可写为 cut -c2-5,空格可省略
 echo -e "123\t456"|cut -f2 # 结果为456
+
 ### paste
 paste file1 file2 ...      # 列模式拼接,默认为Tab链接
 paste file1 file2 -d ","   # 指定分隔符拼接
+
 ### tr
 echo 12345 | tr '0-9' '9876543210'  # 按规则替换字符;结果为87654
 cat file | tr '\t' ' '              # 制表符替换为空格
 cat file | tr -d '0-9'              # 删除所有数字
 cat file | tr -d -c '0-9\n'         # 删除非数字数据,默认不换行,加上 \n
 cat file | tr -s ' '                # 去除重复空格
+
 ### split
 split -n file str  # 将文件每n行切割为多个str开头(默认为x)的小文件,不改变原文件
 split -l n file    # 同上
 split -b n fiel    # 按字节切割
 split -C n fiel    # 同上,尽量保证每行的完整性   
+
 ### sort
 sort      # 排序,默认按照字典顺序
     -n    # 按数字进行排序
@@ -461,14 +495,17 @@ sort      # 排序,默认按照字典顺序
     -b    # 忽略像空格之类的前导空白字符
 sort -nrk 1 data.txt
 sort -bd data
+
 ### wc
 wc -c/m/w/l file            # 按照字节/字符/单词(Tab或空格分隔,多个分隔符算一个)/行数 统计文本或标准输出
 wc -l *|sort -rh|head -10   # 当前目录中行数前十的文件
 echo -e '1\t2  34 56'|wc -w # 输出4
+
 ### uniq
 sort unsort.txt | uniq      # 排序并去除重复行
 sort unsort.txt | uniq -c   # 统计各行在文件中出现的次数
 sort unsort.txt | uniq -d   # 找出重复行
+
 ### sed   # stream editor(流编辑器)
 # 动作说明
     a :新增,a 的后面可以接字串,而这些字串会在新的一行出现(目前的下一行) 
@@ -482,6 +519,7 @@ sed 's/text/replace_text/g' file     # 全局替换
 sed -i 's/text/repalce_text/g' file  # 全局替换并替换原文件
 sed '/^$/d' file                     # 替换空行,会修改原文件
 sed 's/ //g' file                    # 替换所有空格
+
 ### awk   # 数据流处理工具,逐行处理;上述文本处理命令都可用awk实现
 ### 常见用法参见 https://www.runoob.com/linux/linux-comm-awk.html
 awk '[BEGIN{statements}] {statements2} [END{statements}]'  # statements2是处理语句核心,BEGIN和END可不出现
@@ -590,6 +628,7 @@ du -sh                     # 以易读方式显示当前文件夹占用总空间
 du -sh *                   # 以易读方式显示当前文件夹每个文件或文件夹(汇总)占用空间
 du -sh path/* |sort -rh |head -10  # 指定路径下文件(夹)大小前十
 du -sh --max-depth=1       # 指定子文件夹深度(默认为0)
+
 ps -ef | grep java         # snaps of prosess;搜索含java的进程快照,其他类似;标准语法
 ps [-]aux |grep java       # 同上一条类似;BSD发行版语法
 free [-h/k/m]              # 以易读/KB(默认)/MB显示内存及虚拟内存(swap-交换区)使用情况;无参以KB显示
@@ -622,6 +661,7 @@ uname -a                   # 显示系统内核相关信息
 cat /etc/redhad-release    # 查看红帽发行版相关信息
 cat /etc/issue             # 查看发行版
 cat /etc/lsb-release       # 查看Ubuntu版本
+cat /proc/version          # 显示系统版本
 cat /proc/cpuinfo          # 显示每个CPU核心信息
 cat /proc/meminfo          # 显示内存信息
 service xx start           # 启动xx服务;stop/restart同理;实际运行/etc/init.d/目录下的服务命令脚本,可使用/etc/init.d/xx start替代
@@ -629,16 +669,19 @@ systemctl start xx         # 效果同上;属于systemd(初始化系统,负责�
 journalctl                 # 系统(内核和应用)日志管理,systemd的一部分
 
 ## 打包压缩
-tar [-]cvf file.tar dir  # 打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示打印过程,可不加
+tar [-]cvf file.tar dir  # 打包;dir为文件或文件夹列表(空格隔开);-可不加;v表示显示打包过程,可不加
+tar rf file.tar dir      # 追加文件到file.tar中
 tar xvf file.tar         # 解包;x表示extract(提取),f表示指定文件;打包中c表示create
 tar -tf file.tar         # 查看包中文件
 tar zcvf file.tar.gz dir # 打包并压缩,压缩包结尾可能是.tgz,dir为文件或文件夹列表(空格隔开)
 tar zxvf file.tar.gz     # 解压并解包,压缩包结尾可能是.tgz
+
 gzip file1 file2         # 压缩,压缩完成会删除每个原文件;压缩后文件名为file.gz
 gzip -rv dir             # 递归压缩dir下所有文件及子文件夹的文件
 gzip -d file.gz          # 解压,解压完成会删除.gz文件
 gzip -rd dir             # 递归解压dir下所有压缩文件
 gzip -l file.gz          # 查看每个压缩文件信息(文件名/压缩前后大小/压缩率);不解压
+
 gunzip file.gz           # 解压,同上
 compress file            # 压缩,比较古老的unix/linux命令;不常用,现在gzip应用更广泛
 compress -d file.Z       # 解压
@@ -928,6 +971,17 @@ make install
 make unistall   # 卸载已经安装程序
 make clean      # 清理由make命令产生的文件
 make distclean  # 清理由./configure产生的文件
+
+
+# 挂载光盘
+1.使用vmware连接光盘
+2.创建挂载点
+mkdir /myroot   # 也可以使用其他已存在目录(挂载后目录中的文件文件夹会被隐藏,知道解除挂载);挂载点目录名称可自定义
+3.挂载光盘
+mount /dev/cdrom /myroot/
+4.解除挂载
+mount /myroot   # 要求文件文件夹未在使用
+
 
 
 

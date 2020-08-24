@@ -34,17 +34,18 @@ yum groupremove group1 # 删除程序组group1
 yum deplist pkg        # 查看程序pkg依赖情况
 
 
-# rpm/红帽包管理器
-rpm -i[v/h] package.rpm # 安装[显示文件信息/进度]软件包
-rpm -U[v/h] package.rpm # 更新软件包
-rpm -e package          # 卸载软件包,不需要rpm结尾
-rpm -qa|grep package    # 查找已安装软件包
-rpm -qf '绝对路径'      # 查看指定文件属于哪个软件包
-rpm -q[l/i] package     # 查看软件包[安装路径/已安装软件包信息]
+# rpm/红帽包管理器[Red-Hat Package Manager]
+rpm -i[v/h] package.rpm  # 安装[显示文件信息/进度]软件包;一般使用rpm -ivh xx.rpm
+rpm -ivh --nodeps xx.rpm # 强制安装
+rpm -U[v/h] package.rpm  # 更新软件包
+rpm -e package           # 卸载软件包,不需要rpm结尾
+rpm -e --nodeps package  # 强制卸载
+rpm -qa | grep package   # 查找已安装软件包
+rpm -qf '绝对路径'       # 查看指定文件属于哪个软件包
+rpm -q[l/i] package      # 查看软件包[安装路径/已安装软件包信息]
 
 
 # 源码安装参考linux.txt
-
 
 # 常用软件安装
 yum install psmisc -y   # centos7安装pstree工具;psmisc为系统进程管理工具,包含pstree、killall和fuser三个命令
@@ -59,7 +60,7 @@ epel:Extra Packages for Enterprise Linux 。由 Fedora 社区打造,相当于第
 mkdir /etc/yum.repos.d.yyyymmdd
 mv /etc/yum.repos.d/* /etc/yum.repos.d.yyyymmdd
 2.下载阿里Base.repo和epel,wget无法使用可用 curl -o
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo      # centos6可修改为6
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo      # centos6可修改为6;centos8可修改为8
 wget -O /etc/yum.repos.d/epel-7.repo https://mirrors.aliyun.com/repo/epel-7.repo            # 可不配置
 3.生成cache
 yum makecache
@@ -123,6 +124,18 @@ systemctl restart firewalld                               # 重启服务生效;f
 firewall-cmd --list-ports                                 # 列出开启端口
 
 
+# centos7.x密码修改(忘记密码)
+参考：https://www.cnblogs.com/Crazy-Liu/p/11283143.html
+1.开机进入内核选择页面按'e'编辑
+内核选择页面: CentOS Linux (3.10.0-xxx.x.x.el7.x86_64) 7 (core)
+2.在linux16 /vmlinuxz-3.10.0-xxxx的那一行增加 rd.break
+3.Ctrl + x进入单用户模式,并以此执行以下命令
+mount -o remount, rw /sysroot  # 可读写方式重新挂载/sysroot
+chroot /sysroot                # 切换root目录到/sysroot
+passwd root                    # 修改指定用户密码;一般修改root用户密码,其他用户建议使用root用户去修改
+touch /.autorelabel            # 创建文件标签(底层权限控制和标记),重启时更新系统信息
+exit                           # 退出
+reboot                         # 重启系统
 
 
 
