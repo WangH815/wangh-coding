@@ -1,46 +1,59 @@
 Nginx
 
 
-#简介
+# 简介
 Nginx是一款轻量级的Web服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，
 在BSD-like 协议下发行。其特点是占有内存少，并发能力强，事实上nginx的并发能力
 在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、
 网易、腾讯、淘宝等。
 
 
-#基本概念
+# 基本概念
 1.正向代理
 主要作用于用户通过代理服务器访问用户不能直接访问的外部资源;用户及代理服务器一般是位于局域网内
 2.反向代理
 主要是外部用户访问局域网内资源需要通过反向代理服务器代理
 
 
+# 优势
+1.高并发高性能
+2.可扩展性好
+3.高可靠性
+4.热部署
+5.开源许可证
+
+
+# 主要应用场景
+1.静态资源服务，通过本地文件系统提供服务
+2.反向代理服务、负载均衡
+3.AI服务、权限控制，减少应用服务器压力
+
 
 ========================CentOS 7 安装Nginx=======================
 
 
-#环境
-版本: 1.14.1          #生产环境建议选择最新稳定版,具体参考官网
+# 环境
+版本: 1.14.1          # 生产环境建议选择最新稳定版,具体参考官网
 Linux:centos7.7_1908
 
 
-#安装前检查
-##确保已安装一下软件
-yum list installed pkg                #检查软件包是否安装
+# 安装前检查
+## 确保已安装一下软件
+yum list installed pkg                # 检查软件包是否安装
 
-yum -y install pcre-devel             #用于支持重定向,如不需要可不安装
-yum -y install gcc make gcc-c++ wget  #centos7一般都有,也可检查一下yum list installed gcc
-yum -y install openssl openssl-devel  #用于支持https;如不需要可不安装
+yum -y install pcre-devel             # 用于支持重定向,如不需要可不安装
+yum -y install gcc make gcc-c++ wget  # centos7一般都有,也可检查一下yum list installed gcc
+yum -y install openssl openssl-devel  # 用于支持https;如不需要可不安装
 
-1.下载Nginx包      #可自己选择其它版本
+1.下载Nginx包                  # 可自己选择其它版本
 wget http://nginx.org/download/nginx-1.14.1.tar.gz
 
 2.安装前准备
-tar zxvf nginx-1.14.1.tar.gz   #解压
+tar zxvf nginx-1.14.1.tar.gz   # 解压
 cd nginx-1.14.1
-./configure                    #安装前配置(依赖)检查;也可以按照自定义配置,参见文末
+./configure                    # 安装前配置(依赖)检查;也可以按照自定义配置,参见文末
 
-3.编译安装                     #nginx-1.14.1目录下操作
+3.编译安装                     # nginx-1.14.1目录下操作
 make && make install
 
 4.设置为全局命令(当前用户,如需全局用户可写入 /etc/profile)
@@ -49,47 +62,47 @@ PATH=$PATH:/usr/local/nginx/sbin/
 export PATH
 ' >> ~/.bash_profile
 
-source ~/.bash_profile                                       #生效配置;source可使用 . 替代
+source ~/.bash_profile                                       # 生效配置;source可使用 . 替代
 
 5.开放80端口
-firewall-cmd --list-ports                                    #查看开放端口
-firewall-cmd --permanent --zone=public --add-port=80/tcp     #增加规则;permanent表示永久生效;zone表示作用域
-firewall-cmd --reload                                        #重启防火墙生效
+firewall-cmd --list-ports                                    # 查看开放端口
+firewall-cmd --permanent --zone=public --add-port=80/tcp     # 增加规则;permanent表示永久生效;zone表示作用域
+firewall-cmd --reload                                        # 重启防火墙生效
 
-firewall-cmd --permanent --zone=public --remove-port=80/tcp  #移除规则;重启生效
+firewall-cmd --permanent --zone=public --remove-port=80/tcp  # 移除规则;重启生效
 
 6.测试
-nginx -t                         #测试配置并退出(nginx服务未启动也可以);其他命令参考 ./nginx -h
-ps -ef |grep -v grep|grep nginx  #查看nginx进程;可判断是否启动
-http://ip/index.html             #nginx启动且防火墙配置好;其他主机浏览器访问
-curl http://ip[/index.html]      #直接返回index.html文件内容;index.html可不加
+nginx -t                         # 测试配置并退出(nginx服务未启动也可以);其他命令参考 ./nginx -h
+ps -ef |grep -v grep|grep nginx  # 查看nginx进程;可判断是否启动
+http://ip/index.html             # nginx启动且防火墙配置好;其他主机浏览器访问
+curl http://ip[/index.html]      # 直接返回index.html文件内容;index.html可不加
 
 
-#自启动相关
+# 自启动相关
 1.方式一:构建服务
-vi /lib/systemd/system/nginx.service         #相关配置可参考手册
+vi /lib/systemd/system/nginx.service         # 相关配置可参考手册
 
 2.方式二:增加自启动脚本(自定义开机程序)
-chmod +x /etc/rc.d/rc.local                  #增加执行权限;默认无执行权限
+chmod +x /etc/rc.d/rc.local                  # 增加执行权限;默认无执行权限
 echo '
 /usr/local/nginx/sbin/nginx
 ' >> /etc/rc.d/rc.local
 
 
-#卸载
-rm -rf /usr/local/nginx                      #删除文件;其他修改过的配置文件删除Nginx部分即可
+# 卸载
+rm -rf /usr/local/nginx                      # 删除文件;其他修改过的配置文件删除Nginx部分即可
 
 
-#常用命令
-nginx                            #启动
-nginx -s reload                  #重启
-nginx -s stop                    #关闭
-nginx -s quit                    #平滑关闭nginx
-nginx -V                         #查看安装状态
+# 常用命令
+nginx                    # 启动
+nginx -s reload          # 重启
+nginx -s stop            # 强制关闭
+nginx -s quit            # 平滑关闭nginx
+nginx -V                 # 查看安装状态
 
 
-#yum方式安装                     #会自动安装依赖
-1.增加Nginx官方仓库源            #如增加了阿里云镜像源也可不添加
+# yum方式安装            # 会自动安装依赖
+1.增加Nginx官方仓库源    # 如增加了阿里云镜像源也可不添加
 echo '[nginx]
 name=nginx repo
 baseurl=http://nginx.org/packages/mainline/OS/OSRELEASE/$basearch/
@@ -105,106 +118,106 @@ systemctl enable nginx
 参见前面第5项
 
 
-#yum方式卸载
+# yum方式卸载
 yum remove nginx
 
 
-#配置
-/usr/local/nginx/conf/nginx.conf   #centos7系统下目录;也可以配置时指定,其他系统默认位置可能不一样
+# 配置
+/usr/local/nginx/conf/nginx.conf   # centos7系统下目录;也可以配置时指定,其他系统默认位置可能不一样
 
 
-#configure特定配置
+# configure特定配置
 ./configure \
---prefix=/etc/nginx                   \
---sbin-path=/usr/sbin/nginx           \
---conf-path=/etc/nginx/nginx.conf     \
---pid-path=/var/run/nginx.pid         \
---lock-path=/var/run/nginx.lock       \
+--prefix=/etc/nginx               \
+--sbin-path=/usr/sbin/nginx       \
+--conf-path=/etc/nginx/nginx.conf \
+--pid-path=/var/run/nginx.pid     \
+--lock-path=/var/run/nginx.lock   \
 --error-log-path=/var/log/nginx/error.log \
 --http-log-path=/var/log/nginx/access.log \
---with-http_gzip_static_module        \
---with-http_stub_status_module        \
---with-http_ssl_module                \
---with-pcre                           \
---with-file-aio                       \
---with-http_realip_module             \
---without-http_scgi_module            \
---without-http_uwsgi_module           \
---without-http_fastcgi_module         \
+--with-http_gzip_static_module    \
+--with-http_stub_status_module    \
+--with-http_ssl_module            \
+--with-pcre                       \
+--with-file-aio                   \
+--with-http_realip_module         \
+--without-http_scgi_module        \
+--without-http_uwsgi_module       \
+--without-http_fastcgi_module     \
 
 
 
 ========================ubuntu 1804 安装Nginx=======================
 
-#依赖包安装    #可使用 apt list pkg1 [pkg2 ...] 检查;如需其他包同理
+# 依赖包安装    # 可使用 apt list pkg1 [pkg2 ...] 检查;如需其他包同理
 apt install libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev libperl-dev
 
-#安装
+# 安装
 前三步同centos环境下
 
 4.设置为全局命令(当前用户)
 echo 'PATH=$PATH:/usr/local/nginx/sbin/
 export PATH' >> ~/.bashrc
 
-source ~/.bashrc  #生效配置;source可使用 . 替代
+source ~/.bashrc  # 生效配置;source可使用 . 替代
 
 5.防火墙(待补充)
-ufw               #uncomplicated firewall(简单防火墙)
+ufw               # uncomplicated firewall(简单防火墙)
 
 6.测试同centos环境下一致
 
 
-#自启动
-chmod +x /lib/systemd/system/rc-local.service                                   #增加执行权限;默认无执行权限
+# 自启动
+chmod +x /lib/systemd/system/rc-local.service                                   # 增加执行权限;默认无执行权限
 echo '
 [Install]
 WantedBy=multi-user.target
 Alias=rc-local.service' >> /lib/systemd/system/rc-local.service
 
-ln -s /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service #软连接到系统启动服务中
+ln -s /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service # 软连接到系统启动服务中
 echo '#!/bin/bash
 
-/usr/local/nginx/sbin/nginx' >> /etc/rc.local                                   #增加执行命令;需要完整路径
-chmod +x /etc/rc.local                                                          #增加执行权限
+/usr/local/nginx/sbin/nginx' >> /etc/rc.local                                   # 增加执行命令;需要完整路径
+chmod +x /etc/rc.local                                                          # 增加执行权限
 
 
-#apt安装
-apt install nginx     #安装最新稳定版nginx;自动安装依赖;文件相关路径可能跟编译安装路径不一致
-apt remove nginx      #移除nginx;编译安装的卸载同centos部分
+# apt安装
+apt install nginx     # 安装最新稳定版nginx;自动安装依赖;文件相关路径可能跟编译安装路径不一致
+apt remove nginx      # 移除nginx;编译安装的卸载同centos部分
 
 
 
 ==============================运维相关=============================
-#关键目录或文件
-##apt/yum安装方式
-/etc/nginx/                    #nginx根目录
-/etc/nginx/nginx.conf          #nginx默认配置文件
-/etc/nginx/conf.d/             #nginx的http配置文件夹
-/var/log/nginx/                #nginx日志目录;一般包含access.log(访问日志)和error.log(错误日志)
+# 关键目录或文件
+## apt/yum安装方式
+/etc/nginx/                    # nginx根目录
+/etc/nginx/nginx.conf          # nginx默认配置文件
+/etc/nginx/conf.d/             # nginx的http配置文件夹
+/var/log/nginx/                # nginx日志目录;一般包含access.log(访问日志)和error.log(错误日志)
 
-##配置文件默认安装
-/usr/local/nginx               #根目录
-/usr/local/nginx/conf          #配置文件目录
-/usr/local/nginx/nginx.conf    #配置文件
-/usr/local/nginx/logs          #日志目录
-
-
-#重要命令
-nginx                               #启动nginx
-nginx -h                            #帮助
-nginx -v                            #显示nginx版本
-nginx -V                            #显示版本、配置、模块等信息
-nginx -t                            #检测配置文件语法和配置是否成功;可以显示配置文件路径
-nginx -T                            #检测配置并显示已生效配置信息
-nginx -s [stop|quit|reload|reopen]  #向nginx主进程发送信号;分别是终止/响应处理中的请求再停止/重载配置/重新生成日志
+## 配置文件默认安装
+/usr/local/nginx               # 根目录
+/usr/local/nginx/conf          # 配置文件目录
+/usr/local/nginx/nginx.conf    # 配置文件
+/usr/local/nginx/logs          # 日志目录
 
 
-#配置文件说明(nginx.conf)
+# 重要命令
+nginx                               # 启动nginx
+nginx -h                            # 帮助
+nginx -v                            # 显示nginx版本
+nginx -V                            # 显示版本、配置、模块等信息
+nginx -t                            # 检测配置文件语法和配置是否成功;可以显示配置文件路径
+nginx -T                            # 检测配置并显示已生效配置信息
+nginx -s [stop|quit|reload|reopen]  # 向nginx主进程发送信号;分别是终止/响应处理中的请求再停止/重载配置/重新生成日志
+
+
+# 配置文件说明(nginx.conf)
 1.由若干配置项组成
 2.配置项由单项(每行由;结束)和{}部分组成
 3.通过include cfg_file引入其他配置文件
 
-##示例
+## 示例
 cfg_name1 value;
 
 cfg_name2 {
