@@ -233,3 +233,8 @@ deploy_key_rsa
 3.提交此文件到git
 注：使用 git add -f filename 命令可以强制提交符合 .gitignore 中规则的文件。
 
+
+# windows版本git日志中文乱码问题
+git config --global i18n.commitencoding utf-8       # 设置提交日志使用utf-8
+git config --global i18n.logoutputencoding utf-8    # 设置输出日志时使用utf-8
+export LESSCHARSET=utf-8                            # 设置LESS字符集为utf-8
