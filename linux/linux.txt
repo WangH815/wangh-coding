@@ -813,7 +813,7 @@ env var               # 打印变量值;同 echo $var
 set                   # 打印全局变量、用户自定义变量和局部变量(当前shell定义);当前环境的所有变量
 unset var             # 删除环境变量
 echo $PATH            # 用户执行外部命令搜索路径
-date "+%Y%m%d%H%M%S"       # 打印年月日时分秒;格式为YYYYmmddHHMMSS;可用于日志文件名生成
+date "+%Y%m%d%H%M%S"       # 打印年月日时分秒;格式为YYYYmmddHHMMSS;可用于日志文件名生成(touch filename.`date ...`)
 date '+%Y%m%d%H%M%S'       # 同上; date_format='+%Y%m%d%H%M%S';date ${date_format} ;date后面跟格式化字符串
 date "+%Y-%m-%d %H:%M:%S"  # 格式为YYYY-mm-dd HH:MM:SS
 # 基于当前时间的计算并格式化
@@ -980,7 +980,7 @@ mkdir /myroot   # 也可以使用其他已存在目录(挂载后目录中的文�
 3.挂载光盘
 mount /dev/cdrom /myroot/
 4.解除挂载
-mount /myroot   # 要求文件文件夹未在使用
+umount /myroot   # 要求文件文件夹未在使用
 
 
 

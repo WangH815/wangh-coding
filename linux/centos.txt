@@ -48,7 +48,7 @@ rpm -q[l/i] package      # 查看软件包[安装路径/已安装软件包信息
 # 源码安装参考linux.txt
 
 # 常用软件安装
-yum install psmisc -y   # centos7安装pstree工具;psmisc为系统进程管理工具,包含pstree、killall和fuser三个命令
+yum install -y psmisc           # centos7安装pstree工具;psmisc为系统进程管理工具,包含pstree、killall和fuser三个命令
 yum install -y bash-completion  # 命令补全
 
 
@@ -57,11 +57,12 @@ rpm:Redhat Package Manager
 yum:Yellow dog Updater, Modified。基于rpm的RHEL(含衍生版)的Shell前端软件包管理器。由RedHat官方提供。
 epel:Extra Packages for Enterprise Linux 。由 Fedora 社区打造,相当于第三方rpm库,软件版本较新。
 1.备份
-mkdir /etc/yum.repos.d.yyyymmdd
-mv /etc/yum.repos.d/* /etc/yum.repos.d.yyyymmdd
+mkdir /etc/yum.repos.d.`date "+%Y%m%d"` && mv /etc/yum.repos.d/* /etc/yum.repos.d.`date "+%Y%m%d"`
 2.下载阿里Base.repo和epel,wget无法使用可用 curl -o
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo      # centos6可修改为6;centos8可修改为8
-wget -O /etc/yum.repos.d/epel-7.repo https://mirrors.aliyun.com/repo/epel-7.repo            # 可不配置
+curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo      # centos6可修改为6;centos8可修改为8
+curl -o /etc/yum.repos.d/epel-7.repo https://mirrors.aliyun.com/repo/epel-7.repo            # 可不配置
+# wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+# wget -O /etc/yum.repos.d/epel-7.repo https://mirrors.aliyun.com/repo/epel-7.repo
 3.生成cache
 yum makecache
 
@@ -136,6 +137,85 @@ passwd root                    # 修改指定用户密码;一般修改root用户
 touch /.autorelabel            # 创建文件标签(底层权限控制和标记),重启时更新系统信息
 exit                           # 退出
 reboot                         # 重启系统
+
+
+# centos7调整交换分区
+交换分区的大小的原则是：
+1.物理内存小于4GB,交换分区一般设为物理内存的2倍
+2.物理内存大于4GB，但小于16GB,交换分区一般设定和物理内存一样大
+3.物理内存大于16G时交换分区可设置为了0，但一般不设为0
+
+## 查看交换分区
+free -h           # 内存及交换分区使用情况
+swapon -s         # 显示交换分区文件;等价于cat /proc/swaps
+
+## 增加交换分区文件
+1.创建swap分区文件/swapfile
+dd if=/dev/zero of=/swapfile bs=$((1024*4)) count=512k  # 创建指定大小的文件;这里大小为2G
+fallocate -l 2G /swapfile                               # 预分配2G空间给指定文件;对xfs文件系统支持不好
+truncate -s 2G /swapfile                                # 扩展文件到指定大小
+
+2.修改权限
+chmod 600 /swapfile
+
+3.设置交换文件
+mkswap /swapfile
+
+4.启动交换分区文件
+swapon /swapfile   # 启动交换分区
+swapoff /swapfile  # 关闭交换分区
+
+5.设置永久生效     # 写入配置文件
+echo '/swapfile   swap    swap    sw  0   0
+' >> /etc/fstab
+
+
+# centos7挂载磁盘
+1.vmware中增加磁盘
+
+2.查看磁盘信息
+fdisk -l     # 磁盘显示/dev/sda[b/c/d]
+
+3.扫描磁盘   # 默认不会刷新磁盘设备,以下为不重启解决;如可以重启,此步可省略
+## 重新扫描SCSI总线并添加SCSI设备
+ls /sys/class/scsi_host/
+echo "- - -" > /sys/class/scsi_host/host0/scan
+echo "- - -" > /sys/class/scsi_host/host1/scan
+echo "- - -" > /sys/class/scsi_host/host2/scan
+
+## 检查 SCSI 设备的名称;重新扫描SCSI总线
+ls /sys/class/scsi_device/
+echo 1 > /sys/class/scsi_device/0\:0\:0\:0/device/rescan
+echo 1 > /sys/class/scsi_device/2\:0\:0\:0/device/rescan
+
+## 查看是否已经显示新磁盘
+fdisk -l
+
+4.创建分区
+fdisk /dev/sdb  # 进入磁盘操作界面;这里以sdb(第二块)磁盘为例
+m               # 打印菜单(menu);其他命令参考菜单
+l               # 列出(list)分区
+g               # 创建空的GPT分区表(还有MBR分区表)
+n               # 增加新的分区;需要选择分区编号(1-128)和起始结束扇区;需要多个分区增加新的分区表号和容量即可
+w               # 写入分区信息到分区表并退出
+
+5.创建文件系统
+fdisk -l                # 查看磁盘分区信息
+mkfs.ext4 /dev/sdb1     # 为新创建的分区创建文件系统(ext4);sdb1表示sdb磁盘的第一个分区,编号是上一步选择的
+
+6.挂载分区
+mkdir /data             # 创建挂载目录;也可选择其他目录
+mount /dev/sdb1 /data   # 挂载
+umount /data            # 解除挂载
+df -h                   # 可查看所有目录的挂载情况
+
+7.设置开机挂载          # 写入到开机启动任务里;如不生效可此文件开机是否执行;还有一种方式是写入/etc/fstab文件中,具体参考其他教程
+echo 'mount /dev/sdb1 /data
+' >> /etc/rc.local
+chmod +x /etc/rc.local
+
+
+
 
 
 
