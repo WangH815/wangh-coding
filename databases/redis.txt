@@ -1,62 +1,62 @@
 Redis
 
 
-#简介
+# 简介
 Remote Dictionary Server(远程字典服务)
 由ANSI C编写的Key-Value数据库,属于NoSQL的一种,特点是性能极好(内存型数据库,目前是单线程)
 
 
-#环境准备
+# 环境准备
 OS:  Ubuntu 1804
 Ver: Redis 5
 1.拉取镜像
 docker pull redis:5
 2.创建容器
-mkdir -p ~/redis/data   #创建本地目录
-#创建容器
+mkdir -p ~/redis/data   # 创建本地目录
+# 创建容器
 docker run \
 --name docker_redis5 \
 -p 6379:6379 \
 -v redis5-data:/data \
 -di redis:5 redis-server --appendonly yes
-#--restart always   # 增加此参数可以随docker进程重启
+# --restart always   #  增加此参数可以随docker进程重启
 3.登录容器
 方式一:
-docker exec -it docker_redis5 /bin/bash   #登录容器shell环境
-redis-cli                                 #redis容器中的shell执行
+docker exec -it docker_redis5 /bin/bash   # 登录容器shell环境
+redis-cli                                 # redis容器中的shell执行
 方式二:
-docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
+docker exec -it docker_redis5 redis-cli   # 直接登录redis命令行
 
 
-#配置
-redis.conf            #配置文件,一般在安装目录
+# 配置
+redis.conf            # 配置文件,一般在安装目录
 
-##获取配置
-config get *          #获取全部配置,奇数项为配置key,下一项为value
-config get parameter  #获取单项配置,支持通配搜索
+## 获取配置
+config get *          # 获取全部配置,奇数项为配置key,下一项为value
+config get parameter  # 获取单项配置,支持通配搜索
 
-##设置配置
-config set parameter value      #临时设置或更新配置值;
-config rewrite parameter value  #永久设置,会写入配置文件中
-
-
-#基本数据类型
-String            #字符串
-Hash              #散列/哈希
-List              #列表
-Set               #集合
-ZSet/Sorted Set   #有序集合
+## 设置配置
+config set parameter value      # 临时设置或更新配置值;
+config rewrite parameter value  # 永久设置,会写入配置文件中
 
 
-#常用命令
-redis-cli                              #连接本地redis,进入命令行
-redis-cli --raw                        #使用客户端字符集显示(可解决中文显示问题)
-redis-cli -h host -p port -a password  #连接指定主机redis
+# 基本数据类型
+String            # 字符串
+Hash              # 散列/哈希
+List              # 列表
+Set               # 集合
+ZSet/Sorted Set   # 有序集合
 
 
-#数据结构
+# 常用命令
+redis-cli                              # 连接本地redis,进入命令行
+redis-cli --raw                        # 使用客户端字符集显示(可解决中文显示问题)
+redis-cli -h host -p port -a password  # 连接指定主机redis
 
-##应用场景
+
+# 数据结构
+
+## 应用场景
 类型    简介                   特性                                               场景
 String  二进制安全             任意数据,包含序列化对象,单个键最大512M             -
 Hash    与Map类似              适合对象的存储                                     存储、读取、修改用户属性
@@ -64,155 +64,155 @@ List    链表(双向链表)         增删快,提供了操作某一段元素的
 Set     哈希表实现,元素不重复  增删改查的复杂度都是O(1);适合集合的交并差集等操作  共同好友、独立IP及通过域值推荐
 ZSet    通过增加Score实现有序  有序集合                                           排行榜及带权重的消息队列
 
-##String
+## String
 set key value [ex seconds] [px milliseconds] [nx|xx]
-###选项说明
-ex            #设置过期时间,单位为s;等价于setex key seconds value
-px            #同上,单位为ms;等价于psetex key milliseconds value
-nx            #key不存在则执行;等价于setnx
-xx            #key存在则执行
+## # 选项说明
+ex            # 设置过期时间,单位为s;等价于setex key seconds value
+px            # 同上,单位为ms;等价于psetex key milliseconds value
+nx            # key不存在则执行;等价于setnx
+xx            # key存在则执行
 
-mset key value [key value]   #为多个key设置值;操作是原子性的,若key存在会覆盖
-msetnx key value [key value] #key不存在则执行;其余同mset
-mget key [key ...]           #获取多个key的值
+mset key value [key value]   # 为多个key设置值;操作是原子性的,若key存在会覆盖
+msetnx key value [key value] # key不存在则执行;其余同mset
+mget key [key ...]           # 获取多个key的值
 
-set key value       #设置key-value
-get/del key         #获取/删除
-strlen key          #返回字符串长度
-rename key new_key  #修改key名称
-exists key          #检测key是否存在
-expire key seconds  #设置过期时间(秒);还支持其他格式的时间
-persist key         #移除过期时间
-pttl/ttl key        #返回过期时间,以ms/s计
-type key            #返回key对应value的类型
+set key value       # 设置key-value
+get/del key         # 获取/删除
+strlen key          # 返回字符串长度
+rename key new_key  # 修改key名称
+exists key          # 检测key是否存在
+expire key seconds  # 设置过期时间(秒);还支持其他格式的时间
+persist key         # 移除过期时间
+pttl/ttl key        # 返回过期时间,以ms/s计
+type key            # 返回key对应value的类型
 
-##Hash
-hset hash field value [field value] #设置hash;等价于hmset
-hsetnx                              #hash不存在则执行;其余同上
-hget/hdel hash field [field]        #获取/删除指定域值;hmget也可以
-hgetall hash                        #获取所有域值
-hexists hash/hash field             #检查hash或hash域是否存在
-hlen hash                           #返回hash域的数量
-hstrlen hash field                  #返回指定域值的长度
+## Hash
+hset hash field value [field value] # 设置hash;等价于hmset
+hsetnx                              # hash不存在则执行;其余同上
+hget/hdel hash field [field]        # 获取/删除指定域值;hmget也可以
+hgetall hash                        # 获取所有域值
+hexists hash/hash field             # 检查hash或hash域是否存在
+hlen hash                           # 返回hash域的数量
+hstrlen hash field                  # 返回指定域值的长度
 
-##List
-rpush key value [value]    #向列表尾部插值
-lpush key value [value]    #向列表头部插值
-lpushx key value           #向已存在列表头部插值;rpushx类似
-lpop key                   #移除并返回列表的第一个元素
-rpop key                   #移除并返回列表的最后一个元素
-llen key                   #返回列表长度
-lrange key start end       #返回指定索引范围列表
-lindex key index           #返回指定索引位置的元素;索引可正可负
-lset key index value       #向指定索引位置插值
-ltrim key start end        #截取列表指定位置元素,其他元素删除;截取范围[start,end]
+## List
+rpush key value [value]    # 向列表尾部插值
+lpush key value [value]    # 向列表头部插值
+lpushx key value           # 向已存在列表头部插值;rpushx类似
+lpop key                   # 移除并返回列表的第一个元素
+rpop key                   # 移除并返回列表的最后一个元素
+llen key                   # 返回列表长度
+lrange key start end       # 返回指定索引范围列表
+lindex key index           # 返回指定索引位置的元素;索引可正可负
+lset key index value       # 向指定索引位置插值
+ltrim key start end        # 截取列表指定位置元素,其他元素删除;截取范围[start,end]
 
-lrem key count value       #移除指定数量的元素;count为整数
-###参数说明
-count > 0   #从表头向表尾删除count个与value相同的元素
-count < 0   #搜索方向相反;其余同上
-count = 0   #移除所有与value的元素
+lrem key count value       # 移除指定数量的元素;count为整数
+## # 参数说明
+count > 0   # 从表头向表尾删除count个与value相同的元素
+count < 0   # 搜索方向相反;其余同上
+count = 0   # 移除所有与value的元素
 
-linsert key before|after pivot value  #指定位置前后插值;pivot为参考点
+linsert key before|after pivot value  # 指定位置前后插值;pivot为参考点
 
-##Set
-sadd key member [member]   #向集合添加成员
-spop key                   #随机移除并返回一个成员
-srem key member [member]   #移除指定成员
-smembers key               #返回所有成员
-scard key                  #返回成员数
-sismember key member       #检测成员是否存在
+## Set
+sadd key member [member]   # 向集合添加成员
+spop key                   # 随机移除并返回一个成员
+srem key member [member]   # 移除指定成员
+smembers key               # 返回所有成员
+scard key                  # 返回成员数
+sismember key member       # 检测成员是否存在
 
-##ZSet/Sorted Set
-zadd key score member [score member]   #添加成员;通过分数(score)排序
-zrem key member [member]               #移除成员
-zcard key                              #获取成员数
-zcount key min max                     #返回指定权重间的成员数量
-zrange key start end [withscores]      #返回指定权重间的成员;withscores表示返回分数
-zrevrange key start end [withscores]   #按分数倒序;其他同上
-zrank/zrevrank key member              #返回成员正向/反向索引值(不是score);索引值从0开始
-zscore key member                      #返回指定成员的权重(score)
+## ZSet/Sorted Set
+zadd key score member [score member]   # 添加成员;通过分数(score)排序
+zrem key member [member]               # 移除成员
+zcard key                              # 获取成员数
+zcount key min max                     # 返回指定权重间的成员数量
+zrange key start end [withscores]      # 返回指定权重间的成员;withscores表示返回分数
+zrevrange key start end [withscores]   # 按分数倒序;其他同上
+zrank/zrevrank key member              # 返回成员正向/反向索引值(不是score);索引值从0开始
+zscore key member                      # 返回指定成员的权重(score)
 
-##其他命令
-https://redis.io/commands                         #官网
-https://github.com/antirez/redis-doc              #github地址
-https://www.runoob.com/redis/redis-commands.html  #菜鸟教程
-
-
-#发布订阅(pub/sub)
-channel   #通道,客户端获取消息的途径
-client    #客户端;通过通道获取数据
-
-##相关命令
-subscribe channel        #订阅通道;支持多个通道
-psubscribe pattern       #订阅通道模式;支持多个通道
-unsubscribe channel      #退订通道
-punsubscribe pattern     #退订通道模式
-publish channel message  #向通道发布消息;订阅此通道的客户端会受到此消息
+## 其他命令
+https://redis.io/commands                         # 官网
+https://github.com/antirez/redis-doc              # github地址
+https://www.runoob.com/redis/redis-commands.html  # 菜鸟教程
 
 
-#事务
-##redis中的事务不是原子性的;类似于命令打包批量执行,所有命令都会执行(失败除外),中间命令失败,之后命令也会执行
-multi      #事务开始
-set a aaa  #事务操作
+# 发布订阅(pub/sub)
+channel   # 通道,客户端获取消息的途径
+client    # 客户端;通过通道获取数据
+
+## 相关命令
+subscribe channel        # 订阅通道;支持多个通道
+psubscribe pattern       # 订阅通道模式;支持多个通道
+unsubscribe channel      # 退订通道
+punsubscribe pattern     # 退订通道模式
+publish channel message  # 向通道发布消息;订阅此通道的客户端会受到此消息
+
+
+# 事务
+## redis中的事务不是原子性的;类似于命令打包批量执行,所有命令都会执行(失败除外),中间命令失败,之后命令也会执行
+multi      # 事务开始
+set a aaa  # 事务操作
 ...
 set z zzz
-exec       #触发事务;会执行事务里所有命令
+exec       # 触发事务;会执行事务里所有命令
 
-discard    #用于取消事务
-watch key  #监控key,value改变时事务不会被执行
-unwatch    #取消监控
+discard    # 用于取消事务
+watch key  # 监控key,value改变时事务不会被执行
+unwatch    # 取消监控
 
 
-#脚本
-##通过Lua解释器执行redis脚本
+# 脚本
+## 通过Lua解释器执行redis脚本
 
-##基本语法
+## 基本语法
 EVAL script numkeys key [key ...] arg [arg ...]
 
 
-#流水线/通道(pipeline)
-cat commands.txt | redis-cli --pipe  #主要用于批量导入数据或其他命令
+# 流水线/通道(pipeline)
+cat commands.txt | redis-cli --pipe  # 主要用于批量导入数据或其他命令
 
 
-#连接
-config get requirepass       #获取密码;默认为空
-config set requirepass "xx"  #设置密码
-auth passwd                  #通过密码验证是否连接到redis服务
-ping                         #检查服务是否在运行;正常反馈PONG
-select index                 #切换到指定数据库;redis默认为0-15;与MySQL中的use类似
-config get databases         #获取数据库数量;默认数据库index为0
+# 连接
+config get requirepass       # 获取密码;默认为空
+config set requirepass "xx"  # 设置密码
+auth passwd                  # 通过密码验证是否连接到redis服务
+ping                         # 检查服务是否在运行;正常反馈PONG
+select index                 # 切换到指定数据库;redis默认为0-15;与MySQL中的use类似
+config get databases         # 获取数据库数量;默认数据库index为0
 
 
-#服务器信息
-info [section]       #获取redis服务器统计信息;默认查询全部,常见的有Section有Server/Clients/Memory/Cpu/Stats等
-client list          #获取客户端列表
-client kill [ip:port] [ID client-id]  #关闭指定客户端连接
+# 服务器信息
+info [section]       # 获取redis服务器统计信息;默认查询全部,常见的有Section有Server/Clients/Memory/Cpu/Stats等
+client list          # 获取客户端列表
+client kill [ip:port] [ID client-id]  # 关闭指定客户端连接
 
-exists key           #判断key是否存在
-type key             #判断key的类型
-rename key newkey    #修改key名
-renamenx key newkey  #key存在则执行
-move key db          #移动key到指定数据库中
-del key [key]        #删除一个或多个key
-randomkey            #随机返回一个key;不会删除key
-keys pattern         #返回指定模式的key
-dbsize               #返回当前数据库key的数量
-flushdb              #删除当前数据库所有key
-flushall             #删除数据库所有key
-select index         #切换到指定数据库;按索引
-swap index1 index2   #交换两个数据库数据
-
-
-#数据备份与恢复
-save            #同步保存数据到硬盘;在redis安装目录创建dump.rdb文件,路径可使用config get dir获取
-bgsave          #后台执行sava
+exists key           # 判断key是否存在
+type key             # 判断key的类型
+rename key newkey    # 修改key名
+renamenx key newkey  # key存在则执行
+move key db          # 移动key到指定数据库中
+del key [key]        # 删除一个或多个key
+randomkey            # 随机返回一个key;不会删除key
+keys pattern         # 返回指定模式的key
+dbsize               # 返回当前数据库key的数量
+flushdb              # 删除当前数据库所有key
+flushall             # 删除数据库所有key
+select index         # 切换到指定数据库;按索引
+swap index1 index2   # 交换两个数据库数据
 
 
-#性能测试
-redis-benchmark [option] [option value]  #在Shell中执行
+# 数据备份与恢复
+save            # 同步保存数据到硬盘;在redis安装目录创建dump.rdb文件,路径可使用config get dir获取
+bgsave          # 后台执行sava
 
-##可选参数
+
+# 性能测试
+redis-benchmark [option] [option value]  # 在Shell中执行
+
+## 可选参数
 选项      描述                                        默认值
 -h        指定服务器主机名                            127.0.0.1
 -p        指定服务器端口                              6379
@@ -229,8 +229,8 @@ redis-benchmark [option] [option value]  #在Shell中执行
 -t        仅运行以逗号分隔的测试命令列表
 -I        Idle 模式。仅打开 N 个 idle 连接并等待
 
-##实例
-redis-benchmark -n 10000 -q                                     #同时执行10000个请求来检测性能
-redis-benchmark -h 127.0.0.1 -p 6379 -t set,lpush -n 10000 -q   #测试部分命令
+## 实例
+redis-benchmark -n 10000 -q                                     # 同时执行10000个请求来检测性能
+redis-benchmark -h 127.0.0.1 -p 6379 -t set,lpush -n 10000 -q   # 测试部分命令
 
 

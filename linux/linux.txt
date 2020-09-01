@@ -60,7 +60,7 @@ journal     # 日志
 常见日志文件系统
 1.ReiserFS  # 只支持回写模式,速度快;2001年Hans Reiser(人名)为Linux创建
 2.JFS       # Journaled File System,日志化文件系统;1990年IBM为IBM开发,第二版JFS2(一般称JFS)才被引入Linux;采用有序模式
-3.XFS       # 1994年SGI(美国硅图公司)为IRIX Unix系统开发,2002年被引入Linux;采用回写模式
+3.XFS       # 1994年SGI(美国硅图公司)为IRIX Unix系统开发,2002年被引入Linux;采用回写模式;CentOS 7.x默认文件系统
 
 ext3
 1.2001年引入Linux内核
@@ -220,10 +220,10 @@ netperf               # 网络性能测试
 
 
 # shell脚本的运行方式
-1 . xx.sh      # 一般用于生效用户配置而不需要重新登录shell;xx.sh有读权限即可
-2 source xx.sh # 同上;常见用于执行 profile 配置,脚本本身在当前进程中执行
-3 sh xx.sh     # 读权限即可,脚本本身会在子进程中执行
-4 ./xx.sh      # 需执行权限,脚本本身会在子进程中执行;如不指定当前路径(./),会优先根据PATH查找相应命令
+1 . xx.sh             # 一般用于生效用户配置而不需要重新登录shell;xx.sh有读权限即可
+2 source xx.sh        # 同上;常见用于执行 profile 配置,脚本本身在当前进程中执行
+3 sh xx.sh            # 读权限即可,脚本本身会在子进程中执行
+4 ./xx.sh             # 需执行权限,脚本本身会在子进程中执行;如不指定当前路径(./),会优先根据PATH查找相应命令
 
 
 # shell命令类型
@@ -289,9 +289,9 @@ cmd1 || cmd2      # cmd1执行失败则执行cmd2
 
 # 命令hash缓存    # shell会缓存命令hash表，每个子Shell独立，第一次子Shell的hash为空;
                   # 主要缓存命令路径,命令不存在于hash表中再去PATH中寻找,加快执行速度
-hash          # 返回当前shell的命令hash缓存;包含执行次数及命令
-hash -r       # 清空当前hash
-hash -d cmd   # 删除指定命令hash记录
+hash              # 返回当前shell的命令hash缓存;包含执行次数及命令
+hash -r           # 清空当前hash
+hash -d cmd       # 删除指定命令hash记录
 
 
 # 命令别名
@@ -486,13 +486,13 @@ split -b n fiel    # 按字节切割
 split -C n fiel    # 同上,尽量保证每行的完整性   
 
 ### sort
-sort      # 排序,默认按照字典顺序
-    -n    # 按数字进行排序
-    -d    # 按字典序进行排序,仅考虑空字符、字母和数字排序
-    -r    # 降序排序
-    -k N  # 指定按第N列排序
-	-h    # 以易读方式排序(eg:K/M/G)
-    -b    # 忽略像空格之类的前导空白字符
+sort               # 排序,默认按照字典顺序
+    -n             # 按数字进行排序
+    -d             # 按字典序进行排序,仅考虑空字符、字母和数字排序
+    -r             # 降序排序
+    -k N           # 指定按第N列排序
+	-h             # 以易读方式排序(eg:K/M/G)
+    -b             # 忽略像空格之类的前导空白字符
 sort -nrk 1 data.txt
 sort -bd data
 
@@ -702,17 +702,17 @@ ping IP/hostname                     # 测试与目标主机的连通性
 ping localhost/127.0.0.1/127.1/::1/  # 测试本机回环地址;localhost需要在/etc/hosts中配置为回环地址   
 ping -c n -i m IP/hostname           # 指定ping的次数为n,每隔m秒ping一次(默认一秒);默认不会停止
 ping -i 3 -s 1024 -t 255 192.168.0.5 # -s指定发送数据包大小;-t指定TTL(time to live,路由跳转次数),最大为255,由发送方指定,一般为2^n
-netstat           # 检验本机各端口的网络连接情况
-netstat -a        # 显示所有端口
-netstat -t/u/w/x  # 显示tcp/udp/raw/unix当前连接情况;local address显示的是主机名和协议
-netstat -nt       # 同上;-n表示local address显示的是ip和port(端口)
-netstat -apt      # 显示tcp端口使用情况;-p表示显示使用程序名
-netstat -i        # 显示网络接口(网卡)列表 
-netstat -l        # 显示监听状态连接情况
-ss -t/u/w/x       # 显示tcp/udp/raw/unix的socket统计信息
-ss -at[n]         # 显示所有tcp的socket统计信息;-n表示local address显示的是ip和port(端口)
-ss -s             # 显示汇总(摘要)信息
-ss -l[p]          # 显示所有的网络端口;-p显示进程
+netstat                              # 检验本机各端口的网络连接情况
+netstat -a                           # 显示所有端口
+netstat -t/u/w/x                     # 显示tcp/udp/raw/unix当前连接情况;local address显示的是主机名和协议
+netstat -nt                          # 同上;-n表示local address显示的是ip和port(端口)
+netstat -apt                         # 显示tcp端口使用情况;-p表示显示使用程序名
+netstat -i                           # 显示网络接口(网卡)列表 
+netstat -l                           # 显示监听状态连接情况
+ss -t/u/w/x                          # 显示tcp/udp/raw/unix的socket统计信息
+ss -at[n]                            # 显示所有tcp的socket统计信息;-n表示local address显示的是ip和port(端口)
+ss -s                                # 显示汇总(摘要)信息
+ss -l[p]                             # 显示所有的网络端口;-p显示进程
 
 ## 计划任务后台
 at                         # 指定一个时间执行一个任务,只能执行一次
