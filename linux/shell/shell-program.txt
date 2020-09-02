@@ -179,7 +179,7 @@ ${a}${b}
 ${a}"str"${b}
 ${a}'str'${b}
 
-## 数组变量                       # 仅支持一维数组,不限定长度
+## 数组变量                      # 仅支持一维数组,不限定长度;shell对数组的支持不太好,不推荐使用
 array_name=(arr1 arr2 arr3 ...)  # 赋值,下同;元素间以空格隔开
 array_name=(
 arr1
@@ -205,7 +205,7 @@ ${array_name[*]}       # 以一个字符串的形式,其余同上
 3)布尔运算符     # 连接表达式
 4)字符串运算符
 5)文件测试运算符
-注:整数运算主要通过[]、awk(编程语言)、expr和(())实现;[]和expr(也可用于字符串处理)最常用;浮点运算使用bc
+注:整数运算主要通过[]、awk(编程语言,用于文本处理)、expr和(())实现;[]和expr(也可用于字符串处理)最常用;浮点运算使用bc
 
 # 算数运算              # 只能用于整数运算
 expr                    # evaluate expressions(表达式计算)
@@ -289,7 +289,7 @@ echo $var/${var}    # 输出,输出后自动换行
 echo -e             # 开启转义
 echo -n             # 不输出末尾的换行符
 echo `cmd`          # 输出命令结果
-printf  format-string  [arguments...]  # 格式化输出,不自动换行
+printf  format-string  [arguments...]  # 格式化输出,不自动换行;用于一般脚本中,复杂文本处理推荐使awk处理
 printf "%-10s %-8s\n" 姓名 性别        # 格式化字符串与C语言相同,移植性比echo好;-表示左对齐
 printf '%-10s %-8s\n' 姓名 性别        # 同上
 printf '%-10s %-8s\n' $var1 $var2      # 与上类似
@@ -352,7 +352,7 @@ test命令  # 等价于 []
 -b $file  # 存在且为块特殊文件;block
 格式:if test -e ./bash  # 判断./bash文件是否存在;等价于 if [ -e ./bash ]
 ## 重要
-上述命令推荐使用 "$var" 形式,而不是 $var ;若文件(夹)名称中含有空格或.等时使用 $var 会出错
+上述命令推荐使用 "$var"/"${var}" 形式,而不是 $var ;若文件(夹)名称中含有空格或.等时使用 $var 会出错
 
 
 # 结构化命令
@@ -465,7 +465,7 @@ for var in {001..10}     # 001,002,..,010
 for var in {1..10..2}    # 1,3,..,9
 for var in {10..1}       # 10,9,..,1
 for var in {10..1..2}    # 10,8,..,2
-for var in {a..z}        # a,b,..,z;支持反向
+for var in {a..z}        # a,b,..,z;支持反向,{z..a}
 for var in {a..z..2}     # a,c,..,y
 for var in a{a..z}       # aa,ab,..,az;数字也可以
 for var in {1..3}{a..c}  # 1a,1b,1c,2a,..,3c
@@ -521,7 +521,7 @@ $0        # 执行脚本名称,可在脚本中调用
 $1/$2/$3  # 参数,可在脚本中调用,当n>=10时,需要使用${n}来调用
 $#        # 传递到脚本的参数个数
 $*        # 以一个字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。
-$$        # 脚本运行的当前进程ID号
+$$        # 脚本运行的当前进程ID号;命令行使用echo $$显示当前shell的进程id
 $!        # 后台运行的最后一个进程的ID号
 $@        # 与$*相同,但是使用时加引号,并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
 $-        # 显示Shell使用的当前选项,与set命令功能相同
@@ -788,14 +788,14 @@ find [path1 path2 ...] [option1 value1] [option2 value2] ... [operation]
 -follow              # 如果遇到符号链接文件,就跟踪链接所指的文件
 -cpio                # 查位于某一类型文件系统中的文件,这些文件系统类型通常可 在/etc/fstab中找到
 
-find . -name   "*.txt" -print                      # .txt结尾的文件,双引号和-print选项可不加
-find . ! -name "*.txt" -print                      # 查找所有非 .txt 结尾文件
-find . -name "[a-z][a-z][0–9][0–9].txt" -print     # 查以两个小写字母和两个数字开头的txt文件     
-find . -name "*.txt" -o -name "*.pdf"  -print      # 查找txt或pdf文件,-o表示或
-find . -regex  ".*\(\.txt|\.pdf\)$" -print         # 同上。-iregex:忽略大小写
-find . -name 'xa*'|grep -v xaa|xargs rm -rf {} \;  # 删除当前目录下所有除了xaa的xa*文件
-find . -perm 755 -exec ls -ltr {} \;               # 显示所有权限是755的文件(夹)
-find . -size +512k                                 # 大于512k的文件
+find . -name   "*.txt" -print                          # .txt结尾的文件,双引号和-print选项可不加
+find . ! -name "*.txt" -print                          # 查找所有非 .txt 结尾文件
+find . -name "[a-z][a-z][0–9][0–9].txt" -print         # 查以两个小写字母和两个数字开头的txt文件     
+find . -name "*.txt" -o -name "*.pdf"  -print          # 查找txt或pdf文件,-o表示或
+find . -regex  ".*\(\.txt|\.pdf\)$" -print             # 同上。-iregex:忽略大小写
+find . -name 'xa*' | grep -v xaa | xargs rm -rf {} \;  # 删除当前目录下所有除了xaa的xa*文件
+find . -perm 755 -exec ls -ltr {} \;                   # 显示所有权限是755的文件(夹)
+find . -size +512k                                     # 大于512k的文件
 
 
 ## grep   ## 文本匹配
