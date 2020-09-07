@@ -507,7 +507,7 @@ sort unsort.txt | uniq      # 排序并去除重复行
 sort unsort.txt | uniq -c   # 统计各行在文件中出现的次数
 sort unsort.txt | uniq -d   # 找出重复行
 
-### sed   # stream editor(流编辑器)
+### sed   # stream editor(流编辑器);更多内容参见shell编程部分
 # 动作说明
     a :新增,a 的后面可以接字串,而这些字串会在新的一行出现(目前的下一行) 
     c :取代,c 的后面可以接字串,这些字串可以取代 n1,n2 之间的行
@@ -521,7 +521,7 @@ sed -i 's/text/repalce_text/g' file  # 全局替换并替换原文件
 sed '/^$/d' file                     # 替换空行
 sed 's/ //g' file                    # 替换所有空格
 
-### awk   # 数据流处理工具,逐行处理;上述文本处理命令都可用awk实现
+### awk   # 数据流处理工具,逐行处理;上述文本处理命令都可用awk实现;更多内容参见awk编程
 ### 常见用法参见 https://www.runoob.com/linux/linux-comm-awk.html
 awk '[BEGIN{statements}] {statements2} [END{statements}]'  # statements2是处理语句核心,BEGIN和END可不出现
     # 特殊变量
@@ -980,6 +980,146 @@ mount /dev/cdrom /myroot/
 umount /myroot   # 要求文件文件夹未在使用
 
 
+# 常用性能分析工具
+vmstat/sar/iostat  # CPU
+free/vmstat        # 内存
+iostat             # 磁盘I/0
+netstat/iftop      # 网络带宽
+ps/top             # 进程
+
+
+# 系统性能分析工具sar
+## 主要参考
+https://blog.csdn.net/qccz123456/article/details/81808436
+https://blog.csdn.net/qq_43753178/article/details/107117287
+
+sar                            # System Activity Reporter（系统活动情况报告）
+                               # 安装可使用: yum insatll -y sysstat/apt install -y sysstat
+
+## 使用方式
+1.追溯过去的统计数据（默认）   # 以自动任务的方式进行;可查看相关文件,这里不想述
+2.周期性的查看当前数据         # 使用sar命令方式查询
+
+## 主要参数
+-A   # 汇总所有的报告
+-a   # 文件读写使用情况
+-B   # 附加的缓存的使用情况
+-b   # 缓存的使用情况
+-c   # 系统调用的使用情况
+-d   # 磁盘的使用情况
+-g   # 串口的使用情况
+-h   # 关于buffer使用的统计数据
+-m   # IPC消息队列和信号量的使用情况
+-n   # 命名cache的使用情况
+-p   # 调页活动的使用情况
+-q   # 运行队列和交换队列的平均长度
+-R   # 进程的活动情况
+-r   # 没有使用的内存页面和硬盘块
+-u   # CPU的利用率
+-v   # 进程、i节点、文件和锁表状态
+-w   # 系统交换活动状况
+-y   # TTY设备活动状况
+
+## 常用命令
+sar -u [m] [n]   # cpu资源;每m秒检测一次,共检测n次
+### 指标
+# %user    用户模式下消耗的CPU时间的比例
+# %nice    通过nice改变了进程调度优先级的进程，在用户模式下消耗的CPU时间的比例
+# %system  系统模式下消耗的CPU时间的比例
+# %iowait  CPU等待磁盘I/O导致空闲状态消耗的时间比例
+# %steal   利用Xen等操作系统虚拟化技术，等待其它虚拟CPU计算占用的时间比例
+# %idle    CPU空闲时间比例
+
+sar -q [m] [n]   # 平均负载及进程
+### 指标
+# runq-sz  运行队列的长度（等待运行的进程数）
+# plist-sz 进程列表中进程（processes）和线程（threads）的数量
+# ldavg-1  最后1分钟的系统平均负载 ldavg-5：过去5分钟的系统平均负载
+# ldavg-15 过去15分钟的系统平均负载
+
+sar -r [m] [n]   # 内存资源
+### 指标
+# kbmemfree 这个值和free命令中的free值基本一致,所以它不包括buffer和cache的空间
+# kbmemused 这个值和free命令中的used值基本一致,所以它包括buffer和cache的空间
+# %memused  物理内存使用率，这个值是kbmemused和内存总量(不包括swap)的一个百分比
+# kbbuffers free中的buffer
+# kbcached  free中的cache
+# kbcommit  保证当前系统所需要的内存,即为了确保不溢出而需要的内存(RAM+swap)
+# %commit   这个值是kbcommit与内存总量(包括swap)的一个百分比
+
+
+# 命令日志格式修改
+1.备份配置文件
+cp /etc/profile /etc/profile.`date +%Y%m%d`    # 这里为全局配置文件;也可修改指定用户配置文件,只作用于指定用户
+
+2.修改配置文件   # 这里设置日志条数和时间格式(2020-01-01 00:00)
+echo '
+export HISTSIZE=10000 HISTTIMEFORMAT="%F %T " 
+' >> /etc/profile
+
+## 原理
+a).默认历史命令日志文件为$HOME/.bash_history        # 这里bash为例,其他shell版本可能不一样
+b).shell只用终端正常退出会写入日志文件              # 是否会自动写入日志有待确认
+c).会根据环境变量配置修改写入规则,常见环境变量如下:
+   HISTSIZE=xxx               # 指定记录最大命令数
+   HISTFILE=/path/FILENAME    # 指定日志文件
+   HISTCONTROL=ignoredups     # 命令控制;忽略连续重复命令
+   HISTIGNORE="pwd:ls:cd:"    # 忽略命令不记录
+   HISTTIMEFORMAT="%F %T "    # 命令时间格式
+
+3.生效配置
+. /etc/profile   # source /etc/profile也可以;格式只能作用环境变量生效后的命令
+
+
+# 命令日志备份
+## 备份到指定目录
+1.备份配置文件
+cp /etc/profile /etc/profile.`date +%Y%m%d`
+
+2.修改配置文件
+将下列内容追加到 /etc/profile 文件中;注释可去掉
+# history record
+RECORD_DATE=`date "+%Y%m%d"`                                                        # 日志日期
+RECORD_TIME=`date "+%Y%m%d%H%M%S"`                                                  # 用户登录日期;也是日志记录日期时间
+USER_INFO=`who -u am i 2>/dev/null | sed 's/\///g' | awk '{print $1"_"$2}'`         # 会显示最开始登录用户和TTY(虚拟控制台编号);不同用户实际操作命令会记录在各用户名下
+USER_IP=`who -u am i 2>/dev/null | grep \( | sed 's/[()]//g' | awk '{print $NF}'`   # 获取登录IP
+
+if [ $USER_IP ];then                                             # 无IP处理
+  USER_INFO=${USER_INFO}_${USER_IP}
+fi
+
+mkdir -pm 777 /tmp/record 2>/dev/null                            # 创建日志顶层目录;也可按自己习惯或公司标准;777确保所有用户能使用
+mkdir -pm 300 /tmp/record/${LOGNAME}/${RECORD_DATE} 2>/dev/null  # 日志顶层目录下创建用户及日期的分类子目录;300确保当前用户的读写权限,其他用户无权限
+
+HISTFILE="/tmp/record/${LOGNAME}/${RECORD_DATE}/${LOGNAME}@${USER_INFO}_${RECORD_TIME}"  # 日志文件格式拼接
+export HISTSIZE=10000 HISTFILE HISTTIMEFORMAT="%F %T "                                   # 导出环境变量
+
+3.生效配置
+. /etc/profile   # source /etc/profile 也可以
+
+4.日志文件名格式 # 这里记录的是指执行用户的日志
+-rw-------. 1 root  root  448 Sep  7 09:40 /tmp/record/root/20200907/root@wangh_pts1_192.168.99.1_20200907094039
+-rw-------. 1 root  root   17 Sep  7 10:00 /tmp/record/root/20200907/root@root_tty1_20200907100056
+-rw-------. 1 wangh wangh  17 Sep  7 10:01 /tmp/record/wangh/20200907/wangh@wangh_tty1_20200907100113
+-rw-------. 1 wangh wangh  32 Sep  7 10:01 /tmp/record/wangh/20200907/wangh@wangh_pts0_192.168.99.1_20200907100137
+-rw-------. 1 wangh wangh  17 Sep  7 10:33 /tmp/record/wangh/20200907/wangh@wangh_pts2_192.168.99.132_20200907103306
+
+## 说明文件名结构
+/tmp/record/执行命令用户/登录日期(日志日期)/执行命令用户@登录终端用户_虚拟终端类型及编号[_登录IP(本地登录无IP)]_登录终端日期时间
+
+5.日志文件格式
+cat /tmp/record/root/20200907/root@wangh_pts1_192.168.99.1_20200907094048
+
+#1599443777
+cd /tmp
+#1599444173
+w 
+#1599444486
+exit
+
+## 说明
+a.每条记录由时间戳和命令构成
+b.时间戳可使用 date -d @1599443777 "+%F %T" 转换为正常日期时间
 
 
 

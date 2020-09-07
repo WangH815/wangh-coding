@@ -89,7 +89,7 @@ hostnamectl set-hostname ""             # 修改所有主机名为空
 hostnamectl set-hostname "" --static/transient/pretty    # 修改指定类型主机名
  
 
-# CentOS 6.9 vmware虚拟机复制无法获取ip处理(直接复制虚拟机的文件,不是通过VM软件复制的)
+# CentOS 6.x vmware虚拟机复制无法获取ip处理(直接复制虚拟机的文件,不是通过VM软件复制的)
     原因：复制之后mac和uuid与原系统一致导致
 解决方案：删除 HWADDR 和 UUID 配置以及网卡相关信息文件后重启系统
 vi /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -98,7 +98,7 @@ rm -f /etc/udev/rules.d/70-persistent-net.rules
 
 # 静态IP设置   # root用户操作
 
-## 6.9
+## 6.X
 1.修改网卡配置文件 /etc/sysconfig/network-scripts/ifcfg-eth0
   增加或修改以下内容,具体配置参考vmware虚拟网络配置
   设置多个IP参见 https://blog.csdn.net/javastart/article/details/79868187
@@ -113,7 +113,7 @@ DNS1=192.168.99.2        # DNS,这里设置与网关一致；多个可设置DNS1
 2.重启网络服务
 service network restart
 
-## 7.6/7.7/stream
+## 7.x/stream
 网络配置文件 /etc/sysconfig/network-scripts/ifcfg-ens33
 配置值用双引号,如：IPADDR="192.168.99.110"
 重启网络推荐使用 systemctl restart network
