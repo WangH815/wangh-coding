@@ -47,7 +47,7 @@ ip addr flush ens33 && systemctl restart networking
 ## 18.04
 1.修改配置
 18.04版本采用netplan方式管理网络,配置文件使用yaml格式（配置项冒号后至少有一个空格）
-/etc/netplan/50-cloud-init.yaml
+/etc/netplan/50-cloud-init.yaml             # 文件名可能不同
 ### 显示格式
 network:
 	version: 2                              # 非必填项
