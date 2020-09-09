@@ -1,4 +1,4 @@
-#docker   #表意为码头工人。现指一种轻量级容器技术
+# docker   # 表意为码头工人。现指一种轻量级容器技术
 简介
 Docker是一个轻量级容器技术,类似于虚拟机。一般运行在Linux系统中,实现了虚拟机技术的资源隔离,性能远远高于虚拟机技术。    
 Docker支持将软件编译成一个镜像（image）,在这个镜像里做好对软件的各种配置,然后发布这个镜像,使用者可以运行这个镜像,
@@ -6,33 +6,33 @@ Docker支持将软件编译成一个镜像（image）,在这个镜像里做好�
 目前各大主流计算平台都支持Docker容器技术。
 
 
-#技术基础
+# 技术基础
 1.使用go语言开发
-2.基于Linux内核(不同发行版只是在内核版本增加不同的软件包)开发   #非Linux版本不讨论
+2.基于Linux内核(不同发行版只是在内核版本增加不同的软件包)开发   # 非Linux版本不讨论
 3.主要使用内核模块:
   Namespace:用于容器的隔离
     Cgroups:用于容器的资源控制,只要是内存及cpu等资源的控制
 
 
-#基本概念
-image       #镜像;用于创建容器的模板,类似于Java中的Class
-container   #容器;独立运行的一个或一组应用,类似于对象(实例)
-registry    #仓库;存放镜像的仓库
+# 基本概念
+image       # 镜像;用于创建容器的模板,类似于Java中的Class
+container   # 容器;独立运行的一个或一组应用,类似于对象(实例)
+registry    # 仓库;存放镜像的仓库
 
 
-#常见操作
-docker version                               #查看docker版本
-docker info                                  #查看docker相关的系统信息
-docker --help                                #docker命令帮助
-docker xx --help                             #docker某个命令帮助
-docker ps                                    #查看正在运行的容器
-docker images                                #查看本地镜像
-docker image ls                              #同上
-docker pull CONTAINER_NAME[:VERSION]         #从镜像站拉取镜像,默认拉取最新稳定版;可指定版本
-docker inspect CONTAINER_NAME[:VERSION]/ID   #查看本地镜像详细信息;也可查看容器
+# 常见操作
+docker version                               # 查看docker版本
+docker info                                  # 查看docker相关的系统信息
+docker --help                                # docker命令帮助
+docker xx --help                             # docker某个命令帮助
+docker ps                                    # 查看正在运行的容器
+docker images                                # 查看本地镜像
+docker image ls                              # 同上
+docker pull CONTAINER_NAME[:VERSION]         # 从镜像站拉取镜像,默认拉取最新稳定版;可指定版本
+docker inspect CONTAINER_NAME[:VERSION]/ID   # 查看本地镜像详细信息;也可查看容器
 
 
-#命令分类
+# 命令分类
 功能划分        命令
 环境信息相关    info version
 系统运维相关    attach build commit cp diff export images import
@@ -44,11 +44,11 @@ docker inspect CONTAINER_NAME[:VERSION]/ID   #查看本地镜像详细信息;也
 仓库服务相关    login pull push search
 
 
-#docker时区不一致处理      #以东八区 Asia/Shanghai 为例,其他时区同理
+# docker时区不一致处理      # 以东八区 Asia/Shanghai 为例,其他时区同理
 
 方案一:
-##创建容器时使用-v选项
-###/etc/timezone文件不存在时创建;centos7默认此文件不存在
+## 创建容器时使用-v选项
+## # /etc/timezone文件不存在时创建;centos7默认此文件不存在
 ls -ltr /etc/timezone || ( echo 'Asia/Shanghai' > /etc/timezone )
 
 docker run ... \
@@ -58,11 +58,11 @@ docker run ... \
 -d container_name
 
 方案二:
-##容器已创建
-ls -ltr /etc/timezone || ( echo 'Asia/Shanghai' > /etc/timezone ) #/etc/timezone文件不存在时创建
-docker cp /etc/timezone container_name:/etc/timezone              #容器名可以使用容器id代替
+## 容器已创建
+ls -ltr /etc/timezone || ( echo 'Asia/Shanghai' > /etc/timezone ) # /etc/timezone文件不存在时创建
+docker cp /etc/timezone container_name:/etc/timezone              # 容器名可以使用容器id代替
 docker cp /usr/share/zoneinfo/Asia/Shanghai container_name:/etc/localtime
-###批量操作
+## # 批量操作
 for name in `docker ps -q`
 do
   docker cp /etc/timezone ${name}:/etc/timezone
@@ -70,50 +70,50 @@ do
 done
 
 
-#使用教程 
+# 使用教程 
 环境：Ubuntu 18.04
 
 1.安装和卸载docker
-##卸载旧版本
+## 卸载旧版本
 apt remove docker \
            docker-engine \
            docker.io
 
-##更新软件列表;使用https传输确保软件包不被篡改
+## 更新软件列表;使用https传输确保软件包不被篡改
 apt update && apt install \
     apt-transport-https \
     ca-certificates \
     curl \
     software-properties-common
 
-## 增加软件源的GPG密钥,确保合法性;以下是中科大软件源,其他同理
-##官方GPG https://download.docker.com/linux/ubuntu/gpg
+##  增加软件源的GPG密钥,确保合法性;以下是中科大软件源,其他同理
+## 官方GPG https://download.docker.com/linux/ubuntu/gpg
 curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 
-##添加中科大apt源;加快下载速度
-##官方地址 https://download.docker.com/linux/ubuntu
+## 添加中科大apt源;加快下载速度
+## 官方地址 https://download.docker.com/linux/ubuntu
 add-apt-repository \
     "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \
     $(lsb_release -cs) \
     stable"
 
-##更新软件列表及安装docker-ce(社区版)
+## 更新软件列表及安装docker-ce(社区版)
 apt update && apt install docker-ce
 
-##设置开机自启动
-systemctl is-enabled docker    #查看是否自启动
-systemctl enable docker
-systemctl start docker
+## 设置开机自启动
+systemctl is-enabled docker    # 查看是否自启动
+systemctl enable docker        # 设置开机启动
+systemctl start docker         # 启动docker服务
 
 2.启停docker服务
 systemctl start/stop/restart docker
 
-3.增加其他用户使用docker的权限 #不需要可以不添加
-cat /etc/group | grep docker   #查看docker组是否存在
-groupadd docker                #增加docker;root操作
-usermod -aG docker username    #将用户用户添加到docker用户组中;root操作
+3.增加其他用户使用docker的权限 # 不需要可以不添加
+cat /etc/group | grep docker   # 查看docker组是否存在
+groupadd docker                # 增加docker;root操作
+usermod -aG docker username    # 将用户用户添加到docker用户组中;root操作
 
-4.镜像加速                     #网易镜像加速
+4.镜像加速                     # 网易镜像加速
 echo '{
   "registry-mirrors": [
     "https://hub-mirror.c.163.com"
@@ -121,62 +121,62 @@ echo '{
 }
 ' > /etc/docker/daemon.json
 
-systemctl restart docker             #重启生效配置
+systemctl restart docker             # 重启生效配置
 
-##其他常用镜像源
-https://hub.docker.com               #官方默认镜像源;镜像标签可直接访问此网站查询
-https://registry.docker-cn.com       #Docker官方中国区镜像源
-https://docker.mirrors.ustc.edu.cn   #中科大镜像源
-https://reg-mirror.qiniu.com         #七牛云
+## 其他常用镜像源
+https://hub.docker.com               # 官方默认镜像源;镜像标签可直接访问此网站查询
+https://registry.docker-cn.com       # Docker官方中国区镜像源
+https://docker.mirrors.ustc.edu.cn   # 中科大镜像源
+https://reg-mirror.qiniu.com         # 七牛云
 
 5.测试docker是否正确安装
-docker run hello-world               #正常的话会显示Hello from Docker!及相关的信息
+docker run hello-world               # 正常的话会显示Hello from Docker!及相关的信息
 
 
-#镜像操作
-#列出本地镜像,默认位于 /var/lib/docker 目录下
+# 镜像操作
+# 列出本地镜像,默认位于 /var/lib/docker 目录下
 docker images 
 REPOSITORY   TAG   IMAGE ID   CREATED   SIZE  
-REPOSITORY   #镜像所在的仓库名称
-TAG          #镜像标签
-IMAGE ID     #镜像ID
-CREATED      #镜像的创建日期（不是获取该镜像的日期）
-SIZE         #镜像大小
+REPOSITORY   # 镜像所在的仓库名称
+TAG          # 镜像标签
+IMAGE ID     # 镜像ID
+CREATED      # 镜像的创建日期（不是获取该镜像的日期）
+SIZE         # 镜像大小
 
-docker search CONTAINER_NAME          #搜索镜像源可用镜像;推荐直接访问 https://hub.docker.com/ 搜索
-docker pull CONTAINER_NAME            #从镜像源下载指定镜像
-docker pull CONTAINER_NAME:VERSION    #同上;指定版本
-docker rmi IMAGE_NAME/ID              #删除本地指定镜像;rmi表示remove images
-docker rmi $(docker images -q)        #删除本地所有镜像
+docker search CONTAINER_NAME         # 搜索镜像源可用镜像;推荐直接访问 https://hub.docker.com/ 搜索
+docker pull CONTAINER_NAME           # 从镜像源下载指定镜像
+docker pull CONTAINER_NAME:VERSION   # 同上;指定版本
+docker rmi IMAGE_NAME/ID             # 删除本地指定镜像;rmi表示remove images
+docker rmi $(docker images -q)       # 删除本地所有镜像
 
-#镜像备份与恢复
-docker save -o xx.tar IMAGE_NAME   #基于镜像的备份(导出),不含容器信息
-docker load -i xx.tar              #载入
-##批量备份镜像
+# 镜像备份与恢复
+docker save -o xx.tar IMAGE_NAME     # 基于镜像的备份(导出),不含容器信息
+docker load -i xx.tar                # 载入
+## 批量备份镜像
 mkdir docker-images && cd docker-images
 images=`docker images --format \
-    "table {{.Repository}}-{{.Tag}}.tar#{{.Repository}}:{{.Tag}}" \
+    "table {{.Repository}}-{{.Tag}}.tar# {{.Repository}}:{{.Tag}}" \
 	| awk 'NR > 1'`
 for x in ${images//docker.io\/}
 do
-  docker save -o `echo ${x/\//-} | tr '#' ' '`
+  docker save -o `echo ${x/\//-} | tr '# ' ' '`
 done
-##批量恢复镜像(在镜像解压目录中操作)
+## 批量恢复镜像(在镜像解压目录中操作)
 cd docker-images
 for x in `ls | grep .tar$`
 do
   docker load -i $x
 done
 
-#容器的导出与导入
-docker export CONTAINER_NAME -o xx.tar  #基于容器的备份(保存),保存为镜像
-docker import xx.tar                    #导入;导入形式为镜像
+# 容器的导出与导入
+docker export CONTAINER_NAME -o xx.tar  # 基于容器的备份(保存),保存为镜像
+docker import xx.tar                    # 导入;导入形式为镜像
 
 mkdir docker-containers && cd docker-containers
 for x in `docker ps -q --no-trunc`
 do
   name=`docker inspect -f "{{.Name}}" $x | awk -F '/' '{print $2}'`
-  #name=`docker inspect $x | grep -i \"name\" | grep \/ | awk -F '["/]' '{print $5}'`
+  # name=`docker inspect $x | grep -i \"name\" | grep \/ | awk -F '["/]' '{print $5}'`
   docker export ${name} -o ${name}.tar
 done
 
@@ -187,119 +187,119 @@ do
 done
 
 
-#容器操作   #可认为是镜像的实例
-docker ps                                     #查看正在运行的容器       
-docker ps -a                                  #查看所用容器,包括启动过的历史容器
-docker ps -a -q                               #显示所有容器ID
-docker ps -l                                  #查看最后一次运行的容器
-docker ps -f status=exited                    #查看停止的容器
-docker rm CONTAINER_NAME/ID                   #删除已停止容器
-docker rm $(docker ps -a -q)                  #删除所有容器,前提是所有容器都是停止的
-docker rm $(docker ps -f "status=exited" -q)  #删除所有退出的容器
-docker rm $(docker stop $(docker ps -a -q))   #停止并删除所有容器
-docker stats -a                               #循环显示所有容器的资源使用信息(包括没有运行的) ,只显示一次
-docker stats -a --no-stream                   #显示所有容器的统计信息(包括没有运行的) ,只显示一次
-docker stats --no-stream | sort -k8 -h        #统计容器信息并以使用流量作为倒序
-docker system df                              #显示实际硬盘占用
-docker system events                          #显示容器的实时事件
-docker system info                            #显示系统信息
-docker system prune                           #清理文件  
-docker top CONTAINER_NAME/ID                  #显示容器本身的top信息,类似于Linux top,但更简洁
-docker logs CONTAINER_NAME/ID                 #显示运行容器的日志
-docker update options CONTAINER_NAME/ID       #更新容器配置(cpu、memory、io等资源),如自启动等;option在容器名称后也可以
-docker port CONTAINER_NAME/ID                 #显示容器端口映射列表
-docker diff CONTAINER_NAME/ID                 #显示容器的文件变化列表(A-Add, D-Delete, C-Change)
-docker events                                 #显示容器实时事件;可以过滤或按时间显示
+# 容器操作   # 可认为是镜像的实例
+docker ps                                     # 查看正在运行的容器       
+docker ps -a                                  # 查看所用容器,包括启动过的历史容器
+docker ps -a -q                               # 显示所有容器ID
+docker ps -l                                  # 查看最后一次运行的容器
+docker ps -f status=exited                    # 查看停止的容器
+docker rm CONTAINER_NAME/ID                   # 删除已停止容器
+docker rm $(docker ps -a -q)                  # 删除所有容器,前提是所有容器都是停止的
+docker rm $(docker ps -f "status=exited" -q)  # 删除所有退出的容器
+docker rm $(docker stop $(docker ps -a -q))   # 停止并删除所有容器
+docker stats -a                               # 循环显示所有容器的资源使用信息(包括没有运行的) ,只显示一次
+docker stats -a --no-stream                   # 显示所有容器的统计信息(包括没有运行的) ,只显示一次
+docker stats --no-stream | sort -k8 -h        # 统计容器信息并以使用流量作为倒序
+docker system df                              # 显示实际硬盘占用
+docker system events                          # 显示容器的实时事件
+docker system info                            # 显示系统信息
+docker system prune                           # 清理文件  
+docker top CONTAINER_NAME/ID                  # 显示容器本身的top信息,类似于Linux top,但更简洁
+docker logs CONTAINER_NAME/ID                 # 显示运行容器的日志
+docker update options CONTAINER_NAME/ID       # 更新容器配置(cpu、memory、io等资源),如自启动等;option在容器名称后也可以
+docker port CONTAINER_NAME/ID                 # 显示容器端口映射列表
+docker diff CONTAINER_NAME/ID                 # 显示容器的文件变化列表(A-Add, D-Delete, C-Change)
+docker events                                 # 显示容器实时事件;可以过滤或按时间显示
 
 
-#创建启动容器
+# 创建启动容器
 docker run
-#参数
---name CONTAINER_NAME         #设置容器名称
--p host_port:container_port   #映射主机和容器内的端口;port;使用-P可随机映射主机高端口
--e ${env name}=${env value}   #添加环境变量;environment
--v host_path:container_path   #将主机目录挂载(映射)到容器内;--volumes(卷)
--d                            #后台运行容器并打印其ID
--i                            #执行交互式命令;interactive(交互式)
--t                            #表示容器启动后会进入其命令行,加入 -it,创建并登录进去,即分配一个伪终端;tty
---restart always              #设置跟随docker进程自启动;也可通过 docker update --restart always xx 修改
+# 参数
+--name CONTAINER_NAME         # 设置容器名称
+-p host_port:container_port   # 映射主机和容器内的端口;port;使用-P可随机映射主机高端口
+-e ${env name}=${env value}   # 添加环境变量;environment
+-v host_path:container_path   # 将主机目录挂载(映射)到容器内;--volumes(卷)
+-d                            # 后台运行容器并打印其ID
+-i                            # 执行交互式命令;interactive(交互式)
+-t                            # 表示容器启动后会进入其命令行,加入 -it,创建并登录进去,即分配一个伪终端;tty
+--restart always              # 设置跟随docker进程自启动;也可通过 docker update --restart always xx 修改
 
-##交互式容器
+## 交互式容器
 docker run -it --name mycentos7 centos:7 /bin/bash  
-exit                                                      #命令可退出当前容器,退出后容器停止;-d参数退出后不停止
+exit                                                      # 命令可退出当前容器,退出后容器停止;-d参数退出后不停止
 
-##守护式容器
-docker run -di --name=mycentos7 centos:7                  #创建容器
-docker exec -it CONTAINER_NAME/ID /bin/bash               #进入/登录容器shell环境
-docker exec -it CONTAINER_NAME/ID ping CONTAINER_NAME/ID  #一个容器ping另外一个容器
+## 守护式容器
+docker run -di --name=mycentos7 centos:7                  # 创建容器
+docker exec -it CONTAINER_NAME/ID /bin/bash               # 进入/登录容器shell环境
+docker exec -it CONTAINER_NAME/ID ping CONTAINER_NAME/ID  # 一个容器ping另外一个容器
 exit 退出容器后容器仍然在运行
 
-##启停容器
+## 启停容器
 docker stop CONTAINER_NAME/ID
-docker stop $(docker ps -aq)             #停止所有容器;$(docker ps -a -q)可使用`docker ps -aq`
+docker stop $(docker ps -aq)             # 停止所有容器;$(docker ps -a -q)可使用`docker ps -aq`
 docker start CONTAINER_NAME/ID
 docker restart CONTAINER_NAME/ID
-docker restart $(docker ps -q)           #重启所有正在运行的容器
+docker restart $(docker ps -q)           # 重启所有正在运行的容器
 
-##文件拷贝
-docker cp FILE/DIR CONTAINER_NAME:PATH   #拷贝到容器
-docker cp CONTAINER_NAME:FILE/PATH PATH  #反向
-docker save IMAGE_NAME > FILE_NAME.tar   #将镜像保存成文件
-docker load < FILE_NAME.tar              #从文件加载镜像
+## 文件拷贝
+docker cp FILE/DIR CONTAINER_NAME:PATH   # 拷贝到容器
+docker cp CONTAINER_NAME:FILE/PATH PATH  # 反向
+docker save IMAGE_NAME > FILE_NAME.tar   # 将镜像保存成文件
+docker load < FILE_NAME.tar              # 从文件加载镜像
 
-##目录挂载
+## 目录挂载
 在创建容器的时候,将宿主机的目录和容器内的目录进行映射,这样我们就可以通过修改宿主机某个目录的文件从而影响容器。格式为：
 docker run -di -v 宿主机目录:容器目录
 
-##获取容器或镜像元数据(详细信息)
+## 获取容器或镜像元数据(详细信息)
 docker inspect CONTAINER_NAME/IMAGE_NAME
 
 
-#容器创建实例
+# 容器创建实例
 
-##Mysql 5.7
+## Mysql 5.7
 1.拉取镜像
 docker pull mysql:5.7
 2.创建守护容器
 docker run \
---name docker_mysql57 \
+--name mysql57 \
 -p 3306:3306 \
 -e MYSQL_ROOT_PASSWORD=root \
 -v mysql57-data:/data \
 --restart always \
 -di mysql:5.7
-# -p 代表端口映射,格式为 宿主机映射端口:容器运行端口
-# -e 代表添加环境变量, MYSQL_ROOT_PASSWORD是root用户的登录密码
-# -v 本地挂载目录/var/lib/docker/volumes/;下同
+#  -p 代表端口映射,格式为 宿主机映射端口:容器运行端口
+#  -e 代表添加环境变量, MYSQL_ROOT_PASSWORD是root用户的登录密码
+#  -v 本地挂载目录/var/lib/docker/volumes/;下同
 3.登录容器
 方式一:
-docker exec -it docker_mysql57 /bin/bash       #登录容器shell环境
-mysql -uroot -p                                #登录mysql
+docker exec -it mysql57 /bin/bash       # 登录容器shell环境
+mysql -uroot -p                         # 登录mysql
 方式二:
-docker exec -it docker_mysql57 mysql -uroot -p #直接登录容器mysql
+docker exec -it mysql57 mysql -uroot -p # 直接登录容器mysql
 
 
-##Redis 5
+## Redis 5
 1.拉取镜像
 docker pull redis:5
 2.创建容器
 docker run \
---name docker_redis5 \
+--name redis5 \
 -p 6379:6379 \
 -v redis5-data:/data \
 --restart always \
 -d redis:5 redis-server --appendonly yes
 3.登录容器
 方式一:
-docker exec -it docker_redis5 /bin/bash   #登录容器shell环境
-redis-cli                                 #进入redis命令行
+docker exec -it redis5 /bin/bash   # 登录容器shell环境
+redis-cli                          # 进入redis命令行
 方式二:
-docker exec -it docker_redis5 redis-cli   #直接登录redis命令行
+docker exec -it redis5 redis-cli   # 直接登录redis命令行
 
 
-##nginx
+## nginx
 1.拉取镜像
-docker pull nginx:1.16      #stable表示稳定版,其他支持版本可从官方镜像库查询
+docker pull nginx:1.16      # stable表示稳定版,其他支持版本可从官方镜像库查询
 2.创建容器
 docker run \
 --name nginx_1.16 \
@@ -310,9 +310,9 @@ docker run \
 3.登录容器同其他
 
 
-##tomcat
+## tomcat
 1.拉取镜像
-docker pull tomcat:9     #其他版本为6/7/8.0/8(同8.5)/9
+docker pull tomcat:9        # 其他版本为6/7/8.0/8(同8.5)/9
 2.创建容器
 docker run \
 --name tomcat9 \
@@ -321,16 +321,16 @@ docker run \
 --restart always \
 -d tomcat:9
 3.登录容器同其他
-4.复制应用目录              #登陆容器后操作
+4.复制应用目录              # 登陆容器后操作
 cp -r /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
 
 
-##jenkins
+## jenkins
 1.拉取镜像
-docker pull jenkinsci/blueocean   #默认为最新稳定版
+docker pull jenkinsci/blueocean   # 默认为最新稳定版
 2.创建容器
 docker run \
---name docker_jenkins \
+--name jenkins \
 -u root \
 -p 8080:8080 \
 -p 50000:50000 \
@@ -338,104 +338,104 @@ docker run \
 -v /var/run/docker.sock:/var/run/docker.sock \
 --restart always \
 -di jenkinsci/blueocean
-3.修改update源                    #容器中修改
-docker exec -it docker_jenkins \
+3.修改update源                    # 容器中修改
+docker exec -it jenkins \
 sed -i "s/https:\/\/updates.jenkins.io/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins\/updates/g" \
 /var/jenkins_home/hudson.model.UpdateCenter.xml
-docker restart docker_jenkins     #重启后生效
-4.修改插件源                      #上一步完成才会生成updates目录;第4步无需重启
-docker exec -it docker_jenkins \
+docker restart jenkins            # 重启后生效
+4.修改插件源                      # 上一步完成才会生成updates目录;第4步无需重启
+docker exec -it jenkins \
 sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins/g' \
 /var/jenkins_home/updates/default.json
 
-docker exec -it docker_jenkins \
+docker exec -it jenkins \
 sed -i 's/http:\/\/www.google.com/https:\/\/www.baidu.com/g' \
 /var/jenkins_home/updates/default.json
-5.访问jenkins控制台               #使用浏览器
+5.访问jenkins控制台               # 使用浏览器
 http://192.168.99.98:8080
 6.获取控制台密码
 方式一:
-docker exec -it docker_jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+docker exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 方式二:
-docker logs docker_jenkins        #找到其中密码
+docker logs jenkins        # 找到其中密码
 
 
 容器清理
 1.停止并删除容器
-docker stop CONTAINER_NAME/ID                           #停止容器
-docker rm CONTAINER_NAME/ID                             #删除容器
+docker stop CONTAINER_NAME/ID                           # 停止容器
+docker rm CONTAINER_NAME/ID                             # 删除容器
 2.清理文件
-docker volume ls -qf dangling=true                      #列出无用的卷;由创建时-v参数指定
+docker volume ls -qf dangling=true                      # 列出无用的卷;由创建时-v参数指定
 docker volume rm `docker volume ls -qf dangling=true`
 
 
 定制镜像
-Dockerfile    #构建镜像的文本文件,包含构建镜像所需的指令和说明
+Dockerfile    # 构建镜像的文本文件,包含构建镜像所需的指令和说明
 
-#组成部分
+# 组成部分
 1.基础镜像信息
 2.维护者信息
 3.镜像操作指令
 4.容器启动时执行指令
 
-#参数详解
-##FROM                  #Dockerfile的第一行指令
-FROM <image>[:tag]      #指定镜像;tag一般为版本号
+# 参数详解
+## FROM                  # Dockerfile的第一行指令
+FROM <image>[:tag]      # 指定镜像;tag一般为版本号
 
-##MAINTAINER
-MAINTAINER <name>       #指定维护者信息
+## MAINTAINER
+MAINTAINER <name>       # 指定维护者信息
 
-##RUN                   #每条run指令会构建新的镜像
-RUN <command>                           #shell中执行
-RUN ["executable", "param1", "param2"]  #通过exec执行
+## RUN                   # 每条run指令会构建新的镜像
+RUN <command>                           # shell中执行
+RUN ["executable", "param1", "param2"]  # 通过exec执行
 
-##CMD                                   #指定启动容器时执行的命令;每个Dockerfile只能有一个
-CMD ["executable","param1","param2"]    #通过exec执行;推荐方式
-CMD command param1 param2               #在 /bin/sh 中执行，提供给需要交互的应用
-CMD ["param1","param2"]                 #提供给 ENTRYPOINT 的默认参数
+## CMD                                   # 指定启动容器时执行的命令;每个Dockerfile只能有一个
+CMD ["executable","param1","param2"]    # 通过exec执行;推荐方式
+CMD command param1 param2               # 在 /bin/sh 中执行，提供给需要交互的应用
+CMD ["param1","param2"]                 # 提供给 ENTRYPOINT 的默认参数
 
-##EXPOSE
-EXPOSE <port> [<port>...]               #指定容器开放(外部可访问)的端口;启动时使用-P指定主机转发端口
+## EXPOSE
+EXPOSE <port> [<port>...]               # 指定容器开放(外部可访问)的端口;启动时使用-P指定主机转发端口
 
-##ENV
-ENV <key> <value>   #指定环境变量;指定后可使用
+## ENV
+ENV <key> <value>   # 指定环境变量;指定后可使用
 
-##ADD
-ADD <src> <dest>    #增加指定内容到容器中;内容可以是url、tar(会自动解压)
+## ADD
+ADD <src> <dest>    # 增加指定内容到容器中;内容可以是url、tar(会自动解压)
 
-##COPY
-COPY <src> <dest>   #复制主机内容到容器中
+## COPY
+COPY <src> <dest>   # 复制主机内容到容器中
 
-##ENTRYPOINT        #指定启动容器时执行的命令;不会被docker run提供的参数覆盖;每个Dockerfile只能有一个
-ENTRYPOINT ["executable", "param1", "param2"]  #通过exec执行
-ENTRYPOINT command param1 param2               #通过shell执行
+## ENTRYPOINT        # 指定启动容器时执行的命令;不会被docker run提供的参数覆盖;每个Dockerfile只能有一个
+ENTRYPOINT ["executable", "param1", "param2"]  # 通过exec执行
+ENTRYPOINT command param1 param2               # 通过shell执行
 
-##VOLUME
-VOLUME ["/data"]    #创建挂载点用于主机或其他容器挂载;用于存放共享数据
+## VOLUME
+VOLUME ["/data"]    # 创建挂载点用于主机或其他容器挂载;用于存放共享数据
 
-##USER
-USER daemon         #指定运行容器的用户(名称/UID)
+## USER
+USER daemon         # 指定运行容器的用户(名称/UID)
 
-##WORKDIR           #为RUN、CMD、ENTRYPOINT构建工作目录
+## WORKDIR           # 为RUN、CMD、ENTRYPOINT构建工作目录
 WORKDIR /path/to/workdir
 
-##ONBUILD           #配置当所创建的镜像作为其它新创建镜像的基础镜像时，所执行的操作指令
+## ONBUILD           # 配置当所创建的镜像作为其它新创建镜像的基础镜像时，所执行的操作指令
 ONBUILD [INSTRUCTION]
 
 
-#构建镜像
+# 构建镜像
 
-基于centos:7.7.1908构建特定版本的redis镜像   #ubuntu18.04下操作
+基于centos:7.7.1908构建特定版本的redis镜像   # ubuntu18.04下操作
 1.拉取基本镜像
 docker pull centos:7.7.1908
-2.新建Dockerfile文件                         #建议在空目录下创建
+2.新建Dockerfile文件                         # 建议在空目录下创建
 Dockerfile文件内容如下:
 FROM centos:7.7.1908
 RUN yum install -y wget \
-    && wget -O redis.tar.gz "http:#download.redis.io/releases/redis-5.0.3.tar.gz" \
+    && wget -O redis.tar.gz "http:# download.redis.io/releases/redis-5.0.3.tar.gz" \
     && tar -xvf redis.tar.gz
 3.在Dockerfile文件所在目录构建镜像
-docker build -t redis5:test .                #.表示指定Dockerfile文件目录
+docker build -t redis5:test .                # .表示指定Dockerfile文件目录
 4.查看构建的镜像
 docker images
 
@@ -457,6 +457,7 @@ yum remove docker \
 yum install -y yum-utils \
                device-mapper-persistent-data \
                lvm2
+## 第一个yum工具集,后面两个为存储驱动管理
 
 3.配置docker软件源
 yum-config-manager \
@@ -473,7 +474,7 @@ yum install docker-ce
 
 ======================================
 
-#docker --help
+# docker --help
 
 Usage:    docker [OPTIONS] COMMAND
 
